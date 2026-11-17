@@ -2,9 +2,11 @@
 ---
 title: "getMigrateJobs"
 title_tag: "tencentcloud.Dts.getMigrateJobs"
-meta_desc: "Documentation for the tencentcloud.Dts.getMigrateJobs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dts migrateJobs"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,6 +16,393 @@ no_edit_this_page: true
 
 Use this data source to query detailed information of dts migrateJobs
 
+## Example Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const migrateJob = new tencentcloud.dts.MigrateJob("migrate_job", {
+    srcDatabaseType: "mysql",
+    dstDatabaseType: "cynosdbmysql",
+    srcRegion: "ap-guangzhou",
+    dstRegion: "ap-guangzhou",
+    instanceClass: "small",
+    jobName: "tf_test_migration_job",
+    tags: [{
+        tagKey: "aaa",
+        tagValue: "bbb",
+    }],
+});
+const all = tencentcloud.dts.getMigrateJobs({});
+const job = tencentcloud.dts.getMigrateJobsOutput({
+    jobId: migrateJob.id,
+    jobName: migrateJob.jobName,
+    statuses: ["created"],
+});
+const srcDest = tencentcloud.dts.getMigrateJobs({
+    srcRegion: "ap-guangzhou",
+    srcDatabaseTypes: ["mysql"],
+    dstRegion: "ap-guangzhou",
+    dstDatabaseTypes: ["cynosdbmysql"],
+    statuses: ["created"],
+    tagFilters: [{
+        tagKey: "aaa",
+        tagValue: "bbb",
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+migrate_job = tencentcloud.dts.MigrateJob("migrate_job",
+    src_database_type="mysql",
+    dst_database_type="cynosdbmysql",
+    src_region="ap-guangzhou",
+    dst_region="ap-guangzhou",
+    instance_class="small",
+    job_name="tf_test_migration_job",
+    tags=[{
+        "tagKey": "aaa",
+        "tagValue": "bbb",
+    }])
+all = tencentcloud.dts.get_migrate_jobs()
+job = tencentcloud.dts.get_migrate_jobs_output(job_id=migrate_job.id,
+    job_name=migrate_job.job_name,
+    statuses=["created"])
+src_dest = tencentcloud.dts.get_migrate_jobs(src_region="ap-guangzhou",
+    src_database_types=["mysql"],
+    dst_region="ap-guangzhou",
+    dst_database_types=["cynosdbmysql"],
+    statuses=["created"],
+    tag_filters=[{
+        "tag_key": "aaa",
+        "tag_value": "bbb",
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dts"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		migrateJob, err := dts.NewMigrateJob(ctx, "migrate_job", &dts.MigrateJobArgs{
+			SrcDatabaseType: "mysql",
+			DstDatabaseType: "cynosdbmysql",
+			SrcRegion:       "ap-guangzhou",
+			DstRegion:       "ap-guangzhou",
+			InstanceClass:   "small",
+			JobName:         "tf_test_migration_job",
+			Tags: []map[string]string{
+				{
+					"tagKey":   "aaa",
+					"tagValue": "bbb",
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = dts.GetMigrateJobs(ctx, &dts.GetMigrateJobsArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		_ = dts.GetMigrateJobsOutput(ctx, dts.GetMigrateJobsOutputArgs{
+			JobId:   migrateJob.ID().ToIDOutput().ToStringOutput(),
+			JobName: migrateJob.JobName,
+			Statuses: pulumi.StringArray{
+				pulumi.String("created"),
+			},
+		}, nil)
+		_, err = dts.GetMigrateJobs(ctx, &dts.GetMigrateJobsArgs{
+			SrcRegion: pulumi.StringRef("ap-guangzhou"),
+			SrcDatabaseTypes: []string{
+				"mysql",
+			},
+			DstRegion: pulumi.StringRef("ap-guangzhou"),
+			DstDatabaseTypes: []string{
+				"cynosdbmysql",
+			},
+			Statuses: []string{
+				"created",
+			},
+			TagFilters: []dts.GetMigrateJobsTagFilter{
+				{
+					TagKey:   pulumi.StringRef("aaa"),
+					TagValue: pulumi.StringRef("bbb"),
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var migrateJob = new Tencentcloud.Dts.MigrateJob("migrate_job", new()
+    {
+        SrcDatabaseType = "mysql",
+        DstDatabaseType = "cynosdbmysql",
+        SrcRegion = "ap-guangzhou",
+        DstRegion = "ap-guangzhou",
+        InstanceClass = "small",
+        JobName = "tf_test_migration_job",
+        Tags = new[]
+        {
+            
+            {
+                { "tagKey", "aaa" },
+                { "tagValue", "bbb" },
+            },
+        },
+    });
+
+    var all = Tencentcloud.Dts.GetMigrateJobs.Invoke();
+
+    var job = Tencentcloud.Dts.GetMigrateJobs.Invoke(new()
+    {
+        JobId = migrateJob.Id,
+        JobName = migrateJob.JobName,
+        Statuses = new[]
+        {
+            "created",
+        },
+    });
+
+    var srcDest = Tencentcloud.Dts.GetMigrateJobs.Invoke(new()
+    {
+        SrcRegion = "ap-guangzhou",
+        SrcDatabaseTypes = new[]
+        {
+            "mysql",
+        },
+        DstRegion = "ap-guangzhou",
+        DstDatabaseTypes = new[]
+        {
+            "cynosdbmysql",
+        },
+        Statuses = new[]
+        {
+            "created",
+        },
+        TagFilters = new[]
+        {
+            new Tencentcloud.Dts.Inputs.GetMigrateJobsTagFilterInputArgs
+            {
+                TagKey = "aaa",
+                TagValue = "bbb",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Dts.MigrateJob;
+import com.pulumi.tencentcloud.Dts.MigrateJobArgs;
+import com.pulumi.tencentcloud.Dts.DtsFunctions;
+import com.pulumi.tencentcloud.Dts.inputs.GetMigrateJobsArgs;
+import com.pulumi.tencentcloud.Dts.inputs.GetMigrateJobsTagFilterArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var migrateJob = new MigrateJob("migrateJob", MigrateJobArgs.builder()
+            .srcDatabaseType("mysql")
+            .dstDatabaseType("cynosdbmysql")
+            .srcRegion("ap-guangzhou")
+            .dstRegion("ap-guangzhou")
+            .instanceClass("small")
+            .jobName("tf_test_migration_job")
+            .tags(Arrays.asList(Map.ofEntries(
+                Map.entry("tagKey", "aaa"),
+                Map.entry("tagValue", "bbb")
+            )))
+            .build());
+
+        final var all = DtsFunctions.getMigrateJobs(GetMigrateJobsArgs.builder()
+            .build());
+
+        final var job = DtsFunctions.getMigrateJobs(GetMigrateJobsArgs.builder()
+            .jobId(migrateJob.id())
+            .jobName(migrateJob.jobName())
+            .statuses("created")
+            .build());
+
+        final var srcDest = DtsFunctions.getMigrateJobs(GetMigrateJobsArgs.builder()
+            .srcRegion("ap-guangzhou")
+            .srcDatabaseTypes("mysql")
+            .dstRegion("ap-guangzhou")
+            .dstDatabaseTypes("cynosdbmysql")
+            .statuses("created")
+            .tagFilters(GetMigrateJobsTagFilterArgs.builder()
+                .tagKey("aaa")
+                .tagValue("bbb")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  migrateJob:
+    type: tencentcloud:Dts:MigrateJob
+    name: migrate_job
+    properties:
+      srcDatabaseType: mysql
+      dstDatabaseType: cynosdbmysql
+      srcRegion: ap-guangzhou
+      dstRegion: ap-guangzhou
+      instanceClass: small
+      jobName: tf_test_migration_job
+      tags:
+        - tagKey: aaa
+          tagValue: bbb
+variables:
+  all:
+    fn::invoke:
+      function: tencentcloud:Dts:getMigrateJobs
+      arguments: {}
+  job:
+    fn::invoke:
+      function: tencentcloud:Dts:getMigrateJobs
+      arguments:
+        jobId: ${migrateJob.id}
+        jobName: ${migrateJob.jobName}
+        statuses:
+          - created
+  srcDest:
+    fn::invoke:
+      function: tencentcloud:Dts:getMigrateJobs
+      arguments:
+        srcRegion: ap-guangzhou
+        srcDatabaseTypes:
+          - mysql
+        dstRegion: ap-guangzhou
+        dstDatabaseTypes:
+          - cynosdbmysql
+        statuses:
+          - created
+        tagFilters:
+          - tagKey: aaa
+            tagValue: bbb
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dts_getmigratejobs" "all" {
+}
+data "tencentcloud_dts_getmigratejobs" "job" {
+  job_id   = tencentcloud_dts_migratejob.migrate_job.id
+  job_name = tencentcloud_dts_migratejob.migrate_job.jobName
+  statuses = ["created"]
+}
+data "tencentcloud_dts_getmigratejobs" "srcDest" {
+  src_region         = "ap-guangzhou"
+  src_database_types = ["mysql"]
+  dst_region         = "ap-guangzhou"
+  dst_database_types = ["cynosdbmysql"]
+  statuses           = ["created"]
+  tag_filters {
+    tag_key   = "aaa"
+    tag_value = "bbb"
+  }
+}
+
+resource "tencentcloud_dts_migratejob" "migrate_job" {
+  src_database_type = "mysql"
+  dst_database_type = "cynosdbmysql"
+  src_region        = "ap-guangzhou"
+  dst_region        = "ap-guangzhou"
+  instance_class    = "small"
+  job_name          = "tf_test_migration_job"
+  tags = [{
+    "tagKey"   = "aaa"
+    "tagValue" = "bbb"
+  }]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
 
 
 
@@ -25,7 +414,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -33,9 +422,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getMigrateJobs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMigrateJobsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>></span
+><span class="k">function </span>getMigrateJobs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMigrateJobsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>></span
 ><span class="k">
-function </span>getMigrateJobsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMigrateJobsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>></span
+function </span>getMigrateJobsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMigrateJobsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -58,25 +447,25 @@ function </span>getMigrateJobsOutput<span class="p">(</span><span class="nx">arg
                      <span class="nx">src_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">src_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">tag_filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dts.GetMigrateJobsTagFilter]]</span> = None<span class="p">,</span>
+                     <span class="nx">tag_filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetMigrateJobsTagFilter]]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetMigrateJobsResult</span
 ><span class="k">
-def </span>get_migrate_jobs_output<span class="p">(</span><span class="nx">dst_access_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">dst_database_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">dst_instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">dst_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">job_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">job_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">order_seq</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">run_mode</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">src_access_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">src_database_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">src_instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">src_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">tag_filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_dts.GetMigrateJobsTagFilterArgs]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMigrateJobsResult]</span
+def </span>get_migrate_jobs_output<span class="p">(</span><span class="nx">dst_access_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">dst_database_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">dst_instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">dst_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">job_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">job_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">order_seq</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">run_mode</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">src_access_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">src_database_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">src_instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">src_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">tag_filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetMigrateJobsTagFilterArgs]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMigrateJobsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -101,7 +490,8 @@ func </span>GetMigrateJobsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetMigrateJobs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetMigrateJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMigrateJobsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMigrateJobsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMigrateJobsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -110,7 +500,8 @@ func </span>GetMigrateJobsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> </span>getMigrateJobs<span class="p">(</span><span class="nx">GetMigrateJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> </span>getMigrateJobs<span class="p">(</span><span class="nx">GetMigrateJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMigrateJobsResult</a></span>> </span>getMigrateJobs<span class="p">(</span><span class="nx">GetMigrateJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -122,6 +513,15 @@ func </span>GetMigrateJobsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dts/getMigrateJobs:getMigrateJobs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dts_get_migrate_jobs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -140,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>destination access type.</p>
-</dd><dt class="property-optional"
+    <dd>destination access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstdatabasetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstdatabasetypes_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Database<wbr>Types</a>
@@ -149,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>destination database type.</p>
-</dd><dt class="property-optional"
+    <dd>destination database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Instance<wbr>Id</a>
@@ -158,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Region</a>
@@ -167,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>destination region.</p>
-</dd><dt class="property-optional"
+    <dd>destination region.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -176,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -185,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-optional"
+    <dd>job name.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderseq_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Seq</a>
@@ -194,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>order by, default by create time.</p>
-</dd><dt class="property-optional"
+    <dd>order by, default by create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -203,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Mode</a>
@@ -212,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd><dt class="property-optional"
+    <dd>run mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcaccesstypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcaccesstypes_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>Access<wbr>Types</a>
@@ -221,8 +612,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>source access type.</p>
-</dd><dt class="property-optional"
+    <dd>source access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcdatabasetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcdatabasetypes_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>Database<wbr>Types</a>
@@ -230,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>source database type.</p>
-</dd><dt class="property-optional"
+    <dd>source database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>Instance<wbr>Id</a>
@@ -239,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcregion_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>Region</a>
@@ -248,8 +636,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source region.</p>
-</dd><dt class="property-optional"
+    <dd>source region.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_csharp" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -257,8 +644,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-optional"
+    <dd>migrate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Filters</a>
@@ -266,8 +652,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobstagfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>tag filters.</p>
-</dd></dl>
+    <dd>tag filters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -281,8 +666,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>destination access type.</p>
-</dd><dt class="property-optional"
+    <dd>destination access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstdatabasetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstdatabasetypes_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Database<wbr>Types</a>
@@ -290,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>destination database type.</p>
-</dd><dt class="property-optional"
+    <dd>destination database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinstanceid_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Instance<wbr>Id</a>
@@ -299,8 +682,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Region</a>
@@ -308,8 +690,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>destination region.</p>
-</dd><dt class="property-optional"
+    <dd>destination region.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -317,8 +698,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -326,8 +706,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-optional"
+    <dd>job name.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderseq_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Seq</a>
@@ -335,8 +714,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>order by, default by create time.</p>
-</dd><dt class="property-optional"
+    <dd>order by, default by create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -344,8 +722,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Mode</a>
@@ -353,8 +730,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd><dt class="property-optional"
+    <dd>run mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcaccesstypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcaccesstypes_go" style="color: inherit; text-decoration: inherit;">Src<wbr>Access<wbr>Types</a>
@@ -362,8 +738,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>source access type.</p>
-</dd><dt class="property-optional"
+    <dd>source access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcdatabasetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcdatabasetypes_go" style="color: inherit; text-decoration: inherit;">Src<wbr>Database<wbr>Types</a>
@@ -371,8 +746,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>source database type.</p>
-</dd><dt class="property-optional"
+    <dd>source database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinstanceid_go" style="color: inherit; text-decoration: inherit;">Src<wbr>Instance<wbr>Id</a>
@@ -380,8 +754,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcregion_go" style="color: inherit; text-decoration: inherit;">Src<wbr>Region</a>
@@ -389,8 +762,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source region.</p>
-</dd><dt class="property-optional"
+    <dd>source region.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_go" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -398,8 +770,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-optional"
+    <dd>migrate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Filters</a>
@@ -407,8 +778,133 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobstagfilter">[]Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter</a></span>
     </dt>
-    <dd><p>tag filters.</p>
-</dd></dl>
+    <dd>tag filters.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dst_access_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_access_types_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>access_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>destination access type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dst_database_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_database_types_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>database_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>destination database type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dst_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_instance_id_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>source instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dst_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_region_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>destination region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="job_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_seq_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_seq_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>seq</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>order by, default by create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="run_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_mode_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>run mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="src_access_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_access_types_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>access_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>source access type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="src_database_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_database_types_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>database_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>source database type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="src_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_instance_id_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>source instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="src_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_region_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>source region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>migrate status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_filters_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobstagfilter">list(object)</a></span>
+    </dt>
+    <dd>tag filters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -422,8 +918,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>destination access type.</p>
-</dd><dt class="property-optional"
+    <dd>destination access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstdatabasetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstdatabasetypes_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Database<wbr>Types</a>
@@ -431,8 +926,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>destination database type.</p>
-</dd><dt class="property-optional"
+    <dd>destination database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinstanceid_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Instance<wbr>Id</a>
@@ -440,8 +934,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Region</a>
@@ -449,8 +942,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>destination region.</p>
-</dd><dt class="property-optional"
+    <dd>destination region.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -458,8 +950,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_java" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -467,8 +958,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-optional"
+    <dd>job name.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderseq_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_java" style="color: inherit; text-decoration: inherit;">order<wbr>Seq</a>
@@ -476,8 +966,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>order by, default by create time.</p>
-</dd><dt class="property-optional"
+    <dd>order by, default by create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -485,8 +974,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_java" style="color: inherit; text-decoration: inherit;">run<wbr>Mode</a>
@@ -494,8 +982,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd><dt class="property-optional"
+    <dd>run mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcaccesstypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcaccesstypes_java" style="color: inherit; text-decoration: inherit;">src<wbr>Access<wbr>Types</a>
@@ -503,8 +990,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>source access type.</p>
-</dd><dt class="property-optional"
+    <dd>source access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcdatabasetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcdatabasetypes_java" style="color: inherit; text-decoration: inherit;">src<wbr>Database<wbr>Types</a>
@@ -512,8 +998,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>source database type.</p>
-</dd><dt class="property-optional"
+    <dd>source database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinstanceid_java" style="color: inherit; text-decoration: inherit;">src<wbr>Instance<wbr>Id</a>
@@ -521,8 +1006,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcregion_java" style="color: inherit; text-decoration: inherit;">src<wbr>Region</a>
@@ -530,8 +1014,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source region.</p>
-</dd><dt class="property-optional"
+    <dd>source region.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_java" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -539,8 +1022,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-optional"
+    <dd>migrate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Filters</a>
@@ -548,8 +1030,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobstagfilter">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>tag filters.</p>
-</dd></dl>
+    <dd>tag filters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -563,8 +1044,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>destination access type.</p>
-</dd><dt class="property-optional"
+    <dd>destination access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstdatabasetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstdatabasetypes_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Database<wbr>Types</a>
@@ -572,8 +1052,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>destination database type.</p>
-</dd><dt class="property-optional"
+    <dd>destination database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Instance<wbr>Id</a>
@@ -581,8 +1060,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Region</a>
@@ -590,8 +1068,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>destination region.</p>
-</dd><dt class="property-optional"
+    <dd>destination region.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -599,8 +1076,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -608,8 +1084,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-optional"
+    <dd>job name.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderseq_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Seq</a>
@@ -617,8 +1092,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>order by, default by create time.</p>
-</dd><dt class="property-optional"
+    <dd>order by, default by create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -626,8 +1100,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Mode</a>
@@ -635,8 +1108,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd><dt class="property-optional"
+    <dd>run mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcaccesstypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcaccesstypes_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>Access<wbr>Types</a>
@@ -644,8 +1116,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>source access type.</p>
-</dd><dt class="property-optional"
+    <dd>source access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcdatabasetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcdatabasetypes_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>Database<wbr>Types</a>
@@ -653,8 +1124,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>source database type.</p>
-</dd><dt class="property-optional"
+    <dd>source database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>Instance<wbr>Id</a>
@@ -662,8 +1132,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcregion_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>Region</a>
@@ -671,8 +1140,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source region.</p>
-</dd><dt class="property-optional"
+    <dd>source region.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_nodejs" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -680,8 +1148,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-optional"
+    <dd>migrate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Filters</a>
@@ -689,8 +1156,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobstagfilter">Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>tag filters.</p>
-</dd></dl>
+    <dd>tag filters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -704,8 +1170,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>destination access type.</p>
-</dd><dt class="property-optional"
+    <dd>destination access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dst_database_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_database_types_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>database_<wbr>types</a>
@@ -713,8 +1178,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>destination database type.</p>
-</dd><dt class="property-optional"
+    <dd>destination database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dst_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_instance_id_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>instance_<wbr>id</a>
@@ -722,8 +1186,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="dst_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_region_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>region</a>
@@ -731,8 +1194,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>destination region.</p>
-</dd><dt class="property-optional"
+    <dd>destination region.</dd><dt class="property-optional"
             title="Optional">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -740,8 +1202,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="job_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_python" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
@@ -749,8 +1210,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-optional"
+    <dd>job name.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_seq_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_seq_python" style="color: inherit; text-decoration: inherit;">order_<wbr>seq</a>
@@ -758,8 +1218,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>order by, default by create time.</p>
-</dd><dt class="property-optional"
+    <dd>order by, default by create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -767,8 +1226,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="run_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_mode_python" style="color: inherit; text-decoration: inherit;">run_<wbr>mode</a>
@@ -776,8 +1234,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd><dt class="property-optional"
+    <dd>run mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="src_access_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_access_types_python" style="color: inherit; text-decoration: inherit;">src_<wbr>access_<wbr>types</a>
@@ -785,8 +1242,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>source access type.</p>
-</dd><dt class="property-optional"
+    <dd>source access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="src_database_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_database_types_python" style="color: inherit; text-decoration: inherit;">src_<wbr>database_<wbr>types</a>
@@ -794,8 +1250,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>source database type.</p>
-</dd><dt class="property-optional"
+    <dd>source database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="src_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_instance_id_python" style="color: inherit; text-decoration: inherit;">src_<wbr>instance_<wbr>id</a>
@@ -803,8 +1258,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="src_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_region_python" style="color: inherit; text-decoration: inherit;">src_<wbr>region</a>
@@ -812,8 +1266,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>source region.</p>
-</dd><dt class="property-optional"
+    <dd>source region.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_python" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -821,17 +1274,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-optional"
+    <dd>migrate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_filters_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobstagfilter">Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getmigratejobstagfilter">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter]</a></span>
     </dt>
-    <dd><p>tag filters.</p>
-</dd></dl>
+    <dd>tag filters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -845,8 +1296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>destination access type.</p>
-</dd><dt class="property-optional"
+    <dd>destination access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstdatabasetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstdatabasetypes_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Database<wbr>Types</a>
@@ -854,8 +1304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>destination database type.</p>
-</dd><dt class="property-optional"
+    <dd>destination database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinstanceid_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Instance<wbr>Id</a>
@@ -863,8 +1312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Region</a>
@@ -872,8 +1320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>destination region.</p>
-</dd><dt class="property-optional"
+    <dd>destination region.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -881,8 +1328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -890,8 +1336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-optional"
+    <dd>job name.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderseq_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Seq</a>
@@ -899,8 +1344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>order by, default by create time.</p>
-</dd><dt class="property-optional"
+    <dd>order by, default by create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -908,8 +1352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Mode</a>
@@ -917,8 +1360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd><dt class="property-optional"
+    <dd>run mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcaccesstypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcaccesstypes_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>Access<wbr>Types</a>
@@ -926,8 +1368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>source access type.</p>
-</dd><dt class="property-optional"
+    <dd>source access type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcdatabasetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcdatabasetypes_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>Database<wbr>Types</a>
@@ -935,8 +1376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>source database type.</p>
-</dd><dt class="property-optional"
+    <dd>source database type.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinstanceid_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>Instance<wbr>Id</a>
@@ -944,8 +1384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source instance id.</p>
-</dd><dt class="property-optional"
+    <dd>source instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="srcregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcregion_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>Region</a>
@@ -953,8 +1392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source region.</p>
-</dd><dt class="property-optional"
+    <dd>source region.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_yaml" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -962,8 +1400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-optional"
+    <dd>migrate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Filters</a>
@@ -971,8 +1408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobstagfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>tag filters.</p>
-</dd></dl>
+    <dd>tag filters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -1004,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Outputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>migration job list.</p>
-</dd><dt class="property-"
+    <dd>migration job list.</dd><dt class="property-"
             title="">
         <span id="dstaccesstypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstaccesstypes_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Access<wbr>Types</a>
@@ -1045,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="jobname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -1054,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-"
+    <dd>job name.</dd><dt class="property-"
             title="">
         <span id="orderseq_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Seq</a>
@@ -1119,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>current status.</p>
-</dd><dt class="property-"
+    <dd>current status.</dd><dt class="property-"
             title="">
         <span id="tagfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Filters</a>
@@ -1142,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -1151,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslist">[]Get<wbr>Migrate<wbr>Jobs<wbr>List</a></span>
     </dt>
-    <dd><p>migration job list.</p>
-</dd><dt class="property-"
+    <dd>migration job list.</dd><dt class="property-"
             title="">
         <span id="dstaccesstypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstaccesstypes_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Access<wbr>Types</a>
@@ -1192,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="jobname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -1201,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-"
+    <dd>job name.</dd><dt class="property-"
             title="">
         <span id="orderseq_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Seq</a>
@@ -1266,14 +1693,155 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>current status.</p>
-</dd><dt class="property-"
+    <dd>current status.</dd><dt class="property-"
             title="">
         <span id="tagfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobstagfilter">[]Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter</a></span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslist">list(object)</a></span>
+    </dt>
+    <dd>migration job list.</dd><dt class="property-"
+            title="">
+        <span id="dst_access_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_access_types_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>access_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="dst_database_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_database_types_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>database_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="dst_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_instance_id_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="dst_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_region_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job id.</dd><dt class="property-"
+            title="">
+        <span id="job_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job name.</dd><dt class="property-"
+            title="">
+        <span id="order_seq_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_seq_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>seq</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="run_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_mode_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="src_access_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_access_types_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>access_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="src_database_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_database_types_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>database_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="src_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_instance_id_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="src_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_region_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>current status.</dd><dt class="property-"
+            title="">
+        <span id="tag_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_filters_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobstagfilter">list(object)</a></span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1289,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -1298,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslist">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>migration job list.</p>
-</dd><dt class="property-"
+    <dd>migration job list.</dd><dt class="property-"
             title="">
         <span id="dstaccesstypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstaccesstypes_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Access<wbr>Types</a>
@@ -1339,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="jobname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_java" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -1348,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-"
+    <dd>job name.</dd><dt class="property-"
             title="">
         <span id="orderseq_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_java" style="color: inherit; text-decoration: inherit;">order<wbr>Seq</a>
@@ -1413,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>current status.</p>
-</dd><dt class="property-"
+    <dd>current status.</dd><dt class="property-"
             title="">
         <span id="tagfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Filters</a>
@@ -1436,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -1445,8 +2007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslist">Get<wbr>Migrate<wbr>Jobs<wbr>List[]</a></span>
     </dt>
-    <dd><p>migration job list.</p>
-</dd><dt class="property-"
+    <dd>migration job list.</dd><dt class="property-"
             title="">
         <span id="dstaccesstypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstaccesstypes_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Access<wbr>Types</a>
@@ -1486,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="jobname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -1495,8 +2055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-"
+    <dd>job name.</dd><dt class="property-"
             title="">
         <span id="orderseq_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Seq</a>
@@ -1560,8 +2119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>current status.</p>
-</dd><dt class="property-"
+    <dd>current status.</dd><dt class="property-"
             title="">
         <span id="tagfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Filters</a>
@@ -1583,17 +2141,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslist">Get<wbr>Migrate<wbr>Jobs<wbr>List]</a></span>
+        <span class="property-type"><a href="#getmigratejobslist">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List]</a></span>
     </dt>
-    <dd><p>migration job list.</p>
-</dd><dt class="property-"
+    <dd>migration job list.</dd><dt class="property-"
             title="">
         <span id="dst_access_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_access_types_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>access_<wbr>types</a>
@@ -1633,8 +2189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="job_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_python" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
@@ -1642,8 +2197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-"
+    <dd>job name.</dd><dt class="property-"
             title="">
         <span id="order_seq_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_seq_python" style="color: inherit; text-decoration: inherit;">order_<wbr>seq</a>
@@ -1707,14 +2261,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>current status.</p>
-</dd><dt class="property-"
+    <dd>current status.</dd><dt class="property-"
             title="">
         <span id="tag_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_filters_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobstagfilter">Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getmigratejobstagfilter">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>Tag<wbr>Filter]</a></span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1730,8 +2283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -1739,8 +2291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>migration job list.</p>
-</dd><dt class="property-"
+    <dd>migration job list.</dd><dt class="property-"
             title="">
         <span id="dstaccesstypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstaccesstypes_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Access<wbr>Types</a>
@@ -1780,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="jobname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -1789,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-"
+    <dd>job name.</dd><dt class="property-"
             title="">
         <span id="orderseq_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderseq_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Seq</a>
@@ -1854,8 +2403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>current status.</p>
-</dd><dt class="property-"
+    <dd>current status.</dd><dt class="property-"
             title="">
         <span id="tagfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagfilters_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Filters</a>
@@ -1887,8 +2435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistaction">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Action&gt;</a></span>
     </dt>
-    <dd><p>action info.</p>
-</dd><dt class="property-required"
+    <dd>action info.</dd><dt class="property-required"
             title="Required">
         <span id="briefmsg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#briefmsg_csharp" style="color: inherit; text-decoration: inherit;">Brief<wbr>Msg</a>
@@ -1896,8 +2443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>brief message for migrate error.</p>
-</dd><dt class="property-required"
+    <dd>brief message for migrate error.</dd><dt class="property-required"
             title="Required">
         <span id="comparetasks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetasks_csharp" style="color: inherit; text-decoration: inherit;">Compare<wbr>Tasks</a>
@@ -1905,8 +2451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistcomparetask">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Compare<wbr>Task&gt;</a></span>
     </dt>
-    <dd><p>compare task info.</p>
-</dd><dt class="property-required"
+    <dd>compare task info.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1914,8 +2459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dstinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinfos_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Infos</a>
@@ -1923,8 +2467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>destination info.</p>
-</dd><dt class="property-required"
+    <dd>destination info.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1932,8 +2475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="expectruntime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expectruntime_csharp" style="color: inherit; text-decoration: inherit;">Expect<wbr>Run<wbr>Time</a>
@@ -1941,8 +2483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expected run time.</p>
-</dd><dt class="property-required"
+    <dd>expected run time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -1950,8 +2491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -1959,8 +2499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-required"
+    <dd>job name.</dd><dt class="property-required"
             title="Required">
         <span id="srcinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinfos_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>Infos</a>
@@ -1968,8 +2507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>source info.</p>
-</dd><dt class="property-required"
+    <dd>source info.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1977,8 +2515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1986,8 +2523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Infos</a>
@@ -1995,8 +2531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -2004,8 +2539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>tag list.</p>
-</dd><dt class="property-required"
+    <dd>tag list.</dd><dt class="property-required"
             title="Required">
         <span id="tradeinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradeinfos_csharp" style="color: inherit; text-decoration: inherit;">Trade<wbr>Infos</a>
@@ -2013,8 +2547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttradeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Trade<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>trade info.</p>
-</dd><dt class="property-required"
+    <dd>trade info.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -2022,8 +2555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-optional"
+    <dd>update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Mode</a>
@@ -2031,8 +2563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd></dl>
+    <dd>run mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2046,8 +2577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistaction">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Action</a></span>
     </dt>
-    <dd><p>action info.</p>
-</dd><dt class="property-required"
+    <dd>action info.</dd><dt class="property-required"
             title="Required">
         <span id="briefmsg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#briefmsg_go" style="color: inherit; text-decoration: inherit;">Brief<wbr>Msg</a>
@@ -2055,8 +2585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>brief message for migrate error.</p>
-</dd><dt class="property-required"
+    <dd>brief message for migrate error.</dd><dt class="property-required"
             title="Required">
         <span id="comparetasks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetasks_go" style="color: inherit; text-decoration: inherit;">Compare<wbr>Tasks</a>
@@ -2064,8 +2593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistcomparetask">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Compare<wbr>Task</a></span>
     </dt>
-    <dd><p>compare task info.</p>
-</dd><dt class="property-required"
+    <dd>compare task info.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2073,8 +2601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dstinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinfos_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Infos</a>
@@ -2082,8 +2609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info</a></span>
     </dt>
-    <dd><p>destination info.</p>
-</dd><dt class="property-required"
+    <dd>destination info.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -2091,8 +2617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="expectruntime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expectruntime_go" style="color: inherit; text-decoration: inherit;">Expect<wbr>Run<wbr>Time</a>
@@ -2100,8 +2625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expected run time.</p>
-</dd><dt class="property-required"
+    <dd>expected run time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -2109,8 +2633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -2118,8 +2641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-required"
+    <dd>job name.</dd><dt class="property-required"
             title="Required">
         <span id="srcinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinfos_go" style="color: inherit; text-decoration: inherit;">Src<wbr>Infos</a>
@@ -2127,8 +2649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info</a></span>
     </dt>
-    <dd><p>source info.</p>
-</dd><dt class="property-required"
+    <dd>source info.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2136,8 +2657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2145,8 +2665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Infos</a>
@@ -2154,8 +2673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -2163,8 +2681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttag">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Tag</a></span>
     </dt>
-    <dd><p>tag list.</p>
-</dd><dt class="property-required"
+    <dd>tag list.</dd><dt class="property-required"
             title="Required">
         <span id="tradeinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradeinfos_go" style="color: inherit; text-decoration: inherit;">Trade<wbr>Infos</a>
@@ -2172,8 +2689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttradeinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Trade<wbr>Info</a></span>
     </dt>
-    <dd><p>trade info.</p>
-</dd><dt class="property-required"
+    <dd>trade info.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -2181,8 +2697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-optional"
+    <dd>update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Mode</a>
@@ -2190,8 +2705,149 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd></dl>
+    <dd>run mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="actions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actions_hcl" style="color: inherit; text-decoration: inherit;">actions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistaction">list(object)</a></span>
+    </dt>
+    <dd>action info.</dd><dt class="property-required"
+            title="Required">
+        <span id="brief_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#brief_msg_hcl" style="color: inherit; text-decoration: inherit;">brief_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>brief message for migrate error.</dd><dt class="property-required"
+            title="Required">
+        <span id="compare_tasks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_tasks_hcl" style="color: inherit; text-decoration: inherit;">compare_<wbr>tasks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistcomparetask">list(object)</a></span>
+    </dt>
+    <dd>compare task info.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="dst_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_infos_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistdstinfo">list(object)</a></span>
+    </dt>
+    <dd>destination info.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>end time.</dd><dt class="property-required"
+            title="Required">
+        <span id="expect_run_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expect_run_time_hcl" style="color: inherit; text-decoration: inherit;">expect_<wbr>run_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>expected run time.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job id.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job name.</dd><dt class="property-required"
+            title="Required">
+        <span id="src_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_infos_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistsrcinfo">list(object)</a></span>
+    </dt>
+    <dd>source info.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>migrate status.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_infos_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfo">list(object)</a></span>
+    </dt>
+    <dd>step infos.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslisttag">list(object)</a></span>
+    </dt>
+    <dd>tag list.</dd><dt class="property-required"
+            title="Required">
+        <span id="trade_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_infos_hcl" style="color: inherit; text-decoration: inherit;">trade_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslisttradeinfo">list(object)</a></span>
+    </dt>
+    <dd>trade info.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="run_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_mode_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>run mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2205,8 +2861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistaction">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Action&gt;</a></span>
     </dt>
-    <dd><p>action info.</p>
-</dd><dt class="property-required"
+    <dd>action info.</dd><dt class="property-required"
             title="Required">
         <span id="briefmsg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#briefmsg_java" style="color: inherit; text-decoration: inherit;">brief<wbr>Msg</a>
@@ -2214,8 +2869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>brief message for migrate error.</p>
-</dd><dt class="property-required"
+    <dd>brief message for migrate error.</dd><dt class="property-required"
             title="Required">
         <span id="comparetasks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetasks_java" style="color: inherit; text-decoration: inherit;">compare<wbr>Tasks</a>
@@ -2223,8 +2877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistcomparetask">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Compare<wbr>Task&gt;</a></span>
     </dt>
-    <dd><p>compare task info.</p>
-</dd><dt class="property-required"
+    <dd>compare task info.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2232,8 +2885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dstinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinfos_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Infos</a>
@@ -2241,8 +2893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>destination info.</p>
-</dd><dt class="property-required"
+    <dd>destination info.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -2250,8 +2901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="expectruntime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expectruntime_java" style="color: inherit; text-decoration: inherit;">expect<wbr>Run<wbr>Time</a>
@@ -2259,8 +2909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expected run time.</p>
-</dd><dt class="property-required"
+    <dd>expected run time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -2268,8 +2917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_java" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -2277,8 +2925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-required"
+    <dd>job name.</dd><dt class="property-required"
             title="Required">
         <span id="srcinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinfos_java" style="color: inherit; text-decoration: inherit;">src<wbr>Infos</a>
@@ -2286,8 +2933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>source info.</p>
-</dd><dt class="property-required"
+    <dd>source info.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2295,8 +2941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2304,8 +2949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_java" style="color: inherit; text-decoration: inherit;">step<wbr>Infos</a>
@@ -2313,8 +2957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2322,8 +2965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttag">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>tag list.</p>
-</dd><dt class="property-required"
+    <dd>tag list.</dd><dt class="property-required"
             title="Required">
         <span id="tradeinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradeinfos_java" style="color: inherit; text-decoration: inherit;">trade<wbr>Infos</a>
@@ -2331,8 +2973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttradeinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Trade<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>trade info.</p>
-</dd><dt class="property-required"
+    <dd>trade info.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2340,8 +2981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-optional"
+    <dd>update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_java" style="color: inherit; text-decoration: inherit;">run<wbr>Mode</a>
@@ -2349,8 +2989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd></dl>
+    <dd>run mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2364,8 +3003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistaction">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Action[]</a></span>
     </dt>
-    <dd><p>action info.</p>
-</dd><dt class="property-required"
+    <dd>action info.</dd><dt class="property-required"
             title="Required">
         <span id="briefmsg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#briefmsg_nodejs" style="color: inherit; text-decoration: inherit;">brief<wbr>Msg</a>
@@ -2373,8 +3011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>brief message for migrate error.</p>
-</dd><dt class="property-required"
+    <dd>brief message for migrate error.</dd><dt class="property-required"
             title="Required">
         <span id="comparetasks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetasks_nodejs" style="color: inherit; text-decoration: inherit;">compare<wbr>Tasks</a>
@@ -2382,8 +3019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistcomparetask">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Compare<wbr>Task[]</a></span>
     </dt>
-    <dd><p>compare task info.</p>
-</dd><dt class="property-required"
+    <dd>compare task info.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2391,8 +3027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dstinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinfos_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Infos</a>
@@ -2400,8 +3035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info[]</a></span>
     </dt>
-    <dd><p>destination info.</p>
-</dd><dt class="property-required"
+    <dd>destination info.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -2409,8 +3043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="expectruntime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expectruntime_nodejs" style="color: inherit; text-decoration: inherit;">expect<wbr>Run<wbr>Time</a>
@@ -2418,8 +3051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expected run time.</p>
-</dd><dt class="property-required"
+    <dd>expected run time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -2427,8 +3059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -2436,8 +3067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-required"
+    <dd>job name.</dd><dt class="property-required"
             title="Required">
         <span id="srcinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinfos_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>Infos</a>
@@ -2445,8 +3075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info[]</a></span>
     </dt>
-    <dd><p>source info.</p>
-</dd><dt class="property-required"
+    <dd>source info.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2454,8 +3083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2463,8 +3091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Infos</a>
@@ -2472,8 +3099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info[]</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2481,8 +3107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttag">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>tag list.</p>
-</dd><dt class="property-required"
+    <dd>tag list.</dd><dt class="property-required"
             title="Required">
         <span id="tradeinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradeinfos_nodejs" style="color: inherit; text-decoration: inherit;">trade<wbr>Infos</a>
@@ -2490,8 +3115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttradeinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Trade<wbr>Info[]</a></span>
     </dt>
-    <dd><p>trade info.</p>
-</dd><dt class="property-required"
+    <dd>trade info.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2499,8 +3123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-optional"
+    <dd>update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Mode</a>
@@ -2508,8 +3131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd></dl>
+    <dd>run mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2521,10 +3143,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actions_python" style="color: inherit; text-decoration: inherit;">actions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistaction">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Action]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistaction">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Action]</a></span>
     </dt>
-    <dd><p>action info.</p>
-</dd><dt class="property-required"
+    <dd>action info.</dd><dt class="property-required"
             title="Required">
         <span id="brief_msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#brief_msg_python" style="color: inherit; text-decoration: inherit;">brief_<wbr>msg</a>
@@ -2532,17 +3153,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>brief message for migrate error.</p>
-</dd><dt class="property-required"
+    <dd>brief message for migrate error.</dd><dt class="property-required"
             title="Required">
         <span id="compare_tasks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_tasks_python" style="color: inherit; text-decoration: inherit;">compare_<wbr>tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistcomparetask">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Compare<wbr>Task]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistcomparetask">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Compare<wbr>Task]</a></span>
     </dt>
-    <dd><p>compare task info.</p>
-</dd><dt class="property-required"
+    <dd>compare task info.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2550,17 +3169,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dst_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_infos_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistdstinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistdstinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info]</a></span>
     </dt>
-    <dd><p>destination info.</p>
-</dd><dt class="property-required"
+    <dd>destination info.</dd><dt class="property-required"
             title="Required">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -2568,8 +3185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="expect_run_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expect_run_time_python" style="color: inherit; text-decoration: inherit;">expect_<wbr>run_<wbr>time</a>
@@ -2577,8 +3193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>expected run time.</p>
-</dd><dt class="property-required"
+    <dd>expected run time.</dd><dt class="property-required"
             title="Required">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -2586,8 +3201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="job_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_python" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
@@ -2595,17 +3209,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-required"
+    <dd>job name.</dd><dt class="property-required"
             title="Required">
         <span id="src_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_infos_python" style="color: inherit; text-decoration: inherit;">src_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistsrcinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistsrcinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info]</a></span>
     </dt>
-    <dd><p>source info.</p>
-</dd><dt class="property-required"
+    <dd>source info.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -2613,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2622,35 +3233,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="step_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_infos_python" style="color: inherit; text-decoration: inherit;">step_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobsliststepinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info]</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslisttag">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Tag]</a></span>
+        <span class="property-type"><a href="#getmigratejobslisttag">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Tag]</a></span>
     </dt>
-    <dd><p>tag list.</p>
-</dd><dt class="property-required"
+    <dd>tag list.</dd><dt class="property-required"
             title="Required">
         <span id="trade_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_infos_python" style="color: inherit; text-decoration: inherit;">trade_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslisttradeinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Trade<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobslisttradeinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Trade<wbr>Info]</a></span>
     </dt>
-    <dd><p>trade info.</p>
-</dd><dt class="property-required"
+    <dd>trade info.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2658,8 +3265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-optional"
+    <dd>update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="run_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_mode_python" style="color: inherit; text-decoration: inherit;">run_<wbr>mode</a>
@@ -2667,8 +3273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd></dl>
+    <dd>run mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2682,8 +3287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistaction">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>action info.</p>
-</dd><dt class="property-required"
+    <dd>action info.</dd><dt class="property-required"
             title="Required">
         <span id="briefmsg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#briefmsg_yaml" style="color: inherit; text-decoration: inherit;">brief<wbr>Msg</a>
@@ -2691,8 +3295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>brief message for migrate error.</p>
-</dd><dt class="property-required"
+    <dd>brief message for migrate error.</dd><dt class="property-required"
             title="Required">
         <span id="comparetasks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetasks_yaml" style="color: inherit; text-decoration: inherit;">compare<wbr>Tasks</a>
@@ -2700,8 +3303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistcomparetask">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>compare task info.</p>
-</dd><dt class="property-required"
+    <dd>compare task info.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2709,8 +3311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dstinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstinfos_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Infos</a>
@@ -2718,8 +3319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>destination info.</p>
-</dd><dt class="property-required"
+    <dd>destination info.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -2727,8 +3327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="expectruntime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expectruntime_yaml" style="color: inherit; text-decoration: inherit;">expect<wbr>Run<wbr>Time</a>
@@ -2736,8 +3335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expected run time.</p>
-</dd><dt class="property-required"
+    <dd>expected run time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -2745,8 +3343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -2754,8 +3351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job name.</p>
-</dd><dt class="property-required"
+    <dd>job name.</dd><dt class="property-required"
             title="Required">
         <span id="srcinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcinfos_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>Infos</a>
@@ -2763,8 +3359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>source info.</p>
-</dd><dt class="property-required"
+    <dd>source info.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2772,8 +3367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2781,8 +3375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Infos</a>
@@ -2790,8 +3383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2799,8 +3391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>tag list.</p>
-</dd><dt class="property-required"
+    <dd>tag list.</dd><dt class="property-required"
             title="Required">
         <span id="tradeinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradeinfos_yaml" style="color: inherit; text-decoration: inherit;">trade<wbr>Infos</a>
@@ -2808,8 +3399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslisttradeinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>trade info.</p>
-</dd><dt class="property-required"
+    <dd>trade info.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2817,8 +3407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-optional"
+    <dd>update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="runmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runmode_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Mode</a>
@@ -2826,8 +3415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>run mode.</p>
-</dd></dl>
+    <dd>run mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2845,8 +3433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>all action list.</p>
-</dd><dt class="property-required"
+    <dd>all action list.</dd><dt class="property-required"
             title="Required">
         <span id="allowedactions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedactions_csharp" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Actions</a>
@@ -2854,8 +3441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>allowed action list.</p>
-</dd></dl>
+    <dd>allowed action list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2869,8 +3455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>all action list.</p>
-</dd><dt class="property-required"
+    <dd>all action list.</dd><dt class="property-required"
             title="Required">
         <span id="allowedactions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedactions_go" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Actions</a>
@@ -2878,8 +3463,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>allowed action list.</p>
-</dd></dl>
+    <dd>allowed action list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="all_actions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#all_actions_hcl" style="color: inherit; text-decoration: inherit;">all_<wbr>actions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>all action list.</dd><dt class="property-required"
+            title="Required">
+        <span id="allowed_actions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_actions_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>actions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>allowed action list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2893,8 +3499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>all action list.</p>
-</dd><dt class="property-required"
+    <dd>all action list.</dd><dt class="property-required"
             title="Required">
         <span id="allowedactions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedactions_java" style="color: inherit; text-decoration: inherit;">allowed<wbr>Actions</a>
@@ -2902,8 +3507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>allowed action list.</p>
-</dd></dl>
+    <dd>allowed action list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2917,8 +3521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>all action list.</p>
-</dd><dt class="property-required"
+    <dd>all action list.</dd><dt class="property-required"
             title="Required">
         <span id="allowedactions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedactions_nodejs" style="color: inherit; text-decoration: inherit;">allowed<wbr>Actions</a>
@@ -2926,8 +3529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>allowed action list.</p>
-</dd></dl>
+    <dd>allowed action list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2941,8 +3543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>all action list.</p>
-</dd><dt class="property-required"
+    <dd>all action list.</dd><dt class="property-required"
             title="Required">
         <span id="allowed_actions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_actions_python" style="color: inherit; text-decoration: inherit;">allowed_<wbr>actions</a>
@@ -2950,8 +3551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>allowed action list.</p>
-</dd></dl>
+    <dd>allowed action list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2965,8 +3565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>all action list.</p>
-</dd><dt class="property-required"
+    <dd>all action list.</dd><dt class="property-required"
             title="Required">
         <span id="allowedactions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedactions_yaml" style="color: inherit; text-decoration: inherit;">allowed<wbr>Actions</a>
@@ -2974,8 +3573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>allowed action list.</p>
-</dd></dl>
+    <dd>allowed action list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2993,8 +3591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3002,8 +3599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd></dl>
+    <dd>migrate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3017,8 +3613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3026,8 +3621,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd></dl>
+    <dd>migrate status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="compare_task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_task_id_hcl" style="color: inherit; text-decoration: inherit;">compare_<wbr>task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task id.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>migrate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3041,8 +3657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3050,8 +3665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd></dl>
+    <dd>migrate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3065,8 +3679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3074,8 +3687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd></dl>
+    <dd>migrate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3089,8 +3701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3098,8 +3709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd></dl>
+    <dd>migrate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3113,8 +3723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3122,8 +3731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd></dl>
+    <dd>migrate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3141,8 +3749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_csharp" style="color: inherit; text-decoration: inherit;">Database<wbr>Type</a>
@@ -3150,8 +3757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="infos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_csharp" style="color: inherit; text-decoration: inherit;">Infos</a>
@@ -3159,8 +3765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -3168,8 +3773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -3177,8 +3781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd></dl>
+    <dd>region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3192,8 +3795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_go" style="color: inherit; text-decoration: inherit;">Database<wbr>Type</a>
@@ -3201,8 +3803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="infos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_go" style="color: inherit; text-decoration: inherit;">Infos</a>
@@ -3210,8 +3811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info<wbr>Info</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -3219,8 +3819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -3228,8 +3827,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd></dl>
+    <dd>region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_type_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>access type.</dd><dt class="property-required"
+            title="Required">
+        <span id="database_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_type_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>database type.</dd><dt class="property-required"
+            title="Required">
+        <span id="infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_hcl" style="color: inherit; text-decoration: inherit;">infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">list(object)</a></span>
+    </dt>
+    <dd>db info.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>node type.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3243,8 +3887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_java" style="color: inherit; text-decoration: inherit;">database<wbr>Type</a>
@@ -3252,8 +3895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="infos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_java" style="color: inherit; text-decoration: inherit;">infos</a>
@@ -3261,8 +3903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -3270,8 +3911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3279,8 +3919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region.</p>
-</dd></dl>
+    <dd>region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3294,8 +3933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_nodejs" style="color: inherit; text-decoration: inherit;">database<wbr>Type</a>
@@ -3303,8 +3941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="infos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_nodejs" style="color: inherit; text-decoration: inherit;">infos</a>
@@ -3312,8 +3949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info<wbr>Info[]</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -3321,8 +3957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3330,8 +3965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd></dl>
+    <dd>region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3345,8 +3979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="database_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_type_python" style="color: inherit; text-decoration: inherit;">database_<wbr>type</a>
@@ -3354,17 +3987,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_python" style="color: inherit; text-decoration: inherit;">infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Dst<wbr>Info<wbr>Info]</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -3372,8 +4003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3381,8 +4011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>region.</p>
-</dd></dl>
+    <dd>region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3396,8 +4025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_yaml" style="color: inherit; text-decoration: inherit;">database<wbr>Type</a>
@@ -3405,8 +4033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="infos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_yaml" style="color: inherit; text-decoration: inherit;">infos</a>
@@ -3414,8 +4041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistdstinfoinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -3423,8 +4049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3432,8 +4057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region.</p>
-</dd></dl>
+    <dd>region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3451,8 +4075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Mode</a>
@@ -3460,8 +4083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Role</a>
@@ -3469,8 +4091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_csharp" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Gw<wbr>Id</a>
@@ -3478,8 +4099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_csharp" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Id</a>
@@ -3487,8 +4107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel</a>
@@ -3496,8 +4115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -3505,8 +4123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -3514,8 +4131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3523,8 +4139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3532,8 +4147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3541,8 +4155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -3550,8 +4163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3559,8 +4171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_csharp" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Id</a>
@@ -3568,8 +4179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_csharp" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Key</a>
@@ -3577,8 +4187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_csharp" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Token</a>
@@ -3586,8 +4195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -3595,8 +4203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_csharp" style="color: inherit; text-decoration: inherit;">User</a>
@@ -3604,8 +4211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3613,8 +4219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3628,8 +4233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Mode</a>
@@ -3637,8 +4241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Role</a>
@@ -3646,8 +4249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_go" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Gw<wbr>Id</a>
@@ -3655,8 +4257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_go" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Id</a>
@@ -3664,8 +4265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel</a>
@@ -3673,8 +4273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -3682,8 +4281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -3691,8 +4289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3700,8 +4297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3709,8 +4305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3718,8 +4313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -3727,8 +4321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3736,8 +4329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_go" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Id</a>
@@ -3745,8 +4337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_go" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Key</a>
@@ -3754,8 +4345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_go" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Token</a>
@@ -3763,8 +4353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -3772,8 +4361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_go" style="color: inherit; text-decoration: inherit;">User</a>
@@ -3781,8 +4369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3790,8 +4377,165 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_hcl" style="color: inherit; text-decoration: inherit;">account</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account.</dd><dt class="property-required"
+            title="Required">
+        <span id="account_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_mode_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="account_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_role_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account role.</dd><dt class="property-required"
+            title="Required">
+        <span id="ccn_gw_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_gw_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>gw_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ccn gateway id.</dd><dt class="property-required"
+            title="Required">
+        <span id="cvm_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_id_hcl" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cvm instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_kernel_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_kernel_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>database kernel.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine version.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>host.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>password.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>port.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>node role.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet id.</dd><dt class="property-required"
+            title="Required">
+        <span id="tmp_secret_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_id_hcl" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>temporary secret id.</dd><dt class="property-required"
+            title="Required">
+        <span id="tmp_secret_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_key_hcl" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>temporary secret key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tmp_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_token_hcl" style="color: inherit; text-decoration: inherit;">tmp_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>temporary token.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_vpn_gw_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpn_gw_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpn_<wbr>gw_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpn gateway id.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_hcl" style="color: inherit; text-decoration: inherit;">user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>user.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3805,8 +4549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_java" style="color: inherit; text-decoration: inherit;">account<wbr>Mode</a>
@@ -3814,8 +4557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_java" style="color: inherit; text-decoration: inherit;">account<wbr>Role</a>
@@ -3823,8 +4565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_java" style="color: inherit; text-decoration: inherit;">ccn<wbr>Gw<wbr>Id</a>
@@ -3832,8 +4573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_java" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Id</a>
@@ -3841,8 +4581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_java" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel</a>
@@ -3850,8 +4589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -3859,8 +4597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -3868,8 +4605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3877,8 +4613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3886,8 +4621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3895,8 +4629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -3904,8 +4637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3913,8 +4645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_java" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Id</a>
@@ -3922,8 +4653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_java" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Key</a>
@@ -3931,8 +4661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_java" style="color: inherit; text-decoration: inherit;">tmp<wbr>Token</a>
@@ -3940,8 +4669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -3949,8 +4677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_java" style="color: inherit; text-decoration: inherit;">user</a>
@@ -3958,8 +4685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3967,8 +4693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3982,8 +4707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Mode</a>
@@ -3991,8 +4715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Role</a>
@@ -4000,8 +4723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_nodejs" style="color: inherit; text-decoration: inherit;">ccn<wbr>Gw<wbr>Id</a>
@@ -4009,8 +4731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_nodejs" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Id</a>
@@ -4018,8 +4739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel</a>
@@ -4027,8 +4747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -4036,8 +4755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -4045,8 +4763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4054,8 +4771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4063,8 +4779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4072,8 +4787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -4081,8 +4795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4090,8 +4803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_nodejs" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Id</a>
@@ -4099,8 +4811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_nodejs" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Key</a>
@@ -4108,8 +4819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_nodejs" style="color: inherit; text-decoration: inherit;">tmp<wbr>Token</a>
@@ -4117,8 +4827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -4126,8 +4835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_nodejs" style="color: inherit; text-decoration: inherit;">user</a>
@@ -4135,8 +4843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4144,8 +4851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4159,8 +4865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="account_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_mode_python" style="color: inherit; text-decoration: inherit;">account_<wbr>mode</a>
@@ -4168,8 +4873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="account_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_role_python" style="color: inherit; text-decoration: inherit;">account_<wbr>role</a>
@@ -4177,8 +4881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccn_gw_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_gw_id_python" style="color: inherit; text-decoration: inherit;">ccn_<wbr>gw_<wbr>id</a>
@@ -4186,8 +4889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_id_python" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>id</a>
@@ -4195,8 +4897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="db_kernel_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_kernel_python" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel</a>
@@ -4204,8 +4905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -4213,8 +4913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -4222,8 +4921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -4231,8 +4929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4240,8 +4937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4249,8 +4945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -4258,8 +4953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -4267,8 +4961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmp_secret_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_id_python" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>id</a>
@@ -4276,8 +4969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmp_secret_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_key_python" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>key</a>
@@ -4285,8 +4977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmp_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_token_python" style="color: inherit; text-decoration: inherit;">tmp_<wbr>token</a>
@@ -4294,8 +4985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_vpn_gw_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpn_gw_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpn_<wbr>gw_<wbr>id</a>
@@ -4303,8 +4993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_python" style="color: inherit; text-decoration: inherit;">user</a>
@@ -4312,8 +5001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -4321,8 +5009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4336,8 +5023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Mode</a>
@@ -4345,8 +5031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Role</a>
@@ -4354,8 +5039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_yaml" style="color: inherit; text-decoration: inherit;">ccn<wbr>Gw<wbr>Id</a>
@@ -4363,8 +5047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_yaml" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Id</a>
@@ -4372,8 +5055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel</a>
@@ -4381,8 +5063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -4390,8 +5071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -4399,8 +5079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4408,8 +5087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4417,8 +5095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4426,8 +5103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -4435,8 +5111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4444,8 +5119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_yaml" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Id</a>
@@ -4453,8 +5127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_yaml" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Key</a>
@@ -4462,8 +5135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_yaml" style="color: inherit; text-decoration: inherit;">tmp<wbr>Token</a>
@@ -4471,8 +5143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -4480,8 +5151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_yaml" style="color: inherit; text-decoration: inherit;">user</a>
@@ -4489,8 +5159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4498,8 +5167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4517,8 +5185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_csharp" style="color: inherit; text-decoration: inherit;">Database<wbr>Type</a>
@@ -4526,8 +5193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="extraattrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraattrs_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Attrs</a>
@@ -4535,8 +5201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Extra<wbr>Attr&gt;</a></span>
     </dt>
-    <dd><p>extra attributes.</p>
-</dd><dt class="property-required"
+    <dd>extra attributes.</dd><dt class="property-required"
             title="Required">
         <span id="infos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_csharp" style="color: inherit; text-decoration: inherit;">Infos</a>
@@ -4544,8 +5209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -4553,8 +5217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -4562,8 +5225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="supplier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_csharp" style="color: inherit; text-decoration: inherit;">Supplier</a>
@@ -4571,8 +5233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>supplier.</p>
-</dd></dl>
+    <dd>supplier.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4586,8 +5247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_go" style="color: inherit; text-decoration: inherit;">Database<wbr>Type</a>
@@ -4595,8 +5255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="extraattrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraattrs_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Attrs</a>
@@ -4604,8 +5263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Extra<wbr>Attr</a></span>
     </dt>
-    <dd><p>extra attributes.</p>
-</dd><dt class="property-required"
+    <dd>extra attributes.</dd><dt class="property-required"
             title="Required">
         <span id="infos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_go" style="color: inherit; text-decoration: inherit;">Infos</a>
@@ -4613,8 +5271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Info</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -4622,8 +5279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -4631,8 +5287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="supplier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_go" style="color: inherit; text-decoration: inherit;">Supplier</a>
@@ -4640,8 +5295,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>supplier.</p>
-</dd></dl>
+    <dd>supplier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_type_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>access type.</dd><dt class="property-required"
+            title="Required">
+        <span id="database_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_type_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>database type.</dd><dt class="property-required"
+            title="Required">
+        <span id="extra_attrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_attrs_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">list(object)</a></span>
+    </dt>
+    <dd>extra attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_hcl" style="color: inherit; text-decoration: inherit;">infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">list(object)</a></span>
+    </dt>
+    <dd>db info.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>node type.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>region.</dd><dt class="property-required"
+            title="Required">
+        <span id="supplier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_hcl" style="color: inherit; text-decoration: inherit;">supplier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>supplier.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4655,8 +5371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_java" style="color: inherit; text-decoration: inherit;">database<wbr>Type</a>
@@ -4664,8 +5379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="extraattrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraattrs_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Attrs</a>
@@ -4673,8 +5387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Extra<wbr>Attr&gt;</a></span>
     </dt>
-    <dd><p>extra attributes.</p>
-</dd><dt class="property-required"
+    <dd>extra attributes.</dd><dt class="property-required"
             title="Required">
         <span id="infos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_java" style="color: inherit; text-decoration: inherit;">infos</a>
@@ -4682,8 +5395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4691,8 +5403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4700,8 +5411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="supplier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_java" style="color: inherit; text-decoration: inherit;">supplier</a>
@@ -4709,8 +5419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>supplier.</p>
-</dd></dl>
+    <dd>supplier.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4724,8 +5433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_nodejs" style="color: inherit; text-decoration: inherit;">database<wbr>Type</a>
@@ -4733,8 +5441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="extraattrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraattrs_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Attrs</a>
@@ -4742,8 +5449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Extra<wbr>Attr[]</a></span>
     </dt>
-    <dd><p>extra attributes.</p>
-</dd><dt class="property-required"
+    <dd>extra attributes.</dd><dt class="property-required"
             title="Required">
         <span id="infos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_nodejs" style="color: inherit; text-decoration: inherit;">infos</a>
@@ -4751,8 +5457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Info[]</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4760,8 +5465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4769,8 +5473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="supplier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_nodejs" style="color: inherit; text-decoration: inherit;">supplier</a>
@@ -4778,8 +5481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>supplier.</p>
-</dd></dl>
+    <dd>supplier.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4793,8 +5495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="database_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_type_python" style="color: inherit; text-decoration: inherit;">database_<wbr>type</a>
@@ -4802,26 +5503,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="extra_attrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_attrs_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>attrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Extra<wbr>Attr]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Extra<wbr>Attr]</a></span>
     </dt>
-    <dd><p>extra attributes.</p>
-</dd><dt class="property-required"
+    <dd>extra attributes.</dd><dt class="property-required"
             title="Required">
         <span id="infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_python" style="color: inherit; text-decoration: inherit;">infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Src<wbr>Info<wbr>Info]</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -4829,8 +5527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4838,8 +5535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="supplier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_python" style="color: inherit; text-decoration: inherit;">supplier</a>
@@ -4847,8 +5543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>supplier.</p>
-</dd></dl>
+    <dd>supplier.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4862,8 +5557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>access type.</p>
-</dd><dt class="property-required"
+    <dd>access type.</dd><dt class="property-required"
             title="Required">
         <span id="databasetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetype_yaml" style="color: inherit; text-decoration: inherit;">database<wbr>Type</a>
@@ -4871,8 +5565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database type.</p>
-</dd><dt class="property-required"
+    <dd>database type.</dd><dt class="property-required"
             title="Required">
         <span id="extraattrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraattrs_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Attrs</a>
@@ -4880,8 +5573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoextraattr">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>extra attributes.</p>
-</dd><dt class="property-required"
+    <dd>extra attributes.</dd><dt class="property-required"
             title="Required">
         <span id="infos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#infos_yaml" style="color: inherit; text-decoration: inherit;">infos</a>
@@ -4889,8 +5581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobslistsrcinfoinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>db info.</p>
-</dd><dt class="property-required"
+    <dd>db info.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4898,8 +5589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node type.</p>
-</dd><dt class="property-required"
+    <dd>node type.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4907,8 +5597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="supplier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supplier_yaml" style="color: inherit; text-decoration: inherit;">supplier</a>
@@ -4916,8 +5605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>supplier.</p>
-</dd></dl>
+    <dd>supplier.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4935,8 +5623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4944,8 +5631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4959,8 +5645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4968,8 +5653,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4983,8 +5689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4992,8 +5697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5007,8 +5711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5016,8 +5719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5031,8 +5733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5040,8 +5741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5055,8 +5755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5064,8 +5763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5083,8 +5781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Mode</a>
@@ -5092,8 +5789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Role</a>
@@ -5101,8 +5797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_csharp" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Gw<wbr>Id</a>
@@ -5110,8 +5805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_csharp" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Id</a>
@@ -5119,8 +5813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel</a>
@@ -5128,8 +5821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -5137,8 +5829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -5146,8 +5837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -5155,8 +5845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -5164,8 +5853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -5173,8 +5861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -5182,8 +5869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -5191,8 +5877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_csharp" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Id</a>
@@ -5200,8 +5885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_csharp" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Key</a>
@@ -5209,8 +5893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_csharp" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Token</a>
@@ -5218,8 +5901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -5227,8 +5909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_csharp" style="color: inherit; text-decoration: inherit;">User</a>
@@ -5236,8 +5917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -5245,8 +5925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5260,8 +5939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Mode</a>
@@ -5269,8 +5947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Role</a>
@@ -5278,8 +5955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_go" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Gw<wbr>Id</a>
@@ -5287,8 +5963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_go" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Id</a>
@@ -5296,8 +5971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel</a>
@@ -5305,8 +5979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -5314,8 +5987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -5323,8 +5995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -5332,8 +6003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -5341,8 +6011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -5350,8 +6019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -5359,8 +6027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -5368,8 +6035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_go" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Id</a>
@@ -5377,8 +6043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_go" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Secret<wbr>Key</a>
@@ -5386,8 +6051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_go" style="color: inherit; text-decoration: inherit;">Tmp<wbr>Token</a>
@@ -5395,8 +6059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -5404,8 +6067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_go" style="color: inherit; text-decoration: inherit;">User</a>
@@ -5413,8 +6075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -5422,8 +6083,165 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_hcl" style="color: inherit; text-decoration: inherit;">account</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account.</dd><dt class="property-required"
+            title="Required">
+        <span id="account_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_mode_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="account_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_role_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account role.</dd><dt class="property-required"
+            title="Required">
+        <span id="ccn_gw_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_gw_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>gw_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ccn gateway id.</dd><dt class="property-required"
+            title="Required">
+        <span id="cvm_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_id_hcl" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cvm instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_kernel_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_kernel_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>database kernel.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine version.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>host.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>password.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>port.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>node role.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet id.</dd><dt class="property-required"
+            title="Required">
+        <span id="tmp_secret_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_id_hcl" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>temporary secret id.</dd><dt class="property-required"
+            title="Required">
+        <span id="tmp_secret_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_key_hcl" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>temporary secret key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tmp_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_token_hcl" style="color: inherit; text-decoration: inherit;">tmp_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>temporary token.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_vpn_gw_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpn_gw_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpn_<wbr>gw_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpn gateway id.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_hcl" style="color: inherit; text-decoration: inherit;">user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>user.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5437,8 +6255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_java" style="color: inherit; text-decoration: inherit;">account<wbr>Mode</a>
@@ -5446,8 +6263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_java" style="color: inherit; text-decoration: inherit;">account<wbr>Role</a>
@@ -5455,8 +6271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_java" style="color: inherit; text-decoration: inherit;">ccn<wbr>Gw<wbr>Id</a>
@@ -5464,8 +6279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_java" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Id</a>
@@ -5473,8 +6287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_java" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel</a>
@@ -5482,8 +6295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -5491,8 +6303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -5500,8 +6311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -5509,8 +6319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5518,8 +6327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5527,8 +6335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -5536,8 +6343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5545,8 +6351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_java" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Id</a>
@@ -5554,8 +6359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_java" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Key</a>
@@ -5563,8 +6367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_java" style="color: inherit; text-decoration: inherit;">tmp<wbr>Token</a>
@@ -5572,8 +6375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -5581,8 +6383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_java" style="color: inherit; text-decoration: inherit;">user</a>
@@ -5590,8 +6391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5599,8 +6399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5614,8 +6413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Mode</a>
@@ -5623,8 +6421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Role</a>
@@ -5632,8 +6429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_nodejs" style="color: inherit; text-decoration: inherit;">ccn<wbr>Gw<wbr>Id</a>
@@ -5641,8 +6437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_nodejs" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Id</a>
@@ -5650,8 +6445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel</a>
@@ -5659,8 +6453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -5668,8 +6461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -5677,8 +6469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -5686,8 +6477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5695,8 +6485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5704,8 +6493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -5713,8 +6501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5722,8 +6509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_nodejs" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Id</a>
@@ -5731,8 +6517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_nodejs" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Key</a>
@@ -5740,8 +6525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_nodejs" style="color: inherit; text-decoration: inherit;">tmp<wbr>Token</a>
@@ -5749,8 +6533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -5758,8 +6541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_nodejs" style="color: inherit; text-decoration: inherit;">user</a>
@@ -5767,8 +6549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5776,8 +6557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5791,8 +6571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="account_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_mode_python" style="color: inherit; text-decoration: inherit;">account_<wbr>mode</a>
@@ -5800,8 +6579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="account_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_role_python" style="color: inherit; text-decoration: inherit;">account_<wbr>role</a>
@@ -5809,8 +6587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccn_gw_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_gw_id_python" style="color: inherit; text-decoration: inherit;">ccn_<wbr>gw_<wbr>id</a>
@@ -5818,8 +6595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_id_python" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>id</a>
@@ -5827,8 +6603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="db_kernel_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_kernel_python" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel</a>
@@ -5836,8 +6611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -5845,8 +6619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -5854,8 +6627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -5863,8 +6635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5872,8 +6643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5881,8 +6651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -5890,8 +6659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -5899,8 +6667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmp_secret_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_id_python" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>id</a>
@@ -5908,8 +6675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmp_secret_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_secret_key_python" style="color: inherit; text-decoration: inherit;">tmp_<wbr>secret_<wbr>key</a>
@@ -5917,8 +6683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmp_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmp_token_python" style="color: inherit; text-decoration: inherit;">tmp_<wbr>token</a>
@@ -5926,8 +6691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_vpn_gw_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpn_gw_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpn_<wbr>gw_<wbr>id</a>
@@ -5935,8 +6699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_python" style="color: inherit; text-decoration: inherit;">user</a>
@@ -5944,8 +6707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -5953,8 +6715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5968,8 +6729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account.</p>
-</dd><dt class="property-required"
+    <dd>account.</dd><dt class="property-required"
             title="Required">
         <span id="accountmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountmode_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Mode</a>
@@ -5977,8 +6737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account mode.</p>
-</dd><dt class="property-required"
+    <dd>account mode.</dd><dt class="property-required"
             title="Required">
         <span id="accountrole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountrole_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Role</a>
@@ -5986,8 +6745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account role.</p>
-</dd><dt class="property-required"
+    <dd>account role.</dd><dt class="property-required"
             title="Required">
         <span id="ccngwid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccngwid_yaml" style="color: inherit; text-decoration: inherit;">ccn<wbr>Gw<wbr>Id</a>
@@ -5995,8 +6753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ccn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>ccn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceid_yaml" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Id</a>
@@ -6004,8 +6761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cvm instance id.</p>
-</dd><dt class="property-required"
+    <dd>cvm instance id.</dd><dt class="property-required"
             title="Required">
         <span id="dbkernel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernel_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel</a>
@@ -6013,8 +6769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database kernel.</p>
-</dd><dt class="property-required"
+    <dd>database kernel.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -6022,8 +6777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine version.</p>
-</dd><dt class="property-required"
+    <dd>engine version.</dd><dt class="property-required"
             title="Required">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -6031,8 +6785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>host.</p>
-</dd><dt class="property-required"
+    <dd>host.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -6040,8 +6793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -6049,8 +6801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6058,8 +6809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>port.</p>
-</dd><dt class="property-required"
+    <dd>port.</dd><dt class="property-required"
             title="Required">
         <span id="role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -6067,8 +6817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node role.</p>
-</dd><dt class="property-required"
+    <dd>node role.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -6076,8 +6825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretid_yaml" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Id</a>
@@ -6085,8 +6833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret id.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret id.</dd><dt class="property-required"
             title="Required">
         <span id="tmpsecretkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmpsecretkey_yaml" style="color: inherit; text-decoration: inherit;">tmp<wbr>Secret<wbr>Key</a>
@@ -6094,8 +6841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary secret key.</p>
-</dd><dt class="property-required"
+    <dd>temporary secret key.</dd><dt class="property-required"
             title="Required">
         <span id="tmptoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tmptoken_yaml" style="color: inherit; text-decoration: inherit;">tmp<wbr>Token</a>
@@ -6103,8 +6849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>temporary token.</p>
-</dd><dt class="property-required"
+    <dd>temporary token.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpngwid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpngwid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpn<wbr>Gw<wbr>Id</a>
@@ -6112,8 +6857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpn gateway id.</p>
-</dd><dt class="property-required"
+    <dd>vpn gateway id.</dd><dt class="property-required"
             title="Required">
         <span id="user_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_yaml" style="color: inherit; text-decoration: inherit;">user</a>
@@ -6121,8 +6865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user.</p>
-</dd><dt class="property-required"
+    <dd>user.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -6130,8 +6873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd></dl>
+    <dd>vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6149,8 +6891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>master slave distance.</p>
-</dd><dt class="property-required"
+    <dd>master slave distance.</dd><dt class="property-required"
             title="Required">
         <span id="secondsbehindmaster_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondsbehindmaster_csharp" style="color: inherit; text-decoration: inherit;">Seconds<wbr>Behind<wbr>Master</a>
@@ -6158,8 +6899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>seconds behind master.</p>
-</dd><dt class="property-required"
+    <dd>seconds behind master.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>All</a>
@@ -6167,8 +6907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of all steps.</p>
-</dd><dt class="property-required"
+    <dd>number of all steps.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Infos</a>
@@ -6176,8 +6915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Now</a>
@@ -6185,8 +6923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step.</p>
-</dd></dl>
+    <dd>current step.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6200,8 +6937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>master slave distance.</p>
-</dd><dt class="property-required"
+    <dd>master slave distance.</dd><dt class="property-required"
             title="Required">
         <span id="secondsbehindmaster_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondsbehindmaster_go" style="color: inherit; text-decoration: inherit;">Seconds<wbr>Behind<wbr>Master</a>
@@ -6209,8 +6945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>seconds behind master.</p>
-</dd><dt class="property-required"
+    <dd>seconds behind master.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_go" style="color: inherit; text-decoration: inherit;">Step<wbr>All</a>
@@ -6218,8 +6953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of all steps.</p>
-</dd><dt class="property-required"
+    <dd>number of all steps.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Infos</a>
@@ -6227,8 +6961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Now</a>
@@ -6236,8 +6969,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step.</p>
-</dd></dl>
+    <dd>current step.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="master_slave_distance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_slave_distance_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>slave_<wbr>distance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>master slave distance.</dd><dt class="property-required"
+            title="Required">
+        <span id="seconds_behind_master_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#seconds_behind_master_hcl" style="color: inherit; text-decoration: inherit;">seconds_<wbr>behind_<wbr>master</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>seconds behind master.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_all_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_all_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>number of all steps.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_infos_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">list(object)</a></span>
+    </dt>
+    <dd>step infos.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_now_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_now_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>now</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>current step.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6251,8 +7029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>master slave distance.</p>
-</dd><dt class="property-required"
+    <dd>master slave distance.</dd><dt class="property-required"
             title="Required">
         <span id="secondsbehindmaster_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondsbehindmaster_java" style="color: inherit; text-decoration: inherit;">seconds<wbr>Behind<wbr>Master</a>
@@ -6260,8 +7037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>seconds behind master.</p>
-</dd><dt class="property-required"
+    <dd>seconds behind master.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_java" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -6269,8 +7045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>number of all steps.</p>
-</dd><dt class="property-required"
+    <dd>number of all steps.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_java" style="color: inherit; text-decoration: inherit;">step<wbr>Infos</a>
@@ -6278,8 +7053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_java" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -6287,8 +7061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>current step.</p>
-</dd></dl>
+    <dd>current step.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6302,8 +7075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>master slave distance.</p>
-</dd><dt class="property-required"
+    <dd>master slave distance.</dd><dt class="property-required"
             title="Required">
         <span id="secondsbehindmaster_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondsbehindmaster_nodejs" style="color: inherit; text-decoration: inherit;">seconds<wbr>Behind<wbr>Master</a>
@@ -6311,8 +7083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>seconds behind master.</p>
-</dd><dt class="property-required"
+    <dd>seconds behind master.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -6320,8 +7091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>number of all steps.</p>
-</dd><dt class="property-required"
+    <dd>number of all steps.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Infos</a>
@@ -6329,8 +7099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info[]</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -6338,8 +7107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>current step.</p>
-</dd></dl>
+    <dd>current step.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6353,8 +7121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>master slave distance.</p>
-</dd><dt class="property-required"
+    <dd>master slave distance.</dd><dt class="property-required"
             title="Required">
         <span id="seconds_behind_master_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#seconds_behind_master_python" style="color: inherit; text-decoration: inherit;">seconds_<wbr>behind_<wbr>master</a>
@@ -6362,8 +7129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>seconds behind master.</p>
-</dd><dt class="property-required"
+    <dd>seconds behind master.</dd><dt class="property-required"
             title="Required">
         <span id="step_all_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_all_python" style="color: inherit; text-decoration: inherit;">step_<wbr>all</a>
@@ -6371,17 +7137,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of all steps.</p>
-</dd><dt class="property-required"
+    <dd>number of all steps.</dd><dt class="property-required"
             title="Required">
         <span id="step_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_infos_python" style="color: inherit; text-decoration: inherit;">step_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info]</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="step_now_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_now_python" style="color: inherit; text-decoration: inherit;">step_<wbr>now</a>
@@ -6389,8 +7153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step.</p>
-</dd></dl>
+    <dd>current step.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6404,8 +7167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>master slave distance.</p>
-</dd><dt class="property-required"
+    <dd>master slave distance.</dd><dt class="property-required"
             title="Required">
         <span id="secondsbehindmaster_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondsbehindmaster_yaml" style="color: inherit; text-decoration: inherit;">seconds<wbr>Behind<wbr>Master</a>
@@ -6413,8 +7175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>seconds behind master.</p>
-</dd><dt class="property-required"
+    <dd>seconds behind master.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -6422,8 +7183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>number of all steps.</p>
-</dd><dt class="property-required"
+    <dd>number of all steps.</dd><dt class="property-required"
             title="Required">
         <span id="stepinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepinfos_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Infos</a>
@@ -6431,8 +7191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>step infos.</p>
-</dd><dt class="property-required"
+    <dd>step infos.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -6440,8 +7199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>current step.</p>
-</dd></dl>
+    <dd>current step.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6459,8 +7217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Error&gt;</a></span>
     </dt>
-    <dd><p>error list.</p>
-</dd><dt class="property-required"
+    <dd>error list.</dd><dt class="property-required"
             title="Required">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -6468,8 +7225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the percent of miragtion progress.</p>
-</dd><dt class="property-required"
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -6477,8 +7233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -6486,8 +7241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Id</a>
@@ -6495,8 +7249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-required"
+    <dd>step id.</dd><dt class="property-required"
             title="Required">
         <span id="stepmessage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Message</a>
@@ -6504,8 +7257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-required"
+    <dd>step message.</dd><dt class="property-required"
             title="Required">
         <span id="stepname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Name</a>
@@ -6513,8 +7265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-required"
+    <dd>step name.</dd><dt class="property-required"
             title="Required">
         <span id="stepno_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>No</a>
@@ -6522,8 +7273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-required"
+    <dd>step number.</dd><dt class="property-required"
             title="Required">
         <span id="warnings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_csharp" style="color: inherit; text-decoration: inherit;">Warnings</a>
@@ -6531,8 +7281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Warning&gt;</a></span>
     </dt>
-    <dd><p>warning list.</p>
-</dd></dl>
+    <dd>warning list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6546,8 +7295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Error</a></span>
     </dt>
-    <dd><p>error list.</p>
-</dd><dt class="property-required"
+    <dd>error list.</dd><dt class="property-required"
             title="Required">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -6555,8 +7303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the percent of miragtion progress.</p>
-</dd><dt class="property-required"
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -6564,8 +7311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -6573,8 +7319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Id</a>
@@ -6582,8 +7327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-required"
+    <dd>step id.</dd><dt class="property-required"
             title="Required">
         <span id="stepmessage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Message</a>
@@ -6591,8 +7335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-required"
+    <dd>step message.</dd><dt class="property-required"
             title="Required">
         <span id="stepname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Name</a>
@@ -6600,8 +7343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-required"
+    <dd>step name.</dd><dt class="property-required"
             title="Required">
         <span id="stepno_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_go" style="color: inherit; text-decoration: inherit;">Step<wbr>No</a>
@@ -6609,8 +7351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-required"
+    <dd>step number.</dd><dt class="property-required"
             title="Required">
         <span id="warnings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_go" style="color: inherit; text-decoration: inherit;">Warnings</a>
@@ -6618,8 +7359,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">[]Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Warning</a></span>
     </dt>
-    <dd><p>warning list.</p>
-</dd></dl>
+    <dd>warning list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="errors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errors_hcl" style="color: inherit; text-decoration: inherit;">errors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">list(object)</a></span>
+    </dt>
+    <dd>error list.</dd><dt class="property-required"
+            title="Required">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>migrate status.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_id_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step id.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_message_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step message.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_name_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step name.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_no_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_no_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>no</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>step number.</dd><dt class="property-required"
+            title="Required">
+        <span id="warnings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_hcl" style="color: inherit; text-decoration: inherit;">warnings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">list(object)</a></span>
+    </dt>
+    <dd>warning list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6633,8 +7451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Error&gt;</a></span>
     </dt>
-    <dd><p>error list.</p>
-</dd><dt class="property-required"
+    <dd>error list.</dd><dt class="property-required"
             title="Required">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -6642,8 +7459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>the percent of miragtion progress.</p>
-</dd><dt class="property-required"
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -6651,8 +7467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6660,8 +7475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_java" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -6669,8 +7483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-required"
+    <dd>step id.</dd><dt class="property-required"
             title="Required">
         <span id="stepmessage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_java" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -6678,8 +7491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-required"
+    <dd>step message.</dd><dt class="property-required"
             title="Required">
         <span id="stepname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_java" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -6687,8 +7499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-required"
+    <dd>step name.</dd><dt class="property-required"
             title="Required">
         <span id="stepno_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_java" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -6696,8 +7507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-required"
+    <dd>step number.</dd><dt class="property-required"
             title="Required">
         <span id="warnings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_java" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -6705,8 +7515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">List&lt;Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Warning&gt;</a></span>
     </dt>
-    <dd><p>warning list.</p>
-</dd></dl>
+    <dd>warning list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6720,8 +7529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Error[]</a></span>
     </dt>
-    <dd><p>error list.</p>
-</dd><dt class="property-required"
+    <dd>error list.</dd><dt class="property-required"
             title="Required">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -6729,8 +7537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>the percent of miragtion progress.</p>
-</dd><dt class="property-required"
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -6738,8 +7545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6747,8 +7553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -6756,8 +7561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-required"
+    <dd>step id.</dd><dt class="property-required"
             title="Required">
         <span id="stepmessage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -6765,8 +7569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-required"
+    <dd>step message.</dd><dt class="property-required"
             title="Required">
         <span id="stepname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -6774,8 +7577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-required"
+    <dd>step name.</dd><dt class="property-required"
             title="Required">
         <span id="stepno_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -6783,8 +7585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-required"
+    <dd>step number.</dd><dt class="property-required"
             title="Required">
         <span id="warnings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_nodejs" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -6792,8 +7593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Warning[]</a></span>
     </dt>
-    <dd><p>warning list.</p>
-</dd></dl>
+    <dd>warning list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6805,10 +7605,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errors_python" style="color: inherit; text-decoration: inherit;">errors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Error]</a></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Error]</a></span>
     </dt>
-    <dd><p>error list.</p>
-</dd><dt class="property-required"
+    <dd>error list.</dd><dt class="property-required"
             title="Required">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -6816,8 +7615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the percent of miragtion progress.</p>
-</dd><dt class="property-required"
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -6825,8 +7623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6834,8 +7631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="step_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_id_python" style="color: inherit; text-decoration: inherit;">step_<wbr>id</a>
@@ -6843,8 +7639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-required"
+    <dd>step id.</dd><dt class="property-required"
             title="Required">
         <span id="step_message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_message_python" style="color: inherit; text-decoration: inherit;">step_<wbr>message</a>
@@ -6852,8 +7647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-required"
+    <dd>step message.</dd><dt class="property-required"
             title="Required">
         <span id="step_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_name_python" style="color: inherit; text-decoration: inherit;">step_<wbr>name</a>
@@ -6861,8 +7655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-required"
+    <dd>step name.</dd><dt class="property-required"
             title="Required">
         <span id="step_no_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_no_python" style="color: inherit; text-decoration: inherit;">step_<wbr>no</a>
@@ -6870,17 +7663,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-required"
+    <dd>step number.</dd><dt class="property-required"
             title="Required">
         <span id="warnings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_python" style="color: inherit; text-decoration: inherit;">warnings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Warning]</a></span>
+        <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">Sequence[Get<wbr>Migrate<wbr>Jobs<wbr>List<wbr>Step<wbr>Info<wbr>Step<wbr>Info<wbr>Warning]</a></span>
     </dt>
-    <dd><p>warning list.</p>
-</dd></dl>
+    <dd>warning list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6894,8 +7685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfoerror">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>error list.</p>
-</dd><dt class="property-required"
+    <dd>error list.</dd><dt class="property-required"
             title="Required">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -6903,8 +7693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>the percent of miragtion progress.</p>
-</dd><dt class="property-required"
+    <dd>the percent of miragtion progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -6912,8 +7701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6921,8 +7709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>migrate status.</p>
-</dd><dt class="property-required"
+    <dd>migrate status.</dd><dt class="property-required"
             title="Required">
         <span id="stepid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -6930,8 +7717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-required"
+    <dd>step id.</dd><dt class="property-required"
             title="Required">
         <span id="stepmessage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -6939,8 +7725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-required"
+    <dd>step message.</dd><dt class="property-required"
             title="Required">
         <span id="stepname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -6948,8 +7733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-required"
+    <dd>step name.</dd><dt class="property-required"
             title="Required">
         <span id="stepno_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -6957,8 +7741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-required"
+    <dd>step number.</dd><dt class="property-required"
             title="Required">
         <span id="warnings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_yaml" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -6966,8 +7749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmigratejobsliststepinfostepinfowarning">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>warning list.</p>
-</dd></dl>
+    <dd>warning list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6985,8 +7767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -6994,8 +7775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -7003,8 +7783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7018,8 +7797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -7027,8 +7805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -7036,8 +7813,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="help_doc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#help_doc_hcl" style="color: inherit; text-decoration: inherit;">help_<wbr>doc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>help document.</dd><dt class="property-required"
+            title="Required">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-required"
+            title="Required">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7051,8 +7857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7060,8 +7865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7069,8 +7873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7084,8 +7887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7093,8 +7895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7102,8 +7903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7117,8 +7917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7126,8 +7925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7135,8 +7933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7150,8 +7947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7159,8 +7955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7168,8 +7963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7187,8 +7981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -7196,8 +7989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -7205,8 +7997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7220,8 +8011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -7229,8 +8019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -7238,8 +8027,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="help_doc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#help_doc_hcl" style="color: inherit; text-decoration: inherit;">help_<wbr>doc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>help document.</dd><dt class="property-required"
+            title="Required">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-required"
+            title="Required">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7253,8 +8071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7262,8 +8079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7271,8 +8087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7286,8 +8101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7295,8 +8109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7304,8 +8117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7319,8 +8131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7328,8 +8139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7337,8 +8147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7352,8 +8161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-required"
+    <dd>help document.</dd><dt class="property-required"
             title="Required">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -7361,8 +8169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -7370,8 +8177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7389,8 +8195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -7398,8 +8203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7413,8 +8217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -7422,8 +8225,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7437,8 +8261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -7446,8 +8269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7461,8 +8283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -7470,8 +8291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7485,8 +8305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -7494,8 +8313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7509,8 +8327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -7518,8 +8335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7537,8 +8353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>billing type.</p>
-</dd><dt class="property-required"
+    <dd>billing type.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_csharp" style="color: inherit; text-decoration: inherit;">Deal<wbr>Name</a>
@@ -7546,8 +8361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deal name.</p>
-</dd><dt class="property-required"
+    <dd>deal name.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_csharp" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -7555,8 +8369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceclass_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Class</a>
@@ -7564,8 +8377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance class.</p>
-</dd><dt class="property-required"
+    <dd>instance class.</dd><dt class="property-required"
             title="Required">
         <span id="isolatereason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatereason_csharp" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Reason</a>
@@ -7573,8 +8385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolate reason.</p>
-</dd><dt class="property-required"
+    <dd>isolate reason.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_csharp" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Time</a>
@@ -7582,8 +8393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolate time.</p>
-</dd><dt class="property-required"
+    <dd>isolate time.</dd><dt class="property-required"
             title="Required">
         <span id="lastdealname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastdealname_csharp" style="color: inherit; text-decoration: inherit;">Last<wbr>Deal<wbr>Name</a>
@@ -7591,8 +8401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>last deal name.</p>
-</dd><dt class="property-required"
+    <dd>last deal name.</dd><dt class="property-required"
             title="Required">
         <span id="offlinereason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinereason_csharp" style="color: inherit; text-decoration: inherit;">Offline<wbr>Reason</a>
@@ -7600,8 +8409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline reason.</p>
-</dd><dt class="property-required"
+    <dd>offline reason.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_csharp" style="color: inherit; text-decoration: inherit;">Offline<wbr>Time</a>
@@ -7609,8 +8417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline time.</p>
-</dd><dt class="property-required"
+    <dd>offline time.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -7618,8 +8425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>pay type.</p>
-</dd><dt class="property-required"
+    <dd>pay type.</dd><dt class="property-required"
             title="Required">
         <span id="tradestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradestatus_csharp" style="color: inherit; text-decoration: inherit;">Trade<wbr>Status</a>
@@ -7627,8 +8433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trade status.</p>
-</dd></dl>
+    <dd>trade status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7642,8 +8447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>billing type.</p>
-</dd><dt class="property-required"
+    <dd>billing type.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_go" style="color: inherit; text-decoration: inherit;">Deal<wbr>Name</a>
@@ -7651,8 +8455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deal name.</p>
-</dd><dt class="property-required"
+    <dd>deal name.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_go" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -7660,8 +8463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceclass_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Class</a>
@@ -7669,8 +8471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance class.</p>
-</dd><dt class="property-required"
+    <dd>instance class.</dd><dt class="property-required"
             title="Required">
         <span id="isolatereason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatereason_go" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Reason</a>
@@ -7678,8 +8479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolate reason.</p>
-</dd><dt class="property-required"
+    <dd>isolate reason.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_go" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Time</a>
@@ -7687,8 +8487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolate time.</p>
-</dd><dt class="property-required"
+    <dd>isolate time.</dd><dt class="property-required"
             title="Required">
         <span id="lastdealname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastdealname_go" style="color: inherit; text-decoration: inherit;">Last<wbr>Deal<wbr>Name</a>
@@ -7696,8 +8495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>last deal name.</p>
-</dd><dt class="property-required"
+    <dd>last deal name.</dd><dt class="property-required"
             title="Required">
         <span id="offlinereason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinereason_go" style="color: inherit; text-decoration: inherit;">Offline<wbr>Reason</a>
@@ -7705,8 +8503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline reason.</p>
-</dd><dt class="property-required"
+    <dd>offline reason.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_go" style="color: inherit; text-decoration: inherit;">Offline<wbr>Time</a>
@@ -7714,8 +8511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline time.</p>
-</dd><dt class="property-required"
+    <dd>offline time.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -7723,8 +8519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>pay type.</p>
-</dd><dt class="property-required"
+    <dd>pay type.</dd><dt class="property-required"
             title="Required">
         <span id="tradestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradestatus_go" style="color: inherit; text-decoration: inherit;">Trade<wbr>Status</a>
@@ -7732,8 +8527,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trade status.</p>
-</dd></dl>
+    <dd>trade status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="billing_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#billing_type_hcl" style="color: inherit; text-decoration: inherit;">billing_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>billing type.</dd><dt class="property-required"
+            title="Required">
+        <span id="deal_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deal_name_hcl" style="color: inherit; text-decoration: inherit;">deal_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deal name.</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>expired time.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_class_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance class.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolate_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_reason_hcl" style="color: inherit; text-decoration: inherit;">isolate_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>isolate reason.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolate_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_time_hcl" style="color: inherit; text-decoration: inherit;">isolate_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>isolate time.</dd><dt class="property-required"
+            title="Required">
+        <span id="last_deal_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_deal_name_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>deal_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>last deal name.</dd><dt class="property-required"
+            title="Required">
+        <span id="offline_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offline_reason_hcl" style="color: inherit; text-decoration: inherit;">offline_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>offline reason.</dd><dt class="property-required"
+            title="Required">
+        <span id="offline_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offline_time_hcl" style="color: inherit; text-decoration: inherit;">offline_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>offline time.</dd><dt class="property-required"
+            title="Required">
+        <span id="pay_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>pay type.</dd><dt class="property-required"
+            title="Required">
+        <span id="trade_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_status_hcl" style="color: inherit; text-decoration: inherit;">trade_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>trade status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7747,8 +8635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>billing type.</p>
-</dd><dt class="property-required"
+    <dd>billing type.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_java" style="color: inherit; text-decoration: inherit;">deal<wbr>Name</a>
@@ -7756,8 +8643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deal name.</p>
-</dd><dt class="property-required"
+    <dd>deal name.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_java" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -7765,8 +8651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceclass_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Class</a>
@@ -7774,8 +8659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance class.</p>
-</dd><dt class="property-required"
+    <dd>instance class.</dd><dt class="property-required"
             title="Required">
         <span id="isolatereason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatereason_java" style="color: inherit; text-decoration: inherit;">isolate<wbr>Reason</a>
@@ -7783,8 +8667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>isolate reason.</p>
-</dd><dt class="property-required"
+    <dd>isolate reason.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_java" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -7792,8 +8675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>isolate time.</p>
-</dd><dt class="property-required"
+    <dd>isolate time.</dd><dt class="property-required"
             title="Required">
         <span id="lastdealname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastdealname_java" style="color: inherit; text-decoration: inherit;">last<wbr>Deal<wbr>Name</a>
@@ -7801,8 +8683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>last deal name.</p>
-</dd><dt class="property-required"
+    <dd>last deal name.</dd><dt class="property-required"
             title="Required">
         <span id="offlinereason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinereason_java" style="color: inherit; text-decoration: inherit;">offline<wbr>Reason</a>
@@ -7810,8 +8691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>offline reason.</p>
-</dd><dt class="property-required"
+    <dd>offline reason.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_java" style="color: inherit; text-decoration: inherit;">offline<wbr>Time</a>
@@ -7819,8 +8699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>offline time.</p>
-</dd><dt class="property-required"
+    <dd>offline time.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -7828,8 +8707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>pay type.</p>
-</dd><dt class="property-required"
+    <dd>pay type.</dd><dt class="property-required"
             title="Required">
         <span id="tradestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradestatus_java" style="color: inherit; text-decoration: inherit;">trade<wbr>Status</a>
@@ -7837,8 +8715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trade status.</p>
-</dd></dl>
+    <dd>trade status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7852,8 +8729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>billing type.</p>
-</dd><dt class="property-required"
+    <dd>billing type.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_nodejs" style="color: inherit; text-decoration: inherit;">deal<wbr>Name</a>
@@ -7861,8 +8737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deal name.</p>
-</dd><dt class="property-required"
+    <dd>deal name.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_nodejs" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -7870,8 +8745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceclass_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Class</a>
@@ -7879,8 +8753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance class.</p>
-</dd><dt class="property-required"
+    <dd>instance class.</dd><dt class="property-required"
             title="Required">
         <span id="isolatereason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatereason_nodejs" style="color: inherit; text-decoration: inherit;">isolate<wbr>Reason</a>
@@ -7888,8 +8761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolate reason.</p>
-</dd><dt class="property-required"
+    <dd>isolate reason.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_nodejs" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -7897,8 +8769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolate time.</p>
-</dd><dt class="property-required"
+    <dd>isolate time.</dd><dt class="property-required"
             title="Required">
         <span id="lastdealname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastdealname_nodejs" style="color: inherit; text-decoration: inherit;">last<wbr>Deal<wbr>Name</a>
@@ -7906,8 +8777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>last deal name.</p>
-</dd><dt class="property-required"
+    <dd>last deal name.</dd><dt class="property-required"
             title="Required">
         <span id="offlinereason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinereason_nodejs" style="color: inherit; text-decoration: inherit;">offline<wbr>Reason</a>
@@ -7915,8 +8785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline reason.</p>
-</dd><dt class="property-required"
+    <dd>offline reason.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_nodejs" style="color: inherit; text-decoration: inherit;">offline<wbr>Time</a>
@@ -7924,8 +8793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline time.</p>
-</dd><dt class="property-required"
+    <dd>offline time.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -7933,8 +8801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>pay type.</p>
-</dd><dt class="property-required"
+    <dd>pay type.</dd><dt class="property-required"
             title="Required">
         <span id="tradestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradestatus_nodejs" style="color: inherit; text-decoration: inherit;">trade<wbr>Status</a>
@@ -7942,8 +8809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trade status.</p>
-</dd></dl>
+    <dd>trade status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7957,8 +8823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>billing type.</p>
-</dd><dt class="property-required"
+    <dd>billing type.</dd><dt class="property-required"
             title="Required">
         <span id="deal_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deal_name_python" style="color: inherit; text-decoration: inherit;">deal_<wbr>name</a>
@@ -7966,8 +8831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deal name.</p>
-</dd><dt class="property-required"
+    <dd>deal name.</dd><dt class="property-required"
             title="Required">
         <span id="expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_python" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
@@ -7975,8 +8839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="instance_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_class_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>class</a>
@@ -7984,8 +8847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance class.</p>
-</dd><dt class="property-required"
+    <dd>instance class.</dd><dt class="property-required"
             title="Required">
         <span id="isolate_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_reason_python" style="color: inherit; text-decoration: inherit;">isolate_<wbr>reason</a>
@@ -7993,8 +8855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>isolate reason.</p>
-</dd><dt class="property-required"
+    <dd>isolate reason.</dd><dt class="property-required"
             title="Required">
         <span id="isolate_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_time_python" style="color: inherit; text-decoration: inherit;">isolate_<wbr>time</a>
@@ -8002,8 +8863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>isolate time.</p>
-</dd><dt class="property-required"
+    <dd>isolate time.</dd><dt class="property-required"
             title="Required">
         <span id="last_deal_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_deal_name_python" style="color: inherit; text-decoration: inherit;">last_<wbr>deal_<wbr>name</a>
@@ -8011,8 +8871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>last deal name.</p>
-</dd><dt class="property-required"
+    <dd>last deal name.</dd><dt class="property-required"
             title="Required">
         <span id="offline_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offline_reason_python" style="color: inherit; text-decoration: inherit;">offline_<wbr>reason</a>
@@ -8020,8 +8879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>offline reason.</p>
-</dd><dt class="property-required"
+    <dd>offline reason.</dd><dt class="property-required"
             title="Required">
         <span id="offline_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offline_time_python" style="color: inherit; text-decoration: inherit;">offline_<wbr>time</a>
@@ -8029,8 +8887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>offline time.</p>
-</dd><dt class="property-required"
+    <dd>offline time.</dd><dt class="property-required"
             title="Required">
         <span id="pay_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
@@ -8038,8 +8895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>pay type.</p>
-</dd><dt class="property-required"
+    <dd>pay type.</dd><dt class="property-required"
             title="Required">
         <span id="trade_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_status_python" style="color: inherit; text-decoration: inherit;">trade_<wbr>status</a>
@@ -8047,8 +8903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>trade status.</p>
-</dd></dl>
+    <dd>trade status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8062,8 +8917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>billing type.</p>
-</dd><dt class="property-required"
+    <dd>billing type.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_yaml" style="color: inherit; text-decoration: inherit;">deal<wbr>Name</a>
@@ -8071,8 +8925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deal name.</p>
-</dd><dt class="property-required"
+    <dd>deal name.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_yaml" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -8080,8 +8933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceclass_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Class</a>
@@ -8089,8 +8941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance class.</p>
-</dd><dt class="property-required"
+    <dd>instance class.</dd><dt class="property-required"
             title="Required">
         <span id="isolatereason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatereason_yaml" style="color: inherit; text-decoration: inherit;">isolate<wbr>Reason</a>
@@ -8098,8 +8949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>isolate reason.</p>
-</dd><dt class="property-required"
+    <dd>isolate reason.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_yaml" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -8107,8 +8957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>isolate time.</p>
-</dd><dt class="property-required"
+    <dd>isolate time.</dd><dt class="property-required"
             title="Required">
         <span id="lastdealname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastdealname_yaml" style="color: inherit; text-decoration: inherit;">last<wbr>Deal<wbr>Name</a>
@@ -8116,8 +8965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>last deal name.</p>
-</dd><dt class="property-required"
+    <dd>last deal name.</dd><dt class="property-required"
             title="Required">
         <span id="offlinereason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinereason_yaml" style="color: inherit; text-decoration: inherit;">offline<wbr>Reason</a>
@@ -8125,8 +8973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>offline reason.</p>
-</dd><dt class="property-required"
+    <dd>offline reason.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_yaml" style="color: inherit; text-decoration: inherit;">offline<wbr>Time</a>
@@ -8134,8 +8981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>offline time.</p>
-</dd><dt class="property-required"
+    <dd>offline time.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -8143,8 +8989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>pay type.</p>
-</dd><dt class="property-required"
+    <dd>pay type.</dd><dt class="property-required"
             title="Required">
         <span id="tradestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradestatus_yaml" style="color: inherit; text-decoration: inherit;">trade<wbr>Status</a>
@@ -8152,8 +8997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trade status.</p>
-</dd></dl>
+    <dd>trade status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8171,8 +9015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-optional"
+    <dd>tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -8180,8 +9023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8195,8 +9037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-optional"
+    <dd>tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -8204,8 +9045,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8219,8 +9081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-optional"
+    <dd>tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -8228,8 +9089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8243,8 +9103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-optional"
+    <dd>tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -8252,8 +9111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8267,8 +9125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-optional"
+    <dd>tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -8276,8 +9133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8291,8 +9147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-optional"
+    <dd>tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -8300,8 +9155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8316,7 +9170,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

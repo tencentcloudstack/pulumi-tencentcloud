@@ -2,9 +2,11 @@
 ---
 title: "getPairs"
 title_tag: "tencentcloud.Key.getPairs"
-meta_desc: "Documentation for the tencentcloud.Key.getPairs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query key pairs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,26 +20,66 @@ Use this data source to query key pairs.
 
 ### Query key pairs by key ID
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const keyId = tencentcloud.Key.getPairs({
+const keyId = tencentcloud.key.getPairs({
     keyId: "skey-ie97i3ml",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-key_id = tencentcloud.Key.get_pairs(key_id="skey-ie97i3ml")
+key_id = tencentcloud.key.get_pairs(key_id="skey-ie97i3ml")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/key"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := key.GetPairs(ctx, &key.GetPairsArgs{
+			KeyId: pulumi.StringRef("skey-ie97i3ml"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -48,26 +90,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Key.GetPairs(ctx, &key.GetPairsArgs{
-			KeyId: pulumi.StringRef("skey-ie97i3ml"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -76,8 +103,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Key.KeyFunctions;
 import com.pulumi.tencentcloud.Key.inputs.GetPairsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,38 +123,103 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   keyId:
     fn::invoke:
-      Function: tencentcloud:Key:getPairs
-      Arguments:
+      function: tencentcloud:Key:getPairs
+      arguments:
         keyId: skey-ie97i3ml
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_key_getpairs" "keyId" {
+  key_id = "skey-ie97i3ml"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query key pairs by key name
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const keyName = tencentcloud.Key.getPairs({
+const keyName = tencentcloud.key.getPairs({
     keyName: "^test$",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-key_name = tencentcloud.Key.get_pairs(key_name="^test$")
+key_name = tencentcloud.key.get_pairs(key_name="^test$")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/key"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := key.GetPairs(ctx, &key.GetPairsArgs{
+			KeyName: pulumi.StringRef("^test$"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -138,26 +230,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Key.GetPairs(ctx, &key.GetPairsArgs{
-			KeyName: pulumi.StringRef("^test$"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -166,8 +243,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Key.KeyFunctions;
 import com.pulumi.tencentcloud.Key.inputs.GetPairsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -186,16 +263,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   keyName:
     fn::invoke:
-      Function: tencentcloud:Key:getPairs
-      Arguments:
+      function: tencentcloud:Key:getPairs
+      arguments:
         keyName: ^test$
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_key_getpairs" "keyName" {
+  key_name = "^test$"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
 
 
 
@@ -207,7 +314,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -215,9 +322,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPairs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPairsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>></span
+><span class="k">function </span>getPairs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPairsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>></span
 ><span class="k">
-function </span>getPairsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPairsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>></span
+function </span>getPairsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPairsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,11 +339,11 @@ function </span>getPairsOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPairsResult</span
 ><span class="k">
-def </span>get_pairs_output<span class="p">(</span><span class="nx">key_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">key_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPairsResult]</span
+def </span>get_pairs_output<span class="p">(</span><span class="nx">key_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">key_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPairsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -261,7 +368,8 @@ func </span>GetPairsOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPairs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPairsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPairsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPairsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPairsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -270,7 +378,8 @@ func </span>GetPairsOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> </span>getPairs<span class="p">(</span><span class="nx">GetPairsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> </span>getPairs<span class="p">(</span><span class="nx">GetPairsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPairsResult</a></span>> </span>getPairs<span class="p">(</span><span class="nx">GetPairsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -282,6 +391,15 @@ func </span>GetPairsOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Key/getPairs:getPairs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_key_get_pairs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -309,8 +426,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -318,8 +434,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -327,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -342,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -351,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -360,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -369,8 +480,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -384,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -393,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -402,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -411,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -426,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -435,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -444,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -453,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -468,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
@@ -477,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -486,8 +624,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -495,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +646,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -519,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -528,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -537,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keypairlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypairlists_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Pair<wbr>Lists</a>
@@ -570,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpairskeypairlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Key.<wbr>Outputs.<wbr>Get<wbr>Pairs<wbr>Key<wbr>Pair<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of key pair. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="keyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -579,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -588,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Name of the key pair.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -597,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -620,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keypairlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypairlists_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Pair<wbr>Lists</a>
@@ -629,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpairskeypairlist">[]Get<wbr>Pairs<wbr>Key<wbr>Pair<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of key pair. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="keyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -638,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -647,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Name of the key pair.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -656,11 +779,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="key_pair_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_pair_lists_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>pair_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpairskeypairlist">list(object)</a></span>
+    </dt>
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the key pair.</dd><dt class="property-"
+            title="">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the key pair.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the key pair.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -679,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keypairlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypairlists_java" style="color: inherit; text-decoration: inherit;">key<wbr>Pair<wbr>Lists</a>
@@ -688,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpairskeypairlist">List&lt;Get<wbr>Pairs<wbr>Pair<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of key pair. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="keyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -697,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -706,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Name of the key pair.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -715,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -738,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keypairlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypairlists_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Pair<wbr>Lists</a>
@@ -747,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpairskeypairlist">Get<wbr>Pairs<wbr>Key<wbr>Pair<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of key pair. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="keyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -756,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -765,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Name of the key pair.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -774,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -797,17 +963,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_pair_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_pair_lists_python" style="color: inherit; text-decoration: inherit;">key_<wbr>pair_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpairskeypairlist">Get<wbr>Pairs<wbr>Key<wbr>Pair<wbr>List]</a></span>
+        <span class="property-type"><a href="#getpairskeypairlist">Sequence[Get<wbr>Pairs<wbr>Key<wbr>Pair<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of key pair. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
@@ -815,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
@@ -824,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Name of the key pair.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -833,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -856,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keypairlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypairlists_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Pair<wbr>Lists</a>
@@ -865,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpairskeypairlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of key pair. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of key pair. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="keyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -874,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -883,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Name of the key pair.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -892,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the key pair.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the key pair.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -925,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the key pair.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
             title="Required">
         <span id="keyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -934,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -943,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-required"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -952,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="publickey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Key</a>
@@ -961,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>public key of the key pair.</p>
-</dd></dl>
+    <dd>public key of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -976,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the key pair.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
             title="Required">
         <span id="keyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -985,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -994,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-required"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1003,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="publickey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Key</a>
@@ -1012,8 +1159,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>public key of the key pair.</p>
-</dd></dl>
+    <dd>public key of the key pair.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_key_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>public key of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1027,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the key pair.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
             title="Required">
         <span id="keyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1036,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1045,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-required"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1054,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="publickey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_java" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -1063,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>public key of the key pair.</p>
-</dd></dl>
+    <dd>public key of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the key pair.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
             title="Required">
         <span id="keyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1087,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1096,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-required"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1105,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="publickey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -1114,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>public key of the key pair.</p>
-</dd></dl>
+    <dd>public key of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1129,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the key pair.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
             title="Required">
         <span id="key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
@@ -1138,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
@@ -1147,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-required"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1156,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="public_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_key_python" style="color: inherit; text-decoration: inherit;">public_<wbr>key</a>
@@ -1165,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>public key of the key pair.</p>
-</dd></dl>
+    <dd>public key of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1180,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the key pair.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the key pair.</dd><dt class="property-required"
             title="Required">
         <span id="keyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1189,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1198,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</p>
-</dd><dt class="property-required"
+    <dd>Name of the key pair to be queried. Support regular expression search, only <code>^</code> and <code>$</code> are supported.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1207,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the key pair to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the key pair to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="publickey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -1216,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>public key of the key pair.</p>
-</dd></dl>
+    <dd>public key of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1232,7 +1404,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

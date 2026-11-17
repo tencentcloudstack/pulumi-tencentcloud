@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Cdh.getInstances"
-meta_desc: "Documentation for the tencentcloud.Cdh.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query CDH instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,12 +18,17 @@ Use this data source to query CDH instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const list = tencentcloud.Cdh.getInstances({
+const list = tencentcloud.cdh.getInstances({
     availabilityZone: "ap-guangzhou-3",
     hostId: "host-d6s7i5q4",
     hostName: "test",
@@ -29,21 +36,60 @@ const list = tencentcloud.Cdh.getInstances({
     projectId: 1154137,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-list = tencentcloud.Cdh.get_instances(availability_zone="ap-guangzhou-3",
+list = tencentcloud.cdh.get_instances(availability_zone="ap-guangzhou-3",
     host_id="host-d6s7i5q4",
     host_name="test",
     host_state="RUNNING",
     project_id=1154137)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdh"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdh.GetInstances(ctx, &cdh.GetInstancesArgs{
+			AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
+			HostId:           pulumi.StringRef("host-d6s7i5q4"),
+			HostName:         pulumi.StringRef("test"),
+			HostState:        pulumi.StringRef("RUNNING"),
+			ProjectId:        pulumi.IntRef(1154137),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -58,30 +104,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdh.GetInstances(ctx, &cdh.GetInstancesArgs{
-			AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
-			HostId:           pulumi.StringRef("host-d6s7i5q4"),
-			HostName:         pulumi.StringRef("test"),
-			HostState:        pulumi.StringRef("RUNNING"),
-			ProjectId:        pulumi.IntRef(1154137),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -90,8 +117,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdh.CdhFunctions;
 import com.pulumi.tencentcloud.Cdh.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -114,20 +141,54 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   list:
     fn::invoke:
-      Function: tencentcloud:Cdh:getInstances
-      Arguments:
+      function: tencentcloud:Cdh:getInstances
+      arguments:
         availabilityZone: ap-guangzhou-3
         hostId: host-d6s7i5q4
         hostName: test
         hostState: RUNNING
         projectId: 1.154137e+06
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cdh_getinstances" "list" {
+  availability_zone = "ap-guangzhou-3"
+  host_id           = "host-d6s7i5q4"
+  host_name         = "test"
+  host_state        = "RUNNING"
+  project_id        = 1154137
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
 
 
 
@@ -139,7 +200,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +208,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,13 +227,13 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">host_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">host_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">host_state</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">host_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">host_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">host_state</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,7 +258,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,7 +268,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,6 +281,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cdh/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cdh_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -236,8 +308,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -245,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -254,8 +324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hoststate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -263,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -272,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -305,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -314,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hoststate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_go" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -323,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -332,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -341,8 +402,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_java" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -365,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -374,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hoststate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_java" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -383,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -392,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -401,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -425,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -434,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hoststate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -443,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -452,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -461,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_python" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
@@ -485,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
@@ -494,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_python" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
@@ -503,8 +602,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -512,8 +610,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -521,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -545,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -554,8 +648,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="hoststate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -563,8 +656,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -572,8 +664,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CDH belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -581,8 +672,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdh.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cdh instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -614,8 +703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -623,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
             title="">
         <span id="hostid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -632,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -641,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hoststate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -650,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -659,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CDH belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -682,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelist">[]Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of cdh instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -691,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -700,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
             title="">
         <span id="hostid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -709,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -718,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hoststate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_go" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -727,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -736,11 +813,80 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CDH belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cdh_instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdh_instance_lists_hcl" style="color: inherit; text-decoration: inherit;">cdh_<wbr>instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancescdhinstancelist">list(object)</a></span>
+    </dt>
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="host_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CDH instance.</dd><dt class="property-"
+            title="">
+        <span id="host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CDH instance.</dd><dt class="property-"
+            title="">
+        <span id="host_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the CDH instance.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CDH belongs to.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -759,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cdh instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -768,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -777,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
             title="">
         <span id="hostid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_java" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -786,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -795,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hoststate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_java" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -804,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -813,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CDH belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -836,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelist">Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of cdh instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -845,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -854,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
             title="">
         <span id="hostid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -863,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -872,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hoststate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -881,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -890,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CDH belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -911,10 +1043,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdh_instance_lists_python" style="color: inherit; text-decoration: inherit;">cdh_<wbr>instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancescdhinstancelist">Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancescdhinstancelist">Sequence[Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of cdh instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -922,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -931,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
             title="">
         <span id="host_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_python" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
@@ -940,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="host_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
@@ -949,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="host_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_python" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
@@ -958,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -967,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CDH belongs to.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -990,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of cdh instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdh instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -999,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1008,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-"
             title="">
         <span id="hostid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1017,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1026,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="hoststate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1035,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1044,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CDH belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1077,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cageid_csharp" style="color: inherit; text-decoration: inherit;">Cage<wbr>Id</a>
@@ -1086,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</p>
-</dd><dt class="property-required"
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1095,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1104,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_csharp" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Ids</a>
@@ -1113,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1122,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="hostid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -1131,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -1140,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostresources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Resources</a>
@@ -1149,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdh.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List<wbr>Host<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="hoststate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -1158,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hosttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Type</a>
@@ -1167,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1176,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag.</p>
-</dd><dt class="property-required"
+    <dd>Auto renewal flag.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1185,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd></dl>
+    <dd>The project CDH belongs to.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1200,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cageid_go" style="color: inherit; text-decoration: inherit;">Cage<wbr>Id</a>
@@ -1209,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</p>
-</dd><dt class="property-required"
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1218,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1227,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_go" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Ids</a>
@@ -1236,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1245,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="hostid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -1254,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -1263,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostresources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Resources</a>
@@ -1272,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">[]Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List<wbr>Host<wbr>Resource</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="hoststate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_go" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -1281,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hosttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Type</a>
@@ -1290,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1299,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag.</p>
-</dd><dt class="property-required"
+    <dd>Auto renewal flag.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1308,8 +1401,117 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd></dl>
+    <dd>The project CDH belongs to.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="cage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cage_id_hcl" style="color: inherit; text-decoration: inherit;">cage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cvm_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_resources_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">list(object)</a></span>
+    </dt>
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="host_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_type_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto renewal flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CDH belongs to.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1323,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cageid_java" style="color: inherit; text-decoration: inherit;">cage<wbr>Id</a>
@@ -1332,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</p>
-</dd><dt class="property-required"
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1341,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1350,8 +1549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_java" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1359,8 +1557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1368,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="hostid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_java" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1377,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1386,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostresources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_java" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -1395,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Host<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="hoststate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_java" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1404,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hosttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_java" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -1413,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1422,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag.</p>
-</dd><dt class="property-required"
+    <dd>Auto renewal flag.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1431,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd></dl>
+    <dd>The project CDH belongs to.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1446,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cageid_nodejs" style="color: inherit; text-decoration: inherit;">cage<wbr>Id</a>
@@ -1455,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</p>
-</dd><dt class="property-required"
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1464,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1473,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_nodejs" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1482,8 +1667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1491,8 +1675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="hostid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1500,8 +1683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1509,8 +1691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostresources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -1518,8 +1699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List<wbr>Host<wbr>Resource[]</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="hoststate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1527,8 +1707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hosttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -1536,8 +1715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1545,8 +1723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag.</p>
-</dd><dt class="property-required"
+    <dd>Auto renewal flag.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1554,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd></dl>
+    <dd>The project CDH belongs to.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1569,8 +1745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cage_id_python" style="color: inherit; text-decoration: inherit;">cage_<wbr>id</a>
@@ -1578,8 +1753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</p>
-</dd><dt class="property-required"
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
             title="Required">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1587,8 +1761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1596,8 +1769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_ids_python" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>ids</a>
@@ -1605,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -1614,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="host_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_python" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
@@ -1623,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="host_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
@@ -1632,17 +1801,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="host_resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_resources_python" style="color: inherit; text-decoration: inherit;">host_<wbr>resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List<wbr>Host<wbr>Resource]</a></span>
+        <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">Sequence[Get<wbr>Instances<wbr>Cdh<wbr>Instance<wbr>List<wbr>Host<wbr>Resource]</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="host_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_python" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
@@ -1650,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="host_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_type_python" style="color: inherit; text-decoration: inherit;">host_<wbr>type</a>
@@ -1659,8 +1825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -1668,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto renewal flag.</p>
-</dd><dt class="property-required"
+    <dd>Auto renewal flag.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1677,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd></dl>
+    <dd>The project CDH belongs to.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1692,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CDH instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CDH instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cageid_yaml" style="color: inherit; text-decoration: inherit;">cage<wbr>Id</a>
@@ -1701,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</p>
-</dd><dt class="property-required"
+    <dd>Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1710,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1719,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="cvminstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_yaml" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1728,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1737,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="hostid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1746,8 +1903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1755,8 +1911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CDH instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CDH instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="hostresources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -1764,8 +1919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancescdhinstancelisthostresource">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="hoststate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1773,8 +1927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the CDH instances to be queried. Valid values: <code>PENDING</code>, <code>LAUNCH_FAILURE</code>, <code>RUNNING</code>, <code>EXPIRED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hosttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -1782,8 +1935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the CDH instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the CDH instance.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1791,8 +1943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag.</p>
-</dd><dt class="property-required"
+    <dd>Auto renewal flag.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1800,8 +1951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CDH belongs to.</p>
-</dd></dl>
+    <dd>The project CDH belongs to.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1819,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="cputotalnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Total<wbr>Num</a>
@@ -1828,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskavailablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Available<wbr>Size</a>
@@ -1837,8 +1985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktotalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Total<wbr>Size</a>
@@ -1846,8 +1993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1855,8 +2001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memoryavailablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Available<wbr>Size</a>
@@ -1864,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memorytotalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Total<wbr>Size</a>
@@ -1873,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1888,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="cputotalnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Total<wbr>Num</a>
@@ -1897,8 +2039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskavailablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Available<wbr>Size</a>
@@ -1906,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktotalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Total<wbr>Size</a>
@@ -1915,8 +2055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1924,8 +2063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memoryavailablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Available<wbr>Size</a>
@@ -1933,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memorytotalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Total<wbr>Size</a>
@@ -1942,8 +2079,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_available_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_available_num_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>available_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_total_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_total_num_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>total_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_available_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_available_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>available_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_total_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_available_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_available_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>available_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_total_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1957,8 +2155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="cputotalnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Total<wbr>Num</a>
@@ -1966,8 +2163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskavailablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Available<wbr>Size</a>
@@ -1975,8 +2171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktotalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Total<wbr>Size</a>
@@ -1984,8 +2179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1993,8 +2187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memoryavailablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Available<wbr>Size</a>
@@ -2002,8 +2195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memorytotalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Total<wbr>Size</a>
@@ -2011,8 +2203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2026,8 +2217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="cputotalnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Total<wbr>Num</a>
@@ -2035,8 +2225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskavailablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Available<wbr>Size</a>
@@ -2044,8 +2233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktotalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Total<wbr>Size</a>
@@ -2053,8 +2241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2062,8 +2249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memoryavailablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Available<wbr>Size</a>
@@ -2071,8 +2257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memorytotalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Total<wbr>Size</a>
@@ -2080,8 +2265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2095,8 +2279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_total_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_total_num_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>total_<wbr>num</a>
@@ -2104,8 +2287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="disk_available_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_available_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>available_<wbr>size</a>
@@ -2113,8 +2295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disk_total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_total_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>total_<wbr>size</a>
@@ -2122,8 +2303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -2131,8 +2311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_available_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_available_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>available_<wbr>size</a>
@@ -2140,8 +2319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_total_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>total_<wbr>size</a>
@@ -2149,8 +2327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2164,8 +2341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="cputotalnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Total<wbr>Num</a>
@@ -2173,8 +2349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskavailablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Available<wbr>Size</a>
@@ -2182,8 +2357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktotalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Total<wbr>Size</a>
@@ -2191,8 +2365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2200,8 +2373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memoryavailablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Available<wbr>Size</a>
@@ -2209,8 +2381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memorytotalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Total<wbr>Size</a>
@@ -2218,8 +2389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2234,7 +2404,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

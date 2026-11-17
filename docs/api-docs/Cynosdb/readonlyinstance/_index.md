@@ -2,9 +2,11 @@
 ---
 title: "ReadonlyInstance"
 title_tag: "tencentcloud.Cynosdb.ReadonlyInstance"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.ReadonlyInstance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a CynosDB readonly instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provide a resource to create a CynosDB readonly instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -40,6 +47,11 @@ const foo = new tencentcloud.cynosdb.ReadonlyInstance("foo", {
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -62,6 +74,51 @@ foo = tencentcloud.cynosdb.ReadonlyInstance("foo",
         "Tue",
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cynosdb.NewReadonlyInstance(ctx, "foo", &cynosdb.ReadonlyInstanceArgs{
+			ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
+			InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
+			ForceDelete:               pulumi.Bool(true),
+			InstanceCpuCore:           pulumi.Int(2),
+			InstanceMemorySize:        pulumi.Int(4),
+			InstanceMaintainDuration:  pulumi.Int(7200),
+			InstanceMaintainStartTime: pulumi.Int(21600),
+			InstanceMaintainWeekdays: pulumi.StringArray{
+				pulumi.String("Fri"),
+				pulumi.String("Mon"),
+				pulumi.String("Sat"),
+				pulumi.String("Sun"),
+				pulumi.String("Thu"),
+				pulumi.String("Wed"),
+				pulumi.String("Tue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -93,41 +150,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
-			ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
-			InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
-			ForceDelete:               pulumi.Bool(true),
-			InstanceCpuCore:           pulumi.Int(2),
-			InstanceMemorySize:        pulumi.Int(4),
-			InstanceMaintainDuration:  pulumi.Int(7200),
-			InstanceMaintainStartTime: pulumi.Int(21600),
-			InstanceMaintainWeekdays: pulumi.StringArray{
-				pulumi.String("Fri"),
-				pulumi.String("Mon"),
-				pulumi.String("Sat"),
-				pulumi.String("Sun"),
-				pulumi.String("Thu"),
-				pulumi.String("Wed"),
-				pulumi.String("Tue"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -136,8 +163,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.ReadonlyInstance;
 import com.pulumi.tencentcloud.Cynosdb.ReadonlyInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -149,7 +176,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new ReadonlyInstance("foo", ReadonlyInstanceArgs.builder()        
+        var foo = new ReadonlyInstance("foo", ReadonlyInstanceArgs.builder()
             .clusterId(cynosdbmysql_dzj5l8gz)
             .instanceName("tf-cynosdb-readonly-instance")
             .forceDelete(true)
@@ -170,6 +197,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -191,74 +223,139 @@ resources:
         - Wed
         - Tue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cynosdb_readonlyinstance" "foo" {
+  cluster_id                   = cynosdbmysql-dzj5l8gz
+  instance_name                = "tf-cynosdb-readonly-instance"
+  force_delete                 = true
+  instance_cpu_core            = 2
+  instance_memory_size         = 4
+  instance_maintain_duration   = 7200
+  instance_maintain_start_time = 21600
+  instance_maintain_weekdays   = ["Fri", "Mon", "Sat", "Sun", "Thu", "Wed", "Tue"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AddInstances](https://www.tencentcloud.com/document/api/1098/40754)
+  - [DescribeResourcesByDealName](https://www.tencentcloud.com/document/api/1098/40735)
+  - [ModifyMaintainPeriodConfig](https://www.tencentcloud.com/document/api/1098/40743)
+* Read:
+  - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+  - [DescribeMaintainPeriod](https://www.tencentcloud.com/document/api/1098/40746)
+* Update:
+  - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+  - [ModifyInstanceName](https://www.tencentcloud.com/document/api/1098/46317)
+  - [ModifyMaintainPeriodConfig](https://www.tencentcloud.com/document/api/1098/40743)
+  - [UpgradeInstance](https://www.tencentcloud.com/document/api/1098/40739)
+* Delete:
+  - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+  - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
+  - [OfflineInstance](https://www.tencentcloud.com/document/api/1098/40741)
 
 
 ## Create ReadonlyInstance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                      <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                      <span class="nx">instance_cpu_core</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">instance_maintain_duration</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">instance_maintain_start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">instance_maintain_weekdays</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                      <span class="nx">instance_memory_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReadonlyInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReadonlyInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:ReadonlyInstance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:ReadonlyInstance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cynosdb_readonly_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -279,7 +376,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -396,11 +493,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ReadonlyInstance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -416,8 +521,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -425,8 +529,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -434,8 +537,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -443,8 +545,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -452,8 +553,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -461,8 +561,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -470,8 +569,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -479,8 +577,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -488,8 +585,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -497,8 +593,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -512,8 +607,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -521,8 +615,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -530,8 +623,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -539,8 +631,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -548,8 +639,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -557,8 +647,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -566,8 +655,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -575,8 +663,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -584,8 +671,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -593,8 +679,93 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_cpu_core_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_cpu_core_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_maintain_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_duration_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_maintain_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_start_time_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_maintain_weekdays_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_weekdays_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_memory_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -608,8 +779,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -617,8 +787,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -626,8 +795,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -635,8 +803,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -644,8 +811,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -653,8 +819,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -662,8 +827,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -671,8 +835,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -680,8 +843,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -689,8 +851,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -704,8 +865,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -713,8 +873,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -722,8 +881,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -731,8 +889,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -740,8 +897,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -749,8 +905,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -758,8 +913,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -767,8 +921,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -776,8 +929,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -785,8 +937,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -800,8 +951,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -809,8 +959,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -818,8 +967,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_cpu_core_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_cpu_core_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
@@ -827,8 +975,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_maintain_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_duration_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
@@ -836,8 +983,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_maintain_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_start_time_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
@@ -845,8 +991,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_maintain_weekdays_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_weekdays_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
@@ -854,8 +999,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_memory_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
@@ -863,8 +1007,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -872,8 +1015,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -881,8 +1023,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,8 +1037,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -905,8 +1045,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -914,8 +1053,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -923,8 +1061,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -932,8 +1069,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -941,8 +1077,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -950,8 +1085,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -959,8 +1093,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -968,8 +1101,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -977,8 +1109,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -999,8 +1130,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1008,8 +1138,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -1017,8 +1146,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd></dl>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1032,8 +1160,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1041,8 +1168,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -1050,8 +1176,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd></dl>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the instance.</dd><dt class="property-"
+            title="">
+        <span id="instance_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_storage_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1220,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1074,8 +1228,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1083,8 +1236,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd></dl>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1098,8 +1250,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1107,8 +1258,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1116,8 +1266,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd></dl>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1131,8 +1280,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -1140,8 +1288,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instance_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_storage_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
@@ -1149,8 +1296,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd></dl>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1310,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1173,8 +1318,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1182,8 +1326,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd></dl>
+    <dd>Storage size of the instance, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1193,18 +1336,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ReadonlyInstance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ReadonlyInstance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ReadonlyInstance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1220,104 +1363,143 @@ Get an existing ReadonlyInstance resource's state with the given name, ID, and o
         <span class="nx">instance_storage_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ReadonlyInstance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReadonlyInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReadonlyInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingReadonlyInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cynosdb:ReadonlyInstance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cynosdb_readonly_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1325,28 +1507,31 @@ Get an existing ReadonlyInstance resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1354,28 +1539,31 @@ Get an existing ReadonlyInstance resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1395,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -1404,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -1413,8 +1599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -1422,8 +1607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1431,8 +1615,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1440,8 +1623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -1449,8 +1631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1458,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1467,8 +1647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -1476,8 +1655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1485,8 +1663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1494,8 +1671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1509,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -1518,8 +1693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -1527,8 +1701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -1536,8 +1709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1545,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1554,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -1563,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1572,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1581,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -1590,8 +1757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1599,8 +1765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1608,8 +1773,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_cpu_core_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_cpu_core_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_maintain_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_duration_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_maintain_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_start_time_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_maintain_weekdays_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_weekdays_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_memory_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_storage_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1623,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1632,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1641,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -1650,8 +1913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1659,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1668,8 +1929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1677,8 +1937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1686,8 +1945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1695,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1704,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1713,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1722,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1737,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1746,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1755,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -1764,8 +2015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1773,8 +2023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1782,8 +2031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1791,8 +2039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1800,8 +2047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1809,8 +2055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1818,8 +2063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1827,8 +2071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1836,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1851,8 +2093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -1860,8 +2101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_cpu_core_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_cpu_core_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
@@ -1869,8 +2109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_maintain_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_duration_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
@@ -1878,8 +2117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_maintain_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_start_time_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
@@ -1887,8 +2125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_maintain_weekdays_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_weekdays_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
@@ -1896,8 +2133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_memory_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
@@ -1905,8 +2141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1914,8 +2149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -1923,8 +2157,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_storage_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
@@ -1932,8 +2165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1941,8 +2173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1950,8 +2181,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1965,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID which the readonly instance belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID which the readonly instance belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1974,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1983,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -1992,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -2001,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -2010,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -2019,8 +2243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2028,8 +2251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2037,8 +2259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -2046,8 +2267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2055,8 +2275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2064,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2088,6 +2306,9 @@ $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynos
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2097,7 +2318,6 @@ $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynos
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

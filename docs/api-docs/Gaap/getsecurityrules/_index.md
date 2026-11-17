@@ -2,9 +2,11 @@
 ---
 title: "getSecurityRules"
 title_tag: "tencentcloud.Gaap.getSecurityRules"
-meta_desc: "Documentation for the tencentcloud.Gaap.getSecurityRules function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query security policy rule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,82 +18,152 @@ Use this data source to query security policy rule.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const foo = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooSecurityPolicy = new tencentcloud.gaap.SecurityPolicy("fooSecurityPolicy", {
-    proxyId: fooProxy.id,
+const fooSecurityPolicy = new tencentcloud.gaap.SecurityPolicy("foo", {
+    proxyId: foo.id,
     action: "ACCEPT",
 });
-const fooSecurityRule = new tencentcloud.gaap.SecurityRule("fooSecurityRule", {
+const fooSecurityRule = new tencentcloud.gaap.SecurityRule("foo", {
     policyId: fooSecurityPolicy.id,
+    name: "ci-test-gaap-s-rule",
     cidrIp: "1.1.1.1",
     action: "ACCEPT",
     protocol: "TCP",
     port: "80",
 });
-const protocol = pulumi.all([fooSecurityPolicy.id, fooSecurityRule.protocol]).apply(([id, protocol]) => tencentcloud.Gaap.getSecurityRulesOutput({
-    policyId: id,
-    protocol: protocol,
-}));
+const protocol = tencentcloud.gaap.getSecurityRulesOutput({
+    policyId: fooSecurityPolicy.id,
+    protocol: fooSecurityRule.protocol,
+});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_security_policy = tencentcloud.gaap.SecurityPolicy("fooSecurityPolicy",
-    proxy_id=foo_proxy.id,
+foo_security_policy = tencentcloud.gaap.SecurityPolicy("foo",
+    proxy_id=foo.id,
     action="ACCEPT")
-foo_security_rule = tencentcloud.gaap.SecurityRule("fooSecurityRule",
+foo_security_rule = tencentcloud.gaap.SecurityRule("foo",
     policy_id=foo_security_policy.id,
+    name="ci-test-gaap-s-rule",
     cidr_ip="1.1.1.1",
     action="ACCEPT",
     protocol="TCP",
     port="80")
-protocol = pulumi.Output.all(foo_security_policy.id, foo_security_rule.protocol).apply(lambda id, protocol: tencentcloud.Gaap.get_security_rules_output(policy_id=id,
-    protocol=protocol))
+protocol = tencentcloud.gaap.get_security_rules_output(policy_id=foo_security_policy.id,
+    protocol=foo_security_rule.protocol)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+		})
+		if err != nil {
+			return err
+		}
+		fooSecurityPolicy, err := gaap.NewSecurityPolicy(ctx, "foo", &gaap.SecurityPolicyArgs{
+			ProxyId: foo.ID().ToIDOutput().ToStringOutput(),
+			Action:  pulumi.String("ACCEPT"),
+		})
+		if err != nil {
+			return err
+		}
+		fooSecurityRule, err := gaap.NewSecurityRule(ctx, "foo", &gaap.SecurityRuleArgs{
+			PolicyId: fooSecurityPolicy.ID().ToIDOutput().ToStringOutput(),
+			Name:     pulumi.String("ci-test-gaap-s-rule"),
+			CidrIp:   pulumi.String("1.1.1.1"),
+			Action:   pulumi.String("ACCEPT"),
+			Protocol: pulumi.String("TCP"),
+			Port:     pulumi.String("80"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetSecurityRulesOutput(ctx, gaap.GetSecurityRulesOutputArgs{
+			PolicyId: fooSecurityPolicy.ID().ToIDOutput().ToStringOutput(),
+			Protocol: fooSecurityRule.Protocol,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
+    var foo = new Tencentcloud.Gaap.Proxy("foo", new()
     {
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
         AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
     });
 
-    var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new()
+    var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("foo", new()
     {
-        ProxyId = fooProxy.Id,
+        ProxyId = foo.Id,
         Action = "ACCEPT",
     });
 
-    var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new()
+    var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("foo", new()
     {
         PolicyId = fooSecurityPolicy.Id,
+        Name = "ci-test-gaap-s-rule",
         CidrIp = "1.1.1.1",
         Action = "ACCEPT",
         Protocol = "TCP",
@@ -106,54 +178,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			AccessRegion:     pulumi.String("SouthChina"),
-			RealserverRegion: pulumi.String("NorthChina"),
-		})
-		if err != nil {
-			return err
-		}
-		fooSecurityPolicy, err := Gaap.NewSecurityPolicy(ctx, "fooSecurityPolicy", &Gaap.SecurityPolicyArgs{
-			ProxyId: fooProxy.ID(),
-			Action:  pulumi.String("ACCEPT"),
-		})
-		if err != nil {
-			return err
-		}
-		fooSecurityRule, err := Gaap.NewSecurityRule(ctx, "fooSecurityRule", &Gaap.SecurityRuleArgs{
-			PolicyId: fooSecurityPolicy.ID(),
-			CidrIp:   pulumi.String("1.1.1.1"),
-			Action:   pulumi.String("ACCEPT"),
-			Protocol: pulumi.String("TCP"),
-			Port:     pulumi.String("80"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = pulumi.All(fooSecurityPolicy.ID(), fooSecurityRule.Protocol).ApplyT(func(_args []interface{}) (gaap.GetSecurityRulesResult, error) {
-			id := _args[0].(string)
-			protocol := _args[1].(*string)
-			return Gaap.GetSecurityRulesOutput(ctx, gaap.GetSecurityRulesOutputArgs{
-				PolicyId: id,
-				Protocol: protocol,
-			}, nil), nil
-		}).(gaap.GetSecurityRulesResultOutput)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -168,8 +197,8 @@ import com.pulumi.tencentcloud.Gaap.SecurityRule;
 import com.pulumi.tencentcloud.Gaap.SecurityRuleArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetSecurityRulesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -181,20 +210,22 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var foo = new Proxy("foo", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooSecurityPolicy = new SecurityPolicy("fooSecurityPolicy", SecurityPolicyArgs.builder()        
-            .proxyId(fooProxy.id())
+        var fooSecurityPolicy = new SecurityPolicy("fooSecurityPolicy", SecurityPolicyArgs.builder()
+            .proxyId(foo.id())
             .action("ACCEPT")
             .build());
 
-        var fooSecurityRule = new SecurityRule("fooSecurityRule", SecurityRuleArgs.builder()        
+        var fooSecurityRule = new SecurityRule("fooSecurityRule", SecurityRuleArgs.builder()
             .policyId(fooSecurityPolicy.id())
+            .name("ci-test-gaap-s-rule")
             .cidrIp("1.1.1.1")
             .action("ACCEPT")
             .protocol("TCP")
@@ -209,24 +240,33 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  fooProxy:
+  foo:
     type: tencentcloud:Gaap:Proxy
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooSecurityPolicy:
     type: tencentcloud:Gaap:SecurityPolicy
+    name: foo
     properties:
-      proxyId: ${fooProxy.id}
+      proxyId: ${foo.id}
       action: ACCEPT
   fooSecurityRule:
     type: tencentcloud:Gaap:SecurityRule
+    name: foo
     properties:
       policyId: ${fooSecurityPolicy.id}
+      name: ci-test-gaap-s-rule
       cidrIp: 1.1.1.1
       action: ACCEPT
       protocol: TCP
@@ -234,13 +274,59 @@ resources:
 variables:
   protocol:
     fn::invoke:
-      Function: tencentcloud:Gaap:getSecurityRules
-      Arguments:
+      function: tencentcloud:Gaap:getSecurityRules
+      arguments:
         policyId: ${fooSecurityPolicy.id}
         protocol: ${fooSecurityRule.protocol}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getsecurityrules" "protocol" {
+  policy_id = tencentcloud_gaap_securitypolicy.foo.id
+  protocol  = tencentcloud_gaap_securityrule.foo.protocol
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_securitypolicy" "foo" {
+  proxy_id = tencentcloud_gaap_proxy.foo.id
+  action   = "ACCEPT"
+}
+resource "tencentcloud_gaap_securityrule" "foo" {
+  policy_id = tencentcloud_gaap_securitypolicy.foo.id
+  name      = "ci-test-gaap-s-rule"
+  cidr_ip   = "1.1.1.1"
+  action    = "ACCEPT"
+  protocol  = "TCP"
+  port      = "80"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
 
 
 
@@ -252,7 +338,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -260,9 +346,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSecurityRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>></span
+><span class="k">function </span>getSecurityRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>></span
 ><span class="k">
-function </span>getSecurityRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>></span
+function </span>getSecurityRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -281,15 +367,15 @@ function </span>getSecurityRulesOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSecurityRulesResult</span
 ><span class="k">
-def </span>get_security_rules_output<span class="p">(</span><span class="nx">action</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">cidr_ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecurityRulesResult]</span
+def </span>get_security_rules_output<span class="p">(</span><span class="nx">action</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">cidr_ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">port</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">protocol</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecurityRulesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -314,7 +400,8 @@ func </span>GetSecurityRulesOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSecurityRules </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSecurityRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -323,7 +410,8 @@ func </span>GetSecurityRulesOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> </span>getSecurityRules<span class="p">(</span><span class="nx">GetSecurityRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> </span>getSecurityRules<span class="p">(</span><span class="nx">GetSecurityRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecurityRulesResult</a></span>> </span>getSecurityRules<span class="p">(</span><span class="nx">GetSecurityRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -335,6 +423,15 @@ func </span>GetSecurityRulesOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getSecurityRules:getSecurityRules
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_security_rules&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -353,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_csharp" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -362,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -371,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -380,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -389,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -398,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -407,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -416,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy rules to be queried.</p>
-</dd></dl>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_go" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -440,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -449,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -458,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -467,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -476,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -485,8 +568,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -494,8 +576,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy rules to be queried.</p>
-</dd></dl>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -509,8 +660,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_java" style="color: inherit; text-decoration: inherit;">action</a>
@@ -518,8 +668,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -527,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -536,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -545,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -554,8 +700,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -563,8 +708,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -572,8 +716,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security policy rules to be queried.</p>
-</dd></dl>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -587,8 +730,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_nodejs" style="color: inherit; text-decoration: inherit;">action</a>
@@ -596,8 +738,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -605,8 +746,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -614,8 +754,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -623,8 +762,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -632,8 +770,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -641,8 +778,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -650,8 +786,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy rules to be queried.</p>
-</dd></dl>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -665,8 +800,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_python" style="color: inherit; text-decoration: inherit;">action</a>
@@ -674,8 +808,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidr_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
@@ -683,8 +816,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -692,8 +824,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -701,8 +832,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -710,8 +840,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -719,8 +848,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -728,8 +856,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security policy rules to be queried.</p>
-</dd></dl>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -743,8 +870,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_yaml" style="color: inherit; text-decoration: inherit;">action</a>
@@ -752,8 +878,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -761,8 +886,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -770,8 +894,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -779,8 +902,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -788,8 +910,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the security policy rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -797,8 +918,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -806,8 +926,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security policy rules to be queried.</p>
-</dd></dl>
+    <dd>ID of the security policy rules to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -847,8 +965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityrulesrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Security<wbr>Rules<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>An information list of security policy rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="action_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_csharp" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -856,8 +973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule.</p>
-</dd><dt class="property-"
+    <dd>Policy of the rule.</dd><dt class="property-"
             title="">
         <span id="cidrip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -865,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the request source.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -874,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Name of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -883,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Port of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -892,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -923,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -940,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityrulesrule">[]Get<wbr>Security<wbr>Rules<wbr>Rule</a></span>
     </dt>
-    <dd><p>An information list of security policy rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="action_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_go" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -949,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule.</p>
-</dd><dt class="property-"
+    <dd>Policy of the rule.</dd><dt class="property-"
             title="">
         <span id="cidrip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -958,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the request source.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -967,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Name of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -976,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Port of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -985,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1007,6 +1112,92 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_hcl" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecurityrulesrule">list(object)</a></span>
+    </dt>
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of the rule.</dd><dt class="property-"
+            title="">
+        <span id="cidr_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block of the request source.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the security policy rule.</dd><dt class="property-"
+            title="">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of the security policy rule.</dd><dt class="property-"
+            title="">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1016,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1033,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityrulesrule">List&lt;Get<wbr>Security<wbr>Rules<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>An information list of security policy rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="action_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_java" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1042,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of the rule.</p>
-</dd><dt class="property-"
+    <dd>Policy of the rule.</dd><dt class="property-"
             title="">
         <span id="cidrip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1051,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the request source.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the request source.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1060,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Name of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1069,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Port of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1078,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1109,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1126,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityrulesrule">Get<wbr>Security<wbr>Rules<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>An information list of security policy rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="action_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_nodejs" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1135,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule.</p>
-</dd><dt class="property-"
+    <dd>Policy of the rule.</dd><dt class="property-"
             title="">
         <span id="cidrip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1144,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the request source.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1153,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Name of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1162,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Port of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1171,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1202,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1217,10 +1393,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_python" style="color: inherit; text-decoration: inherit;">rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecurityrulesrule">Get<wbr>Security<wbr>Rules<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getsecurityrulesrule">Sequence[Get<wbr>Security<wbr>Rules<wbr>Rule]</a></span>
     </dt>
-    <dd><p>An information list of security policy rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_python" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1228,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of the rule.</p>
-</dd><dt class="property-"
+    <dd>Policy of the rule.</dd><dt class="property-"
             title="">
         <span id="cidr_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
@@ -1237,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block of the request source.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the request source.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1246,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Name of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1255,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Port of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1264,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1295,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1312,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityrulesrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of security policy rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of security policy rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="action_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_yaml" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1321,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of the rule.</p>
-</dd><dt class="property-"
+    <dd>Policy of the rule.</dd><dt class="property-"
             title="">
         <span id="cidrip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1330,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the request source.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the request source.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1339,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Name of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1348,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Port of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1357,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the security policy rule.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the security policy rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1398,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -1407,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1416,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1425,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1434,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1443,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd></dl>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1458,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -1467,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1476,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1485,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1494,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1503,8 +1655,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd></dl>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="cidr_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1518,8 +1723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1527,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1536,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security policy rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1545,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1554,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1563,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd></dl>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1587,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1596,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security policy rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1605,8 +1801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1614,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1623,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd></dl>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1638,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cidr_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
@@ -1647,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1656,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security policy rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1665,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1674,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1683,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd></dl>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1698,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of the rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Policy of the rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1707,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the request source to be queried.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the request source to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1716,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security policy rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security policy rule.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1725,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1734,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the security policy rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the security policy rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1743,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the security policy rule to be queried.</p>
-</dd></dl>
+    <dd>Protocol of the security policy rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1759,7 +1940,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

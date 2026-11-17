@@ -2,9 +2,11 @@
 ---
 title: "getGateways"
 title_tag: "tencentcloud.Vpn.getGateways"
-meta_desc: "Documentation for the tencentcloud.Vpn.getGateways function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of VPN gateways."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,77 +18,69 @@ Use this data source to query detailed information of VPN gateways.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Vpn.getGateways({
-    id: "vpngw-8ccsnclt",
+const foo = tencentcloud.vpn.getGateways({
     name: "main",
+    id: "vpngw-8ccsnclt",
     publicIpAddress: "1.1.1.1",
+    zone: "ap-guangzhou-3",
+    vpcId: "vpc-dk8zmwuf",
     tags: {
         test: "tf",
     },
-    vpcId: "vpc-dk8zmwuf",
-    zone: "ap-guangzhou-3",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Vpn.get_gateways(id="vpngw-8ccsnclt",
-    name="main",
+foo = tencentcloud.vpn.get_gateways(name="main",
+    id="vpngw-8ccsnclt",
     public_ip_address="1.1.1.1",
+    zone="ap-guangzhou-3",
+    vpc_id="vpc-dk8zmwuf",
     tags={
         "test": "tf",
-    },
-    vpc_id="vpc-dk8zmwuf",
-    zone="ap-guangzhou-3")
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Vpn.GetGateways.Invoke(new()
-    {
-        Id = "vpngw-8ccsnclt",
-        Name = "main",
-        PublicIpAddress = "1.1.1.1",
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-        VpcId = "vpc-dk8zmwuf",
-        Zone = "ap-guangzhou-3",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vpn.GetGateways(ctx, &vpn.GetGatewaysArgs{
-			Id:              pulumi.StringRef("vpngw-8ccsnclt"),
+		_, err := vpn.GetGateways(ctx, &vpn.GetGatewaysArgs{
 			Name:            pulumi.StringRef("main"),
+			Id:              pulumi.StringRef("vpngw-8ccsnclt"),
 			PublicIpAddress: pulumi.StringRef("1.1.1.1"),
-			Tags: map[string]interface{}{
+			Zone:            pulumi.StringRef("ap-guangzhou-3"),
+			VpcId:           pulumi.StringRef("vpc-dk8zmwuf"),
+			Tags: map[string]string{
 				"test": "tf",
 			},
-			VpcId: pulumi.StringRef("vpc-dk8zmwuf"),
-			Zone:  pulumi.StringRef("ap-guangzhou-3"),
 		}, nil)
 		if err != nil {
 			return err
@@ -95,6 +89,39 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Vpn.GetGateways.Invoke(new()
+    {
+        Name = "main",
+        Id = "vpngw-8ccsnclt",
+        PublicIpAddress = "1.1.1.1",
+        Zone = "ap-guangzhou-3",
+        VpcId = "vpc-dk8zmwuf",
+        Tags = 
+        {
+            { "test", "tf" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -103,8 +130,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpn.VpnFunctions;
 import com.pulumi.tencentcloud.Vpn.inputs.GetGatewaysArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -117,33 +144,72 @@ public class App {
 
     public static void stack(Context ctx) {
         final var foo = VpnFunctions.getGateways(GetGatewaysArgs.builder()
-            .id("vpngw-8ccsnclt")
             .name("main")
+            .id("vpngw-8ccsnclt")
             .publicIpAddress("1.1.1.1")
-            .tags(Map.of("test", "tf"))
-            .vpcId("vpc-dk8zmwuf")
             .zone("ap-guangzhou-3")
+            .vpcId("vpc-dk8zmwuf")
+            .tags(Map.of("test", "tf"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Vpn:getGateways
-      Arguments:
-        id: vpngw-8ccsnclt
+      function: tencentcloud:Vpn:getGateways
+      arguments:
         name: main
+        id: vpngw-8ccsnclt
         publicIpAddress: 1.1.1.1
+        zone: ap-guangzhou-3
+        vpcId: vpc-dk8zmwuf
         tags:
           test: tf
-        vpcId: vpc-dk8zmwuf
-        zone: ap-guangzhou-3
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpn_getgateways" "foo" {
+  name              = "main"
+  id                = "vpngw-8ccsnclt"
+  public_ip_address = "1.1.1.1"
+  zone              = "ap-guangzhou-3"
+  vpc_id            = "vpc-dk8zmwuf"
+  tags = {
+    "test" = "tf"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
 
 
 
@@ -155,7 +221,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -163,9 +229,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGateways<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
+><span class="k">function </span>getGateways<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
 ><span class="k">
-function </span>getGatewaysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
+function </span>getGatewaysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,19 +244,19 @@ function </span>getGatewaysOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">public_ip_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGatewaysResult</span
 ><span class="k">
-def </span>get_gateways_output<span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">public_ip_address</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewaysResult]</span
+def </span>get_gateways_output<span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">public_ip_address</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewaysResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -215,7 +281,8 @@ func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGateways </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,7 +291,8 @@ func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> </span>getGateways<span class="p">(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> </span>getGateways<span class="p">(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> </span>getGateways<span class="p">(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -236,6 +304,15 @@ func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Vpn/getGateways:getGateways
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_vpn_get_gateways&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -254,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -263,8 +339,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Address</a>
@@ -272,8 +347,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,17 +355,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -299,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -308,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -323,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -332,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Address</a>
@@ -341,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -350,17 +417,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -368,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -377,8 +441,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_ip_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_address_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -392,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -401,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -410,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +541,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -437,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -446,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -461,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -470,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -479,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -488,17 +603,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -506,8 +619,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -515,8 +627,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -530,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -539,8 +649,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_ip_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_address_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>address</a>
@@ -548,8 +657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -557,17 +665,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -575,8 +681,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -584,8 +689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +703,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -608,8 +711,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -617,8 +719,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -626,17 +727,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -644,8 +743,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -653,8 +751,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysgatewaylist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Outputs.<wbr>Get<wbr>Gateways<wbr>Gateway<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated gateways.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -686,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -695,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="publicipaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Address</a>
@@ -704,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -719,10 +812,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -730,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -739,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysgatewaylist">[]Get<wbr>Gateways<wbr>Gateway<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the dedicated gateways.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -763,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -772,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="publicipaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Address</a>
@@ -781,8 +868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -796,10 +882,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -807,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -816,8 +900,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="gateway_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_lists_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysgatewaylist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
+            title="">
+        <span id="public_ip_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_address_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-"
+            title="">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -831,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysgatewaylist">List&lt;Get<wbr>Gateways<wbr>Gateway<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated gateways.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -840,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -849,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="publicipaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -858,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public ip of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -873,10 +1022,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -884,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -893,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysgatewaylist">Get<wbr>Gateways<wbr>Gateway<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated gateways.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -917,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -926,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="publicipaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -935,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -950,10 +1092,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -961,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -970,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,10 +1122,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_lists_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysgatewaylist">Get<wbr>Gateways<wbr>Gateway<wbr>List]</a></span>
+        <span class="property-type"><a href="#getgatewaysgatewaylist">Sequence[Get<wbr>Gateways<wbr>Gateway<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated gateways.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -994,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1003,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="public_ip_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_address_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>address</a>
@@ -1012,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public ip of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1027,10 +1162,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1038,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1047,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysgatewaylist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated gateways.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated gateways.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1071,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1080,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="publicipaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -1089,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public ip of the VPN gateway.</p>
-</dd><dt class="property-"
+    <dd>Public ip of the VPN gateway.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1104,10 +1232,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1115,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1124,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1149,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</p>
-</dd><dt class="property-required"
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1158,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge Type of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1167,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1176,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1185,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="isaddressblocked_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isaddressblocked_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Address<wbr>Blocked</a>
@@ -1194,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether ip address is blocked.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1203,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="newpurchaseplan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newpurchaseplan_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Purchase<wbr>Plan</a>
@@ -1212,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The plan of new purchase.</p>
-</dd><dt class="property-required"
+    <dd>The plan of new purchase.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1221,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flag indicates whether to renew or not.</p>
-</dd><dt class="property-required"
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Address</a>
@@ -1230,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="restrictstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrictstate_csharp" style="color: inherit; text-decoration: inherit;">Restrict<wbr>State</a>
@@ -1239,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Restrict state of VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1248,17 +1362,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1266,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of gateway instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of gateway instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1275,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1284,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1299,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</p>
-</dd><dt class="property-required"
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1308,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge Type of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1317,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1326,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1335,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="isaddressblocked_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isaddressblocked_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Address<wbr>Blocked</a>
@@ -1344,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether ip address is blocked.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1353,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="newpurchaseplan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newpurchaseplan_go" style="color: inherit; text-decoration: inherit;">New<wbr>Purchase<wbr>Plan</a>
@@ -1362,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The plan of new purchase.</p>
-</dd><dt class="property-required"
+    <dd>The plan of new purchase.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1371,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flag indicates whether to renew or not.</p>
-</dd><dt class="property-required"
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Address</a>
@@ -1380,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="restrictstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrictstate_go" style="color: inherit; text-decoration: inherit;">Restrict<wbr>State</a>
@@ -1389,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Restrict state of VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1398,17 +1496,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1416,8 +1512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of gateway instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of gateway instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1425,8 +1520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1434,8 +1528,141 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_address_blocked_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_address_blocked_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>address_<wbr>blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
+            title="Required">
+        <span id="new_purchase_plan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_purchase_plan_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>purchase_<wbr>plan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The plan of new purchase.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_address_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="restrict_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrict_state_hcl" style="color: inherit; text-decoration: inherit;">restrict_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of gateway instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1449,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</p>
-</dd><dt class="property-required"
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1458,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge Type of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1467,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1476,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1485,8 +1708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="isaddressblocked_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isaddressblocked_java" style="color: inherit; text-decoration: inherit;">is<wbr>Address<wbr>Blocked</a>
@@ -1494,8 +1716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether ip address is blocked.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1503,8 +1724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="newpurchaseplan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newpurchaseplan_java" style="color: inherit; text-decoration: inherit;">new<wbr>Purchase<wbr>Plan</a>
@@ -1512,8 +1732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The plan of new purchase.</p>
-</dd><dt class="property-required"
+    <dd>The plan of new purchase.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1521,8 +1740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Flag indicates whether to renew or not.</p>
-</dd><dt class="property-required"
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -1530,8 +1748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="restrictstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrictstate_java" style="color: inherit; text-decoration: inherit;">restrict<wbr>State</a>
@@ -1539,8 +1756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Restrict state of VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1548,17 +1764,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1566,8 +1780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of gateway instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of gateway instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1575,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1584,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1599,8 +1810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</p>
-</dd><dt class="property-required"
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1608,8 +1818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge Type of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1617,8 +1826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1626,8 +1834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1635,8 +1842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="isaddressblocked_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isaddressblocked_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Address<wbr>Blocked</a>
@@ -1644,8 +1850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether ip address is blocked.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1653,8 +1858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="newpurchaseplan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newpurchaseplan_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Purchase<wbr>Plan</a>
@@ -1662,8 +1866,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The plan of new purchase.</p>
-</dd><dt class="property-required"
+    <dd>The plan of new purchase.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1671,8 +1874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flag indicates whether to renew or not.</p>
-</dd><dt class="property-required"
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -1680,8 +1882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="restrictstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrictstate_nodejs" style="color: inherit; text-decoration: inherit;">restrict<wbr>State</a>
@@ -1689,8 +1890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Restrict state of VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1698,17 +1898,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1716,8 +1914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of gateway instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of gateway instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1725,8 +1922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1734,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1749,8 +1944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</p>
-</dd><dt class="property-required"
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
             title="Required">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1758,8 +1952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge Type of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1767,8 +1960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -1776,8 +1968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1785,8 +1976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="is_address_blocked_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_address_blocked_python" style="color: inherit; text-decoration: inherit;">is_<wbr>address_<wbr>blocked</a>
@@ -1794,8 +1984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether ip address is blocked.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1803,8 +1992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="new_purchase_plan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_purchase_plan_python" style="color: inherit; text-decoration: inherit;">new_<wbr>purchase_<wbr>plan</a>
@@ -1812,8 +2000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The plan of new purchase.</p>
-</dd><dt class="property-required"
+    <dd>The plan of new purchase.</dd><dt class="property-required"
             title="Required">
         <span id="prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -1821,8 +2008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Flag indicates whether to renew or not.</p>
-</dd><dt class="property-required"
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_address_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>address</a>
@@ -1830,8 +2016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="restrict_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrict_state_python" style="color: inherit; text-decoration: inherit;">restrict_<wbr>state</a>
@@ -1839,8 +2024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Restrict state of VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1848,17 +2032,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1866,8 +2048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of gateway instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of gateway instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1875,8 +2056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1884,8 +2064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1899,8 +2078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</p>
-</dd><dt class="property-required"
+    <dd>The maximum public network output bandwidth of VPN gateway (unit: Mbps).</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1908,8 +2086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge Type of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Charge Type of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1917,8 +2094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1926,8 +2102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the VPN gateway when charge type is <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1935,8 +2110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="isaddressblocked_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isaddressblocked_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Address<wbr>Blocked</a>
@@ -1944,8 +2118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether ip address is blocked.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ip address is blocked.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1953,8 +2126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN gateway. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN gateway. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="newpurchaseplan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newpurchaseplan_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Purchase<wbr>Plan</a>
@@ -1962,8 +2134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The plan of new purchase.</p>
-</dd><dt class="property-required"
+    <dd>The plan of new purchase.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1971,8 +2142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Flag indicates whether to renew or not.</p>
-</dd><dt class="property-required"
+    <dd>Flag indicates whether to renew or not.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddress_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Address</a>
@@ -1980,8 +2150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public ip address of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Public ip address of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="restrictstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#restrictstate_yaml" style="color: inherit; text-decoration: inherit;">restrict<wbr>State</a>
@@ -1989,8 +2158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Restrict state of VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>Restrict state of VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1998,17 +2166,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the VPN gateway.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN gateway.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN gateway to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN gateway to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2016,8 +2182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of gateway instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of gateway instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2025,8 +2190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2034,8 +2198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the VPN gateway.</p>
-</dd></dl>
+    <dd>Zone of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2050,7 +2213,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

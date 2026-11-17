@@ -2,9 +2,11 @@
 ---
 title: "CcHttpsPolicy"
 title_tag: "tencentcloud.Dayu.CcHttpsPolicy"
-meta_desc: "Documentation for the tencentcloud.Dayu.CcHttpsPolicy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create a dayu CC self-define https policy NOTE: creating CC self-define https policy need a valid resource tencentcloud.Dayu.L7Rule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,16 +20,22 @@ Use this resource to create a dayu CC self-define https policy
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const testPolicy = new tencentcloud.dayu.CcHttpsPolicy("testPolicy", {
-    resourceType: tencentcloud_dayu_l7_rule.test_rule.resource_type,
-    resourceId: tencentcloud_dayu_l7_rule.test_rule.resource_id,
-    ruleId: tencentcloud_dayu_l7_rule.test_rule.rule_id,
-    domain: tencentcloud_dayu_l7_rule.test_rule.domain,
+const testPolicy = new tencentcloud.dayu.CcHttpsPolicy("test_policy", {
+    resourceType: testRule.resourceType,
+    resourceId: testRule.resourceId,
+    ruleId: testRule.ruleId,
+    domain: testRule.domain,
+    name: "policy_test",
     action: "drop",
     "switch": true,
     ruleLists: [{
@@ -37,67 +45,50 @@ const testPolicy = new tencentcloud.dayu.CcHttpsPolicy("testPolicy", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-test_policy = tencentcloud.dayu.CcHttpsPolicy("testPolicy",
-    resource_type=tencentcloud_dayu_l7_rule["test_rule"]["resource_type"],
-    resource_id=tencentcloud_dayu_l7_rule["test_rule"]["resource_id"],
-    rule_id=tencentcloud_dayu_l7_rule["test_rule"]["rule_id"],
-    domain=tencentcloud_dayu_l7_rule["test_rule"]["domain"],
+test_policy = tencentcloud.dayu.CcHttpsPolicy("test_policy",
+    resource_type=test_rule["resourceType"],
+    resource_id=test_rule["resourceId"],
+    rule_id=test_rule["ruleId"],
+    domain=test_rule["domain"],
+    name="policy_test",
     action="drop",
     switch=True,
-    rule_lists=[tencentcloud.dayu.CcHttpsPolicyRuleListArgs(
-        skey="cgi",
-        operator="include",
-        value="123",
-    )])
+    rule_lists=[{
+        "skey": "cgi",
+        "operator": "include",
+        "value": "123",
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var testPolicy = new Tencentcloud.Dayu.CcHttpsPolicy("testPolicy", new()
-    {
-        ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-        ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-        RuleId = tencentcloud_dayu_l7_rule.Test_rule.Rule_id,
-        Domain = tencentcloud_dayu_l7_rule.Test_rule.Domain,
-        Action = "drop",
-        Switch = true,
-        RuleLists = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.CcHttpsPolicyRuleListArgs
-            {
-                Skey = "cgi",
-                Operator = "include",
-                Value = "123",
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewCcHttpsPolicy(ctx, "testPolicy", &Dayu.CcHttpsPolicyArgs{
-			ResourceType: pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_type),
-			ResourceId:   pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_id),
-			RuleId:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Rule_id),
-			Domain:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Domain),
+		_, err := dayu.NewCcHttpsPolicy(ctx, "test_policy", &dayu.CcHttpsPolicyArgs{
+			ResourceType: pulumi.Any(testRule.ResourceType),
+			ResourceId:   pulumi.Any(testRule.ResourceId),
+			RuleId:       pulumi.Any(testRule.RuleId),
+			Domain:       pulumi.Any(testRule.Domain),
+			Name:         pulumi.String("policy_test"),
 			Action:       pulumi.String("drop"),
 			Switch:       pulumi.Bool(true),
 			RuleLists: dayu.CcHttpsPolicyRuleListArray{
@@ -115,6 +106,46 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var testPolicy = new Tencentcloud.Dayu.CcHttpsPolicy("test_policy", new()
+    {
+        ResourceType = testRule.ResourceType,
+        ResourceId = testRule.ResourceId,
+        RuleId = testRule.RuleId,
+        Domain = testRule.Domain,
+        Name = "policy_test",
+        Action = "drop",
+        Switch = true,
+        RuleLists = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.CcHttpsPolicyRuleListArgs
+            {
+                Skey = "cgi",
+                Operator = "include",
+                Value = "123",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -124,8 +155,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.CcHttpsPolicy;
 import com.pulumi.tencentcloud.Dayu.CcHttpsPolicyArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.CcHttpsPolicyRuleListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -137,11 +168,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var testPolicy = new CcHttpsPolicy("testPolicy", CcHttpsPolicyArgs.builder()        
-            .resourceType(tencentcloud_dayu_l7_rule.test_rule().resource_type())
-            .resourceId(tencentcloud_dayu_l7_rule.test_rule().resource_id())
-            .ruleId(tencentcloud_dayu_l7_rule.test_rule().rule_id())
-            .domain(tencentcloud_dayu_l7_rule.test_rule().domain())
+        var testPolicy = new CcHttpsPolicy("testPolicy", CcHttpsPolicyArgs.builder()
+            .resourceType(testRule.resourceType())
+            .resourceId(testRule.resourceId())
+            .ruleId(testRule.ruleId())
+            .domain(testRule.domain())
+            .name("policy_test")
             .action("drop")
             .switch_(true)
             .ruleLists(CcHttpsPolicyRuleListArgs.builder()
@@ -154,15 +186,22 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   testPolicy:
     type: tencentcloud:Dayu:CcHttpsPolicy
+    name: test_policy
     properties:
-      resourceType: ${tencentcloud_dayu_l7_rule.test_rule.resource_type}
-      resourceId: ${tencentcloud_dayu_l7_rule.test_rule.resource_id}
-      ruleId: ${tencentcloud_dayu_l7_rule.test_rule.rule_id}
-      domain: ${tencentcloud_dayu_l7_rule.test_rule.domain}
+      resourceType: ${testRule.resourceType}
+      resourceId: ${testRule.resourceId}
+      ruleId: ${testRule.ruleId}
+      domain: ${testRule.domain}
+      name: policy_test
       action: drop
       switch: true
       ruleLists:
@@ -170,73 +209,131 @@ resources:
           operator: include
           value: '123'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_cchttpspolicy" "test_policy" {
+  resource_type = testRule.resourceType
+  resource_id   = testRule.resourceId
+  rule_id       = testRule.ruleId
+  domain        = testRule.domain
+  name          = "policy_test"
+  action        = "drop"
+  switch        = true
+  rule_lists {
+    skey     = "cgi"
+    operator = "include"
+    value    = "123"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=CreateCCSelfDefinePolicy&type=document&lang=en)
+  - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+* Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+* Update: [ModifyCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=ModifyCCSelfDefinePolicy&type=document&lang=en)
+* Delete:
+  - [DeleteCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DeleteCCSelfDefinePolicy&type=document&lang=en)
+  - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
 
 
 
 ## Create CcHttpsPolicy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">action</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcHttpsPolicyRuleListArgs]]</span> = None<span class="p">,</span>
-                  <span class="nx">switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcHttpsPolicyRuleListArgs]]</span> = None<span class="p">,</span>
+                  <span class="nx">action</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcHttpsPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpsPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcHttpsPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpsPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">CcHttpsPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpsPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:CcHttpsPolicy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:CcHttpsPolicy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_cc_https_policy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -257,7 +354,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -374,11 +471,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## CcHttpsPolicy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -394,8 +499,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -403,8 +507,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -412,8 +515,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -421,17 +523,15 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_csharp" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -439,8 +539,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -448,8 +547,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -457,8 +555,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -472,8 +569,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -481,8 +577,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -490,8 +585,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -499,8 +593,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -508,8 +601,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttpspolicyrulelist">[]Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_go" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -517,8 +609,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -526,8 +617,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -535,8 +625,77 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">list(object)</a></span>
+    </dt>
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,8 +709,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -559,8 +717,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -568,8 +725,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -577,17 +733,15 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_java" style="color: inherit; text-decoration: inherit;">action</a>
@@ -595,8 +749,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -604,8 +757,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -613,8 +765,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -628,8 +779,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -637,8 +787,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -646,8 +795,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -655,17 +803,15 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_nodejs" style="color: inherit; text-decoration: inherit;">action</a>
@@ -673,8 +819,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -682,8 +827,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -691,8 +835,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +849,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -715,8 +857,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -724,8 +865,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -733,17 +873,15 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">Sequence[Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_python" style="color: inherit; text-decoration: inherit;">action</a>
@@ -751,8 +889,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -760,8 +897,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -769,8 +905,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -784,8 +919,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -793,8 +927,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -802,8 +935,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -811,8 +943,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -820,8 +951,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_yaml" style="color: inherit; text-decoration: inherit;">action</a>
@@ -829,8 +959,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -838,8 +967,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -847,8 +975,7 @@ The CcHttpsPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,8 +996,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -878,8 +1004,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="iplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Lists</a>
@@ -887,8 +1012,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -896,8 +1020,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define https policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1034,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -920,8 +1042,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="iplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Lists</a>
@@ -929,8 +1050,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -938,8 +1058,45 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define https policy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="ip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_lists_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the CC self-define https policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -953,8 +1110,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -962,8 +1118,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="iplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -971,8 +1126,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -980,8 +1134,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define https policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,8 +1148,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1004,8 +1156,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="iplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1013,8 +1164,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1022,8 +1172,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define https policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1037,8 +1186,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1046,8 +1194,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_lists_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>lists</a>
@@ -1055,8 +1202,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1064,8 +1210,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define https policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1079,8 +1224,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1088,8 +1232,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="iplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1097,8 +1240,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1106,8 +1248,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define https policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1117,18 +1258,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing CcHttpsPolicy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcHttpsPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcHttpsPolicy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcHttpsPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcHttpsPolicy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1141,106 +1282,145 @@ Get an existing CcHttpsPolicy resource's state with the given name, ID, and opti
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcHttpsPolicyRuleListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcHttpsPolicyRuleListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">) -&gt;</span> CcHttpsPolicy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcHttpsPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcHttpsPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpsPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcHttpsPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcHttpsPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpsPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcHttpsPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpsPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcHttpsPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpsPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcHttpsPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpsPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcHttpsPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpsPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCcHttpsPolicy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:CcHttpsPolicy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_cc_https_policy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpsPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpsPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1248,28 +1428,31 @@ Get an existing CcHttpsPolicy resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpsPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1277,28 +1460,31 @@ Get an existing CcHttpsPolicy resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpsPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1318,8 +1504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1327,8 +1512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1336,8 +1520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_iplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iplists_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Lists</a>
@@ -1345,8 +1528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1354,8 +1536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1363,8 +1544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1372,8 +1552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1381,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1390,17 +1568,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -1408,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1423,8 +1598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1432,8 +1606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1441,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_iplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iplists_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Lists</a>
@@ -1450,8 +1622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1459,8 +1630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1468,8 +1638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1477,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1486,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1495,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -1504,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttpspolicyrulelist">[]Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -1513,8 +1678,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_lists_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_lists_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">list(object)</a></span>
+    </dt>
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1528,8 +1786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1537,8 +1794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1546,8 +1802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_iplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iplists_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1555,8 +1810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1564,8 +1818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1573,8 +1826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1582,8 +1834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1591,8 +1842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1600,17 +1850,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -1618,8 +1866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1633,8 +1880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1642,8 +1888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1651,8 +1896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_iplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iplists_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1660,8 +1904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1669,8 +1912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1678,8 +1920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1687,8 +1928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1696,8 +1936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1705,17 +1944,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1723,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1738,8 +1974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1747,8 +1982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1756,8 +1990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_lists_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>lists</a>
@@ -1765,8 +1998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1774,8 +2006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1783,8 +2014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1792,8 +2022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1801,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -1810,17 +2038,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_lists_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#cchttpspolicyrulelist">Sequence[Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1828,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1843,8 +2068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1852,8 +2076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1861,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_iplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iplists_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1870,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1879,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define https policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define https policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1888,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define https policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define https policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1897,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define https policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define https policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1906,8 +2124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the resource that the CC self-define https policy works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1915,8 +2132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule id of the domain that the CC self-define https policy works for, only valid when <code>protocol</code> is <code>https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -1924,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttpspolicyrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define https policy.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define https policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1933,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define https policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define https policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1949,7 +2163,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="cchttpspolicyrulelist">Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List</h4>
+<h4 id="cchttpspolicyrulelist">
+Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Https<wbr>Policy<wbr>Rule<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1961,8 +2177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
             title="Required">
         <span id="skey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_csharp" style="color: inherit; text-decoration: inherit;">Skey</a>
@@ -1970,8 +2185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1979,8 +2193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1994,8 +2207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
             title="Required">
         <span id="skey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_go" style="color: inherit; text-decoration: inherit;">Skey</a>
@@ -2003,8 +2215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2012,8 +2223,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="skey_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_hcl" style="color: inherit; text-decoration: inherit;">skey</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2027,8 +2267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
             title="Required">
         <span id="skey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_java" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2036,8 +2275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2045,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2060,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
             title="Required">
         <span id="skey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_nodejs" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2069,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2078,8 +2313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2093,8 +2327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
             title="Required">
         <span id="skey_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_python" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2102,8 +2335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2111,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2126,8 +2357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule. Valid values are <code>include</code> and <code>equal</code>.</dd><dt class="property-required"
             title="Required">
         <span id="skey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_yaml" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2135,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule. Valid values are <code>cgi</code>, <code>ua</code> and <code>referer</code>.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2144,8 +2373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2157,7 +2385,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

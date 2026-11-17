@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Tse.Instance"
-meta_desc: "Documentation for the tencentcloud.Tse.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tse instance"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,98 +20,85 @@ Provides a resource to create a tse instance
 
 ### Create zookeeper standard version
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zookeeperStandard = new tencentcloud.tse.Instance("zookeeperStandard", {
-    engineName: "zookeeper-test",
-    engineNodeNum: 3,
-    engineProductVersion: "STANDARD",
-    engineRegion: "ap-guangzhou",
-    engineResourceSpec: "spec-qvj6k7t4q",
+const zookeeperStandard = new tencentcloud.tse.Instance("zookeeper_standard", {
     engineType: "zookeeper",
     engineVersion: "3.5.9.4",
+    engineProductVersion: "STANDARD",
+    engineRegion: "ap-guangzhou",
+    engineName: "zookeeper-test",
+    tradeType: 0,
+    engineResourceSpec: "spec-qvj6k7t4q",
+    engineNodeNum: 3,
+    vpcId: "vpc-4owdpnwr",
     subnetId: "subnet-dwj7ipnc",
     tags: {
         createdBy: "terraform",
     },
-    tradeType: 0,
-    vpcId: "vpc-4owdpnwr",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-zookeeper_standard = tencentcloud.tse.Instance("zookeeperStandard",
-    engine_name="zookeeper-test",
-    engine_node_num=3,
-    engine_product_version="STANDARD",
-    engine_region="ap-guangzhou",
-    engine_resource_spec="spec-qvj6k7t4q",
+zookeeper_standard = tencentcloud.tse.Instance("zookeeper_standard",
     engine_type="zookeeper",
     engine_version="3.5.9.4",
+    engine_product_version="STANDARD",
+    engine_region="ap-guangzhou",
+    engine_name="zookeeper-test",
+    trade_type=0,
+    engine_resource_spec="spec-qvj6k7t4q",
+    engine_node_num=3,
+    vpc_id="vpc-4owdpnwr",
     subnet_id="subnet-dwj7ipnc",
     tags={
         "createdBy": "terraform",
-    },
-    trade_type=0,
-    vpc_id="vpc-4owdpnwr")
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zookeeperStandard = new Tencentcloud.Tse.Instance("zookeeperStandard", new()
-    {
-        EngineName = "zookeeper-test",
-        EngineNodeNum = 3,
-        EngineProductVersion = "STANDARD",
-        EngineRegion = "ap-guangzhou",
-        EngineResourceSpec = "spec-qvj6k7t4q",
-        EngineType = "zookeeper",
-        EngineVersion = "3.5.9.4",
-        SubnetId = "subnet-dwj7ipnc",
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-        TradeType = 0,
-        VpcId = "vpc-4owdpnwr",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tse"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tse.NewInstance(ctx, "zookeeperStandard", &Tse.InstanceArgs{
-			EngineName:           pulumi.String("zookeeper-test"),
-			EngineNodeNum:        pulumi.Int(3),
-			EngineProductVersion: pulumi.String("STANDARD"),
-			EngineRegion:         pulumi.String("ap-guangzhou"),
-			EngineResourceSpec:   pulumi.String("spec-qvj6k7t4q"),
+		_, err := tse.NewInstance(ctx, "zookeeper_standard", &tse.InstanceArgs{
 			EngineType:           pulumi.String("zookeeper"),
 			EngineVersion:        pulumi.String("3.5.9.4"),
+			EngineProductVersion: pulumi.String("STANDARD"),
+			EngineRegion:         pulumi.String("ap-guangzhou"),
+			EngineName:           pulumi.String("zookeeper-test"),
+			TradeType:            pulumi.Int(0),
+			EngineResourceSpec:   pulumi.String("spec-qvj6k7t4q"),
+			EngineNodeNum:        pulumi.Int(3),
+			VpcId:                pulumi.String("vpc-4owdpnwr"),
 			SubnetId:             pulumi.String("subnet-dwj7ipnc"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
 			},
-			TradeType: pulumi.Int(0),
-			VpcId:     pulumi.String("vpc-4owdpnwr"),
 		})
 		if err != nil {
 			return err
@@ -118,6 +107,44 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zookeeperStandard = new Tencentcloud.Tse.Instance("zookeeper_standard", new()
+    {
+        EngineType = "zookeeper",
+        EngineVersion = "3.5.9.4",
+        EngineProductVersion = "STANDARD",
+        EngineRegion = "ap-guangzhou",
+        EngineName = "zookeeper-test",
+        TradeType = 0,
+        EngineResourceSpec = "spec-qvj6k7t4q",
+        EngineNodeNum = 3,
+        VpcId = "vpc-4owdpnwr",
+        SubnetId = "subnet-dwj7ipnc",
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -126,8 +153,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tse.Instance;
 import com.pulumi.tencentcloud.Tse.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -139,55 +166,104 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var zookeeperStandard = new Instance("zookeeperStandard", InstanceArgs.builder()        
-            .engineName("zookeeper-test")
-            .engineNodeNum(3)
-            .engineProductVersion("STANDARD")
-            .engineRegion("ap-guangzhou")
-            .engineResourceSpec("spec-qvj6k7t4q")
+        var zookeeperStandard = new Instance("zookeeperStandard", InstanceArgs.builder()
             .engineType("zookeeper")
             .engineVersion("3.5.9.4")
+            .engineProductVersion("STANDARD")
+            .engineRegion("ap-guangzhou")
+            .engineName("zookeeper-test")
+            .tradeType(0)
+            .engineResourceSpec("spec-qvj6k7t4q")
+            .engineNodeNum(3)
+            .vpcId("vpc-4owdpnwr")
             .subnetId("subnet-dwj7ipnc")
             .tags(Map.of("createdBy", "terraform"))
-            .tradeType(0)
-            .vpcId("vpc-4owdpnwr")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   zookeeperStandard:
     type: tencentcloud:Tse:Instance
+    name: zookeeper_standard
     properties:
-      engineName: zookeeper-test
-      engineNodeNum: 3
-      engineProductVersion: STANDARD
-      engineRegion: ap-guangzhou
-      engineResourceSpec: spec-qvj6k7t4q
       engineType: zookeeper
       engineVersion: 3.5.9.4
+      engineProductVersion: STANDARD
+      engineRegion: ap-guangzhou
+      engineName: zookeeper-test
+      tradeType: 0
+      engineResourceSpec: spec-qvj6k7t4q
+      engineNodeNum: 3
+      vpcId: vpc-4owdpnwr
       subnetId: subnet-dwj7ipnc
       tags:
         createdBy: terraform
-      tradeType: 0
-      vpcId: vpc-4owdpnwr
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tse_instance" "zookeeper_standard" {
+  engine_type            = "zookeeper"
+  engine_version         = "3.5.9.4"
+  engine_product_version = "STANDARD"
+  engine_region          = "ap-guangzhou"
+  engine_name            = "zookeeper-test"
+  trade_type             = 0
+  engine_resource_spec   = "spec-qvj6k7t4q"
+  engine_node_num        = 3
+  vpc_id                 = "vpc-4owdpnwr"
+  subnet_id              = "subnet-dwj7ipnc"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create zookeeper professional version
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zookeeperProfessional = new tencentcloud.tse.Instance("zookeeperProfessional", {
-    engineName: "zookeeper-test",
-    engineNodeNum: 3,
+const zookeeperProfessional = new tencentcloud.tse.Instance("zookeeper_professional", {
+    engineType: "zookeeper",
+    engineVersion: "3.5.9.4",
     engineProductVersion: "PROFESSIONAL",
     engineRegion: "ap-guangzhou",
+    engineName: "zookeeper-test",
+    tradeType: 0,
+    engineResourceSpec: "spec-qvj6k7t4q",
+    engineNodeNum: 3,
+    vpcId: "vpc-4owdpnwr",
+    subnetId: "subnet-dwj7ipnc",
     engineRegionInfos: [{
         engineRegion: "ap-guangzhou",
         replica: 3,
@@ -202,50 +278,107 @@ const zookeeperProfessional = new tencentcloud.tse.Instance("zookeeperProfession
             },
         ],
     }],
-    engineResourceSpec: "spec-qvj6k7t4q",
-    engineType: "zookeeper",
-    engineVersion: "3.5.9.4",
-    subnetId: "subnet-dwj7ipnc",
     tags: {
         createdBy: "terraform",
     },
-    tradeType: 0,
-    vpcId: "vpc-4owdpnwr",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-zookeeper_professional = tencentcloud.tse.Instance("zookeeperProfessional",
-    engine_name="zookeeper-test",
-    engine_node_num=3,
-    engine_product_version="PROFESSIONAL",
-    engine_region="ap-guangzhou",
-    engine_region_infos=[tencentcloud.tse.InstanceEngineRegionInfoArgs(
-        engine_region="ap-guangzhou",
-        replica=3,
-        vpc_infos=[
-            tencentcloud.tse.InstanceEngineRegionInfoVpcInfoArgs(
-                subnet_id="subnet-dwj7ipnc",
-                vpc_id="vpc-4owdpnwr",
-            ),
-            tencentcloud.tse.InstanceEngineRegionInfoVpcInfoArgs(
-                subnet_id="subnet-403mgks4",
-                vpc_id="vpc-b1puef4z",
-            ),
-        ],
-    )],
-    engine_resource_spec="spec-qvj6k7t4q",
+zookeeper_professional = tencentcloud.tse.Instance("zookeeper_professional",
     engine_type="zookeeper",
     engine_version="3.5.9.4",
+    engine_product_version="PROFESSIONAL",
+    engine_region="ap-guangzhou",
+    engine_name="zookeeper-test",
+    trade_type=0,
+    engine_resource_spec="spec-qvj6k7t4q",
+    engine_node_num=3,
+    vpc_id="vpc-4owdpnwr",
     subnet_id="subnet-dwj7ipnc",
+    engine_region_infos=[{
+        "engine_region": "ap-guangzhou",
+        "replica": 3,
+        "vpc_infos": [
+            {
+                "subnet_id": "subnet-dwj7ipnc",
+                "vpc_id": "vpc-4owdpnwr",
+            },
+            {
+                "subnet_id": "subnet-403mgks4",
+                "vpc_id": "vpc-b1puef4z",
+            },
+        ],
+    }],
     tags={
         "createdBy": "terraform",
-    },
-    trade_type=0,
-    vpc_id="vpc-4owdpnwr")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tse.NewInstance(ctx, "zookeeper_professional", &tse.InstanceArgs{
+			EngineType:           pulumi.String("zookeeper"),
+			EngineVersion:        pulumi.String("3.5.9.4"),
+			EngineProductVersion: pulumi.String("PROFESSIONAL"),
+			EngineRegion:         pulumi.String("ap-guangzhou"),
+			EngineName:           pulumi.String("zookeeper-test"),
+			TradeType:            pulumi.Int(0),
+			EngineResourceSpec:   pulumi.String("spec-qvj6k7t4q"),
+			EngineNodeNum:        pulumi.Int(3),
+			VpcId:                pulumi.String("vpc-4owdpnwr"),
+			SubnetId:             pulumi.String("subnet-dwj7ipnc"),
+			EngineRegionInfos: tse.InstanceEngineRegionInfoArray{
+				&tse.InstanceEngineRegionInfoArgs{
+					EngineRegion: pulumi.String("ap-guangzhou"),
+					Replica:      pulumi.Int(3),
+					VpcInfos: tse.InstanceEngineRegionInfoVpcInfoArray{
+						&tse.InstanceEngineRegionInfoVpcInfoArgs{
+							SubnetId: pulumi.String("subnet-dwj7ipnc"),
+							VpcId:    pulumi.String("vpc-4owdpnwr"),
+						},
+						&tse.InstanceEngineRegionInfoVpcInfoArgs{
+							SubnetId: pulumi.String("subnet-403mgks4"),
+							VpcId:    pulumi.String("vpc-b1puef4z"),
+						},
+					},
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -254,12 +387,18 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var zookeeperProfessional = new Tencentcloud.Tse.Instance("zookeeperProfessional", new()
+    var zookeeperProfessional = new Tencentcloud.Tse.Instance("zookeeper_professional", new()
     {
-        EngineName = "zookeeper-test",
-        EngineNodeNum = 3,
+        EngineType = "zookeeper",
+        EngineVersion = "3.5.9.4",
         EngineProductVersion = "PROFESSIONAL",
         EngineRegion = "ap-guangzhou",
+        EngineName = "zookeeper-test",
+        TradeType = 0,
+        EngineResourceSpec = "spec-qvj6k7t4q",
+        EngineNodeNum = 3,
+        VpcId = "vpc-4owdpnwr",
+        SubnetId = "subnet-dwj7ipnc",
         EngineRegionInfos = new[]
         {
             new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoArgs
@@ -281,68 +420,19 @@ return await Deployment.RunAsync(() =>
                 },
             },
         },
-        EngineResourceSpec = "spec-qvj6k7t4q",
-        EngineType = "zookeeper",
-        EngineVersion = "3.5.9.4",
-        SubnetId = "subnet-dwj7ipnc",
         Tags = 
         {
             { "createdBy", "terraform" },
         },
-        TradeType = 0,
-        VpcId = "vpc-4owdpnwr",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tse.NewInstance(ctx, "zookeeperProfessional", &Tse.InstanceArgs{
-			EngineName:           pulumi.String("zookeeper-test"),
-			EngineNodeNum:        pulumi.Int(3),
-			EngineProductVersion: pulumi.String("PROFESSIONAL"),
-			EngineRegion:         pulumi.String("ap-guangzhou"),
-			EngineRegionInfos: tse.InstanceEngineRegionInfoArray{
-				&tse.InstanceEngineRegionInfoArgs{
-					EngineRegion: pulumi.String("ap-guangzhou"),
-					Replica:      pulumi.Int(3),
-					VpcInfos: tse.InstanceEngineRegionInfoVpcInfoArray{
-						&tse.InstanceEngineRegionInfoVpcInfoArgs{
-							SubnetId: pulumi.String("subnet-dwj7ipnc"),
-							VpcId:    pulumi.String("vpc-4owdpnwr"),
-						},
-						&tse.InstanceEngineRegionInfoVpcInfoArgs{
-							SubnetId: pulumi.String("subnet-403mgks4"),
-							VpcId:    pulumi.String("vpc-b1puef4z"),
-						},
-					},
-				},
-			},
-			EngineResourceSpec: pulumi.String("spec-qvj6k7t4q"),
-			EngineType:         pulumi.String("zookeeper"),
-			EngineVersion:      pulumi.String("3.5.9.4"),
-			SubnetId:           pulumi.String("subnet-dwj7ipnc"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			TradeType: pulumi.Int(0),
-			VpcId:     pulumi.String("vpc-4owdpnwr"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -352,8 +442,9 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tse.Instance;
 import com.pulumi.tencentcloud.Tse.InstanceArgs;
 import com.pulumi.tencentcloud.Tse.inputs.InstanceEngineRegionInfoArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tse.inputs.InstanceEngineRegionInfoVpcInfoArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -365,11 +456,17 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var zookeeperProfessional = new Instance("zookeeperProfessional", InstanceArgs.builder()        
-            .engineName("zookeeper-test")
-            .engineNodeNum(3)
+        var zookeeperProfessional = new Instance("zookeeperProfessional", InstanceArgs.builder()
+            .engineType("zookeeper")
+            .engineVersion("3.5.9.4")
             .engineProductVersion("PROFESSIONAL")
             .engineRegion("ap-guangzhou")
+            .engineName("zookeeper-test")
+            .tradeType(0)
+            .engineResourceSpec("spec-qvj6k7t4q")
+            .engineNodeNum(3)
+            .vpcId("vpc-4owdpnwr")
+            .subnetId("subnet-dwj7ipnc")
             .engineRegionInfos(InstanceEngineRegionInfoArgs.builder()
                 .engineRegion("ap-guangzhou")
                 .replica(3)
@@ -383,27 +480,33 @@ public class App {
                         .vpcId("vpc-b1puef4z")
                         .build())
                 .build())
-            .engineResourceSpec("spec-qvj6k7t4q")
-            .engineType("zookeeper")
-            .engineVersion("3.5.9.4")
-            .subnetId("subnet-dwj7ipnc")
             .tags(Map.of("createdBy", "terraform"))
-            .tradeType(0)
-            .vpcId("vpc-4owdpnwr")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   zookeeperProfessional:
     type: tencentcloud:Tse:Instance
+    name: zookeeper_professional
     properties:
-      engineName: zookeeper-test
-      engineNodeNum: 3
+      engineType: zookeeper
+      engineVersion: 3.5.9.4
       engineProductVersion: PROFESSIONAL
       engineRegion: ap-guangzhou
+      engineName: zookeeper-test
+      tradeType: 0
+      engineResourceSpec: spec-qvj6k7t4q
+      engineNodeNum: 3
+      vpcId: vpc-4owdpnwr
+      subnetId: subnet-dwj7ipnc
       engineRegionInfos:
         - engineRegion: ap-guangzhou
           replica: 3
@@ -412,20 +515,63 @@ resources:
               vpcId: vpc-4owdpnwr
             - subnetId: subnet-403mgks4
               vpcId: vpc-b1puef4z
-      engineResourceSpec: spec-qvj6k7t4q
-      engineType: zookeeper
-      engineVersion: 3.5.9.4
-      subnetId: subnet-dwj7ipnc
       tags:
         createdBy: terraform
-      tradeType: 0
-      vpcId: vpc-4owdpnwr
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tse_instance" "zookeeper_professional" {
+  engine_type            = "zookeeper"
+  engine_version         = "3.5.9.4"
+  engine_product_version = "PROFESSIONAL"
+  engine_region          = "ap-guangzhou"
+  engine_name            = "zookeeper-test"
+  trade_type             = 0
+  engine_resource_spec   = "spec-qvj6k7t4q"
+  engine_node_num        = 3
+  vpc_id                 = "vpc-4owdpnwr"
+  subnet_id              = "subnet-dwj7ipnc"
+  engine_region_infos {
+    engine_region = "ap-guangzhou"
+    replica       = 3
+    vpc_infos {
+      subnet_id = "subnet-dwj7ipnc"
+      vpc_id    = "vpc-4owdpnwr"
+    }
+    vpc_infos {
+      subnet_id = "subnet-403mgks4"
+      vpc_id    = "vpc-b1puef4z"
+    }
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create nacos standard version
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -440,13 +586,18 @@ const nacos = new tencentcloud.tse.Instance("nacos", {
     engineType: "nacos",
     engineVersion: "2.0.3.4",
     subnetId: "subnet-5vpegquy",
+    tradeType: 0,
+    vpcId: "vpc-99xmasf9",
     tags: {
         createdBy: "terraform",
     },
-    tradeType: 0,
-    vpcId: "vpc-99xmasf9",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -461,12 +612,55 @@ nacos = tencentcloud.tse.Instance("nacos",
     engine_type="nacos",
     engine_version="2.0.3.4",
     subnet_id="subnet-5vpegquy",
+    trade_type=0,
+    vpc_id="vpc-99xmasf9",
     tags={
         "createdBy": "terraform",
-    },
-    trade_type=0,
-    vpc_id="vpc-99xmasf9")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tse.NewInstance(ctx, "nacos", &tse.InstanceArgs{
+			EnableClientInternetAccess: pulumi.Bool(false),
+			EngineName:                 pulumi.String("test"),
+			EngineNodeNum:              pulumi.Int(3),
+			EngineProductVersion:       pulumi.String("STANDARD"),
+			EngineRegion:               pulumi.String("ap-guangzhou"),
+			EngineResourceSpec:         pulumi.String("spec-1160a35a"),
+			EngineType:                 pulumi.String("nacos"),
+			EngineVersion:              pulumi.String("2.0.3.4"),
+			SubnetId:                   pulumi.String("subnet-5vpegquy"),
+			TradeType:                  pulumi.Int(0),
+			VpcId:                      pulumi.String("vpc-99xmasf9"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -486,49 +680,21 @@ return await Deployment.RunAsync(() =>
         EngineType = "nacos",
         EngineVersion = "2.0.3.4",
         SubnetId = "subnet-5vpegquy",
+        TradeType = 0,
+        VpcId = "vpc-99xmasf9",
         Tags = 
         {
             { "createdBy", "terraform" },
         },
-        TradeType = 0,
-        VpcId = "vpc-99xmasf9",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tse.NewInstance(ctx, "nacos", &Tse.InstanceArgs{
-			EnableClientInternetAccess: pulumi.Bool(false),
-			EngineName:                 pulumi.String("test"),
-			EngineNodeNum:              pulumi.Int(3),
-			EngineProductVersion:       pulumi.String("STANDARD"),
-			EngineRegion:               pulumi.String("ap-guangzhou"),
-			EngineResourceSpec:         pulumi.String("spec-1160a35a"),
-			EngineType:                 pulumi.String("nacos"),
-			EngineVersion:              pulumi.String("2.0.3.4"),
-			SubnetId:                   pulumi.String("subnet-5vpegquy"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			TradeType: pulumi.Int(0),
-			VpcId:     pulumi.String("vpc-99xmasf9"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -537,8 +703,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tse.Instance;
 import com.pulumi.tencentcloud.Tse.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -550,7 +716,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var nacos = new Instance("nacos", InstanceArgs.builder()        
+        var nacos = new Instance("nacos", InstanceArgs.builder()
             .enableClientInternetAccess(false)
             .engineName("test")
             .engineNodeNum(3)
@@ -560,14 +726,19 @@ public class App {
             .engineType("nacos")
             .engineVersion("2.0.3.4")
             .subnetId("subnet-5vpegquy")
-            .tags(Map.of("createdBy", "terraform"))
             .tradeType(0)
             .vpcId("vpc-99xmasf9")
+            .tags(Map.of("createdBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   nacos:
@@ -582,16 +753,54 @@ resources:
       engineType: nacos
       engineVersion: 2.0.3.4
       subnetId: subnet-5vpegquy
-      tags:
-        createdBy: terraform
       tradeType: 0
       vpcId: vpc-99xmasf9
+      tags:
+        createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tse_instance" "nacos" {
+  enable_client_internet_access = false
+  engine_name                   = "test"
+  engine_node_num               = 3
+  engine_product_version        = "STANDARD"
+  engine_region                 = "ap-guangzhou"
+  engine_resource_spec          = "spec-1160a35a"
+  engine_type                   = "nacos"
+  engine_version                = "2.0.3.4"
+  subnet_id                     = "subnet-5vpegquy"
+  trade_type                    = 0
+  vpc_id                        = "vpc-99xmasf9"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create polaris base version
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -606,13 +815,18 @@ const polaris = new tencentcloud.tse.Instance("polaris", {
     engineType: "polaris",
     engineVersion: "1.16.0.1",
     subnetId: "subnet-5vpegquy",
+    tradeType: 0,
+    vpcId: "vpc-99xmasf9",
     tags: {
         createdBy: "terraform",
     },
-    tradeType: 0,
-    vpcId: "vpc-99xmasf9",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -627,12 +841,55 @@ polaris = tencentcloud.tse.Instance("polaris",
     engine_type="polaris",
     engine_version="1.16.0.1",
     subnet_id="subnet-5vpegquy",
+    trade_type=0,
+    vpc_id="vpc-99xmasf9",
     tags={
         "createdBy": "terraform",
-    },
-    trade_type=0,
-    vpc_id="vpc-99xmasf9")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tse.NewInstance(ctx, "polaris", &tse.InstanceArgs{
+			EnableClientInternetAccess: pulumi.Bool(false),
+			EngineName:                 pulumi.String("test"),
+			EngineNodeNum:              pulumi.Int(2),
+			EngineProductVersion:       pulumi.String("BASE"),
+			EngineRegion:               pulumi.String("ap-guangzhou"),
+			EngineResourceSpec:         pulumi.String("spec-c160bas1"),
+			EngineType:                 pulumi.String("polaris"),
+			EngineVersion:              pulumi.String("1.16.0.1"),
+			SubnetId:                   pulumi.String("subnet-5vpegquy"),
+			TradeType:                  pulumi.Int(0),
+			VpcId:                      pulumi.String("vpc-99xmasf9"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -652,49 +909,21 @@ return await Deployment.RunAsync(() =>
         EngineType = "polaris",
         EngineVersion = "1.16.0.1",
         SubnetId = "subnet-5vpegquy",
+        TradeType = 0,
+        VpcId = "vpc-99xmasf9",
         Tags = 
         {
             { "createdBy", "terraform" },
         },
-        TradeType = 0,
-        VpcId = "vpc-99xmasf9",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tse.NewInstance(ctx, "polaris", &Tse.InstanceArgs{
-			EnableClientInternetAccess: pulumi.Bool(false),
-			EngineName:                 pulumi.String("test"),
-			EngineNodeNum:              pulumi.Int(2),
-			EngineProductVersion:       pulumi.String("BASE"),
-			EngineRegion:               pulumi.String("ap-guangzhou"),
-			EngineResourceSpec:         pulumi.String("spec-c160bas1"),
-			EngineType:                 pulumi.String("polaris"),
-			EngineVersion:              pulumi.String("1.16.0.1"),
-			SubnetId:                   pulumi.String("subnet-5vpegquy"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			TradeType: pulumi.Int(0),
-			VpcId:     pulumi.String("vpc-99xmasf9"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -703,8 +932,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tse.Instance;
 import com.pulumi.tencentcloud.Tse.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -716,7 +945,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var polaris = new Instance("polaris", InstanceArgs.builder()        
+        var polaris = new Instance("polaris", InstanceArgs.builder()
             .enableClientInternetAccess(false)
             .engineName("test")
             .engineNodeNum(2)
@@ -726,14 +955,19 @@ public class App {
             .engineType("polaris")
             .engineVersion("1.16.0.1")
             .subnetId("subnet-5vpegquy")
-            .tags(Map.of("createdBy", "terraform"))
             .tradeType(0)
             .vpcId("vpc-99xmasf9")
+            .tags(Map.of("createdBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   polaris:
@@ -748,84 +982,150 @@ resources:
       engineType: polaris
       engineVersion: 1.16.0.1
       subnetId: subnet-5vpegquy
-      tags:
-        createdBy: terraform
       tradeType: 0
       vpcId: vpc-99xmasf9
+      tags:
+        createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tse_instance" "polaris" {
+  enable_client_internet_access = false
+  engine_name                   = "test"
+  engine_node_num               = 2
+  engine_product_version        = "BASE"
+  engine_region                 = "ap-guangzhou"
+  engine_resource_spec          = "spec-c160bas1"
+  engine_type                   = "polaris"
+  engine_version                = "1.16.0.1"
+  subnet_id                     = "subnet-5vpegquy"
+  trade_type                    = 0
+  vpc_id                        = "vpc-99xmasf9"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateEngine](https://www.tencentcloud.com/search/?wd=CreateEngine&type=document&lang=en)
+  - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+* Update:
+  - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateEngineInternetAccess](https://www.tencentcloud.com/search/?wd=UpdateEngineInternetAccess&type=document&lang=en)
+* Delete:
+  - [DeleteEngine](https://www.tencentcloud.com/search/?wd=DeleteEngine&type=document&lang=en)
+  - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">enable_client_internet_access</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">engine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">engine_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">engine_node_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">trade_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">engine_product_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">engine_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">engine_region_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tse.InstanceEngineRegionInfoArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">engine_resource_spec</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">engine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">engine_resource_spec</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">enable_client_internet_access</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">engine_region_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceEngineRegionInfoArgs]]</span> = None<span class="p">,</span>
              <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">trade_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+             <span class="nx">engine_node_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tse:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tse:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tse_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -846,7 +1146,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -963,11 +1263,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -983,8 +1291,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-required"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
             title="Required">
         <span id="engineproductversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineproductversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Product<wbr>Version</a>
@@ -992,8 +1299,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-required"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region</a>
@@ -1001,8 +1307,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
             title="Required">
         <span id="enginetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -1010,8 +1315,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1019,8 +1323,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-required"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_csharp" style="color: inherit; text-decoration: inherit;">Trade<wbr>Type</a>
@@ -1028,8 +1331,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableclientinternetaccess_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableclientinternetaccess_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Client<wbr>Internet<wbr>Access</a>
@@ -1037,8 +1339,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginenodenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginenodenum_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Node<wbr>Num</a>
@@ -1046,17 +1347,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineregioninfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregioninfos_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Instance<wbr>Engine<wbr>Region<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineresourcespec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineresourcespec_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Resource<wbr>Spec</a>
@@ -1064,8 +1363,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1073,8 +1371,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1082,8 +1379,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1091,17 +1387,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1109,8 +1403,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,8 +1417,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-required"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
             title="Required">
         <span id="engineproductversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineproductversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Product<wbr>Version</a>
@@ -1133,8 +1425,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-required"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region</a>
@@ -1142,8 +1433,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
             title="Required">
         <span id="enginetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -1151,8 +1441,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1160,8 +1449,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-required"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_go" style="color: inherit; text-decoration: inherit;">Trade<wbr>Type</a>
@@ -1169,8 +1457,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableclientinternetaccess_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableclientinternetaccess_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Client<wbr>Internet<wbr>Access</a>
@@ -1178,8 +1465,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginenodenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginenodenum_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Node<wbr>Num</a>
@@ -1187,8 +1473,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineregioninfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregioninfos_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region<wbr>Infos</a>
@@ -1196,8 +1481,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfo">[]Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineresourcespec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineresourcespec_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Resource<wbr>Spec</a>
@@ -1205,8 +1489,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1214,8 +1497,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1223,8 +1505,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1232,17 +1513,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1250,8 +1529,133 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="engine_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_name_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_product_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_type_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
+            title="Required">
+        <span id="trade_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_type_hcl" style="color: inherit; text-decoration: inherit;">trade_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_client_internet_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_client_internet_access_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>client_<wbr>internet_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_node_num_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_region_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_infos_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>region_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">list(object)</a></span>
+    </dt>
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_resource_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_resource_spec_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>resource_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1265,8 +1669,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-required"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
             title="Required">
         <span id="engineproductversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineproductversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Product<wbr>Version</a>
@@ -1274,8 +1677,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-required"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -1283,8 +1685,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
             title="Required">
         <span id="enginetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1292,8 +1693,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1301,8 +1701,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-required"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_java" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -1310,8 +1709,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableclientinternetaccess_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableclientinternetaccess_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Client<wbr>Internet<wbr>Access</a>
@@ -1319,8 +1717,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginenodenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginenodenum_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Node<wbr>Num</a>
@@ -1328,17 +1725,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineregioninfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregioninfos_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Region<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Instance<wbr>Engine<wbr>Region<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineresourcespec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineresourcespec_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Resource<wbr>Spec</a>
@@ -1346,8 +1741,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1355,8 +1749,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1364,8 +1757,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1373,17 +1765,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1391,8 +1781,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1406,8 +1795,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-required"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
             title="Required">
         <span id="engineproductversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineproductversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Product<wbr>Version</a>
@@ -1415,8 +1803,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-required"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -1424,8 +1811,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
             title="Required">
         <span id="enginetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1433,8 +1819,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1442,8 +1827,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-required"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_nodejs" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -1451,8 +1835,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableclientinternetaccess_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableclientinternetaccess_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Client<wbr>Internet<wbr>Access</a>
@@ -1460,8 +1843,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginenodenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginenodenum_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Node<wbr>Num</a>
@@ -1469,17 +1851,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineregioninfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregioninfos_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Region<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineresourcespec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineresourcespec_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Resource<wbr>Spec</a>
@@ -1487,8 +1867,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1496,8 +1875,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1505,8 +1883,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1514,17 +1891,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1532,8 +1907,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1547,8 +1921,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-required"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
             title="Required">
         <span id="engine_product_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_product_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>product_<wbr>version</a>
@@ -1556,8 +1929,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-required"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engine_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
@@ -1565,8 +1937,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_type_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
@@ -1574,8 +1945,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -1583,8 +1953,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-required"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
             title="Required">
         <span id="trade_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_type_python" style="color: inherit; text-decoration: inherit;">trade_<wbr>type</a>
@@ -1592,8 +1961,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_client_internet_access_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_client_internet_access_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>client_<wbr>internet_<wbr>access</a>
@@ -1601,8 +1969,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_node_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_node_num_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>node_<wbr>num</a>
@@ -1610,17 +1977,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_region_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_infos_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>region_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">Sequence[Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_resource_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_resource_spec_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>resource_<wbr>spec</a>
@@ -1628,8 +1993,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1637,8 +2001,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -1646,8 +2009,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1655,17 +2017,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1673,8 +2033,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1688,8 +2047,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-required"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-required"
             title="Required">
         <span id="engineproductversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineproductversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Product<wbr>Version</a>
@@ -1697,8 +2055,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-required"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -1706,8 +2063,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-required"
             title="Required">
         <span id="enginetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1715,8 +2071,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-required"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1724,8 +2079,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-required"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_yaml" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -1733,8 +2087,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableclientinternetaccess_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableclientinternetaccess_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Client<wbr>Internet<wbr>Access</a>
@@ -1742,8 +2095,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginenodenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginenodenum_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Node<wbr>Num</a>
@@ -1751,8 +2103,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineregioninfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregioninfos_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Region<wbr>Infos</a>
@@ -1760,8 +2111,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineresourcespec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineresourcespec_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Resource<wbr>Spec</a>
@@ -1769,8 +2119,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1778,8 +2127,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1787,8 +2135,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1796,17 +2143,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1814,8 +2159,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1836,8 +2180,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1851,8 +2194,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1866,8 +2222,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1881,8 +2236,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1896,8 +2250,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1911,8 +2264,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1922,18 +2274,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1942,114 +2294,153 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">engine_node_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">engine_product_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">engine_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">engine_region_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tse.InstanceEngineRegionInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">engine_region_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceEngineRegionInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">engine_resource_spec</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">engine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">trade_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tse:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tse_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2057,28 +2448,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2086,28 +2480,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2127,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginename_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Name</a>
@@ -2136,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-optional"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginenodenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginenodenum_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Node<wbr>Num</a>
@@ -2145,8 +2540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineproductversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineproductversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Product<wbr>Version</a>
@@ -2154,8 +2548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region</a>
@@ -2163,17 +2556,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregioninfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregioninfos_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Instance<wbr>Engine<wbr>Region<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineresourcespec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineresourcespec_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Resource<wbr>Spec</a>
@@ -2181,8 +2572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -2190,8 +2580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2199,8 +2588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-optional"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2208,8 +2596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2217,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2226,17 +2612,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tradetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tradetype_csharp" style="color: inherit; text-decoration: inherit;">Trade<wbr>Type</a>
@@ -2244,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2253,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2268,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginename_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Name</a>
@@ -2277,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-optional"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginenodenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginenodenum_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Node<wbr>Num</a>
@@ -2286,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineproductversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineproductversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Product<wbr>Version</a>
@@ -2295,8 +2674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region</a>
@@ -2304,8 +2682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregioninfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregioninfos_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region<wbr>Infos</a>
@@ -2313,8 +2690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfo">[]Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineresourcespec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineresourcespec_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Resource<wbr>Spec</a>
@@ -2322,8 +2698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -2331,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2340,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-optional"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2349,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2358,8 +2730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2367,17 +2738,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tradetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tradetype_go" style="color: inherit; text-decoration: inherit;">Trade<wbr>Type</a>
@@ -2385,8 +2754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2394,8 +2762,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_client_internet_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_client_internet_access_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>client_<wbr>internet_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_name_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_node_num_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_product_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_region_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_region_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_region_infos_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>region_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">list(object)</a></span>
+    </dt>
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_resource_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_resource_spec_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>resource_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_type_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_trade_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trade_type_hcl" style="color: inherit; text-decoration: inherit;">trade_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2409,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginename_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Name</a>
@@ -2418,8 +2910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-optional"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginenodenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginenodenum_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Node<wbr>Num</a>
@@ -2427,8 +2918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineproductversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineproductversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Product<wbr>Version</a>
@@ -2436,8 +2926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -2445,17 +2934,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregioninfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregioninfos_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Region<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Instance<wbr>Engine<wbr>Region<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineresourcespec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineresourcespec_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Resource<wbr>Spec</a>
@@ -2463,8 +2950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -2472,8 +2958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2481,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-optional"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2490,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2499,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2508,17 +2990,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tradetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tradetype_java" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -2526,8 +3006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2535,8 +3014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2550,8 +3028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginename_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Name</a>
@@ -2559,8 +3036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-optional"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginenodenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginenodenum_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Node<wbr>Num</a>
@@ -2568,8 +3044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineproductversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineproductversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Product<wbr>Version</a>
@@ -2577,8 +3052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -2586,17 +3060,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregioninfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregioninfos_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Region<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineresourcespec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineresourcespec_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Resource<wbr>Spec</a>
@@ -2604,8 +3076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -2613,8 +3084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2622,8 +3092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-optional"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2631,8 +3100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2640,8 +3108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2649,17 +3116,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tradetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tradetype_nodejs" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -2667,8 +3132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2676,8 +3140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2691,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_name_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>name</a>
@@ -2700,8 +3162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-optional"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_node_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_node_num_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>node_<wbr>num</a>
@@ -2709,8 +3170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_product_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_product_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>product_<wbr>version</a>
@@ -2718,8 +3178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_region_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
@@ -2727,17 +3186,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_region_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_region_infos_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>region_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfo">Sequence[Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_resource_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_resource_spec_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>resource_<wbr>spec</a>
@@ -2745,8 +3202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_type_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
@@ -2754,8 +3210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -2763,8 +3218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-optional"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -2772,8 +3226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -2781,8 +3234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2790,17 +3242,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trade_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trade_type_python" style="color: inherit; text-decoration: inherit;">trade_<wbr>type</a>
@@ -2808,8 +3258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2817,8 +3266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2832,8 +3280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</p>
-</dd><dt class="property-optional"
+    <dd>Client public network access, <code>true</code>: on, <code>false</code>: off, default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginename_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Name</a>
@@ -2841,8 +3288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engien name. Reference value: nacos-test.</p>
-</dd><dt class="property-optional"
+    <dd>engien name. Reference value: nacos-test.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginenodenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginenodenum_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Node<wbr>Num</a>
@@ -2850,8 +3296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>engine node num. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine node num. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineproductversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineproductversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Product<wbr>Version</a>
@@ -2859,8 +3304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Engine product version. Reference value: <code>Nacos</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Zookeeper</code>: <code>TRIAL</code>: Development version, optional node num: <code>1</code>, optional spec list: <code>1C1G</code>; <code>STANDARD</code>: Standard versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>; <code>PROFESSIONAL</code>: professional versions, optional node num: <code>3</code>, <code>5</code>, <code>7</code>, optional spec list: <code>1C2G</code>, <code>2C4G</code>, <code>4C8G</code>, <code>8C16G</code>, <code>16C32G</code>. <code>Polarismesh</code>: <code>BASE</code>: Base version, optional node num: <code>1</code>, optional spec list: <code>NUM50</code>; <code>PROFESSIONAL</code>: Enterprise versions, optional node num: <code>2</code>, <code>3</code>, optional spec list: <code>NUM50</code>, <code>NUM100</code>, <code>NUM200</code>, <code>NUM500</code>, <code>NUM1000</code>, <code>NUM5000</code>, <code>NUM10000</code>, <code>NUM50000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -2868,8 +3312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine deploy region. Reference value: <code>China area</code> Reference value: <code>ap-guangzhou</code>, <code>ap-beijing</code>, <code>ap-chengdu</code>, <code>ap-chongqing</code>, <code>ap-nanjing</code>, <code>ap-shanghai</code> <code>ap-beijing-fsi</code>, <code>ap-shanghai-fsi</code>, <code>ap-shenzhen-fsi</code>. <code>Asia Pacific</code> area Reference value: <code>ap-hongkong</code>, <code>ap-taipei</code>, <code>ap-jakarta</code>, <code>ap-singapore</code>, <code>ap-bangkok</code>, <code>ap-seoul</code>, <code>ap-tokyo</code>. <code>North America area</code> Reference value: <code>na-toronto</code>, <code>sa-saopaulo</code>, <code>na-siliconvalley</code>, <code>na-ashburn</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineregioninfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineregioninfos_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Region<wbr>Infos</a>
@@ -2877,8 +3320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineresourcespec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineresourcespec_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Resource<wbr>Spec</a>
@@ -2886,8 +3328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine spec ID. see EngineProductVersion.</p>
-</dd><dt class="property-optional"
+    <dd>engine spec ID. see EngineProductVersion.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -2895,8 +3336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</p>
-</dd><dt class="property-optional"
+    <dd>engine type. Reference value: <code>zookeeper</code>, <code>nacos</code>, <code>polaris</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2904,8 +3344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</p>
-</dd><dt class="property-optional"
+    <dd>An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2913,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Prepaid time, in monthly units.</p>
-</dd><dt class="property-optional"
+    <dd>Prepaid time, in monthly units.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2922,8 +3360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal mark, prepaid only.  Reference value: <code>0</code>: No automatic renewal, <code>1</code>: Automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2931,17 +3368,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</p>
-</dd><dt class="property-optional"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tradetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tradetype_yaml" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -2949,8 +3384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</p>
-</dd><dt class="property-optional"
+    <dd>trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2958,8 +3392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</p>
-</dd></dl>
+    <dd>VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2974,7 +3407,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instanceengineregioninfo">Instance<wbr>Engine<wbr>Region<wbr>Info</h4>
+<h4 id="instanceengineregioninfo">
+Instance<wbr>Engine<wbr>Region<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2986,8 +3421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine node region.</p>
-</dd><dt class="property-required"
+    <dd>Engine node region.</dd><dt class="property-required"
             title="Required">
         <span id="replica_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_csharp" style="color: inherit; text-decoration: inherit;">Replica</a>
@@ -2995,8 +3429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of nodes allocated in this region.</p>
-</dd><dt class="property-required"
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
             title="Required">
         <span id="vpcinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcinfos_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Infos</a>
@@ -3004,8 +3437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfovpcinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Cluster network information.</p>
-</dd></dl>
+    <dd>Cluster network information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3019,8 +3451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine node region.</p>
-</dd><dt class="property-required"
+    <dd>Engine node region.</dd><dt class="property-required"
             title="Required">
         <span id="replica_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_go" style="color: inherit; text-decoration: inherit;">Replica</a>
@@ -3028,8 +3459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of nodes allocated in this region.</p>
-</dd><dt class="property-required"
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
             title="Required">
         <span id="vpcinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcinfos_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Infos</a>
@@ -3037,8 +3467,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfovpcinfo">[]Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info</a></span>
     </dt>
-    <dd><p>Cluster network information.</p>
-</dd></dl>
+    <dd>Cluster network information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="engine_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Engine node region.</dd><dt class="property-required"
+            title="Required">
+        <span id="replica_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_hcl" style="color: inherit; text-decoration: inherit;">replica</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_infos_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceengineregioninfovpcinfo">list(object)</a></span>
+    </dt>
+    <dd>Cluster network information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3052,8 +3511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Engine node region.</p>
-</dd><dt class="property-required"
+    <dd>Engine node region.</dd><dt class="property-required"
             title="Required">
         <span id="replica_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_java" style="color: inherit; text-decoration: inherit;">replica</a>
@@ -3061,8 +3519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of nodes allocated in this region.</p>
-</dd><dt class="property-required"
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
             title="Required">
         <span id="vpcinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcinfos_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Infos</a>
@@ -3070,8 +3527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfovpcinfo">List&lt;Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Cluster network information.</p>
-</dd></dl>
+    <dd>Cluster network information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3085,8 +3541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Engine node region.</p>
-</dd><dt class="property-required"
+    <dd>Engine node region.</dd><dt class="property-required"
             title="Required">
         <span id="replica_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_nodejs" style="color: inherit; text-decoration: inherit;">replica</a>
@@ -3094,8 +3549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of nodes allocated in this region.</p>
-</dd><dt class="property-required"
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
             title="Required">
         <span id="vpcinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcinfos_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Infos</a>
@@ -3103,8 +3557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfovpcinfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Cluster network information.</p>
-</dd></dl>
+    <dd>Cluster network information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3118,8 +3571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Engine node region.</p>
-</dd><dt class="property-required"
+    <dd>Engine node region.</dd><dt class="property-required"
             title="Required">
         <span id="replica_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_python" style="color: inherit; text-decoration: inherit;">replica</a>
@@ -3127,17 +3579,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of nodes allocated in this region.</p>
-</dd><dt class="property-required"
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_infos_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceengineregioninfovpcinfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info]</a></span>
+        <span class="property-type"><a href="#instanceengineregioninfovpcinfo">Sequence[Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info]</a></span>
     </dt>
-    <dd><p>Cluster network information.</p>
-</dd></dl>
+    <dd>Cluster network information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3151,8 +3601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Engine node region.</p>
-</dd><dt class="property-required"
+    <dd>Engine node region.</dd><dt class="property-required"
             title="Required">
         <span id="replica_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_yaml" style="color: inherit; text-decoration: inherit;">replica</a>
@@ -3160,8 +3609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of nodes allocated in this region.</p>
-</dd><dt class="property-required"
+    <dd>The number of nodes allocated in this region.</dd><dt class="property-required"
             title="Required">
         <span id="vpcinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcinfos_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Infos</a>
@@ -3169,12 +3617,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceengineregioninfovpcinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Cluster network information.</p>
-</dd></dl>
+    <dd>Cluster network information.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instanceengineregioninfovpcinfo">Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info</h4>
+<h4 id="instanceengineregioninfovpcinfo">
+Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Engine<wbr>Region<wbr>Info<wbr>Vpc<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3186,8 +3635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>Subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3195,8 +3643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc Id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetaddress_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Address</a>
@@ -3204,8 +3651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</p>
-</dd></dl>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3219,8 +3665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>Subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3228,8 +3673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc Id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetaddress_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Address</a>
@@ -3237,8 +3681,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</p>
-</dd></dl>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intranet_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_address_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3252,8 +3725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>Subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3261,8 +3733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc Id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetaddress_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Address</a>
@@ -3270,8 +3741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</p>
-</dd></dl>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3285,8 +3755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>Subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3294,8 +3763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc Id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetaddress_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Address</a>
@@ -3303,8 +3771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</p>
-</dd></dl>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3318,8 +3785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>Subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3327,8 +3793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc Id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranet_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_address_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>address</a>
@@ -3336,8 +3801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</p>
-</dd></dl>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3351,8 +3815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>Subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3360,8 +3823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc Id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetaddress_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Address</a>
@@ -3369,8 +3831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</p>
-</dd></dl>
+    <dd>Intranet access addressNote: This field may return null, indicating that a valid value is not available..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3386,6 +3847,9 @@ $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3395,7 +3859,6 @@ $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

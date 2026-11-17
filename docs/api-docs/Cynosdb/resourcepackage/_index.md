@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Cynosdb.ResourcePackage"
 meta_desc: "Documentation for the tencentcloud.Cynosdb.ResourcePackage resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,67 +18,82 @@ no_edit_this_page: true
 
 
 ## Create ResourcePackage Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                     <span class="nx">expire_day</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">package_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                    <span class="nx">package_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">package_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">package_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
                     <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">package_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">package_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">package_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewResourcePackage</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ResourcePackage</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewResourcePackage</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ResourcePackage</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ResourcePackage</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourcePackageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:ResourcePackage</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:ResourcePackage</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cynosdb_resource_package&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -97,7 +114,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -214,11 +231,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## ResourcePackage Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ResourcePackage resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -234,8 +259,7 @@ The ResourcePackage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-required"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -243,8 +267,7 @@ The ResourcePackage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-required"
+    <dd>Instance Type.</dd><dt class="property-required"
             title="Required">
         <span id="packagecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagecount_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Count</a>
@@ -252,8 +275,7 @@ The ResourcePackage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-required"
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
             title="Required">
         <span id="packageregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageregion_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Region</a>
@@ -261,9 +283,7 @@ The ResourcePackage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-required"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
             title="Required">
         <span id="packagespec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagespec_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Spec</a>
@@ -271,8 +291,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-required"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
             title="Required">
         <span id="packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -280,8 +299,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-required"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
             title="Required">
         <span id="packageversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageversion_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Version</a>
@@ -289,8 +307,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagename_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Name</a>
@@ -298,8 +315,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd></dl>
+    <dd>Resource Package Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -313,8 +329,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-required"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -322,8 +337,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-required"
+    <dd>Instance Type.</dd><dt class="property-required"
             title="Required">
         <span id="packagecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagecount_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Count</a>
@@ -331,8 +345,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-required"
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
             title="Required">
         <span id="packageregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageregion_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Region</a>
@@ -340,9 +353,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-required"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
             title="Required">
         <span id="packagespec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagespec_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Spec</a>
@@ -350,8 +361,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-required"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
             title="Required">
         <span id="packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -359,8 +369,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-required"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
             title="Required">
         <span id="packageversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageversion_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Version</a>
@@ -368,8 +377,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagename_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Name</a>
@@ -377,8 +385,77 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd></dl>
+    <dd>Resource Package Name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="expire_day_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_day_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>day</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Type.</dd><dt class="property-required"
+            title="Required">
+        <span id="package_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_count_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
+            title="Required">
+        <span id="package_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_region_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
+            title="Required">
+        <span id="package_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_spec_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
+            title="Required">
+        <span id="package_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_version_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="package_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_name_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource Package Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -392,8 +469,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-required"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -401,8 +477,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-required"
+    <dd>Instance Type.</dd><dt class="property-required"
             title="Required">
         <span id="packagecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagecount_java" style="color: inherit; text-decoration: inherit;">package<wbr>Count</a>
@@ -410,8 +485,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-required"
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
             title="Required">
         <span id="packageregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageregion_java" style="color: inherit; text-decoration: inherit;">package<wbr>Region</a>
@@ -419,9 +493,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-required"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
             title="Required">
         <span id="packagespec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagespec_java" style="color: inherit; text-decoration: inherit;">package<wbr>Spec</a>
@@ -429,8 +501,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-required"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
             title="Required">
         <span id="packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -438,8 +509,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-required"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
             title="Required">
         <span id="packageversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageversion_java" style="color: inherit; text-decoration: inherit;">package<wbr>Version</a>
@@ -447,8 +517,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagename_java" style="color: inherit; text-decoration: inherit;">package<wbr>Name</a>
@@ -456,8 +525,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd></dl>
+    <dd>Resource Package Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -471,8 +539,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-required"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -480,8 +547,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-required"
+    <dd>Instance Type.</dd><dt class="property-required"
             title="Required">
         <span id="packagecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagecount_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Count</a>
@@ -489,8 +555,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-required"
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
             title="Required">
         <span id="packageregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageregion_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Region</a>
@@ -498,9 +563,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-required"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
             title="Required">
         <span id="packagespec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagespec_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Spec</a>
@@ -508,8 +571,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-required"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
             title="Required">
         <span id="packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -517,8 +579,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-required"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
             title="Required">
         <span id="packageversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageversion_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Version</a>
@@ -526,8 +587,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagename_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Name</a>
@@ -535,8 +595,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd></dl>
+    <dd>Resource Package Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,8 +609,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-required"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -559,8 +617,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-required"
+    <dd>Instance Type.</dd><dt class="property-required"
             title="Required">
         <span id="package_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_count_python" style="color: inherit; text-decoration: inherit;">package_<wbr>count</a>
@@ -568,8 +625,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-required"
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
             title="Required">
         <span id="package_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_region_python" style="color: inherit; text-decoration: inherit;">package_<wbr>region</a>
@@ -577,9 +633,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-required"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
             title="Required">
         <span id="package_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_spec_python" style="color: inherit; text-decoration: inherit;">package_<wbr>spec</a>
@@ -587,8 +641,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-required"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
             title="Required">
         <span id="package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -596,8 +649,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-required"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
             title="Required">
         <span id="package_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_version_python" style="color: inherit; text-decoration: inherit;">package_<wbr>version</a>
@@ -605,8 +657,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
             title="Optional">
         <span id="package_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_name_python" style="color: inherit; text-decoration: inherit;">package_<wbr>name</a>
@@ -614,8 +665,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd></dl>
+    <dd>Resource Package Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -629,8 +679,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-required"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -638,8 +687,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-required"
+    <dd>Instance Type.</dd><dt class="property-required"
             title="Required">
         <span id="packagecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagecount_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Count</a>
@@ -647,8 +695,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-required"
+    <dd>Number of purchased resource packs.</dd><dt class="property-required"
             title="Required">
         <span id="packageregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageregion_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Region</a>
@@ -656,9 +703,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-required"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-required"
             title="Required">
         <span id="packagespec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagespec_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Spec</a>
@@ -666,8 +711,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-required"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-required"
             title="Required">
         <span id="packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -675,8 +719,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-required"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-required"
             title="Required">
         <span id="packageversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packageversion_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Version</a>
@@ -684,8 +727,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagename_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Name</a>
@@ -693,8 +735,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd></dl>
+    <dd>Resource Package Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -715,8 +756,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -730,8 +770,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,8 +798,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -760,8 +812,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -775,8 +826,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -790,8 +840,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -801,18 +850,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ResourcePackage resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ResourcePackageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ResourcePackage</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ResourcePackageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ResourcePackage</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -824,104 +873,143 @@ Get an existing ResourcePackage resource's state with the given name, ID, and op
         <span class="nx">package_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">package_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ResourcePackage</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetResourcePackage<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ResourcePackageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ResourcePackage</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetResourcePackage<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ResourcePackageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ResourcePackage</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ResourcePackage</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourcePackageState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ResourcePackage</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourcePackageState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ResourcePackage</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourcePackageState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ResourcePackage</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourcePackageState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingResourcePackage</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cynosdb:ResourcePackage</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cynosdb_resource_package</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourcePackageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourcePackageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -929,28 +1017,31 @@ Get an existing ResourcePackage resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourcePackageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -958,28 +1049,31 @@ Get an existing ResourcePackage resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourcePackageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -999,8 +1093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-optional"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1008,8 +1101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagecount_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Count</a>
@@ -1017,8 +1109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagename_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Name</a>
@@ -1026,8 +1117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Package Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageregion_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Region</a>
@@ -1035,9 +1125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagespec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagespec_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Spec</a>
@@ -1045,8 +1133,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -1054,8 +1141,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageversion_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Version</a>
@@ -1063,8 +1149,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd></dl>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1163,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-optional"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1087,8 +1171,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagecount_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Count</a>
@@ -1096,8 +1179,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagename_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Name</a>
@@ -1105,8 +1187,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Package Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageregion_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Region</a>
@@ -1114,9 +1195,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagespec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagespec_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Spec</a>
@@ -1124,8 +1203,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -1133,8 +1211,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageversion_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Version</a>
@@ -1142,8 +1219,77 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd></dl>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_expire_day_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expire_day_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>day</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_count_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_name_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource Package Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_region_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_spec_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_version_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1303,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-optional"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1166,8 +1311,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagecount_java" style="color: inherit; text-decoration: inherit;">package<wbr>Count</a>
@@ -1175,8 +1319,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagename_java" style="color: inherit; text-decoration: inherit;">package<wbr>Name</a>
@@ -1184,8 +1327,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Package Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageregion_java" style="color: inherit; text-decoration: inherit;">package<wbr>Region</a>
@@ -1193,9 +1335,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagespec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagespec_java" style="color: inherit; text-decoration: inherit;">package<wbr>Spec</a>
@@ -1203,8 +1343,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1212,8 +1351,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageversion_java" style="color: inherit; text-decoration: inherit;">package<wbr>Version</a>
@@ -1221,8 +1359,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd></dl>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1236,8 +1373,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-optional"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1245,8 +1381,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagecount_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Count</a>
@@ -1254,8 +1389,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagename_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Name</a>
@@ -1263,8 +1397,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Package Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageregion_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Region</a>
@@ -1272,9 +1405,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagespec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagespec_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Spec</a>
@@ -1282,8 +1413,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1291,8 +1421,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageversion_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Version</a>
@@ -1300,8 +1429,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd></dl>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1315,8 +1443,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-optional"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1324,8 +1451,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_count_python" style="color: inherit; text-decoration: inherit;">package_<wbr>count</a>
@@ -1333,8 +1459,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_name_python" style="color: inherit; text-decoration: inherit;">package_<wbr>name</a>
@@ -1342,8 +1467,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Package Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_region_python" style="color: inherit; text-decoration: inherit;">package_<wbr>region</a>
@@ -1351,9 +1475,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_spec_python" style="color: inherit; text-decoration: inherit;">package_<wbr>spec</a>
@@ -1361,8 +1483,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -1370,8 +1491,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_version_python" style="color: inherit; text-decoration: inherit;">package_<wbr>version</a>
@@ -1379,8 +1499,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd></dl>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,8 +1513,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Validity period of resource package, in days.</p>
-</dd><dt class="property-optional"
+    <dd>Validity period of resource package, in days.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1403,8 +1521,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Type.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagecount_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Count</a>
@@ -1412,8 +1529,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of purchased resource packs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of purchased resource packs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagename_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Name</a>
@@ -1421,8 +1537,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Package Name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Package Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageregion_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Region</a>
@@ -1430,9 +1545,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and
-overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagespec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagespec_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Spec</a>
@@ -1440,8 +1553,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Resource package size, calculated in 10000 units; Storage resources: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package size, calculated in 10000 units; Storage resources: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1449,8 +1561,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package type: CCU computing resource package, DISK storage resource package.</p>
-</dd><dt class="property-optional"
+    <dd>Resource package type: CCU computing resource package, DISK storage resource package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packageversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packageversion_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Version</a>
@@ -1458,8 +1569,7 @@ overseas.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource package version base basic version, common general version, enterprise enterprise version.</p>
-</dd></dl>
+    <dd>Resource package version base basic version, common general version, enterprise enterprise version.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1478,7 +1588,6 @@ overseas.</p>
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

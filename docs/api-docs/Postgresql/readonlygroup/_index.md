@@ -2,9 +2,11 @@
 ---
 title: "ReadonlyGroup"
 title_tag: "tencentcloud.Postgresql.ReadonlyGroup"
-meta_desc: "Documentation for the tencentcloud.Postgresql.ReadonlyGroup resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create postgresql readonly group."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,81 +18,227 @@ Use this resource to create postgresql readonly group.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const group = new tencentcloud.postgresql.ReadonlyGroup("group", {
-    masterDbInstanceId: "postgres-gzg9jb2n",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
+// create vpc subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    vpcId: vpc.id,
+    cidrBlock: "10.0.20.0/28",
+    isMulticast: false,
+});
+// create postgresql
+const example = new tencentcloud.postgresql.Instance("example", {
+    name: "example",
+    availabilityZone: availabilityZone,
+    chargeType: "POSTPAID_BY_HOUR",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    engineVersion: "10.4",
+    rootUser: "root123",
+    rootPassword: "Root123$",
+    charset: "UTF8",
+    projectId: 0,
+    memory: 4,
+    cpu: 2,
+    storage: 50,
+    tags: {
+        test: "tf",
+    },
+});
+// create security group
+const exampleGroup = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
+    projectId: 0,
+    tags: {
+        example: "test",
+    },
+});
+const exampleReadonlyGroup = new tencentcloud.postgresql.ReadonlyGroup("example", {
+    masterDbInstanceId: example.id,
+    name: "tf_ro_group",
+    projectId: 0,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    securityGroupsIds: [exampleGroup.id],
+    replayLagEliminate: 1,
+    replayLatencyEliminate: 1,
     maxReplayLag: 100,
     maxReplayLatency: 512,
     minDelayEliminateReserve: 1,
-    projectId: 0,
-    replayLagEliminate: 1,
-    replayLatencyEliminate: 1,
-    subnetId: "subnet-enm92y0m",
-    vpcId: "vpc-86v957zb",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-group = tencentcloud.postgresql.ReadonlyGroup("group",
-    master_db_instance_id="postgres-gzg9jb2n",
-    max_replay_lag=100,
-    max_replay_latency=512,
-    min_delay_eliminate_reserve=1,
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-3"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
+# create vpc subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    availability_zone=availability_zone,
+    name="subnet",
+    vpc_id=vpc.id,
+    cidr_block="10.0.20.0/28",
+    is_multicast=False)
+# create postgresql
+example = tencentcloud.postgresql.Instance("example",
+    name="example",
+    availability_zone=availability_zone,
+    charge_type="POSTPAID_BY_HOUR",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    engine_version="10.4",
+    root_user="root123",
+    root_password="Root123$",
+    charset="UTF8",
     project_id=0,
+    memory=4,
+    cpu=2,
+    storage=50,
+    tags={
+        "test": "tf",
+    })
+# create security group
+example_group = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
+    project_id=0,
+    tags={
+        "example": "test",
+    })
+example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("example",
+    master_db_instance_id=example.id,
+    name="tf_ro_group",
+    project_id=0,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    security_groups_ids=[example_group.id],
     replay_lag_eliminate=1,
     replay_latency_eliminate=1,
-    subnet_id="subnet-enm92y0m",
-    vpc_id="vpc-86v957zb")
+    max_replay_lag=100,
+    max_replay_latency=512,
+    min_delay_eliminate_reserve=1)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new()
-    {
-        MasterDbInstanceId = "postgres-gzg9jb2n",
-        MaxReplayLag = 100,
-        MaxReplayLatency = 512,
-        MinDelayEliminateReserve = 1,
-        ProjectId = 0,
-        ReplayLagEliminate = 1,
-        ReplayLatencyEliminate = 1,
-        SubnetId = "subnet-enm92y0m",
-        VpcId = "vpc-86v957zb",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-			MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create vpc subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create postgresql
+		example, err := postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:             pulumi.String("example"),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			EngineVersion:    pulumi.String("10.4"),
+			RootUser:         pulumi.String("root123"),
+			RootPassword:     pulumi.String("Root123$"),
+			Charset:          pulumi.String("UTF8"),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(4),
+			Cpu:              pulumi.Int(2),
+			Storage:          pulumi.Int(50),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("tf"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		exampleGroup, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = postgresql.NewReadonlyGroup(ctx, "example", &postgresql.ReadonlyGroupArgs{
+			MasterDbInstanceId: example.ID().ToIDOutput().ToStringOutput(),
+			Name:               pulumi.String("tf_ro_group"),
+			ProjectId:          pulumi.Int(0),
+			VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroupsIds: pulumi.StringArray{
+				exampleGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			ReplayLagEliminate:       pulumi.Int(1),
+			ReplayLatencyEliminate:   pulumi.Int(1),
 			MaxReplayLag:             pulumi.Int(100),
 			MaxReplayLatency:         pulumi.Int(512),
 			MinDelayEliminateReserve: pulumi.Int(1),
-			ProjectId:                pulumi.Int(0),
-			ReplayLagEliminate:       pulumi.Int(1),
-			ReplayLatencyEliminate:   pulumi.Int(1),
-			SubnetId:                 pulumi.String("subnet-enm92y0m"),
-			VpcId:                    pulumi.String("vpc-86v957zb"),
 		})
 		if err != nil {
 			return err
@@ -99,16 +247,109 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    // create vpc subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.20.0/28",
+        IsMulticast = false,
+    });
+
+    // create postgresql
+    var example = new Tencentcloud.Postgresql.Instance("example", new()
+    {
+        Name = "example",
+        AvailabilityZone = availabilityZone,
+        ChargeType = "POSTPAID_BY_HOUR",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        EngineVersion = "10.4",
+        RootUser = "root123",
+        RootPassword = "Root123$",
+        Charset = "UTF8",
+        ProjectId = 0,
+        Memory = 4,
+        Cpu = 2,
+        Storage = 50,
+        Tags = 
+        {
+            { "test", "tf" },
+        },
+    });
+
+    // create security group
+    var exampleGroup = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    var exampleReadonlyGroup = new Tencentcloud.Postgresql.ReadonlyGroup("example", new()
+    {
+        MasterDbInstanceId = example.Id,
+        Name = "tf_ro_group",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        SecurityGroupsIds = new[]
+        {
+            exampleGroup.Id,
+        },
+        ReplayLagEliminate = 1,
+        ReplayLatencyEliminate = 1,
+        MaxReplayLag = 100,
+        MaxReplayLatency = 512,
+        MinDelayEliminateReserve = 1,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Postgresql.ReadonlyGroup;
 import com.pulumi.tencentcloud.Postgresql.ReadonlyGroupArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -120,106 +361,314 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var group = new ReadonlyGroup("group", ReadonlyGroupArgs.builder()        
-            .masterDbInstanceId("postgres-gzg9jb2n")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        // create vpc subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .vpcId(vpc.id())
+            .cidrBlock("10.0.20.0/28")
+            .isMulticast(false)
+            .build());
+
+        // create postgresql
+        var example = new com.pulumi.tencentcloud.Postgresql.Instance("example", com.pulumi.tencentcloud.Postgresql.InstanceArgs.builder()
+            .name("example")
+            .availabilityZone(availabilityZone)
+            .chargeType("POSTPAID_BY_HOUR")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .engineVersion("10.4")
+            .rootUser("root123")
+            .rootPassword("Root123$")
+            .charset("UTF8")
+            .projectId(0)
+            .memory(4)
+            .cpu(2)
+            .storage(50)
+            .tags(Map.of("test", "tf"))
+            .build());
+
+        // create security group
+        var exampleGroup = new Group("exampleGroup", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        var exampleReadonlyGroup = new ReadonlyGroup("exampleReadonlyGroup", ReadonlyGroupArgs.builder()
+            .masterDbInstanceId(example.id())
+            .name("tf_ro_group")
+            .projectId(0)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .securityGroupsIds(exampleGroup.id())
+            .replayLagEliminate(1)
+            .replayLatencyEliminate(1)
             .maxReplayLag(100)
             .maxReplayLatency(512)
             .minDelayEliminateReserve(1)
-            .projectId(0)
-            .replayLagEliminate(1)
-            .replayLatencyEliminate(1)
-            .subnetId("subnet-enm92y0m")
-            .vpcId("vpc-86v957zb")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-3
 resources:
-  group:
-    type: tencentcloud:Postgresql:ReadonlyGroup
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
     properties:
-      masterDbInstanceId: postgres-gzg9jb2n
+      name: vpc
+      cidrBlock: 10.0.0.0/16
+  # create vpc subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      vpcId: ${vpc.id}
+      cidrBlock: 10.0.20.0/28
+      isMulticast: false
+  # create postgresql
+  example:
+    type: tencentcloud:Postgresql:Instance
+    properties:
+      name: example
+      availabilityZone: ${availabilityZone}
+      chargeType: POSTPAID_BY_HOUR
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      engineVersion: '10.4'
+      rootUser: root123
+      rootPassword: Root123$
+      charset: UTF8
+      projectId: 0
+      memory: 4
+      cpu: 2
+      storage: 50
+      tags:
+        test: tf
+  # create security group
+  exampleGroup:
+    type: tencentcloud:Security:Group
+    name: example
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  exampleReadonlyGroup:
+    type: tencentcloud:Postgresql:ReadonlyGroup
+    name: example
+    properties:
+      masterDbInstanceId: ${example.id}
+      name: tf_ro_group
+      projectId: 0
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      securityGroupsIds:
+        - ${exampleGroup.id}
+      replayLagEliminate: 1
+      replayLatencyEliminate: 1
       maxReplayLag: 100
       maxReplayLatency: 512
       minDelayEliminateReserve: 1
-      projectId: 0
-      replayLagEliminate: 1
-      replayLatencyEliminate: 1
-      subnetId: subnet-enm92y0m
-      vpcId: vpc-86v957zb
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create vpc subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create postgresql
+resource "tencentcloud_postgresql_instance" "example" {
+  name              = "example"
+  availability_zone = var.availabilityZone
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  engine_version    = "10.4"
+  root_user         = "root123"
+  root_password     = "Root123$"
+  charset           = "UTF8"
+  project_id        = 0
+  memory            = 4
+  cpu               = 2
+  storage           = 50
+  tags = {
+    "test" = "tf"
+  }
+}
+# create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+resource "tencentcloud_postgresql_readonlygroup" "example" {
+  master_db_instance_id       = tencentcloud_postgresql_instance.example.id
+  name                        = "tf_ro_group"
+  project_id                  = 0
+  vpc_id                      = tencentcloud_vpc_instance.vpc.id
+  subnet_id                   = tencentcloud_subnet_instance.subnet.id
+  security_groups_ids         = [tencentcloud_security_group.example.id]
+  replay_lag_eliminate        = 1
+  replay_latency_eliminate    = 1
+  max_replay_lag              = 100
+  max_replay_latency          = 512
+  min_delay_eliminate_reserve = 1
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
 
 
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39727)
+  - [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+* Read:
+  - [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+  - [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+* Update:
+  - [CreateReadOnlyGroupNetworkAccess](https://www.tencentcloud.com/document/api/409/45950)
+  - [DeleteReadOnlyGroupNetworkAccess](https://www.tencentcloud.com/document/api/409/45948)
+  - [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+  - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+  - [ModifyReadOnlyGroupConfig](https://www.tencentcloud.com/document/api/409/39723)
+* Delete: [DeleteReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39726)
 
 
 ## Create ReadonlyGroup Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                   <span class="nx">master_db_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">max_replay_lag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">max_replay_latency</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">min_delay_eliminate_reserve</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">replay_lag_eliminate</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">replay_latency_eliminate</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">security_groups_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                   <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">security_groups_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReadonlyGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReadonlyGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ReadonlyGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Postgresql:ReadonlyGroup</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Postgresql:ReadonlyGroup</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_postgresql_readonly_group&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -240,7 +689,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -357,11 +806,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ReadonlyGroup Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -377,8 +834,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Primary instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylag_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Lag</a>
@@ -386,8 +842,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-required"
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylatency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylatency_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Latency</a>
@@ -395,8 +850,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-required"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
             title="Required">
         <span id="mindelayeliminatereserve_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindelayeliminatereserve_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -404,8 +858,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -413,8 +866,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="replaylageliminate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylageliminate_csharp" style="color: inherit; text-decoration: inherit;">Replay<wbr>Lag<wbr>Eliminate</a>
@@ -422,8 +874,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="replaylatencyeliminate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylatencyeliminate_csharp" style="color: inherit; text-decoration: inherit;">Replay<wbr>Latency<wbr>Eliminate</a>
@@ -431,8 +882,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -440,8 +890,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>VPC subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -449,8 +898,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -458,8 +906,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupsids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupsids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups<wbr>Ids</a>
@@ -467,8 +914,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd></dl>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -482,8 +928,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Primary instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylag_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Lag</a>
@@ -491,8 +936,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-required"
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylatency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylatency_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Latency</a>
@@ -500,8 +944,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-required"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
             title="Required">
         <span id="mindelayeliminatereserve_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindelayeliminatereserve_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -509,8 +952,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -518,8 +960,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="replaylageliminate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylageliminate_go" style="color: inherit; text-decoration: inherit;">Replay<wbr>Lag<wbr>Eliminate</a>
@@ -527,8 +968,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="replaylatencyeliminate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylatencyeliminate_go" style="color: inherit; text-decoration: inherit;">Replay<wbr>Latency<wbr>Eliminate</a>
@@ -536,8 +976,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -545,8 +984,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>VPC subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -554,8 +992,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -563,8 +1000,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupsids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupsids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups<wbr>Ids</a>
@@ -572,8 +1008,101 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd></dl>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="master_db_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_db_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>db_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_replay_lag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replay_lag_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>lag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_replay_latency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replay_latency_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>latency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_delay_eliminate_reserve_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_delay_eliminate_reserve_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>delay_<wbr>eliminate_<wbr>reserve</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="replay_lag_eliminate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replay_lag_eliminate_hcl" style="color: inherit; text-decoration: inherit;">replay_<wbr>lag_<wbr>eliminate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
+            title="Required">
+        <span id="replay_latency_eliminate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replay_latency_eliminate_hcl" style="color: inherit; text-decoration: inherit;">replay_<wbr>latency_<wbr>eliminate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC subnet ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>RO group name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -587,8 +1116,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Primary instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylag_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Lag</a>
@@ -596,8 +1124,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-required"
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylatency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylatency_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Latency</a>
@@ -605,8 +1132,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-required"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
             title="Required">
         <span id="mindelayeliminatereserve_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindelayeliminatereserve_java" style="color: inherit; text-decoration: inherit;">min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -614,8 +1140,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -623,8 +1148,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="replaylageliminate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylageliminate_java" style="color: inherit; text-decoration: inherit;">replay<wbr>Lag<wbr>Eliminate</a>
@@ -632,8 +1156,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="replaylatencyeliminate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylatencyeliminate_java" style="color: inherit; text-decoration: inherit;">replay<wbr>Latency<wbr>Eliminate</a>
@@ -641,8 +1164,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -650,8 +1172,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>VPC subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -659,8 +1180,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -668,8 +1188,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupsids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupsids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups<wbr>Ids</a>
@@ -677,8 +1196,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd></dl>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -692,8 +1210,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Primary instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylag_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Lag</a>
@@ -701,8 +1218,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-required"
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylatency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylatency_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Latency</a>
@@ -710,8 +1226,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-required"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
             title="Required">
         <span id="mindelayeliminatereserve_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindelayeliminatereserve_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -719,8 +1234,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -728,8 +1242,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="replaylageliminate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylageliminate_nodejs" style="color: inherit; text-decoration: inherit;">replay<wbr>Lag<wbr>Eliminate</a>
@@ -737,8 +1250,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="replaylatencyeliminate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylatencyeliminate_nodejs" style="color: inherit; text-decoration: inherit;">replay<wbr>Latency<wbr>Eliminate</a>
@@ -746,8 +1258,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -755,8 +1266,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>VPC subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -764,8 +1274,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -773,8 +1282,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupsids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupsids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups<wbr>Ids</a>
@@ -782,8 +1290,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd></dl>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +1304,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Primary instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="max_replay_lag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replay_lag_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>lag</a>
@@ -806,8 +1312,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-required"
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
             title="Required">
         <span id="max_replay_latency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replay_latency_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>latency</a>
@@ -815,8 +1320,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-required"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
             title="Required">
         <span id="min_delay_eliminate_reserve_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_delay_eliminate_reserve_python" style="color: inherit; text-decoration: inherit;">min_<wbr>delay_<wbr>eliminate_<wbr>reserve</a>
@@ -824,8 +1328,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -833,8 +1336,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="replay_lag_eliminate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replay_lag_eliminate_python" style="color: inherit; text-decoration: inherit;">replay_<wbr>lag_<wbr>eliminate</a>
@@ -842,8 +1344,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="replay_latency_eliminate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replay_latency_eliminate_python" style="color: inherit; text-decoration: inherit;">replay_<wbr>latency_<wbr>eliminate</a>
@@ -851,8 +1352,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -860,8 +1360,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>VPC subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -869,8 +1368,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -878,8 +1376,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups_<wbr>ids</a>
@@ -887,8 +1384,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd></dl>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -902,8 +1398,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Primary instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylag_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Lag</a>
@@ -911,8 +1406,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-required"
+    <dd>Delay threshold in ms.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplaylatency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplaylatency_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Latency</a>
@@ -920,8 +1414,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-required"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-required"
             title="Required">
         <span id="mindelayeliminatereserve_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindelayeliminatereserve_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -929,8 +1422,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -938,8 +1430,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="replaylageliminate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylageliminate_yaml" style="color: inherit; text-decoration: inherit;">replay<wbr>Lag<wbr>Eliminate</a>
@@ -947,8 +1438,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="replaylatencyeliminate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaylatencyeliminate_yaml" style="color: inherit; text-decoration: inherit;">replay<wbr>Latency<wbr>Eliminate</a>
@@ -956,8 +1446,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-required"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -965,8 +1454,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-required"
+    <dd>VPC subnet ID.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -974,8 +1462,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -983,8 +1470,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupsids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupsids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups<wbr>Ids</a>
@@ -992,8 +1478,7 @@ The ReadonlyGroup resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd></dl>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1014,8 +1499,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1023,8 +1507,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="netinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netinfolists_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Info<wbr>Lists</a>
@@ -1032,8 +1515,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Outputs.<wbr>Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd></dl>
+    <dd>List of db instance net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1047,8 +1529,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1056,8 +1537,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="netinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netinfolists_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Info<wbr>Lists</a>
@@ -1065,8 +1545,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">[]Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd></dl>
+    <dd>List of db instance net info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="net_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_info_lists_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">list(object)</a></span>
+    </dt>
+    <dd>List of db instance net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1080,8 +1589,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1089,8 +1597,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="netinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netinfolists_java" style="color: inherit; text-decoration: inherit;">net<wbr>Info<wbr>Lists</a>
@@ -1098,8 +1605,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd></dl>
+    <dd>List of db instance net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1113,8 +1619,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1122,8 +1627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="netinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netinfolists_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Info<wbr>Lists</a>
@@ -1131,8 +1635,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd></dl>
+    <dd>List of db instance net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1146,8 +1649,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1155,17 +1657,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="net_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_info_lists_python" style="color: inherit; text-decoration: inherit;">net_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#readonlygroupnetinfolist">Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List]</a></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">Sequence[Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List]</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd></dl>
+    <dd>List of db instance net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1179,8 +1679,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1188,8 +1687,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="netinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netinfolists_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Info<wbr>Lists</a>
@@ -1197,8 +1695,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd></dl>
+    <dd>List of db instance net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1208,18 +1705,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ReadonlyGroup resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReadonlyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ReadonlyGroup</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReadonlyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ReadonlyGroup</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1229,111 +1726,150 @@ Get an existing ReadonlyGroup resource's state with the given name, ID, and opti
         <span class="nx">max_replay_latency</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">min_delay_eliminate_reserve</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">net_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_postgresql.ReadonlyGroupNetInfoListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">net_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ReadonlyGroupNetInfoListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">replay_lag_eliminate</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">replay_latency_eliminate</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">security_groups_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ReadonlyGroup</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReadonlyGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReadonlyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReadonlyGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReadonlyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ReadonlyGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ReadonlyGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ReadonlyGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ReadonlyGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingReadonlyGroup</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Postgresql:ReadonlyGroup</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_postgresql_readonly_group</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1341,28 +1877,31 @@ Get an existing ReadonlyGroup resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1370,28 +1909,31 @@ Get an existing ReadonlyGroup resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1411,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_masterdbinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterdbinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Db<wbr>Instance<wbr>Id</a>
@@ -1420,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Primary instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylag_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Lag</a>
@@ -1429,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-optional"
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylatency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylatency_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Latency</a>
@@ -1438,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mindelayeliminatereserve_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mindelayeliminatereserve_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -1447,8 +1985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1456,17 +1993,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netinfolists_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd><dt class="property-optional"
+    <dd>List of db instance net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1474,8 +2009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylageliminate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylageliminate_csharp" style="color: inherit; text-decoration: inherit;">Replay<wbr>Lag<wbr>Eliminate</a>
@@ -1483,8 +2017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylatencyeliminate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylatencyeliminate_csharp" style="color: inherit; text-decoration: inherit;">Replay<wbr>Latency<wbr>Eliminate</a>
@@ -1492,8 +2025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupsids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupsids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups<wbr>Ids</a>
@@ -1501,8 +2033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1510,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1519,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1534,8 +2063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_masterdbinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterdbinstanceid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Db<wbr>Instance<wbr>Id</a>
@@ -1543,8 +2071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Primary instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylag_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Lag</a>
@@ -1552,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-optional"
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylatency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylatency_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replay<wbr>Latency</a>
@@ -1561,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mindelayeliminatereserve_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mindelayeliminatereserve_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -1570,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1579,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netinfolists_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Info<wbr>Lists</a>
@@ -1588,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">[]Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd><dt class="property-optional"
+    <dd>List of db instance net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1597,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylageliminate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylageliminate_go" style="color: inherit; text-decoration: inherit;">Replay<wbr>Lag<wbr>Eliminate</a>
@@ -1606,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylatencyeliminate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylatencyeliminate_go" style="color: inherit; text-decoration: inherit;">Replay<wbr>Latency<wbr>Eliminate</a>
@@ -1615,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupsids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupsids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups<wbr>Ids</a>
@@ -1624,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1633,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1642,8 +2159,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_master_db_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_db_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>db_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_replay_lag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_replay_lag_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>lag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_replay_latency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_replay_latency_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>latency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_delay_eliminate_reserve_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_delay_eliminate_reserve_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>delay_<wbr>eliminate_<wbr>reserve</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>RO group name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_net_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_info_lists_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">list(object)</a></span>
+    </dt>
+    <dd>List of db instance net info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replay_lag_eliminate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replay_lag_eliminate_hcl" style="color: inherit; text-decoration: inherit;">replay_<wbr>lag_<wbr>eliminate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replay_latency_eliminate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replay_latency_eliminate_hcl" style="color: inherit; text-decoration: inherit;">replay_<wbr>latency_<wbr>eliminate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1657,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_masterdbinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterdbinstanceid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Db<wbr>Instance<wbr>Id</a>
@@ -1666,8 +2291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Primary instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylag_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Lag</a>
@@ -1675,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-optional"
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylatency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylatency_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Latency</a>
@@ -1684,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mindelayeliminatereserve_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mindelayeliminatereserve_java" style="color: inherit; text-decoration: inherit;">min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -1693,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1702,17 +2323,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netinfolists_java" style="color: inherit; text-decoration: inherit;">net<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd><dt class="property-optional"
+    <dd>List of db instance net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1720,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylageliminate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylageliminate_java" style="color: inherit; text-decoration: inherit;">replay<wbr>Lag<wbr>Eliminate</a>
@@ -1729,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylatencyeliminate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylatencyeliminate_java" style="color: inherit; text-decoration: inherit;">replay<wbr>Latency<wbr>Eliminate</a>
@@ -1738,8 +2355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupsids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupsids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups<wbr>Ids</a>
@@ -1747,8 +2363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1756,8 +2371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1765,8 +2379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1780,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_masterdbinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterdbinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Db<wbr>Instance<wbr>Id</a>
@@ -1789,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Primary instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylag_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Lag</a>
@@ -1798,8 +2409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-optional"
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylatency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylatency_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Latency</a>
@@ -1807,8 +2417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mindelayeliminatereserve_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mindelayeliminatereserve_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -1816,8 +2425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1825,17 +2433,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netinfolists_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#readonlygroupnetinfolist">Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd><dt class="property-optional"
+    <dd>List of db instance net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1843,8 +2449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylageliminate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylageliminate_nodejs" style="color: inherit; text-decoration: inherit;">replay<wbr>Lag<wbr>Eliminate</a>
@@ -1852,8 +2457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylatencyeliminate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylatencyeliminate_nodejs" style="color: inherit; text-decoration: inherit;">replay<wbr>Latency<wbr>Eliminate</a>
@@ -1861,8 +2465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupsids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupsids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups<wbr>Ids</a>
@@ -1870,8 +2473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1879,8 +2481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1888,8 +2489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1903,8 +2503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_master_db_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_db_instance_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>db_<wbr>instance_<wbr>id</a>
@@ -1912,8 +2511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Primary instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_replay_lag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_replay_lag_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>lag</a>
@@ -1921,8 +2519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-optional"
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_replay_latency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_replay_latency_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replay_<wbr>latency</a>
@@ -1930,8 +2527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_delay_eliminate_reserve_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_delay_eliminate_reserve_python" style="color: inherit; text-decoration: inherit;">min_<wbr>delay_<wbr>eliminate_<wbr>reserve</a>
@@ -1939,8 +2535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1948,17 +2543,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_net_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_info_lists_python" style="color: inherit; text-decoration: inherit;">net_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#readonlygroupnetinfolist">Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#readonlygroupnetinfolist">Sequence[Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd><dt class="property-optional"
+    <dd>List of db instance net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1966,8 +2559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replay_lag_eliminate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replay_lag_eliminate_python" style="color: inherit; text-decoration: inherit;">replay_<wbr>lag_<wbr>eliminate</a>
@@ -1975,8 +2567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replay_latency_eliminate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replay_latency_eliminate_python" style="color: inherit; text-decoration: inherit;">replay_<wbr>latency_<wbr>eliminate</a>
@@ -1984,8 +2575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups_<wbr>ids</a>
@@ -1993,8 +2583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2002,8 +2591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2011,8 +2599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2026,8 +2613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_masterdbinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterdbinstanceid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Db<wbr>Instance<wbr>Id</a>
@@ -2035,8 +2621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Primary instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylag_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Lag</a>
@@ -2044,8 +2629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Delay threshold in ms.</p>
-</dd><dt class="property-optional"
+    <dd>Delay threshold in ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreplaylatency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreplaylatency_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replay<wbr>Latency</a>
@@ -2053,8 +2637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Delayed log size threshold in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Delayed log size threshold in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mindelayeliminatereserve_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mindelayeliminatereserve_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Delay<wbr>Eliminate<wbr>Reserve</a>
@@ -2062,8 +2645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The minimum number of read-only replicas that must be retained in an RO group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum number of read-only replicas that must be retained in an RO group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2071,8 +2653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>RO group name.</p>
-</dd><dt class="property-optional"
+    <dd>RO group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netinfolists_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Info<wbr>Lists</a>
@@ -2080,8 +2661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#readonlygroupnetinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of db instance net info.</p>
-</dd><dt class="property-optional"
+    <dd>List of db instance net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2089,8 +2669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylageliminate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylageliminate_yaml" style="color: inherit; text-decoration: inherit;">replay<wbr>Lag<wbr>Eliminate</a>
@@ -2098,8 +2677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaylatencyeliminate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaylatencyeliminate_yaml" style="color: inherit; text-decoration: inherit;">replay<wbr>Latency<wbr>Eliminate</a>
@@ -2107,8 +2685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupsids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupsids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups<wbr>Ids</a>
@@ -2116,8 +2693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2125,8 +2701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2134,8 +2709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2150,7 +2724,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="readonlygroupnetinfolist">Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List</h4>
+<h4 id="readonlygroupnetinfolist">
+Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Readonly<wbr>Group<wbr>Net<wbr>Info<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2162,8 +2738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of the net info.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2171,8 +2746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the net info.</p>
-</dd></dl>
+    <dd>Port of the net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2186,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of the net info.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2195,8 +2768,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the net info.</p>
-</dd></dl>
+    <dd>Port of the net info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2210,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address of the net info.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2219,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the net info.</p>
-</dd></dl>
+    <dd>Port of the net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2234,8 +2826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of the net info.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2243,8 +2834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the net info.</p>
-</dd></dl>
+    <dd>Port of the net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2258,8 +2848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip address of the net info.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2267,8 +2856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the net info.</p>
-</dd></dl>
+    <dd>Port of the net info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2282,8 +2870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address of the net info.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of the net info.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2291,10 +2878,25 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the net info.</p>
-</dd></dl>
+    <dd>Port of the net info.</dd></dl>
 </pulumi-choosable>
 </div>
+
+## Import
+
+
+
+postgresql readonly group can be imported, e.g.
+
+```sh
+$ pulumi import tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup example pgrogrp-lckioi2a
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2304,7 +2906,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

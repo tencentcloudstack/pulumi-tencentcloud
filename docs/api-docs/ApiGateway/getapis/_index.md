@@ -2,9 +2,11 @@
 ---
 title: "getApis"
 title_tag: "tencentcloud.ApiGateway.getApis"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getApis function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query API gateway APIs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Use this data source to query API gateway APIs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const service = new tencentcloud.apigateway.Service("service", {
@@ -50,21 +56,26 @@ const api = new tencentcloud.apigateway.Api("api", {
     responseSuccessExample: "success",
     responseFailExample: "fail",
 });
-const id = tencentcloud.ApiGateway.getApisOutput({
+const id = tencentcloud.apigateway.getApisOutput({
     serviceId: service.id,
     apiId: api.id,
 });
-const name = tencentcloud.ApiGateway.getApisOutput({
+const name = tencentcloud.apigateway.getApisOutput({
     serviceId: service.id,
     apiName: api.apiName,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-service = tencentcloud.api_gateway.Service("service",
+service = tencentcloud.apigateway.Service("service",
     service_name="ck",
     protocol="http&https",
     service_desc="your nice service",
@@ -73,7 +84,7 @@ service = tencentcloud.api_gateway.Service("service",
         "OUTER",
     ],
     ip_version="IPv4")
-api = tencentcloud.api_gateway.Api("api",
+api = tencentcloud.apigateway.Api("api",
     service_id=service.id,
     api_name="hello",
     api_desc="my hello api",
@@ -90,16 +101,81 @@ api = tencentcloud.api_gateway.Api("api",
     response_type="HTML",
     response_success_example="success",
     response_fail_example="fail")
-id = tencentcloud.ApiGateway.get_apis_output(service_id=service.id,
+id = tencentcloud.apigateway.get_apis_output(service_id=service.id,
     api_id=api.id)
-name = tencentcloud.ApiGateway.get_apis_output(service_id=service.id,
+name = tencentcloud.apigateway.get_apis_output(service_id=service.id,
     api_name=api.api_name)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		service, err := apigateway.NewService(ctx, "service", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("ck"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("your nice service"),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		api, err := apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
+			ServiceId:              service.ID().ToIDOutput().ToStringOutput(),
+			ApiName:                pulumi.String("hello"),
+			ApiDesc:                pulumi.String("my hello api"),
+			AuthType:               pulumi.String("NONE"),
+			Protocol:               pulumi.String("HTTP"),
+			EnableCors:             pulumi.Bool(true),
+			RequestConfigPath:      pulumi.String("/user/info"),
+			RequestConfigMethod:    pulumi.String("GET"),
+			ServiceConfigType:      pulumi.String("HTTP"),
+			ServiceConfigTimeout:   pulumi.Int(15),
+			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
+			ServiceConfigPath:      pulumi.String("/user"),
+			ServiceConfigMethod:    pulumi.String("GET"),
+			ResponseType:           pulumi.String("HTML"),
+			ResponseSuccessExample: pulumi.String("success"),
+			ResponseFailExample:    pulumi.String("fail"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = apigateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
+			ServiceId: service.ID().ToIDOutput().ToStringOutput(),
+			ApiId:     api.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		_ = apigateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
+			ServiceId: service.ID().ToIDOutput().ToStringOutput(),
+			ApiName:   api.ApiName,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -151,62 +227,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("ck"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("your nice service"),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-		})
-		if err != nil {
-			return err
-		}
-		api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-			ServiceId:              service.ID(),
-			ApiName:                pulumi.String("hello"),
-			ApiDesc:                pulumi.String("my hello api"),
-			AuthType:               pulumi.String("NONE"),
-			Protocol:               pulumi.String("HTTP"),
-			EnableCors:             pulumi.Bool(true),
-			RequestConfigPath:      pulumi.String("/user/info"),
-			RequestConfigMethod:    pulumi.String("GET"),
-			ServiceConfigType:      pulumi.String("HTTP"),
-			ServiceConfigTimeout:   pulumi.Int(15),
-			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
-			ServiceConfigPath:      pulumi.String("/user"),
-			ServiceConfigMethod:    pulumi.String("GET"),
-			ResponseType:           pulumi.String("HTML"),
-			ResponseSuccessExample: pulumi.String("success"),
-			ResponseFailExample:    pulumi.String("fail"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = ApiGateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
-			ServiceId: service.ID(),
-			ApiId:     api.ID(),
-		}, nil)
-		_ = ApiGateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
-			ServiceId: service.ID(),
-			ApiName:   api.ApiName,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -219,8 +244,8 @@ import com.pulumi.tencentcloud.ApiGateway.Api;
 import com.pulumi.tencentcloud.ApiGateway.ApiArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetApisArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -232,7 +257,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var service = new Service("service", ServiceArgs.builder()        
+        var service = new Service("service", ServiceArgs.builder()
             .serviceName("ck")
             .protocol("http&https")
             .serviceDesc("your nice service")
@@ -242,7 +267,7 @@ public class App {
             .ipVersion("IPv4")
             .build());
 
-        var api = new Api("api", ApiArgs.builder()        
+        var api = new Api("api", ApiArgs.builder()
             .serviceId(service.id())
             .apiName("hello")
             .apiDesc("my hello api")
@@ -274,6 +299,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   service:
@@ -308,19 +338,77 @@ resources:
 variables:
   id:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getApis
-      Arguments:
+      function: tencentcloud:ApiGateway:getApis
+      arguments:
         serviceId: ${service.id}
         apiId: ${api.id}
   name:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getApis
-      Arguments:
+      function: tencentcloud:ApiGateway:getApis
+      arguments:
         serviceId: ${service.id}
         apiName: ${api.apiName}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getapis" "id" {
+  service_id = tencentcloud_apigateway_service.service.id
+  api_id     = tencentcloud_apigateway_api.api.id
+}
+data "tencentcloud_apigateway_getapis" "name" {
+  service_id = tencentcloud_apigateway_service.service.id
+  api_name   = tencentcloud_apigateway_api.api.api_name
+}
+
+resource "tencentcloud_apigateway_service" "service" {
+  service_name = "ck"
+  protocol     = "http&https"
+  service_desc = "your nice service"
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_api" "api" {
+  service_id               = tencentcloud_apigateway_service.service.id
+  api_name                 = "hello"
+  api_desc                 = "my hello api"
+  auth_type                = "NONE"
+  protocol                 = "HTTP"
+  enable_cors              = true
+  request_config_path      = "/user/info"
+  request_config_method    = "GET"
+  service_config_type      = "HTTP"
+  service_config_timeout   = 15
+  service_config_url       = "http://www.qq.com"
+  service_config_path      = "/user"
+  service_config_method    = "GET"
+  response_type            = "HTML"
+  response_success_example = "success"
+  response_fail_example    = "fail"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+  - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&type=document&lang=en)
 
 
 
@@ -332,7 +420,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -340,9 +428,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getApis<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApisArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetApisResult</a></span>></span
+><span class="k">function </span>getApis<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApisArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetApisResult</a></span>></span
 ><span class="k">
-function </span>getApisOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApisOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>></span
+function </span>getApisOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApisOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -357,11 +445,11 @@ function </span>getApisOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetApisResult</span
 ><span class="k">
-def </span>get_apis_output<span class="p">(</span><span class="nx">api_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">api_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetApisResult]</span
+def </span>get_apis_output<span class="p">(</span><span class="nx">api_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">api_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">service_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetApisResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -386,7 +474,8 @@ func </span>GetApisOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetApis </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApisInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApisInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApisInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -395,7 +484,8 @@ func </span>GetApisOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> </span>getApis<span class="p">(</span><span class="nx">GetApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> </span>getApis<span class="p">(</span><span class="nx">GetApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetApisResult</a></span>> </span>getApis<span class="p">(</span><span class="nx">GetApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -407,6 +497,15 @@ func </span>GetApisOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getApis:getApis
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_apis&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -425,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Service ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -434,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -443,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom API name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -452,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Service ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -476,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -485,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom API name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -494,8 +586,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service ID for query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Created API ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom API name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -509,8 +638,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Service ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -518,8 +646,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -527,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom API name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -536,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -551,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Service ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -560,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -569,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom API name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -578,8 +700,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +714,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Service ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="api_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
@@ -602,8 +722,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Created API ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="api_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
@@ -611,8 +730,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom API name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -620,8 +738,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -635,8 +752,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Service ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -644,8 +760,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -653,8 +768,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom API name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -662,8 +776,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -686,8 +799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -695,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Apis<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -704,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</p>
-</dd><dt class="property-"
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
             title="">
         <span id="apiid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -721,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-"
+    <dd>Custom API name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -744,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -753,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislist">[]Get<wbr>Apis<wbr>List</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -762,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</p>
-</dd><dt class="property-"
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
             title="">
         <span id="apiid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -779,11 +885,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-"
+    <dd>Custom API name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapislist">list(object)</a></span>
+    </dt>
+    <dd>A list of APIs.</dd><dt class="property-"
+            title="">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
+            title="">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom API name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -802,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -811,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislist">List&lt;Get<wbr>Apis<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -820,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</p>
-</dd><dt class="property-"
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
             title="">
         <span id="apiid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -837,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-"
+    <dd>Custom API name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -860,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -869,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislist">Get<wbr>Apis<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -878,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</p>
-</dd><dt class="property-"
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
             title="">
         <span id="apiid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -895,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-"
+    <dd>Custom API name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -918,17 +1069,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapislist">Get<wbr>Apis<wbr>List]</a></span>
+        <span class="property-type"><a href="#getapislist">Sequence[Get<wbr>Apis<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -936,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</p>
-</dd><dt class="property-"
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
             title="">
         <span id="api_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
@@ -953,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-"
+    <dd>Custom API name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -976,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -985,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -994,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</p>
-</dd><dt class="property-"
+    <dd>Which service this API belongs. Refer to resource <code>tencentcloud.ApiGateway.Service</code>.</dd><dt class="property-"
             title="">
         <span id="apiid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -1011,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-"
+    <dd>Custom API name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1044,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API description.</p>
-</dd><dt class="property-required"
+    <dd>Custom API description.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -1053,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="authtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Type</a>
@@ -1062,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</p>
-</dd><dt class="property-required"
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1071,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="enablecors_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecors_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cors</a>
@@ -1080,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable CORS.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1089,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1098,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</p>
-</dd><dt class="property-required"
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigmethod_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Config<wbr>Method</a>
@@ -1107,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigpath_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Config<wbr>Path</a>
@@ -1116,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request frontend path configuration. Like <code>/user/getinfo</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestparameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestparameters_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Parameters</a>
@@ -1125,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistrequestparameter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Get<wbr>Apis<wbr>List<wbr>Request<wbr>Parameter&gt;</a></span>
     </dt>
-    <dd><p>Frontend request parameters.</p>
-</dd><dt class="property-required"
+    <dd>Frontend request parameters.</dd><dt class="property-required"
             title="Required">
         <span id="responseerrorcodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responseerrorcodes_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Error<wbr>Codes</a>
@@ -1134,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistresponseerrorcode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Get<wbr>Apis<wbr>List<wbr>Response<wbr>Error<wbr>Code&gt;</a></span>
     </dt>
-    <dd><p>Custom error code configuration. Must keep at least one after set.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
             title="Required">
         <span id="responsefailexample_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsefailexample_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Fail<wbr>Example</a>
@@ -1143,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Response failure sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsesuccessexample_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsesuccessexample_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Success<wbr>Example</a>
@@ -1152,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Successful response sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Type</a>
@@ -1161,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return type.</p>
-</dd><dt class="property-required"
+    <dd>Return type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmethod_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Method</a>
@@ -1170,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service request method, such as <code>GET</code>. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_method</code> and backend method <code>service_config_method</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmockreturnmessage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmockreturnmessage_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Mock<wbr>Return<wbr>Message</a>
@@ -1179,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned information of API backend mocking.</p>
-</dd><dt class="property-required"
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigpath_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Path</a>
@@ -1188,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service path, such as /path. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_path</code> and backend path <code>service_config_path</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigproduct_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigproduct_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Product</a>
@@ -1197,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</p>
-</dd><dt class="property-required"
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionname_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Scf<wbr>Function<wbr>Name</a>
@@ -1206,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function name. This parameter takes effect when <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionnamespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionnamespace_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Scf<wbr>Function<wbr>Namespace</a>
@@ -1215,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function namespace. This parameter takes effect when  <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionqualifier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionqualifier_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Scf<wbr>Function<wbr>Qualifier</a>
@@ -1224,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function version. This parameter takes effect when <code>service_config_type</code>  is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtimeout_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Timeout</a>
@@ -1233,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API backend service timeout period in seconds.</p>
-</dd><dt class="property-required"
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtype_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Type</a>
@@ -1242,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service type.</p>
-</dd><dt class="property-required"
+    <dd>API backend service type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigurl_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Url</a>
@@ -1251,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service url. This parameter is required when <code>service_config_type</code> is <code>HTTP</code>.</p>
-</dd><dt class="property-required"
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigvpcid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Vpc<wbr>Id</a>
@@ -1260,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique VPC ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique VPC ID.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1269,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd></dl>
+    <dd>Service ID for query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1284,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API description.</p>
-</dd><dt class="property-required"
+    <dd>Custom API description.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -1293,8 +1409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="authtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Type</a>
@@ -1302,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</p>
-</dd><dt class="property-required"
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1311,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="enablecors_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecors_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cors</a>
@@ -1320,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable CORS.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1329,8 +1441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1338,8 +1449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</p>
-</dd><dt class="property-required"
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigmethod_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Config<wbr>Method</a>
@@ -1347,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigpath_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Config<wbr>Path</a>
@@ -1356,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request frontend path configuration. Like <code>/user/getinfo</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestparameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestparameters_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Parameters</a>
@@ -1365,8 +1473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistrequestparameter">[]Get<wbr>Apis<wbr>List<wbr>Request<wbr>Parameter</a></span>
     </dt>
-    <dd><p>Frontend request parameters.</p>
-</dd><dt class="property-required"
+    <dd>Frontend request parameters.</dd><dt class="property-required"
             title="Required">
         <span id="responseerrorcodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responseerrorcodes_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Error<wbr>Codes</a>
@@ -1374,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistresponseerrorcode">[]Get<wbr>Apis<wbr>List<wbr>Response<wbr>Error<wbr>Code</a></span>
     </dt>
-    <dd><p>Custom error code configuration. Must keep at least one after set.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
             title="Required">
         <span id="responsefailexample_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsefailexample_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Fail<wbr>Example</a>
@@ -1383,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Response failure sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsesuccessexample_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsesuccessexample_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Success<wbr>Example</a>
@@ -1392,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Successful response sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Type</a>
@@ -1401,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return type.</p>
-</dd><dt class="property-required"
+    <dd>Return type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmethod_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Method</a>
@@ -1410,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service request method, such as <code>GET</code>. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_method</code> and backend method <code>service_config_method</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmockreturnmessage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmockreturnmessage_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Mock<wbr>Return<wbr>Message</a>
@@ -1419,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned information of API backend mocking.</p>
-</dd><dt class="property-required"
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigpath_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Path</a>
@@ -1428,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service path, such as /path. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_path</code> and backend path <code>service_config_path</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigproduct_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigproduct_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Product</a>
@@ -1437,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</p>
-</dd><dt class="property-required"
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionname_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Scf<wbr>Function<wbr>Name</a>
@@ -1446,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function name. This parameter takes effect when <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionnamespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionnamespace_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Scf<wbr>Function<wbr>Namespace</a>
@@ -1455,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function namespace. This parameter takes effect when  <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionqualifier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionqualifier_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Scf<wbr>Function<wbr>Qualifier</a>
@@ -1464,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function version. This parameter takes effect when <code>service_config_type</code>  is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtimeout_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Timeout</a>
@@ -1473,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API backend service timeout period in seconds.</p>
-</dd><dt class="property-required"
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtype_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Type</a>
@@ -1482,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service type.</p>
-</dd><dt class="property-required"
+    <dd>API backend service type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigurl_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Url</a>
@@ -1491,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service url. This parameter is required when <code>service_config_type</code> is <code>HTTP</code>.</p>
-</dd><dt class="property-required"
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigvpcid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Vpc<wbr>Id</a>
@@ -1500,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique VPC ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique VPC ID.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1509,8 +1601,221 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd></dl>
+    <dd>Service ID for query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="api_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_desc_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom API description.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom API name.</dd><dt class="property-required"
+            title="Required">
+        <span id="auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_cors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cors_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_config_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_config_method_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>config_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_config_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_config_path_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>config_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_parameters_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapislistrequestparameter">list(object)</a></span>
+    </dt>
+    <dd>Frontend request parameters.</dd><dt class="property-required"
+            title="Required">
+        <span id="response_error_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_error_codes_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>error_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapislistresponseerrorcode">list(object)</a></span>
+    </dt>
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
+            title="Required">
+        <span id="response_fail_example_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_fail_example_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>fail_<wbr>example</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="response_success_example_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_success_example_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>success_<wbr>example</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="response_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_type_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Return type.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_method_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_mock_return_message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_mock_return_message_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>mock_<wbr>return_<wbr>message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_path_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_product_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_scf_function_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_scf_function_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>scf_<wbr>function_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_scf_function_namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_scf_function_namespace_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>scf_<wbr>function_<wbr>namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_scf_function_qualifier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_scf_function_qualifier_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>scf_<wbr>function_<wbr>qualifier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_timeout_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API backend service type.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_url_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique VPC ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service ID for query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1524,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API description.</p>
-</dd><dt class="property-required"
+    <dd>Custom API description.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1533,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="authtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -1542,8 +1845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</p>
-</dd><dt class="property-required"
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1551,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="enablecors_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecors_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cors</a>
@@ -1560,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable CORS.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1569,8 +1869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1578,8 +1877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</p>
-</dd><dt class="property-required"
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigmethod_java" style="color: inherit; text-decoration: inherit;">request<wbr>Config<wbr>Method</a>
@@ -1587,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigpath_java" style="color: inherit; text-decoration: inherit;">request<wbr>Config<wbr>Path</a>
@@ -1596,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request frontend path configuration. Like <code>/user/getinfo</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestparameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestparameters_java" style="color: inherit; text-decoration: inherit;">request<wbr>Parameters</a>
@@ -1605,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistrequestparameter">List&lt;Get<wbr>Apis<wbr>List<wbr>Request<wbr>Parameter&gt;</a></span>
     </dt>
-    <dd><p>Frontend request parameters.</p>
-</dd><dt class="property-required"
+    <dd>Frontend request parameters.</dd><dt class="property-required"
             title="Required">
         <span id="responseerrorcodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responseerrorcodes_java" style="color: inherit; text-decoration: inherit;">response<wbr>Error<wbr>Codes</a>
@@ -1614,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistresponseerrorcode">List&lt;Get<wbr>Apis<wbr>List<wbr>Response<wbr>Error<wbr>Code&gt;</a></span>
     </dt>
-    <dd><p>Custom error code configuration. Must keep at least one after set.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
             title="Required">
         <span id="responsefailexample_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsefailexample_java" style="color: inherit; text-decoration: inherit;">response<wbr>Fail<wbr>Example</a>
@@ -1623,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Response failure sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsesuccessexample_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsesuccessexample_java" style="color: inherit; text-decoration: inherit;">response<wbr>Success<wbr>Example</a>
@@ -1632,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Successful response sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_java" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -1641,8 +1933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Return type.</p>
-</dd><dt class="property-required"
+    <dd>Return type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmethod_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Method</a>
@@ -1650,8 +1941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service request method, such as <code>GET</code>. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_method</code> and backend method <code>service_config_method</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmockreturnmessage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmockreturnmessage_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Mock<wbr>Return<wbr>Message</a>
@@ -1659,8 +1949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Returned information of API backend mocking.</p>
-</dd><dt class="property-required"
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigpath_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Path</a>
@@ -1668,8 +1957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service path, such as /path. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_path</code> and backend path <code>service_config_path</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigproduct_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigproduct_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Product</a>
@@ -1677,8 +1965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</p>
-</dd><dt class="property-required"
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionname_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Name</a>
@@ -1686,8 +1973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function name. This parameter takes effect when <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionnamespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionnamespace_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Namespace</a>
@@ -1695,8 +1981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function namespace. This parameter takes effect when  <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionqualifier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionqualifier_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Qualifier</a>
@@ -1704,8 +1989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function version. This parameter takes effect when <code>service_config_type</code>  is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtimeout_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Timeout</a>
@@ -1713,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API backend service timeout period in seconds.</p>
-</dd><dt class="property-required"
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtype_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Type</a>
@@ -1722,8 +2005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service type.</p>
-</dd><dt class="property-required"
+    <dd>API backend service type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigurl_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Url</a>
@@ -1731,8 +2013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service url. This parameter is required when <code>service_config_type</code> is <code>HTTP</code>.</p>
-</dd><dt class="property-required"
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigvpcid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Vpc<wbr>Id</a>
@@ -1740,8 +2021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique VPC ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique VPC ID.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1749,8 +2029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd></dl>
+    <dd>Service ID for query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1764,8 +2043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API description.</p>
-</dd><dt class="property-required"
+    <dd>Custom API description.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1773,8 +2051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="authtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -1782,8 +2059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</p>
-</dd><dt class="property-required"
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1791,8 +2067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="enablecors_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecors_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cors</a>
@@ -1800,8 +2075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable CORS.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1809,8 +2083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1818,8 +2091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</p>
-</dd><dt class="property-required"
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigmethod_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Config<wbr>Method</a>
@@ -1827,8 +2099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigpath_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Config<wbr>Path</a>
@@ -1836,8 +2107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request frontend path configuration. Like <code>/user/getinfo</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestparameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestparameters_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Parameters</a>
@@ -1845,8 +2115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistrequestparameter">Get<wbr>Apis<wbr>List<wbr>Request<wbr>Parameter[]</a></span>
     </dt>
-    <dd><p>Frontend request parameters.</p>
-</dd><dt class="property-required"
+    <dd>Frontend request parameters.</dd><dt class="property-required"
             title="Required">
         <span id="responseerrorcodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responseerrorcodes_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Error<wbr>Codes</a>
@@ -1854,8 +2123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistresponseerrorcode">Get<wbr>Apis<wbr>List<wbr>Response<wbr>Error<wbr>Code[]</a></span>
     </dt>
-    <dd><p>Custom error code configuration. Must keep at least one after set.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
             title="Required">
         <span id="responsefailexample_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsefailexample_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Fail<wbr>Example</a>
@@ -1863,8 +2131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Response failure sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsesuccessexample_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsesuccessexample_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Success<wbr>Example</a>
@@ -1872,8 +2139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Successful response sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -1881,8 +2147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return type.</p>
-</dd><dt class="property-required"
+    <dd>Return type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmethod_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Method</a>
@@ -1890,8 +2155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service request method, such as <code>GET</code>. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_method</code> and backend method <code>service_config_method</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmockreturnmessage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmockreturnmessage_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Mock<wbr>Return<wbr>Message</a>
@@ -1899,8 +2163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned information of API backend mocking.</p>
-</dd><dt class="property-required"
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigpath_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Path</a>
@@ -1908,8 +2171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service path, such as /path. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_path</code> and backend path <code>service_config_path</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigproduct_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigproduct_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Product</a>
@@ -1917,8 +2179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</p>
-</dd><dt class="property-required"
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionname_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Name</a>
@@ -1926,8 +2187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function name. This parameter takes effect when <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionnamespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionnamespace_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Namespace</a>
@@ -1935,8 +2195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function namespace. This parameter takes effect when  <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionqualifier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionqualifier_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Qualifier</a>
@@ -1944,8 +2203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function version. This parameter takes effect when <code>service_config_type</code>  is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtimeout_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Timeout</a>
@@ -1953,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API backend service timeout period in seconds.</p>
-</dd><dt class="property-required"
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtype_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Type</a>
@@ -1962,8 +2219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service type.</p>
-</dd><dt class="property-required"
+    <dd>API backend service type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigurl_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Url</a>
@@ -1971,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API backend service url. This parameter is required when <code>service_config_type</code> is <code>HTTP</code>.</p>
-</dd><dt class="property-required"
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigvpcid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Vpc<wbr>Id</a>
@@ -1980,8 +2235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique VPC ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique VPC ID.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1989,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd></dl>
+    <dd>Service ID for query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2004,8 +2257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom API description.</p>
-</dd><dt class="property-required"
+    <dd>Custom API description.</dd><dt class="property-required"
             title="Required">
         <span id="api_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
@@ -2013,8 +2265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="auth_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
@@ -2022,8 +2273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</p>
-</dd><dt class="property-required"
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2031,8 +2281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="enable_cors_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cors_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cors</a>
@@ -2040,8 +2289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable CORS.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -2049,8 +2297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2058,8 +2305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</p>
-</dd><dt class="property-required"
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
             title="Required">
         <span id="request_config_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_config_method_python" style="color: inherit; text-decoration: inherit;">request_<wbr>config_<wbr>method</a>
@@ -2067,8 +2313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="request_config_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_config_path_python" style="color: inherit; text-decoration: inherit;">request_<wbr>config_<wbr>path</a>
@@ -2076,26 +2321,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Request frontend path configuration. Like <code>/user/getinfo</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
             title="Required">
         <span id="request_parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_parameters_python" style="color: inherit; text-decoration: inherit;">request_<wbr>parameters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapislistrequestparameter">Get<wbr>Apis<wbr>List<wbr>Request<wbr>Parameter]</a></span>
+        <span class="property-type"><a href="#getapislistrequestparameter">Sequence[Get<wbr>Apis<wbr>List<wbr>Request<wbr>Parameter]</a></span>
     </dt>
-    <dd><p>Frontend request parameters.</p>
-</dd><dt class="property-required"
+    <dd>Frontend request parameters.</dd><dt class="property-required"
             title="Required">
         <span id="response_error_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_error_codes_python" style="color: inherit; text-decoration: inherit;">response_<wbr>error_<wbr>codes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapislistresponseerrorcode">Get<wbr>Apis<wbr>List<wbr>Response<wbr>Error<wbr>Code]</a></span>
+        <span class="property-type"><a href="#getapislistresponseerrorcode">Sequence[Get<wbr>Apis<wbr>List<wbr>Response<wbr>Error<wbr>Code]</a></span>
     </dt>
-    <dd><p>Custom error code configuration. Must keep at least one after set.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
             title="Required">
         <span id="response_fail_example_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_fail_example_python" style="color: inherit; text-decoration: inherit;">response_<wbr>fail_<wbr>example</a>
@@ -2103,8 +2345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Response failure sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="response_success_example_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_success_example_python" style="color: inherit; text-decoration: inherit;">response_<wbr>success_<wbr>example</a>
@@ -2112,8 +2353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Successful response sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="response_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_type_python" style="color: inherit; text-decoration: inherit;">response_<wbr>type</a>
@@ -2121,8 +2361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Return type.</p>
-</dd><dt class="property-required"
+    <dd>Return type.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_method_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>method</a>
@@ -2130,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API backend service request method, such as <code>GET</code>. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_method</code> and backend method <code>service_config_method</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_mock_return_message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_mock_return_message_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>mock_<wbr>return_<wbr>message</a>
@@ -2139,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Returned information of API backend mocking.</p>
-</dd><dt class="property-required"
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_path_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>path</a>
@@ -2148,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API backend service path, such as /path. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_path</code> and backend path <code>service_config_path</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_product_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_product_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>product</a>
@@ -2157,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</p>
-</dd><dt class="property-required"
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_scf_function_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_scf_function_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>scf_<wbr>function_<wbr>name</a>
@@ -2166,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function name. This parameter takes effect when <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_scf_function_namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_scf_function_namespace_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>scf_<wbr>function_<wbr>namespace</a>
@@ -2175,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function namespace. This parameter takes effect when  <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_scf_function_qualifier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_scf_function_qualifier_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>scf_<wbr>function_<wbr>qualifier</a>
@@ -2184,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function version. This parameter takes effect when <code>service_config_type</code>  is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_timeout_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>timeout</a>
@@ -2193,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API backend service timeout period in seconds.</p>
-</dd><dt class="property-required"
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_type_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>type</a>
@@ -2202,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API backend service type.</p>
-</dd><dt class="property-required"
+    <dd>API backend service type.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_url_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>url</a>
@@ -2211,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API backend service url. This parameter is required when <code>service_config_type</code> is <code>HTTP</code>.</p>
-</dd><dt class="property-required"
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_vpc_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>vpc_<wbr>id</a>
@@ -2220,8 +2449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique VPC ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique VPC ID.</dd><dt class="property-required"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -2229,8 +2457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd></dl>
+    <dd>Service ID for query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2244,8 +2471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API description.</p>
-</dd><dt class="property-required"
+    <dd>Custom API description.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -2253,8 +2479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="authtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -2262,8 +2487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</p>
-</dd><dt class="property-required"
+    <dd>API authentication type. Valid values: <code>SECRET</code>, <code>NONE</code>. <code>SECRET</code> means key pair authentication, <code>NONE</code> means no authentication.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2271,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="enablecors_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecors_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cors</a>
@@ -2280,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable CORS.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable CORS.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2289,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2298,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</p>
-</dd><dt class="property-required"
+    <dd>API frontend request type, such as <code>HTTP</code>,<code>WEBSOCKET</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigmethod_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Config<wbr>Method</a>
@@ -2307,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend method configuration. Like <code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>,<code>HEAD</code>,<code>ANY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestconfigpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestconfigpath_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Config<wbr>Path</a>
@@ -2316,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request frontend path configuration. Like <code>/user/getinfo</code>.</p>
-</dd><dt class="property-required"
+    <dd>Request frontend path configuration. Like <code>/user/getinfo</code>.</dd><dt class="property-required"
             title="Required">
         <span id="requestparameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestparameters_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Parameters</a>
@@ -2325,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistrequestparameter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Frontend request parameters.</p>
-</dd><dt class="property-required"
+    <dd>Frontend request parameters.</dd><dt class="property-required"
             title="Required">
         <span id="responseerrorcodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responseerrorcodes_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Error<wbr>Codes</a>
@@ -2334,8 +2551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapislistresponseerrorcode">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Custom error code configuration. Must keep at least one after set.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code configuration. Must keep at least one after set.</dd><dt class="property-required"
             title="Required">
         <span id="responsefailexample_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsefailexample_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Fail<wbr>Example</a>
@@ -2343,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Response failure sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Response failure sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsesuccessexample_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsesuccessexample_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Success<wbr>Example</a>
@@ -2352,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Successful response sample of custom response configuration.</p>
-</dd><dt class="property-required"
+    <dd>Successful response sample of custom response configuration.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -2361,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Return type.</p>
-</dd><dt class="property-required"
+    <dd>Return type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmethod_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Method</a>
@@ -2370,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service request method, such as <code>GET</code>. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_method</code> and backend method <code>service_config_method</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service request method, such as <code>GET</code>. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigMethod</code> and backend method <code>serviceConfigMethod</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigmockreturnmessage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigmockreturnmessage_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Mock<wbr>Return<wbr>Message</a>
@@ -2379,8 +2591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Returned information of API backend mocking.</p>
-</dd><dt class="property-required"
+    <dd>Returned information of API backend mocking.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigpath_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Path</a>
@@ -2388,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service path, such as /path. If <code>service_config_type</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>request_config_path</code> and backend path <code>service_config_path</code> can be different.</p>
-</dd><dt class="property-required"
+    <dd>API backend service path, such as /path. If <code>serviceConfigType</code> is <code>HTTP</code>, this parameter will be required. The frontend <code>requestConfigPath</code> and backend path <code>serviceConfigPath</code> can be different.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigproduct_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigproduct_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Product</a>
@@ -2397,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</p>
-</dd><dt class="property-required"
+    <dd>Backend type. This parameter takes effect when VPC is enabled. Currently, only <code>clb</code> is supported.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionname_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Name</a>
@@ -2406,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function name. This parameter takes effect when <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function name. This parameter takes effect when <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionnamespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionnamespace_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Namespace</a>
@@ -2415,8 +2623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function namespace. This parameter takes effect when  <code>service_config_type</code> is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function namespace. This parameter takes effect when  <code>serviceConfigType</code> is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigscffunctionqualifier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigscffunctionqualifier_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Scf<wbr>Function<wbr>Qualifier</a>
@@ -2424,8 +2631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function version. This parameter takes effect when <code>service_config_type</code>  is <code>SCF</code>.</p>
-</dd><dt class="property-required"
+    <dd>SCF function version. This parameter takes effect when <code>serviceConfigType</code>  is <code>SCF</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtimeout_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Timeout</a>
@@ -2433,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API backend service timeout period in seconds.</p>
-</dd><dt class="property-required"
+    <dd>API backend service timeout period in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigtype_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Type</a>
@@ -2442,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service type.</p>
-</dd><dt class="property-required"
+    <dd>API backend service type.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigurl_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Url</a>
@@ -2451,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API backend service url. This parameter is required when <code>service_config_type</code> is <code>HTTP</code>.</p>
-</dd><dt class="property-required"
+    <dd>API backend service url. This parameter is required when <code>serviceConfigType</code> is <code>HTTP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfigvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfigvpcid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Vpc<wbr>Id</a>
@@ -2460,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique VPC ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique VPC ID.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -2469,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service ID for query.</p>
-</dd></dl>
+    <dd>Service ID for query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2488,8 +2689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter default value.</p>
-</dd><dt class="property-required"
+    <dd>Parameter default value.</dd><dt class="property-required"
             title="Required">
         <span id="desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -2497,8 +2697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2506,8 +2705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="position_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_csharp" style="color: inherit; text-decoration: inherit;">Position</a>
@@ -2515,8 +2713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter location.</p>
-</dd><dt class="property-required"
+    <dd>Parameter location.</dd><dt class="property-required"
             title="Required">
         <span id="required_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_csharp" style="color: inherit; text-decoration: inherit;">Required</a>
@@ -2524,8 +2721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If this parameter required.</p>
-</dd><dt class="property-required"
+    <dd>If this parameter required.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2533,8 +2729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2548,8 +2743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter default value.</p>
-</dd><dt class="property-required"
+    <dd>Parameter default value.</dd><dt class="property-required"
             title="Required">
         <span id="desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -2557,8 +2751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2566,8 +2759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="position_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_go" style="color: inherit; text-decoration: inherit;">Position</a>
@@ -2575,8 +2767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter location.</p>
-</dd><dt class="property-required"
+    <dd>Parameter location.</dd><dt class="property-required"
             title="Required">
         <span id="required_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_go" style="color: inherit; text-decoration: inherit;">Required</a>
@@ -2584,8 +2775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If this parameter required.</p>
-</dd><dt class="property-required"
+    <dd>If this parameter required.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2593,8 +2783,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="default_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_value_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter default value.</dd><dt class="property-required"
+            title="Required">
+        <span id="desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter description.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter name.</dd><dt class="property-required"
+            title="Required">
+        <span id="position_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_hcl" style="color: inherit; text-decoration: inherit;">position</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter location.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_hcl" style="color: inherit; text-decoration: inherit;">required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If this parameter required.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2608,8 +2851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter default value.</p>
-</dd><dt class="property-required"
+    <dd>Parameter default value.</dd><dt class="property-required"
             title="Required">
         <span id="desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2617,8 +2859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2626,8 +2867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="position_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_java" style="color: inherit; text-decoration: inherit;">position</a>
@@ -2635,8 +2875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter location.</p>
-</dd><dt class="property-required"
+    <dd>Parameter location.</dd><dt class="property-required"
             title="Required">
         <span id="required_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_java" style="color: inherit; text-decoration: inherit;">required</a>
@@ -2644,8 +2883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If this parameter required.</p>
-</dd><dt class="property-required"
+    <dd>If this parameter required.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2653,8 +2891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2668,8 +2905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter default value.</p>
-</dd><dt class="property-required"
+    <dd>Parameter default value.</dd><dt class="property-required"
             title="Required">
         <span id="desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2677,8 +2913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2686,8 +2921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="position_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_nodejs" style="color: inherit; text-decoration: inherit;">position</a>
@@ -2695,8 +2929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter location.</p>
-</dd><dt class="property-required"
+    <dd>Parameter location.</dd><dt class="property-required"
             title="Required">
         <span id="required_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_nodejs" style="color: inherit; text-decoration: inherit;">required</a>
@@ -2704,8 +2937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If this parameter required.</p>
-</dd><dt class="property-required"
+    <dd>If this parameter required.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2713,8 +2945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2728,8 +2959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter default value.</p>
-</dd><dt class="property-required"
+    <dd>Parameter default value.</dd><dt class="property-required"
             title="Required">
         <span id="desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2737,8 +2967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2746,8 +2975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="position_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_python" style="color: inherit; text-decoration: inherit;">position</a>
@@ -2755,8 +2983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter location.</p>
-</dd><dt class="property-required"
+    <dd>Parameter location.</dd><dt class="property-required"
             title="Required">
         <span id="required_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_python" style="color: inherit; text-decoration: inherit;">required</a>
@@ -2764,8 +2991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If this parameter required.</p>
-</dd><dt class="property-required"
+    <dd>If this parameter required.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2773,8 +2999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2788,8 +3013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter default value.</p>
-</dd><dt class="property-required"
+    <dd>Parameter default value.</dd><dt class="property-required"
             title="Required">
         <span id="desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2797,8 +3021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2806,8 +3029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="position_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_yaml" style="color: inherit; text-decoration: inherit;">position</a>
@@ -2815,8 +3037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter location.</p>
-</dd><dt class="property-required"
+    <dd>Parameter location.</dd><dt class="property-required"
             title="Required">
         <span id="required_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_yaml" style="color: inherit; text-decoration: inherit;">required</a>
@@ -2824,8 +3045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If this parameter required.</p>
-</dd><dt class="property-required"
+    <dd>If this parameter required.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2833,8 +3053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2852,8 +3071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Custom response configuration error code.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
             title="Required">
         <span id="convertedcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#convertedcode_csharp" style="color: inherit; text-decoration: inherit;">Converted<wbr>Code</a>
@@ -2861,8 +3079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Custom error code conversion.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code conversion.</dd><dt class="property-required"
             title="Required">
         <span id="desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -2870,8 +3087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="msg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_csharp" style="color: inherit; text-decoration: inherit;">Msg</a>
@@ -2879,8 +3095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom response configuration error message.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
             title="Required">
         <span id="needconvert_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needconvert_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Convert</a>
@@ -2888,8 +3103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable error code conversion. Default value: <code>false</code>.</p>
-</dd></dl>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2903,8 +3117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Custom response configuration error code.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
             title="Required">
         <span id="convertedcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#convertedcode_go" style="color: inherit; text-decoration: inherit;">Converted<wbr>Code</a>
@@ -2912,8 +3125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Custom error code conversion.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code conversion.</dd><dt class="property-required"
             title="Required">
         <span id="desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -2921,8 +3133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="msg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_go" style="color: inherit; text-decoration: inherit;">Msg</a>
@@ -2930,8 +3141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom response configuration error message.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
             title="Required">
         <span id="needconvert_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needconvert_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Convert</a>
@@ -2939,8 +3149,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable error code conversion. Default value: <code>false</code>.</p>
-</dd></dl>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_hcl" style="color: inherit; text-decoration: inherit;">code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
+            title="Required">
+        <span id="converted_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#converted_code_hcl" style="color: inherit; text-decoration: inherit;">converted_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Custom error code conversion.</dd><dt class="property-required"
+            title="Required">
+        <span id="desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter description.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_hcl" style="color: inherit; text-decoration: inherit;">msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
+            title="Required">
+        <span id="need_convert_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_convert_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>convert</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2954,8 +3209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Custom response configuration error code.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
             title="Required">
         <span id="convertedcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#convertedcode_java" style="color: inherit; text-decoration: inherit;">converted<wbr>Code</a>
@@ -2963,8 +3217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Custom error code conversion.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code conversion.</dd><dt class="property-required"
             title="Required">
         <span id="desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2972,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="msg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_java" style="color: inherit; text-decoration: inherit;">msg</a>
@@ -2981,8 +3233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom response configuration error message.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
             title="Required">
         <span id="needconvert_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needconvert_java" style="color: inherit; text-decoration: inherit;">need<wbr>Convert</a>
@@ -2990,8 +3241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable error code conversion. Default value: <code>false</code>.</p>
-</dd></dl>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3005,8 +3255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Custom response configuration error code.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
             title="Required">
         <span id="convertedcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#convertedcode_nodejs" style="color: inherit; text-decoration: inherit;">converted<wbr>Code</a>
@@ -3014,8 +3263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Custom error code conversion.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code conversion.</dd><dt class="property-required"
             title="Required">
         <span id="desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -3023,8 +3271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="msg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_nodejs" style="color: inherit; text-decoration: inherit;">msg</a>
@@ -3032,8 +3279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom response configuration error message.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
             title="Required">
         <span id="needconvert_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needconvert_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Convert</a>
@@ -3041,8 +3287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable error code conversion. Default value: <code>false</code>.</p>
-</dd></dl>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3056,8 +3301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Custom response configuration error code.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
             title="Required">
         <span id="converted_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#converted_code_python" style="color: inherit; text-decoration: inherit;">converted_<wbr>code</a>
@@ -3065,8 +3309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Custom error code conversion.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code conversion.</dd><dt class="property-required"
             title="Required">
         <span id="desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -3074,8 +3317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_python" style="color: inherit; text-decoration: inherit;">msg</a>
@@ -3083,8 +3325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom response configuration error message.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
             title="Required">
         <span id="need_convert_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_convert_python" style="color: inherit; text-decoration: inherit;">need_<wbr>convert</a>
@@ -3092,8 +3333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable error code conversion. Default value: <code>false</code>.</p>
-</dd></dl>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3107,8 +3347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Custom response configuration error code.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error code.</dd><dt class="property-required"
             title="Required">
         <span id="convertedcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#convertedcode_yaml" style="color: inherit; text-decoration: inherit;">converted<wbr>Code</a>
@@ -3116,8 +3355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Custom error code conversion.</p>
-</dd><dt class="property-required"
+    <dd>Custom error code conversion.</dd><dt class="property-required"
             title="Required">
         <span id="desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -3125,8 +3363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter description.</p>
-</dd><dt class="property-required"
+    <dd>Parameter description.</dd><dt class="property-required"
             title="Required">
         <span id="msg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_yaml" style="color: inherit; text-decoration: inherit;">msg</a>
@@ -3134,8 +3371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom response configuration error message.</p>
-</dd><dt class="property-required"
+    <dd>Custom response configuration error message.</dd><dt class="property-required"
             title="Required">
         <span id="needconvert_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needconvert_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Convert</a>
@@ -3143,8 +3379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable error code conversion. Default value: <code>false</code>.</p>
-</dd></dl>
+    <dd>Whether to enable error code conversion. Default value: <code>false</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3159,7 +3394,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

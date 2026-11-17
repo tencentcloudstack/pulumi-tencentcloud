@@ -2,9 +2,11 @@
 ---
 title: "Privilege"
 title_tag: "tencentcloud.Mysql.Privilege"
-meta_desc: "Documentation for the tencentcloud.Mysql.Privilege resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a mysql account privilege resource to grant different access privilege to different database. A database can be granted by multiple account."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,35 @@ Provides a mysql account privilege resource to grant different access privilege 
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "cdb",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-mysql",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+    name: "subnet-mysql",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
-const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-mysql",
+    description: "mysql test",
+});
+const example = new tencentcloud.mysql.Instance("example", {
     internetService: 1,
     engineVersion: "5.7",
     chargeType: "POSTPAID",
@@ -56,14 +69,15 @@ const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
         max_connections: "1000",
     },
 });
-const exampleAccount = new tencentcloud.mysql.Account("exampleAccount", {
-    mysqlId: exampleInstance.id,
+const exampleAccount = new tencentcloud.mysql.Account("example", {
+    mysqlId: example.id,
+    name: "tf_example",
     password: "Qwer@234",
     description: "desc.",
     maxUserConnections: 10,
 });
-const examplePrivilege = new tencentcloud.mysql.Privilege("examplePrivilege", {
-    mysqlId: exampleInstance.id,
+const examplePrivilege = new tencentcloud.mysql.Privilege("example", {
+    mysqlId: example.id,
     accountName: exampleAccount.name,
     globals: ["TRIGGER"],
     databases: [
@@ -117,20 +131,30 @@ const examplePrivilege = new tencentcloud.mysql.Privilege("examplePrivilege", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="cdb")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-mysql",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[0].name,
+    name="subnet-mysql",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
-example_instance = tencentcloud.mysql.Instance("exampleInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-mysql",
+    description="mysql test")
+example = tencentcloud.mysql.Instance("example",
     internet_service=1,
     engine_version="5.7",
     charge_type="POSTPAID",
@@ -152,70 +176,229 @@ example_instance = tencentcloud.mysql.Instance("exampleInstance",
         "character_set_server": "utf8",
         "max_connections": "1000",
     })
-example_account = tencentcloud.mysql.Account("exampleAccount",
-    mysql_id=example_instance.id,
+example_account = tencentcloud.mysql.Account("example",
+    mysql_id=example.id,
+    name="tf_example",
     password="Qwer@234",
     description="desc.",
     max_user_connections=10)
-example_privilege = tencentcloud.mysql.Privilege("examplePrivilege",
-    mysql_id=example_instance.id,
+example_privilege = tencentcloud.mysql.Privilege("example",
+    mysql_id=example.id,
     account_name=example_account.name,
     globals=["TRIGGER"],
     databases=[
-        tencentcloud.mysql.PrivilegeDatabaseArgs(
-            privileges=[
+        {
+            "privileges": [
                 "SELECT",
                 "INSERT",
                 "UPDATE",
                 "DELETE",
                 "CREATE",
             ],
-            database_name="sys",
-        ),
-        tencentcloud.mysql.PrivilegeDatabaseArgs(
-            privileges=["SELECT"],
-            database_name="performance_schema",
-        ),
+            "database_name": "sys",
+        },
+        {
+            "privileges": ["SELECT"],
+            "database_name": "performance_schema",
+        },
     ],
     tables=[
-        tencentcloud.mysql.PrivilegeTableArgs(
-            privileges=[
+        {
+            "privileges": [
                 "SELECT",
                 "INSERT",
                 "UPDATE",
                 "DELETE",
                 "CREATE",
             ],
-            database_name="mysql",
-            table_name="slow_log",
-        ),
-        tencentcloud.mysql.PrivilegeTableArgs(
-            privileges=[
+            "database_name": "mysql",
+            "table_name": "slow_log",
+        },
+        {
+            "privileges": [
                 "SELECT",
                 "INSERT",
                 "UPDATE",
             ],
-            database_name="mysql",
-            table_name="user",
-        ),
+            "database_name": "mysql",
+            "table_name": "user",
+        },
     ],
-    columns=[tencentcloud.mysql.PrivilegeColumnArgs(
-        privileges=[
+    columns=[{
+        "privileges": [
             "SELECT",
             "INSERT",
             "UPDATE",
             "REFERENCES",
         ],
-        database_name="mysql",
-        table_name="user",
-        column_name="host",
-    )])
+        "database_name": "mysql",
+        "table_name": "user",
+        "column_name": "host",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "cdb",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-mysql"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			Name:             pulumi.String("subnet-mysql"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-mysql"),
+			Description: pulumi.String("mysql test"),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
+			InternetService:  pulumi.Int(1),
+			EngineVersion:    pulumi.String("5.7"),
+			ChargeType:       pulumi.String("POSTPAID"),
+			RootPassword:     pulumi.String("PassWord123"),
+			SlaveDeployMode:  pulumi.Int(0),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			SlaveSyncMode:    pulumi.Int(1),
+			InstanceName:     pulumi.String("tf-example-mysql"),
+			MemSize:          pulumi.Int(4000),
+			VolumeSize:       pulumi.Int(200),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			IntranetPort:     pulumi.Int(3306),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"name": pulumi.String("test"),
+			},
+			Parameters: pulumi.StringMap{
+				"character_set_server": pulumi.String("utf8"),
+				"max_connections":      pulumi.String("1000"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleAccount, err := mysql.NewAccount(ctx, "example", &mysql.AccountArgs{
+			MysqlId:            example.ID().ToIDOutput().ToStringOutput(),
+			Name:               pulumi.String("tf_example"),
+			Password:           pulumi.String("Qwer@234"),
+			Description:        pulumi.String("desc."),
+			MaxUserConnections: pulumi.Int(10),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = mysql.NewPrivilege(ctx, "example", &mysql.PrivilegeArgs{
+			MysqlId:     example.ID().ToIDOutput().ToStringOutput(),
+			AccountName: exampleAccount.Name,
+			Globals: pulumi.StringArray{
+				pulumi.String("TRIGGER"),
+			},
+			Databases: mysql.PrivilegeDatabaseArray{
+				&mysql.PrivilegeDatabaseArgs{
+					Privileges: pulumi.StringArray{
+						pulumi.String("SELECT"),
+						pulumi.String("INSERT"),
+						pulumi.String("UPDATE"),
+						pulumi.String("DELETE"),
+						pulumi.String("CREATE"),
+					},
+					DatabaseName: pulumi.String("sys"),
+				},
+				&mysql.PrivilegeDatabaseArgs{
+					Privileges: pulumi.StringArray{
+						pulumi.String("SELECT"),
+					},
+					DatabaseName: pulumi.String("performance_schema"),
+				},
+			},
+			Tables: mysql.PrivilegeTableArray{
+				&mysql.PrivilegeTableArgs{
+					Privileges: pulumi.StringArray{
+						pulumi.String("SELECT"),
+						pulumi.String("INSERT"),
+						pulumi.String("UPDATE"),
+						pulumi.String("DELETE"),
+						pulumi.String("CREATE"),
+					},
+					DatabaseName: pulumi.String("mysql"),
+					TableName:    pulumi.String("slow_log"),
+				},
+				&mysql.PrivilegeTableArgs{
+					Privileges: pulumi.StringArray{
+						pulumi.String("SELECT"),
+						pulumi.String("INSERT"),
+						pulumi.String("UPDATE"),
+					},
+					DatabaseName: pulumi.String("mysql"),
+					TableName:    pulumi.String("user"),
+				},
+			},
+			Columns: mysql.PrivilegeColumnArray{
+				&mysql.PrivilegeColumnArgs{
+					Privileges: pulumi.StringArray{
+						pulumi.String("SELECT"),
+						pulumi.String("INSERT"),
+						pulumi.String("UPDATE"),
+						pulumi.String("REFERENCES"),
+					},
+					DatabaseName: pulumi.String("mysql"),
+					TableName:    pulumi.String("user"),
+					ColumnName:   pulumi.String("host"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -227,23 +410,26 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-mysql",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "subnet-mysql",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-mysql",
         Description = "mysql test",
     });
 
-    var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Mysql.Instance("example", new()
     {
         InternetService = 1,
         EngineVersion = "5.7",
@@ -273,17 +459,18 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleAccount = new Tencentcloud.Mysql.Account("exampleAccount", new()
+    var exampleAccount = new Tencentcloud.Mysql.Account("example", new()
     {
-        MysqlId = exampleInstance.Id,
+        MysqlId = example.Id,
+        Name = "tf_example",
         Password = "Qwer@234",
         Description = "desc.",
         MaxUserConnections = 10,
     });
 
-    var examplePrivilege = new Tencentcloud.Mysql.Privilege("examplePrivilege", new()
+    var examplePrivilege = new Tencentcloud.Mysql.Privilege("example", new()
     {
-        MysqlId = exampleInstance.Id,
+        MysqlId = example.Id,
         AccountName = exampleAccount.Name,
         Globals = new[]
         {
@@ -359,151 +546,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "cdb",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("mysql test"),
-		})
-		if err != nil {
-			return err
-		}
-		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-			InternetService:  pulumi.Int(1),
-			EngineVersion:    pulumi.String("5.7"),
-			ChargeType:       pulumi.String("POSTPAID"),
-			RootPassword:     pulumi.String("PassWord123"),
-			SlaveDeployMode:  pulumi.Int(0),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			SlaveSyncMode:    pulumi.Int(1),
-			InstanceName:     pulumi.String("tf-example-mysql"),
-			MemSize:          pulumi.Int(4000),
-			VolumeSize:       pulumi.Int(200),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			IntranetPort:     pulumi.Int(3306),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"name": pulumi.Any("test"),
-			},
-			Parameters: pulumi.Map{
-				"character_set_server": pulumi.Any("utf8"),
-				"max_connections":      pulumi.Any("1000"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleAccount, err := Mysql.NewAccount(ctx, "exampleAccount", &Mysql.AccountArgs{
-			MysqlId:            exampleInstance.ID(),
-			Password:           pulumi.String("Qwer@234"),
-			Description:        pulumi.String("desc."),
-			MaxUserConnections: pulumi.Int(10),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Mysql.NewPrivilege(ctx, "examplePrivilege", &Mysql.PrivilegeArgs{
-			MysqlId:     exampleInstance.ID(),
-			AccountName: exampleAccount.Name,
-			Globals: pulumi.StringArray{
-				pulumi.String("TRIGGER"),
-			},
-			Databases: mysql.PrivilegeDatabaseArray{
-				&mysql.PrivilegeDatabaseArgs{
-					Privileges: pulumi.StringArray{
-						pulumi.String("SELECT"),
-						pulumi.String("INSERT"),
-						pulumi.String("UPDATE"),
-						pulumi.String("DELETE"),
-						pulumi.String("CREATE"),
-					},
-					DatabaseName: pulumi.String("sys"),
-				},
-				&mysql.PrivilegeDatabaseArgs{
-					Privileges: pulumi.StringArray{
-						pulumi.String("SELECT"),
-					},
-					DatabaseName: pulumi.String("performance_schema"),
-				},
-			},
-			Tables: mysql.PrivilegeTableArray{
-				&mysql.PrivilegeTableArgs{
-					Privileges: pulumi.StringArray{
-						pulumi.String("SELECT"),
-						pulumi.String("INSERT"),
-						pulumi.String("UPDATE"),
-						pulumi.String("DELETE"),
-						pulumi.String("CREATE"),
-					},
-					DatabaseName: pulumi.String("mysql"),
-					TableName:    pulumi.String("slow_log"),
-				},
-				&mysql.PrivilegeTableArgs{
-					Privileges: pulumi.StringArray{
-						pulumi.String("SELECT"),
-						pulumi.String("INSERT"),
-						pulumi.String("UPDATE"),
-					},
-					DatabaseName: pulumi.String("mysql"),
-					TableName:    pulumi.String("user"),
-				},
-			},
-			Columns: mysql.PrivilegeColumnArray{
-				&mysql.PrivilegeColumnArgs{
-					Privileges: pulumi.StringArray{
-						pulumi.String("SELECT"),
-						pulumi.String("INSERT"),
-						pulumi.String("UPDATE"),
-						pulumi.String("REFERENCES"),
-					},
-					DatabaseName: pulumi.String("mysql"),
-					TableName:    pulumi.String("user"),
-					ColumnName:   pulumi.String("host"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -512,14 +559,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
-import com.pulumi.tencentcloud.Mysql.Instance;
-import com.pulumi.tencentcloud.Mysql.InstanceArgs;
 import com.pulumi.tencentcloud.Mysql.Account;
 import com.pulumi.tencentcloud.Mysql.AccountArgs;
 import com.pulumi.tencentcloud.Mysql.Privilege;
@@ -527,8 +568,8 @@ import com.pulumi.tencentcloud.Mysql.PrivilegeArgs;
 import com.pulumi.tencentcloud.Mysql.inputs.PrivilegeDatabaseArgs;
 import com.pulumi.tencentcloud.Mysql.inputs.PrivilegeTableArgs;
 import com.pulumi.tencentcloud.Mysql.inputs.PrivilegeColumnArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -544,28 +585,31 @@ public class App {
             .product("cdb")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-mysql")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[0].name())
+            .name("subnet-mysql")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-mysql")
             .description("mysql test")
             .build());
 
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Mysql.Instance("example", com.pulumi.tencentcloud.Mysql.InstanceArgs.builder()
             .internetService(1)
             .engineVersion("5.7")
             .chargeType("POSTPAID")
             .rootPassword("PassWord123")
             .slaveDeployMode(0)
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .slaveSyncMode(1)
             .instanceName("tf-example-mysql")
             .memSize(4000)
@@ -581,15 +625,16 @@ public class App {
             ))
             .build());
 
-        var exampleAccount = new Account("exampleAccount", AccountArgs.builder()        
-            .mysqlId(exampleInstance.id())
+        var exampleAccount = new Account("exampleAccount", AccountArgs.builder()
+            .mysqlId(example.id())
+            .name("tf_example")
             .password("Qwer@234")
             .description("desc.")
             .maxUserConnections(10)
             .build());
 
-        var examplePrivilege = new Privilege("examplePrivilege", PrivilegeArgs.builder()        
-            .mysqlId(exampleInstance.id())
+        var examplePrivilege = new Privilege("examplePrivilege", PrivilegeArgs.builder()
+            .mysqlId(example.id())
             .accountName(exampleAccount.name())
             .globals("TRIGGER")
             .databases(            
@@ -640,24 +685,33 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-mysql
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[0].name}
+      name: subnet-mysql
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-mysql
       description: mysql test
-  exampleInstance:
+  example:
     type: tencentcloud:Mysql:Instance
     properties:
       internetService: 1
@@ -682,15 +736,18 @@ resources:
         max_connections: '1000'
   exampleAccount:
     type: tencentcloud:Mysql:Account
+    name: example
     properties:
-      mysqlId: ${exampleInstance.id}
+      mysqlId: ${example.id}
+      name: tf_example
       password: Qwer@234
       description: desc.
       maxUserConnections: 10
   examplePrivilege:
     type: tencentcloud:Mysql:Privilege
+    name: example
     properties:
-      mysqlId: ${exampleInstance.id}
+      mysqlId: ${example.id}
       accountName: ${exampleAccount.name}
       globals:
         - TRIGGER
@@ -732,76 +789,202 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: cdb
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "cdb"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-mysql"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  name              = "subnet-mysql"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-mysql"
+  description = "mysql test"
+}
+resource "tencentcloud_mysql_instance" "example" {
+  internet_service  = 1
+  engine_version    = "5.7"
+  charge_type       = "POSTPAID"
+  root_password     = "PassWord123"
+  slave_deploy_mode = 0
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  slave_sync_mode   = 1
+  instance_name     = "tf-example-mysql"
+  mem_size          = 4000
+  volume_size       = 200
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  intranet_port     = 3306
+  security_groups   = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "name" = "test"
+  }
+  parameters = {
+    "character_set_server" = "utf8"
+    "max_connections"      = "1000"
+  }
+}
+resource "tencentcloud_mysql_account" "example" {
+  mysql_id             = tencentcloud_mysql_instance.example.id
+  name                 = "tf_example"
+  password             = "Qwer@234"
+  description          = "desc."
+  max_user_connections = 10
+}
+resource "tencentcloud_mysql_privilege" "example" {
+  mysql_id     = tencentcloud_mysql_instance.example.id
+  account_name = tencentcloud_mysql_account.example.name
+  globals      = ["TRIGGER"]
+  databases {
+    privileges    = ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE"]
+    database_name = "sys"
+  }
+  databases {
+    privileges    = ["SELECT"]
+    database_name = "performance_schema"
+  }
+  tables {
+    privileges    = ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE"]
+    database_name = "mysql"
+    table_name    = "slow_log"
+  }
+  tables {
+    privileges    = ["SELECT", "INSERT", "UPDATE"]
+    database_name = "mysql"
+    table_name    = "user"
+  }
+  columns {
+    privileges    = ["SELECT", "INSERT", "UPDATE", "REFERENCES"]
+    database_name = "mysql"
+    table_name    = "user"
+    column_name   = "host"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+  - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+* Read:
+  - [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/236/17500)
+  - [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499)
+* Update:
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+  - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+* Delete:
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+  - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
 
 
 
 ## Create Privilege Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-              <span class="nx">account_host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">columns</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.PrivilegeColumnArgs]]</span> = None<span class="p">,</span>
-              <span class="nx">databases</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.PrivilegeDatabaseArgs]]</span> = None<span class="p">,</span>
-              <span class="nx">globals</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-              <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">tables</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.PrivilegeTableArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+              <span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">globals</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+              <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">account_host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">columns</span><span class="p">:</span> <span class="nx">Optional[Sequence[PrivilegeColumnArgs]]</span> = None<span class="p">,</span>
+              <span class="nx">databases</span><span class="p">:</span> <span class="nx">Optional[Sequence[PrivilegeDatabaseArgs]]</span> = None<span class="p">,</span>
+              <span class="nx">tables</span><span class="p">:</span> <span class="nx">Optional[Sequence[PrivilegeTableArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPrivilege</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Privilege</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPrivilege</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Privilege</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Privilege</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PrivilegeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:Privilege</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:Privilege</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mysql_privilege&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -822,7 +1005,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -939,11 +1122,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Privilege Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Privilege resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -959,8 +1150,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-required"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
             title="Required">
         <span id="globals_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_csharp" style="color: inherit; text-decoration: inherit;">Globals</a>
@@ -968,8 +1158,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="mysqlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_csharp" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -977,8 +1166,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accounthost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accounthost_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Host</a>
@@ -986,35 +1174,31 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="columns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_csharp" style="color: inherit; text-decoration: inherit;">Columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Column<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegecolumn">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Column&gt;</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="databases_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_csharp" style="color: inherit; text-decoration: inherit;">Databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Database<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegedatabase">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Database&gt;</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_csharp" style="color: inherit; text-decoration: inherit;">Tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Table<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegetable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1028,8 +1212,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-required"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
             title="Required">
         <span id="globals_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_go" style="color: inherit; text-decoration: inherit;">Globals</a>
@@ -1037,8 +1220,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="mysqlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_go" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -1046,8 +1228,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accounthost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accounthost_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Host</a>
@@ -1055,8 +1236,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="columns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_go" style="color: inherit; text-decoration: inherit;">Columns</a>
@@ -1064,8 +1244,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegecolumn">[]Privilege<wbr>Column<wbr>Args</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="databases_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_go" style="color: inherit; text-decoration: inherit;">Databases</a>
@@ -1073,8 +1252,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegedatabase">[]Privilege<wbr>Database<wbr>Args</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_go" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -1082,8 +1260,69 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegetable">[]Privilege<wbr>Table<wbr>Args</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
+            title="Required">
+        <span id="globals_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_hcl" style="color: inherit; text-decoration: inherit;">globals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="account_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_host_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="columns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_hcl" style="color: inherit; text-decoration: inherit;">columns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#privilegecolumn">list(object)</a></span>
+    </dt>
+    <dd>Column privileges list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="databases_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_hcl" style="color: inherit; text-decoration: inherit;">databases</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#privilegedatabase">list(object)</a></span>
+    </dt>
+    <dd>Database privileges list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_hcl" style="color: inherit; text-decoration: inherit;">tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#privilegetable">list(object)</a></span>
+    </dt>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,8 +1336,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-required"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
             title="Required">
         <span id="globals_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_java" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1106,8 +1344,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="mysqlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_java" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -1115,8 +1352,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accounthost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accounthost_java" style="color: inherit; text-decoration: inherit;">account<wbr>Host</a>
@@ -1124,35 +1360,31 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="columns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_java" style="color: inherit; text-decoration: inherit;">columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">List&lt;Privilege<wbr>Column<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegecolumn">List&lt;Privilege<wbr>Column&gt;</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="databases_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_java" style="color: inherit; text-decoration: inherit;">databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">List&lt;Privilege<wbr>Database<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegedatabase">List&lt;Privilege<wbr>Database&gt;</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_java" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">List&lt;Privilege<wbr>Table<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegetable">List&lt;Privilege<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1166,8 +1398,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-required"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
             title="Required">
         <span id="globals_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_nodejs" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1175,8 +1406,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="mysqlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_nodejs" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -1184,8 +1414,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accounthost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accounthost_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Host</a>
@@ -1193,35 +1422,31 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="columns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_nodejs" style="color: inherit; text-decoration: inherit;">columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">Privilege<wbr>Column<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#privilegecolumn">Privilege<wbr>Column[]</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="databases_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_nodejs" style="color: inherit; text-decoration: inherit;">databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">Privilege<wbr>Database<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#privilegedatabase">Privilege<wbr>Database[]</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_nodejs" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">Privilege<wbr>Table<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#privilegetable">Privilege<wbr>Table[]</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1460,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-required"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
             title="Required">
         <span id="globals_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_python" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1244,8 +1468,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="mysql_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_python" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
@@ -1253,8 +1476,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="account_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_host_python" style="color: inherit; text-decoration: inherit;">account_<wbr>host</a>
@@ -1262,35 +1484,31 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="columns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_python" style="color: inherit; text-decoration: inherit;">columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">Privilege<wbr>Column<wbr>Args]</a></span>
+        <span class="property-type"><a href="#privilegecolumn">Sequence[Privilege<wbr>Column<wbr>Args]</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="databases_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_python" style="color: inherit; text-decoration: inherit;">databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">Privilege<wbr>Database<wbr>Args]</a></span>
+        <span class="property-type"><a href="#privilegedatabase">Sequence[Privilege<wbr>Database<wbr>Args]</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_python" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">Privilege<wbr>Table<wbr>Args]</a></span>
+        <span class="property-type"><a href="#privilegetable">Sequence[Privilege<wbr>Table<wbr>Args]</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1304,8 +1522,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-required"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-required"
             title="Required">
         <span id="globals_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#globals_yaml" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1313,8 +1530,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="mysqlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_yaml" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -1322,8 +1538,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accounthost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accounthost_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Host</a>
@@ -1331,8 +1546,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="columns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#columns_yaml" style="color: inherit; text-decoration: inherit;">columns</a>
@@ -1340,8 +1554,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegecolumn">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="databases_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databases_yaml" style="color: inherit; text-decoration: inherit;">databases</a>
@@ -1349,8 +1562,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegedatabase">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_yaml" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -1358,8 +1570,7 @@ The Privilege resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegetable">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1380,8 +1591,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1605,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1410,8 +1633,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1425,8 +1647,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1440,8 +1661,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1455,8 +1675,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,126 +1685,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Privilege resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PrivilegeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Privilege</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PrivilegeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Privilege</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">account_host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">columns</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.PrivilegeColumnArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">databases</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.PrivilegeDatabaseArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">columns</span><span class="p">:</span> <span class="nx">Optional[Sequence[PrivilegeColumnArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">databases</span><span class="p">:</span> <span class="nx">Optional[Sequence[PrivilegeDatabaseArgs]]</span> = None<span class="p">,</span>
         <span class="nx">globals</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tables</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.PrivilegeTableArgs]]</span> = None<span class="p">) -&gt;</span> Privilege</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tables</span><span class="p">:</span> <span class="nx">Optional[Sequence[PrivilegeTableArgs]]</span> = None<span class="p">) -&gt;</span> Privilege</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPrivilege<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PrivilegeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Privilege</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPrivilege<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PrivilegeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Privilege</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Privilege</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PrivilegeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Privilege</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PrivilegeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Privilege</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PrivilegeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Privilege</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PrivilegeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPrivilege</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mysql:Privilege</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mysql_privilege</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PrivilegeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PrivilegeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1593,28 +1851,31 @@ Get an existing Privilege resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PrivilegeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1622,28 +1883,31 @@ Get an existing Privilege resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PrivilegeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1663,8 +1927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_accountname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountname_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -1672,26 +1935,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-optional"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_columns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_csharp" style="color: inherit; text-decoration: inherit;">Columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Column<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegecolumn">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Column&gt;</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_databases_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_csharp" style="color: inherit; text-decoration: inherit;">Databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Database<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegedatabase">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Database&gt;</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_globals_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_csharp" style="color: inherit; text-decoration: inherit;">Globals</a>
@@ -1699,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_mysqlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysqlid_csharp" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -1708,17 +1967,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tables_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_csharp" style="color: inherit; text-decoration: inherit;">Tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Table<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegetable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Privilege<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1732,8 +1989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_accountname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountname_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -1741,8 +1997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-optional"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_columns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_go" style="color: inherit; text-decoration: inherit;">Columns</a>
@@ -1750,8 +2005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegecolumn">[]Privilege<wbr>Column<wbr>Args</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_databases_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_go" style="color: inherit; text-decoration: inherit;">Databases</a>
@@ -1759,8 +2013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegedatabase">[]Privilege<wbr>Database<wbr>Args</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_globals_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_go" style="color: inherit; text-decoration: inherit;">Globals</a>
@@ -1768,8 +2021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_mysqlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysqlid_go" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -1777,8 +2029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tables_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_go" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -1786,8 +2037,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegetable">[]Privilege<wbr>Table<wbr>Args</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_account_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_host_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_columns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_hcl" style="color: inherit; text-decoration: inherit;">columns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#privilegecolumn">list(object)</a></span>
+    </dt>
+    <dd>Column privileges list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_databases_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_hcl" style="color: inherit; text-decoration: inherit;">databases</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#privilegedatabase">list(object)</a></span>
+    </dt>
+    <dd>Database privileges list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_globals_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_hcl" style="color: inherit; text-decoration: inherit;">globals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_hcl" style="color: inherit; text-decoration: inherit;">tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#privilegetable">list(object)</a></span>
+    </dt>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1801,8 +2113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_accountname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountname_java" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -1810,26 +2121,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-optional"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_columns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_java" style="color: inherit; text-decoration: inherit;">columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">List&lt;Privilege<wbr>Column<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegecolumn">List&lt;Privilege<wbr>Column&gt;</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_databases_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_java" style="color: inherit; text-decoration: inherit;">databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">List&lt;Privilege<wbr>Database<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegedatabase">List&lt;Privilege<wbr>Database&gt;</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_globals_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_java" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1837,8 +2145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_mysqlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysqlid_java" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -1846,17 +2153,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tables_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_java" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">List&lt;Privilege<wbr>Table<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#privilegetable">List&lt;Privilege<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1870,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_accountname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountname_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -1879,26 +2183,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-optional"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_columns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_nodejs" style="color: inherit; text-decoration: inherit;">columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">Privilege<wbr>Column<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#privilegecolumn">Privilege<wbr>Column[]</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_databases_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_nodejs" style="color: inherit; text-decoration: inherit;">databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">Privilege<wbr>Database<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#privilegedatabase">Privilege<wbr>Database[]</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_globals_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_nodejs" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1906,8 +2207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_mysqlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysqlid_nodejs" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -1915,17 +2215,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tables_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_nodejs" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">Privilege<wbr>Table<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#privilegetable">Privilege<wbr>Table[]</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1939,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_account_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_name_python" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
@@ -1948,26 +2245,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-optional"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_columns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_python" style="color: inherit; text-decoration: inherit;">columns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegecolumn">Privilege<wbr>Column<wbr>Args]</a></span>
+        <span class="property-type"><a href="#privilegecolumn">Sequence[Privilege<wbr>Column<wbr>Args]</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_databases_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_python" style="color: inherit; text-decoration: inherit;">databases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegedatabase">Privilege<wbr>Database<wbr>Args]</a></span>
+        <span class="property-type"><a href="#privilegedatabase">Sequence[Privilege<wbr>Database<wbr>Args]</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_globals_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_python" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -1975,8 +2269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_mysql_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysql_id_python" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
@@ -1984,17 +2277,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tables_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_python" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#privilegetable">Privilege<wbr>Table<wbr>Args]</a></span>
+        <span class="property-type"><a href="#privilegetable">Sequence[Privilege<wbr>Table<wbr>Args]</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2008,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account host, default is <code>%</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Account host, default is <code>%</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_accountname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountname_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -2017,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name.the forbidden value is:root,mysql.sys,tencentroot.</p>
-</dd><dt class="property-optional"
+    <dd>Account name.the forbidden value is:root,mysql.sys,tencentroot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_columns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_columns_yaml" style="color: inherit; text-decoration: inherit;">columns</a>
@@ -2026,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegecolumn">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Column privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Column privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_databases_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databases_yaml" style="color: inherit; text-decoration: inherit;">databases</a>
@@ -2035,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegedatabase">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Database privileges list.</p>
-</dd><dt class="property-optional"
+    <dd>Database privileges list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_globals_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_globals_yaml" style="color: inherit; text-decoration: inherit;">globals</a>
@@ -2044,8 +2331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_mysqlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mysqlid_yaml" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -2053,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tables_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tables_yaml" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -2062,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#privilegetable">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Table privileges list.</p>
-</dd></dl>
+    <dd>Table privileges list.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2078,7 +2362,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="privilegecolumn">Privilege<wbr>Column</h4>
+<h4 id="privilegecolumn">
+Privilege<wbr>Column<pulumi-choosable type="language" values="python,go" class="inline">, Privilege<wbr>Column<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2090,8 +2376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Column name.</p>
-</dd><dt class="property-required"
+    <dd>Column name.</dd><dt class="property-required"
             title="Required">
         <span id="databasename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasename_csharp" style="color: inherit; text-decoration: inherit;">Database<wbr>Name</a>
@@ -2099,8 +2384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_csharp" style="color: inherit; text-decoration: inherit;">Privileges</a>
@@ -2108,8 +2392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</p>
-</dd><dt class="property-required"
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -2117,8 +2400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2132,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Column name.</p>
-</dd><dt class="property-required"
+    <dd>Column name.</dd><dt class="property-required"
             title="Required">
         <span id="databasename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasename_go" style="color: inherit; text-decoration: inherit;">Database<wbr>Name</a>
@@ -2141,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_go" style="color: inherit; text-decoration: inherit;">Privileges</a>
@@ -2150,8 +2430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</p>
-</dd><dt class="property-required"
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -2159,8 +2438,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="column_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_name_hcl" style="color: inherit; text-decoration: inherit;">column_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Column name.</dd><dt class="property-required"
+            title="Required">
+        <span id="database_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_name_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-required"
+            title="Required">
+        <span id="privileges_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_hcl" style="color: inherit; text-decoration: inherit;">privileges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2174,8 +2490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Column name.</p>
-</dd><dt class="property-required"
+    <dd>Column name.</dd><dt class="property-required"
             title="Required">
         <span id="databasename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasename_java" style="color: inherit; text-decoration: inherit;">database<wbr>Name</a>
@@ -2183,8 +2498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_java" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2192,8 +2506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</p>
-</dd><dt class="property-required"
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2201,8 +2514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2216,8 +2528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Column name.</p>
-</dd><dt class="property-required"
+    <dd>Column name.</dd><dt class="property-required"
             title="Required">
         <span id="databasename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasename_nodejs" style="color: inherit; text-decoration: inherit;">database<wbr>Name</a>
@@ -2225,8 +2536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_nodejs" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2234,8 +2544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</p>
-</dd><dt class="property-required"
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2243,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2258,8 +2566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Column name.</p>
-</dd><dt class="property-required"
+    <dd>Column name.</dd><dt class="property-required"
             title="Required">
         <span id="database_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_name_python" style="color: inherit; text-decoration: inherit;">database_<wbr>name</a>
@@ -2267,8 +2574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_python" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2276,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</p>
-</dd><dt class="property-required"
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
             title="Required">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -2285,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2300,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Column name.</p>
-</dd><dt class="property-required"
+    <dd>Column name.</dd><dt class="property-required"
             title="Required">
         <span id="databasename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasename_yaml" style="color: inherit; text-decoration: inherit;">database<wbr>Name</a>
@@ -2309,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_yaml" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2318,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</p>
-</dd><dt class="property-required"
+    <dd>Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2327,12 +2628,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="privilegedatabase">Privilege<wbr>Database</h4>
+<h4 id="privilegedatabase">
+Privilege<wbr>Database<pulumi-choosable type="language" values="python,go" class="inline">, Privilege<wbr>Database<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2344,8 +2646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_csharp" style="color: inherit; text-decoration: inherit;">Privileges</a>
@@ -2353,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</p>
-</dd></dl>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2368,8 +2668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_go" style="color: inherit; text-decoration: inherit;">Privileges</a>
@@ -2377,8 +2676,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</p>
-</dd></dl>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_name_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-required"
+            title="Required">
+        <span id="privileges_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_hcl" style="color: inherit; text-decoration: inherit;">privileges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2392,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_java" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2401,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</p>
-</dd></dl>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2416,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_nodejs" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2425,8 +2742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</p>
-</dd></dl>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2440,8 +2756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_python" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2449,8 +2764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</p>
-</dd></dl>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2464,8 +2778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_yaml" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2473,12 +2786,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</p>
-</dd></dl>
+    <dd>Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="privilegetable">Privilege<wbr>Table</h4>
+<h4 id="privilegetable">
+Privilege<wbr>Table<pulumi-choosable type="language" values="python,go" class="inline">, Privilege<wbr>Table<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2490,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_csharp" style="color: inherit; text-decoration: inherit;">Privileges</a>
@@ -2499,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</p>
-</dd><dt class="property-required"
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -2508,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2523,8 +2834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_go" style="color: inherit; text-decoration: inherit;">Privileges</a>
@@ -2532,8 +2842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</p>
-</dd><dt class="property-required"
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -2541,8 +2850,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_name_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-required"
+            title="Required">
+        <span id="privileges_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_hcl" style="color: inherit; text-decoration: inherit;">privileges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2556,8 +2894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_java" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2565,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</p>
-</dd><dt class="property-required"
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2574,8 +2910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2589,8 +2924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_nodejs" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2598,8 +2932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</p>
-</dd><dt class="property-required"
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2607,8 +2940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2622,8 +2954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_python" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2631,8 +2962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</p>
-</dd><dt class="property-required"
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
             title="Required">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -2640,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2655,8 +2984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="privileges_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privileges_yaml" style="color: inherit; text-decoration: inherit;">privileges</a>
@@ -2664,8 +2992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</p>
-</dd><dt class="property-required"
+    <dd>Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2673,8 +3000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name.</p>
-</dd></dl>
+    <dd>Table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2686,7 +3012,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

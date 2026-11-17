@@ -2,9 +2,11 @@
 ---
 title: "getMembers"
 title_tag: "tencentcloud.Organization.getMembers"
-meta_desc: "Documentation for the tencentcloud.Organization.getMembers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of organization members"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,47 @@ Use this data source to query detailed information of organization members
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all members
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const members = tencentcloud.Organization.getMembers({});
+const example = tencentcloud.organization.getMembers({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-members = tencentcloud.Organization.get_members()
+example = tencentcloud.organization.get_members()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var members = Tencentcloud.Organization.GetMembers.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/organization"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Organization.GetMembers(ctx, nil, nil)
+		_, err := organization.GetMembers(ctx, &organization.GetMembersArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Organization.GetMembers.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Organization.OrganizationFunctions;
 import com.pulumi.tencentcloud.Organization.inputs.GetMembersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +109,197 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var members = OrganizationFunctions.getMembers();
+        final var example = OrganizationFunctions.getMembers(GetMembersArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  members:
+  example:
     fn::invoke:
-      Function: tencentcloud:Organization:getMembers
-      Arguments: {}
+      function: tencentcloud:Organization:getMembers
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_organization_getmembers" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query members by filter
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.organization.getMembers({
+    lang: "en",
+    searchKey: "tf-example",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.organization.get_members(lang="en",
+    search_key="tf-example")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/organization"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := organization.GetMembers(ctx, &organization.GetMembersArgs{
+			Lang:      pulumi.StringRef("en"),
+			SearchKey: pulumi.StringRef("tf-example"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Organization.GetMembers.Invoke(new()
+    {
+        Lang = "en",
+        SearchKey = "tf-example",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Organization.OrganizationFunctions;
+import com.pulumi.tencentcloud.Organization.inputs.GetMembersArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = OrganizationFunctions.getMembers(GetMembersArgs.builder()
+            .lang("en")
+            .searchKey("tf-example")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Organization:getMembers
+      arguments:
+        lang: en
+        searchKey: tf-example
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_organization_getmembers" "example" {
+  lang       = "en"
+  search_key = "tf-example"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
 
 
 
@@ -105,7 +311,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +319,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getMembers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMembersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>></span
+><span class="k">function </span>getMembers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMembersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>></span
 ><span class="k">
-function </span>getMembersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMembersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>></span
+function </span>getMembersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMembersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -131,12 +337,12 @@ function </span>getMembersOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">search_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetMembersResult</span
 ><span class="k">
-def </span>get_members_output<span class="p">(</span><span class="nx">auth_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">lang</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">product</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">search_key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMembersResult]</span
+def </span>get_members_output<span class="p">(</span><span class="nx">auth_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">lang</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">product</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">search_key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMembersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -161,7 +367,8 @@ func </span>GetMembersOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetMembers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetMembersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMembersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMembersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMembersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -170,7 +377,8 @@ func </span>GetMembersOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> </span>getMembers<span class="p">(</span><span class="nx">GetMembersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> </span>getMembers<span class="p">(</span><span class="nx">GetMembersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMembersResult</a></span>> </span>getMembers<span class="p">(</span><span class="nx">GetMembersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,6 +390,15 @@ func </span>GetMembersOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Organization/getMembers:getMembers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_organization_get_members&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -200,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Entity name.</p>
-</dd><dt class="property-optional"
+    <dd>Entity name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lang_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_csharp" style="color: inherit; text-decoration: inherit;">Lang</a>
@@ -209,8 +425,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</p>
-</dd><dt class="property-optional"
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
             title="Optional">
         <span id="product_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_csharp" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -218,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation of the trusted service, which is required during querying the trusted service admin.</p>
-</dd><dt class="property-optional"
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -227,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Key</a>
@@ -236,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Search by member name or ID.</p>
-</dd></dl>
+    <dd>Search by member name or ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -251,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Entity name.</p>
-</dd><dt class="property-optional"
+    <dd>Entity name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lang_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_go" style="color: inherit; text-decoration: inherit;">Lang</a>
@@ -260,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</p>
-</dd><dt class="property-optional"
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
             title="Optional">
         <span id="product_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_go" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -269,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation of the trusted service, which is required during querying the trusted service admin.</p>
-</dd><dt class="property-optional"
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -278,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Key</a>
@@ -287,8 +495,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Search by member name or ID.</p>
-</dd></dl>
+    <dd>Search by member name or ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="auth_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_name_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Entity name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lang_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_hcl" style="color: inherit; text-decoration: inherit;">lang</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_hcl" style="color: inherit; text-decoration: inherit;">product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Search by member name or ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -302,8 +555,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Entity name.</p>
-</dd><dt class="property-optional"
+    <dd>Entity name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lang_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_java" style="color: inherit; text-decoration: inherit;">lang</a>
@@ -311,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</p>
-</dd><dt class="property-optional"
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
             title="Optional">
         <span id="product_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_java" style="color: inherit; text-decoration: inherit;">product</a>
@@ -320,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Abbreviation of the trusted service, which is required during querying the trusted service admin.</p>
-</dd><dt class="property-optional"
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_java" style="color: inherit; text-decoration: inherit;">search<wbr>Key</a>
@@ -338,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Search by member name or ID.</p>
-</dd></dl>
+    <dd>Search by member name or ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -353,8 +601,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Entity name.</p>
-</dd><dt class="property-optional"
+    <dd>Entity name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lang_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_nodejs" style="color: inherit; text-decoration: inherit;">lang</a>
@@ -362,8 +609,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</p>
-</dd><dt class="property-optional"
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
             title="Optional">
         <span id="product_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_nodejs" style="color: inherit; text-decoration: inherit;">product</a>
@@ -371,8 +617,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation of the trusted service, which is required during querying the trusted service admin.</p>
-</dd><dt class="property-optional"
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -380,8 +625,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Key</a>
@@ -389,8 +633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Search by member name or ID.</p>
-</dd></dl>
+    <dd>Search by member name or ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +647,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Entity name.</p>
-</dd><dt class="property-optional"
+    <dd>Entity name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lang_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_python" style="color: inherit; text-decoration: inherit;">lang</a>
@@ -413,8 +655,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</p>
-</dd><dt class="property-optional"
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
             title="Optional">
         <span id="product_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_python" style="color: inherit; text-decoration: inherit;">product</a>
@@ -422,8 +663,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Abbreviation of the trusted service, which is required during querying the trusted service admin.</p>
-</dd><dt class="property-optional"
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -431,8 +671,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_python" style="color: inherit; text-decoration: inherit;">search_<wbr>key</a>
@@ -440,8 +679,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Search by member name or ID.</p>
-</dd></dl>
+    <dd>Search by member name or ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -455,8 +693,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Entity name.</p>
-</dd><dt class="property-optional"
+    <dd>Entity name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lang_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_yaml" style="color: inherit; text-decoration: inherit;">lang</a>
@@ -464,8 +701,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</p>
-</dd><dt class="property-optional"
+    <dd>Valid values: <code>en</code> (Tencent Cloud International); <code>zh</code> (Tencent Cloud).</dd><dt class="property-optional"
             title="Optional">
         <span id="product_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_yaml" style="color: inherit; text-decoration: inherit;">product</a>
@@ -473,8 +709,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Abbreviation of the trusted service, which is required during querying the trusted service admin.</p>
-</dd><dt class="property-optional"
+    <dd>Abbreviation of the trusted service, which is required during querying the trusted service admin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -482,8 +717,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Key</a>
@@ -491,8 +725,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Search by member name or ID.</p>
-</dd></dl>
+    <dd>Search by member name or ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -515,8 +748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="items_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_csharp" style="color: inherit; text-decoration: inherit;">Items</a>
@@ -524,8 +756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Organization.<wbr>Outputs.<wbr>Get<wbr>Members<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Member list.</p>
-</dd><dt class="property-"
+    <dd>Member list.</dd><dt class="property-"
             title="">
         <span id="authname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authname_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Name</a>
@@ -579,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="items_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_go" style="color: inherit; text-decoration: inherit;">Items</a>
@@ -588,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitem">[]Get<wbr>Members<wbr>Item</a></span>
     </dt>
-    <dd><p>Member list.</p>
-</dd><dt class="property-"
+    <dd>Member list.</dd><dt class="property-"
             title="">
         <span id="authname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authname_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Name</a>
@@ -634,6 +863,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="items_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_hcl" style="color: inherit; text-decoration: inherit;">items</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmembersitem">list(object)</a></span>
+    </dt>
+    <dd>Member list.</dd><dt class="property-"
+            title="">
+        <span id="auth_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_name_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="lang_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lang_hcl" style="color: inherit; text-decoration: inherit;">lang</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_hcl" style="color: inherit; text-decoration: inherit;">product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -643,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="items_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_java" style="color: inherit; text-decoration: inherit;">items</a>
@@ -652,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitem">List&lt;Get<wbr>Members<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Member list.</p>
-</dd><dt class="property-"
+    <dd>Member list.</dd><dt class="property-"
             title="">
         <span id="authname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authname_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Name</a>
@@ -707,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="items_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_nodejs" style="color: inherit; text-decoration: inherit;">items</a>
@@ -716,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitem">Get<wbr>Members<wbr>Item[]</a></span>
     </dt>
-    <dd><p>Member list.</p>
-</dd><dt class="property-"
+    <dd>Member list.</dd><dt class="property-"
             title="">
         <span id="authname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authname_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Name</a>
@@ -771,17 +1058,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="items_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_python" style="color: inherit; text-decoration: inherit;">items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmembersitem">Get<wbr>Members<wbr>Item]</a></span>
+        <span class="property-type"><a href="#getmembersitem">Sequence[Get<wbr>Members<wbr>Item]</a></span>
     </dt>
-    <dd><p>Member list.</p>
-</dd><dt class="property-"
+    <dd>Member list.</dd><dt class="property-"
             title="">
         <span id="auth_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_name_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>name</a>
@@ -835,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="items_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#items_yaml" style="color: inherit; text-decoration: inherit;">items</a>
@@ -844,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitem">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Member list.</p>
-</dd><dt class="property-"
+    <dd>Member list.</dd><dt class="property-"
             title="">
         <span id="authname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authname_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Name</a>
@@ -909,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -918,8 +1200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowquit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Quit</a>
@@ -927,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="membertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membertype_csharp" style="color: inherit; text-decoration: inherit;">Member<wbr>Type</a>
@@ -936,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memberuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memberuin_csharp" style="color: inherit; text-decoration: inherit;">Member<wbr>Uin</a>
@@ -945,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Member UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -954,8 +1232,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd><dt class="property-required"
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nickname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_csharp" style="color: inherit; text-decoration: inherit;">Nick<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Id</a>
@@ -963,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node IDNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -972,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgidentities_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgidentities_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Identities</a>
@@ -981,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgidentity">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Organization.<wbr>Inputs.<wbr>Get<wbr>Members<wbr>Item<wbr>Org<wbr>Identity&gt;</a></span>
     </dt>
-    <dd><p>Management identityNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpermissions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Permissions</a>
@@ -990,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgpermission">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Organization.<wbr>Inputs.<wbr>Get<wbr>Members<wbr>Item<wbr>Org<wbr>Permission&gt;</a></span>
     </dt>
-    <dd><p>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Name</a>
@@ -999,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Type</a>
@@ -1008,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Name</a>
@@ -1017,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Uin</a>
@@ -1026,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="permissionstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissionstatus_csharp" style="color: inherit; text-decoration: inherit;">Permission<wbr>Status</a>
@@ -1035,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1044,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RemarksNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1053,8 +1328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1068,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1077,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowquit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Quit</a>
@@ -1086,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="membertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membertype_go" style="color: inherit; text-decoration: inherit;">Member<wbr>Type</a>
@@ -1095,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memberuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memberuin_go" style="color: inherit; text-decoration: inherit;">Member<wbr>Uin</a>
@@ -1104,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Member UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1113,8 +1382,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd><dt class="property-required"
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nickname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_go" style="color: inherit; text-decoration: inherit;">Nick<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Id</a>
@@ -1122,8 +1398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node IDNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -1131,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgidentities_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgidentities_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Identities</a>
@@ -1140,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgidentity">[]Get<wbr>Members<wbr>Item<wbr>Org<wbr>Identity</a></span>
     </dt>
-    <dd><p>Management identityNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpermissions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Permissions</a>
@@ -1149,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgpermission">[]Get<wbr>Members<wbr>Item<wbr>Org<wbr>Permission</a></span>
     </dt>
-    <dd><p>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Name</a>
@@ -1158,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Type</a>
@@ -1167,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Name</a>
@@ -1176,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Uin</a>
@@ -1185,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="permissionstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissionstatus_go" style="color: inherit; text-decoration: inherit;">Permission<wbr>Status</a>
@@ -1194,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1203,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RemarksNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1212,8 +1478,157 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bind_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_status_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_allow_quit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_quit_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>quit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="member_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#member_type_hcl" style="color: inherit; text-decoration: inherit;">member_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="member_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#member_uin_hcl" style="color: inherit; text-decoration: inherit;">member_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nick_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nick_name_hcl" style="color: inherit; text-decoration: inherit;">nick_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_id_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="org_identities_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_identities_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>identities</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmembersitemorgidentity">list(object)</a></span>
+    </dt>
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="org_permissions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_permissions_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>permissions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmembersitemorgpermission">list(object)</a></span>
+    </dt>
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="org_policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_name_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="org_policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_type_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="pay_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_name_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="pay_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_uin_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="permission_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_status_hcl" style="color: inherit; text-decoration: inherit;">permission_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1236,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowquit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_java" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -1245,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="membertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membertype_java" style="color: inherit; text-decoration: inherit;">member<wbr>Type</a>
@@ -1254,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memberuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memberuin_java" style="color: inherit; text-decoration: inherit;">member<wbr>Uin</a>
@@ -1263,8 +1674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Member UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1272,8 +1682,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd><dt class="property-required"
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nickname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_java" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_java" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
@@ -1281,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node IDNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_java" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1290,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgidentities_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgidentities_java" style="color: inherit; text-decoration: inherit;">org<wbr>Identities</a>
@@ -1299,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgidentity">List&lt;Get<wbr>Members<wbr>Item<wbr>Org<wbr>Identity&gt;</a></span>
     </dt>
-    <dd><p>Management identityNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpermissions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_java" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -1308,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgpermission">List&lt;Get<wbr>Members<wbr>Item<wbr>Org<wbr>Permission&gt;</a></span>
     </dt>
-    <dd><p>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_java" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -1317,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_java" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -1326,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -1335,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -1344,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="permissionstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissionstatus_java" style="color: inherit; text-decoration: inherit;">permission<wbr>Status</a>
@@ -1353,8 +1762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1362,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>RemarksNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1371,8 +1778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1386,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1395,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowquit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -1404,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="membertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membertype_nodejs" style="color: inherit; text-decoration: inherit;">member<wbr>Type</a>
@@ -1413,8 +1816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memberuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memberuin_nodejs" style="color: inherit; text-decoration: inherit;">member<wbr>Uin</a>
@@ -1422,8 +1824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Member UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1431,8 +1832,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd><dt class="property-required"
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nickname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_nodejs" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
@@ -1440,8 +1848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node IDNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1449,8 +1856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgidentities_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgidentities_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Identities</a>
@@ -1458,8 +1864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgidentity">Get<wbr>Members<wbr>Item<wbr>Org<wbr>Identity[]</a></span>
     </dt>
-    <dd><p>Management identityNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpermissions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -1467,8 +1872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgpermission">Get<wbr>Members<wbr>Item<wbr>Org<wbr>Permission[]</a></span>
     </dt>
-    <dd><p>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -1476,8 +1880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -1485,8 +1888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -1494,8 +1896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -1503,8 +1904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="permissionstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissionstatus_nodejs" style="color: inherit; text-decoration: inherit;">permission<wbr>Status</a>
@@ -1512,8 +1912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1521,8 +1920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>RemarksNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1530,8 +1928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1545,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1554,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_allow_quit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_quit_python" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>quit</a>
@@ -1563,8 +1958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="member_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#member_type_python" style="color: inherit; text-decoration: inherit;">member_<wbr>type</a>
@@ -1572,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="member_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#member_uin_python" style="color: inherit; text-decoration: inherit;">member_<wbr>uin</a>
@@ -1581,8 +1974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Member UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1590,8 +1982,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd><dt class="property-required"
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nick_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nick_name_python" style="color: inherit; text-decoration: inherit;">nick_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="node_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_id_python" style="color: inherit; text-decoration: inherit;">node_<wbr>id</a>
@@ -1599,8 +1998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node IDNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="node_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_python" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
@@ -1608,26 +2006,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="org_identities_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_identities_python" style="color: inherit; text-decoration: inherit;">org_<wbr>identities</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmembersitemorgidentity">Get<wbr>Members<wbr>Item<wbr>Org<wbr>Identity]</a></span>
+        <span class="property-type"><a href="#getmembersitemorgidentity">Sequence[Get<wbr>Members<wbr>Item<wbr>Org<wbr>Identity]</a></span>
     </dt>
-    <dd><p>Management identityNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="org_permissions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_permissions_python" style="color: inherit; text-decoration: inherit;">org_<wbr>permissions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmembersitemorgpermission">Get<wbr>Members<wbr>Item<wbr>Org<wbr>Permission]</a></span>
+        <span class="property-type"><a href="#getmembersitemorgpermission">Sequence[Get<wbr>Members<wbr>Item<wbr>Org<wbr>Permission]</a></span>
     </dt>
-    <dd><p>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="org_policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_name_python" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>name</a>
@@ -1635,8 +2030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="org_policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_type_python" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>type</a>
@@ -1644,8 +2038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="pay_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_name_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>name</a>
@@ -1653,8 +2046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="pay_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_uin_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>uin</a>
@@ -1662,8 +2054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="permission_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_status_python" style="color: inherit; text-decoration: inherit;">permission_<wbr>status</a>
@@ -1671,8 +2062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1680,8 +2070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>RemarksNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1689,8 +2078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1704,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security information binding status. Valid values: <code>Unbound</code>, <code>Valid</code>, <code>Success</code>, <code>Failed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1713,8 +2100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Creation timeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowquit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -1722,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the member is allowed to leave. Valid values: <code>Allow</code>, <code>Denied</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="membertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membertype_yaml" style="color: inherit; text-decoration: inherit;">member<wbr>Type</a>
@@ -1731,8 +2116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member type. Valid values: <code>Invite</code> (invited); <code>Create</code> (created).Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memberuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memberuin_yaml" style="color: inherit; text-decoration: inherit;">member<wbr>Uin</a>
@@ -1740,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Member UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1749,8 +2132,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd><dt class="property-required"
+    <dd>Permission name.</dd><dt class="property-required"
+            title="Required">
+        <span id="nickname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_yaml" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
@@ -1758,8 +2148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node IDNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node IDNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1767,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Node nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgidentities_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgidentities_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Identities</a>
@@ -1776,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgidentity">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Management identityNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Management identityNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpermissions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -1785,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmembersitemorgpermission">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -1794,8 +2180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="orgpolicytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -1803,8 +2188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -1812,8 +2196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer nameNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="payuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -1821,8 +2204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Payer UINNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="permissionstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissionstatus_yaml" style="color: inherit; text-decoration: inherit;">permission<wbr>Status</a>
@@ -1830,8 +2212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Member permission status. Valid values: <code>Confirmed</code>, <code>UnConfirmed</code>.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1839,8 +2220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>RemarksNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RemarksNote: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1848,8 +2228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update timeNote: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Update timeNote: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1867,8 +2246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="identityid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityid_csharp" style="color: inherit; text-decoration: inherit;">Identity<wbr>Id</a>
@@ -1876,8 +2254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1891,8 +2268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="identityid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityid_go" style="color: inherit; text-decoration: inherit;">Identity<wbr>Id</a>
@@ -1900,8 +2276,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="identity_alias_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_alias_name_hcl" style="color: inherit; text-decoration: inherit;">identity_<wbr>alias_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="identity_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_id_hcl" style="color: inherit; text-decoration: inherit;">identity_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1915,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="identityid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityid_java" style="color: inherit; text-decoration: inherit;">identity<wbr>Id</a>
@@ -1924,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1939,8 +2334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="identityid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityid_nodejs" style="color: inherit; text-decoration: inherit;">identity<wbr>Id</a>
@@ -1948,8 +2342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1963,8 +2356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="identity_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_id_python" style="color: inherit; text-decoration: inherit;">identity_<wbr>id</a>
@@ -1972,8 +2364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1987,8 +2378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Identity name.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="identityid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityid_yaml" style="color: inherit; text-decoration: inherit;">identity<wbr>Id</a>
@@ -1996,8 +2386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Identity ID.Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2015,8 +2404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Permission ID.</p>
-</dd><dt class="property-required"
+    <dd>Permission ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2024,8 +2412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2039,8 +2426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Permission ID.</p>
-</dd><dt class="property-required"
+    <dd>Permission ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2048,8 +2434,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Permission ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2063,8 +2470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Permission ID.</p>
-</dd><dt class="property-required"
+    <dd>Permission ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2072,8 +2478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2087,8 +2492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Permission ID.</p>
-</dd><dt class="property-required"
+    <dd>Permission ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2096,8 +2500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2111,8 +2514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Permission ID.</p>
-</dd><dt class="property-required"
+    <dd>Permission ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2120,8 +2522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2135,8 +2536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Permission ID.</p>
-</dd><dt class="property-required"
+    <dd>Permission ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2144,8 +2544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2160,7 +2559,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

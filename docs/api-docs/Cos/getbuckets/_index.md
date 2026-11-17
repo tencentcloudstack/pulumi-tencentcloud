@@ -2,9 +2,11 @@
 ---
 title: "getBuckets"
 title_tag: "tencentcloud.Cos.getBuckets"
-meta_desc: "Documentation for the tencentcloud.Cos.getBuckets function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the COS buckets of the current Tencent Cloud user."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,53 +18,47 @@ Use this data source to query the COS buckets of the current Tencent Cloud user.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all cos buckets
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cosBuckets = tencentcloud.Cos.getBuckets({
-    bucketPrefix: "tf-bucket-",
-    resultOutputFile: "mytestpath",
-});
+const example = tencentcloud.cos.getBuckets({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cos_buckets = tencentcloud.Cos.get_buckets(bucket_prefix="tf-bucket-",
-    result_output_file="mytestpath")
+example = tencentcloud.cos.get_buckets()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var cosBuckets = Tencentcloud.Cos.GetBuckets.Invoke(new()
-    {
-        BucketPrefix = "tf-bucket-",
-        ResultOutputFile = "mytestpath",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.GetBuckets(ctx, &cos.GetBucketsArgs{
-			BucketPrefix:     pulumi.StringRef("tf-bucket-"),
-			ResultOutputFile: pulumi.StringRef("mytestpath"),
-		}, nil)
+		_, err := cos.GetBuckets(ctx, &cos.GetBucketsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -70,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cos.GetBuckets.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cos.CosFunctions;
 import com.pulumi.tencentcloud.Cos.inputs.GetBucketsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -91,24 +109,202 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var cosBuckets = CosFunctions.getBuckets(GetBucketsArgs.builder()
-            .bucketPrefix("tf-bucket-")
-            .resultOutputFile("mytestpath")
+        final var example = CosFunctions.getBuckets(GetBucketsArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  cosBuckets:
+  example:
     fn::invoke:
-      Function: tencentcloud:Cos:getBuckets
-      Arguments:
-        bucketPrefix: tf-bucket-
-        resultOutputFile: mytestpath
+      function: tencentcloud:Cos:getBuckets
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cos_getbuckets" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query cos buckets by filters
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.cos.getBuckets({
+    bucketPrefix: "tf-example-prefix",
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.cos.get_buckets(bucket_prefix="tf-example-prefix",
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.GetBuckets(ctx, &cos.GetBucketsArgs{
+			BucketPrefix: pulumi.StringRef("tf-example-prefix"),
+			Tags: map[string]string{
+				"createBy": "Terraform",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cos.GetBuckets.Invoke(new()
+    {
+        BucketPrefix = "tf-example-prefix",
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cos.CosFunctions;
+import com.pulumi.tencentcloud.Cos.inputs.GetBucketsArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = CosFunctions.getBuckets(GetBucketsArgs.builder()
+            .bucketPrefix("tf-example-prefix")
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Cos:getBuckets
+      arguments:
+        bucketPrefix: tf-example-prefix
+        tags:
+          createBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cos_getbuckets" "example" {
+  bucket_prefix = "tf-example-prefix"
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
@@ -121,7 +317,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +325,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBuckets<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>></span
+><span class="k">function </span>getBuckets<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>></span
 ><span class="k">
-function </span>getBucketsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>></span
+function </span>getBucketsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -142,13 +338,13 @@ function </span>getBucketsOutput<span class="p">(</span><span class="nx">args</s
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_buckets<span class="p">(</span><span class="nx">bucket_prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBucketsResult</span
 ><span class="k">
-def </span>get_buckets_output<span class="p">(</span><span class="nx">bucket_prefix</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketsResult]</span
+def </span>get_buckets_output<span class="p">(</span><span class="nx">bucket_prefix</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +369,8 @@ func </span>GetBucketsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBuckets </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBucketsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +379,8 @@ func </span>GetBucketsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> </span>getBuckets<span class="p">(</span><span class="nx">GetBucketsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> </span>getBuckets<span class="p">(</span><span class="nx">GetBucketsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketsResult</a></span>> </span>getBuckets<span class="p">(</span><span class="nx">GetBucketsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +392,15 @@ func </span>GetBucketsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cos/getBuckets:getBuckets
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cos_get_buckets&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A prefix string to filter results by bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -221,17 +427,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd></dl>
+    <dd>Tags to filter bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A prefix string to filter results by bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,17 +457,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd></dl>
+    <dd>Tags to filter bucket.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="bucket_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_prefix_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags to filter bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +509,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A prefix string to filter results by bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -287,17 +517,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd></dl>
+    <dd>Tags to filter bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A prefix string to filter results by bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -320,17 +547,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd></dl>
+    <dd>Tags to filter bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +569,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A prefix string to filter results by bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -353,17 +577,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd></dl>
+    <dd>Tags to filter bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A prefix string to filter results by bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>A prefix string to filter results by bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -386,17 +607,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd></dl>
+    <dd>Tags to filter bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Outputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of bucket. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -428,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bucketprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketprefix_csharp" style="color: inherit; text-decoration: inherit;">Bucket<wbr>Prefix</a>
@@ -451,10 +668,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd></dl>
+    <dd>The tags of a bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -468,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlist">[]Get<wbr>Buckets<wbr>Bucket<wbr>List</a></span>
     </dt>
-    <dd><p>A list of bucket. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -477,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bucketprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketprefix_go" style="color: inherit; text-decoration: inherit;">Bucket<wbr>Prefix</a>
@@ -500,10 +714,55 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd></dl>
+    <dd>The tags of a bucket.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="bucket_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_lists_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlist">list(object)</a></span>
+    </dt>
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="bucket_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_prefix_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of a bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -517,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlist">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of bucket. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -526,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bucketprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketprefix_java" style="color: inherit; text-decoration: inherit;">bucket<wbr>Prefix</a>
@@ -549,10 +806,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd></dl>
+    <dd>The tags of a bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -566,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlist">Get<wbr>Buckets<wbr>Bucket<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of bucket. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -575,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bucketprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketprefix_nodejs" style="color: inherit; text-decoration: inherit;">bucket<wbr>Prefix</a>
@@ -598,10 +852,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd></dl>
+    <dd>The tags of a bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -613,10 +866,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_lists_python" style="color: inherit; text-decoration: inherit;">bucket_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlist">Get<wbr>Buckets<wbr>Bucket<wbr>List]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlist">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of bucket. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -624,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bucket_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_prefix_python" style="color: inherit; text-decoration: inherit;">bucket_<wbr>prefix</a>
@@ -647,10 +898,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd></dl>
+    <dd>The tags of a bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -664,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of bucket. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of bucket. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -673,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bucketprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketprefix_yaml" style="color: inherit; text-decoration: inherit;">bucket<wbr>Prefix</a>
@@ -696,10 +944,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd></dl>
+    <dd>The tags of a bucket.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -723,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket access control configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
             title="Required">
         <span id="aclbody_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_csharp" style="color: inherit; text-decoration: inherit;">Acl<wbr>Body</a>
@@ -732,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket verbose acl configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_csharp" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -741,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</p>
-</dd><dt class="property-required"
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
             title="Required">
         <span id="corsrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_csharp" style="color: inherit; text-decoration: inherit;">Cors<wbr>Rules</a>
@@ -750,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistcorsrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Cors<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A list of CORS rule configurations.</p>
-</dd><dt class="property-required"
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
             title="Required">
         <span id="cosbucketurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketurl_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Url</a>
@@ -759,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-required"
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclerules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Rules</a>
@@ -768,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>The lifecycle configuration of a bucket.</p>
-</dd><dt class="property-required"
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
             title="Required">
         <span id="origindomainrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Domain<wbr>Rules</a>
@@ -777,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Domain<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket origin domain rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
             title="Required">
         <span id="originpullrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Rules</a>
@@ -786,17 +1026,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Pull<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd><dt class="property-required"
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
             title="Required">
         <span id="websites_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_csharp" style="color: inherit; text-decoration: inherit;">Websites</a>
@@ -804,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistwebsite">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Website&gt;</a></span>
     </dt>
-    <dd><p>A list of one element containing configuration parameters used when the bucket is used as a website.</p>
-</dd></dl>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -819,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket access control configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
             title="Required">
         <span id="aclbody_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_go" style="color: inherit; text-decoration: inherit;">Acl<wbr>Body</a>
@@ -828,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket verbose acl configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_go" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -837,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</p>
-</dd><dt class="property-required"
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
             title="Required">
         <span id="corsrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_go" style="color: inherit; text-decoration: inherit;">Cors<wbr>Rules</a>
@@ -846,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistcorsrule">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Cors<wbr>Rule</a></span>
     </dt>
-    <dd><p>A list of CORS rule configurations.</p>
-</dd><dt class="property-required"
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
             title="Required">
         <span id="cosbucketurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketurl_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Url</a>
@@ -855,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-required"
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclerules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Rules</a>
@@ -864,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule</a></span>
     </dt>
-    <dd><p>The lifecycle configuration of a bucket.</p>
-</dd><dt class="property-required"
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
             title="Required">
         <span id="origindomainrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Domain<wbr>Rules</a>
@@ -873,8 +1104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Domain<wbr>Rule</a></span>
     </dt>
-    <dd><p>Bucket origin domain rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
             title="Required">
         <span id="originpullrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Rules</a>
@@ -882,17 +1112,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Pull<wbr>Rule</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd><dt class="property-required"
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
             title="Required">
         <span id="websites_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_go" style="color: inherit; text-decoration: inherit;">Websites</a>
@@ -900,8 +1128,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistwebsite">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Website</a></span>
     </dt>
-    <dd><p>A list of one element containing configuration parameters used when the bucket is used as a website.</p>
-</dd></dl>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_hcl" style="color: inherit; text-decoration: inherit;">acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
+            title="Required">
+        <span id="acl_body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_body_hcl" style="color: inherit; text-decoration: inherit;">acl_<wbr>body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cors_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cors_rules_hcl" style="color: inherit; text-decoration: inherit;">cors_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistcorsrule">list(object)</a></span>
+    </dt>
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
+            title="Required">
+        <span id="cos_bucket_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_url_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
+            title="Required">
+        <span id="lifecycle_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_rules_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">list(object)</a></span>
+    </dt>
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_domain_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_domain_rules_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>domain_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">list(object)</a></span>
+    </dt>
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_pull_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_rules_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">list(object)</a></span>
+    </dt>
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
+            title="Required">
+        <span id="websites_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_hcl" style="color: inherit; text-decoration: inherit;">websites</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistwebsite">list(object)</a></span>
+    </dt>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket access control configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
             title="Required">
         <span id="aclbody_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_java" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -924,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket verbose acl configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_java" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -933,8 +1244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</p>
-</dd><dt class="property-required"
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
             title="Required">
         <span id="corsrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_java" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
@@ -942,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistcorsrule">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Cors<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A list of CORS rule configurations.</p>
-</dd><dt class="property-required"
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
             title="Required">
         <span id="cosbucketurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketurl_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Url</a>
@@ -951,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-required"
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclerules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
@@ -960,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>The lifecycle configuration of a bucket.</p>
-</dd><dt class="property-required"
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
             title="Required">
         <span id="origindomainrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
@@ -969,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Domain<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket origin domain rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
             title="Required">
         <span id="originpullrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
@@ -978,17 +1284,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Pull<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd><dt class="property-required"
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
             title="Required">
         <span id="websites_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_java" style="color: inherit; text-decoration: inherit;">websites</a>
@@ -996,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistwebsite">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Website&gt;</a></span>
     </dt>
-    <dd><p>A list of one element containing configuration parameters used when the bucket is used as a website.</p>
-</dd></dl>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1011,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket access control configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
             title="Required">
         <span id="aclbody_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_nodejs" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -1020,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket verbose acl configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_nodejs" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1029,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</p>
-</dd><dt class="property-required"
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
             title="Required">
         <span id="corsrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_nodejs" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
@@ -1038,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistcorsrule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Cors<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A list of CORS rule configurations.</p>
-</dd><dt class="property-required"
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
             title="Required">
         <span id="cosbucketurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketurl_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Url</a>
@@ -1047,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-required"
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclerules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
@@ -1056,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>The lifecycle configuration of a bucket.</p>
-</dd><dt class="property-required"
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
             title="Required">
         <span id="origindomainrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
@@ -1065,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Domain<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Bucket origin domain rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
             title="Required">
         <span id="originpullrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
@@ -1074,17 +1370,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Pull<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd><dt class="property-required"
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
             title="Required">
         <span id="websites_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_nodejs" style="color: inherit; text-decoration: inherit;">websites</a>
@@ -1092,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistwebsite">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Website[]</a></span>
     </dt>
-    <dd><p>A list of one element containing configuration parameters used when the bucket is used as a website.</p>
-</dd></dl>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1107,8 +1400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket access control configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
             title="Required">
         <span id="acl_body_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_body_python" style="color: inherit; text-decoration: inherit;">acl_<wbr>body</a>
@@ -1116,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket verbose acl configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_python" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1125,17 +1416,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</p>
-</dd><dt class="property-required"
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cors_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cors_rules_python" style="color: inherit; text-decoration: inherit;">cors_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistcorsrule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Cors<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistcorsrule">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Cors<wbr>Rule]</a></span>
     </dt>
-    <dd><p>A list of CORS rule configurations.</p>
-</dd><dt class="property-required"
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
             title="Required">
         <span id="cos_bucket_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_url_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>url</a>
@@ -1143,53 +1432,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-required"
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycle_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_rules_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule]</a></span>
     </dt>
-    <dd><p>The lifecycle configuration of a bucket.</p>
-</dd><dt class="property-required"
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
             title="Required">
         <span id="origin_domain_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_domain_rules_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>domain_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Domain<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Domain<wbr>Rule]</a></span>
     </dt>
-    <dd><p>Bucket origin domain rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
             title="Required">
         <span id="origin_pull_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_rules_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Pull<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Origin<wbr>Pull<wbr>Rule]</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd><dt class="property-required"
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
             title="Required">
         <span id="websites_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_python" style="color: inherit; text-decoration: inherit;">websites</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistwebsite">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Website]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistwebsite">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Website]</a></span>
     </dt>
-    <dd><p>A list of one element containing configuration parameters used when the bucket is used as a website.</p>
-</dd></dl>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1203,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket access control configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket access control configurations.</dd><dt class="property-required"
             title="Required">
         <span id="aclbody_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_yaml" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -1212,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket verbose acl configurations.</p>
-</dd><dt class="property-required"
+    <dd>Bucket verbose acl configurations.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_yaml" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1221,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</p>
-</dd><dt class="property-required"
+    <dd>Bucket name, the format likes <code>&lt;bucket&gt;-&lt;appid&gt;</code>.</dd><dt class="property-required"
             title="Required">
         <span id="corsrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_yaml" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
@@ -1230,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistcorsrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CORS rule configurations.</p>
-</dd><dt class="property-required"
+    <dd>A list of CORS rule configurations.</dd><dt class="property-required"
             title="Required">
         <span id="cosbucketurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketurl_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Url</a>
@@ -1239,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-required"
+    <dd>The URL of this cos bucket.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclerules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
@@ -1248,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The lifecycle configuration of a bucket.</p>
-</dd><dt class="property-required"
+    <dd>The lifecycle configuration of a bucket.</dd><dt class="property-required"
             title="Required">
         <span id="origindomainrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
@@ -1257,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistorigindomainrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bucket origin domain rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket origin domain rules.</dd><dt class="property-required"
             title="Required">
         <span id="originpullrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
@@ -1266,17 +1542,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistoriginpullrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull rules.</p>
-</dd><dt class="property-required"
+    <dd>Bucket Origin-Pull rules.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags to filter bucket.</p>
-</dd><dt class="property-required"
+    <dd>Tags to filter bucket.</dd><dt class="property-required"
             title="Required">
         <span id="websites_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#websites_yaml" style="color: inherit; text-decoration: inherit;">websites</a>
@@ -1284,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistwebsite">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of one element containing configuration parameters used when the bucket is used as a website.</p>
-</dd></dl>
+    <dd>A list of one element containing configuration parameters used when the bucket is used as a website.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1303,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_csharp" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Methods</a>
@@ -1312,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_csharp" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Origins</a>
@@ -1321,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="exposeheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_csharp" style="color: inherit; text-decoration: inherit;">Expose<wbr>Headers</a>
@@ -1330,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-required"
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
             title="Required">
         <span id="maxageseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Age<wbr>Seconds</a>
@@ -1339,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1354,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_go" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Methods</a>
@@ -1363,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_go" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Origins</a>
@@ -1372,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="exposeheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_go" style="color: inherit; text-decoration: inherit;">Expose<wbr>Headers</a>
@@ -1381,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-required"
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
             title="Required">
         <span id="maxageseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Age<wbr>Seconds</a>
@@ -1390,8 +1654,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="allowed_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_headers_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
+            title="Required">
+        <span id="allowed_methods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_methods_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>methods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
+            title="Required">
+        <span id="allowed_origins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_origins_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>origins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
+            title="Required">
+        <span id="expose_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expose_headers_hcl" style="color: inherit; text-decoration: inherit;">expose_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_age_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_age_seconds_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>age_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1405,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_java" style="color: inherit; text-decoration: inherit;">allowed<wbr>Methods</a>
@@ -1414,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_java" style="color: inherit; text-decoration: inherit;">allowed<wbr>Origins</a>
@@ -1423,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="exposeheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_java" style="color: inherit; text-decoration: inherit;">expose<wbr>Headers</a>
@@ -1432,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-required"
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
             title="Required">
         <span id="maxageseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_java" style="color: inherit; text-decoration: inherit;">max<wbr>Age<wbr>Seconds</a>
@@ -1441,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1456,8 +1760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_nodejs" style="color: inherit; text-decoration: inherit;">allowed<wbr>Methods</a>
@@ -1465,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_nodejs" style="color: inherit; text-decoration: inherit;">allowed<wbr>Origins</a>
@@ -1474,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="exposeheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_nodejs" style="color: inherit; text-decoration: inherit;">expose<wbr>Headers</a>
@@ -1483,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-required"
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
             title="Required">
         <span id="maxageseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Age<wbr>Seconds</a>
@@ -1492,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowed_methods_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_methods_python" style="color: inherit; text-decoration: inherit;">allowed_<wbr>methods</a>
@@ -1516,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
             title="Required">
         <span id="allowed_origins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_origins_python" style="color: inherit; text-decoration: inherit;">allowed_<wbr>origins</a>
@@ -1525,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="expose_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expose_headers_python" style="color: inherit; text-decoration: inherit;">expose_<wbr>headers</a>
@@ -1534,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-required"
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
             title="Required">
         <span id="max_age_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_age_seconds_python" style="color: inherit; text-decoration: inherit;">max_<wbr>age_<wbr>seconds</a>
@@ -1543,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1558,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_yaml" style="color: inherit; text-decoration: inherit;">allowed<wbr>Methods</a>
@@ -1567,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_yaml" style="color: inherit; text-decoration: inherit;">allowed<wbr>Origins</a>
@@ -1576,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="exposeheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_yaml" style="color: inherit; text-decoration: inherit;">expose<wbr>Headers</a>
@@ -1585,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-required"
+    <dd>Specifies expose header in the response.</dd><dt class="property-required"
             title="Required">
         <span id="maxageseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Age<wbr>Seconds</a>
@@ -1594,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1613,8 +1902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload&gt;</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-required"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
             title="Required">
         <span id="expirations_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_csharp" style="color: inherit; text-decoration: inherit;">Expirations</a>
@@ -1622,8 +1910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Expiration&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
             title="Required">
         <span id="filterprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Prefix</a>
@@ -1631,8 +1918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-required"
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrentexpirations_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpirations_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Expirations</a>
@@ -1640,8 +1926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration&gt;</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrenttransitions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Transitions</a>
@@ -1649,8 +1934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition&gt;</a></span>
     </dt>
-    <dd><p>Specifies when to transition objects of non current versions and the target storage class.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
             title="Required">
         <span id="transitions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_csharp" style="color: inherit; text-decoration: inherit;">Transitions</a>
@@ -1658,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Transition&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions.</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1673,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-required"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
             title="Required">
         <span id="expirations_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_go" style="color: inherit; text-decoration: inherit;">Expirations</a>
@@ -1682,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
             title="Required">
         <span id="filterprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Prefix</a>
@@ -1691,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-required"
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrentexpirations_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpirations_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Expirations</a>
@@ -1700,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrenttransitions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Transitions</a>
@@ -1709,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition</a></span>
     </dt>
-    <dd><p>Specifies when to transition objects of non current versions and the target storage class.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
             title="Required">
         <span id="transitions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_go" style="color: inherit; text-decoration: inherit;">Transitions</a>
@@ -1718,8 +1996,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">[]Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Transition</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions.</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="abort_incomplete_multipart_uploads_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abort_incomplete_multipart_uploads_hcl" style="color: inherit; text-decoration: inherit;">abort_<wbr>incomplete_<wbr>multipart_<wbr>uploads</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">list(object)</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
+            title="Required">
+        <span id="expirations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_hcl" style="color: inherit; text-decoration: inherit;">expirations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">list(object)</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
+            title="Required">
+        <span id="filter_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_prefix_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
+            title="Required">
+        <span id="non_current_expirations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_expirations_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>expirations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">list(object)</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
+            title="Required">
+        <span id="non_current_transitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_transitions_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">list(object)</a></span>
+    </dt>
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
+            title="Required">
+        <span id="transitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_hcl" style="color: inherit; text-decoration: inherit;">transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">list(object)</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1733,8 +2064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload&gt;</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-required"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
             title="Required">
         <span id="expirations_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_java" style="color: inherit; text-decoration: inherit;">expirations</a>
@@ -1742,8 +2072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Expiration&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
             title="Required">
         <span id="filterprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
@@ -1751,8 +2080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-required"
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrentexpirations_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpirations_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expirations</a>
@@ -1760,8 +2088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration&gt;</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrenttransitions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
@@ -1769,8 +2096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition&gt;</a></span>
     </dt>
-    <dd><p>Specifies when to transition objects of non current versions and the target storage class.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
             title="Required">
         <span id="transitions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_java" style="color: inherit; text-decoration: inherit;">transitions</a>
@@ -1778,8 +2104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">List&lt;Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Transition&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions.</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1793,8 +2118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload[]</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-required"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
             title="Required">
         <span id="expirations_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_nodejs" style="color: inherit; text-decoration: inherit;">expirations</a>
@@ -1802,8 +2126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Expiration[]</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
             title="Required">
         <span id="filterprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
@@ -1811,8 +2134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-required"
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrentexpirations_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpirations_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expirations</a>
@@ -1820,8 +2142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration[]</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrenttransitions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
@@ -1829,8 +2150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition[]</a></span>
     </dt>
-    <dd><p>Specifies when to transition objects of non current versions and the target storage class.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
             title="Required">
         <span id="transitions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_nodejs" style="color: inherit; text-decoration: inherit;">transitions</a>
@@ -1838,8 +2158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Transition[]</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions.</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1851,19 +2170,17 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abort_incomplete_multipart_uploads_python" style="color: inherit; text-decoration: inherit;">abort_<wbr>incomplete_<wbr>multipart_<wbr>uploads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload]</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-required"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
             title="Required">
         <span id="expirations_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_python" style="color: inherit; text-decoration: inherit;">expirations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Expiration]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Expiration]</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
             title="Required">
         <span id="filter_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_prefix_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>prefix</a>
@@ -1871,35 +2188,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-required"
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
             title="Required">
         <span id="non_current_expirations_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_expirations_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>expirations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration]</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
             title="Required">
         <span id="non_current_transitions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_transitions_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>transitions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition]</a></span>
     </dt>
-    <dd><p>Specifies when to transition objects of non current versions and the target storage class.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
             title="Required">
         <span id="transitions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_python" style="color: inherit; text-decoration: inherit;">transitions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Transition]</a></span>
+        <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">Sequence[Get<wbr>Buckets<wbr>Bucket<wbr>List<wbr>Lifecycle<wbr>Rule<wbr>Transition]</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions.</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1913,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleabortincompletemultipartupload">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-required"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-required"
             title="Required">
         <span id="expirations_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirations_yaml" style="color: inherit; text-decoration: inherit;">expirations</a>
@@ -1922,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruleexpiration">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies a period in the object's expire.</dd><dt class="property-required"
             title="Required">
         <span id="filterprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
@@ -1931,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-required"
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrentexpirations_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpirations_yaml" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expirations</a>
@@ -1940,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrentexpiration">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-required"
             title="Required">
         <span id="noncurrenttransitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_yaml" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
@@ -1949,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecyclerulenoncurrenttransition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specifies when to transition objects of non current versions and the target storage class.</p>
-</dd><dt class="property-required"
+    <dd>Specifies when to transition objects of non current versions and the target storage class.</dd><dt class="property-required"
             title="Required">
         <span id="transitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_yaml" style="color: inherit; text-decoration: inherit;">transitions</a>
@@ -1958,8 +2266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketsbucketlistlifecycleruletransition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions.</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1977,8 +2284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1992,8 +2298,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_after_initiation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_after_initiation_hcl" style="color: inherit; text-decoration: inherit;">days_<wbr>after_<wbr>initiation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2007,8 +2326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2022,8 +2340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2037,8 +2354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2052,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2071,8 +2386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_csharp" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -2080,8 +2394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2095,8 +2408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_go" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -2104,8 +2416,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_hcl" style="color: inherit; text-decoration: inherit;">date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_hcl" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2119,8 +2452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_java" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2128,8 +2460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2143,8 +2474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_nodejs" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2152,8 +2482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2167,8 +2496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_python" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2176,8 +2504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2191,8 +2518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_yaml" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2200,8 +2526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2219,8 +2544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2234,8 +2558,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="non_current_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_days_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2249,8 +2586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2264,8 +2600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2279,8 +2614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2294,8 +2628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2313,8 +2646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -2322,8 +2654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2337,8 +2668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -2346,8 +2676,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="non_current_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_days_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2361,8 +2712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2370,8 +2720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2385,8 +2734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2394,8 +2742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2409,8 +2756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -2418,8 +2764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2433,8 +2778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2442,8 +2786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2461,8 +2804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_csharp" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -2470,8 +2812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -2479,8 +2820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2494,8 +2834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_go" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -2503,8 +2842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -2512,8 +2850,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_hcl" style="color: inherit; text-decoration: inherit;">date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_hcl" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2527,8 +2894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_java" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2536,8 +2902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2545,8 +2910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2560,8 +2924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_nodejs" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2569,8 +2932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2578,8 +2940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2593,8 +2954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_python" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2602,8 +2962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -2611,8 +2970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2626,8 +2984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-required"
             title="Required">
         <span id="days_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_yaml" style="color: inherit; text-decoration: inherit;">days</a>
@@ -2635,8 +2992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2644,8 +3000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</p>
-</dd></dl>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2663,26 +3018,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2696,26 +3048,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2729,26 +3108,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2762,26 +3138,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2795,26 +3168,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2828,26 +3198,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Specify domain host.</dd><dt class="property-required"
+            title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2859,14 +3226,61 @@ The following output properties are available:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="backtosourcemode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_csharp" style="color: inherit; text-decoration: inherit;">Back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="customhttpheaders_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followhttpheaders_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followquerystring_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Query<wbr>String</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followredirection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -2874,71 +3288,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="customhttpheaders_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
-    </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followhttpheaders_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">List&lt;string&gt;</span>
-    </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followquerystring_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Query<wbr>String</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">bool</span>
-    </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followredirection_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Redirection</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">bool</span>
-    </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="prefix_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="syncbacktosource_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2946,14 +3312,61 @@ The following output properties are available:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="backtosourcemode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_go" style="color: inherit; text-decoration: inherit;">Back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="customhttpheaders_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followhttpheaders_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followquerystring_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Query<wbr>String</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followredirection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -2961,71 +3374,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="customhttpheaders_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
-    </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followhttpheaders_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">[]string</span>
-    </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followquerystring_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Query<wbr>String</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">bool</span>
-    </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followredirection_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Redirection</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">bool</span>
-    </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="prefix_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="syncbacktosource_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="back_to_source_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_to_source_mode_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>to_<wbr>source_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="custom_http_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_http_headers_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>http_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_http_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_http_headers_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>http_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_query_string_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_query_string_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>query_<wbr>string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_redirection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_redirection_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sync_back_to_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_back_to_source_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>back_<wbr>to_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3033,14 +3484,61 @@ The following output properties are available:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="backtosourcemode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_java" style="color: inherit; text-decoration: inherit;">back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="customhttpheaders_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followhttpheaders_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followquerystring_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followredirection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -3048,71 +3546,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="customhttpheaders_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
-    </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followhttpheaders_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">List&lt;String&gt;</span>
-    </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followquerystring_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Boolean</span>
-    </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followredirection_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Boolean</span>
-    </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="prefix_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="syncbacktosource_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3120,14 +3570,61 @@ The following output properties are available:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="backtosourcemode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_nodejs" style="color: inherit; text-decoration: inherit;">back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="customhttpheaders_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followhttpheaders_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followquerystring_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followredirection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -3135,71 +3632,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="customhttpheaders_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
-    </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followhttpheaders_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string[]</span>
-    </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followquerystring_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">boolean</span>
-    </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followredirection_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">boolean</span>
-    </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="prefix_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="syncbacktosource_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3207,14 +3656,61 @@ The following output properties are available:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="back_to_source_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_to_source_mode_python" style="color: inherit; text-decoration: inherit;">back_<wbr>to_<wbr>source_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="custom_http_headers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_http_headers_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>http_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_http_headers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_http_headers_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>http_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_query_string_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_query_string_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>query_<wbr>string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_redirection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_redirection_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -3222,71 +3718,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="custom_http_headers_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_http_headers_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>http_<wbr>headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
-    </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="follow_http_headers_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_http_headers_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>http_<wbr>headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Sequence[str]</span>
-    </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="follow_query_string_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_query_string_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>query_<wbr>string</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">bool</span>
-    </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="follow_redirection_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_redirection_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>redirection</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">bool</span>
-    </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="prefix_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="sync_back_to_source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_back_to_source_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>back_<wbr>to_<wbr>source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3294,14 +3742,61 @@ The following output properties are available:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="backtosourcemode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_yaml" style="color: inherit; text-decoration: inherit;">back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-required"
+            title="Required">
+        <span id="customhttpheaders_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followhttpheaders_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followquerystring_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-required"
+            title="Required">
+        <span id="followredirection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-required"
+            title="Required">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -3309,71 +3804,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="customhttpheaders_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
-    </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followhttpheaders_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">List&lt;String&gt;</span>
-    </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followquerystring_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Boolean</span>
-    </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="followredirection_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Boolean</span>
-    </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="prefix_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-required"
+            title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-required"
+            title="Required">
         <span id="syncbacktosource_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3391,8 +3838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-required"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocument_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Document</a>
@@ -3400,8 +3846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3415,8 +3860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-required"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocument_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Document</a>
@@ -3424,8 +3868,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="error_document_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_document_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_document_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_document_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3439,8 +3904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-required"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocument_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_java" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
@@ -3448,8 +3912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3463,8 +3926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-required"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocument_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
@@ -3472,8 +3934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3487,8 +3948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-required"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
             title="Required">
         <span id="index_document_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_document_python" style="color: inherit; text-decoration: inherit;">index_<wbr>document</a>
@@ -3496,8 +3956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3511,8 +3970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-required"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
@@ -3520,8 +3978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3536,7 +3993,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

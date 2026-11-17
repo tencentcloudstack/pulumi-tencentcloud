@@ -2,9 +2,11 @@
 ---
 title: "getTasks"
 title_tag: "tencentcloud.Mps.getTasks"
-meta_desc: "Documentation for the tencentcloud.Mps.getTasks function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of mps tasks"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of mps tasks
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const tasks = tencentcloud.Mps.getTasks({
-    limit: 20,
+const tasks = tencentcloud.mps.getTasks({
     status: "FINISH",
+    limit: 20,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-tasks = tencentcloud.Mps.get_tasks(limit=20,
-    status="FINISH")
+tasks = tencentcloud.mps.get_tasks(status="FINISH",
+    limit=20)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var tasks = Tencentcloud.Mps.GetTasks.Invoke(new()
-    {
-        Limit = 20,
-        Status = "FINISH",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mps"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mps.GetTasks(ctx, &mps.GetTasksArgs{
-			Limit:  pulumi.IntRef(20),
+		_, err := mps.GetTasks(ctx, &mps.GetTasksArgs{
 			Status: "FINISH",
+			Limit:  pulumi.IntRef(20),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var tasks = Tencentcloud.Mps.GetTasks.Invoke(new()
+    {
+        Status = "FINISH",
+        Limit = 20,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mps.MpsFunctions;
 import com.pulumi.tencentcloud.Mps.inputs.GetTasksArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var tasks = MpsFunctions.getTasks(GetTasksArgs.builder()
-            .limit(20)
             .status("FINISH")
+            .limit(20)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   tasks:
     fn::invoke:
-      Function: tencentcloud:Mps:getTasks
-      Arguments:
-        limit: 20
+      function: tencentcloud:Mps:getTasks
+      arguments:
         status: FINISH
+        limit: 20
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mps_gettasks" "tasks" {
+  status = "FINISH"
+  limit  = 20
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeTasks](https://www.tencentcloud.com/document/api/1041/33643)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTasks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTasksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>></span
+><span class="k">function </span>getTasks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTasksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>></span
 ><span class="k">
-function </span>getTasksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTasksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>></span
+function </span>getTasksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTasksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -146,11 +204,11 @@ function </span>getTasksOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTasksResult</span
 ><span class="k">
-def </span>get_tasks_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">scroll_token</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTasksResult]</span
+def </span>get_tasks_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">scroll_token</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">status</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTasksResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,7 +233,8 @@ func </span>GetTasksOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTasks </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +243,8 @@ func </span>GetTasksOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> </span>getTasks<span class="p">(</span><span class="nx">GetTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> </span>getTasks<span class="p">(</span><span class="nx">GetTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTasksResult</a></span>> </span>getTasks<span class="p">(</span><span class="nx">GetTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +256,15 @@ func </span>GetTasksOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mps/getTasks:getTasks
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mps_get_tasks&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -223,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Return the number of records, default value: 10, maximum value: 100.</p>
-</dd><dt class="property-optional"
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -232,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scrolltoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_csharp" style="color: inherit; text-decoration: inherit;">Scroll<wbr>Token</a>
@@ -241,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</p>
-</dd></dl>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -265,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Return the number of records, default value: 10, maximum value: 100.</p>
-</dd><dt class="property-optional"
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -274,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scrolltoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_go" style="color: inherit; text-decoration: inherit;">Scroll<wbr>Token</a>
@@ -283,8 +345,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</p>
-</dd></dl>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scroll_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scroll_token_hcl" style="color: inherit; text-decoration: inherit;">scroll_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -307,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Return the number of records, default value: 10, maximum value: 100.</p>
-</dd><dt class="property-optional"
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -316,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scrolltoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_java" style="color: inherit; text-decoration: inherit;">scroll<wbr>Token</a>
@@ -325,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</p>
-</dd></dl>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -349,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Return the number of records, default value: 10, maximum value: 100.</p>
-</dd><dt class="property-optional"
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -358,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scrolltoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_nodejs" style="color: inherit; text-decoration: inherit;">scroll<wbr>Token</a>
@@ -367,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</p>
-</dd></dl>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -391,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Return the number of records, default value: 10, maximum value: 100.</p>
-</dd><dt class="property-optional"
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -400,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scroll_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scroll_token_python" style="color: inherit; text-decoration: inherit;">scroll_<wbr>token</a>
@@ -409,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</p>
-</dd></dl>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -433,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Return the number of records, default value: 10, maximum value: 100.</p>
-</dd><dt class="property-optional"
+    <dd>Return the number of records, default value: 10, maximum value: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -442,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scrolltoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_yaml" style="color: inherit; text-decoration: inherit;">scroll<wbr>Token</a>
@@ -451,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</p>
-</dd></dl>
+    <dd>Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -475,8 +558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scrolltoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_csharp" style="color: inherit; text-decoration: inherit;">Scroll<wbr>Token</a>
@@ -500,8 +582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettaskstaskset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Outputs.<wbr>Get<wbr>Tasks<wbr>Task<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Task list.</p>
-</dd><dt class="property-"
+    <dd>Task list.</dd><dt class="property-"
             title="">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -531,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scrolltoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_go" style="color: inherit; text-decoration: inherit;">Scroll<wbr>Token</a>
@@ -556,8 +636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettaskstaskset">[]Get<wbr>Tasks<wbr>Task<wbr>Set</a></span>
     </dt>
-    <dd><p>Task list.</p>
-</dd><dt class="property-"
+    <dd>Task list.</dd><dt class="property-"
             title="">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -578,6 +657,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="scroll_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scroll_token_hcl" style="color: inherit; text-decoration: inherit;">scroll_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="task_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_sets_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettaskstaskset">list(object)</a></span>
+    </dt>
+    <dd>Task list.</dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -587,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scrolltoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_java" style="color: inherit; text-decoration: inherit;">scroll<wbr>Token</a>
@@ -612,8 +744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettaskstaskset">List&lt;Get<wbr>Tasks<wbr>Task<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Task list.</p>
-</dd><dt class="property-"
+    <dd>Task list.</dd><dt class="property-"
             title="">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -643,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scrolltoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_nodejs" style="color: inherit; text-decoration: inherit;">scroll<wbr>Token</a>
@@ -668,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettaskstaskset">Get<wbr>Tasks<wbr>Task<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Task list.</p>
-</dd><dt class="property-"
+    <dd>Task list.</dd><dt class="property-"
             title="">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -699,8 +828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scroll_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scroll_token_python" style="color: inherit; text-decoration: inherit;">scroll_<wbr>token</a>
@@ -722,10 +850,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_sets_python" style="color: inherit; text-decoration: inherit;">task_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettaskstaskset">Get<wbr>Tasks<wbr>Task<wbr>Set]</a></span>
+        <span class="property-type"><a href="#gettaskstaskset">Sequence[Get<wbr>Tasks<wbr>Task<wbr>Set]</a></span>
     </dt>
-    <dd><p>Task list.</p>
-</dd><dt class="property-"
+    <dd>Task list.</dd><dt class="property-"
             title="">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -755,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scrolltoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scrolltoken_yaml" style="color: inherit; text-decoration: inherit;">scroll<wbr>Token</a>
@@ -780,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettaskstaskset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Task list.</p>
-</dd><dt class="property-"
+    <dd>Task list.</dd><dt class="property-"
             title="">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -821,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -830,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_csharp" style="color: inherit; text-decoration: inherit;">Finish<wbr>Time</a>
@@ -839,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="subtasktypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtasktypes_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Task<wbr>Types</a>
@@ -848,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Sub task types.</p>
-</dd><dt class="property-required"
+    <dd>Sub task types.</dd><dt class="property-required"
             title="Required">
         <span id="taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -857,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task ID.</p>
-</dd><dt class="property-required"
+    <dd>Task ID.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -866,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</p>
-</dd></dl>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -881,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -890,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_go" style="color: inherit; text-decoration: inherit;">Finish<wbr>Time</a>
@@ -899,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="subtasktypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtasktypes_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Task<wbr>Types</a>
@@ -908,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Sub task types.</p>
-</dd><dt class="property-required"
+    <dd>Sub task types.</dd><dt class="property-required"
             title="Required">
         <span id="taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -917,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task ID.</p>
-</dd><dt class="property-required"
+    <dd>Task ID.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -926,8 +1040,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</p>
-</dd></dl>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="begin_process_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_process_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>process_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
+            title="Required">
+        <span id="finish_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finish_time_hcl" style="color: inherit; text-decoration: inherit;">finish_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
+            title="Required">
+        <span id="sub_task_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_task_types_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>task_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Sub task types.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -941,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -950,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_java" style="color: inherit; text-decoration: inherit;">finish<wbr>Time</a>
@@ -959,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="subtasktypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtasktypes_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Task<wbr>Types</a>
@@ -968,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Sub task types.</p>
-</dd><dt class="property-required"
+    <dd>Sub task types.</dd><dt class="property-required"
             title="Required">
         <span id="taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -977,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task ID.</p>
-</dd><dt class="property-required"
+    <dd>Task ID.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_java" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -986,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</p>
-</dd></dl>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1001,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1010,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_nodejs" style="color: inherit; text-decoration: inherit;">finish<wbr>Time</a>
@@ -1019,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="subtasktypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtasktypes_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Task<wbr>Types</a>
@@ -1028,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Sub task types.</p>
-</dd><dt class="property-required"
+    <dd>Sub task types.</dd><dt class="property-required"
             title="Required">
         <span id="taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1037,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task ID.</p>
-</dd><dt class="property-required"
+    <dd>Task ID.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -1046,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</p>
-</dd></dl>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1061,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1070,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
             title="Required">
         <span id="finish_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finish_time_python" style="color: inherit; text-decoration: inherit;">finish_<wbr>time</a>
@@ -1079,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="sub_task_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_task_types_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>task_<wbr>types</a>
@@ -1088,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Sub task types.</p>
-</dd><dt class="property-required"
+    <dd>Sub task types.</dd><dt class="property-required"
             title="Required">
         <span id="task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -1097,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task ID.</p>
-</dd><dt class="property-required"
+    <dd>Task ID.</dd><dt class="property-required"
             title="Required">
         <span id="task_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_python" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
@@ -1106,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</p>
-</dd></dl>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1121,8 +1270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Begin process time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not started yet, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1130,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_yaml" style="color: inherit; text-decoration: inherit;">finish<wbr>Time</a>
@@ -1139,8 +1286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</p>
-</dd><dt class="property-required"
+    <dd>Task finish time, in ISO date format. Refer to https://cloud.tencent.com/document/product/862/37710#52. If the task has not been completed, this field is: 0000-00-00T00:00:00Z.</dd><dt class="property-required"
             title="Required">
         <span id="subtasktypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtasktypes_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Task<wbr>Types</a>
@@ -1148,8 +1294,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Sub task types.</p>
-</dd><dt class="property-required"
+    <dd>Sub task types.</dd><dt class="property-required"
             title="Required">
         <span id="taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1157,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task ID.</p>
-</dd><dt class="property-required"
+    <dd>Task ID.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -1166,8 +1310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</p>
-</dd></dl>
+    <dd>Task type, including:WorkflowTask, EditMediaTask, LiveProcessTask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1182,7 +1325,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

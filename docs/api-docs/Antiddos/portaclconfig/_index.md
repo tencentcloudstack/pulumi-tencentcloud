@@ -2,9 +2,11 @@
 ---
 title: "PortAclConfig"
 title_tag: "tencentcloud.Antiddos.PortAclConfig"
-meta_desc: "Documentation for the tencentcloud.Antiddos.PortAclConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a antiddos port acl config"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,86 +18,76 @@ Provides a resource to create a antiddos port acl config
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const portAclConfig = new tencentcloud.antiddos.PortAclConfig("portAclConfig", {
-    aclConfig: {
-        action: "drop",
-        dPortEnd: 23,
-        dPortStart: 22,
-        forwardProtocol: "all",
-        priority: 2,
-        sPortEnd: 23,
-        sPortStart: 22,
-    },
+const portAclConfig = new tencentcloud.antiddos.PortAclConfig("port_acl_config", {
     instanceId: "bgp-xxxxxx",
+    aclConfig: {
+        forwardProtocol: "all",
+        dPortStart: 22,
+        dPortEnd: 23,
+        sPortStart: 22,
+        sPortEnd: 23,
+        action: "drop",
+        priority: 2,
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-port_acl_config = tencentcloud.antiddos.PortAclConfig("portAclConfig",
-    acl_config=tencentcloud.antiddos.PortAclConfigAclConfigArgs(
-        action="drop",
-        d_port_end=23,
-        d_port_start=22,
-        forward_protocol="all",
-        priority=2,
-        s_port_end=23,
-        s_port_start=22,
-    ),
-    instance_id="bgp-xxxxxx")
+port_acl_config = tencentcloud.antiddos.PortAclConfig("port_acl_config",
+    instance_id="bgp-xxxxxx",
+    acl_config={
+        "forward_protocol": "all",
+        "d_port_start": 22,
+        "d_port_end": 23,
+        "s_port_start": 22,
+        "s_port_end": 23,
+        "action": "drop",
+        "priority": 2,
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var portAclConfig = new Tencentcloud.Antiddos.PortAclConfig("portAclConfig", new()
-    {
-        AclConfig = new Tencentcloud.Antiddos.Inputs.PortAclConfigAclConfigArgs
-        {
-            Action = "drop",
-            DPortEnd = 23,
-            DPortStart = 22,
-            ForwardProtocol = "all",
-            Priority = 2,
-            SPortEnd = 23,
-            SPortStart = 22,
-        },
-        InstanceId = "bgp-xxxxxx",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/antiddos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.NewPortAclConfig(ctx, "portAclConfig", &Antiddos.PortAclConfigArgs{
-			AclConfig: &antiddos.PortAclConfigAclConfigArgs{
-				Action:          pulumi.String("drop"),
-				DPortEnd:        pulumi.Int(23),
-				DPortStart:      pulumi.Int(22),
-				ForwardProtocol: pulumi.String("all"),
-				Priority:        pulumi.Int(2),
-				SPortEnd:        pulumi.Int(23),
-				SPortStart:      pulumi.Int(22),
-			},
+		_, err := antiddos.NewPortAclConfig(ctx, "port_acl_config", &antiddos.PortAclConfigArgs{
 			InstanceId: pulumi.String("bgp-xxxxxx"),
+			AclConfig: &antiddos.PortAclConfigAclConfigArgs{
+				ForwardProtocol: pulumi.String("all"),
+				DPortStart:      pulumi.Int(22),
+				DPortEnd:        pulumi.Int(23),
+				SPortStart:      pulumi.Int(22),
+				SPortEnd:        pulumi.Int(23),
+				Action:          pulumi.String("drop"),
+				Priority:        pulumi.Int(2),
+			},
 		})
 		if err != nil {
 			return err
@@ -104,6 +96,41 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var portAclConfig = new Tencentcloud.Antiddos.PortAclConfig("port_acl_config", new()
+    {
+        InstanceId = "bgp-xxxxxx",
+        AclConfig = new Tencentcloud.Antiddos.Inputs.PortAclConfigAclConfigArgs
+        {
+            ForwardProtocol = "all",
+            DPortStart = 22,
+            DPortEnd = 23,
+            SPortStart = 22,
+            SPortEnd = 23,
+            Action = "drop",
+            Priority = 2,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -113,8 +140,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Antiddos.PortAclConfig;
 import com.pulumi.tencentcloud.Antiddos.PortAclConfigArgs;
 import com.pulumi.tencentcloud.Antiddos.inputs.PortAclConfigAclConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -126,97 +153,154 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var portAclConfig = new PortAclConfig("portAclConfig", PortAclConfigArgs.builder()        
-            .aclConfig(PortAclConfigAclConfigArgs.builder()
-                .action("drop")
-                .dPortEnd(23)
-                .dPortStart(22)
-                .forwardProtocol("all")
-                .priority(2)
-                .sPortEnd(23)
-                .sPortStart(22)
-                .build())
+        var portAclConfig = new PortAclConfig("portAclConfig", PortAclConfigArgs.builder()
             .instanceId("bgp-xxxxxx")
+            .aclConfig(PortAclConfigAclConfigArgs.builder()
+                .forwardProtocol("all")
+                .dPortStart(22)
+                .dPortEnd(23)
+                .sPortStart(22)
+                .sPortEnd(23)
+                .action("drop")
+                .priority(2)
+                .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   portAclConfig:
     type: tencentcloud:Antiddos:PortAclConfig
+    name: port_acl_config
     properties:
-      aclConfig:
-        action: drop
-        dPortEnd: 23
-        dPortStart: 22
-        forwardProtocol: all
-        priority: 2
-        sPortEnd: 23
-        sPortStart: 22
       instanceId: bgp-xxxxxx
+      aclConfig:
+        forwardProtocol: all
+        dPortStart: 22
+        dPortEnd: 23
+        sPortStart: 22
+        sPortEnd: 23
+        action: drop
+        priority: 2
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_antiddos_portaclconfig" "port_acl_config" {
+  instance_id = "bgp-xxxxxx"
+  acl_config = {
+    forward_protocol = "all"
+    d_port_start     = 22
+    d_port_end       = 23
+    s_port_start     = 22
+    s_port_end       = 23
+    action           = "drop"
+    priority         = 2
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&type=document&lang=en)
+* Read: [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&type=document&lang=en)
+* Delete: [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&type=document&lang=en)
 
 
 ## Create PortAclConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">acl_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.PortAclConfigAclConfigArgs]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                  <span class="nx">acl_config</span><span class="p">:</span> <span class="nx">Optional[PortAclConfigAclConfigArgs]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPortAclConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PortAclConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPortAclConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PortAclConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">PortAclConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PortAclConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:PortAclConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:PortAclConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_antiddos_port_acl_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -237,7 +321,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -354,11 +438,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## PortAclConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The PortAclConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -372,10 +464,9 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclconfig_csharp" style="color: inherit; text-decoration: inherit;">Acl<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#portaclconfigaclconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -383,8 +474,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,8 +488,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -407,8 +496,29 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="acl_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_config_hcl" style="color: inherit; text-decoration: inherit;">acl_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">object</a></span>
+    </dt>
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -420,10 +530,9 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclconfig_java" style="color: inherit; text-decoration: inherit;">acl<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -431,8 +540,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -444,10 +552,9 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclconfig_nodejs" style="color: inherit; text-decoration: inherit;">acl<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -455,8 +562,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -470,8 +576,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -479,8 +584,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -494,8 +598,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#portaclconfigaclconfig">Property Map</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -503,8 +606,7 @@ The PortAclConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,8 +641,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -555,8 +669,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -570,8 +683,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -585,8 +697,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -600,8 +711,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -611,121 +721,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing PortAclConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PortAclConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PortAclConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PortAclConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PortAclConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">acl_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.PortAclConfigAclConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">acl_config</span><span class="p">:</span> <span class="nx">Optional[PortAclConfigAclConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> PortAclConfig</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPortAclConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PortAclConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PortAclConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPortAclConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PortAclConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PortAclConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PortAclConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PortAclConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PortAclConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PortAclConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PortAclConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PortAclConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PortAclConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PortAclConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPortAclConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Antiddos:PortAclConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_antiddos_port_acl_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PortAclConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PortAclConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -733,28 +882,31 @@ Get an existing PortAclConfig resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PortAclConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -762,28 +914,31 @@ Get an existing PortAclConfig resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PortAclConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -801,10 +956,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclconfig_csharp" style="color: inherit; text-decoration: inherit;">Acl<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#portaclconfigaclconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -812,8 +966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -836,8 +988,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_acl_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_config_hcl" style="color: inherit; text-decoration: inherit;">acl_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">object</a></span>
+    </dt>
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -849,10 +1022,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclconfig_java" style="color: inherit; text-decoration: inherit;">acl<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -860,8 +1032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -873,10 +1044,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclconfig_nodejs" style="color: inherit; text-decoration: inherit;">acl<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -884,8 +1054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -899,8 +1068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -908,8 +1076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -923,8 +1090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#portaclconfigaclconfig">Property Map</a></span>
     </dt>
-    <dd><p>Port ACL Policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port ACL Policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -932,8 +1098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceIdList.</p>
-</dd></dl>
+    <dd>InstanceIdList.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -948,7 +1113,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="portaclconfigaclconfig">Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config</h4>
+<h4 id="portaclconfigaclconfig">
+Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Port<wbr>Acl<wbr>Config<wbr>Acl<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -960,8 +1127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, can take values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_csharp" style="color: inherit; text-decoration: inherit;">DPort<wbr>End</a>
@@ -969,8 +1135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_csharp" style="color: inherit; text-decoration: inherit;">DPort<wbr>Start</a>
@@ -978,8 +1143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -987,8 +1151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type, can take TCP, udp, all values.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_csharp" style="color: inherit; text-decoration: inherit;">SPort<wbr>End</a>
@@ -996,8 +1159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_csharp" style="color: inherit; text-decoration: inherit;">SPort<wbr>Start</a>
@@ -1005,8 +1167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1014,8 +1175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1029,8 +1189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, can take values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_go" style="color: inherit; text-decoration: inherit;">DPort<wbr>End</a>
@@ -1038,8 +1197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_go" style="color: inherit; text-decoration: inherit;">DPort<wbr>Start</a>
@@ -1047,8 +1205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -1056,8 +1213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type, can take TCP, udp, all values.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_go" style="color: inherit; text-decoration: inherit;">SPort<wbr>End</a>
@@ -1065,8 +1221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_go" style="color: inherit; text-decoration: inherit;">SPort<wbr>Start</a>
@@ -1074,8 +1229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1083,8 +1237,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_end_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_port_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_start_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_end_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_start_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1098,8 +1313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, can take values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_java" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -1107,8 +1321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>end from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_java" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -1116,8 +1329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1125,8 +1337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type, can take TCP, udp, all values.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -1134,8 +1345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>end from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -1143,8 +1353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1152,8 +1361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, can take values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -1176,8 +1383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>end from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -1185,8 +1391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1194,8 +1399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type, can take TCP, udp, all values.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -1203,8 +1407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>end from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -1212,8 +1415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1221,8 +1423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1236,8 +1437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action, can take values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="d_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_end_python" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>end</a>
@@ -1245,8 +1445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="d_port_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_start_python" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>start</a>
@@ -1254,8 +1453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="forward_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
@@ -1263,8 +1461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol type, can take TCP, udp, all values.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
             title="Required">
         <span id="s_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_end_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>end</a>
@@ -1272,8 +1469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="s_port_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_start_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>start</a>
@@ -1281,8 +1477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1290,8 +1485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1305,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, can take values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, can take values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -1314,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>end from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>end from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -1323,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting from port, with a range of 0~65535 values.</p>
-</dd><dt class="property-required"
+    <dd>Starting from port, with a range of 0~65535 values.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1332,8 +1523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type, can take TCP, udp, all values.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, can take TCP, udp, all values.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -1341,8 +1531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>end from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>end from the source port, with a value range of 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -1350,8 +1539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting from the source port, with a value range of 0~65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting from the source port, with a value range of 0~65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1359,8 +1547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1368,12 +1555,15 @@ The following state arguments are supported:
 
 
 
-antiddos port_acl_config can be imported using the id, e.g.
+antiddos portAclConfig can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1385,7 +1575,6 @@ $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_confi
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "StrategyAttachment"
 title_tag: "tencentcloud.ApiGateway.StrategyAttachment"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.StrategyAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create IP strategy attachment of API gateway."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,12 +18,17 @@ Use this resource to create IP strategy attachment of API gateway.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const serviceService = new tencentcloud.apigateway.Service("serviceService", {
+const service = new tencentcloud.apigateway.Service("service", {
     serviceName: "niceservice",
     protocol: "http&https",
     serviceDesc: "your nice service",
@@ -31,14 +38,14 @@ const serviceService = new tencentcloud.apigateway.Service("serviceService", {
     ],
     ipVersion: "IPv4",
 });
-const testIpStrategy = new tencentcloud.apigateway.IpStrategy("testIpStrategy", {
-    serviceId: serviceService.id,
+const test = new tencentcloud.apigateway.IpStrategy("test", {
+    serviceId: service.id,
     strategyName: "tf_test",
     strategyType: "BLACK",
     strategyData: "9.9.9.9",
 });
 const api = new tencentcloud.apigateway.Api("api", {
-    serviceId: serviceService.id,
+    serviceId: service.id,
     apiName: "tf_example",
     apiDesc: "my hello api update",
     authType: "SECRET",
@@ -70,23 +77,28 @@ const api = new tencentcloud.apigateway.Api("api", {
         needConvert: true,
     }],
 });
-const serviceServiceRelease = new tencentcloud.apigateway.ServiceRelease("serviceServiceRelease", {
-    serviceId: serviceService.id,
+const serviceServiceRelease = new tencentcloud.apigateway.ServiceRelease("service", {
+    serviceId: service.id,
     environmentName: "release",
     releaseDesc: "test service release",
 });
-const testStrategyAttachment = new tencentcloud.apigateway.StrategyAttachment("testStrategyAttachment", {
+const testStrategyAttachment = new tencentcloud.apigateway.StrategyAttachment("test", {
     serviceId: serviceServiceRelease.serviceId,
-    strategyId: testIpStrategy.strategyId,
+    strategyId: test.strategyId,
     environmentName: "release",
     bindApiId: api.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-service_service = tencentcloud.api_gateway.Service("serviceService",
+service = tencentcloud.apigateway.Service("service",
     service_name="niceservice",
     protocol="http&https",
     service_desc="your nice service",
@@ -95,13 +107,13 @@ service_service = tencentcloud.api_gateway.Service("serviceService",
         "OUTER",
     ],
     ip_version="IPv4")
-test_ip_strategy = tencentcloud.api_gateway.IpStrategy("testIpStrategy",
-    service_id=service_service.id,
+test = tencentcloud.apigateway.IpStrategy("test",
+    service_id=service.id,
     strategy_name="tf_test",
     strategy_type="BLACK",
     strategy_data="9.9.9.9")
-api = tencentcloud.api_gateway.Api("api",
-    service_id=service_service.id,
+api = tencentcloud.apigateway.Api("api",
+    service_id=service.id,
     api_name="tf_example",
     api_desc="my hello api update",
     auth_type="SECRET",
@@ -109,14 +121,14 @@ api = tencentcloud.api_gateway.Api("api",
     enable_cors=True,
     request_config_path="/user/info",
     request_config_method="POST",
-    request_parameters=[tencentcloud.api_gateway.ApiRequestParameterArgs(
-        name="email",
-        position="QUERY",
-        type="string",
-        desc="your email please?",
-        default_value="tom@qq.com",
-        required=True,
-    )],
+    request_parameters=[{
+        "name": "email",
+        "position": "QUERY",
+        "type": "string",
+        "desc": "your email please?",
+        "default_value": "tom@qq.com",
+        "required": True,
+    }],
     service_config_type="HTTP",
     service_config_timeout=10,
     service_config_url="http://www.tencent.com",
@@ -125,23 +137,126 @@ api = tencentcloud.api_gateway.Api("api",
     response_type="XML",
     response_success_example="<note>success</note>",
     response_fail_example="<note>fail</note>",
-    response_error_codes=[tencentcloud.api_gateway.ApiResponseErrorCodeArgs(
-        code=10,
-        msg="system error",
-        desc="system error code",
-        converted_code=-10,
-        need_convert=True,
-    )])
-service_service_release = tencentcloud.api_gateway.ServiceRelease("serviceServiceRelease",
-    service_id=service_service.id,
+    response_error_codes=[{
+        "code": 10,
+        "msg": "system error",
+        "desc": "system error code",
+        "converted_code": -10,
+        "need_convert": True,
+    }])
+service_service_release = tencentcloud.apigateway.ServiceRelease("service",
+    service_id=service.id,
     environment_name="release",
     release_desc="test service release")
-test_strategy_attachment = tencentcloud.api_gateway.StrategyAttachment("testStrategyAttachment",
+test_strategy_attachment = tencentcloud.apigateway.StrategyAttachment("test",
     service_id=service_service_release.service_id,
-    strategy_id=test_ip_strategy.strategy_id,
+    strategy_id=test.strategy_id,
     environment_name="release",
     bind_api_id=api.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		service, err := apigateway.NewService(ctx, "service", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("niceservice"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("your nice service"),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		test, err := apigateway.NewIpStrategy(ctx, "test", &apigateway.IpStrategyArgs{
+			ServiceId:    service.ID().ToIDOutput().ToStringOutput(),
+			StrategyName: pulumi.String("tf_test"),
+			StrategyType: pulumi.String("BLACK"),
+			StrategyData: pulumi.String("9.9.9.9"),
+		})
+		if err != nil {
+			return err
+		}
+		api, err := apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
+			ServiceId:           service.ID().ToIDOutput().ToStringOutput(),
+			ApiName:             pulumi.String("tf_example"),
+			ApiDesc:             pulumi.String("my hello api update"),
+			AuthType:            pulumi.String("SECRET"),
+			Protocol:            pulumi.String("HTTP"),
+			EnableCors:          pulumi.Bool(true),
+			RequestConfigPath:   pulumi.String("/user/info"),
+			RequestConfigMethod: pulumi.String("POST"),
+			RequestParameters: apigateway.ApiRequestParameterArray{
+				&apigateway.ApiRequestParameterArgs{
+					Name:         pulumi.String("email"),
+					Position:     pulumi.String("QUERY"),
+					Type:         pulumi.String("string"),
+					Desc:         pulumi.String("your email please?"),
+					DefaultValue: pulumi.String("tom@qq.com"),
+					Required:     pulumi.Bool(true),
+				},
+			},
+			ServiceConfigType:      pulumi.String("HTTP"),
+			ServiceConfigTimeout:   pulumi.Int(10),
+			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+			ServiceConfigPath:      pulumi.String("/user"),
+			ServiceConfigMethod:    pulumi.String("POST"),
+			ResponseType:           pulumi.String("XML"),
+			ResponseSuccessExample: pulumi.String("<note>success</note>"),
+			ResponseFailExample:    pulumi.String("<note>fail</note>"),
+			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+				&apigateway.ApiResponseErrorCodeArgs{
+					Code:          pulumi.Int(10),
+					Msg:           pulumi.String("system error"),
+					Desc:          pulumi.String("system error code"),
+					ConvertedCode: pulumi.Int(-10),
+					NeedConvert:   pulumi.Bool(true),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		serviceServiceRelease, err := apigateway.NewServiceRelease(ctx, "service", &apigateway.ServiceReleaseArgs{
+			ServiceId:       service.ID().ToIDOutput().ToStringOutput(),
+			EnvironmentName: pulumi.String("release"),
+			ReleaseDesc:     pulumi.String("test service release"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewStrategyAttachment(ctx, "test", &apigateway.StrategyAttachmentArgs{
+			ServiceId:       serviceServiceRelease.ServiceId,
+			StrategyId:      test.StrategyId,
+			EnvironmentName: pulumi.String("release"),
+			BindApiId:       api.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -150,7 +265,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var serviceService = new Tencentcloud.ApiGateway.Service("serviceService", new()
+    var service = new Tencentcloud.ApiGateway.Service("service", new()
     {
         ServiceName = "niceservice",
         Protocol = "http&https",
@@ -163,9 +278,9 @@ return await Deployment.RunAsync(() =>
         IpVersion = "IPv4",
     });
 
-    var testIpStrategy = new Tencentcloud.ApiGateway.IpStrategy("testIpStrategy", new()
+    var test = new Tencentcloud.ApiGateway.IpStrategy("test", new()
     {
-        ServiceId = serviceService.Id,
+        ServiceId = service.Id,
         StrategyName = "tf_test",
         StrategyType = "BLACK",
         StrategyData = "9.9.9.9",
@@ -173,7 +288,7 @@ return await Deployment.RunAsync(() =>
 
     var api = new Tencentcloud.ApiGateway.Api("api", new()
     {
-        ServiceId = serviceService.Id,
+        ServiceId = service.Id,
         ApiName = "tf_example",
         ApiDesc = "my hello api update",
         AuthType = "SECRET",
@@ -214,116 +329,28 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var serviceServiceRelease = new Tencentcloud.ApiGateway.ServiceRelease("serviceServiceRelease", new()
+    var serviceServiceRelease = new Tencentcloud.ApiGateway.ServiceRelease("service", new()
     {
-        ServiceId = serviceService.Id,
+        ServiceId = service.Id,
         EnvironmentName = "release",
         ReleaseDesc = "test service release",
     });
 
-    var testStrategyAttachment = new Tencentcloud.ApiGateway.StrategyAttachment("testStrategyAttachment", new()
+    var testStrategyAttachment = new Tencentcloud.ApiGateway.StrategyAttachment("test", new()
     {
         ServiceId = serviceServiceRelease.ServiceId,
-        StrategyId = testIpStrategy.StrategyId,
+        StrategyId = test.StrategyId,
         EnvironmentName = "release",
         BindApiId = api.Id,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		serviceService, err := ApiGateway.NewService(ctx, "serviceService", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("niceservice"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("your nice service"),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-		})
-		if err != nil {
-			return err
-		}
-		testIpStrategy, err := ApiGateway.NewIpStrategy(ctx, "testIpStrategy", &ApiGateway.IpStrategyArgs{
-			ServiceId:    serviceService.ID(),
-			StrategyName: pulumi.String("tf_test"),
-			StrategyType: pulumi.String("BLACK"),
-			StrategyData: pulumi.String("9.9.9.9"),
-		})
-		if err != nil {
-			return err
-		}
-		api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-			ServiceId:           serviceService.ID(),
-			ApiName:             pulumi.String("tf_example"),
-			ApiDesc:             pulumi.String("my hello api update"),
-			AuthType:            pulumi.String("SECRET"),
-			Protocol:            pulumi.String("HTTP"),
-			EnableCors:          pulumi.Bool(true),
-			RequestConfigPath:   pulumi.String("/user/info"),
-			RequestConfigMethod: pulumi.String("POST"),
-			RequestParameters: apigateway.ApiRequestParameterArray{
-				&apigateway.ApiRequestParameterArgs{
-					Name:         pulumi.String("email"),
-					Position:     pulumi.String("QUERY"),
-					Type:         pulumi.String("string"),
-					Desc:         pulumi.String("your email please?"),
-					DefaultValue: pulumi.String("tom@qq.com"),
-					Required:     pulumi.Bool(true),
-				},
-			},
-			ServiceConfigType:      pulumi.String("HTTP"),
-			ServiceConfigTimeout:   pulumi.Int(10),
-			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-			ServiceConfigPath:      pulumi.String("/user"),
-			ServiceConfigMethod:    pulumi.String("POST"),
-			ResponseType:           pulumi.String("XML"),
-			ResponseSuccessExample: pulumi.String("<note>success</note>"),
-			ResponseFailExample:    pulumi.String("<note>fail</note>"),
-			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-				&apigateway.ApiResponseErrorCodeArgs{
-					Code:          pulumi.Int(10),
-					Msg:           pulumi.String("system error"),
-					Desc:          pulumi.String("system error code"),
-					ConvertedCode: -10,
-					NeedConvert:   pulumi.Bool(true),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		serviceServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "serviceServiceRelease", &ApiGateway.ServiceReleaseArgs{
-			ServiceId:       serviceService.ID(),
-			EnvironmentName: pulumi.String("release"),
-			ReleaseDesc:     pulumi.String("test service release"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.NewStrategyAttachment(ctx, "testStrategyAttachment", &ApiGateway.StrategyAttachmentArgs{
-			ServiceId:       serviceServiceRelease.ServiceId,
-			StrategyId:      testIpStrategy.StrategyId,
-			EnvironmentName: pulumi.String("release"),
-			BindApiId:       api.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -342,8 +369,8 @@ import com.pulumi.tencentcloud.ApiGateway.ServiceRelease;
 import com.pulumi.tencentcloud.ApiGateway.ServiceReleaseArgs;
 import com.pulumi.tencentcloud.ApiGateway.StrategyAttachment;
 import com.pulumi.tencentcloud.ApiGateway.StrategyAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -355,7 +382,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var serviceService = new Service("serviceService", ServiceArgs.builder()        
+        var service = new Service("service", ServiceArgs.builder()
             .serviceName("niceservice")
             .protocol("http&https")
             .serviceDesc("your nice service")
@@ -365,15 +392,15 @@ public class App {
             .ipVersion("IPv4")
             .build());
 
-        var testIpStrategy = new IpStrategy("testIpStrategy", IpStrategyArgs.builder()        
-            .serviceId(serviceService.id())
+        var test = new IpStrategy("test", IpStrategyArgs.builder()
+            .serviceId(service.id())
             .strategyName("tf_test")
             .strategyType("BLACK")
             .strategyData("9.9.9.9")
             .build());
 
-        var api = new Api("api", ApiArgs.builder()        
-            .serviceId(serviceService.id())
+        var api = new Api("api", ApiArgs.builder()
+            .serviceId(service.id())
             .apiName("tf_example")
             .apiDesc("my hello api update")
             .authType("SECRET")
@@ -401,20 +428,20 @@ public class App {
                 .code(10)
                 .msg("system error")
                 .desc("system error code")
-                .convertedCode("TODO: GenUnaryOpExpression")
+                .convertedCode(-10)
                 .needConvert(true)
                 .build())
             .build());
 
-        var serviceServiceRelease = new ServiceRelease("serviceServiceRelease", ServiceReleaseArgs.builder()        
-            .serviceId(serviceService.id())
+        var serviceServiceRelease = new ServiceRelease("serviceServiceRelease", ServiceReleaseArgs.builder()
+            .serviceId(service.id())
             .environmentName("release")
             .releaseDesc("test service release")
             .build());
 
-        var testStrategyAttachment = new StrategyAttachment("testStrategyAttachment", StrategyAttachmentArgs.builder()        
+        var testStrategyAttachment = new StrategyAttachment("testStrategyAttachment", StrategyAttachmentArgs.builder()
             .serviceId(serviceServiceRelease.serviceId())
-            .strategyId(testIpStrategy.strategyId())
+            .strategyId(test.strategyId())
             .environmentName("release")
             .bindApiId(api.id())
             .build());
@@ -422,68 +449,238 @@ public class App {
     }
 }
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
 
+```yaml
+resources:
+  service:
+    type: tencentcloud:ApiGateway:Service
+    properties:
+      serviceName: niceservice
+      protocol: http&https
+      serviceDesc: your nice service
+      netTypes:
+        - INNER
+        - OUTER
+      ipVersion: IPv4
+  test:
+    type: tencentcloud:ApiGateway:IpStrategy
+    properties:
+      serviceId: ${service.id}
+      strategyName: tf_test
+      strategyType: BLACK
+      strategyData: 9.9.9.9
+  api:
+    type: tencentcloud:ApiGateway:Api
+    properties:
+      serviceId: ${service.id}
+      apiName: tf_example
+      apiDesc: my hello api update
+      authType: SECRET
+      protocol: HTTP
+      enableCors: true
+      requestConfigPath: /user/info
+      requestConfigMethod: POST
+      requestParameters:
+        - name: email
+          position: QUERY
+          type: string
+          desc: your email please?
+          defaultValue: tom@qq.com
+          required: true
+      serviceConfigType: HTTP
+      serviceConfigTimeout: 10
+      serviceConfigUrl: http://www.tencent.com
+      serviceConfigPath: /user
+      serviceConfigMethod: POST
+      responseType: XML
+      responseSuccessExample: <note>success</note>
+      responseFailExample: <note>fail</note>
+      responseErrorCodes:
+        - code: 10
+          msg: system error
+          desc: system error code
+          convertedCode: -10
+          needConvert: true
+  serviceServiceRelease:
+    type: tencentcloud:ApiGateway:ServiceRelease
+    name: service
+    properties:
+      serviceId: ${service.id}
+      environmentName: release
+      releaseDesc: test service release
+  testStrategyAttachment:
+    type: tencentcloud:ApiGateway:StrategyAttachment
+    name: test
+    properties:
+      serviceId: ${serviceServiceRelease.serviceId}
+      strategyId: ${test.strategyId}
+      environmentName: release
+      bindApiId: ${api.id}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_service" "service" {
+  service_name = "niceservice"
+  protocol     = "http&https"
+  service_desc = "your nice service"
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_ipstrategy" "test" {
+  service_id    = tencentcloud_apigateway_service.service.id
+  strategy_name = "tf_test"
+  strategy_type = "BLACK"
+  strategy_data = "9.9.9.9"
+}
+resource "tencentcloud_apigateway_api" "api" {
+  service_id            = tencentcloud_apigateway_service.service.id
+  api_name              = "tf_example"
+  api_desc              = "my hello api update"
+  auth_type             = "SECRET"
+  protocol              = "HTTP"
+  enable_cors           = true
+  request_config_path   = "/user/info"
+  request_config_method = "POST"
+  request_parameters {
+    name          = "email"
+    position      = "QUERY"
+    type          = "string"
+    desc          = "your email please?"
+    default_value = "tom@qq.com"
+    required      = true
+  }
+  service_config_type      = "HTTP"
+  service_config_timeout   = 10
+  service_config_url       = "http://www.tencent.com"
+  service_config_path      = "/user"
+  service_config_method    = "POST"
+  response_type            = "XML"
+  response_success_example = "<note>success</note>"
+  response_fail_example    = "<note>fail</note>"
+  response_error_codes {
+    code           = 10
+    msg            = "system error"
+    desc           = "system error code"
+    converted_code = -10
+    need_convert   = true
+  }
+}
+resource "tencentcloud_apigateway_servicerelease" "service" {
+  service_id       = tencentcloud_apigateway_service.service.id
+  environment_name = "release"
+  release_desc     = "test service release"
+}
+resource "tencentcloud_apigateway_strategyattachment" "test" {
+  service_id       = tencentcloud_apigateway_servicerelease.service.service_id
+  strategy_id      = tencentcloud_apigateway_ipstrategy.test.strategy_id
+  environment_name = "release"
+  bind_api_id      = tencentcloud_apigateway_api.api.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [BindIPStrategy](https://www.tencentcloud.com/search/?wd=BindIPStrategy&type=document&lang=en)
+  - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+* Read: [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+* Delete: [UnBindIPStrategy](https://www.tencentcloud.com/search/?wd=UnBindIPStrategy&type=document&lang=en)
 
 
 ## Create StrategyAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                        <span class="nx">bind_api_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                       <span class="nx">strategy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                       <span class="nx">strategy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewStrategyAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StrategyAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewStrategyAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StrategyAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">StrategyAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StrategyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:StrategyAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:StrategyAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_strategy_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -504,7 +701,7 @@ public class App {
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -621,11 +818,19 @@ public class App {
 </pulumi-choosable>
 </div>
 
+
+
 ## StrategyAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The StrategyAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -641,8 +846,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentname_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Name</a>
@@ -650,8 +854,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -659,8 +862,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -668,8 +870,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -683,8 +884,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentname_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Name</a>
@@ -692,8 +892,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -701,8 +900,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -710,8 +908,45 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="bind_api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_api_id_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="strategy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_id_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -725,8 +960,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentname_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -734,8 +968,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -743,8 +976,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -752,8 +984,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -767,8 +998,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentname_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -776,8 +1006,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -785,8 +1014,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -794,8 +1022,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +1036,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environment_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
@@ -818,8 +1044,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -827,8 +1052,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_id_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
@@ -836,8 +1060,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1074,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentname_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -860,8 +1082,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -869,8 +1090,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -878,8 +1098,7 @@ The StrategyAttachment resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1119,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1133,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -930,8 +1161,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -945,8 +1175,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,8 +1189,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -975,8 +1203,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -986,18 +1213,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing StrategyAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">StrategyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">StrategyAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">StrategyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">StrategyAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1005,104 +1232,143 @@ Get an existing StrategyAttachment resource's state with the given name, ID, and
         <span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">strategy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> StrategyAttachment</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetStrategyAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">StrategyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StrategyAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetStrategyAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">StrategyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StrategyAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">StrategyAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StrategyAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">StrategyAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StrategyAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">StrategyAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StrategyAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">StrategyAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StrategyAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingStrategyAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:StrategyAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_strategy_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StrategyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StrategyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1110,28 +1376,31 @@ Get an existing StrategyAttachment resource's state with the given name, ID, and
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StrategyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1139,28 +1408,31 @@ Get an existing StrategyAttachment resource's state with the given name, ID, and
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StrategyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1180,8 +1452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Name</a>
@@ -1189,8 +1460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1198,8 +1468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -1207,8 +1476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1222,8 +1490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Name</a>
@@ -1231,8 +1498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1240,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -1249,8 +1514,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bind_api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bind_api_id_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_strategy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_id_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1264,8 +1566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -1273,8 +1574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1282,8 +1582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -1291,8 +1590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1306,8 +1604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -1315,8 +1612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1324,8 +1620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -1333,8 +1628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1348,8 +1642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_name_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
@@ -1357,8 +1650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1366,8 +1658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_id_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
@@ -1375,8 +1666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1390,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API that needs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The API that needs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -1399,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment of the strategy association. Valid values: <code>test</code>, <code>release</code>, <code>prepub</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1408,8 +1696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -1417,8 +1704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway strategy.</p>
-</dd></dl>
+    <dd>The ID of the API gateway strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1441,6 +1727,9 @@ $ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment te
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1450,7 +1739,6 @@ $ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment te
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

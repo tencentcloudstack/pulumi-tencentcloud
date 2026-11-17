@@ -2,9 +2,11 @@
 ---
 title: "Bucket"
 title_tag: "tencentcloud.Cos.Bucket"
-meta_desc: "Documentation for the tencentcloud.Cos.Bucket resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a COS resource to create a COS bucket and set its attributes. NOTE: The following capabilities do not support cdc scenarios: multiAz, website."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,75 +16,70 @@ no_edit_this_page: true
 
 Provides a COS resource to create a COS bucket and set its attributes.
 
+> **NOTE:** The following capabilities do not support cdc scenarios: `multiAz`, `website`, and bucket replication `replicaRole`.
+
+> **NOTE:** If `chdfsOfs` is `true`, cannot set `aclBody`, `acl`, `originPullRules`, `originDomainRules`, `website`, `encryptionAlgorithm`, `kmsId`, `versioningEnable`, `accelerationEnable` at the same time. For more information, please refer to `https://www.tencentcloud.com/document/product/436/43305`.
+
 ## Example Usage
 
 ### Private Bucket
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
+const info = tencentcloud.user.getInfo({});
 const appId = info.then(info => info.appId);
-const privateSbucket = new tencentcloud.cos.Bucket("privateSbucket", {
+const privateBucket = new tencentcloud.cos.Bucket("private_bucket", {
     bucket: appId.then(appId => `private-bucket-${appId}`),
     acl: "private",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
+info = tencentcloud.user.get_info()
 app_id = info.app_id
-private_sbucket = tencentcloud.cos.Bucket("privateSbucket",
+private_bucket = tencentcloud.cos.Bucket("private_bucket",
     bucket=f"private-bucket-{app_id}",
     acl="private")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var info = Tencentcloud.User.GetInfo.Invoke();
-
-    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
-
-    var privateSbucket = new Tencentcloud.Cos.Bucket("privateSbucket", new()
-    {
-        CosBucket = appId.Apply(appId => $"private-bucket-{appId}"),
-        Acl = "private",
-    });
-
-});
-```
 ```go
 package main
 
 import (
-	"fmt"
-
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
 		if err != nil {
 			return err
 		}
 		appId := info.AppId
-		_, err = Cos.NewBucket(ctx, "privateSbucket", &Cos.BucketArgs{
-			Bucket: pulumi.String(fmt.Sprintf("private-bucket-%v", appId)),
+		_, err = cos.NewBucket(ctx, "private_bucket", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("private-bucket-%v", appId),
 			Acl:    pulumi.String("private"),
 		})
 		if err != nil {
@@ -92,6 +89,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var privateBucket = new Tencentcloud.Cos.Bucket("private_bucket", new()
+    {
+        CosBucket = appId.Apply(appId => $"private-bucket-{appId}"),
+        Acl = "private",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -102,8 +129,8 @@ import com.pulumi.tencentcloud.User.UserFunctions;
 import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,11 +142,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var appId = info.appId();
 
-        var privateSbucket = new Bucket("privateSbucket", BucketArgs.builder()        
+        var privateBucket = new Bucket("privateBucket", BucketArgs.builder()
             .bucket(String.format("private-bucket-%s", appId))
             .acl("private")
             .build());
@@ -127,59 +155,394 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  privateSbucket:
+  privateBucket:
     type: tencentcloud:Cos:Bucket
+    name: private_bucket
     properties:
       bucket: private-bucket-${appId}
       acl: private
 variables:
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Creation of multiple available zone bucket
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "private_bucket" {
+  bucket ="private-bucket-${local.appId}"
+  acl    = "private"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Private Bucket with CDC cluster
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
+const region = "ap-guangzhou";
+const cdcId = "cluster-262n63e8";
+const info = tencentcloud.user.getInfo({});
 const appId = info.then(info => info.appId);
-const multiZoneBucket = new tencentcloud.cos.Bucket("multiZoneBucket", {
-    bucket: appId.then(appId => `multi-zone-bucket-${appId}`),
+const privateBucket = new tencentcloud.cos.Bucket("private_bucket", {
+    bucket: appId.then(appId => `private-bucket-${appId}`),
     acl: "private",
-    multiAz: true,
     versioningEnable: true,
     forceClean: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
+region = "ap-guangzhou"
+cdc_id = "cluster-262n63e8"
+info = tencentcloud.user.get_info()
 app_id = info.app_id
-multi_zone_bucket = tencentcloud.cos.Bucket("multiZoneBucket",
-    bucket=f"multi-zone-bucket-{app_id}",
+private_bucket = tencentcloud.cos.Bucket("private_bucket",
+    bucket=f"private-bucket-{app_id}",
     acl="private",
-    multi_az=True,
     versioning_enable=True,
     force_clean=True)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_ := "ap-guangzhou"
+		_ := "cluster-262n63e8"
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "private_bucket", &cos.BucketArgs{
+			Bucket:           pulumi.Sprintf("private-bucket-%v", appId),
+			Acl:              pulumi.String("private"),
+			VersioningEnable: pulumi.Bool(true),
+			ForceClean:       pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var region = "ap-guangzhou";
+
+    var cdcId = "cluster-262n63e8";
+
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var privateBucket = new Tencentcloud.Cos.Bucket("private_bucket", new()
+    {
+        CosBucket = appId.Apply(appId => $"private-bucket-{appId}"),
+        Acl = "private",
+        VersioningEnable = true,
+        ForceClean = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var region = "ap-guangzhou";
+
+        final var cdcId = "cluster-262n63e8";
+
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var privateBucket = new Bucket("privateBucket", BucketArgs.builder()
+            .bucket(String.format("private-bucket-%s", appId))
+            .acl("private")
+            .versioningEnable(true)
+            .forceClean(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  privateBucket:
+    type: tencentcloud:Cos:Bucket
+    name: private_bucket
+    properties:
+      bucket: private-bucket-${appId}
+      acl: private
+      versioningEnable: true
+      forceClean: true
+variables:
+  region: ap-guangzhou
+  cdcId: cluster-262n63e8
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "private_bucket" {
+  bucket            ="private-bucket-${local.appId}"
+  acl               = "private"
+  versioning_enable = true
+  force_clean       = true
+}
+locals {
+  region = "ap-guangzhou"
+}
+locals {
+  cdcId = "cluster-262n63e8"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Enable SSE-KMS encryption
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.kms.Key("example", {
+    alias: "tf-example-kms-key",
+    description: "example of kms key",
+    keyRotationEnabled: false,
+    isEnabled: true,
+    tags: {
+        createdBy: "terraform",
+    },
+});
+const bucketBasic = new tencentcloud.cos.Bucket("bucket_basic", {
+    bucket: appId.then(appId => `tf-bucket-cdc-${appId}`),
+    acl: "private",
+    encryptionAlgorithm: "KMS",
+    kmsId: example.id,
+    versioningEnable: true,
+    accelerationEnable: false,
+    forceClean: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.kms.Key("example",
+    alias="tf-example-kms-key",
+    description="example of kms key",
+    key_rotation_enabled=False,
+    is_enabled=True,
+    tags={
+        "createdBy": "terraform",
+    })
+bucket_basic = tencentcloud.cos.Bucket("bucket_basic",
+    bucket=f"tf-bucket-cdc-{app_id}",
+    acl="private",
+    encryption_algorithm="KMS",
+    kms_id=example.id,
+    versioning_enable=True,
+    acceleration_enable=False,
+    force_clean=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		example, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+			Alias:              pulumi.String("tf-example-kms-key"),
+			Description:        pulumi.String("example of kms key"),
+			KeyRotationEnabled: pulumi.Bool(false),
+			IsEnabled:          pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cos.NewBucket(ctx, "bucket_basic", &cos.BucketArgs{
+			Bucket:              pulumi.Sprintf("tf-bucket-cdc-%v", appId),
+			Acl:                 pulumi.String("private"),
+			EncryptionAlgorithm: pulumi.String("KMS"),
+			KmsId:               example.ID().ToIDOutput().ToStringOutput(),
+			VersioningEnable:    pulumi.Bool(true),
+			AccelerationEnable:  pulumi.Bool(false),
+			ForceClean:          pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -188,37 +551,228 @@ return await Deployment.RunAsync(() =>
 
     var appId = info.Apply(getInfoResult => getInfoResult.AppId);
 
-    var multiZoneBucket = new Tencentcloud.Cos.Bucket("multiZoneBucket", new()
+    var example = new Tencentcloud.Kms.Key("example", new()
     {
-        CosBucket = appId.Apply(appId => $"multi-zone-bucket-{appId}"),
+        Alias = "tf-example-kms-key",
+        Description = "example of kms key",
+        KeyRotationEnabled = false,
+        IsEnabled = true,
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+    var bucketBasic = new Tencentcloud.Cos.Bucket("bucket_basic", new()
+    {
+        CosBucket = appId.Apply(appId => $"tf-bucket-cdc-{appId}"),
         Acl = "private",
-        MultiAz = true,
+        EncryptionAlgorithm = "KMS",
+        KmsId = example.Id,
         VersioningEnable = true,
+        AccelerationEnable = false,
         ForceClean = true,
     });
 
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Kms.Key;
+import com.pulumi.tencentcloud.Kms.KeyArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Key("example", KeyArgs.builder()
+            .alias("tf-example-kms-key")
+            .description("example of kms key")
+            .keyRotationEnabled(false)
+            .isEnabled(true)
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+        var bucketBasic = new Bucket("bucketBasic", BucketArgs.builder()
+            .bucket(String.format("tf-bucket-cdc-%s", appId))
+            .acl("private")
+            .encryptionAlgorithm("KMS")
+            .kmsId(example.id())
+            .versioningEnable(true)
+            .accelerationEnable(false)
+            .forceClean(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Kms:Key
+    properties:
+      alias: tf-example-kms-key
+      description: example of kms key
+      keyRotationEnabled: false
+      isEnabled: true
+      tags:
+        createdBy: terraform
+  bucketBasic:
+    type: tencentcloud:Cos:Bucket
+    name: bucket_basic
+    properties:
+      bucket: tf-bucket-cdc-${appId}
+      acl: private
+      encryptionAlgorithm: KMS
+      kmsId: ${example.id}
+      versioningEnable: true
+      accelerationEnable: false
+      forceClean: true
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_kms_key" "example" {
+  alias                = "tf-example-kms-key"
+  description          = "example of kms key"
+  key_rotation_enabled = false
+  is_enabled           = true
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_cos_bucket" "bucket_basic" {
+  bucket               ="tf-bucket-cdc-${local.appId}"
+  acl                  = "private"
+  encryption_algorithm = "KMS"
+  kms_id               = tencentcloud_kms_key.example.id
+  versioning_enable    = true
+  acceleration_enable  = false
+  force_clean          = true
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Creation of multiple available zone bucket
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const multiZoneBucket = new tencentcloud.cos.Bucket("multi_zone_bucket", {
+    bucket: appId.then(appId => `multi-zone-bucket-${appId}`),
+    acl: "private",
+    multiAz: true,
+    versioningEnable: true,
+    forceClean: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+multi_zone_bucket = tencentcloud.cos.Bucket("multi_zone_bucket",
+    bucket=f"multi-zone-bucket-{app_id}",
+    acl="private",
+    multi_az=True,
+    versioning_enable=True,
+    force_clean=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
-	"fmt"
-
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
 		if err != nil {
 			return err
 		}
 		appId := info.AppId
-		_, err = Cos.NewBucket(ctx, "multiZoneBucket", &Cos.BucketArgs{
-			Bucket:           pulumi.String(fmt.Sprintf("multi-zone-bucket-%v", appId)),
+		_, err = cos.NewBucket(ctx, "multi_zone_bucket", &cos.BucketArgs{
+			Bucket:           pulumi.Sprintf("multi-zone-bucket-%v", appId),
 			Acl:              pulumi.String("private"),
 			MultiAz:          pulumi.Bool(true),
 			VersioningEnable: pulumi.Bool(true),
@@ -231,6 +785,39 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var multiZoneBucket = new Tencentcloud.Cos.Bucket("multi_zone_bucket", new()
+    {
+        CosBucket = appId.Apply(appId => $"multi-zone-bucket-{appId}"),
+        Acl = "private",
+        MultiAz = true,
+        VersioningEnable = true,
+        ForceClean = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -241,8 +828,8 @@ import com.pulumi.tencentcloud.User.UserFunctions;
 import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -254,11 +841,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var appId = info.appId();
 
-        var multiZoneBucket = new Bucket("multiZoneBucket", BucketArgs.builder()        
+        var multiZoneBucket = new Bucket("multiZoneBucket", BucketArgs.builder()
             .bucket(String.format("multi-zone-bucket-%s", appId))
             .acl("private")
             .multiAz(true)
@@ -269,10 +857,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   multiZoneBucket:
     type: tencentcloud:Cos:Bucket
+    name: multi_zone_bucket
     properties:
       bucket: multi-zone-bucket-${appId}
       acl: private
@@ -282,318 +876,279 @@ resources:
 variables:
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "multi_zone_bucket" {
+  bucket            ="multi-zone-bucket-${local.appId}"
+  acl               = "private"
+  multi_az          = true
+  versioning_enable = true
+  force_clean       = true
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using verbose acl
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
+const info = tencentcloud.user.getInfo({});
 const appId = info.then(info => info.appId);
-const bucketWithAcl = new tencentcloud.cos.Bucket("bucketWithAcl", {
+const bucketWithAcl = new tencentcloud.cos.Bucket("bucket_with_acl", {
     bucket: appId.then(appId => `bucketwith-acl-${appId}`),
     aclBody: `<AccessControlPolicy>
-	<Owner>
-		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-	</Owner>
-	<AccessControlList>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-	</AccessControlList>
+\\t<Owner>
+\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\\t</Owner>
+\\t<AccessControlList>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"Group\\">
+\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>READ</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"CanonicalUser\\">
+\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>FULL_CONTROL</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"CanonicalUser\\">
+\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>WRITE_ACP</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"Group\\">
+\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>READ_ACP</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"Group\\">
+\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>WRITE_ACP</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"CanonicalUser\\">
+\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>READ</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"CanonicalUser\\">
+\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>WRITE</Permission>
+\\t\\t</Grant>
+\\t\\t<Grant>
+\\t\\t\\t<Grantee xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:type=\\"Group\\">
+\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\\t\\t\\t</Grantee>
+\\t\\t\\t<Permission>FULL_CONTROL</Permission>
+\\t\\t</Grant>
+\\t</AccessControlList>
 </AccessControlPolicy>
 `,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
+info = tencentcloud.user.get_info()
 app_id = info.app_id
-bucket_with_acl = tencentcloud.cos.Bucket("bucketWithAcl",
+bucket_with_acl = tencentcloud.cos.Bucket("bucket_with_acl",
     bucket=f"bucketwith-acl-{app_id}",
     acl_body="""<AccessControlPolicy>
-	<Owner>
-		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-	</Owner>
-	<AccessControlList>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-	</AccessControlList>
+\t<Owner>
+\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t</Owner>
+\t<AccessControlList>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t</AccessControlList>
 </AccessControlPolicy>
 """)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var info = Tencentcloud.User.GetInfo.Invoke();
-
-    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
-
-    var bucketWithAcl = new Tencentcloud.Cos.Bucket("bucketWithAcl", new()
-    {
-        CosBucket = appId.Apply(appId => $"bucketwith-acl-{appId}"),
-        AclBody = @"<AccessControlPolicy>
-	<Owner>
-		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-	</Owner>
-	<AccessControlList>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group"">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser"">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser"">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group"">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group"">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser"">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser"">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group"">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-	</AccessControlList>
-</AccessControlPolicy>
-",
-    });
-
-});
-```
 ```go
 package main
 
 import (
-	"fmt"
-
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
 		if err != nil {
 			return err
 		}
 		appId := info.AppId
-		_, err = Cos.NewBucket(ctx, "bucketWithAcl", &Cos.BucketArgs{
-			Bucket: pulumi.String(fmt.Sprintf("bucketwith-acl-%v", appId)),
+		_, err = cos.NewBucket(ctx, "bucket_with_acl", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("bucketwith-acl-%v", appId),
 			AclBody: pulumi.String(`<AccessControlPolicy>
-	<Owner>
-		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-	</Owner>
-	<AccessControlList>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-	</AccessControlList>
+\t<Owner>
+\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t</Owner>
+\t<AccessControlList>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t</AccessControlList>
 </AccessControlPolicy>
 `),
 		})
@@ -604,6 +1159,96 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var bucketWithAcl = new Tencentcloud.Cos.Bucket("bucket_with_acl", new()
+    {
+        CosBucket = appId.Apply(appId => $"bucketwith-acl-{appId}"),
+        AclBody = @"<AccessControlPolicy>
+\t<Owner>
+\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t</Owner>
+\t<AccessControlList>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""Group\"">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""CanonicalUser\"">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""CanonicalUser\"">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""Group\"">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""Group\"">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""CanonicalUser\"">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""CanonicalUser\"">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\""http://www.w3.org/2001/XMLSchema-instance\"" xsi:type=\""Group\"">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t</AccessControlList>
+</AccessControlPolicy>
+",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -614,8 +1259,8 @@ import com.pulumi.tencentcloud.User.UserFunctions;
 import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -627,72 +1272,73 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var appId = info.appId();
 
-        var bucketWithAcl = new Bucket("bucketWithAcl", BucketArgs.builder()        
+        var bucketWithAcl = new Bucket("bucketWithAcl", BucketArgs.builder()
             .bucket(String.format("bucketwith-acl-%s", appId))
             .aclBody("""
 <AccessControlPolicy>
-	<Owner>
-		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-	</Owner>
-	<AccessControlList>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>READ_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>WRITE_ACP</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>READ</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-			</Grantee>
-			<Permission>WRITE</Permission>
-		</Grant>
-		<Grant>
-			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-			</Grantee>
-			<Permission>FULL_CONTROL</Permission>
-		</Grant>
-	</AccessControlList>
+\t<Owner>
+\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t</Owner>
+\t<AccessControlList>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE_ACP</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>READ</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+\t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+\t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+\t\t\t</Grantee>
+\t\t\t<Permission>WRITE</Permission>
+\t\t</Grant>
+\t\t<Grant>
+\t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+\t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+\t\t\t</Grantee>
+\t\t\t<Permission>FULL_CONTROL</Permission>
+\t\t</Grant>
+\t</AccessControlList>
 </AccessControlPolicy>
             """)
             .build());
@@ -700,122 +1346,592 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   bucketWithAcl:
     type: tencentcloud:Cos:Bucket
+    name: bucket_with_acl
     properties:
       bucket: bucketwith-acl-${appId}
-      # NOTE: Specify the acl_body by the priority sequence of permission and user type with the following sequence: `CanonicalUser with READ`, `CanonicalUser with WRITE`, `CanonicalUser with FULL_CONTROL`, `CanonicalUser with WRITE_ACP`, `CanonicalUser with READ_ACP`, then specify the `Group` of permissions same as `CanonicalUser`.
       aclBody: |
         <AccessControlPolicy>
-        	<Owner>
-        		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-        		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-        	</Owner>
-        	<AccessControlList>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-        			</Grantee>
-        			<Permission>READ</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-        			</Grantee>
-        			<Permission>FULL_CONTROL</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-        			</Grantee>
-        			<Permission>WRITE_ACP</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-        			</Grantee>
-        			<Permission>READ_ACP</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-        			</Grantee>
-        			<Permission>WRITE_ACP</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-        			</Grantee>
-        			<Permission>READ</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
-        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
-        			</Grantee>
-        			<Permission>WRITE</Permission>
-        		</Grant>
-        		<Grant>
-        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-        			</Grantee>
-        			<Permission>FULL_CONTROL</Permission>
-        		</Grant>
-        	</AccessControlList>
+        \t<Owner>
+        \t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        \t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        \t</Owner>
+        \t<AccessControlList>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+        \t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>READ</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+        \t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        \t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>FULL_CONTROL</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+        \t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        \t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>WRITE_ACP</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+        \t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>READ_ACP</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+        \t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>WRITE_ACP</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+        \t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        \t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>READ</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+        \t\t\t\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        \t\t\t\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>WRITE</Permission>
+        \t\t</Grant>
+        \t\t<Grant>
+        \t\t\t<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">
+        \t\t\t\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        \t\t\t</Grantee>
+        \t\t\t<Permission>FULL_CONTROL</Permission>
+        \t\t</Grant>
+        \t</AccessControlList>
         </AccessControlPolicy>
 variables:
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Static Website
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_acl" {
+  bucket   ="bucketwith-acl-${local.appId}"
+  acl_body = "<AccessControlPolicy>\n\\t<Owner>\n\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n\\t</Owner>\n\\t<AccessControlList>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"Group\\\">\n\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>READ</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"CanonicalUser\\\">\n\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>FULL_CONTROL</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"CanonicalUser\\\">\n\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>WRITE_ACP</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"Group\\\">\n\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>READ_ACP</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"Group\\\">\n\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>WRITE_ACP</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"CanonicalUser\\\">\n\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>READ</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"CanonicalUser\\\">\n\\t\\t\\t\\t<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n\\t\\t\\t\\t<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>WRITE</Permission>\n\\t\\t</Grant>\n\\t\\t<Grant>\n\\t\\t\\t<Grantee xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\" xsi:type=\\\"Group\\\">\n\\t\\t\\t\\t<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n\\t\\t\\t</Grantee>\n\\t\\t\\t<Permission>FULL_CONTROL</Permission>\n\\t\\t</Grant>\n\\t</AccessControlList>\n</AccessControlPolicy>\n"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using verbose acl with CDC cluster
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
+const region = "ap-guangzhou";
+const cdcId = "cluster-262n63e8";
+const info = tencentcloud.user.getInfo({});
 const appId = info.then(info => info.appId);
-const bucketWithStaticWebsite = new tencentcloud.cos.Bucket("bucketWithStaticWebsite", {
-    bucket: appId.then(appId => `bucket-with-static-website-${appId}`),
-    website: {
-        indexDocument: "index.html",
-        errorDocument: "error.html",
-    },
+const bucketWithAcl = new tencentcloud.cos.Bucket("bucket_with_acl", {
+    bucket: appId.then(appId => `private-bucket-${appId}`),
+    acl: "private",
+    aclBody: `<AccessControlPolicy>
+    <Owner>
+        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+    </Owner>
+    <AccessControlList>
+        <Grant>
+            <Grantee type=\\"CanonicalUser\\">
+                <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+            </Grantee>
+            <Permission>WRITE</Permission>
+        </Grant>
+        <Grant>
+            <Grantee type=\\"CanonicalUser\\">
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Grantee>
+            <Permission>FULL_CONTROL</Permission>
+        </Grant>
+    </AccessControlList>
+</AccessControlPolicy>
+`,
 });
-export const endpointTest = bucketWithStaticWebsite.website.apply(website => website?.endpoint);
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
+region = "ap-guangzhou"
+cdc_id = "cluster-262n63e8"
+info = tencentcloud.user.get_info()
 app_id = info.app_id
-bucket_with_static_website = tencentcloud.cos.Bucket("bucketWithStaticWebsite",
-    bucket=f"bucket-with-static-website-{app_id}",
-    website=tencentcloud.cos.BucketWebsiteArgs(
-        index_document="index.html",
-        error_document="error.html",
-    ))
-pulumi.export("endpointTest", bucket_with_static_website.website.endpoint)
+bucket_with_acl = tencentcloud.cos.Bucket("bucket_with_acl",
+    bucket=f"private-bucket-{app_id}",
+    acl="private",
+    acl_body="""<AccessControlPolicy>
+    <Owner>
+        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+    </Owner>
+    <AccessControlList>
+        <Grant>
+            <Grantee type=\"CanonicalUser\">
+                <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+            </Grantee>
+            <Permission>WRITE</Permission>
+        </Grant>
+        <Grant>
+            <Grantee type=\"CanonicalUser\">
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Grantee>
+            <Permission>FULL_CONTROL</Permission>
+        </Grant>
+    </AccessControlList>
+</AccessControlPolicy>
+""")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_ := "ap-guangzhou"
+		_ := "cluster-262n63e8"
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "bucket_with_acl", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("private-bucket-%v", appId),
+			Acl:    pulumi.String("private"),
+			AclBody: pulumi.String(`<AccessControlPolicy>
+    <Owner>
+        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+    </Owner>
+    <AccessControlList>
+        <Grant>
+            <Grantee type=\"CanonicalUser\">
+                <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+            </Grantee>
+            <Permission>WRITE</Permission>
+        </Grant>
+        <Grant>
+            <Grantee type=\"CanonicalUser\">
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Grantee>
+            <Permission>FULL_CONTROL</Permission>
+        </Grant>
+    </AccessControlList>
+</AccessControlPolicy>
+`),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var region = "ap-guangzhou";
+
+    var cdcId = "cluster-262n63e8";
+
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var bucketWithAcl = new Tencentcloud.Cos.Bucket("bucket_with_acl", new()
+    {
+        CosBucket = appId.Apply(appId => $"private-bucket-{appId}"),
+        Acl = "private",
+        AclBody = @"<AccessControlPolicy>
+    <Owner>
+        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+    </Owner>
+    <AccessControlList>
+        <Grant>
+            <Grantee type=\""CanonicalUser\"">
+                <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+            </Grantee>
+            <Permission>WRITE</Permission>
+        </Grant>
+        <Grant>
+            <Grantee type=\""CanonicalUser\"">
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Grantee>
+            <Permission>FULL_CONTROL</Permission>
+        </Grant>
+    </AccessControlList>
+</AccessControlPolicy>
+",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var region = "ap-guangzhou";
+
+        final var cdcId = "cluster-262n63e8";
+
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var bucketWithAcl = new Bucket("bucketWithAcl", BucketArgs.builder()
+            .bucket(String.format("private-bucket-%s", appId))
+            .acl("private")
+            .aclBody("""
+<AccessControlPolicy>
+    <Owner>
+        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+    </Owner>
+    <AccessControlList>
+        <Grant>
+            <Grantee type=\"CanonicalUser\">
+                <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+            </Grantee>
+            <Permission>WRITE</Permission>
+        </Grant>
+        <Grant>
+            <Grantee type=\"CanonicalUser\">
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Grantee>
+            <Permission>FULL_CONTROL</Permission>
+        </Grant>
+    </AccessControlList>
+</AccessControlPolicy>
+            """)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  bucketWithAcl:
+    type: tencentcloud:Cos:Bucket
+    name: bucket_with_acl
+    properties:
+      bucket: private-bucket-${appId}
+      acl: private
+      aclBody: |
+        <AccessControlPolicy>
+            <Owner>
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Owner>
+            <AccessControlList>
+                <Grant>
+                    <Grantee type=\"CanonicalUser\">
+                        <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                        <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+                    </Grantee>
+                    <Permission>WRITE</Permission>
+                </Grant>
+                <Grant>
+                    <Grantee type=\"CanonicalUser\">
+                        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+                    </Grantee>
+                    <Permission>FULL_CONTROL</Permission>
+                </Grant>
+            </AccessControlList>
+        </AccessControlPolicy>
+variables:
+  region: ap-guangzhou
+  cdcId: cluster-262n63e8
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_acl" {
+  bucket   ="private-bucket-${local.appId}"
+  acl      = "private"
+  acl_body = "<AccessControlPolicy>\n    <Owner>\n        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>\n        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>\n    </Owner>\n    <AccessControlList>\n        <Grant>\n            <Grantee type=\\\"CanonicalUser\\\">\n                <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>\n                <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>\n            </Grantee>\n            <Permission>WRITE</Permission>\n        </Grant>\n        <Grant>\n            <Grantee type=\\\"CanonicalUser\\\">\n                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>\n                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>\n            </Grantee>\n            <Permission>FULL_CONTROL</Permission>\n        </Grant>\n    </AccessControlList>\n</AccessControlPolicy>\n"
+}
+locals {
+  region = "ap-guangzhou"
+}
+locals {
+  cdcId = "cluster-262n63e8"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Static Website
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const bucketWithStaticWebsite = new tencentcloud.cos.Bucket("bucket_with_static_website", {
+    bucket: appId.then(appId => `bucket-with-static-website-${appId}`),
+    website: {
+        indexDocument: "index.html",
+        errorDocument: "error.html",
+        redirectAllRequestsTo: "https",
+        routingRules: {
+            rules: [
+                {
+                    conditionErrorCode: "404",
+                    redirectProtocol: "https",
+                    redirectReplaceKeyPrefix: "/test",
+                },
+                {
+                    conditionPrefix: "/test",
+                    redirectProtocol: "https",
+                    redirectReplaceKey: "key",
+                },
+            ],
+        },
+    },
+});
+export const endpointTest = bucketWithStaticWebsite.website.apply(website => website?.endpoint);
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+bucket_with_static_website = tencentcloud.cos.Bucket("bucket_with_static_website",
+    bucket=f"bucket-with-static-website-{app_id}",
+    website={
+        "index_document": "index.html",
+        "error_document": "error.html",
+        "redirect_all_requests_to": "https",
+        "routing_rules": {
+            "rules": [
+                {
+                    "condition_error_code": "404",
+                    "redirect_protocol": "https",
+                    "redirect_replace_key_prefix": "/test",
+                },
+                {
+                    "condition_prefix": "/test",
+                    "redirect_protocol": "https",
+                    "redirect_replace_key": "key",
+                },
+            ],
+        },
+    })
+pulumi.export("endpointTest", bucket_with_static_website.website.endpoint)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		bucketWithStaticWebsite, err := cos.NewBucket(ctx, "bucket_with_static_website", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("bucket-with-static-website-%v", appId),
+			Website: &cos.BucketWebsiteArgs{
+				IndexDocument:         pulumi.String("index.html"),
+				ErrorDocument:         pulumi.String("error.html"),
+				RedirectAllRequestsTo: pulumi.String("https"),
+				RoutingRules: &cos.BucketWebsiteRoutingRulesArgs{
+					Rules: cos.BucketWebsiteRoutingRulesRuleArray{
+						&cos.BucketWebsiteRoutingRulesRuleArgs{
+							ConditionErrorCode:       pulumi.String("404"),
+							RedirectProtocol:         pulumi.String("https"),
+							RedirectReplaceKeyPrefix: pulumi.String("/test"),
+						},
+						&cos.BucketWebsiteRoutingRulesRuleArgs{
+							ConditionPrefix:    pulumi.String("/test"),
+							RedirectProtocol:   pulumi.String("https"),
+							RedirectReplaceKey: pulumi.String("key"),
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		ctx.Export("endpointTest", bucketWithStaticWebsite.Website.Endpoint())
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -824,13 +1940,32 @@ return await Deployment.RunAsync(() =>
 
     var appId = info.Apply(getInfoResult => getInfoResult.AppId);
 
-    var bucketWithStaticWebsite = new Tencentcloud.Cos.Bucket("bucketWithStaticWebsite", new()
+    var bucketWithStaticWebsite = new Tencentcloud.Cos.Bucket("bucket_with_static_website", new()
     {
         CosBucket = appId.Apply(appId => $"bucket-with-static-website-{appId}"),
         Website = new Tencentcloud.Cos.Inputs.BucketWebsiteArgs
         {
             IndexDocument = "index.html",
             ErrorDocument = "error.html",
+            RedirectAllRequestsTo = "https",
+            RoutingRules = new Tencentcloud.Cos.Inputs.BucketWebsiteRoutingRulesArgs
+            {
+                Rules = new[]
+                {
+                    new Tencentcloud.Cos.Inputs.BucketWebsiteRoutingRulesRuleArgs
+                    {
+                        ConditionErrorCode = "404",
+                        RedirectProtocol = "https",
+                        RedirectReplaceKeyPrefix = "/test",
+                    },
+                    new Tencentcloud.Cos.Inputs.BucketWebsiteRoutingRulesRuleArgs
+                    {
+                        ConditionPrefix = "/test",
+                        RedirectProtocol = "https",
+                        RedirectReplaceKey = "key",
+                    },
+                },
+            },
         },
     });
 
@@ -840,41 +1975,11 @@ return await Deployment.RunAsync(() =>
     };
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"fmt"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		appId := info.AppId
-		bucketWithStaticWebsite, err := Cos.NewBucket(ctx, "bucketWithStaticWebsite", &Cos.BucketArgs{
-			Bucket: pulumi.String(fmt.Sprintf("bucket-with-static-website-%v", appId)),
-			Website: &cos.BucketWebsiteArgs{
-				IndexDocument: pulumi.String("index.html"),
-				ErrorDocument: pulumi.String("error.html"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		ctx.Export("endpointTest", bucketWithStaticWebsite.Website.ApplyT(func(website cos.BucketWebsite) (*string, error) {
-			return &website.Endpoint, nil
-		}).(pulumi.StringPtrOutput))
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -886,8 +1991,10 @@ import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketWebsiteArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Cos.inputs.BucketWebsiteRoutingRulesArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketWebsiteRoutingRulesRuleArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -899,55 +2006,679 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var appId = info.appId();
 
-        var bucketWithStaticWebsite = new Bucket("bucketWithStaticWebsite", BucketArgs.builder()        
+        var bucketWithStaticWebsite = new Bucket("bucketWithStaticWebsite", BucketArgs.builder()
             .bucket(String.format("bucket-with-static-website-%s", appId))
             .website(BucketWebsiteArgs.builder()
                 .indexDocument("index.html")
                 .errorDocument("error.html")
+                .redirectAllRequestsTo("https")
+                .routingRules(BucketWebsiteRoutingRulesArgs.builder()
+                    .rules(                    
+                        BucketWebsiteRoutingRulesRuleArgs.builder()
+                            .conditionErrorCode("404")
+                            .redirectProtocol("https")
+                            .redirectReplaceKeyPrefix("/test")
+                            .build(),
+                        BucketWebsiteRoutingRulesRuleArgs.builder()
+                            .conditionPrefix("/test")
+                            .redirectProtocol("https")
+                            .redirectReplaceKey("key")
+                            .build())
+                    .build())
                 .build())
             .build());
 
-        ctx.export("endpointTest", bucketWithStaticWebsite.website().applyValue(website -> website.endpoint()));
+        ctx.export("endpointTest", bucketWithStaticWebsite.website().applyValue(_website -> _website.endpoint()));
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   bucketWithStaticWebsite:
     type: tencentcloud:Cos:Bucket
+    name: bucket_with_static_website
     properties:
       bucket: bucket-with-static-website-${appId}
       website:
         indexDocument: index.html
         errorDocument: error.html
+        redirectAllRequestsTo: https
+        routingRules:
+          rules:
+            - conditionErrorCode: '404'
+              redirectProtocol: https
+              redirectReplaceKeyPrefix: /test
+            - conditionPrefix: /test
+              redirectProtocol: https
+              redirectReplaceKey: key
 variables:
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
 outputs:
   endpointTest: ${bucketWithStaticWebsite.website.endpoint}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_static_website" {
+  bucket ="bucket-with-static-website-${local.appId}"
+  website = {
+    index_document           = "index.html"
+    error_document           = "error.html"
+    redirect_all_requests_to = "https"
+    routing_rules = {
+      rules = [{
+        "conditionErrorCode"       = "404"
+        "redirectProtocol"         = "https"
+        "redirectReplaceKeyPrefix" = "/test"
+        }, {
+        "conditionPrefix"    = "/test"
+        "redirectProtocol"   = "https"
+        "redirectReplaceKey" = "key"
+      }]
+    }
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+output "endpointTest" {
+  value = tencentcloud_cos_bucket.bucket_with_static_website.website.endpoint
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using CORS
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
+const info = tencentcloud.user.getInfo({});
 const appId = info.then(info => info.appId);
-const bucketWithCors = new tencentcloud.cos.Bucket("bucketWithCors", {
+const bucketWithCors = new tencentcloud.cos.Bucket("bucket_with_cors", {
     bucket: appId.then(appId => `bucket-with-cors-${appId}`),
     acl: "public-read-write",
+    corsResponseVary: "true",
+    corsRules: [{
+        allowedOrigins: ["http://*.example.com"],
+        allowedMethods: [
+            "PUT",
+            "POST",
+        ],
+        allowedHeaders: ["*"],
+        maxAgeSeconds: 300,
+        exposeHeaders: ["Etag"],
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+bucket_with_cors = tencentcloud.cos.Bucket("bucket_with_cors",
+    bucket=f"bucket-with-cors-{app_id}",
+    acl="public-read-write",
+    cors_response_vary="true",
+    cors_rules=[{
+        "allowed_origins": ["http://*.example.com"],
+        "allowed_methods": [
+            "PUT",
+            "POST",
+        ],
+        "allowed_headers": ["*"],
+        "max_age_seconds": 300,
+        "expose_headers": ["Etag"],
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "bucket_with_cors", &cos.BucketArgs{
+			Bucket:           pulumi.Sprintf("bucket-with-cors-%v", appId),
+			Acl:              pulumi.String("public-read-write"),
+			CorsResponseVary: pulumi.String("true"),
+			CorsRules: cos.BucketCorsRuleArray{
+				&cos.BucketCorsRuleArgs{
+					AllowedOrigins: pulumi.StringArray{
+						pulumi.String("http://*.example.com"),
+					},
+					AllowedMethods: pulumi.StringArray{
+						pulumi.String("PUT"),
+						pulumi.String("POST"),
+					},
+					AllowedHeaders: pulumi.StringArray{
+						pulumi.String("*"),
+					},
+					MaxAgeSeconds: pulumi.Int(300),
+					ExposeHeaders: pulumi.StringArray{
+						pulumi.String("Etag"),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var bucketWithCors = new Tencentcloud.Cos.Bucket("bucket_with_cors", new()
+    {
+        CosBucket = appId.Apply(appId => $"bucket-with-cors-{appId}"),
+        Acl = "public-read-write",
+        CorsResponseVary = "true",
+        CorsRules = new[]
+        {
+            new Tencentcloud.Cos.Inputs.BucketCorsRuleArgs
+            {
+                AllowedOrigins = new[]
+                {
+                    "http://*.example.com",
+                },
+                AllowedMethods = new[]
+                {
+                    "PUT",
+                    "POST",
+                },
+                AllowedHeaders = new[]
+                {
+                    "*",
+                },
+                MaxAgeSeconds = 300,
+                ExposeHeaders = new[]
+                {
+                    "Etag",
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketCorsRuleArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var bucketWithCors = new Bucket("bucketWithCors", BucketArgs.builder()
+            .bucket(String.format("bucket-with-cors-%s", appId))
+            .acl("public-read-write")
+            .corsResponseVary("true")
+            .corsRules(BucketCorsRuleArgs.builder()
+                .allowedOrigins("http://*.example.com")
+                .allowedMethods(                
+                    "PUT",
+                    "POST")
+                .allowedHeaders("*")
+                .maxAgeSeconds(300)
+                .exposeHeaders("Etag")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  bucketWithCors:
+    type: tencentcloud:Cos:Bucket
+    name: bucket_with_cors
+    properties:
+      bucket: bucket-with-cors-${appId}
+      acl: public-read-write
+      corsResponseVary: true
+      corsRules:
+        - allowedOrigins:
+            - http://*.example.com
+          allowedMethods:
+            - PUT
+            - POST
+          allowedHeaders:
+            - '*'
+          maxAgeSeconds: 300
+          exposeHeaders:
+            - Etag
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_cors" {
+  bucket             ="bucket-with-cors-${local.appId}"
+  acl                = "public-read-write"
+  cors_response_vary = true
+  cors_rules {
+    allowed_origins = ["http://*.example.com"]
+    allowed_methods = ["PUT", "POST"]
+    allowed_headers = ["*"]
+    max_age_seconds = 300
+    expose_headers  = ["Etag"]
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using Origin pull
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const uin = info.then(info => info.uin);
+const ownerUin = info.then(info => info.ownerUin);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `tf-bucket-basic10-${appId}`),
+    acl: "public-read",
+    originPullRules: [{
+        priority: 1,
+        backToSourceMode: "Redirect",
+        httpRedirectCode: "301",
+        protocol: "FOLLOW",
+        host: "1.1.1.1",
+        followQueryString: true,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+uin = info.uin
+owner_uin = info.owner_uin
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"tf-bucket-basic10-{app_id}",
+    acl="public-read",
+    origin_pull_rules=[{
+        "priority": 1,
+        "back_to_source_mode": "Redirect",
+        "http_redirect_code": "301",
+        "protocol": "FOLLOW",
+        "host": "1.1.1.1",
+        "follow_query_string": True,
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_ := info.Uin
+		_ := info.OwnerUin
+		_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("tf-bucket-basic10-%v", appId),
+			Acl:    pulumi.String("public-read"),
+			OriginPullRules: cos.BucketOriginPullRuleArray{
+				&cos.BucketOriginPullRuleArgs{
+					Priority:          pulumi.Int(1),
+					BackToSourceMode:  pulumi.String("Redirect"),
+					HttpRedirectCode:  pulumi.String("301"),
+					Protocol:          pulumi.String("FOLLOW"),
+					Host:              pulumi.String("1.1.1.1"),
+					FollowQueryString: pulumi.Bool(true),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var uin = info.Apply(getInfoResult => getInfoResult.Uin);
+
+    var ownerUin = info.Apply(getInfoResult => getInfoResult.OwnerUin);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
+    {
+        CosBucket = appId.Apply(appId => $"tf-bucket-basic10-{appId}"),
+        Acl = "public-read",
+        OriginPullRules = new[]
+        {
+            new Tencentcloud.Cos.Inputs.BucketOriginPullRuleArgs
+            {
+                Priority = 1,
+                BackToSourceMode = "Redirect",
+                HttpRedirectCode = "301",
+                Protocol = "FOLLOW",
+                Host = "1.1.1.1",
+                FollowQueryString = true,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketOriginPullRuleArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        final var uin = info.uin();
+
+        final var ownerUin = info.ownerUin();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("tf-bucket-basic10-%s", appId))
+            .acl("public-read")
+            .originPullRules(BucketOriginPullRuleArgs.builder()
+                .priority(1)
+                .backToSourceMode("Redirect")
+                .httpRedirectCode("301")
+                .protocol("FOLLOW")
+                .host("1.1.1.1")
+                .followQueryString(true)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cos:Bucket
+    properties:
+      bucket: tf-bucket-basic10-${appId}
+      acl: public-read
+      originPullRules:
+        - priority: 1
+          backToSourceMode: Redirect
+          httpRedirectCode: '301'
+          protocol: FOLLOW
+          host: 1.1.1.1
+          followQueryString: true
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+  uin: ${info.uin}
+  ownerUin: ${info.ownerUin}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket ="tf-bucket-basic10-${local.appId}"
+  acl    = "public-read"
+  origin_pull_rules {
+    priority            = 1
+    back_to_source_mode = "Redirect"
+    http_redirect_code  = "301"
+    protocol            = "FOLLOW"
+    host                = "1.1.1.1"
+    follow_query_string = true
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+locals {
+  uin = data.tencentcloud_user_getinfo.info.uin
+}
+locals {
+  ownerUin = data.tencentcloud_user_getinfo.info.owner_uin
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using CORS with CDC
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const region = "ap-guangzhou";
+const cdcId = "cluster-262n63e8";
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const bucketWithCors = new tencentcloud.cos.Bucket("bucket_with_cors", {
+    bucket: appId.then(appId => `bucket-with-cors-${appId}`),
     corsRules: [{
         allowedOrigins: ["http://*.abc.com"],
         allowedMethods: [
@@ -960,44 +2691,108 @@ const bucketWithCors = new tencentcloud.cos.Bucket("bucketWithCors", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
+region = "ap-guangzhou"
+cdc_id = "cluster-262n63e8"
+info = tencentcloud.user.get_info()
 app_id = info.app_id
-bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
+bucket_with_cors = tencentcloud.cos.Bucket("bucket_with_cors",
     bucket=f"bucket-with-cors-{app_id}",
-    acl="public-read-write",
-    cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
-        allowed_origins=["http://*.abc.com"],
-        allowed_methods=[
+    cors_rules=[{
+        "allowed_origins": ["http://*.abc.com"],
+        "allowed_methods": [
             "PUT",
             "POST",
         ],
-        allowed_headers=["*"],
-        max_age_seconds=300,
-        expose_headers=["Etag"],
-    )])
+        "allowed_headers": ["*"],
+        "max_age_seconds": 300,
+        "expose_headers": ["Etag"],
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_ := "ap-guangzhou"
+		_ := "cluster-262n63e8"
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "bucket_with_cors", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("bucket-with-cors-%v", appId),
+			CorsRules: cos.BucketCorsRuleArray{
+				&cos.BucketCorsRuleArgs{
+					AllowedOrigins: pulumi.StringArray{
+						pulumi.String("http://*.abc.com"),
+					},
+					AllowedMethods: pulumi.StringArray{
+						pulumi.String("PUT"),
+						pulumi.String("POST"),
+					},
+					AllowedHeaders: pulumi.StringArray{
+						pulumi.String("*"),
+					},
+					MaxAgeSeconds: pulumi.Int(300),
+					ExposeHeaders: pulumi.StringArray{
+						pulumi.String("Etag"),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
+    var region = "ap-guangzhou";
+
+    var cdcId = "cluster-262n63e8";
+
     var info = Tencentcloud.User.GetInfo.Invoke();
 
     var appId = info.Apply(getInfoResult => getInfoResult.AppId);
 
-    var bucketWithCors = new Tencentcloud.Cos.Bucket("bucketWithCors", new()
+    var bucketWithCors = new Tencentcloud.Cos.Bucket("bucket_with_cors", new()
     {
         CosBucket = appId.Apply(appId => $"bucket-with-cors-{appId}"),
-        Acl = "public-read-write",
         CorsRules = new[]
         {
             new Tencentcloud.Cos.Inputs.BucketCorsRuleArgs
@@ -1026,53 +2821,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"fmt"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		appId := info.AppId
-		_, err = Cos.NewBucket(ctx, "bucketWithCors", &Cos.BucketArgs{
-			Bucket: pulumi.String(fmt.Sprintf("bucket-with-cors-%v", appId)),
-			Acl:    pulumi.String("public-read-write"),
-			CorsRules: cos.BucketCorsRuleArray{
-				&cos.BucketCorsRuleArgs{
-					AllowedOrigins: pulumi.StringArray{
-						pulumi.String("http://*.abc.com"),
-					},
-					AllowedMethods: pulumi.StringArray{
-						pulumi.String("PUT"),
-						pulumi.String("POST"),
-					},
-					AllowedHeaders: pulumi.StringArray{
-						pulumi.String("*"),
-					},
-					MaxAgeSeconds: pulumi.Int(300),
-					ExposeHeaders: pulumi.StringArray{
-						pulumi.String("Etag"),
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -1084,8 +2837,8 @@ import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketCorsRuleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1097,13 +2850,17 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var region = "ap-guangzhou";
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var cdcId = "cluster-262n63e8";
 
-        var bucketWithCors = new Bucket("bucketWithCors", BucketArgs.builder()        
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var bucketWithCors = new Bucket("bucketWithCors", BucketArgs.builder()
             .bucket(String.format("bucket-with-cors-%s", appId))
-            .acl("public-read-write")
             .corsRules(BucketCorsRuleArgs.builder()
                 .allowedOrigins("http://*.abc.com")
                 .allowedMethods(                
@@ -1118,13 +2875,18 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   bucketWithCors:
     type: tencentcloud:Cos:Bucket
+    name: bucket_with_cors
     properties:
       bucket: bucket-with-cors-${appId}
-      acl: public-read-write
       corsRules:
         - allowedOrigins:
             - http://*.abc.com
@@ -1137,25 +2899,70 @@ resources:
           exposeHeaders:
             - Etag
 variables:
+  region: ap-guangzhou
+  cdcId: cluster-262n63e8
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_cors" {
+  bucket ="bucket-with-cors-${local.appId}"
+  cors_rules {
+    allowed_origins = ["http://*.abc.com"]
+    allowed_methods = ["PUT", "POST"]
+    allowed_headers = ["*"]
+    max_age_seconds = 300
+    expose_headers  = ["Etag"]
+  }
+}
+locals {
+  region = "ap-guangzhou"
+}
+locals {
+  cdcId = "cluster-262n63e8"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using object lifecycle
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
+const info = tencentcloud.user.getInfo({});
 const appId = info.then(info => info.appId);
-const bucketWithLifecycle = new tencentcloud.cos.Bucket("bucketWithLifecycle", {
+const bucketWithLifecycle = new tencentcloud.cos.Bucket("bucket_with_lifecycle", {
     bucket: appId.then(appId => `bucket-with-lifecycle-${appId}`),
     acl: "public-read-write",
     lifecycleRules: [{
@@ -1170,32 +2977,87 @@ const bucketWithLifecycle = new tencentcloud.cos.Bucket("bucketWithLifecycle", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
+info = tencentcloud.user.get_info()
 app_id = info.app_id
-bucket_with_lifecycle = tencentcloud.cos.Bucket("bucketWithLifecycle",
+bucket_with_lifecycle = tencentcloud.cos.Bucket("bucket_with_lifecycle",
     bucket=f"bucket-with-lifecycle-{app_id}",
     acl="public-read-write",
-    lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
-        filter_prefix="path1/",
-        transitions=[tencentcloud.cos.BucketLifecycleRuleTransitionArgs(
-            days=30,
-            storage_class="STANDARD_IA",
-        )],
-        expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
-            days=90,
-        ),
-    )])
+    lifecycle_rules=[{
+        "filter_prefix": "path1/",
+        "transitions": [{
+            "days": 30,
+            "storage_class": "STANDARD_IA",
+        }],
+        "expiration": {
+            "days": 90,
+        },
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "bucket_with_lifecycle", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("bucket-with-lifecycle-%v", appId),
+			Acl:    pulumi.String("public-read-write"),
+			LifecycleRules: cos.BucketLifecycleRuleArray{
+				&cos.BucketLifecycleRuleArgs{
+					FilterPrefix: pulumi.String("path1/"),
+					Transitions: cos.BucketLifecycleRuleTransitionArray{
+						&cos.BucketLifecycleRuleTransitionArgs{
+							Days:         pulumi.Int(30),
+							StorageClass: pulumi.String("STANDARD_IA"),
+						},
+					},
+					Expiration: &cos.BucketLifecycleRuleExpirationArgs{
+						Days: pulumi.Int(90),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -1204,7 +3066,7 @@ return await Deployment.RunAsync(() =>
 
     var appId = info.Apply(getInfoResult => getInfoResult.AppId);
 
-    var bucketWithLifecycle = new Tencentcloud.Cos.Bucket("bucketWithLifecycle", new()
+    var bucketWithLifecycle = new Tencentcloud.Cos.Bucket("bucket_with_lifecycle", new()
     {
         CosBucket = appId.Apply(appId => $"bucket-with-lifecycle-{appId}"),
         Acl = "public-read-write",
@@ -1231,49 +3093,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"fmt"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		appId := info.AppId
-		_, err = Cos.NewBucket(ctx, "bucketWithLifecycle", &Cos.BucketArgs{
-			Bucket: pulumi.String(fmt.Sprintf("bucket-with-lifecycle-%v", appId)),
-			Acl:    pulumi.String("public-read-write"),
-			LifecycleRules: cos.BucketLifecycleRuleArray{
-				&cos.BucketLifecycleRuleArgs{
-					FilterPrefix: pulumi.String("path1/"),
-					Transitions: cos.BucketLifecycleRuleTransitionArray{
-						&cos.BucketLifecycleRuleTransitionArgs{
-							Days:         pulumi.Int(30),
-							StorageClass: pulumi.String("STANDARD_IA"),
-						},
-					},
-					Expiration: &cos.BucketLifecycleRuleExpirationArgs{
-						Days: pulumi.Int(90),
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -1285,9 +3109,10 @@ import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketLifecycleRuleArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketLifecycleRuleTransitionArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketLifecycleRuleExpirationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1299,11 +3124,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var appId = info.appId();
 
-        var bucketWithLifecycle = new Bucket("bucketWithLifecycle", BucketArgs.builder()        
+        var bucketWithLifecycle = new Bucket("bucketWithLifecycle", BucketArgs.builder()
             .bucket(String.format("bucket-with-lifecycle-%s", appId))
             .acl("public-read-write")
             .lifecycleRules(BucketLifecycleRuleArgs.builder()
@@ -1321,10 +3147,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   bucketWithLifecycle:
     type: tencentcloud:Cos:Bucket
+    name: bucket_with_lifecycle
     properties:
       bucket: bucket-with-lifecycle-${appId}
       acl: public-read-write
@@ -1338,74 +3170,563 @@ resources:
 variables:
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Using replication
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_lifecycle" {
+  bucket ="bucket-with-lifecycle-${local.appId}"
+  acl    = "public-read-write"
+  lifecycle_rules {
+    filter_prefix = "path1/"
+    transitions {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+    expiration = {
+      days = 90
+    }
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using object lifecycle with CDC
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const info = tencentcloud.User.getInfo({});
-const appId = info.then(info => info.appId);
-const uin = info.then(info => info.uin);
-const ownerUin = info.then(info => info.ownerUin);
 const region = "ap-guangzhou";
-const bucketReplicate = new tencentcloud.cos.Bucket("bucketReplicate", {
-    bucket: appId.then(appId => `bucket-replicate-${appId}`),
+const cdcId = "cluster-262n63e8";
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const bucketWithLifecycle = new tencentcloud.cos.Bucket("bucket_with_lifecycle", {
+    bucket: appId.then(appId => `bucket-with-lifecycle-${appId}`),
     acl: "private",
-    versioningEnable: true,
-});
-const bucketWithReplication = new tencentcloud.cos.Bucket("bucketWithReplication", {
-    bucket: appId.then(appId => `bucket-with-replication-${appId}`),
-    acl: "private",
-    versioningEnable: true,
-    replicaRole: Promise.all([ownerUin, uin]).then(([ownerUin, uin]) => `qcs::cam::uin/${ownerUin}:uin/${uin}`),
-    replicaRules: [{
-        id: "test-rep1",
-        status: "Enabled",
-        prefix: "dist",
-        destinationBucket: pulumi.interpolate`qcs::cos:${region}::${bucketReplicate.bucket}`,
+    lifecycleRules: [{
+        filterPrefix: "path1/",
+        expiration: {
+            days: 90,
+        },
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-info = tencentcloud.User.get_info()
-app_id = info.app_id
-uin = info.uin
-owner_uin = info.owner_uin
 region = "ap-guangzhou"
-bucket_replicate = tencentcloud.cos.Bucket("bucketReplicate",
-    bucket=f"bucket-replicate-{app_id}",
+cdc_id = "cluster-262n63e8"
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+bucket_with_lifecycle = tencentcloud.cos.Bucket("bucket_with_lifecycle",
+    bucket=f"bucket-with-lifecycle-{app_id}",
     acl="private",
-    versioning_enable=True)
-bucket_with_replication = tencentcloud.cos.Bucket("bucketWithReplication",
-    bucket=f"bucket-with-replication-{app_id}",
-    acl="private",
-    versioning_enable=True,
-    replica_role=f"qcs::cam::uin/{owner_uin}:uin/{uin}",
-    replica_rules=[tencentcloud.cos.BucketReplicaRuleArgs(
-        id="test-rep1",
-        status="Enabled",
-        prefix="dist",
-        destination_bucket=bucket_replicate.bucket.apply(lambda bucket: f"qcs::cos:{region}::{bucket}"),
-    )])
+    lifecycle_rules=[{
+        "filter_prefix": "path1/",
+        "expiration": {
+            "days": 90,
+        },
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_ := "ap-guangzhou"
+		_ := "cluster-262n63e8"
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "bucket_with_lifecycle", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("bucket-with-lifecycle-%v", appId),
+			Acl:    pulumi.String("private"),
+			LifecycleRules: cos.BucketLifecycleRuleArray{
+				&cos.BucketLifecycleRuleArgs{
+					FilterPrefix: pulumi.String("path1/"),
+					Expiration: &cos.BucketLifecycleRuleExpirationArgs{
+						Days: pulumi.Int(90),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var region = "ap-guangzhou";
+
+    var cdcId = "cluster-262n63e8";
+
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var bucketWithLifecycle = new Tencentcloud.Cos.Bucket("bucket_with_lifecycle", new()
+    {
+        CosBucket = appId.Apply(appId => $"bucket-with-lifecycle-{appId}"),
+        Acl = "private",
+        LifecycleRules = new[]
+        {
+            new Tencentcloud.Cos.Inputs.BucketLifecycleRuleArgs
+            {
+                FilterPrefix = "path1/",
+                Expiration = new Tencentcloud.Cos.Inputs.BucketLifecycleRuleExpirationArgs
+                {
+                    Days = 90,
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketLifecycleRuleArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketLifecycleRuleExpirationArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var region = "ap-guangzhou";
+
+        final var cdcId = "cluster-262n63e8";
+
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var bucketWithLifecycle = new Bucket("bucketWithLifecycle", BucketArgs.builder()
+            .bucket(String.format("bucket-with-lifecycle-%s", appId))
+            .acl("private")
+            .lifecycleRules(BucketLifecycleRuleArgs.builder()
+                .filterPrefix("path1/")
+                .expiration(BucketLifecycleRuleExpirationArgs.builder()
+                    .days(90)
+                    .build())
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  bucketWithLifecycle:
+    type: tencentcloud:Cos:Bucket
+    name: bucket_with_lifecycle
+    properties:
+      bucket: bucket-with-lifecycle-${appId}
+      acl: private
+      lifecycleRules:
+        - filterPrefix: path1/
+          expiration:
+            days: 90
+variables:
+  region: ap-guangzhou
+  cdcId: cluster-262n63e8
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_with_lifecycle" {
+  bucket ="bucket-with-lifecycle-${local.appId}"
+  acl    = "private"
+  lifecycle_rules {
+    filter_prefix = "path1/"
+    expiration = {
+      days = 90
+    }
+  }
+}
+locals {
+  region = "ap-guangzhou"
+}
+locals {
+  cdcId = "cluster-262n63e8"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using replication
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const uin = info.then(info => info.uin);
+const ownerUin = info.then(info => info.ownerUin);
+const region = "ap-guangzhou";
+const bucketReplicate = new tencentcloud.cos.Bucket("bucket_replicate", {
+    bucket: appId.then(appId => `bucket-replicate-${appId}`),
+    acl: "private",
+    versioningEnable: true,
+});
+const bucketWithReplication = new tencentcloud.cos.Bucket("bucket_with_replication", {
+    bucket: appId.then(appId => `bucket-with-replication-${appId}`),
+    acl: "private",
+    versioningEnable: true,
+    replicaRole: Promise.all([ownerUin, uin]).then(([ownerUin, uin]) => `qcs::cam::uin/${ownerUin}:uin/${uin}`),
+    replicaRules: [
+        {
+            id: "rule1",
+            status: "Enabled",
+            priority: 1,
+            prefix: "/prefix",
+            filter: {
+                and: {
+                    tags: [
+                        {
+                            key: "tagKey1",
+                            value: "tagValue1",
+                        },
+                        {
+                            key: "tagKey2",
+                            value: "tagValue2",
+                        },
+                    ],
+                },
+            },
+            destinationBucket: pulumi.interpolate`qcs::cos:${region}::${bucketReplicate.bucket}`,
+            destinationStorageClass: "Standard",
+            destinationEncryptionKmsKeyId: "4f14a617-7c7d-11ef-9a62-525400d3a886",
+            deleteMarkerReplication: {
+                status: "Disabled",
+            },
+            sourceSelectionCriteria: {
+                sseKmsEncryptedObjects: {
+                    status: "Enabled",
+                },
+            },
+        },
+        {
+            id: "rule2",
+            status: "Enabled",
+            priority: 2,
+            destinationBucket: pulumi.interpolate`qcs::cos:${region}::${bucketReplicate.bucket}`,
+            destinationStorageClass: "Standard",
+            destinationEncryptionKmsKeyId: "4f14a617-7c7d-11ef-9a62-525400d3a886",
+            deleteMarkerReplication: {
+                status: "Enabled",
+            },
+            sourceSelectionCriteria: {
+                sseKmsEncryptedObjects: {
+                    status: "Enabled",
+                },
+            },
+        },
+    ],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+uin = info.uin
+owner_uin = info.owner_uin
+region = "ap-guangzhou"
+bucket_replicate = tencentcloud.cos.Bucket("bucket_replicate",
+    bucket=f"bucket-replicate-{app_id}",
+    acl="private",
+    versioning_enable=True)
+bucket_with_replication = tencentcloud.cos.Bucket("bucket_with_replication",
+    bucket=f"bucket-with-replication-{app_id}",
+    acl="private",
+    versioning_enable=True,
+    replica_role=f"qcs::cam::uin/{owner_uin}:uin/{uin}",
+    replica_rules=[
+        {
+            "id": "rule1",
+            "status": "Enabled",
+            "priority": 1,
+            "prefix": "/prefix",
+            "filter": {
+                "and_": {
+                    "tags": [
+                        {
+                            "key": "tagKey1",
+                            "value": "tagValue1",
+                        },
+                        {
+                            "key": "tagKey2",
+                            "value": "tagValue2",
+                        },
+                    ],
+                },
+            },
+            "destination_bucket": bucket_replicate.bucket.apply(lambda bucket: f"qcs::cos:{region}::{bucket}"),
+            "destination_storage_class": "Standard",
+            "destination_encryption_kms_key_id": "4f14a617-7c7d-11ef-9a62-525400d3a886",
+            "delete_marker_replication": {
+                "status": "Disabled",
+            },
+            "source_selection_criteria": {
+                "sse_kms_encrypted_objects": {
+                    "status": "Enabled",
+                },
+            },
+        },
+        {
+            "id": "rule2",
+            "status": "Enabled",
+            "priority": 2,
+            "destination_bucket": bucket_replicate.bucket.apply(lambda bucket: f"qcs::cos:{region}::{bucket}"),
+            "destination_storage_class": "Standard",
+            "destination_encryption_kms_key_id": "4f14a617-7c7d-11ef-9a62-525400d3a886",
+            "delete_marker_replication": {
+                "status": "Enabled",
+            },
+            "source_selection_criteria": {
+                "sse_kms_encrypted_objects": {
+                    "status": "Enabled",
+                },
+            },
+        },
+    ])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		uin := info.Uin
+		ownerUin := info.OwnerUin
+		region := "ap-guangzhou"
+		bucketReplicate, err := cos.NewBucket(ctx, "bucket_replicate", &cos.BucketArgs{
+			Bucket:           pulumi.Sprintf("bucket-replicate-%v", appId),
+			Acl:              pulumi.String("private"),
+			VersioningEnable: pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cos.NewBucket(ctx, "bucket_with_replication", &cos.BucketArgs{
+			Bucket:           pulumi.Sprintf("bucket-with-replication-%v", appId),
+			Acl:              pulumi.String("private"),
+			VersioningEnable: pulumi.Bool(true),
+			ReplicaRole:      pulumi.Sprintf("qcs::cam::uin/%v:uin/%v", ownerUin, uin),
+			ReplicaRules: cos.BucketReplicaRuleArray{
+				&cos.BucketReplicaRuleArgs{
+					Id:       pulumi.String("rule1"),
+					Status:   pulumi.String("Enabled"),
+					Priority: pulumi.Int(1),
+					Prefix:   pulumi.String("/prefix"),
+					Filter: &cos.BucketReplicaRuleFilterArgs{
+						And: &cos.BucketReplicaRuleFilterAndArgs{
+							Tags: cos.BucketReplicaRuleFilterAndTagArray{
+								&cos.BucketReplicaRuleFilterAndTagArgs{
+									Key:   pulumi.String("tagKey1"),
+									Value: pulumi.String("tagValue1"),
+								},
+								&cos.BucketReplicaRuleFilterAndTagArgs{
+									Key:   pulumi.String("tagKey2"),
+									Value: pulumi.String("tagValue2"),
+								},
+							},
+						},
+					},
+					DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
+						return fmt.Sprintf("qcs::cos:%v::%v", region, bucket), nil
+					}).(pulumi.StringOutput),
+					DestinationStorageClass:       pulumi.String("Standard"),
+					DestinationEncryptionKmsKeyId: pulumi.String("4f14a617-7c7d-11ef-9a62-525400d3a886"),
+					DeleteMarkerReplication: &cos.BucketReplicaRuleDeleteMarkerReplicationArgs{
+						Status: pulumi.String("Disabled"),
+					},
+					SourceSelectionCriteria: &cos.BucketReplicaRuleSourceSelectionCriteriaArgs{
+						SseKmsEncryptedObjects: &cos.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{
+							Status: pulumi.String("Enabled"),
+						},
+					},
+				},
+				&cos.BucketReplicaRuleArgs{
+					Id:       pulumi.String("rule2"),
+					Status:   pulumi.String("Enabled"),
+					Priority: pulumi.Int(2),
+					DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
+						return fmt.Sprintf("qcs::cos:%v::%v", region, bucket), nil
+					}).(pulumi.StringOutput),
+					DestinationStorageClass:       pulumi.String("Standard"),
+					DestinationEncryptionKmsKeyId: pulumi.String("4f14a617-7c7d-11ef-9a62-525400d3a886"),
+					DeleteMarkerReplication: &cos.BucketReplicaRuleDeleteMarkerReplicationArgs{
+						Status: pulumi.String("Enabled"),
+					},
+					SourceSelectionCriteria: &cos.BucketReplicaRuleSourceSelectionCriteriaArgs{
+						SseKmsEncryptedObjects: &cos.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{
+							Status: pulumi.String("Enabled"),
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -1420,14 +3741,14 @@ return await Deployment.RunAsync(() =>
 
     var region = "ap-guangzhou";
 
-    var bucketReplicate = new Tencentcloud.Cos.Bucket("bucketReplicate", new()
+    var bucketReplicate = new Tencentcloud.Cos.Bucket("bucket_replicate", new()
     {
         CosBucket = appId.Apply(appId => $"bucket-replicate-{appId}"),
         Acl = "private",
         VersioningEnable = true,
     });
 
-    var bucketWithReplication = new Tencentcloud.Cos.Bucket("bucketWithReplication", new()
+    var bucketWithReplication = new Tencentcloud.Cos.Bucket("bucket_with_replication", new()
     {
         CosBucket = appId.Apply(appId => $"bucket-with-replication-{appId}"),
         Acl = "private",
@@ -1442,68 +3763,74 @@ return await Deployment.RunAsync(() =>
         {
             new Tencentcloud.Cos.Inputs.BucketReplicaRuleArgs
             {
-                Id = "test-rep1",
+                Id = "rule1",
                 Status = "Enabled",
-                Prefix = "dist",
+                Priority = 1,
+                Prefix = "/prefix",
+                Filter = new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterArgs
+                {
+                    And = new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterAndArgs
+                    {
+                        Tags = new[]
+                        {
+                            new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterAndTagArgs
+                            {
+                                Key = "tagKey1",
+                                Value = "tagValue1",
+                            },
+                            new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterAndTagArgs
+                            {
+                                Key = "tagKey2",
+                                Value = "tagValue2",
+                            },
+                        },
+                    },
+                },
                 DestinationBucket = bucketReplicate.CosBucket.Apply(bucket => $"qcs::cos:{region}::{bucket}"),
+                DestinationStorageClass = "Standard",
+                DestinationEncryptionKmsKeyId = "4f14a617-7c7d-11ef-9a62-525400d3a886",
+                DeleteMarkerReplication = new Tencentcloud.Cos.Inputs.BucketReplicaRuleDeleteMarkerReplicationArgs
+                {
+                    Status = "Disabled",
+                },
+                SourceSelectionCriteria = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaArgs
+                {
+                    SseKmsEncryptedObjects = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs
+                    {
+                        Status = "Enabled",
+                    },
+                },
+            },
+            new Tencentcloud.Cos.Inputs.BucketReplicaRuleArgs
+            {
+                Id = "rule2",
+                Status = "Enabled",
+                Priority = 2,
+                DestinationBucket = bucketReplicate.CosBucket.Apply(bucket => $"qcs::cos:{region}::{bucket}"),
+                DestinationStorageClass = "Standard",
+                DestinationEncryptionKmsKeyId = "4f14a617-7c7d-11ef-9a62-525400d3a886",
+                DeleteMarkerReplication = new Tencentcloud.Cos.Inputs.BucketReplicaRuleDeleteMarkerReplicationArgs
+                {
+                    Status = "Enabled",
+                },
+                SourceSelectionCriteria = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaArgs
+                {
+                    SseKmsEncryptedObjects = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs
+                    {
+                        Status = "Enabled",
+                    },
+                },
             },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"fmt"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		info, err := User.GetInfo(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		appId := info.AppId
-		uin := info.Uin
-		ownerUin := info.OwnerUin
-		region := "ap-guangzhou"
-		bucketReplicate, err := Cos.NewBucket(ctx, "bucketReplicate", &Cos.BucketArgs{
-			Bucket:           pulumi.String(fmt.Sprintf("bucket-replicate-%v", appId)),
-			Acl:              pulumi.String("private"),
-			VersioningEnable: pulumi.Bool(true),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Cos.NewBucket(ctx, "bucketWithReplication", &Cos.BucketArgs{
-			Bucket:           pulumi.String(fmt.Sprintf("bucket-with-replication-%v", appId)),
-			Acl:              pulumi.String("private"),
-			VersioningEnable: pulumi.Bool(true),
-			ReplicaRole:      pulumi.String(fmt.Sprintf("qcs::cam::uin/%v:uin/%v", ownerUin, uin)),
-			ReplicaRules: cos.BucketReplicaRuleArray{
-				&cos.BucketReplicaRuleArgs{
-					Id:     pulumi.String("test-rep1"),
-					Status: pulumi.String("Enabled"),
-					Prefix: pulumi.String("dist"),
-					DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
-						return fmt.Sprintf("qcs::cos:%v::%v", region, bucket), nil
-					}).(pulumi.StringOutput),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -1515,8 +3842,14 @@ import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
 import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleFilterArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleFilterAndArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleFilterAndTagArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleDeleteMarkerReplicationArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleSourceSelectionCriteriaArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1528,148 +3861,1368 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var info = UserFunctions.getInfo();
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
 
-        final var appId = info.applyValue(getInfoResult -> getInfoResult.appId());
+        final var appId = info.appId();
 
-        final var uin = info.applyValue(getInfoResult -> getInfoResult.uin());
+        final var uin = info.uin();
 
-        final var ownerUin = info.applyValue(getInfoResult -> getInfoResult.ownerUin());
+        final var ownerUin = info.ownerUin();
 
         final var region = "ap-guangzhou";
 
-        var bucketReplicate = new Bucket("bucketReplicate", BucketArgs.builder()        
+        var bucketReplicate = new Bucket("bucketReplicate", BucketArgs.builder()
             .bucket(String.format("bucket-replicate-%s", appId))
             .acl("private")
             .versioningEnable(true)
             .build());
 
-        var bucketWithReplication = new Bucket("bucketWithReplication", BucketArgs.builder()        
+        var bucketWithReplication = new Bucket("bucketWithReplication", BucketArgs.builder()
             .bucket(String.format("bucket-with-replication-%s", appId))
             .acl("private")
             .versioningEnable(true)
             .replicaRole(String.format("qcs::cam::uin/%s:uin/%s", ownerUin,uin))
-            .replicaRules(BucketReplicaRuleArgs.builder()
-                .id("test-rep1")
-                .status("Enabled")
-                .prefix("dist")
-                .destinationBucket(bucketReplicate.bucket().applyValue(bucket -> String.format("qcs::cos:%s::%s", region,bucket)))
-                .build())
+            .replicaRules(            
+                BucketReplicaRuleArgs.builder()
+                    .id("rule1")
+                    .status("Enabled")
+                    .priority(1)
+                    .prefix("/prefix")
+                    .filter(BucketReplicaRuleFilterArgs.builder()
+                        .and(BucketReplicaRuleFilterAndArgs.builder()
+                            .tags(                            
+                                BucketReplicaRuleFilterAndTagArgs.builder()
+                                    .key("tagKey1")
+                                    .value("tagValue1")
+                                    .build(),
+                                BucketReplicaRuleFilterAndTagArgs.builder()
+                                    .key("tagKey2")
+                                    .value("tagValue2")
+                                    .build())
+                            .build())
+                        .build())
+                    .destinationBucket(bucketReplicate.bucket().applyValue(_bucket -> String.format("qcs::cos:%s::%s", region,_bucket)))
+                    .destinationStorageClass("Standard")
+                    .destinationEncryptionKmsKeyId("4f14a617-7c7d-11ef-9a62-525400d3a886")
+                    .deleteMarkerReplication(BucketReplicaRuleDeleteMarkerReplicationArgs.builder()
+                        .status("Disabled")
+                        .build())
+                    .sourceSelectionCriteria(BucketReplicaRuleSourceSelectionCriteriaArgs.builder()
+                        .sseKmsEncryptedObjects(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs.builder()
+                            .status("Enabled")
+                            .build())
+                        .build())
+                    .build(),
+                BucketReplicaRuleArgs.builder()
+                    .id("rule2")
+                    .status("Enabled")
+                    .priority(2)
+                    .destinationBucket(bucketReplicate.bucket().applyValue(_bucket -> String.format("qcs::cos:%s::%s", region,_bucket)))
+                    .destinationStorageClass("Standard")
+                    .destinationEncryptionKmsKeyId("4f14a617-7c7d-11ef-9a62-525400d3a886")
+                    .deleteMarkerReplication(BucketReplicaRuleDeleteMarkerReplicationArgs.builder()
+                        .status("Enabled")
+                        .build())
+                    .sourceSelectionCriteria(BucketReplicaRuleSourceSelectionCriteriaArgs.builder()
+                        .sseKmsEncryptedObjects(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs.builder()
+                            .status("Enabled")
+                            .build())
+                        .build())
+                    .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   bucketReplicate:
     type: tencentcloud:Cos:Bucket
+    name: bucket_replicate
     properties:
       bucket: bucket-replicate-${appId}
       acl: private
       versioningEnable: true
   bucketWithReplication:
     type: tencentcloud:Cos:Bucket
+    name: bucket_with_replication
     properties:
       bucket: bucket-with-replication-${appId}
       acl: private
       versioningEnable: true
       replicaRole: qcs::cam::uin/${ownerUin}:uin/${uin}
       replicaRules:
-        - id: test-rep1
+        - id: rule1
           status: Enabled
-          prefix: dist
+          priority: 1
+          prefix: /prefix
+          filter:
+            and:
+              tags:
+                - key: tagKey1
+                  value: tagValue1
+                - key: tagKey2
+                  value: tagValue2
           destinationBucket: qcs::cos:${region}::${bucketReplicate.bucket}
+          destinationStorageClass: Standard
+          destinationEncryptionKmsKeyId: 4f14a617-7c7d-11ef-9a62-525400d3a886
+          deleteMarkerReplication:
+            status: Disabled
+          sourceSelectionCriteria:
+            sseKmsEncryptedObjects:
+              status: Enabled
+        - id: rule2
+          status: Enabled
+          priority: 2
+          destinationBucket: qcs::cos:${region}::${bucketReplicate.bucket}
+          destinationStorageClass: Standard
+          destinationEncryptionKmsKeyId: 4f14a617-7c7d-11ef-9a62-525400d3a886
+          deleteMarkerReplication:
+            status: Enabled
+          sourceSelectionCriteria:
+            sseKmsEncryptedObjects:
+              status: Enabled
 variables:
   info:
     fn::invoke:
-      Function: tencentcloud:User:getInfo
-      Arguments: {}
+      function: tencentcloud:User:getInfo
+      arguments: {}
   appId: ${info.appId}
   uin: ${info.uin}
   ownerUin: ${info.ownerUin}
   region: ap-guangzhou
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "bucket_replicate" {
+  bucket            ="bucket-replicate-${local.appId}"
+  acl               = "private"
+  versioning_enable = true
+}
+resource "tencentcloud_cos_bucket" "bucket_with_replication" {
+  bucket            ="bucket-with-replication-${local.appId}"
+  acl               = "private"
+  versioning_enable = true
+  replica_role      ="qcs::cam::uin/${local.ownerUin}:uin/${local.uin}"
+  replica_rules {
+    id       = "rule1"
+    status   = "Enabled"
+    priority = 1
+    prefix   = "/prefix"
+    filter = {
+      and = {
+        tags = [{
+          "key"   = "tagKey1"
+          "value" = "tagValue1"
+          }, {
+          "key"   = "tagKey2"
+          "value" = "tagValue2"
+        }]
+      }
+    }
+    destination_bucket                ="qcs::cos:${local.region}::${tencentcloud_cos_bucket.bucket_replicate.bucket}"
+    destination_storage_class         = "Standard"
+    destination_encryption_kms_key_id = "4f14a617-7c7d-11ef-9a62-525400d3a886"
+    delete_marker_replication = {
+      status = "Disabled"
+    }
+    source_selection_criteria = {
+      sse_kms_encrypted_objects = {
+        status = "Enabled"
+      }
+    }
+  }
+  replica_rules {
+    id                                = "rule2"
+    status                            = "Enabled"
+    priority                          = 2
+    destination_bucket                ="qcs::cos:${local.region}::${tencentcloud_cos_bucket.bucket_replicate.bucket}"
+    destination_storage_class         = "Standard"
+    destination_encryption_kms_key_id = "4f14a617-7c7d-11ef-9a62-525400d3a886"
+    delete_marker_replication = {
+      status = "Enabled"
+    }
+    source_selection_criteria = {
+      sse_kms_encrypted_objects = {
+        status = "Enabled"
+      }
+    }
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+locals {
+  uin = data.tencentcloud_user_getinfo.info.uin
+}
+locals {
+  ownerUin = data.tencentcloud_user_getinfo.info.owner_uin
+}
+locals {
+  region = "ap-guangzhou"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using intelligent tiering, Only enable intelligent tiering
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `bucket-intelligent-tiering-${appId}`),
+    acl: "private",
+    enableIntelligentTiering: true,
+    intelligentTieringDays: 30,
+    intelligentTieringRequestFrequent: 1,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"bucket-intelligent-tiering-{app_id}",
+    acl="private",
+    enable_intelligent_tiering=True,
+    intelligent_tiering_days=30,
+    intelligent_tiering_request_frequent=1)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket:                            pulumi.Sprintf("bucket-intelligent-tiering-%v", appId),
+			Acl:                               pulumi.String("private"),
+			EnableIntelligentTiering:          pulumi.Bool(true),
+			IntelligentTieringDays:            pulumi.Int(30),
+			IntelligentTieringRequestFrequent: pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
+    {
+        CosBucket = appId.Apply(appId => $"bucket-intelligent-tiering-{appId}"),
+        Acl = "private",
+        EnableIntelligentTiering = true,
+        IntelligentTieringDays = 30,
+        IntelligentTieringRequestFrequent = 1,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("bucket-intelligent-tiering-%s", appId))
+            .acl("private")
+            .enableIntelligentTiering(true)
+            .intelligentTieringDays(30)
+            .intelligentTieringRequestFrequent(1)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cos:Bucket
+    properties:
+      bucket: bucket-intelligent-tiering-${appId}
+      acl: private
+      enableIntelligentTiering: true
+      intelligentTieringDays: 30
+      intelligentTieringRequestFrequent: 1
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket                               ="bucket-intelligent-tiering-${local.appId}"
+  acl                                  = "private"
+  enable_intelligent_tiering           = true
+  intelligent_tiering_days             = 30
+  intelligent_tiering_request_frequent = 1
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using intelligent tiering and configure the intelligent tiered storage archiving and deep archiving rules list.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `bucket-intelligent-tiering-${appId}`),
+    acl: "private",
+    enableIntelligentTiering: true,
+    intelligentTieringDays: 30,
+    intelligentTieringRequestFrequent: 1,
+    intelligentTieringArchivingRuleLists: [
+        {
+            ruleId: "rule1",
+            status: "Enabled",
+            tierings: [
+                {
+                    accessTier: "ARCHIVE_ACCESS",
+                    days: 91,
+                },
+                {
+                    accessTier: "DEEP_ARCHIVE_ACCESS",
+                    days: 180,
+                },
+            ],
+        },
+        {
+            ruleId: "rule2",
+            status: "Enabled",
+            filter: {
+                prefix: "/prefix",
+                tags: [{
+                    key: "tagKey",
+                    value: "tagValue",
+                }],
+            },
+            tierings: [{
+                accessTier: "ARCHIVE_ACCESS",
+                days: 91,
+            }],
+        },
+    ],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"bucket-intelligent-tiering-{app_id}",
+    acl="private",
+    enable_intelligent_tiering=True,
+    intelligent_tiering_days=30,
+    intelligent_tiering_request_frequent=1,
+    intelligent_tiering_archiving_rule_lists=[
+        {
+            "rule_id": "rule1",
+            "status": "Enabled",
+            "tierings": [
+                {
+                    "access_tier": "ARCHIVE_ACCESS",
+                    "days": 91,
+                },
+                {
+                    "access_tier": "DEEP_ARCHIVE_ACCESS",
+                    "days": 180,
+                },
+            ],
+        },
+        {
+            "rule_id": "rule2",
+            "status": "Enabled",
+            "filter": {
+                "prefix": "/prefix",
+                "tags": [{
+                    "key": "tagKey",
+                    "value": "tagValue",
+                }],
+            },
+            "tierings": [{
+                "access_tier": "ARCHIVE_ACCESS",
+                "days": 91,
+            }],
+        },
+    ])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket:                            pulumi.Sprintf("bucket-intelligent-tiering-%v", appId),
+			Acl:                               pulumi.String("private"),
+			EnableIntelligentTiering:          pulumi.Bool(true),
+			IntelligentTieringDays:            pulumi.Int(30),
+			IntelligentTieringRequestFrequent: pulumi.Int(1),
+			IntelligentTieringArchivingRuleLists: cos.BucketIntelligentTieringArchivingRuleListArray{
+				&cos.BucketIntelligentTieringArchivingRuleListArgs{
+					RuleId: pulumi.String("rule1"),
+					Status: pulumi.String("Enabled"),
+					Tierings: cos.BucketIntelligentTieringArchivingRuleListTieringArray{
+						&cos.BucketIntelligentTieringArchivingRuleListTieringArgs{
+							AccessTier: pulumi.String("ARCHIVE_ACCESS"),
+							Days:       pulumi.Int(91),
+						},
+						&cos.BucketIntelligentTieringArchivingRuleListTieringArgs{
+							AccessTier: pulumi.String("DEEP_ARCHIVE_ACCESS"),
+							Days:       pulumi.Int(180),
+						},
+					},
+				},
+				&cos.BucketIntelligentTieringArchivingRuleListArgs{
+					RuleId: pulumi.String("rule2"),
+					Status: pulumi.String("Enabled"),
+					Filter: &cos.BucketIntelligentTieringArchivingRuleListFilterArgs{
+						Prefix: pulumi.String("/prefix"),
+						Tags: cos.BucketIntelligentTieringArchivingRuleListFilterTagArray{
+							&cos.BucketIntelligentTieringArchivingRuleListFilterTagArgs{
+								Key:   pulumi.String("tagKey"),
+								Value: pulumi.String("tagValue"),
+							},
+						},
+					},
+					Tierings: cos.BucketIntelligentTieringArchivingRuleListTieringArray{
+						&cos.BucketIntelligentTieringArchivingRuleListTieringArgs{
+							AccessTier: pulumi.String("ARCHIVE_ACCESS"),
+							Days:       pulumi.Int(91),
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
+    {
+        CosBucket = appId.Apply(appId => $"bucket-intelligent-tiering-{appId}"),
+        Acl = "private",
+        EnableIntelligentTiering = true,
+        IntelligentTieringDays = 30,
+        IntelligentTieringRequestFrequent = 1,
+        IntelligentTieringArchivingRuleLists = new[]
+        {
+            new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListArgs
+            {
+                RuleId = "rule1",
+                Status = "Enabled",
+                Tierings = new[]
+                {
+                    new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListTieringArgs
+                    {
+                        AccessTier = "ARCHIVE_ACCESS",
+                        Days = 91,
+                    },
+                    new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListTieringArgs
+                    {
+                        AccessTier = "DEEP_ARCHIVE_ACCESS",
+                        Days = 180,
+                    },
+                },
+            },
+            new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListArgs
+            {
+                RuleId = "rule2",
+                Status = "Enabled",
+                Filter = new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListFilterArgs
+                {
+                    Prefix = "/prefix",
+                    Tags = new[]
+                    {
+                        new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListFilterTagArgs
+                        {
+                            Key = "tagKey",
+                            Value = "tagValue",
+                        },
+                    },
+                },
+                Tierings = new[]
+                {
+                    new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListTieringArgs
+                    {
+                        AccessTier = "ARCHIVE_ACCESS",
+                        Days = 91,
+                    },
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketIntelligentTieringArchivingRuleListArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketIntelligentTieringArchivingRuleListTieringArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketIntelligentTieringArchivingRuleListFilterArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketIntelligentTieringArchivingRuleListFilterTagArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("bucket-intelligent-tiering-%s", appId))
+            .acl("private")
+            .enableIntelligentTiering(true)
+            .intelligentTieringDays(30)
+            .intelligentTieringRequestFrequent(1)
+            .intelligentTieringArchivingRuleLists(            
+                BucketIntelligentTieringArchivingRuleListArgs.builder()
+                    .ruleId("rule1")
+                    .status("Enabled")
+                    .tierings(                    
+                        BucketIntelligentTieringArchivingRuleListTieringArgs.builder()
+                            .accessTier("ARCHIVE_ACCESS")
+                            .days(91)
+                            .build(),
+                        BucketIntelligentTieringArchivingRuleListTieringArgs.builder()
+                            .accessTier("DEEP_ARCHIVE_ACCESS")
+                            .days(180)
+                            .build())
+                    .build(),
+                BucketIntelligentTieringArchivingRuleListArgs.builder()
+                    .ruleId("rule2")
+                    .status("Enabled")
+                    .filter(BucketIntelligentTieringArchivingRuleListFilterArgs.builder()
+                        .prefix("/prefix")
+                        .tags(BucketIntelligentTieringArchivingRuleListFilterTagArgs.builder()
+                            .key("tagKey")
+                            .value("tagValue")
+                            .build())
+                        .build())
+                    .tierings(BucketIntelligentTieringArchivingRuleListTieringArgs.builder()
+                        .accessTier("ARCHIVE_ACCESS")
+                        .days(91)
+                        .build())
+                    .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cos:Bucket
+    properties:
+      bucket: bucket-intelligent-tiering-${appId}
+      acl: private
+      enableIntelligentTiering: true
+      intelligentTieringDays: 30
+      intelligentTieringRequestFrequent: 1
+      intelligentTieringArchivingRuleLists:
+        - ruleId: rule1
+          status: Enabled
+          tierings:
+            - accessTier: ARCHIVE_ACCESS
+              days: 91
+            - accessTier: DEEP_ARCHIVE_ACCESS
+              days: 180
+        - ruleId: rule2
+          status: Enabled
+          filter:
+            prefix: /prefix
+            tags:
+              - key: tagKey
+                value: tagValue
+          tierings:
+            - accessTier: ARCHIVE_ACCESS
+              days: 91
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket                               ="bucket-intelligent-tiering-${local.appId}"
+  acl                                  = "private"
+  enable_intelligent_tiering           = true
+  intelligent_tiering_days             = 30
+  intelligent_tiering_request_frequent = 1
+  intelligent_tiering_archiving_rule_lists {
+    rule_id = "rule1"
+    status  = "Enabled"
+    tierings {
+      access_tier = "ARCHIVE_ACCESS"
+      days        = 91
+    }
+    tierings {
+      access_tier = "DEEP_ARCHIVE_ACCESS"
+      days        = 180
+    }
+  }
+  intelligent_tiering_archiving_rule_lists {
+    rule_id = "rule2"
+    status  = "Enabled"
+    filter = {
+      prefix = "/prefix"
+      tags = [{
+        "key"   = "tagKey"
+        "value" = "tagValue"
+      }]
+    }
+    tierings {
+      access_tier = "ARCHIVE_ACCESS"
+      days        = 91
+    }
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using object lock config
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `bucket-intelligent-tiering-${appId}`),
+    acl: "private",
+    objectLockConfiguration: {
+        enabled: true,
+        rule: {
+            days: 30,
+        },
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"bucket-intelligent-tiering-{app_id}",
+    acl="private",
+    object_lock_configuration={
+        "enabled": True,
+        "rule": {
+            "days": 30,
+        },
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("bucket-intelligent-tiering-%v", appId),
+			Acl:    pulumi.String("private"),
+			ObjectLockConfiguration: &cos.BucketObjectLockConfigurationArgs{
+				Enabled: pulumi.Bool(true),
+				Rule: &cos.BucketObjectLockConfigurationRuleArgs{
+					Days: pulumi.Int(30),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
+    {
+        CosBucket = appId.Apply(appId => $"bucket-intelligent-tiering-{appId}"),
+        Acl = "private",
+        ObjectLockConfiguration = new Tencentcloud.Cos.Inputs.BucketObjectLockConfigurationArgs
+        {
+            Enabled = true,
+            Rule = new Tencentcloud.Cos.Inputs.BucketObjectLockConfigurationRuleArgs
+            {
+                Days = 30,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketObjectLockConfigurationArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketObjectLockConfigurationRuleArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("bucket-intelligent-tiering-%s", appId))
+            .acl("private")
+            .objectLockConfiguration(BucketObjectLockConfigurationArgs.builder()
+                .enabled(true)
+                .rule(BucketObjectLockConfigurationRuleArgs.builder()
+                    .days(30)
+                    .build())
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cos:Bucket
+    properties:
+      bucket: bucket-intelligent-tiering-${appId}
+      acl: private
+      objectLockConfiguration:
+        enabled: true
+        rule:
+          days: 30
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket ="bucket-intelligent-tiering-${local.appId}"
+  acl    = "private"
+  object_lock_configuration = {
+    enabled = true
+    rule = {
+      days = 30
+    }
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using OFS
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `private-ofs-bucket-${appId}`),
+    acl: "private",
+    chdfsOfs: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"private-ofs-bucket-{app_id}",
+    acl="private",
+    chdfs_ofs=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket:   pulumi.Sprintf("private-ofs-bucket-%v", appId),
+			Acl:      pulumi.String("private"),
+			ChdfsOfs: pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
+    {
+        CosBucket = appId.Apply(appId => $"private-ofs-bucket-{appId}"),
+        Acl = "private",
+        ChdfsOfs = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("private-ofs-bucket-%s", appId))
+            .acl("private")
+            .chdfsOfs(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cos:Bucket
+    properties:
+      bucket: private-ofs-bucket-${appId}
+      acl: private
+      chdfsOfs: true
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket    ="private-ofs-bucket-${local.appId}"
+  acl       = "private"
+  chdfs_ofs = true
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
 ## Create Bucket Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-           <span class="nx">acceleration_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-           <span class="nx">acl</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">acl_body</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">cors_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketCorsRuleArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">kms_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+           <span class="nx">acl</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">chdfs_ofs</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+           <span class="nx">cors_response_vary</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">cors_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketCorsRuleArgs]]</span> = None<span class="p">,</span>
            <span class="nx">enable_intelligent_tiering</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
            <span class="nx">encryption_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">force_clean</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-           <span class="nx">intelligent_tiering_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">intelligent_tiering_archiving_rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketIntelligentTieringArchivingRuleListArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">lifecycle_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketLifecycleRuleArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">acl_body</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">intelligent_tiering_request_frequent</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">lifecycle_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketLifecycleRuleArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">intelligent_tiering_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
            <span class="nx">log_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
            <span class="nx">log_prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">log_target_bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">multi_az</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-           <span class="nx">origin_domain_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketOriginDomainRuleArgs]]</span> = None<span class="p">,</span>
-           <span class="nx">origin_pull_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketOriginPullRuleArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">object_lock_configuration</span><span class="p">:</span> <span class="nx">Optional[BucketObjectLockConfigurationArgs]</span> = None<span class="p">,</span>
+           <span class="nx">origin_domain_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketOriginDomainRuleArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">origin_pull_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketOriginPullRuleArgs]]</span> = None<span class="p">,</span>
            <span class="nx">replica_role</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">replica_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketReplicaRuleArgs]]</span> = None<span class="p">,</span>
-           <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+           <span class="nx">replica_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketReplicaRuleArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">acceleration_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
            <span class="nx">versioning_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-           <span class="nx">website</span><span class="p">:</span> <span class="nx">Optional[_cos.BucketWebsiteArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">website</span><span class="p">:</span> <span class="nx">Optional[BucketWebsiteArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBucket</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Bucket</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBucket</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Bucket</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Bucket</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:Bucket</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:Bucket</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cos_bucket&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1690,7 +5243,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1807,11 +5360,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Bucket Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1827,8 +5388,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="accelerationenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accelerationenable_csharp" style="color: inherit; text-decoration: inherit;">Acceleration<wbr>Enable</a>
@@ -1836,8 +5396,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_csharp" style="color: inherit; text-decoration: inherit;">Acl</a>
@@ -1845,8 +5404,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="aclbody_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_csharp" style="color: inherit; text-decoration: inherit;">Acl<wbr>Body</a>
@@ -1854,17 +5412,39 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfsofs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfsofs_csharp" style="color: inherit; text-decoration: inherit;">Chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="corsresponsevary_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsresponsevary_csharp" style="color: inherit; text-decoration: inherit;">Cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="corsrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_csharp" style="color: inherit; text-decoration: inherit;">Cors<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Cors<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Cors<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableintelligenttiering_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableintelligenttiering_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Intelligent<wbr>Tiering</a>
@@ -1872,8 +5452,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptionalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Algorithm</a>
@@ -1881,8 +5460,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forceclean_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forceclean_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Clean</a>
@@ -1890,8 +5468,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligenttieringarchivingrulelists_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringarchivingrulelists_csharp" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List&gt;</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringdays_csharp" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Days</a>
@@ -1899,8 +5484,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringrequestfrequent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringrequestfrequent_csharp" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -1908,17 +5492,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="lifecyclerules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="logenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logenable_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Enable</a>
@@ -1926,8 +5516,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logprefix_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Prefix</a>
@@ -1935,8 +5524,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtargetbucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtargetbucket_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Target<wbr>Bucket</a>
@@ -1944,8 +5532,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="multiaz_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiaz_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Az</a>
@@ -1953,26 +5540,31 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="objectlockconfiguration_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectlockconfiguration_csharp" style="color: inherit; text-decoration: inherit;">Object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Object<wbr>Lock<wbr>Configuration</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="origindomainrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Domain<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Domain<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Pull<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarole_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Role</a>
@@ -1980,26 +5572,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarules_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="versioningenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioningenable_csharp" style="color: inherit; text-decoration: inherit;">Versioning<wbr>Enable</a>
@@ -2007,17 +5596,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="website_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_csharp" style="color: inherit; text-decoration: inherit;">Website</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketwebsite">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Website<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketwebsite">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Website</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2031,8 +5618,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="accelerationenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accelerationenable_go" style="color: inherit; text-decoration: inherit;">Acceleration<wbr>Enable</a>
@@ -2040,8 +5626,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_go" style="color: inherit; text-decoration: inherit;">Acl</a>
@@ -2049,8 +5634,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="aclbody_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_go" style="color: inherit; text-decoration: inherit;">Acl<wbr>Body</a>
@@ -2058,8 +5642,31 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfsofs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfsofs_go" style="color: inherit; text-decoration: inherit;">Chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="corsresponsevary_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsresponsevary_go" style="color: inherit; text-decoration: inherit;">Cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="corsrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_go" style="color: inherit; text-decoration: inherit;">Cors<wbr>Rules</a>
@@ -2067,8 +5674,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketcorsrule">[]Bucket<wbr>Cors<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableintelligenttiering_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableintelligenttiering_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Intelligent<wbr>Tiering</a>
@@ -2076,8 +5682,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptionalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionalgorithm_go" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Algorithm</a>
@@ -2085,8 +5690,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forceclean_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forceclean_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Clean</a>
@@ -2094,8 +5698,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligenttieringarchivingrulelists_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringarchivingrulelists_go" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">[]Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Args</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringdays_go" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Days</a>
@@ -2103,8 +5714,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringrequestfrequent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringrequestfrequent_go" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -2112,8 +5722,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="lifecyclerules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Rules</a>
@@ -2121,8 +5738,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecyclerule">[]Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="logenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logenable_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Enable</a>
@@ -2130,8 +5746,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logprefix_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Prefix</a>
@@ -2139,8 +5754,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtargetbucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtargetbucket_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Target<wbr>Bucket</a>
@@ -2148,8 +5762,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="multiaz_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiaz_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Az</a>
@@ -2157,8 +5770,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="objectlockconfiguration_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectlockconfiguration_go" style="color: inherit; text-decoration: inherit;">Object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Args</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="origindomainrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Domain<wbr>Rules</a>
@@ -2166,8 +5786,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketorigindomainrule">[]Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Rules</a>
@@ -2175,8 +5794,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketoriginpullrule">[]Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarole_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Role</a>
@@ -2184,8 +5802,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarules_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Rules</a>
@@ -2193,17 +5810,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketreplicarule">[]Bucket<wbr>Replica<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="versioningenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioningenable_go" style="color: inherit; text-decoration: inherit;">Versioning<wbr>Enable</a>
@@ -2211,8 +5826,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="website_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_go" style="color: inherit; text-decoration: inherit;">Website</a>
@@ -2220,8 +5834,237 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="acceleration_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acceleration_enable_hcl" style="color: inherit; text-decoration: inherit;">acceleration_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_hcl" style="color: inherit; text-decoration: inherit;">acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="acl_body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_body_hcl" style="color: inherit; text-decoration: inherit;">acl_<wbr>body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfs_ofs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfs_ofs_hcl" style="color: inherit; text-decoration: inherit;">chdfs_<wbr>ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cors_response_vary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cors_response_vary_hcl" style="color: inherit; text-decoration: inherit;">cors_<wbr>response_<wbr>vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cors_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cors_rules_hcl" style="color: inherit; text-decoration: inherit;">cors_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketcorsrule">list(object)</a></span>
+    </dt>
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_intelligent_tiering_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_intelligent_tiering_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>intelligent_<wbr>tiering</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_algorithm_hcl" style="color: inherit; text-decoration: inherit;">encryption_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_clean_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_clean_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>clean</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligent_tiering_archiving_rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligent_tiering_archiving_rule_lists_hcl" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>archiving_<wbr>rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">list(object)</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligent_tiering_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligent_tiering_days_hcl" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligent_tiering_request_frequent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligent_tiering_request_frequent_hcl" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>request_<wbr>frequent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycle_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_rules_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">list(object)</a></span>
+    </dt>
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_enable_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_prefix_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_target_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_target_bucket_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>target_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="multi_az_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_az_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>az</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="object_lock_configuration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_lock_configuration_hcl" style="color: inherit; text-decoration: inherit;">object_<wbr>lock_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">object</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="origin_domain_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_domain_rules_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>domain_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">list(object)</a></span>
+    </dt>
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="origin_pull_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_rules_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">list(object)</a></span>
+    </dt>
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replica_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_role_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replica_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_rules_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarule">list(object)</a></span>
+    </dt>
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="versioning_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioning_enable_hcl" style="color: inherit; text-decoration: inherit;">versioning_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="website_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_hcl" style="color: inherit; text-decoration: inherit;">website</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsite">object</a></span>
+    </dt>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2235,8 +6078,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="accelerationenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accelerationenable_java" style="color: inherit; text-decoration: inherit;">acceleration<wbr>Enable</a>
@@ -2244,8 +6086,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_java" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -2253,8 +6094,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="aclbody_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_java" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -2262,17 +6102,39 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfsofs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfsofs_java" style="color: inherit; text-decoration: inherit;">chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="corsresponsevary_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsresponsevary_java" style="color: inherit; text-decoration: inherit;">cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="corsrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_java" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">List&lt;Bucket<wbr>Cors<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">List&lt;Bucket<wbr>Cors<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableintelligenttiering_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableintelligenttiering_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Intelligent<wbr>Tiering</a>
@@ -2280,8 +6142,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptionalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionalgorithm_java" style="color: inherit; text-decoration: inherit;">encryption<wbr>Algorithm</a>
@@ -2289,8 +6150,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forceclean_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forceclean_java" style="color: inherit; text-decoration: inherit;">force<wbr>Clean</a>
@@ -2298,8 +6158,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligenttieringarchivingrulelists_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringarchivingrulelists_java" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">List&lt;Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List&gt;</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringdays_java" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Days</a>
@@ -2307,8 +6174,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringrequestfrequent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringrequestfrequent_java" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -2316,17 +6182,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="lifecyclerules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Bucket<wbr>Lifecycle<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="logenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logenable_java" style="color: inherit; text-decoration: inherit;">log<wbr>Enable</a>
@@ -2334,8 +6206,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logprefix_java" style="color: inherit; text-decoration: inherit;">log<wbr>Prefix</a>
@@ -2343,8 +6214,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtargetbucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtargetbucket_java" style="color: inherit; text-decoration: inherit;">log<wbr>Target<wbr>Bucket</a>
@@ -2352,8 +6222,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="multiaz_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiaz_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Az</a>
@@ -2361,26 +6230,31 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="objectlockconfiguration_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectlockconfiguration_java" style="color: inherit; text-decoration: inherit;">object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="origindomainrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Bucket<wbr>Origin<wbr>Domain<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Bucket<wbr>Origin<wbr>Pull<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarole_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Role</a>
@@ -2388,26 +6262,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarules_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">List&lt;Bucket<wbr>Replica<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">List&lt;Bucket<wbr>Replica<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="versioningenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioningenable_java" style="color: inherit; text-decoration: inherit;">versioning<wbr>Enable</a>
@@ -2415,17 +6286,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="website_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_java" style="color: inherit; text-decoration: inherit;">website</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2439,8 +6308,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="accelerationenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accelerationenable_nodejs" style="color: inherit; text-decoration: inherit;">acceleration<wbr>Enable</a>
@@ -2448,8 +6316,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_nodejs" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -2457,8 +6324,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="aclbody_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_nodejs" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -2466,17 +6332,39 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfsofs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfsofs_nodejs" style="color: inherit; text-decoration: inherit;">chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="corsresponsevary_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsresponsevary_nodejs" style="color: inherit; text-decoration: inherit;">cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="corsrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_nodejs" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">Bucket<wbr>Cors<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">Bucket<wbr>Cors<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableintelligenttiering_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableintelligenttiering_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Intelligent<wbr>Tiering</a>
@@ -2484,8 +6372,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptionalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">encryption<wbr>Algorithm</a>
@@ -2493,8 +6380,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forceclean_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forceclean_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Clean</a>
@@ -2502,8 +6388,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligenttieringarchivingrulelists_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringarchivingrulelists_nodejs" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List[]</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringdays_nodejs" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Days</a>
@@ -2511,8 +6404,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringrequestfrequent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringrequestfrequent_nodejs" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -2520,17 +6412,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="lifecyclerules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="logenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logenable_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Enable</a>
@@ -2538,8 +6436,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logprefix_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Prefix</a>
@@ -2547,8 +6444,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtargetbucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtargetbucket_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Target<wbr>Bucket</a>
@@ -2556,8 +6452,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="multiaz_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiaz_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Az</a>
@@ -2565,26 +6460,31 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="objectlockconfiguration_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectlockconfiguration_nodejs" style="color: inherit; text-decoration: inherit;">object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="origindomainrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarole_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Role</a>
@@ -2592,26 +6492,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarules_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">Bucket<wbr>Replica<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">Bucket<wbr>Replica<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="versioningenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioningenable_nodejs" style="color: inherit; text-decoration: inherit;">versioning<wbr>Enable</a>
@@ -2619,17 +6516,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="website_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_nodejs" style="color: inherit; text-decoration: inherit;">website</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2643,8 +6538,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="acceleration_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acceleration_enable_python" style="color: inherit; text-decoration: inherit;">acceleration_<wbr>enable</a>
@@ -2652,8 +6546,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_python" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -2661,8 +6554,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_body_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_body_python" style="color: inherit; text-decoration: inherit;">acl_<wbr>body</a>
@@ -2670,17 +6562,39 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfs_ofs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfs_ofs_python" style="color: inherit; text-decoration: inherit;">chdfs_<wbr>ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cors_response_vary_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cors_response_vary_python" style="color: inherit; text-decoration: inherit;">cors_<wbr>response_<wbr>vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cors_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cors_rules_python" style="color: inherit; text-decoration: inherit;">cors_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">Bucket<wbr>Cors<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">Sequence[Bucket<wbr>Cors<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_intelligent_tiering_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_intelligent_tiering_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>intelligent_<wbr>tiering</a>
@@ -2688,8 +6602,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryption_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_algorithm_python" style="color: inherit; text-decoration: inherit;">encryption_<wbr>algorithm</a>
@@ -2697,8 +6610,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_clean_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_clean_python" style="color: inherit; text-decoration: inherit;">force_<wbr>clean</a>
@@ -2706,8 +6618,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligent_tiering_archiving_rule_lists_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligent_tiering_archiving_rule_lists_python" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>archiving_<wbr>rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">Sequence[Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Args]</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligent_tiering_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligent_tiering_days_python" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>days</a>
@@ -2715,8 +6634,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligent_tiering_request_frequent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligent_tiering_request_frequent_python" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>request_<wbr>frequent</a>
@@ -2724,17 +6642,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="lifecycle_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_rules_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">Sequence[Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="log_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_enable_python" style="color: inherit; text-decoration: inherit;">log_<wbr>enable</a>
@@ -2742,8 +6666,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="log_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_prefix_python" style="color: inherit; text-decoration: inherit;">log_<wbr>prefix</a>
@@ -2751,8 +6674,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="log_target_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_target_bucket_python" style="color: inherit; text-decoration: inherit;">log_<wbr>target_<wbr>bucket</a>
@@ -2760,8 +6682,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="multi_az_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_az_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>az</a>
@@ -2769,26 +6690,31 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="object_lock_configuration_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_lock_configuration_python" style="color: inherit; text-decoration: inherit;">object_<wbr>lock_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Args</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_domain_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_domain_rules_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>domain_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">Sequence[Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_pull_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_rules_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">Sequence[Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="replica_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_role_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>role</a>
@@ -2796,26 +6722,23 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="replica_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_rules_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">Bucket<wbr>Replica<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">Sequence[Bucket<wbr>Replica<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="versioning_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioning_enable_python" style="color: inherit; text-decoration: inherit;">versioning_<wbr>enable</a>
@@ -2823,8 +6746,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="website_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_python" style="color: inherit; text-decoration: inherit;">website</a>
@@ -2832,8 +6754,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2847,8 +6768,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="accelerationenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accelerationenable_yaml" style="color: inherit; text-decoration: inherit;">acceleration<wbr>Enable</a>
@@ -2856,8 +6776,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_yaml" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -2865,8 +6784,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="aclbody_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aclbody_yaml" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -2874,8 +6792,31 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="chdfsofs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chdfsofs_yaml" style="color: inherit; text-decoration: inherit;">chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="corsresponsevary_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsresponsevary_yaml" style="color: inherit; text-decoration: inherit;">cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="corsrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#corsrules_yaml" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
@@ -2883,8 +6824,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketcorsrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="enableintelligenttiering_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableintelligenttiering_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Intelligent<wbr>Tiering</a>
@@ -2892,8 +6832,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptionalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionalgorithm_yaml" style="color: inherit; text-decoration: inherit;">encryption<wbr>Algorithm</a>
@@ -2901,8 +6840,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forceclean_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forceclean_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Clean</a>
@@ -2910,8 +6848,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intelligenttieringarchivingrulelists_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringarchivingrulelists_yaml" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringdays_yaml" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Days</a>
@@ -2919,8 +6864,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="intelligenttieringrequestfrequent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intelligenttieringrequestfrequent_yaml" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -2928,8 +6872,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="lifecyclerules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclerules_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
@@ -2937,8 +6888,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="logenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logenable_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Enable</a>
@@ -2946,8 +6896,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logprefix_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Prefix</a>
@@ -2955,8 +6904,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtargetbucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtargetbucket_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Target<wbr>Bucket</a>
@@ -2964,8 +6912,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="multiaz_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiaz_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Az</a>
@@ -2973,8 +6920,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="objectlockconfiguration_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectlockconfiguration_yaml" style="color: inherit; text-decoration: inherit;">object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Property Map</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="origindomainrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origindomainrules_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
@@ -2982,8 +6936,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullrules_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
@@ -2991,8 +6944,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarole_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Role</a>
@@ -3000,8 +6952,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicarules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicarules_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Rules</a>
@@ -3009,17 +6960,15 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketreplicarule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="versioningenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versioningenable_yaml" style="color: inherit; text-decoration: inherit;">versioning<wbr>Enable</a>
@@ -3027,8 +6976,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="website_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#website_yaml" style="color: inherit; text-decoration: inherit;">website</a>
@@ -3036,8 +6984,7 @@ The Bucket resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketwebsite">Property Map</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3058,8 +7005,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-"
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3067,8 +7013,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3082,8 +7027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-"
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3091,8 +7035,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cos_bucket_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_url_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3106,8 +7071,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-"
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3115,8 +7079,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3130,8 +7093,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-"
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3139,8 +7101,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3154,8 +7115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-"
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3163,8 +7123,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3178,8 +7137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-"
+    <dd>The URL of this cos bucket.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3187,8 +7145,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3198,18 +7155,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Bucket resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BucketState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Bucket</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BucketState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Bucket</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -3217,123 +7174,168 @@ Get an existing Bucket resource's state with the given name, ID, and optional ex
         <span class="nx">acl</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">acl_body</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">cors_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketCorsRuleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">chdfs_ofs</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">cors_response_vary</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cors_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketCorsRuleArgs]]</span> = None<span class="p">,</span>
         <span class="nx">cos_bucket_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">enable_intelligent_tiering</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">encryption_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">force_clean</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">intelligent_tiering_archiving_rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketIntelligentTieringArchivingRuleListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">intelligent_tiering_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">intelligent_tiering_request_frequent</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">lifecycle_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketLifecycleRuleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">kms_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">lifecycle_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketLifecycleRuleArgs]]</span> = None<span class="p">,</span>
         <span class="nx">log_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">log_prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">log_target_bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">multi_az</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">origin_domain_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketOriginDomainRuleArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">origin_pull_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketOriginPullRuleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">object_lock_configuration</span><span class="p">:</span> <span class="nx">Optional[BucketObjectLockConfigurationArgs]</span> = None<span class="p">,</span>
+        <span class="nx">origin_domain_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketOriginDomainRuleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">origin_pull_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketOriginPullRuleArgs]]</span> = None<span class="p">,</span>
         <span class="nx">replica_role</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">replica_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cos.BucketReplicaRuleArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">replica_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[BucketReplicaRuleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">versioning_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">website</span><span class="p">:</span> <span class="nx">Optional[_cos.BucketWebsiteArgs]</span> = None<span class="p">) -&gt;</span> Bucket</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">website</span><span class="p">:</span> <span class="nx">Optional[BucketWebsiteArgs]</span> = None<span class="p">) -&gt;</span> Bucket</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBucket<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BucketState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Bucket</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBucket<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BucketState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Bucket</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Bucket</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Bucket</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Bucket</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Bucket</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBucket</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cos:Bucket</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cos_bucket</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3341,28 +7343,31 @@ Get an existing Bucket resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3370,28 +7375,31 @@ Get an existing Bucket resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3411,8 +7419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_csharp" style="color: inherit; text-decoration: inherit;">Acl</a>
@@ -3420,8 +7427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_aclbody_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclbody_csharp" style="color: inherit; text-decoration: inherit;">Acl<wbr>Body</a>
@@ -3429,17 +7435,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfsofs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfsofs_csharp" style="color: inherit; text-decoration: inherit;">Chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_corsresponsevary_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsresponsevary_csharp" style="color: inherit; text-decoration: inherit;">Cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_corsrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsrules_csharp" style="color: inherit; text-decoration: inherit;">Cors<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Cors<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Cors<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cosbucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucket_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket</a>
@@ -3447,8 +7475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketurl_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Url</a>
@@ -3456,8 +7483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableintelligenttiering_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableintelligenttiering_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Intelligent<wbr>Tiering</a>
@@ -3465,8 +7491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptionalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Algorithm</a>
@@ -3474,8 +7499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forceclean_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forceclean_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Clean</a>
@@ -3483,8 +7507,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligenttieringarchivingrulelists_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringarchivingrulelists_csharp" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List&gt;</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringdays_csharp" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Days</a>
@@ -3492,8 +7523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringrequestfrequent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringrequestfrequent_csharp" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -3501,17 +7531,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclerules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclerules_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logenable_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Enable</a>
@@ -3519,8 +7555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logprefix_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Prefix</a>
@@ -3528,8 +7563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtargetbucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtargetbucket_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Target<wbr>Bucket</a>
@@ -3537,8 +7571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_multiaz_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiaz_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Az</a>
@@ -3546,26 +7579,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_objectlockconfiguration_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_objectlockconfiguration_csharp" style="color: inherit; text-decoration: inherit;">Object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Object<wbr>Lock<wbr>Configuration</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origindomainrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origindomainrules_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Domain<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Domain<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_originpullrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_originpullrules_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Origin<wbr>Pull<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarole_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Role</a>
@@ -3573,26 +7611,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarules_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_versioningenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioningenable_csharp" style="color: inherit; text-decoration: inherit;">Versioning<wbr>Enable</a>
@@ -3600,17 +7635,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_website_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_csharp" style="color: inherit; text-decoration: inherit;">Website</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketwebsite">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Website<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketwebsite">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Website</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3624,8 +7657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_go" style="color: inherit; text-decoration: inherit;">Acl</a>
@@ -3633,8 +7665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_aclbody_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclbody_go" style="color: inherit; text-decoration: inherit;">Acl<wbr>Body</a>
@@ -3642,8 +7673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_go" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -3651,8 +7681,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfsofs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfsofs_go" style="color: inherit; text-decoration: inherit;">Chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_corsresponsevary_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsresponsevary_go" style="color: inherit; text-decoration: inherit;">Cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_corsrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsrules_go" style="color: inherit; text-decoration: inherit;">Cors<wbr>Rules</a>
@@ -3660,8 +7713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketcorsrule">[]Bucket<wbr>Cors<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketurl_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Url</a>
@@ -3669,8 +7721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableintelligenttiering_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableintelligenttiering_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Intelligent<wbr>Tiering</a>
@@ -3678,8 +7729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptionalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionalgorithm_go" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Algorithm</a>
@@ -3687,8 +7737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forceclean_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forceclean_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Clean</a>
@@ -3696,8 +7745,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligenttieringarchivingrulelists_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringarchivingrulelists_go" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">[]Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Args</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringdays_go" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Days</a>
@@ -3705,8 +7761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringrequestfrequent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringrequestfrequent_go" style="color: inherit; text-decoration: inherit;">Intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -3714,8 +7769,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclerules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclerules_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Rules</a>
@@ -3723,8 +7785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecyclerule">[]Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logenable_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Enable</a>
@@ -3732,8 +7793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logprefix_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Prefix</a>
@@ -3741,8 +7801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtargetbucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtargetbucket_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Target<wbr>Bucket</a>
@@ -3750,8 +7809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_multiaz_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiaz_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Az</a>
@@ -3759,8 +7817,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_objectlockconfiguration_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_objectlockconfiguration_go" style="color: inherit; text-decoration: inherit;">Object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Args</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origindomainrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origindomainrules_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Domain<wbr>Rules</a>
@@ -3768,8 +7833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketorigindomainrule">[]Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_originpullrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_originpullrules_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Rules</a>
@@ -3777,8 +7841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketoriginpullrule">[]Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarole_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Role</a>
@@ -3786,8 +7849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarules_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Rules</a>
@@ -3795,17 +7857,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketreplicarule">[]Bucket<wbr>Replica<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_versioningenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioningenable_go" style="color: inherit; text-decoration: inherit;">Versioning<wbr>Enable</a>
@@ -3813,8 +7873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_website_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_go" style="color: inherit; text-decoration: inherit;">Website</a>
@@ -3822,8 +7881,245 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_acceleration_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acceleration_enable_hcl" style="color: inherit; text-decoration: inherit;">acceleration_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_hcl" style="color: inherit; text-decoration: inherit;">acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_acl_body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_body_hcl" style="color: inherit; text-decoration: inherit;">acl_<wbr>body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfs_ofs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfs_ofs_hcl" style="color: inherit; text-decoration: inherit;">chdfs_<wbr>ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cors_response_vary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cors_response_vary_hcl" style="color: inherit; text-decoration: inherit;">cors_<wbr>response_<wbr>vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cors_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cors_rules_hcl" style="color: inherit; text-decoration: inherit;">cors_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketcorsrule">list(object)</a></span>
+    </dt>
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cos_bucket_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_bucket_url_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_intelligent_tiering_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_intelligent_tiering_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>intelligent_<wbr>tiering</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_algorithm_hcl" style="color: inherit; text-decoration: inherit;">encryption_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_clean_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_clean_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>clean</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligent_tiering_archiving_rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligent_tiering_archiving_rule_lists_hcl" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>archiving_<wbr>rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">list(object)</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligent_tiering_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligent_tiering_days_hcl" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligent_tiering_request_frequent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligent_tiering_request_frequent_hcl" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>request_<wbr>frequent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_rules_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">list(object)</a></span>
+    </dt>
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_enable_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_prefix_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_target_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_target_bucket_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>target_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_multi_az_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_az_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>az</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_object_lock_configuration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_object_lock_configuration_hcl" style="color: inherit; text-decoration: inherit;">object_<wbr>lock_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">object</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_origin_domain_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origin_domain_rules_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>domain_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">list(object)</a></span>
+    </dt>
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_origin_pull_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origin_pull_rules_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">list(object)</a></span>
+    </dt>
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replica_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_role_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replica_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_rules_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarule">list(object)</a></span>
+    </dt>
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_versioning_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioning_enable_hcl" style="color: inherit; text-decoration: inherit;">versioning_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_website_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_hcl" style="color: inherit; text-decoration: inherit;">website</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsite">object</a></span>
+    </dt>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3837,8 +8133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_java" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -3846,8 +8141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_aclbody_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclbody_java" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -3855,8 +8149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_java" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -3864,17 +8157,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfsofs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfsofs_java" style="color: inherit; text-decoration: inherit;">chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_corsresponsevary_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsresponsevary_java" style="color: inherit; text-decoration: inherit;">cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_corsrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsrules_java" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">List&lt;Bucket<wbr>Cors<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">List&lt;Bucket<wbr>Cors<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketurl_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Url</a>
@@ -3882,8 +8197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableintelligenttiering_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableintelligenttiering_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Intelligent<wbr>Tiering</a>
@@ -3891,8 +8205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptionalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionalgorithm_java" style="color: inherit; text-decoration: inherit;">encryption<wbr>Algorithm</a>
@@ -3900,8 +8213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forceclean_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forceclean_java" style="color: inherit; text-decoration: inherit;">force<wbr>Clean</a>
@@ -3909,8 +8221,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligenttieringarchivingrulelists_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringarchivingrulelists_java" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">List&lt;Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List&gt;</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringdays_java" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Days</a>
@@ -3918,8 +8237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringrequestfrequent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringrequestfrequent_java" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -3927,17 +8245,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclerules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclerules_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Bucket<wbr>Lifecycle<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logenable_java" style="color: inherit; text-decoration: inherit;">log<wbr>Enable</a>
@@ -3945,8 +8269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logprefix_java" style="color: inherit; text-decoration: inherit;">log<wbr>Prefix</a>
@@ -3954,8 +8277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtargetbucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtargetbucket_java" style="color: inherit; text-decoration: inherit;">log<wbr>Target<wbr>Bucket</a>
@@ -3963,8 +8285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_multiaz_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiaz_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Az</a>
@@ -3972,26 +8293,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_objectlockconfiguration_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_objectlockconfiguration_java" style="color: inherit; text-decoration: inherit;">object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origindomainrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origindomainrules_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Bucket<wbr>Origin<wbr>Domain<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_originpullrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_originpullrules_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Bucket<wbr>Origin<wbr>Pull<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarole_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Role</a>
@@ -3999,26 +8325,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarules_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">List&lt;Bucket<wbr>Replica<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">List&lt;Bucket<wbr>Replica<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_versioningenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioningenable_java" style="color: inherit; text-decoration: inherit;">versioning<wbr>Enable</a>
@@ -4026,17 +8349,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_website_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_java" style="color: inherit; text-decoration: inherit;">website</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4050,8 +8371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_nodejs" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -4059,8 +8379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_aclbody_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclbody_nodejs" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -4068,8 +8387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_nodejs" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -4077,17 +8395,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfsofs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfsofs_nodejs" style="color: inherit; text-decoration: inherit;">chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_corsresponsevary_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsresponsevary_nodejs" style="color: inherit; text-decoration: inherit;">cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_corsrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsrules_nodejs" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">Bucket<wbr>Cors<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">Bucket<wbr>Cors<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketurl_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Url</a>
@@ -4095,8 +8435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableintelligenttiering_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableintelligenttiering_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Intelligent<wbr>Tiering</a>
@@ -4104,8 +8443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptionalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">encryption<wbr>Algorithm</a>
@@ -4113,8 +8451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forceclean_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forceclean_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Clean</a>
@@ -4122,8 +8459,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligenttieringarchivingrulelists_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringarchivingrulelists_nodejs" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List[]</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringdays_nodejs" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Days</a>
@@ -4131,8 +8475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringrequestfrequent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringrequestfrequent_nodejs" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -4140,17 +8483,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclerules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclerules_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logenable_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Enable</a>
@@ -4158,8 +8507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logprefix_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Prefix</a>
@@ -4167,8 +8515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtargetbucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtargetbucket_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Target<wbr>Bucket</a>
@@ -4176,8 +8523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_multiaz_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiaz_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Az</a>
@@ -4185,26 +8531,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_objectlockconfiguration_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_objectlockconfiguration_nodejs" style="color: inherit; text-decoration: inherit;">object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origindomainrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origindomainrules_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_originpullrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_originpullrules_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarole_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Role</a>
@@ -4212,26 +8563,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarules_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">Bucket<wbr>Replica<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">Bucket<wbr>Replica<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_versioningenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioningenable_nodejs" style="color: inherit; text-decoration: inherit;">versioning<wbr>Enable</a>
@@ -4239,17 +8587,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_website_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_nodejs" style="color: inherit; text-decoration: inherit;">website</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4263,8 +8609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_python" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -4272,8 +8617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_body_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_body_python" style="color: inherit; text-decoration: inherit;">acl_<wbr>body</a>
@@ -4281,8 +8625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_python" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -4290,17 +8633,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfs_ofs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfs_ofs_python" style="color: inherit; text-decoration: inherit;">chdfs_<wbr>ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cors_response_vary_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cors_response_vary_python" style="color: inherit; text-decoration: inherit;">cors_<wbr>response_<wbr>vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cors_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cors_rules_python" style="color: inherit; text-decoration: inherit;">cors_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketcorsrule">Bucket<wbr>Cors<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketcorsrule">Sequence[Bucket<wbr>Cors<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cos_bucket_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_bucket_url_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>url</a>
@@ -4308,8 +8673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_intelligent_tiering_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_intelligent_tiering_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>intelligent_<wbr>tiering</a>
@@ -4317,8 +8681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryption_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_algorithm_python" style="color: inherit; text-decoration: inherit;">encryption_<wbr>algorithm</a>
@@ -4326,8 +8689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_force_clean_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_clean_python" style="color: inherit; text-decoration: inherit;">force_<wbr>clean</a>
@@ -4335,8 +8697,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligent_tiering_archiving_rule_lists_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligent_tiering_archiving_rule_lists_python" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>archiving_<wbr>rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">Sequence[Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Args]</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligent_tiering_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligent_tiering_days_python" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>days</a>
@@ -4344,8 +8713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligent_tiering_request_frequent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligent_tiering_request_frequent_python" style="color: inherit; text-decoration: inherit;">intelligent_<wbr>tiering_<wbr>request_<wbr>frequent</a>
@@ -4353,17 +8721,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycle_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_rules_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketlifecyclerule">Sequence[Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_enable_python" style="color: inherit; text-decoration: inherit;">log_<wbr>enable</a>
@@ -4371,8 +8745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_prefix_python" style="color: inherit; text-decoration: inherit;">log_<wbr>prefix</a>
@@ -4380,8 +8753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_target_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_target_bucket_python" style="color: inherit; text-decoration: inherit;">log_<wbr>target_<wbr>bucket</a>
@@ -4389,8 +8761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_multi_az_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_az_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>az</a>
@@ -4398,26 +8769,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_object_lock_configuration_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_object_lock_configuration_python" style="color: inherit; text-decoration: inherit;">object_<wbr>lock_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Args</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origin_domain_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origin_domain_rules_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>domain_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketorigindomainrule">Sequence[Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origin_pull_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origin_pull_rules_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketoriginpullrule">Sequence[Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replica_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_role_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>role</a>
@@ -4425,26 +8801,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replica_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_rules_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketreplicarule">Bucket<wbr>Replica<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#bucketreplicarule">Sequence[Bucket<wbr>Replica<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_versioning_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioning_enable_python" style="color: inherit; text-decoration: inherit;">versioning_<wbr>enable</a>
@@ -4452,8 +8825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_website_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_python" style="color: inherit; text-decoration: inherit;">website</a>
@@ -4461,8 +8833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketwebsite">Bucket<wbr>Website<wbr>Args</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4476,8 +8847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket acceleration.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket acceleration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_acl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_yaml" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -4485,8 +8855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_aclbody_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aclbody_yaml" style="color: inherit; text-decoration: inherit;">acl<wbr>Body</a>
@@ -4494,8 +8863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL XML body for multiple grant info. NOTE: this argument will overwrite <code>acl</code>. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_yaml" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -4503,8 +8871,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_chdfsofs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chdfsofs_yaml" style="color: inherit; text-decoration: inherit;">chdfs<wbr>Ofs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Indicates whether to create a bucket of metadata acceleration. For more information, please refer to <code>https://www.tencentcloud.com/document/product/436/43305</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_corsresponsevary_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsresponsevary_yaml" style="color: inherit; text-decoration: inherit;">cors<wbr>Response<wbr>Vary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to return the <code>Vary: Origin</code> header in the CORS response. Valid values: <code>true</code>, <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_corsrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_corsrules_yaml" style="color: inherit; text-decoration: inherit;">cors<wbr>Rules</a>
@@ -4512,8 +8903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketcorsrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A rule of Cross-Origin Resource Sharing (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A rule of Cross-Origin Resource Sharing (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketurl_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Url</a>
@@ -4521,8 +8911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The URL of this cos bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The URL of this cos bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableintelligenttiering_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableintelligenttiering_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Intelligent<wbr>Tiering</a>
@@ -4530,8 +8919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</p>
-</dd><dt class="property-optional"
+    <dd>Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptionalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionalgorithm_yaml" style="color: inherit; text-decoration: inherit;">encryption<wbr>Algorithm</a>
@@ -4539,8 +8927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The server-side encryption algorithm to use. Valid value is <code>AES256</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The server-side encryption algorithm to use. Valid values are <code>AES256</code>, <code>KMS</code> and <code>SM4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forceclean_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forceclean_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Clean</a>
@@ -4548,8 +8935,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Force cleanup all objects before delete bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Force cleanup all objects before delete bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intelligenttieringarchivingrulelists_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringarchivingrulelists_yaml" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelist">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only <code>enableIntelligentTiering</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringdays_yaml" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Days</a>
@@ -4557,8 +8951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intelligenttieringrequestfrequent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intelligenttieringrequestfrequent_yaml" style="color: inherit; text-decoration: inherit;">intelligent<wbr>Tiering<wbr>Request<wbr>Frequent</a>
@@ -4566,8 +8959,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The KMS Master Key ID. This value is valid only when <code>encryptionAlgorithm</code> is set to KMS. Set kms id to the specified value. If not specified, the default kms id is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclerules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclerules_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Rules</a>
@@ -4575,8 +8975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecyclerule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A configuration of object lifecycle management (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>A configuration of object lifecycle management (documented below).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logenable_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Enable</a>
@@ -4584,8 +8983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>log_target_bucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate the access log of this bucket to be saved or not. Default is <code>false</code>. If set <code>true</code>, the access log will be saved with <code>logTargetBucket</code>. To enable log, the full access of log service must be granted. <a href="https://intl.cloud.tencent.com/document/product/436/16920">Full Access Role Policy</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logprefix_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Prefix</a>
@@ -4593,8 +8991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The prefix log name which saves the access log of this bucket per 5 minutes. Eg. <code>MyLogPrefix/</code>. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtargetbucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtargetbucket_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Target<wbr>Bucket</a>
@@ -4602,8 +8999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>log_target_bucket</code>/<code>log_prefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>log_enable</code> is <code>true</code>. User must have full access on this bucket.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is <code>logTargetBucket</code>/<code>logPrefix</code>{YYYY}/{MM}/{DD}/{time}<em>{random}</em>{index}.gz. Only valid when <code>logEnable</code> is <code>true</code>. User must have full access on this bucket.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_multiaz_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiaz_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Az</a>
@@ -4611,8 +9007,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to create a bucket of multi available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to create a bucket of multi available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_objectlockconfiguration_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_objectlockconfiguration_yaml" style="color: inherit; text-decoration: inherit;">object<wbr>Lock<wbr>Configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfiguration">Property Map</a></span>
+    </dt>
+    <dd>Object locking configuration. Once enabled, this feature cannot be disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_origindomainrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_origindomainrules_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Domain<wbr>Rules</a>
@@ -4620,8 +9023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketorigindomainrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin Domain settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin Domain settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_originpullrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_originpullrules_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Rules</a>
@@ -4629,8 +9031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketoriginpullrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bucket Origin-Pull settings.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket Origin-Pull settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarole_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Role</a>
@@ -4638,8 +9039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioning_enable</code> is true can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>Request initiator identifier, format: <code>qcs::cam::uin/&lt;owneruin&gt;:uin/&lt;subuin&gt;</code>. NOTE: only <code>versioningEnable</code> is true can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicarules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicarules_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Rules</a>
@@ -4647,17 +9047,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketreplicarule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of replica rule. NOTE: only <code>versioning_enable</code> is true and <code>replica_role</code> set can configure this argument.</p>
-</dd><dt class="property-optional"
+    <dd>List of replica rule. NOTE: only <code>versioningEnable</code> is true and <code>replicaRole</code> set can configure this argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of a bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of a bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_versioningenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versioningenable_yaml" style="color: inherit; text-decoration: inherit;">versioning<wbr>Enable</a>
@@ -4665,8 +9063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable bucket versioning. NOTE: The <code>multi_az</code> feature is true for the current bucket, cannot disable version control.</p>
-</dd><dt class="property-optional"
+    <dd>Enable bucket versioning. NOTE: The <code>multiAz</code> feature is true for the current bucket, cannot disable version control.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_website_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_website_yaml" style="color: inherit; text-decoration: inherit;">website</a>
@@ -4674,8 +9071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketwebsite">Property Map</a></span>
     </dt>
-    <dd><p>A website object(documented below).</p>
-</dd></dl>
+    <dd>A website object(documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4690,7 +9086,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="bucketcorsrule">Bucket<wbr>Cors<wbr>Rule</h4>
+<h4 id="bucketcorsrule">
+Bucket<wbr>Cors<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Cors<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4702,8 +9100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_csharp" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Methods</a>
@@ -4711,8 +9108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_csharp" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Origins</a>
@@ -4720,8 +9116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="exposeheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_csharp" style="color: inherit; text-decoration: inherit;">Expose<wbr>Headers</a>
@@ -4729,8 +9124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxageseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Age<wbr>Seconds</a>
@@ -4738,8 +9132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4753,8 +9146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_go" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Methods</a>
@@ -4762,8 +9154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_go" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Origins</a>
@@ -4771,8 +9162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="exposeheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_go" style="color: inherit; text-decoration: inherit;">Expose<wbr>Headers</a>
@@ -4780,8 +9170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxageseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Age<wbr>Seconds</a>
@@ -4789,8 +9178,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="allowed_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_headers_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
+            title="Required">
+        <span id="allowed_methods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_methods_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>methods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="allowed_origins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_origins_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>origins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expose_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expose_headers_hcl" style="color: inherit; text-decoration: inherit;">expose_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_age_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_age_seconds_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>age_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4804,8 +9238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_java" style="color: inherit; text-decoration: inherit;">allowed<wbr>Methods</a>
@@ -4813,8 +9246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_java" style="color: inherit; text-decoration: inherit;">allowed<wbr>Origins</a>
@@ -4822,8 +9254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="exposeheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_java" style="color: inherit; text-decoration: inherit;">expose<wbr>Headers</a>
@@ -4831,8 +9262,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxageseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_java" style="color: inherit; text-decoration: inherit;">max<wbr>Age<wbr>Seconds</a>
@@ -4840,8 +9270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4855,8 +9284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_nodejs" style="color: inherit; text-decoration: inherit;">allowed<wbr>Methods</a>
@@ -4864,8 +9292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_nodejs" style="color: inherit; text-decoration: inherit;">allowed<wbr>Origins</a>
@@ -4873,8 +9300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="exposeheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_nodejs" style="color: inherit; text-decoration: inherit;">expose<wbr>Headers</a>
@@ -4882,8 +9308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxageseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Age<wbr>Seconds</a>
@@ -4891,8 +9316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4906,8 +9330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowed_methods_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_methods_python" style="color: inherit; text-decoration: inherit;">allowed_<wbr>methods</a>
@@ -4915,8 +9338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="allowed_origins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_origins_python" style="color: inherit; text-decoration: inherit;">allowed_<wbr>origins</a>
@@ -4924,8 +9346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="expose_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expose_headers_python" style="color: inherit; text-decoration: inherit;">expose_<wbr>headers</a>
@@ -4933,8 +9354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_age_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_age_seconds_python" style="color: inherit; text-decoration: inherit;">max_<wbr>age_<wbr>seconds</a>
@@ -4942,8 +9362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4957,8 +9376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which headers are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which headers are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="allowedmethods_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedmethods_yaml" style="color: inherit; text-decoration: inherit;">allowed<wbr>Methods</a>
@@ -4966,8 +9384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Specifies which methods are allowed. Can be <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code> or <code>HEAD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="allowedorigins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedorigins_yaml" style="color: inherit; text-decoration: inherit;">allowed<wbr>Origins</a>
@@ -4975,8 +9392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies which origins are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which origins are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="exposeheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exposeheaders_yaml" style="color: inherit; text-decoration: inherit;">expose<wbr>Headers</a>
@@ -4984,8 +9400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies expose header in the response.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies expose header in the response.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxageseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxageseconds_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Age<wbr>Seconds</a>
@@ -4993,79 +9408,49 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies time in seconds that browser can cache the response for a preflight request.</p>
-</dd></dl>
+    <dd>Specifies time in seconds that browser can cache the response for a preflight request.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketlifecyclerule">Bucket<wbr>Lifecycle<wbr>Rule</h4>
+<h4 id="bucketintelligenttieringarchivingrulelist">
+Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="filterprefix_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Prefix</a>
+        <span id="ruleid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="abortincompletemultipartupload_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_csharp" style="color: inherit; text-decoration: inherit;">Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
-    </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="expiration_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_csharp" style="color: inherit; text-decoration: inherit;">Expiration</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's expire (documented below).</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="id_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique identifier for the rule. It can be up to 255 characters.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="noncurrentexpiration_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Expiration</a>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_csharp" style="color: inherit; text-decoration: inherit;">Tierings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering&gt;</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
             title="Optional">
-        <span id="noncurrenttransitions_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Transitions</a>
+        <span id="filter_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_csharp" style="color: inherit; text-decoration: inherit;">Filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition&gt;</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter</a></span>
     </dt>
-    <dd><p>Specifies a period in the non current object's transitions.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="transitions_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_csharp" style="color: inherit; text-decoration: inherit;">Transitions</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruletransition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition&gt;</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's transitions (documented below).</p>
-</dd></dl>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5073,68 +9458,75 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="filterprefix_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Prefix</a>
+        <span id="ruleid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="abortincompletemultipartupload_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_go" style="color: inherit; text-decoration: inherit;">Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
-    </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="expiration_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_go" style="color: inherit; text-decoration: inherit;">Expiration</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's expire (documented below).</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="id_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique identifier for the rule. It can be up to 255 characters.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="noncurrentexpiration_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Expiration</a>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_go" style="color: inherit; text-decoration: inherit;">Tierings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">[]Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
             title="Optional">
-        <span id="noncurrenttransitions_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Transitions</a>
+        <span id="filter_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_go" style="color: inherit; text-decoration: inherit;">Filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">[]Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter</a></span>
     </dt>
-    <dd><p>Specifies a period in the non current object's transitions.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="transitions_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_go" style="color: inherit; text-decoration: inherit;">Transitions</a>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruletransition">[]Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition</a></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions (documented below).</p>
-</dd></dl>
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_hcl" style="color: inherit; text-decoration: inherit;">tierings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">list(object)</a></span>
+    </dt>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_hcl" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">object</a></span>
+    </dt>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5142,68 +9534,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="filterprefix_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
+        <span id="ruleid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="abortincompletemultipartupload_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_java" style="color: inherit; text-decoration: inherit;">abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
-    </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="expiration_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_java" style="color: inherit; text-decoration: inherit;">expiration</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's expire (documented below).</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="id_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A unique identifier for the rule. It can be up to 255 characters.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="noncurrentexpiration_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expiration</a>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_java" style="color: inherit; text-decoration: inherit;">tierings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">List&lt;Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering&gt;</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
             title="Optional">
-        <span id="noncurrenttransitions_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
+        <span id="filter_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_java" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">List&lt;Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition&gt;</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter</a></span>
     </dt>
-    <dd><p>Specifies a period in the non current object's transitions.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="transitions_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_java" style="color: inherit; text-decoration: inherit;">transitions</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruletransition">List&lt;Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition&gt;</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's transitions (documented below).</p>
-</dd></dl>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5211,68 +9572,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="filterprefix_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
+        <span id="ruleid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="abortincompletemultipartupload_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_nodejs" style="color: inherit; text-decoration: inherit;">abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
-    </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="expiration_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_nodejs" style="color: inherit; text-decoration: inherit;">expiration</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's expire (documented below).</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="id_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique identifier for the rule. It can be up to 255 characters.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="noncurrentexpiration_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expiration</a>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_nodejs" style="color: inherit; text-decoration: inherit;">tierings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering[]</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
             title="Optional">
-        <span id="noncurrenttransitions_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
+        <span id="filter_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_nodejs" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition[]</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter</a></span>
     </dt>
-    <dd><p>Specifies a period in the non current object's transitions.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="transitions_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_nodejs" style="color: inherit; text-decoration: inherit;">transitions</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruletransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition[]</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's transitions (documented below).</p>
-</dd></dl>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5280,68 +9610,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="filter_prefix_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_prefix_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>prefix</a>
+        <span id="rule_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="abort_incomplete_multipart_upload_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abort_incomplete_multipart_upload_python" style="color: inherit; text-decoration: inherit;">abort_<wbr>incomplete_<wbr>multipart_<wbr>upload</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
-    </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="expiration_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_python" style="color: inherit; text-decoration: inherit;">expiration</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's expire (documented below).</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="id_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A unique identifier for the rule. It can be up to 255 characters.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="non_current_expiration_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_expiration_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>expiration</a>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_python" style="color: inherit; text-decoration: inherit;">tierings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">Sequence[Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering]</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
             title="Optional">
-        <span id="non_current_transitions_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_transitions_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>transitions</a>
+        <span id="filter_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_python" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition]</a></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter</a></span>
     </dt>
-    <dd><p>Specifies a period in the non current object's transitions.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="transitions_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_python" style="color: inherit; text-decoration: inherit;">transitions</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketlifecycleruletransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition]</a></span>
-    </dt>
-    <dd><p>Specifies a period in the object's transitions (documented below).</p>
-</dd></dl>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5349,14 +9648,1265 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="filterprefix_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
+        <span id="ruleid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object key prefix identifying one or more objects to which the rule applies.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is <code>default</code>, only <code>Enabled</code> is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="tierings_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tierings_yaml" style="color: inherit; text-decoration: inherit;">tierings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelisttiering">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_yaml" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilter">Property Map</a></span>
+    </dt>
+    <dd>Specifies configuration information related to data transformation in the intelligent tiered storage configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketintelligenttieringarchivingrulelistfilter">
+Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_csharp" style="color: inherit; text-decoration: inherit;">And</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_go" style="color: inherit; text-decoration: inherit;">And</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">[]Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_hcl" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">object</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">list(object)</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_java" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">List&lt;Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_nodejs" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag[]</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and__python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and__python" style="color: inherit; text-decoration: inherit;">and_</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">Sequence[Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag]</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_yaml" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterand">Property Map</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfiltertag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketintelligenttieringarchivingrulelistfilterand">
+Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">[]Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">list(object)</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">List&lt;Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag[]</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">Sequence[Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag]</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketintelligenttieringarchivingrulelistfilterandtag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketintelligenttieringarchivingrulelistfilterandtag">
+Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>And<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketintelligenttieringarchivingrulelistfiltertag">
+Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Filter<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketintelligenttieringarchivingrulelisttiering">
+Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Intelligent<wbr>Tiering<wbr>Archiving<wbr>Rule<wbr>List<wbr>Tiering<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="accesstier_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstier_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_csharp" style="color: inherit; text-decoration: inherit;">Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="accesstier_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstier_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_go" style="color: inherit; text-decoration: inherit;">Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_tier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_tier_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_hcl" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="accesstier_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstier_java" style="color: inherit; text-decoration: inherit;">access<wbr>Tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_java" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="accesstier_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstier_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_nodejs" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_tier_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_tier_python" style="color: inherit; text-decoration: inherit;">access_<wbr>tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_python" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="accesstier_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstier_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>When <code>ruleId</code> is not <code>default</code>, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.</dd><dt class="property-required"
+            title="Required">
+        <span id="days_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_yaml" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>When the <code>ruleId</code> is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketlifecyclerule">
+Bucket<wbr>Lifecycle<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Lifecycle<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="abortincompletemultipartupload_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_csharp" style="color: inherit; text-decoration: inherit;">Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expiration_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_csharp" style="color: inherit; text-decoration: inherit;">Expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filterprefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrentexpiration_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrenttransitions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition&gt;</a></span>
+    </dt>
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transitions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_csharp" style="color: inherit; text-decoration: inherit;">Transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruletransition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition&gt;</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="abortincompletemultipartupload_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_go" style="color: inherit; text-decoration: inherit;">Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expiration_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_go" style="color: inherit; text-decoration: inherit;">Expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filterprefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrentexpiration_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrenttransitions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">[]Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition</a></span>
+    </dt>
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transitions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_go" style="color: inherit; text-decoration: inherit;">Transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruletransition">[]Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="abort_incomplete_multipart_upload_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abort_incomplete_multipart_upload_hcl" style="color: inherit; text-decoration: inherit;">abort_<wbr>incomplete_<wbr>multipart_<wbr>upload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">object</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expiration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_hcl" style="color: inherit; text-decoration: inherit;">expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleexpiration">object</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_prefix_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="non_current_expiration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_expiration_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">object</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="non_current_transitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_transitions_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">list(object)</a></span>
+    </dt>
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_hcl" style="color: inherit; text-decoration: inherit;">transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruletransition">list(object)</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="abortincompletemultipartupload_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_java" style="color: inherit; text-decoration: inherit;">abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expiration_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_java" style="color: inherit; text-decoration: inherit;">expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filterprefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrentexpiration_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrenttransitions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">List&lt;Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition&gt;</a></span>
+    </dt>
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transitions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_java" style="color: inherit; text-decoration: inherit;">transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruletransition">List&lt;Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition&gt;</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="abortincompletemultipartupload_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_nodejs" style="color: inherit; text-decoration: inherit;">abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expiration_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_nodejs" style="color: inherit; text-decoration: inherit;">expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filterprefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrentexpiration_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noncurrenttransitions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition[]</a></span>
+    </dt>
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transitions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_nodejs" style="color: inherit; text-decoration: inherit;">transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruletransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition[]</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="abort_incomplete_multipart_upload_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abort_incomplete_multipart_upload_python" style="color: inherit; text-decoration: inherit;">abort_<wbr>incomplete_<wbr>multipart_<wbr>upload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a></span>
+    </dt>
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expiration_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_python" style="color: inherit; text-decoration: inherit;">expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_prefix_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="non_current_expiration_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_expiration_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>expiration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</a></span>
+    </dt>
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="non_current_transitions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_transitions_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">Sequence[Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition]</a></span>
+    </dt>
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transitions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_python" style="color: inherit; text-decoration: inherit;">transitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketlifecycleruletransition">Sequence[Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition]</a></span>
+    </dt>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="abortincompletemultipartupload_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abortincompletemultipartupload_yaml" style="color: inherit; text-decoration: inherit;">abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</a>
@@ -5364,8 +10914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecycleruleabortincompletemultipartupload">Property Map</a></span>
     </dt>
-    <dd><p>Set the maximum time a multipart upload is allowed to remain running.</p>
-</dd><dt class="property-optional"
+    <dd>Set the maximum time a multipart upload is allowed to remain running.</dd><dt class="property-optional"
             title="Optional">
         <span id="expiration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_yaml" style="color: inherit; text-decoration: inherit;">expiration</a>
@@ -5373,8 +10922,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecycleruleexpiration">Property Map</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's expire (documented below).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a period in the object's expire (documented below).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filterprefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterprefix_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Object key prefix identifying one or more objects to which the rule applies.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -5382,8 +10938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A unique identifier for the rule. It can be up to 255 characters.</p>
-</dd><dt class="property-optional"
+    <dd>A unique identifier for the rule. It can be up to 255 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrentexpiration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentexpiration_yaml" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Expiration</a>
@@ -5391,8 +10946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecyclerulenoncurrentexpiration">Property Map</a></span>
     </dt>
-    <dd><p>Specifies when non current object versions shall expire.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies when non current object versions shall expire.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrenttransitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrenttransitions_yaml" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Transitions</a>
@@ -5400,8 +10954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecyclerulenoncurrenttransition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the non current object's transitions.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a period in the non current object's transitions.</dd><dt class="property-optional"
             title="Optional">
         <span id="transitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transitions_yaml" style="color: inherit; text-decoration: inherit;">transitions</a>
@@ -5409,12 +10962,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketlifecycleruletransition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specifies a period in the object's transitions (documented below).</p>
-</dd></dl>
+    <dd>Specifies a period in the object's transitions (documented below).</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketlifecycleruleabortincompletemultipartupload">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload</h4>
+<h4 id="bucketlifecycleruleabortincompletemultipartupload">
+Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Lifecycle<wbr>Rule<wbr>Abort<wbr>Incomplete<wbr>Multipart<wbr>Upload<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5426,8 +10980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5441,8 +10994,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_after_initiation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_after_initiation_hcl" style="color: inherit; text-decoration: inherit;">days_<wbr>after_<wbr>initiation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5456,8 +11022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5471,8 +11036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5486,8 +11050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5501,12 +11064,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketlifecycleruleexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration</h4>
+<h4 id="bucketlifecycleruleexpiration">
+Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Lifecycle<wbr>Rule<wbr>Expiration<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5518,8 +11082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_csharp" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -5527,8 +11090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemarker_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarker_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Marker</a>
@@ -5536,8 +11098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the delete marker of an expired object will be removed.</p>
-</dd></dl>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5551,8 +11112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_go" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -5560,8 +11120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemarker_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarker_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Marker</a>
@@ -5569,8 +11128,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the delete marker of an expired object will be removed.</p>
-</dd></dl>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_hcl" style="color: inherit; text-decoration: inherit;">date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_hcl" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_marker_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_marker_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>marker</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5584,8 +11172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_java" style="color: inherit; text-decoration: inherit;">days</a>
@@ -5593,8 +11180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemarker_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarker_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Marker</a>
@@ -5602,8 +11188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the delete marker of an expired object will be removed.</p>
-</dd></dl>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5617,8 +11202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_nodejs" style="color: inherit; text-decoration: inherit;">days</a>
@@ -5626,8 +11210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemarker_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarker_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Marker</a>
@@ -5635,8 +11218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the delete marker of an expired object will be removed.</p>
-</dd></dl>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5650,8 +11232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_python" style="color: inherit; text-decoration: inherit;">days</a>
@@ -5659,8 +11240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_marker_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_marker_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>marker</a>
@@ -5668,8 +11248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the delete marker of an expired object will be removed.</p>
-</dd></dl>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5683,8 +11262,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_yaml" style="color: inherit; text-decoration: inherit;">days</a>
@@ -5692,8 +11270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemarker_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarker_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Marker</a>
@@ -5701,12 +11278,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the delete marker of an expired object will be removed.</p>
-</dd></dl>
+    <dd>Indicates whether the delete marker of an expired object will be removed.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketlifecyclerulenoncurrentexpiration">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration</h4>
+<h4 id="bucketlifecyclerulenoncurrentexpiration">
+Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Expiration<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5718,8 +11296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5733,8 +11310,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="non_current_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_days_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5748,8 +11338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5763,8 +11352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5778,8 +11366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5793,12 +11380,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketlifecyclerulenoncurrenttransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition</h4>
+<h4 id="bucketlifecyclerulenoncurrenttransition">
+Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Lifecycle<wbr>Rule<wbr>Non<wbr>Current<wbr>Transition<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5810,8 +11398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrentdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentdays_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Days</a>
@@ -5819,8 +11406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5834,8 +11420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrentdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentdays_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Current<wbr>Days</a>
@@ -5843,8 +11428,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="non_current_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_days_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5858,8 +11464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrentdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentdays_java" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Days</a>
@@ -5867,8 +11472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5882,8 +11486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrentdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentdays_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Days</a>
@@ -5891,8 +11494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5906,8 +11508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="non_current_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_current_days_python" style="color: inherit; text-decoration: inherit;">non_<wbr>current_<wbr>days</a>
@@ -5915,8 +11516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5930,8 +11530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the non current object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="noncurrentdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noncurrentdays_yaml" style="color: inherit; text-decoration: inherit;">non<wbr>Current<wbr>Days</a>
@@ -5939,12 +11538,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of days after non current object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Number of days after non current object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketlifecycleruletransition">Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition</h4>
+<h4 id="bucketlifecycleruletransition">
+Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Lifecycle<wbr>Rule<wbr>Transition<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5956,8 +11556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_csharp" style="color: inherit; text-decoration: inherit;">Date</a>
@@ -5965,8 +11564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_csharp" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -5974,8 +11572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5989,8 +11586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_go" style="color: inherit; text-decoration: inherit;">Date</a>
@@ -5998,8 +11594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_go" style="color: inherit; text-decoration: inherit;">Days</a>
@@ -6007,8 +11602,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_hcl" style="color: inherit; text-decoration: inherit;">date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_hcl" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6022,8 +11646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_java" style="color: inherit; text-decoration: inherit;">date</a>
@@ -6031,8 +11654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_java" style="color: inherit; text-decoration: inherit;">days</a>
@@ -6040,8 +11662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6055,8 +11676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_nodejs" style="color: inherit; text-decoration: inherit;">date</a>
@@ -6064,8 +11684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_nodejs" style="color: inherit; text-decoration: inherit;">days</a>
@@ -6073,8 +11692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6088,8 +11706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_python" style="color: inherit; text-decoration: inherit;">date</a>
@@ -6097,8 +11714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_python" style="color: inherit; text-decoration: inherit;">days</a>
@@ -6106,8 +11722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6121,8 +11736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the storage class to which you want the object to transition. Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_yaml" style="color: inherit; text-decoration: inherit;">date</a>
@@ -6130,8 +11744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the date after which you want the corresponding action to take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the date after which you want the corresponding action to take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="days_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_yaml" style="color: inherit; text-decoration: inherit;">days</a>
@@ -6139,12 +11752,273 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the number of days after object creation when the specific rule action takes effect.</p>
-</dd></dl>
+    <dd>Specifies the number of days after object creation when the specific rule action takes effect.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketorigindomainrule">Bucket<wbr>Origin<wbr>Domain<wbr>Rule</h4>
+<h4 id="bucketobjectlockconfiguration">
+Bucket<wbr>Object<wbr>Lock<wbr>Configuration<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">object</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable object lock configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketobjectlockconfigurationrule">Property Map</a></span>
+    </dt>
+    <dd>Object locking configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketobjectlockconfigurationrule">
+Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Object<wbr>Lock<wbr>Configuration<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_csharp" style="color: inherit; text-decoration: inherit;">Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_go" style="color: inherit; text-decoration: inherit;">Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_hcl" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_java" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_nodejs" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_python" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="days_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#days_yaml" style="color: inherit; text-decoration: inherit;">days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Object lock default duration (range: 1-36500).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketorigindomainrule">
+Bucket<wbr>Origin<wbr>Domain<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Origin<wbr>Domain<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6156,8 +12030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain host.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -6165,8 +12038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -6174,8 +12046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6189,8 +12060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain host.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -6198,8 +12068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -6207,8 +12076,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify domain host.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6222,8 +12120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain host.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6231,8 +12128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6240,8 +12136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6255,8 +12150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain host.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6264,8 +12158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6273,8 +12166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6288,8 +12180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain host.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6297,8 +12188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6306,8 +12196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6321,8 +12210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain host.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain host.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -6330,8 +12218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain status, default: <code>ENABLED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain status, default: <code>ENABLED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6339,12 +12226,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</p>
-</dd></dl>
+    <dd>Specify origin domain type, available values: <code>REST</code>, <code>WEBSITE</code>, <code>ACCELERATE</code>, default: <code>REST</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketoriginpullrule">Bucket<wbr>Origin<wbr>Pull<wbr>Rule</h4>
+<h4 id="bucketoriginpullrule">
+Bucket<wbr>Origin<wbr>Pull<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Origin<wbr>Pull<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6356,8 +12244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -6365,17 +12252,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="backtosourcemode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_csharp" style="color: inherit; text-decoration: inherit;">Back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="customhttpheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Http<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followhttpheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Http<wbr>Headers</a>
@@ -6383,8 +12276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followquerystring_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Query<wbr>String</a>
@@ -6392,8 +12284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followredirection_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Redirection</a>
@@ -6401,8 +12292,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpredirectcode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpredirectcode_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Redirect<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -6410,8 +12308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -6419,17 +12316,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="syncbacktosource_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6443,8 +12338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -6452,17 +12346,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="backtosourcemode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_go" style="color: inherit; text-decoration: inherit;">Back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="customhttpheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Http<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followhttpheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Http<wbr>Headers</a>
@@ -6470,8 +12370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followquerystring_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Query<wbr>String</a>
@@ -6479,8 +12378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followredirection_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Redirection</a>
@@ -6488,8 +12386,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpredirectcode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpredirectcode_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Redirect<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -6497,8 +12402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -6506,17 +12410,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="syncbacktosource_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="back_to_source_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_to_source_mode_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>to_<wbr>source_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="custom_http_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_http_headers_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>http_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="follow_http_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_http_headers_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>http_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="follow_query_string_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_query_string_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>query_<wbr>string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="follow_redirection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_redirection_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>redirection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_redirect_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_redirect_code_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>redirect_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="sync_back_to_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_back_to_source_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>back_<wbr>to_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6530,8 +12526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -6539,17 +12534,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="backtosourcemode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_java" style="color: inherit; text-decoration: inherit;">back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="customhttpheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followhttpheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
@@ -6557,8 +12558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followquerystring_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
@@ -6566,8 +12566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followredirection_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
@@ -6575,8 +12574,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpredirectcode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpredirectcode_java" style="color: inherit; text-decoration: inherit;">http<wbr>Redirect<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -6584,8 +12590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -6593,17 +12598,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="syncbacktosource_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6617,8 +12620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -6626,17 +12628,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="backtosourcemode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_nodejs" style="color: inherit; text-decoration: inherit;">back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="customhttpheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followhttpheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
@@ -6644,8 +12652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followquerystring_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
@@ -6653,8 +12660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followredirection_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
@@ -6662,8 +12668,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpredirectcode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpredirectcode_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Redirect<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -6671,8 +12684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -6680,17 +12692,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="syncbacktosource_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6704,8 +12714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -6713,17 +12722,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="back_to_source_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_to_source_mode_python" style="color: inherit; text-decoration: inherit;">back_<wbr>to_<wbr>source_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="custom_http_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_http_headers_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>http_<wbr>headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="follow_http_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_http_headers_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>http_<wbr>headers</a>
@@ -6731,8 +12746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="follow_query_string_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_query_string_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>query_<wbr>string</a>
@@ -6740,8 +12754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="follow_redirection_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_redirection_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>redirection</a>
@@ -6749,8 +12762,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_redirect_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_redirect_code_python" style="color: inherit; text-decoration: inherit;">http_<wbr>redirect_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -6758,8 +12778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -6767,17 +12786,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="sync_back_to_source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_back_to_source_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>back_<wbr>to_<wbr>source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6791,8 +12808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Allows only a domain name or IP address. You can optionally append a port number to the address.</p>
-</dd><dt class="property-required"
+    <dd>Allows only a domain name or IP address. You can optionally append a port number to the address.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -6800,17 +12816,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Priority of origin-pull rules, do not set the same value for multiple rules.</p>
-</dd><dt class="property-optional"
+    <dd>Priority of origin-pull rules, do not set the same value for multiple rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="backtosourcemode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtosourcemode_yaml" style="color: inherit; text-decoration: inherit;">back<wbr>To<wbr>Source<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Back to source mode. Allow value: Proxy, Mirror, Redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="customhttpheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customhttpheaders_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Http<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies the custom headers that you can add for COS to access your origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the custom headers that you can add for COS to access your origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followhttpheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followhttpheaders_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Http<wbr>Headers</a>
@@ -6818,8 +12840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specifies the pass through headers when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the pass through headers when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followquerystring_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followquerystring_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Query<wbr>String</a>
@@ -6827,8 +12848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to pass through COS request query string when accessing the origin server.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to pass through COS request query string when accessing the origin server.</dd><dt class="property-optional"
             title="Optional">
         <span id="followredirection_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followredirection_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Redirection</a>
@@ -6836,8 +12856,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to follow 3XX redirect to another origin server to pull data from.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to follow 3XX redirect to another origin server to pull data from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpredirectcode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpredirectcode_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Redirect<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Redirect code. Effective when <code>backToSourceMode</code> is <code>Redirect</code>. ex: 301, 302, 307. Default is 302.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -6845,8 +12872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Triggers the origin-pull rule when the requested file name matches this prefix.</p>
-</dd><dt class="property-optional"
+    <dd>Triggers the origin-pull rule when the requested file name matches this prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -6854,21 +12880,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>the protocol used for COS to access the specified origin server. The available value include <code>HTTP</code>, <code>HTTPS</code> and <code>FOLLOW</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="syncbacktosource_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncbacktosource_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Back<wbr>To<wbr>Source</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead. If <code>true</code>, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.<p class="property-message">Deprecated: It has been deprecated from version 1.81.196. Please use <code>backToSourceMode</code> instead.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketreplicarule">Bucket<wbr>Replica<wbr>Rule</h4>
+<h4 id="bucketreplicarule">
+Bucket<wbr>Replica<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6880,17 +12906,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="status_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletemarkerreplication_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarkerreplication_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Marker<wbr>Replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destinationencryptionkmskeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationencryptionkmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Destination<wbr>Encryption<wbr>Kms<wbr>Key<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationstorageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationstorageclass_csharp" style="color: inherit; text-decoration: inherit;">Destination<wbr>Storage<wbr>Class</a>
@@ -6898,8 +12930,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage class of destination, available values: <code>STANDARD</code>, <code>INTELLIGENT_TIERING</code>, <code>STANDARD_IA</code>. default is following current class of destination.</p>
-</dd><dt class="property-optional"
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_csharp" style="color: inherit; text-decoration: inherit;">Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Filter</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -6907,8 +12946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a specific rule.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -6916,8 +12954,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</p>
-</dd></dl>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceselectioncriteria_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceselectioncriteria_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Selection<wbr>Criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6931,17 +12992,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="status_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletemarkerreplication_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarkerreplication_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Marker<wbr>Replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destinationencryptionkmskeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationencryptionkmskeyid_go" style="color: inherit; text-decoration: inherit;">Destination<wbr>Encryption<wbr>Kms<wbr>Key<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationstorageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationstorageclass_go" style="color: inherit; text-decoration: inherit;">Destination<wbr>Storage<wbr>Class</a>
@@ -6949,8 +13016,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage class of destination, available values: <code>STANDARD</code>, <code>INTELLIGENT_TIERING</code>, <code>STANDARD_IA</code>. default is following current class of destination.</p>
-</dd><dt class="property-optional"
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_go" style="color: inherit; text-decoration: inherit;">Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">Bucket<wbr>Replica<wbr>Rule<wbr>Filter</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -6958,8 +13032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a specific rule.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -6967,8 +13040,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</p>
-</dd></dl>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceselectioncriteria_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceselectioncriteria_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Selection<wbr>Criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="destination_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_bucket_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_marker_replication_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_marker_replication_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>marker_<wbr>replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">object</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_encryption_kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_encryption_kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>encryption_<wbr>kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_storage_class_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_hcl" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">object</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_selection_criteria_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_selection_criteria_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>selection_<wbr>criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">object</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6982,17 +13164,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="status_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletemarkerreplication_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarkerreplication_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Marker<wbr>Replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destinationencryptionkmskeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationencryptionkmskeyid_java" style="color: inherit; text-decoration: inherit;">destination<wbr>Encryption<wbr>Kms<wbr>Key<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationstorageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationstorageclass_java" style="color: inherit; text-decoration: inherit;">destination<wbr>Storage<wbr>Class</a>
@@ -7000,8 +13188,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage class of destination, available values: <code>STANDARD</code>, <code>INTELLIGENT_TIERING</code>, <code>STANDARD_IA</code>. default is following current class of destination.</p>
-</dd><dt class="property-optional"
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_java" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">Bucket<wbr>Replica<wbr>Rule<wbr>Filter</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -7009,8 +13204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a specific rule.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -7018,8 +13212,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</p>
-</dd></dl>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceselectioncriteria_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceselectioncriteria_java" style="color: inherit; text-decoration: inherit;">source<wbr>Selection<wbr>Criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7033,17 +13250,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="status_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletemarkerreplication_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarkerreplication_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Marker<wbr>Replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destinationencryptionkmskeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationencryptionkmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">destination<wbr>Encryption<wbr>Kms<wbr>Key<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationstorageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationstorageclass_nodejs" style="color: inherit; text-decoration: inherit;">destination<wbr>Storage<wbr>Class</a>
@@ -7051,8 +13274,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage class of destination, available values: <code>STANDARD</code>, <code>INTELLIGENT_TIERING</code>, <code>STANDARD_IA</code>. default is following current class of destination.</p>
-</dd><dt class="property-optional"
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_nodejs" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">Bucket<wbr>Replica<wbr>Rule<wbr>Filter</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -7060,8 +13290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a specific rule.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -7069,8 +13298,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</p>
-</dd></dl>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceselectioncriteria_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceselectioncriteria_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Selection<wbr>Criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7084,17 +13336,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="status_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_marker_replication_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_marker_replication_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>marker_<wbr>replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_encryption_kms_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_encryption_kms_key_id_python" style="color: inherit; text-decoration: inherit;">destination_<wbr>encryption_<wbr>kms_<wbr>key_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="destination_storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_storage_class_python" style="color: inherit; text-decoration: inherit;">destination_<wbr>storage_<wbr>class</a>
@@ -7102,8 +13360,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Storage class of destination, available values: <code>STANDARD</code>, <code>INTELLIGENT_TIERING</code>, <code>STANDARD_IA</code>. default is following current class of destination.</p>
-</dd><dt class="property-optional"
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_python" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">Bucket<wbr>Replica<wbr>Rule<wbr>Filter</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -7111,8 +13376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a specific rule.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -7120,8 +13384,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</p>
-</dd></dl>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_selection_criteria_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_selection_criteria_python" style="color: inherit; text-decoration: inherit;">source_<wbr>selection_<wbr>criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7135,17 +13422,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="status_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+    <dd>Destination bucket identifier, format: <code>qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;</code>. NOTE: destination bucket must enable versioning.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletemarkerreplication_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemarkerreplication_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Marker<wbr>Replication</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicaruledeletemarkerreplication">Property Map</a></span>
+    </dt>
+    <dd>Synchronized deletion marker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destinationencryptionkmskeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationencryptionkmskeyid_yaml" style="color: inherit; text-decoration: inherit;">destination<wbr>Encryption<wbr>Kms<wbr>Key<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field must be included when <code>source_selection_criteria.sse_kms_encrypted_objects.status</code> is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationstorageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationstorageclass_yaml" style="color: inherit; text-decoration: inherit;">destination<wbr>Storage<wbr>Class</a>
@@ -7153,8 +13446,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage class of destination, available values: <code>STANDARD</code>, <code>INTELLIGENT_TIERING</code>, <code>STANDARD_IA</code>. default is following current class of destination.</p>
-</dd><dt class="property-optional"
+    <dd>Storage class of destination, available values: <code>Standard</code>, <code>Intelligent_Tiering</code>, <code>Standard_IA</code>. default is following current class of destination.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_yaml" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilter">Property Map</a></span>
+    </dt>
+    <dd>Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -7162,8 +13462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a specific rule.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a specific rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -7171,43 +13470,49 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</p>
-</dd></dl>
+    <dd>Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceselectioncriteria_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceselectioncriteria_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Selection<wbr>Criteria</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteria">Property Map</a></span>
+    </dt>
+    <dd>This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Status identifier, available values: <code>Enabled</code>, <code>Disabled</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketwebsite">Bucket<wbr>Website</h4>
+<h4 id="bucketreplicaruledeletemarkerreplication">
+Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Delete<wbr>Marker<wbr>Replication<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
-        <span id="endpoint_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_csharp" style="color: inherit; text-decoration: inherit;">Endpoint</a>
+        <span id="status_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> of the static website.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="errordocument_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="indexdocument_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7215,32 +13520,27 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
-        <span id="endpoint_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_go" style="color: inherit; text-decoration: inherit;">Endpoint</a>
+        <span id="status_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> of the static website.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
-        <span id="errordocument_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Document</a>
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="indexdocument_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7248,32 +13548,13 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
-        <span id="endpoint_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_java" style="color: inherit; text-decoration: inherit;">endpoint</a>
+        <span id="status_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>Endpoint</code> of the static website.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="errordocument_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_java" style="color: inherit; text-decoration: inherit;">error<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="indexdocument_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_java" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7281,32 +13562,13 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
-        <span id="endpoint_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_nodejs" style="color: inherit; text-decoration: inherit;">endpoint</a>
+        <span id="status_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> of the static website.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="errordocument_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="indexdocument_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7314,32 +13576,13 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
-        <span id="endpoint_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_python" style="color: inherit; text-decoration: inherit;">endpoint</a>
+        <span id="status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>Endpoint</code> of the static website.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="error_document_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_document_python" style="color: inherit; text-decoration: inherit;">error_<wbr>document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="index_document_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_document_python" style="color: inherit; text-decoration: inherit;">index_<wbr>document</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7347,14 +13590,1089 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="status_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketreplicarulefilter">
+Bucket<wbr>Replica<wbr>Rule<wbr>Filter<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_csharp" style="color: inherit; text-decoration: inherit;">And</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_go" style="color: inherit; text-decoration: inherit;">And</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_hcl" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">object</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_java" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_nodejs" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and__python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and__python" style="color: inherit; text-decoration: inherit;">and_</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="and_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#and_yaml" style="color: inherit; text-decoration: inherit;">and</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterand">Property Map</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an <code>And</code> statement.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketreplicarulefilterand">
+Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">[]Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">list(object)</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">List&lt;Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag[]</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">Sequence[Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag]</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Filter objects by prefix; you can specify at most one prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulefilterandtag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the <code>delete_marker_replication.status</code> option must be set to false.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketreplicarulefilterandtag">
+Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Filter<wbr>And<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketreplicarulesourceselectioncriteria">
+Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ssekmsencryptedobjects_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssekmsencryptedobjects_csharp" style="color: inherit; text-decoration: inherit;">Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ssekmsencryptedobjects_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssekmsencryptedobjects_go" style="color: inherit; text-decoration: inherit;">Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="sse_kms_encrypted_objects_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sse_kms_encrypted_objects_hcl" style="color: inherit; text-decoration: inherit;">sse_<wbr>kms_<wbr>encrypted_<wbr>objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">object</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ssekmsencryptedobjects_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssekmsencryptedobjects_java" style="color: inherit; text-decoration: inherit;">sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ssekmsencryptedobjects_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssekmsencryptedobjects_nodejs" style="color: inherit; text-decoration: inherit;">sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="sse_kms_encrypted_objects_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sse_kms_encrypted_objects_python" style="color: inherit; text-decoration: inherit;">sse_<wbr>kms_<wbr>encrypted_<wbr>objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ssekmsencryptedobjects_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssekmsencryptedobjects_yaml" style="color: inherit; text-decoration: inherit;">sse<wbr>Kms<wbr>Encrypted<wbr>Objects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">Property Map</a></span>
+    </dt>
+    <dd>Choose whether to copy the KMS-encrypted objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketreplicarulesourceselectioncriteriassekmsencryptedobjects">
+Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Replica<wbr>Rule<wbr>Source<wbr>Selection<wbr>Criteria<wbr>Sse<wbr>Kms<wbr>Encrypted<wbr>Objects<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="status_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketwebsite">
+Bucket<wbr>Website<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Website<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_csharp" style="color: inherit; text-decoration: inherit;">Charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endpoint_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_csharp" style="color: inherit; text-decoration: inherit;">Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="errordocument_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="indexdocument_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="originalhttpstatus_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalhttpstatus_csharp" style="color: inherit; text-decoration: inherit;">Original<wbr>Http<wbr>Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectallrequeststo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectallrequeststo_csharp" style="color: inherit; text-decoration: inherit;">Redirect<wbr>All<wbr>Requests<wbr>To</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routingrules_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routingrules_csharp" style="color: inherit; text-decoration: inherit;">Routing<wbr>Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Website<wbr>Routing<wbr>Rules</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_go" style="color: inherit; text-decoration: inherit;">Charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endpoint_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_go" style="color: inherit; text-decoration: inherit;">Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="errordocument_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="indexdocument_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="originalhttpstatus_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalhttpstatus_go" style="color: inherit; text-decoration: inherit;">Original<wbr>Http<wbr>Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectallrequeststo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectallrequeststo_go" style="color: inherit; text-decoration: inherit;">Redirect<wbr>All<wbr>Requests<wbr>To</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routingrules_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routingrules_go" style="color: inherit; text-decoration: inherit;">Routing<wbr>Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">Bucket<wbr>Website<wbr>Routing<wbr>Rules</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_hcl" style="color: inherit; text-decoration: inherit;">charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_hcl" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="error_document_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_document_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="index_document_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_document_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="original_http_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_http_status_hcl" style="color: inherit; text-decoration: inherit;">original_<wbr>http_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_all_requests_to_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_all_requests_to_hcl" style="color: inherit; text-decoration: inherit;">redirect_<wbr>all_<wbr>requests_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routing_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routing_rules_hcl" style="color: inherit; text-decoration: inherit;">routing_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">object</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_java" style="color: inherit; text-decoration: inherit;">charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endpoint_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_java" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="errordocument_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_java" style="color: inherit; text-decoration: inherit;">error<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="indexdocument_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_java" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="originalhttpstatus_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalhttpstatus_java" style="color: inherit; text-decoration: inherit;">original<wbr>Http<wbr>Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectallrequeststo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectallrequeststo_java" style="color: inherit; text-decoration: inherit;">redirect<wbr>All<wbr>Requests<wbr>To</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routingrules_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routingrules_java" style="color: inherit; text-decoration: inherit;">routing<wbr>Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">Bucket<wbr>Website<wbr>Routing<wbr>Rules</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_nodejs" style="color: inherit; text-decoration: inherit;">charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endpoint_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_nodejs" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="errordocument_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="indexdocument_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="originalhttpstatus_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalhttpstatus_nodejs" style="color: inherit; text-decoration: inherit;">original<wbr>Http<wbr>Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectallrequeststo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectallrequeststo_nodejs" style="color: inherit; text-decoration: inherit;">redirect<wbr>All<wbr>Requests<wbr>To</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routingrules_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routingrules_nodejs" style="color: inherit; text-decoration: inherit;">routing<wbr>Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">Bucket<wbr>Website<wbr>Routing<wbr>Rules</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_python" style="color: inherit; text-decoration: inherit;">charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endpoint_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_python" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="error_document_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_document_python" style="color: inherit; text-decoration: inherit;">error_<wbr>document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="index_document_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_document_python" style="color: inherit; text-decoration: inherit;">index_<wbr>document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="original_http_status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_http_status_python" style="color: inherit; text-decoration: inherit;">original_<wbr>http_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_all_requests_to_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_all_requests_to_python" style="color: inherit; text-decoration: inherit;">redirect_<wbr>all_<wbr>requests_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routing_rules_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routing_rules_python" style="color: inherit; text-decoration: inherit;">routing_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">Bucket<wbr>Website<wbr>Routing<wbr>Rules</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charity404_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charity404_yaml" style="color: inherit; text-decoration: inherit;">charity404</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>To configure whether to display the 404 public welfare page when the error code is 404, the optional values are <code>Enabled</code> or <code>Disabled</code>, with the default set to <code>Disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
         <span id="endpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_yaml" style="color: inherit; text-decoration: inherit;">endpoint</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>Endpoint</code> of the static website.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> of the static website.</dd><dt class="property-optional"
             title="Optional">
         <span id="errordocument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errordocument_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Document</a>
@@ -7362,8 +14680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An absolute path to the document to return in case of a 4XX error.</p>
-</dd><dt class="property-optional"
+    <dd>An absolute path to the document to return in case of a 4XX error.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexdocument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocument_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Document</a>
@@ -7371,8 +14688,459 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS returns this index document when requests are made to the root domain or any of the subfolders.</p>
-</dd></dl>
+    <dd>COS returns this index document when requests are made to the root domain or any of the subfolders.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="originalhttpstatus_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalhttpstatus_yaml" style="color: inherit; text-decoration: inherit;">original<wbr>Http<wbr>Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HTTP status code for configuring hit error documents, with optional values of <code>Enabled</code> or <code>Disabled</code>, defaulting to <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectallrequeststo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectallrequeststo_yaml" style="color: inherit; text-decoration: inherit;">redirect<wbr>All<wbr>Requests<wbr>To</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Redirects all request configurations. Valid values: http, https. Default is <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routingrules_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routingrules_yaml" style="color: inherit; text-decoration: inherit;">routing<wbr>Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrules">Property Map</a></span>
+    </dt>
+    <dd>Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketwebsiteroutingrules">
+Bucket<wbr>Website<wbr>Routing<wbr>Rules<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_csharp" style="color: inherit; text-decoration: inherit;">Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule&gt;</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_go" style="color: inherit; text-decoration: inherit;">Rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">[]Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_hcl" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">list(object)</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_java" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">List&lt;Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule&gt;</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_nodejs" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule[]</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_python" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">Sequence[Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule]</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rules_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_yaml" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketwebsiteroutingrulesrule">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Routing rule list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="bucketwebsiteroutingrulesrule">
+Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Website<wbr>Routing<wbr>Rules<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditionerrorcode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionerrorcode_csharp" style="color: inherit; text-decoration: inherit;">Condition<wbr>Error<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionprefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionprefix_csharp" style="color: inherit; text-decoration: inherit;">Condition<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectprotocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectprotocol_csharp" style="color: inherit; text-decoration: inherit;">Redirect<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekey_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekey_csharp" style="color: inherit; text-decoration: inherit;">Redirect<wbr>Replace<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekeyprefix_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekeyprefix_csharp" style="color: inherit; text-decoration: inherit;">Redirect<wbr>Replace<wbr>Key<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditionerrorcode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionerrorcode_go" style="color: inherit; text-decoration: inherit;">Condition<wbr>Error<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionprefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionprefix_go" style="color: inherit; text-decoration: inherit;">Condition<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectprotocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectprotocol_go" style="color: inherit; text-decoration: inherit;">Redirect<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekey_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekey_go" style="color: inherit; text-decoration: inherit;">Redirect<wbr>Replace<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekeyprefix_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekeyprefix_go" style="color: inherit; text-decoration: inherit;">Redirect<wbr>Replace<wbr>Key<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="condition_error_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_error_code_hcl" style="color: inherit; text-decoration: inherit;">condition_<wbr>error_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_prefix_hcl" style="color: inherit; text-decoration: inherit;">condition_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_protocol_hcl" style="color: inherit; text-decoration: inherit;">redirect_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_replace_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_replace_key_hcl" style="color: inherit; text-decoration: inherit;">redirect_<wbr>replace_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_replace_key_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_replace_key_prefix_hcl" style="color: inherit; text-decoration: inherit;">redirect_<wbr>replace_<wbr>key_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditionerrorcode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionerrorcode_java" style="color: inherit; text-decoration: inherit;">condition<wbr>Error<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionprefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionprefix_java" style="color: inherit; text-decoration: inherit;">condition<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectprotocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectprotocol_java" style="color: inherit; text-decoration: inherit;">redirect<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekey_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekey_java" style="color: inherit; text-decoration: inherit;">redirect<wbr>Replace<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekeyprefix_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekeyprefix_java" style="color: inherit; text-decoration: inherit;">redirect<wbr>Replace<wbr>Key<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditionerrorcode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionerrorcode_nodejs" style="color: inherit; text-decoration: inherit;">condition<wbr>Error<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionprefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionprefix_nodejs" style="color: inherit; text-decoration: inherit;">condition<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectprotocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectprotocol_nodejs" style="color: inherit; text-decoration: inherit;">redirect<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekey_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekey_nodejs" style="color: inherit; text-decoration: inherit;">redirect<wbr>Replace<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekeyprefix_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekeyprefix_nodejs" style="color: inherit; text-decoration: inherit;">redirect<wbr>Replace<wbr>Key<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="condition_error_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_error_code_python" style="color: inherit; text-decoration: inherit;">condition_<wbr>error_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_prefix_python" style="color: inherit; text-decoration: inherit;">condition_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_protocol_python" style="color: inherit; text-decoration: inherit;">redirect_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_replace_key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_replace_key_python" style="color: inherit; text-decoration: inherit;">redirect_<wbr>replace_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirect_replace_key_prefix_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirect_replace_key_prefix_python" style="color: inherit; text-decoration: inherit;">redirect_<wbr>replace_<wbr>key_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditionerrorcode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionerrorcode_yaml" style="color: inherit; text-decoration: inherit;">condition<wbr>Error<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the error code as the match condition for the routing rule. Valid values: only 4xx return codes, such as 403 or 404.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionprefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionprefix_yaml" style="color: inherit; text-decoration: inherit;">condition<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the object key prefix as the match condition for the routing rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectprotocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectprotocol_yaml" style="color: inherit; text-decoration: inherit;">redirect<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the target protocol for the routing rule. Only HTTPS is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekey_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekey_yaml" style="color: inherit; text-decoration: inherit;">redirect<wbr>Replace<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the target object key to replace the original object key in the request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redirectreplacekeyprefix_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redirectreplacekeyprefix_yaml" style="color: inherit; text-decoration: inherit;">redirect<wbr>Replace<wbr>Key<wbr>Prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the object key prefix to replace the original prefix in the request. You can set this parameter only if the condition is KeyPrefixEquals.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7388,6 +15156,9 @@ $ pulumi import tencentcloud:Cos/bucket:Bucket bucket bucket-name
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -7397,7 +15168,6 @@ $ pulumi import tencentcloud:Cos/bucket:Bucket bucket bucket-name
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

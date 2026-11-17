@@ -2,9 +2,11 @@
 ---
 title: "BucketDomainCertificateAttachment"
 title_tag: "tencentcloud.Cos.BucketDomainCertificateAttachment"
-meta_desc: "Documentation for the tencentcloud.Cos.BucketDomainCertificateAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to attach/detach the corresponding certificate for the domain name in specified cos bucket. NOTE: The current resource does not."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,93 +16,138 @@ no_edit_this_page: true
 
 Provides a resource to attach/detach the corresponding certificate for the domain name in specified cos bucket.
 
+> **NOTE:** The current resource does not support cdc.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Use certId
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.cos.BucketDomainCertificateAttachment("foo", {
-    bucket: "",
+const config = new pulumi.Config();
+const customOriginDomain = config.get("customOriginDomain") || "tf.example.com";
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `private-bucket-${appId}`),
+    acl: "private",
+    forceClean: true,
+    originDomainRules: [{
+        domain: customOriginDomain,
+        status: "ENABLED",
+        type: "REST",
+    }],
+});
+const exampleBucketDomainCertificateAttachment = new tencentcloud.cos.BucketDomainCertificateAttachment("example", {
+    bucket: example.id,
     domainCertificate: {
+        domain: customOriginDomain,
         certificate: {
             certType: "CustomCert",
             customCert: {
-                cert: "===CERTIFICATE===",
-                privateKey: "===PRIVATE_KEY===",
+                certId: "JG65alUy",
             },
         },
-        domain: "domain_name",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
+import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.cos.BucketDomainCertificateAttachment("foo",
-    bucket="",
-    domain_certificate=tencentcloud.cos.BucketDomainCertificateAttachmentDomainCertificateArgs(
-        certificate=tencentcloud.cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs(
-            cert_type="CustomCert",
-            custom_cert=tencentcloud.cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs(
-                cert="===CERTIFICATE===",
-                private_key="===PRIVATE_KEY===",
-            ),
-        ),
-        domain="domain_name",
-    ))
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Cos.BucketDomainCertificateAttachment("foo", new()
-    {
-        Bucket = "",
-        DomainCertificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateArgs
-        {
-            Certificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
-            {
-                CertType = "CustomCert",
-                CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
-                {
-                    Cert = "===CERTIFICATE===",
-                    PrivateKey = "===PRIVATE_KEY===",
-                },
+config = pulumi.Config()
+custom_origin_domain = config.get("customOriginDomain")
+if custom_origin_domain is None:
+    custom_origin_domain = "tf.example.com"
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"private-bucket-{app_id}",
+    acl="private",
+    force_clean=True,
+    origin_domain_rules=[{
+        "domain": custom_origin_domain,
+        "status": "ENABLED",
+        "type": "REST",
+    }])
+example_bucket_domain_certificate_attachment = tencentcloud.cos.BucketDomainCertificateAttachment("example",
+    bucket=example.id,
+    domain_certificate={
+        "domain": custom_origin_domain,
+        "certificate": {
+            "cert_type": "CustomCert",
+            "custom_cert": {
+                "cert_id": "JG65alUy",
             },
-            Domain = "domain_name",
         },
-    });
-
-});
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.NewBucketDomainCertificateAttachment(ctx, "foo", &Cos.BucketDomainCertificateAttachmentArgs{
-			Bucket: pulumi.String(""),
+		cfg := config.New(ctx, "")
+		customOriginDomain := "tf.example.com"
+		if param := cfg.Get("customOriginDomain"); param != "" {
+			customOriginDomain = param
+		}
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		example, err := cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket:     pulumi.Sprintf("private-bucket-%v", appId),
+			Acl:        pulumi.String("private"),
+			ForceClean: pulumi.Bool(true),
+			OriginDomainRules: cos.BucketOriginDomainRuleArray{
+				&cos.BucketOriginDomainRuleArgs{
+					Domain: pulumi.String(customOriginDomain),
+					Status: pulumi.String("ENABLED"),
+					Type:   pulumi.String("REST"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cos.NewBucketDomainCertificateAttachment(ctx, "example", &cos.BucketDomainCertificateAttachmentArgs{
+			Bucket: example.ID().ToIDOutput().ToStringOutput(),
 			DomainCertificate: &cos.BucketDomainCertificateAttachmentDomainCertificateArgs{
+				Domain: pulumi.String(customOriginDomain),
 				Certificate: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{
 					CertType: pulumi.String("CustomCert"),
 					CustomCert: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{
-						Cert:       pulumi.String("===CERTIFICATE==="),
-						PrivateKey: pulumi.String("===PRIVATE_KEY==="),
+						CertId: pulumi.String("JG65alUy"),
 					},
 				},
-				Domain: pulumi.String("domain_name"),
 			},
 		})
 		if err != nil {
@@ -110,19 +157,83 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var customOriginDomain = config.Get("customOriginDomain") ?? "tf.example.com";
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
+    {
+        CosBucket = appId.Apply(appId => $"private-bucket-{appId}"),
+        Acl = "private",
+        ForceClean = true,
+        OriginDomainRules = new[]
+        {
+            new Tencentcloud.Cos.Inputs.BucketOriginDomainRuleArgs
+            {
+                Domain = customOriginDomain,
+                Status = "ENABLED",
+                Type = "REST",
+            },
+        },
+    });
+
+    var exampleBucketDomainCertificateAttachment = new Tencentcloud.Cos.BucketDomainCertificateAttachment("example", new()
+    {
+        Bucket = example.Id,
+        DomainCertificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateArgs
+        {
+            Domain = customOriginDomain,
+            Certificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
+            {
+                CertType = "CustomCert",
+                CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
+                {
+                    CertId = "JG65alUy",
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketOriginDomainRuleArgs;
 import com.pulumi.tencentcloud.Cos.BucketDomainCertificateAttachment;
 import com.pulumi.tencentcloud.Cos.BucketDomainCertificateAttachmentArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketDomainCertificateAttachmentDomainCertificateArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -134,98 +245,508 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new BucketDomainCertificateAttachment("foo", BucketDomainCertificateAttachmentArgs.builder()        
-            .bucket("")
+        final var config = ctx.config();
+        final var customOriginDomain = config.get("customOriginDomain").orElse("tf.example.com");
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("private-bucket-%s", appId))
+            .acl("private")
+            .forceClean(true)
+            .originDomainRules(BucketOriginDomainRuleArgs.builder()
+                .domain(customOriginDomain)
+                .status("ENABLED")
+                .type("REST")
+                .build())
+            .build());
+
+        var exampleBucketDomainCertificateAttachment = new BucketDomainCertificateAttachment("exampleBucketDomainCertificateAttachment", BucketDomainCertificateAttachmentArgs.builder()
+            .bucket(example.id())
             .domainCertificate(BucketDomainCertificateAttachmentDomainCertificateArgs.builder()
+                .domain(customOriginDomain)
                 .certificate(BucketDomainCertificateAttachmentDomainCertificateCertificateArgs.builder()
                     .certType("CustomCert")
                     .customCert(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs.builder()
-                        .cert("===CERTIFICATE===")
-                        .privateKey("===PRIVATE_KEY===")
+                        .certId("JG65alUy")
                         .build())
                     .build())
-                .domain("domain_name")
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  customOriginDomain:
+    type: string
+    default: tf.example.com
 resources:
-  foo:
-    type: tencentcloud:Cos:BucketDomainCertificateAttachment
+  example:
+    type: tencentcloud:Cos:Bucket
     properties:
-      bucket:
+      bucket: private-bucket-${appId}
+      acl: private
+      forceClean: true
+      originDomainRules:
+        - domain: ${customOriginDomain}
+          status: ENABLED
+          type: REST
+  exampleBucketDomainCertificateAttachment:
+    type: tencentcloud:Cos:BucketDomainCertificateAttachment
+    name: example
+    properties:
+      bucket: ${example.id}
       domainCertificate:
+        domain: ${customOriginDomain}
         certificate:
           certType: CustomCert
           customCert:
-            cert: ===CERTIFICATE===
-            privateKey: ===PRIVATE_KEY===
-        domain: domain_name
+            certId: JG65alUy
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket      ="private-bucket-${local.appId}"
+  acl         = "private"
+  force_clean = true
+  origin_domain_rules {
+    domain = var.customOriginDomain
+    status = "ENABLED"
+    type   = "REST"
+  }
+}
+resource "tencentcloud_cos_bucketdomaincertificateattachment" "example" {
+  bucket = tencentcloud_cos_bucket.example.id
+  domain_certificate = {
+    domain = var.customOriginDomain
+    certificate = {
+      cert_type = "CustomCert"
+      custom_cert = {
+        cert_id = "JG65alUy"
+      }
+    }
+  }
+}
+variable "customOriginDomain" {
+  type    = string
+  default = "tf.example.com"
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Use cert and key
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cos.BucketDomainCertificateAttachment("example", {
+    bucket: exampleTencentcloudCosBucket.id,
+    domainCertificate: {
+        domain: customOriginDomain,
+        certificate: {
+            certType: "CustomCert",
+            customCert: {
+                cert: `-----BEGIN CERTIFICATE-----
+MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+***
+***
+***
+ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+gJE=
+-----END CERTIFICATE-----
+`,
+                privateKey: `-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+***
+***
+***
+Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
+-----END RSA PRIVATE KEY-----
+`,
+            },
+        },
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cos.BucketDomainCertificateAttachment("example",
+    bucket=example_tencentcloud_cos_bucket["id"],
+    domain_certificate={
+        "domain": custom_origin_domain,
+        "certificate": {
+            "cert_type": "CustomCert",
+            "custom_cert": {
+                "cert": """-----BEGIN CERTIFICATE-----
+MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+***
+***
+***
+ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+gJE=
+-----END CERTIFICATE-----
+""",
+                "private_key": """-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+***
+***
+***
+Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
+-----END RSA PRIVATE KEY-----
+""",
+            },
+        },
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.NewBucketDomainCertificateAttachment(ctx, "example", &cos.BucketDomainCertificateAttachmentArgs{
+			Bucket: pulumi.Any(exampleTencentcloudCosBucket.Id),
+			DomainCertificate: &cos.BucketDomainCertificateAttachmentDomainCertificateArgs{
+				Domain: pulumi.Any(customOriginDomain),
+				Certificate: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{
+					CertType: pulumi.String("CustomCert"),
+					CustomCert: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{
+						Cert: pulumi.String(`-----BEGIN CERTIFICATE-----
+MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+***
+***
+***
+ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+gJE=
+-----END CERTIFICATE-----
+`),
+						PrivateKey: pulumi.String(`-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+***
+***
+***
+Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
+-----END RSA PRIVATE KEY-----
+`),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cos.BucketDomainCertificateAttachment("example", new()
+    {
+        Bucket = exampleTencentcloudCosBucket.Id,
+        DomainCertificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateArgs
+        {
+            Domain = customOriginDomain,
+            Certificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
+            {
+                CertType = "CustomCert",
+                CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
+                {
+                    Cert = @"-----BEGIN CERTIFICATE-----
+MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+***
+***
+***
+ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+gJE=
+-----END CERTIFICATE-----
+",
+                    PrivateKey = @"-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+***
+***
+***
+Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
+-----END RSA PRIVATE KEY-----
+",
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cos.BucketDomainCertificateAttachment;
+import com.pulumi.tencentcloud.Cos.BucketDomainCertificateAttachmentArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketDomainCertificateAttachmentDomainCertificateArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs;
+import com.pulumi.tencentcloud.Cos.inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new BucketDomainCertificateAttachment("example", BucketDomainCertificateAttachmentArgs.builder()
+            .bucket(exampleTencentcloudCosBucket.id())
+            .domainCertificate(BucketDomainCertificateAttachmentDomainCertificateArgs.builder()
+                .domain(customOriginDomain)
+                .certificate(BucketDomainCertificateAttachmentDomainCertificateCertificateArgs.builder()
+                    .certType("CustomCert")
+                    .customCert(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs.builder()
+                        .cert("""
+-----BEGIN CERTIFICATE-----
+MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+***
+***
+***
+ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+gJE=
+-----END CERTIFICATE-----
+                        """)
+                        .privateKey("""
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+***
+***
+***
+Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
+-----END RSA PRIVATE KEY-----
+                        """)
+                        .build())
+                    .build())
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cos:BucketDomainCertificateAttachment
+    properties:
+      bucket: ${exampleTencentcloudCosBucket.id}
+      domainCertificate:
+        domain: ${customOriginDomain}
+        certificate:
+          certType: CustomCert
+          customCert:
+            cert: |
+              -----BEGIN CERTIFICATE-----
+              MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+              ***
+              ***
+              ***
+              ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+              gJE=
+              -----END CERTIFICATE-----
+            privateKey: |
+              -----BEGIN RSA PRIVATE KEY-----
+              MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+              ***
+              ***
+              ***
+              Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
+              -----END RSA PRIVATE KEY-----
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cos_bucketdomaincertificateattachment" "example" {
+  bucket = exampleTencentcloudCosBucket.id
+  domain_certificate = {
+    domain = customOriginDomain
+    certificate = {
+      cert_type = "CustomCert"
+      custom_cert = {
+        cert        = "-----BEGIN CERTIFICATE-----\nMIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb\n***\n***\n***\nynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC\ngJE=\n-----END CERTIFICATE-----\n"
+        private_key = "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM\n***\n***\n***\nZ8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==\n-----END RSA PRIVATE KEY-----\n"
+      }
+    }
+  }
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
 
 ## Create BucketDomainCertificateAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p">,</span>
+                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                                       <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                                      <span class="nx">domain_certificate</span><span class="p">:</span> <span class="nx">Optional[_cos.BucketDomainCertificateAttachmentDomainCertificateArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p">,</span>
-                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                                      <span class="nx">domain_certificate</span><span class="p">:</span> <span class="nx">Optional[BucketDomainCertificateAttachmentDomainCertificateArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketDomainCertificateAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketDomainCertificateAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">BucketDomainCertificateAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketDomainCertificateAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:BucketDomainCertificateAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:BucketDomainCertificateAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cos_bucket_domain_certificate_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -246,7 +767,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -363,11 +884,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## BucketDomainCertificateAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The BucketDomainCertificateAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -383,17 +912,15 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domaincertificate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaincertificate_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Certificate</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -407,8 +934,7 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domaincertificate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaincertificate_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Certificate</a>
@@ -416,8 +942,29 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_certificate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_certificate_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>certificate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">object</a></span>
+    </dt>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,17 +978,15 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domaincertificate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaincertificate_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Certificate</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -455,17 +1000,15 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domaincertificate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaincertificate_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Certificate</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -479,8 +1022,7 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_certificate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_certificate_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>certificate</a>
@@ -488,8 +1030,7 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -503,8 +1044,7 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Bucket name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domaincertificate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaincertificate_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Certificate</a>
@@ -512,8 +1052,7 @@ The BucketDomainCertificateAttachment resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Property Map</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -534,8 +1073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -549,8 +1087,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -564,8 +1115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -579,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -594,8 +1143,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +1157,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -620,121 +1167,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing BucketDomainCertificateAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BucketDomainCertificateAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BucketDomainCertificateAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BucketDomainCertificateAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BucketDomainCertificateAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">domain_certificate</span><span class="p">:</span> <span class="nx">Optional[_cos.BucketDomainCertificateAttachmentDomainCertificateArgs]</span> = None<span class="p">) -&gt;</span> BucketDomainCertificateAttachment</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">domain_certificate</span><span class="p">:</span> <span class="nx">Optional[BucketDomainCertificateAttachmentDomainCertificateArgs]</span> = None<span class="p">) -&gt;</span> BucketDomainCertificateAttachment</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBucketDomainCertificateAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BucketDomainCertificateAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketDomainCertificateAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBucketDomainCertificateAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BucketDomainCertificateAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketDomainCertificateAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BucketDomainCertificateAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketDomainCertificateAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BucketDomainCertificateAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketDomainCertificateAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BucketDomainCertificateAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketDomainCertificateAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BucketDomainCertificateAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketDomainCertificateAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBucketDomainCertificateAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cos:BucketDomainCertificateAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cos_bucket_domain_certificate_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketDomainCertificateAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketDomainCertificateAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -742,28 +1328,31 @@ Get an existing BucketDomainCertificateAttachment resource's state with the give
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketDomainCertificateAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -771,28 +1360,31 @@ Get an existing BucketDomainCertificateAttachment resource's state with the give
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketDomainCertificateAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -812,17 +1404,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaincertificate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaincertificate_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Certificate</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -836,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaincertificate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaincertificate_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Certificate</a>
@@ -845,8 +1434,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_certificate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_certificate_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>certificate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">object</a></span>
+    </dt>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -860,17 +1470,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaincertificate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaincertificate_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Certificate</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -884,17 +1492,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaincertificate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaincertificate_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Certificate</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_certificate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_certificate_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>certificate</a>
@@ -917,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -932,8 +1536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bucket name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaincertificate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaincertificate_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Certificate</a>
@@ -941,8 +1544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificate">Property Map</a></span>
     </dt>
-    <dd><p>The certificate of specified doamin.</p>
-</dd></dl>
+    <dd>The certificate of specified doamin.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -957,11 +1559,13 @@ The following state arguments are supported:
 
 
 
-<h4 id="bucketdomaincertificateattachmentdomaincertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate</h4>
+<h4 id="bucketdomaincertificateattachmentdomaincertificate">
+Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certificate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_csharp" style="color: inherit; text-decoration: inherit;">Certificate</a>
@@ -969,8 +1573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate</a></span>
     </dt>
-    <dd><p>Certificate info.</p>
-</dd><dt class="property-required"
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -978,14 +1581,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of domain.</p>
-</dd></dl>
+    <dd>The name of domain.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certificate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_go" style="color: inherit; text-decoration: inherit;">Certificate</a>
@@ -993,8 +1595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate</a></span>
     </dt>
-    <dd><p>Certificate info.</p>
-</dd><dt class="property-required"
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1002,14 +1603,35 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of domain.</p>
-</dd></dl>
+    <dd>The name of domain.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="certificate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_hcl" style="color: inherit; text-decoration: inherit;">certificate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">object</a></span>
+    </dt>
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of domain.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certificate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_java" style="color: inherit; text-decoration: inherit;">certificate</a>
@@ -1017,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate</a></span>
     </dt>
-    <dd><p>Certificate info.</p>
-</dd><dt class="property-required"
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1026,14 +1647,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of domain.</p>
-</dd></dl>
+    <dd>The name of domain.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certificate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_nodejs" style="color: inherit; text-decoration: inherit;">certificate</a>
@@ -1041,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate</a></span>
     </dt>
-    <dd><p>Certificate info.</p>
-</dd><dt class="property-required"
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1050,14 +1669,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of domain.</p>
-</dd></dl>
+    <dd>The name of domain.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certificate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_python" style="color: inherit; text-decoration: inherit;">certificate</a>
@@ -1065,8 +1683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate</a></span>
     </dt>
-    <dd><p>Certificate info.</p>
-</dd><dt class="property-required"
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1074,14 +1691,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of domain.</p>
-</dd></dl>
+    <dd>The name of domain.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certificate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_yaml" style="color: inherit; text-decoration: inherit;">certificate</a>
@@ -1089,8 +1705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificate">Property Map</a></span>
     </dt>
-    <dd><p>Certificate info.</p>
-</dd><dt class="property-required"
+    <dd>Certificate info.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1098,16 +1713,17 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of domain.</p>
-</dd></dl>
+    <dd>The name of domain.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketdomaincertificateattachmentdomaincertificatecertificate">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate</h4>
+<h4 id="bucketdomaincertificateattachmentdomaincertificatecertificate">
+Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -1115,8 +1731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate type.</p>
-</dd><dt class="property-required"
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="customcert_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customcert_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Cert</a>
@@ -1124,14 +1739,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert</a></span>
     </dt>
-    <dd><p>Custom certificate.</p>
-</dd></dl>
+    <dd>Custom certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -1139,8 +1753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate type.</p>
-</dd><dt class="property-required"
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="customcert_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customcert_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Cert</a>
@@ -1148,14 +1761,35 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert</a></span>
     </dt>
-    <dd><p>Custom certificate.</p>
-</dd></dl>
+    <dd>Custom certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cert_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_type_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="custom_cert_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_cert_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>cert</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">object</a></span>
+    </dt>
+    <dd>Custom certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1163,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate type.</p>
-</dd><dt class="property-required"
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="customcert_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customcert_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Cert</a>
@@ -1172,14 +1805,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert</a></span>
     </dt>
-    <dd><p>Custom certificate.</p>
-</dd></dl>
+    <dd>Custom certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1187,8 +1819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate type.</p>
-</dd><dt class="property-required"
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="customcert_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customcert_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Cert</a>
@@ -1196,14 +1827,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert</a></span>
     </dt>
-    <dd><p>Custom certificate.</p>
-</dd></dl>
+    <dd>Custom certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="cert_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_type_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
@@ -1211,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate type.</p>
-</dd><dt class="property-required"
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="custom_cert_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_cert_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>cert</a>
@@ -1220,14 +1849,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert</a></span>
     </dt>
-    <dd><p>Custom certificate.</p>
-</dd></dl>
+    <dd>Custom certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="certtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1235,8 +1863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate type.</p>
-</dd><dt class="property-required"
+    <dd>Certificate type.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="customcert_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customcert_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Cert</a>
@@ -1244,154 +1871,221 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Property Map</a></span>
     </dt>
-    <dd><p>Custom certificate.</p>
-</dd></dl>
+    <dd>Custom certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert</h4>
+<h4 id="bucketdomaincertificateattachmentdomaincertificatecertificatecustomcert">
+Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert<pulumi-choosable type="language" values="python,go" class="inline">, Bucket<wbr>Domain<wbr>Certificate<wbr>Attachment<wbr>Domain<wbr>Certificate<wbr>Certificate<wbr>Custom<wbr>Cert<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="cert_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_csharp" style="color: inherit; text-decoration: inherit;">Cert</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public key of certificate.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="certid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="privatekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Key</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private key of certificate.</p>
-</dd></dl>
+    <dd>Private key of certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="cert_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_go" style="color: inherit; text-decoration: inherit;">Cert</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public key of certificate.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="certid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="privatekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Key</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private key of certificate.</p>
-</dd></dl>
+    <dd>Private key of certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="cert_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_hcl" style="color: inherit; text-decoration: inherit;">cert</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cert_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_id_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="private_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_key_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private key of certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="cert_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_java" style="color: inherit; text-decoration: inherit;">cert</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public key of certificate.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="certid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="privatekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_java" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private key of certificate.</p>
-</dd></dl>
+    <dd>Private key of certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="cert_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_nodejs" style="color: inherit; text-decoration: inherit;">cert</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public key of certificate.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="certid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="privatekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private key of certificate.</p>
-</dd></dl>
+    <dd>Private key of certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="cert_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_python" style="color: inherit; text-decoration: inherit;">cert</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public key of certificate.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cert_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_id_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="private_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_key_python" style="color: inherit; text-decoration: inherit;">private_<wbr>key</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private key of certificate.</p>
-</dd></dl>
+    <dd>Private key of certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
+<dl class="resources-properties"><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="cert_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_yaml" style="color: inherit; text-decoration: inherit;">cert</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public key of certificate.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>Public key of certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="certid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
         <span id="privatekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private key of certificate.</p>
-</dd></dl>
+    <dd>Private key of certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,7 +2097,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

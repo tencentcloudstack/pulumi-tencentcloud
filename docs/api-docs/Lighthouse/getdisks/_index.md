@@ -2,9 +2,11 @@
 ---
 title: "getDisks"
 title_tag: "tencentcloud.Lighthouse.getDisks"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.getDisks function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of lighthouse disk"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query detailed information of lighthouse disk
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const disks = tencentcloud.Lighthouse.getDisks({
+const disks = tencentcloud.lighthouse.getDisks({
     diskIds: ["lhdisk-xxxxxx"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-disks = tencentcloud.Lighthouse.get_disks(disk_ids=["lhdisk-xxxxxx"])
+disks = tencentcloud.lighthouse.get_disks(disk_ids=["lhdisk-xxxxxx"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := lighthouse.GetDisks(ctx, &lighthouse.GetDisksArgs{
+			DiskIds: []string{
+				"lhdisk-xxxxxx",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Lighthouse.GetDisks(ctx, &lighthouse.GetDisksArgs{
-			DiskIds: []string{
-				"lhdisk-xxxxxx",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Lighthouse.LighthouseFunctions;
 import com.pulumi.tencentcloud.Lighthouse.inputs.GetDisksArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   disks:
     fn::invoke:
-      Function: tencentcloud:Lighthouse:getDisks
-      Arguments:
+      function: tencentcloud:Lighthouse:getDisks
+      arguments:
         diskIds:
           - lhdisk-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_lighthouse_getdisks" "disks" {
+  disk_ids = ["lhdisk-xxxxxx"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDisks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDisksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>></span
+><span class="k">function </span>getDisks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDisksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>></span
 ><span class="k">
-function </span>getDisksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDisksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>></span
+function </span>getDisksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDisksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -141,14 +198,14 @@ function </span>getDisksOutput<span class="p">(</span><span class="nx">args</spa
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_disks<span class="p">(</span><span class="nx">disk_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-              <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_lighthouse.GetDisksFilter]]</span> = None<span class="p">,</span>
+              <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetDisksFilter]]</span> = None<span class="p">,</span>
               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDisksResult</span
 ><span class="k">
-def </span>get_disks_output<span class="p">(</span><span class="nx">disk_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-              <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_lighthouse.GetDisksFilterArgs]]]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDisksResult]</span
+def </span>get_disks_output<span class="p">(</span><span class="nx">disk_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+              <span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetDisksFilterArgs]]]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDisksResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +230,8 @@ func </span>GetDisksOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDisks </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDisksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDisksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDisksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDisksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +240,8 @@ func </span>GetDisksOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> </span>getDisks<span class="p">(</span><span class="nx">GetDisksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> </span>getDisks<span class="p">(</span><span class="nx">GetDisksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDisksResult</a></span>> </span>getDisks<span class="p">(</span><span class="nx">GetDisksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +253,15 @@ func </span>GetDisksOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Lighthouse/getDisks:getDisks
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_lighthouse_get_disks&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of disk ids.</p>
-</dd><dt class="property-optional"
+    <dd>List of disk ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -221,8 +288,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Get<wbr>Disks<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter list.</p>
-</dd><dt class="property-optional"
+    <dd>Filter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of disk ids.</p>
-</dd><dt class="property-optional"
+    <dd>List of disk ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -254,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksfilter">[]Get<wbr>Disks<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter list.</p>
-</dd><dt class="property-optional"
+    <dd>Filter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +326,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="disk_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_ids_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of disk ids.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdisksfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of disk ids.</p>
-</dd><dt class="property-optional"
+    <dd>List of disk ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -287,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksfilter">List&lt;Get<wbr>Disks<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter list.</p>
-</dd><dt class="property-optional"
+    <dd>Filter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of disk ids.</p>
-</dd><dt class="property-optional"
+    <dd>List of disk ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -320,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksfilter">Get<wbr>Disks<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter list.</p>
-</dd><dt class="property-optional"
+    <dd>Filter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,17 +430,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of disk ids.</p>
-</dd><dt class="property-optional"
+    <dd>List of disk ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdisksfilter">Get<wbr>Disks<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getdisksfilter">Sequence[Get<wbr>Disks<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter list.</p>
-</dd><dt class="property-optional"
+    <dd>Filter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of disk ids.</p>
-</dd><dt class="property-optional"
+    <dd>List of disk ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -386,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter list.</p>
-</dd><dt class="property-optional"
+    <dd>Filter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksdisklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Outputs.<wbr>Get<wbr>Disks<wbr>Disk<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Cloud disk information list.</p>
-</dd><dt class="property-"
+    <dd>Cloud disk information list.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -428,8 +507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="diskids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Ids</a>
@@ -467,8 +545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksdisklist">[]Get<wbr>Disks<wbr>Disk<wbr>List</a></span>
     </dt>
-    <dd><p>Cloud disk information list.</p>
-</dd><dt class="property-"
+    <dd>Cloud disk information list.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -476,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="diskids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Ids</a>
@@ -506,6 +582,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="disk_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_lists_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdisksdisklist">list(object)</a></span>
+    </dt>
+    <dd>Cloud disk information list.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="disk_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_ids_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdisksfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -515,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksdisklist">List&lt;Get<wbr>Disks<wbr>Disk<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Cloud disk information list.</p>
-</dd><dt class="property-"
+    <dd>Cloud disk information list.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -524,8 +645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="diskids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -563,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksdisklist">Get<wbr>Disks<wbr>Disk<wbr>List[]</a></span>
     </dt>
-    <dd><p>Cloud disk information list.</p>
-</dd><dt class="property-"
+    <dd>Cloud disk information list.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -572,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="diskids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -609,10 +727,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_lists_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdisksdisklist">Get<wbr>Disks<wbr>Disk<wbr>List]</a></span>
+        <span class="property-type"><a href="#getdisksdisklist">Sequence[Get<wbr>Disks<wbr>Disk<wbr>List]</a></span>
     </dt>
-    <dd><p>Cloud disk information list.</p>
-</dd><dt class="property-"
+    <dd>Cloud disk information list.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -620,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="disk_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_ids_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
@@ -635,7 +751,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdisksfilter">Get<wbr>Disks<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getdisksfilter">Sequence[Get<wbr>Disks<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -659,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdisksdisklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Cloud disk information list.</p>
-</dd><dt class="property-"
+    <dd>Cloud disk information list.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -668,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="diskids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -717,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disk attach state.</p>
-</dd><dt class="property-required"
+    <dd>Disk attach state.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -726,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>With<wbr>Instance</a>
@@ -735,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to release with the instance.</p>
-</dd><dt class="property-required"
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupcount_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Count</a>
@@ -744,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of existing backup points of cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupquota_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Quota</a>
@@ -753,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of backup points quota for cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Type</a>
@@ -762,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk charge type.</p>
-</dd><dt class="property-required"
+    <dd>Disk charge type.</dd><dt class="property-required"
             title="Required">
         <span id="diskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Id</a>
@@ -771,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk id.</p>
-</dd><dt class="property-required"
+    <dd>Disk id.</dd><dt class="property-required"
             title="Required">
         <span id="diskname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Name</a>
@@ -780,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name.</p>
-</dd><dt class="property-required"
+    <dd>Disk name.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -789,8 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size.</p>
-</dd><dt class="property-required"
+    <dd>Disk size.</dd><dt class="property-required"
             title="Required">
         <span id="diskstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskstate_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>State</a>
@@ -798,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -807,8 +911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type.</p>
-</dd><dt class="property-required"
+    <dd>Disk type.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
@@ -816,8 +919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk usage.</p>
-</dd><dt class="property-required"
+    <dd>Disk usage.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -825,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -834,8 +935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="isolatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_csharp" style="color: inherit; text-decoration: inherit;">Isolated<wbr>Time</a>
@@ -843,8 +943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperation_csharp" style="color: inherit; text-decoration: inherit;">Latest<wbr>Operation</a>
@@ -852,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationrequestid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationrequestid_csharp" style="color: inherit; text-decoration: inherit;">Latest<wbr>Operation<wbr>Request<wbr>Id</a>
@@ -861,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation request id.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation request id.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationstate_csharp" style="color: inherit; text-decoration: inherit;">Latest<wbr>Operation<wbr>State</a>
@@ -870,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation state.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation state.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -879,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Renew flag.</p>
-</dd><dt class="property-required"
+    <dd>Renew flag.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -888,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -903,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disk attach state.</p>
-</dd><dt class="property-required"
+    <dd>Disk attach state.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -912,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>With<wbr>Instance</a>
@@ -921,8 +1013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to release with the instance.</p>
-</dd><dt class="property-required"
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupcount_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Count</a>
@@ -930,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of existing backup points of cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupquota_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Quota</a>
@@ -939,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of backup points quota for cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Type</a>
@@ -948,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk charge type.</p>
-</dd><dt class="property-required"
+    <dd>Disk charge type.</dd><dt class="property-required"
             title="Required">
         <span id="diskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Id</a>
@@ -957,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk id.</p>
-</dd><dt class="property-required"
+    <dd>Disk id.</dd><dt class="property-required"
             title="Required">
         <span id="diskname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Name</a>
@@ -966,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name.</p>
-</dd><dt class="property-required"
+    <dd>Disk name.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -975,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size.</p>
-</dd><dt class="property-required"
+    <dd>Disk size.</dd><dt class="property-required"
             title="Required">
         <span id="diskstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskstate_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>State</a>
@@ -984,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -993,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type.</p>
-</dd><dt class="property-required"
+    <dd>Disk type.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
@@ -1002,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk usage.</p>
-</dd><dt class="property-required"
+    <dd>Disk usage.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1011,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1020,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="isolatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_go" style="color: inherit; text-decoration: inherit;">Isolated<wbr>Time</a>
@@ -1029,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperation_go" style="color: inherit; text-decoration: inherit;">Latest<wbr>Operation</a>
@@ -1038,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationrequestid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationrequestid_go" style="color: inherit; text-decoration: inherit;">Latest<wbr>Operation<wbr>Request<wbr>Id</a>
@@ -1047,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation request id.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation request id.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationstate_go" style="color: inherit; text-decoration: inherit;">Latest<wbr>Operation<wbr>State</a>
@@ -1056,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation state.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation state.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1065,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Renew flag.</p>
-</dd><dt class="property-required"
+    <dd>Renew flag.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1074,8 +1149,173 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="attached_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attached_hcl" style="color: inherit; text-decoration: inherit;">attached</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disk attach state.</dd><dt class="property-required"
+            title="Required">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="delete_with_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_backup_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_backup_count_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_backup_quota_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_backup_quota_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>quota</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk charge type.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_id_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk id.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_name_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk name.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_state_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk type.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk usage.</dd><dt class="property-required"
+            title="Required">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolated_time_hcl" style="color: inherit; text-decoration: inherit;">isolated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="latest_operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latest_operation_hcl" style="color: inherit; text-decoration: inherit;">latest_<wbr>operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Latest operation.</dd><dt class="property-required"
+            title="Required">
+        <span id="latest_operation_request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latest_operation_request_id_hcl" style="color: inherit; text-decoration: inherit;">latest_<wbr>operation_<wbr>request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Latest operation request id.</dd><dt class="property-required"
+            title="Required">
+        <span id="latest_operation_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latest_operation_state_hcl" style="color: inherit; text-decoration: inherit;">latest_<wbr>operation_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Latest operation state.</dd><dt class="property-required"
+            title="Required">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Renew flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1089,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disk attach state.</p>
-</dd><dt class="property-required"
+    <dd>Disk attach state.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1098,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_java" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -1107,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to release with the instance.</p>
-</dd><dt class="property-required"
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupcount_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Count</a>
@@ -1116,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of existing backup points of cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupquota_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -1125,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of backup points quota for cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
@@ -1134,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk charge type.</p>
-</dd><dt class="property-required"
+    <dd>Disk charge type.</dd><dt class="property-required"
             title="Required">
         <span id="diskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1143,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk id.</p>
-</dd><dt class="property-required"
+    <dd>Disk id.</dd><dt class="property-required"
             title="Required">
         <span id="diskname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -1152,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk name.</p>
-</dd><dt class="property-required"
+    <dd>Disk name.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1161,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size.</p>
-</dd><dt class="property-required"
+    <dd>Disk size.</dd><dt class="property-required"
             title="Required">
         <span id="diskstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskstate_java" style="color: inherit; text-decoration: inherit;">disk<wbr>State</a>
@@ -1170,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1179,8 +1409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type.</p>
-</dd><dt class="property-required"
+    <dd>Disk type.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -1188,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk usage.</p>
-</dd><dt class="property-required"
+    <dd>Disk usage.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1197,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1206,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="isolatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_java" style="color: inherit; text-decoration: inherit;">isolated<wbr>Time</a>
@@ -1215,8 +1441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperation_java" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation</a>
@@ -1224,8 +1449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest operation.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationrequestid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationrequestid_java" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation<wbr>Request<wbr>Id</a>
@@ -1233,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest operation request id.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation request id.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationstate_java" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation<wbr>State</a>
@@ -1242,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest operation state.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation state.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1251,8 +1473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Renew flag.</p>
-</dd><dt class="property-required"
+    <dd>Renew flag.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1260,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1275,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disk attach state.</p>
-</dd><dt class="property-required"
+    <dd>Disk attach state.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1284,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -1293,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to release with the instance.</p>
-</dd><dt class="property-required"
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupcount_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Count</a>
@@ -1302,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of existing backup points of cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupquota_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -1311,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of backup points quota for cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
@@ -1320,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk charge type.</p>
-</dd><dt class="property-required"
+    <dd>Disk charge type.</dd><dt class="property-required"
             title="Required">
         <span id="diskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1329,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk id.</p>
-</dd><dt class="property-required"
+    <dd>Disk id.</dd><dt class="property-required"
             title="Required">
         <span id="diskname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -1338,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name.</p>
-</dd><dt class="property-required"
+    <dd>Disk name.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1347,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size.</p>
-</dd><dt class="property-required"
+    <dd>Disk size.</dd><dt class="property-required"
             title="Required">
         <span id="diskstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskstate_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>State</a>
@@ -1356,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1365,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type.</p>
-</dd><dt class="property-required"
+    <dd>Disk type.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -1374,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk usage.</p>
-</dd><dt class="property-required"
+    <dd>Disk usage.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1383,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1392,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="isolatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_nodejs" style="color: inherit; text-decoration: inherit;">isolated<wbr>Time</a>
@@ -1401,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperation_nodejs" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation</a>
@@ -1410,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationrequestid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationrequestid_nodejs" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation<wbr>Request<wbr>Id</a>
@@ -1419,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation request id.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation request id.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationstate_nodejs" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation<wbr>State</a>
@@ -1428,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest operation state.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation state.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1437,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Renew flag.</p>
-</dd><dt class="property-required"
+    <dd>Renew flag.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1446,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1461,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disk attach state.</p>
-</dd><dt class="property-required"
+    <dd>Disk attach state.</dd><dt class="property-required"
             title="Required">
         <span id="created_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
@@ -1470,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="delete_with_instance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
@@ -1479,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to release with the instance.</p>
-</dd><dt class="property-required"
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
             title="Required">
         <span id="disk_backup_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_backup_count_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>count</a>
@@ -1488,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of existing backup points of cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="disk_backup_quota_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_backup_quota_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>quota</a>
@@ -1497,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of backup points quota for cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="disk_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>type</a>
@@ -1506,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk charge type.</p>
-</dd><dt class="property-required"
+    <dd>Disk charge type.</dd><dt class="property-required"
             title="Required">
         <span id="disk_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_id_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>id</a>
@@ -1515,8 +1709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk id.</p>
-</dd><dt class="property-required"
+    <dd>Disk id.</dd><dt class="property-required"
             title="Required">
         <span id="disk_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_name_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>name</a>
@@ -1524,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk name.</p>
-</dd><dt class="property-required"
+    <dd>Disk name.</dd><dt class="property-required"
             title="Required">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -1533,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size.</p>
-</dd><dt class="property-required"
+    <dd>Disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disk_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_state_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>state</a>
@@ -1542,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -1551,8 +1741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk type.</p>
-</dd><dt class="property-required"
+    <dd>Disk type.</dd><dt class="property-required"
             title="Required">
         <span id="disk_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
@@ -1560,8 +1749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk usage.</p>
-</dd><dt class="property-required"
+    <dd>Disk usage.</dd><dt class="property-required"
             title="Required">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -1569,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1578,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="isolated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolated_time_python" style="color: inherit; text-decoration: inherit;">isolated_<wbr>time</a>
@@ -1587,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="latest_operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latest_operation_python" style="color: inherit; text-decoration: inherit;">latest_<wbr>operation</a>
@@ -1596,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Latest operation.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation.</dd><dt class="property-required"
             title="Required">
         <span id="latest_operation_request_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latest_operation_request_id_python" style="color: inherit; text-decoration: inherit;">latest_<wbr>operation_<wbr>request_<wbr>id</a>
@@ -1605,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Latest operation request id.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation request id.</dd><dt class="property-required"
             title="Required">
         <span id="latest_operation_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latest_operation_state_python" style="color: inherit; text-decoration: inherit;">latest_<wbr>operation_<wbr>state</a>
@@ -1614,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Latest operation state.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation state.</dd><dt class="property-required"
             title="Required">
         <span id="renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -1623,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Renew flag.</p>
-</dd><dt class="property-required"
+    <dd>Renew flag.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1632,8 +1813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1647,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disk attach state.</p>
-</dd><dt class="property-required"
+    <dd>Disk attach state.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1656,8 +1835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -1665,8 +1843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to release with the instance.</p>
-</dd><dt class="property-required"
+    <dd>Whether to release with the instance.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupcount_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Count</a>
@@ -1674,8 +1851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of existing backup points of cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of existing backup points of cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskbackupquota_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -1683,8 +1859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of backup points quota for cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>Number of backup points quota for cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="diskchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
@@ -1692,8 +1867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk charge type.</p>
-</dd><dt class="property-required"
+    <dd>Disk charge type.</dd><dt class="property-required"
             title="Required">
         <span id="diskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1701,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk id.</p>
-</dd><dt class="property-required"
+    <dd>Disk id.</dd><dt class="property-required"
             title="Required">
         <span id="diskname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -1710,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk name.</p>
-</dd><dt class="property-required"
+    <dd>Disk name.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1719,8 +1891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size.</p>
-</dd><dt class="property-required"
+    <dd>Disk size.</dd><dt class="property-required"
             title="Required">
         <span id="diskstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskstate_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>State</a>
@@ -1728,8 +1899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Disk state. Valid values:<code>PENDING</code>, <code>UNATTACHED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>SHUTDOWN</code>, <code>CREATED_FAILED</code>, <code>TERMINATING</code>, <code>DELETING</code>, <code>FREEZING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1737,8 +1907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type.</p>
-</dd><dt class="property-required"
+    <dd>Disk type.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -1746,8 +1915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk usage.</p>
-</dd><dt class="property-required"
+    <dd>Disk usage.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1755,8 +1923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1764,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="isolatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_yaml" style="color: inherit; text-decoration: inherit;">isolated<wbr>Time</a>
@@ -1773,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</p>
-</dd><dt class="property-required"
+    <dd>Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperation_yaml" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation</a>
@@ -1782,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest operation.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationrequestid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationrequestid_yaml" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation<wbr>Request<wbr>Id</a>
@@ -1791,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest operation request id.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation request id.</dd><dt class="property-required"
             title="Required">
         <span id="latestoperationstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latestoperationstate_yaml" style="color: inherit; text-decoration: inherit;">latest<wbr>Operation<wbr>State</a>
@@ -1800,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest operation state.</p>
-</dd><dt class="property-required"
+    <dd>Latest operation state.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1809,8 +1971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Renew flag.</p>
-</dd><dt class="property-required"
+    <dd>Renew flag.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1818,8 +1979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1837,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1846,8 +2005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1861,8 +2019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1870,8 +2027,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1885,8 +2063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1894,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1909,8 +2085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1918,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1933,8 +2107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1942,8 +2115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1957,8 +2129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>disk-id</code>: Filters by disk id; <code>instance-id</code>: Filter by instance id; <code>disk-name</code>: Filter by disk name; <code>zone</code>: Filter by zone; <code>disk-usage</code>: Filter by disk usage(Values: <code>SYSTEM_DISK</code> or <code>DATA_DISK</code>); <code>disk-state</code>: Filter by disk state.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1966,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1982,7 +2152,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

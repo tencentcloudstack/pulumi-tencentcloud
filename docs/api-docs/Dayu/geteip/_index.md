@@ -2,9 +2,11 @@
 ---
 title: "getEip"
 title_tag: "tencentcloud.Dayu.getEip"
-meta_desc: "Documentation for the tencentcloud.Dayu.getEip function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query dayu eip rules"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query dayu eip rules
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const test = tencentcloud.Dayu.getEip({
+const test = tencentcloud.dayu.getEip({
     resourceId: "bgpip-000004xg",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-test = tencentcloud.Dayu.get_eip(resource_id="bgpip-000004xg")
+test = tencentcloud.dayu.get_eip(resource_id="bgpip-000004xg")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.GetEip(ctx, &dayu.GetEipArgs{
+			ResourceId: "bgpip-000004xg",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.GetEip(ctx, &dayu.GetEipArgs{
-			ResourceId: "bgpip-000004xg",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DayuFunctions;
 import com.pulumi.tencentcloud.Dayu.inputs.GetEipArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   test:
     fn::invoke:
-      Function: tencentcloud:Dayu:getEip
-      Arguments:
+      function: tencentcloud:Dayu:getEip
+      arguments:
         resourceId: bgpip-000004xg
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dayu_geteip" "test" {
+  resource_id = "bgpip-000004xg"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getEip<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetEipArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetEipResult</a></span>></span
+><span class="k">function </span>getEip<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetEipArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetEipResult</a></span>></span
 ><span class="k">
-function </span>getEipOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetEipOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>></span
+function </span>getEipOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetEipOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -141,12 +198,12 @@ function </span>getEipOutput<span class="p">(</span><span class="nx">args</span>
             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetEipResult</span
 ><span class="k">
-def </span>get_eip_output<span class="p">(</span><span class="nx">bind_statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-            <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-            <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-            <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetEipResult]</span
+def </span>get_eip_output<span class="p">(</span><span class="nx">bind_statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+            <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+            <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+            <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetEipResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -155,12 +212,12 @@ def </span>get_eip_output<span class="p">(</span><span class="nx">bind_statuses<
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetEip<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetEipArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetEipResult</a></span>, error)</span
+><span class="k">func </span>LookupEip<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupEipArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupEipResult</a></span>, error)</span
 ><span class="k">
-func </span>GetEipOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetEipOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetEipResultOutput</span
+func </span>LookupEipOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupEipOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupEipResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetEip` in the Go SDK.
+&gt; Note: This function is named `LookupEip` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetEipOutput<span class="p">(</span><span class="nx">ctx</span><span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetEip </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetEipArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetEipInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetEipInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetEipInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetEipOutput<span class="p">(</span><span class="nx">ctx</span><span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> </span>getEip<span class="p">(</span><span class="nx">GetEipArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> </span>getEip<span class="p">(</span><span class="nx">GetEipArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetEipResult</a></span>> </span>getEip<span class="p">(</span><span class="nx">GetEipArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetEipOutput<span class="p">(</span><span class="nx">ctx</span><span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dayu/getEip:getEip
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dayu_get_eip&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindstatuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatuses_csharp" style="color: inherit; text-decoration: inherit;">Bind<wbr>Statuses</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</p>
-</dd><dt class="property-optional"
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -237,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -246,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -261,8 +324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindstatuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatuses_go" style="color: inherit; text-decoration: inherit;">Bind<wbr>Statuses</a>
@@ -270,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</p>
-</dd><dt class="property-optional"
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -279,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -288,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -297,8 +356,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the resource.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bind_statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_statuses_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -312,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindstatuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatuses_java" style="color: inherit; text-decoration: inherit;">bind<wbr>Statuses</a>
@@ -321,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</p>
-</dd><dt class="property-optional"
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -330,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -339,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -348,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindstatuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatuses_nodejs" style="color: inherit; text-decoration: inherit;">bind<wbr>Statuses</a>
@@ -372,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</p>
-</dd><dt class="property-optional"
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -381,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -390,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -399,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -414,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="bind_statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_statuses_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>statuses</a>
@@ -423,8 +516,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</p>
-</dd><dt class="property-optional"
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -432,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -441,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -450,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindstatuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatuses_yaml" style="color: inherit; text-decoration: inherit;">bind<wbr>Statuses</a>
@@ -474,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</p>
-</dd><dt class="property-optional"
+    <dd>The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -483,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of pages, default is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -492,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The page start offset, default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -501,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -534,8 +617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#geteiplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Outputs.<wbr>Get<wbr>Eip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -589,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -598,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#geteiplist">[]Get<wbr>Eip<wbr>List</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -644,6 +724,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#geteiplist">list(object)</a></span>
+    </dt>
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="bind_statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_statuses_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -653,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -662,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#geteiplist">List&lt;Get<wbr>Eip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -717,8 +857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -726,8 +865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#geteiplist">Get<wbr>Eip<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -781,17 +919,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#geteiplist">Get<wbr>Eip<wbr>List]</a></span>
+        <span class="property-type"><a href="#geteiplist">Sequence[Get<wbr>Eip<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -845,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -854,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#geteiplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -919,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The created time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The created time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="eipaddressstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressstatus_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Address<wbr>Status</a>
@@ -928,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Eip PUBLIC IP status.</p>
-</dd><dt class="property-required"
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrsceni_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrsceni_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Bound<wbr>Rsc<wbr>Eni</a>
@@ -937,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the bound ENI.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrscvip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscvip_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Bound<wbr>Rsc<wbr>Vip</a>
@@ -946,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="eiplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiplists_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Lists</a>
@@ -963,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The expired time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The expired time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -972,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The modify time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The modify time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="protectionstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectionstatus_csharp" style="color: inherit; text-decoration: inherit;">Protection<wbr>Status</a>
@@ -981,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protection status of the asset instance.</p>
-</dd><dt class="property-required"
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -990,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the asset instance is located.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipboundrscins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscins_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Bound<wbr>Rsc<wbr>Ins</a>
@@ -999,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance for the binding.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1008,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource instance.</p>
-</dd></dl>
+    <dd>ID of the resource instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The created time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The created time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="eipaddressstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressstatus_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Address<wbr>Status</a>
@@ -1032,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Eip PUBLIC IP status.</p>
-</dd><dt class="property-required"
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrsceni_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrsceni_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Bound<wbr>Rsc<wbr>Eni</a>
@@ -1041,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the bound ENI.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrscvip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscvip_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Bound<wbr>Rsc<wbr>Vip</a>
@@ -1050,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="eiplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiplists_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Lists</a>
@@ -1067,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The expired time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The expired time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1076,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The modify time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The modify time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="protectionstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectionstatus_go" style="color: inherit; text-decoration: inherit;">Protection<wbr>Status</a>
@@ -1085,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protection status of the asset instance.</p>
-</dd><dt class="property-required"
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1094,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the asset instance is located.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipboundrscins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscins_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Bound<wbr>Rsc<wbr>Ins</a>
@@ -1103,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance for the binding.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1112,8 +1227,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource instance.</p>
-</dd></dl>
+    <dd>ID of the resource instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The created time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_address_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_address_status_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>address_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_bound_rsc_eni_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_bound_rsc_eni_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>bound_<wbr>rsc_<wbr>eni</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_bound_rsc_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_bound_rsc_vip_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>bound_<wbr>rsc_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_lists_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The expired time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The modify time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="protection_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protection_status_hcl" style="color: inherit; text-decoration: inherit;">protection_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eip_bound_rsc_ins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_bound_rsc_ins_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>bound_<wbr>rsc_<wbr>ins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1127,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The created time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The created time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="eipaddressstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressstatus_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Status</a>
@@ -1136,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Eip PUBLIC IP status.</p>
-</dd><dt class="property-required"
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrsceni_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrsceni_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Eni</a>
@@ -1145,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the bound ENI.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrscvip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscvip_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Vip</a>
@@ -1154,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the resource intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="eiplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiplists_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Lists</a>
@@ -1171,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The expired time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The expired time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1180,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The modify time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The modify time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="protectionstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectionstatus_java" style="color: inherit; text-decoration: inherit;">protection<wbr>Status</a>
@@ -1189,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protection status of the asset instance.</p>
-</dd><dt class="property-required"
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1198,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the asset instance is located.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipboundrscins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscins_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Ins</a>
@@ -1207,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance for the binding.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1216,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource instance.</p>
-</dd></dl>
+    <dd>ID of the resource instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1231,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The created time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The created time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="eipaddressstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressstatus_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Status</a>
@@ -1240,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Eip PUBLIC IP status.</p>
-</dd><dt class="property-required"
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrsceni_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrsceni_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Eni</a>
@@ -1249,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the bound ENI.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrscvip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscvip_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Vip</a>
@@ -1258,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="eiplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiplists_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Lists</a>
@@ -1275,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The expired time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The expired time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1284,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The modify time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The modify time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="protectionstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectionstatus_nodejs" style="color: inherit; text-decoration: inherit;">protection<wbr>Status</a>
@@ -1293,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protection status of the asset instance.</p>
-</dd><dt class="property-required"
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1302,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the asset instance is located.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipboundrscins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscins_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Ins</a>
@@ -1311,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance for the binding.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1320,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource instance.</p>
-</dd></dl>
+    <dd>ID of the resource instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1335,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The created time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The created time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="eip_address_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_address_status_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>address_<wbr>status</a>
@@ -1344,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Eip PUBLIC IP status.</p>
-</dd><dt class="property-required"
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
             title="Required">
         <span id="eip_bound_rsc_eni_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_bound_rsc_eni_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>bound_<wbr>rsc_<wbr>eni</a>
@@ -1353,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the bound ENI.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
             title="Required">
         <span id="eip_bound_rsc_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_bound_rsc_vip_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>bound_<wbr>rsc_<wbr>vip</a>
@@ -1362,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bind the resource intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="eip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_lists_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>lists</a>
@@ -1379,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The expired time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The expired time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1388,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The modify time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The modify time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="protection_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protection_status_python" style="color: inherit; text-decoration: inherit;">protection_<wbr>status</a>
@@ -1397,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The protection status of the asset instance.</p>
-</dd><dt class="property-required"
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1406,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region where the asset instance is located.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
             title="Optional">
         <span id="eip_bound_rsc_ins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_bound_rsc_ins_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>bound_<wbr>rsc_<wbr>ins</a>
@@ -1415,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the resource instance for the binding.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1424,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource instance.</p>
-</dd></dl>
+    <dd>ID of the resource instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1439,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The created time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The created time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="eipaddressstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressstatus_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Status</a>
@@ -1448,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Eip PUBLIC IP status.</p>
-</dd><dt class="property-required"
+    <dd>Eip PUBLIC IP status.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrsceni_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrsceni_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Eni</a>
@@ -1457,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the bound ENI.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the bound ENI.</dd><dt class="property-required"
             title="Required">
         <span id="eipboundrscvip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscvip_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Vip</a>
@@ -1466,8 +1641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the resource intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="eiplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiplists_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Lists</a>
@@ -1483,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The expired time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The expired time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1492,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The modify time of resource.</p>
-</dd><dt class="property-required"
+    <dd>The modify time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="protectionstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectionstatus_yaml" style="color: inherit; text-decoration: inherit;">protection<wbr>Status</a>
@@ -1501,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protection status of the asset instance.</p>
-</dd><dt class="property-required"
+    <dd>The protection status of the asset instance.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1510,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the asset instance is located.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the asset instance is located.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipboundrscins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipboundrscins_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Bound<wbr>Rsc<wbr>Ins</a>
@@ -1519,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance for the binding.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance for the binding.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1528,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource instance.</p>
-</dd></dl>
+    <dd>ID of the resource instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1544,7 +1712,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

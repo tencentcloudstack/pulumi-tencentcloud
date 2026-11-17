@@ -2,9 +2,11 @@
 ---
 title: "getZone"
 title_tag: "tencentcloud.Cynosdb.getZone"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.getZone function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of cynosdb zone"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query detailed information of cynosdb zone
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zone = tencentcloud.Cynosdb.getZone({
+const zone = tencentcloud.cynosdb.getZone({
     includeVirtualZones: true,
     showPermission: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-zone = tencentcloud.Cynosdb.get_zone(include_virtual_zones=True,
+zone = tencentcloud.cynosdb.get_zone(include_virtual_zones=True,
     show_permission=True)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cynosdb.GetZone(ctx, &cynosdb.GetZoneArgs{
+			IncludeVirtualZones: pulumi.BoolRef(true),
+			ShowPermission:      pulumi.BoolRef(true),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.GetZone(ctx, &cynosdb.GetZoneArgs{
-			IncludeVirtualZones: pulumi.BoolRef(true),
-			ShowPermission:      pulumi.BoolRef(true),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.CynosdbFunctions;
 import com.pulumi.tencentcloud.Cynosdb.inputs.GetZoneArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   zone:
     fn::invoke:
-      Function: tencentcloud:Cynosdb:getZone
-      Arguments:
+      function: tencentcloud:Cynosdb:getZone
+      arguments:
         includeVirtualZones: true
         showPermission: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cynosdb_getzone" "zone" {
+  include_virtual_zones = true
+  show_permission       = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeZones](https://www.tencentcloud.com/document/api/1098/53648)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZone<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
+><span class="k">function </span>getZone<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
 ><span class="k">
-function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
+function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">show_permission</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneResult</span
 ><span class="k">
-def </span>get_zone_output<span class="p">(</span><span class="nx">include_virtual_zones</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">show_permission</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneResult]</span
+def </span>get_zone_output<span class="p">(</span><span class="nx">include_virtual_zones</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">show_permission</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZone </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cynosdb/getZone:getZone
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cynosdb_get_zone&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is virtual zone included.</p>
-</dd><dt class="property-optional"
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="showpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showpermission_csharp" style="color: inherit; text-decoration: inherit;">Show<wbr>Permission</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display all available zones under the region and display the permissions of each available zone of the user.</p>
-</dd></dl>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is virtual zone included.</p>
-</dd><dt class="property-optional"
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="showpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showpermission_go" style="color: inherit; text-decoration: inherit;">Show<wbr>Permission</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display all available zones under the region and display the permissions of each available zone of the user.</p>
-</dd></dl>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="include_virtual_zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_virtual_zones_hcl" style="color: inherit; text-decoration: inherit;">include_<wbr>virtual_<wbr>zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="show_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#show_permission_hcl" style="color: inherit; text-decoration: inherit;">show_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is virtual zone included.</p>
-</dd><dt class="property-optional"
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="showpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showpermission_java" style="color: inherit; text-decoration: inherit;">show<wbr>Permission</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display all available zones under the region and display the permissions of each available zone of the user.</p>
-</dd></dl>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Is virtual zone included.</p>
-</dd><dt class="property-optional"
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="showpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showpermission_nodejs" style="color: inherit; text-decoration: inherit;">show<wbr>Permission</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to display all available zones under the region and display the permissions of each available zone of the user.</p>
-</dd></dl>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is virtual zone included.</p>
-</dd><dt class="property-optional"
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="show_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#show_permission_python" style="color: inherit; text-decoration: inherit;">show_<wbr>permission</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display all available zones under the region and display the permissions of each available zone of the user.</p>
-</dd></dl>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is virtual zone included.</p>
-</dd><dt class="property-optional"
+    <dd>Is virtual zone included.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="showpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showpermission_yaml" style="color: inherit; text-decoration: inherit;">show<wbr>Permission</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display all available zones under the region and display the permissions of each available zone of the user.</p>
-</dd></dl>
+    <dd>Whether to display all available zones under the region and display the permissions of each available zone of the user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="regionsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionsets_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Sets</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Region<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Information of region.</p>
-</dd><dt class="property-"
+    <dd>Information of region.</dd><dt class="property-"
             title="">
         <span id="includevirtualzones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includevirtualzones_csharp" style="color: inherit; text-decoration: inherit;">Include<wbr>Virtual<wbr>Zones</a>
@@ -467,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="regionsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionsets_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Sets</a>
@@ -476,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionset">[]Get<wbr>Zone<wbr>Region<wbr>Set</a></span>
     </dt>
-    <dd><p>Information of region.</p>
-</dd><dt class="property-"
+    <dd>Information of region.</dd><dt class="property-"
             title="">
         <span id="includevirtualzones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includevirtualzones_go" style="color: inherit; text-decoration: inherit;">Include<wbr>Virtual<wbr>Zones</a>
@@ -506,6 +583,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="region_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_sets_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneregionset">list(object)</a></span>
+    </dt>
+    <dd>Information of region.</dd><dt class="property-"
+            title="">
+        <span id="include_virtual_zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_virtual_zones_hcl" style="color: inherit; text-decoration: inherit;">include_<wbr>virtual_<wbr>zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="show_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#show_permission_hcl" style="color: inherit; text-decoration: inherit;">show_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -515,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="regionsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionsets_java" style="color: inherit; text-decoration: inherit;">region<wbr>Sets</a>
@@ -524,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionset">List&lt;Get<wbr>Zone<wbr>Region<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Information of region.</p>
-</dd><dt class="property-"
+    <dd>Information of region.</dd><dt class="property-"
             title="">
         <span id="includevirtualzones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includevirtualzones_java" style="color: inherit; text-decoration: inherit;">include<wbr>Virtual<wbr>Zones</a>
@@ -563,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="regionsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionsets_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Sets</a>
@@ -572,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionset">Get<wbr>Zone<wbr>Region<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Information of region.</p>
-</dd><dt class="property-"
+    <dd>Information of region.</dd><dt class="property-"
             title="">
         <span id="includevirtualzones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includevirtualzones_nodejs" style="color: inherit; text-decoration: inherit;">include<wbr>Virtual<wbr>Zones</a>
@@ -611,17 +730,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="region_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_sets_python" style="color: inherit; text-decoration: inherit;">region_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneregionset">Get<wbr>Zone<wbr>Region<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getzoneregionset">Sequence[Get<wbr>Zone<wbr>Region<wbr>Set]</a></span>
     </dt>
-    <dd><p>Information of region.</p>
-</dd><dt class="property-"
+    <dd>Information of region.</dd><dt class="property-"
             title="">
         <span id="include_virtual_zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_virtual_zones_python" style="color: inherit; text-decoration: inherit;">include_<wbr>virtual_<wbr>zones</a>
@@ -659,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="regionsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionsets_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Sets</a>
@@ -668,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information of region.</p>
-</dd><dt class="property-"
+    <dd>Information of region.</dd><dt class="property-"
             title="">
         <span id="includevirtualzones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includevirtualzones_yaml" style="color: inherit; text-decoration: inherit;">include<wbr>Virtual<wbr>Zones</a>
@@ -717,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database type.</p>
-</dd><dt class="property-required"
+    <dd>Database type.</dd><dt class="property-required"
             title="Required">
         <span id="modules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_csharp" style="color: inherit; text-decoration: inherit;">Modules</a>
@@ -726,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetmodule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Module&gt;</a></span>
     </dt>
-    <dd><p>Regional module support.</p>
-</dd><dt class="property-required"
+    <dd>Regional module support.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -735,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region in English.</p>
-</dd><dt class="property-required"
+    <dd>Region in English.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -744,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Region ID.</p>
-</dd><dt class="property-required"
+    <dd>Region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionzh_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionzh_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Zh</a>
@@ -753,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name in Chinese.</p>
-</dd><dt class="property-required"
+    <dd>Region name in Chinese.</dd><dt class="property-required"
             title="Required">
         <span id="zonesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonesets_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Sets</a>
@@ -762,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetzoneset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Zone<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of available zones for sale.</p>
-</dd></dl>
+    <dd>List of available zones for sale.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -777,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database type.</p>
-</dd><dt class="property-required"
+    <dd>Database type.</dd><dt class="property-required"
             title="Required">
         <span id="modules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_go" style="color: inherit; text-decoration: inherit;">Modules</a>
@@ -786,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetmodule">[]Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Module</a></span>
     </dt>
-    <dd><p>Regional module support.</p>
-</dd><dt class="property-required"
+    <dd>Regional module support.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -795,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region in English.</p>
-</dd><dt class="property-required"
+    <dd>Region in English.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -804,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Region ID.</p>
-</dd><dt class="property-required"
+    <dd>Region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionzh_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionzh_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Zh</a>
@@ -813,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name in Chinese.</p>
-</dd><dt class="property-required"
+    <dd>Region name in Chinese.</dd><dt class="property-required"
             title="Required">
         <span id="zonesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonesets_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Sets</a>
@@ -822,8 +926,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetzoneset">[]Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Zone<wbr>Set</a></span>
     </dt>
-    <dd><p>List of available zones for sale.</p>
-</dd></dl>
+    <dd>List of available zones for sale.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database type.</dd><dt class="property-required"
+            title="Required">
+        <span id="modules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_hcl" style="color: inherit; text-decoration: inherit;">modules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneregionsetmodule">list(object)</a></span>
+    </dt>
+    <dd>Regional module support.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region in English.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Region ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_zh_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region name in Chinese.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_sets_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneregionsetzoneset">list(object)</a></span>
+    </dt>
+    <dd>List of available zones for sale.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database type.</p>
-</dd><dt class="property-required"
+    <dd>Database type.</dd><dt class="property-required"
             title="Required">
         <span id="modules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_java" style="color: inherit; text-decoration: inherit;">modules</a>
@@ -846,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetmodule">List&lt;Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Module&gt;</a></span>
     </dt>
-    <dd><p>Regional module support.</p>
-</dd><dt class="property-required"
+    <dd>Regional module support.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -855,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region in English.</p>
-</dd><dt class="property-required"
+    <dd>Region in English.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -864,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Region ID.</p>
-</dd><dt class="property-required"
+    <dd>Region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionzh_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionzh_java" style="color: inherit; text-decoration: inherit;">region<wbr>Zh</a>
@@ -873,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region name in Chinese.</p>
-</dd><dt class="property-required"
+    <dd>Region name in Chinese.</dd><dt class="property-required"
             title="Required">
         <span id="zonesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonesets_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Sets</a>
@@ -882,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetzoneset">List&lt;Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Zone<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of available zones for sale.</p>
-</dd></dl>
+    <dd>List of available zones for sale.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -897,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database type.</p>
-</dd><dt class="property-required"
+    <dd>Database type.</dd><dt class="property-required"
             title="Required">
         <span id="modules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_nodejs" style="color: inherit; text-decoration: inherit;">modules</a>
@@ -906,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetmodule">Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Module[]</a></span>
     </dt>
-    <dd><p>Regional module support.</p>
-</dd><dt class="property-required"
+    <dd>Regional module support.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -915,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region in English.</p>
-</dd><dt class="property-required"
+    <dd>Region in English.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -924,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Region ID.</p>
-</dd><dt class="property-required"
+    <dd>Region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionzh_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionzh_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Zh</a>
@@ -933,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name in Chinese.</p>
-</dd><dt class="property-required"
+    <dd>Region name in Chinese.</dd><dt class="property-required"
             title="Required">
         <span id="zonesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonesets_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Sets</a>
@@ -942,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetzoneset">Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Zone<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of available zones for sale.</p>
-</dd></dl>
+    <dd>List of available zones for sale.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -957,17 +1102,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database type.</p>
-</dd><dt class="property-required"
+    <dd>Database type.</dd><dt class="property-required"
             title="Required">
         <span id="modules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_python" style="color: inherit; text-decoration: inherit;">modules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneregionsetmodule">Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Module]</a></span>
+        <span class="property-type"><a href="#getzoneregionsetmodule">Sequence[Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Module]</a></span>
     </dt>
-    <dd><p>Regional module support.</p>
-</dd><dt class="property-required"
+    <dd>Regional module support.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -975,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region in English.</p>
-</dd><dt class="property-required"
+    <dd>Region in English.</dd><dt class="property-required"
             title="Required">
         <span id="region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -984,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Region ID.</p>
-</dd><dt class="property-required"
+    <dd>Region ID.</dd><dt class="property-required"
             title="Required">
         <span id="region_zh_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_zh_python" style="color: inherit; text-decoration: inherit;">region_<wbr>zh</a>
@@ -993,17 +1134,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region name in Chinese.</p>
-</dd><dt class="property-required"
+    <dd>Region name in Chinese.</dd><dt class="property-required"
             title="Required">
         <span id="zone_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_sets_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneregionsetzoneset">Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Zone<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getzoneregionsetzoneset">Sequence[Get<wbr>Zone<wbr>Region<wbr>Set<wbr>Zone<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of available zones for sale.</p>
-</dd></dl>
+    <dd>List of available zones for sale.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1017,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database type.</p>
-</dd><dt class="property-required"
+    <dd>Database type.</dd><dt class="property-required"
             title="Required">
         <span id="modules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modules_yaml" style="color: inherit; text-decoration: inherit;">modules</a>
@@ -1026,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetmodule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Regional module support.</p>
-</dd><dt class="property-required"
+    <dd>Regional module support.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1035,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region in English.</p>
-</dd><dt class="property-required"
+    <dd>Region in English.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1044,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Region ID.</p>
-</dd><dt class="property-required"
+    <dd>Region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionzh_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionzh_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Zh</a>
@@ -1053,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region name in Chinese.</p>
-</dd><dt class="property-required"
+    <dd>Region name in Chinese.</dd><dt class="property-required"
             title="Required">
         <span id="zonesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonesets_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Sets</a>
@@ -1062,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneregionsetzoneset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of available zones for sale.</p>
-</dd></dl>
+    <dd>List of available zones for sale.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1081,8 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Is zone on sale, optional values: yes, no.</p>
-</dd><dt class="property-required"
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
             title="Required">
         <span id="modulename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modulename_csharp" style="color: inherit; text-decoration: inherit;">Module<wbr>Name</a>
@@ -1090,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Module name.</p>
-</dd></dl>
+    <dd>Module name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1105,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Is zone on sale, optional values: yes, no.</p>
-</dd><dt class="property-required"
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
             title="Required">
         <span id="modulename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modulename_go" style="color: inherit; text-decoration: inherit;">Module<wbr>Name</a>
@@ -1114,8 +1244,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Module name.</p>
-</dd></dl>
+    <dd>Module name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="is_disable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_disable_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>disable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
+            title="Required">
+        <span id="module_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#module_name_hcl" style="color: inherit; text-decoration: inherit;">module_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Module name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1129,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Is zone on sale, optional values: yes, no.</p>
-</dd><dt class="property-required"
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
             title="Required">
         <span id="modulename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modulename_java" style="color: inherit; text-decoration: inherit;">module<wbr>Name</a>
@@ -1138,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Module name.</p>
-</dd></dl>
+    <dd>Module name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1153,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Is zone on sale, optional values: yes, no.</p>
-</dd><dt class="property-required"
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
             title="Required">
         <span id="modulename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modulename_nodejs" style="color: inherit; text-decoration: inherit;">module<wbr>Name</a>
@@ -1162,8 +1310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Module name.</p>
-</dd></dl>
+    <dd>Module name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1177,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Is zone on sale, optional values: yes, no.</p>
-</dd><dt class="property-required"
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
             title="Required">
         <span id="module_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#module_name_python" style="color: inherit; text-decoration: inherit;">module_<wbr>name</a>
@@ -1186,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Module name.</p>
-</dd></dl>
+    <dd>Module name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1201,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Is zone on sale, optional values: yes, no.</p>
-</dd><dt class="property-required"
+    <dd>Is zone on sale, optional values: yes, no.</dd><dt class="property-required"
             title="Required">
         <span id="modulename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modulename_yaml" style="color: inherit; text-decoration: inherit;">module<wbr>Name</a>
@@ -1210,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Module name.</p>
-</dd></dl>
+    <dd>Module name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="issupportnormal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportnormal_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Support<wbr>Normal</a>
@@ -1238,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does it support normal clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="issupportserverless_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportserverless_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Support<wbr>Serverless</a>
@@ -1247,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does it support serverless clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="iswholerdmazone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswholerdmazone_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Whole<wbr>Rdma<wbr>Zone</a>
@@ -1256,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Is zone Rdma.</p>
-</dd><dt class="property-required"
+    <dd>Is zone Rdma.</dd><dt class="property-required"
             title="Required">
         <span id="physicalzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physicalzone_csharp" style="color: inherit; text-decoration: inherit;">Physical<wbr>Zone</a>
@@ -1265,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Physical zone.</p>
-</dd><dt class="property-required"
+    <dd>Physical zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1274,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name in English.</p>
-</dd><dt class="property-required"
+    <dd>Zone name in English.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1283,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ZoneId.</p>
-</dd><dt class="property-required"
+    <dd>ZoneId.</dd><dt class="property-required"
             title="Required">
         <span id="zonezh_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonezh_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Zh</a>
@@ -1292,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name in Chinesee.</p>
-</dd></dl>
+    <dd>Zone name in Chinesee.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1307,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="issupportnormal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportnormal_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Support<wbr>Normal</a>
@@ -1316,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does it support normal clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="issupportserverless_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportserverless_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Support<wbr>Serverless</a>
@@ -1325,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does it support serverless clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="iswholerdmazone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswholerdmazone_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Whole<wbr>Rdma<wbr>Zone</a>
@@ -1334,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Is zone Rdma.</p>
-</dd><dt class="property-required"
+    <dd>Is zone Rdma.</dd><dt class="property-required"
             title="Required">
         <span id="physicalzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physicalzone_go" style="color: inherit; text-decoration: inherit;">Physical<wbr>Zone</a>
@@ -1343,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Physical zone.</p>
-</dd><dt class="property-required"
+    <dd>Physical zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1352,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name in English.</p>
-</dd><dt class="property-required"
+    <dd>Zone name in English.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1361,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ZoneId.</p>
-</dd><dt class="property-required"
+    <dd>ZoneId.</dd><dt class="property-required"
             title="Required">
         <span id="zonezh_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonezh_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Zh</a>
@@ -1370,8 +1498,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name in Chinesee.</p>
-</dd></dl>
+    <dd>Zone name in Chinesee.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="has_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_permission_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_support_normal_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_support_normal_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>support_<wbr>normal</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_support_serverless_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_support_serverless_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>support_<wbr>serverless</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_whole_rdma_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_whole_rdma_zone_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>whole_<wbr>rdma_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Is zone Rdma.</dd><dt class="property-required"
+            title="Required">
+        <span id="physical_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_zone_hcl" style="color: inherit; text-decoration: inherit;">physical_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Physical zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone name in English.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ZoneId.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_zh_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone name in Chinesee.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1385,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="issupportnormal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportnormal_java" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Normal</a>
@@ -1394,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Does it support normal clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="issupportserverless_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportserverless_java" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Serverless</a>
@@ -1403,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Does it support serverless clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="iswholerdmazone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswholerdmazone_java" style="color: inherit; text-decoration: inherit;">is<wbr>Whole<wbr>Rdma<wbr>Zone</a>
@@ -1412,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Is zone Rdma.</p>
-</dd><dt class="property-required"
+    <dd>Is zone Rdma.</dd><dt class="property-required"
             title="Required">
         <span id="physicalzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physicalzone_java" style="color: inherit; text-decoration: inherit;">physical<wbr>Zone</a>
@@ -1421,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Physical zone.</p>
-</dd><dt class="property-required"
+    <dd>Physical zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1430,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone name in English.</p>
-</dd><dt class="property-required"
+    <dd>Zone name in English.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1439,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ZoneId.</p>
-</dd><dt class="property-required"
+    <dd>ZoneId.</dd><dt class="property-required"
             title="Required">
         <span id="zonezh_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonezh_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Zh</a>
@@ -1448,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone name in Chinesee.</p>
-</dd></dl>
+    <dd>Zone name in Chinesee.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1463,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="issupportnormal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportnormal_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Normal</a>
@@ -1472,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Does it support normal clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="issupportserverless_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportserverless_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Serverless</a>
@@ -1481,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Does it support serverless clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="iswholerdmazone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswholerdmazone_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Whole<wbr>Rdma<wbr>Zone</a>
@@ -1490,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Is zone Rdma.</p>
-</dd><dt class="property-required"
+    <dd>Is zone Rdma.</dd><dt class="property-required"
             title="Required">
         <span id="physicalzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physicalzone_nodejs" style="color: inherit; text-decoration: inherit;">physical<wbr>Zone</a>
@@ -1499,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Physical zone.</p>
-</dd><dt class="property-required"
+    <dd>Physical zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1508,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name in English.</p>
-</dd><dt class="property-required"
+    <dd>Zone name in English.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1517,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ZoneId.</p>
-</dd><dt class="property-required"
+    <dd>ZoneId.</dd><dt class="property-required"
             title="Required">
         <span id="zonezh_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonezh_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Zh</a>
@@ -1526,8 +1708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name in Chinesee.</p>
-</dd></dl>
+    <dd>Zone name in Chinesee.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1541,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_support_normal_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_support_normal_python" style="color: inherit; text-decoration: inherit;">is_<wbr>support_<wbr>normal</a>
@@ -1550,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does it support normal clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="is_support_serverless_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_support_serverless_python" style="color: inherit; text-decoration: inherit;">is_<wbr>support_<wbr>serverless</a>
@@ -1559,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does it support serverless clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="is_whole_rdma_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_whole_rdma_zone_python" style="color: inherit; text-decoration: inherit;">is_<wbr>whole_<wbr>rdma_<wbr>zone</a>
@@ -1568,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Is zone Rdma.</p>
-</dd><dt class="property-required"
+    <dd>Is zone Rdma.</dd><dt class="property-required"
             title="Required">
         <span id="physical_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_zone_python" style="color: inherit; text-decoration: inherit;">physical_<wbr>zone</a>
@@ -1577,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Physical zone.</p>
-</dd><dt class="property-required"
+    <dd>Physical zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1586,8 +1762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone name in English.</p>
-</dd><dt class="property-required"
+    <dd>Zone name in English.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -1595,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ZoneId.</p>
-</dd><dt class="property-required"
+    <dd>ZoneId.</dd><dt class="property-required"
             title="Required">
         <span id="zone_zh_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_zh_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>zh</a>
@@ -1604,8 +1778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone name in Chinesee.</p>
-</dd></dl>
+    <dd>Zone name in Chinesee.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1619,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="issupportnormal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportnormal_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Normal</a>
@@ -1628,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Does it support normal clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support normal clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="issupportserverless_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportserverless_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Serverless</a>
@@ -1637,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Does it support serverless clusters, 0:Not supported 1:Support.</p>
-</dd><dt class="property-required"
+    <dd>Does it support serverless clusters, 0:Not supported 1:Support.</dd><dt class="property-required"
             title="Required">
         <span id="iswholerdmazone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswholerdmazone_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Whole<wbr>Rdma<wbr>Zone</a>
@@ -1646,8 +1816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Is zone Rdma.</p>
-</dd><dt class="property-required"
+    <dd>Is zone Rdma.</dd><dt class="property-required"
             title="Required">
         <span id="physicalzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physicalzone_yaml" style="color: inherit; text-decoration: inherit;">physical<wbr>Zone</a>
@@ -1655,8 +1824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Physical zone.</p>
-</dd><dt class="property-required"
+    <dd>Physical zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1664,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone name in English.</p>
-</dd><dt class="property-required"
+    <dd>Zone name in English.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1673,8 +1840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ZoneId.</p>
-</dd><dt class="property-required"
+    <dd>ZoneId.</dd><dt class="property-required"
             title="Required">
         <span id="zonezh_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonezh_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Zh</a>
@@ -1682,8 +1848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone name in Chinesee.</p>
-</dd></dl>
+    <dd>Zone name in Chinesee.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1698,7 +1863,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

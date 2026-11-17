@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Tcr.Instance"
-meta_desc: "Documentation for the tencentcloud.Tcr.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create tcr instance. NOTE:If securityPolicy needs to be configured, openPublicOperation needs to be set to true"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,32 +16,80 @@ no_edit_this_page: true
 
 Use this resource to create tcr instance.
 
+> **NOTE:**If `securityPolicy` needs to be configured, `openPublicOperation` needs to be set to true
+
 ## Example Usage
 
 ### Create a basic tcr instance.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
     instanceType: "basic",
     tags: {
         createdBy: "terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
     instance_type="basic",
     tags={
         "createdBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:         pulumi.String("tf-example-tcr"),
+			InstanceType: pulumi.String("basic"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +100,7 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Tcr.Instance("example", new()
     {
+        Name = "tf-example-tcr",
         InstanceType = "basic",
         Tags = 
         {
@@ -59,29 +110,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-			InstanceType: pulumi.String("basic"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -90,8 +123,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.Instance;
 import com.pulumi.tencentcloud.Tcr.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -103,7 +136,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
             .instanceType("basic")
             .tags(Map.of("createdBy", "terraform"))
             .build());
@@ -111,25 +145,61 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Tcr:Instance
     properties:
+      name: tf-example-tcr
       instanceType: basic
       tags:
         createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name          = "tf-example-tcr"
+  instance_type = "basic"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create instance with the public network access whitelist.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
     instanceType: "basic",
     openPublicOperation: true,
     securityPolicies: [
@@ -142,60 +212,45 @@ const example = new tencentcloud.tcr.Instance("example", {
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
     instance_type="basic",
     open_public_operation=True,
     security_policies=[
-        tencentcloud.tcr.InstanceSecurityPolicyArgs(
-            cidr_block="10.0.0.1/24",
-        ),
-        tencentcloud.tcr.InstanceSecurityPolicyArgs(
-            cidr_block="192.168.1.1",
-        ),
+        {
+            "cidr_block": "10.0.0.1/24",
+        },
+        {
+            "cidr_block": "192.168.1.1",
+        },
     ])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = new Tencentcloud.Tcr.Instance("example", new()
-    {
-        InstanceType = "basic",
-        OpenPublicOperation = true,
-        SecurityPolicies = new[]
-        {
-            new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
-            {
-                CidrBlock = "10.0.0.1/24",
-            },
-            new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
-            {
-                CidrBlock = "192.168.1.1",
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
+		_, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:                pulumi.String("tf-example-tcr"),
 			InstanceType:        pulumi.String("basic"),
 			OpenPublicOperation: pulumi.Bool(true),
 			SecurityPolicies: tcr.InstanceSecurityPolicyArray{
@@ -214,6 +269,44 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Tcr.Instance("example", new()
+    {
+        Name = "tf-example-tcr",
+        InstanceType = "basic",
+        OpenPublicOperation = true,
+        SecurityPolicies = new[]
+        {
+            new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
+            {
+                CidrBlock = "10.0.0.1/24",
+            },
+            new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
+            {
+                CidrBlock = "192.168.1.1",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -223,8 +316,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.Instance;
 import com.pulumi.tencentcloud.Tcr.InstanceArgs;
 import com.pulumi.tencentcloud.Tcr.inputs.InstanceSecurityPolicyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -236,7 +329,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
             .instanceType("basic")
             .openPublicOperation(true)
             .securityPolicies(            
@@ -251,59 +345,104 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Tcr:Instance
     properties:
+      name: tf-example-tcr
       instanceType: basic
       openPublicOperation: true
       securityPolicies:
         - cidrBlock: 10.0.0.1/24
         - cidrBlock: 192.168.1.1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name                  = "tf-example-tcr"
+  instance_type         = "basic"
+  open_public_operation = true
+  security_policies {
+    cidr_block = "10.0.0.1/24"
+  }
+  security_policies {
+    cidr_block = "192.168.1.1"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create instance with Replications.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
-const tcrRegionMap = config.getObject<{ap-bangkok?: number, ap-beijing?: number, ap-chengdu?: number, ap-chongqing?: number, ap-guangzhou?: number, ap-hongkong?: number, ap-jakarta?: number, ap-mumbai?: number, ap-nanjing?: number, ap-seoul?: number, ap-shanghai?: number, ap-singapore?: number, ap-taipei?: number, ap-tokyo?: number, eu-frankfurt?: number, eu-moscow?: number, na-ashburn?: number, na-siliconvalley?: number}>("tcrRegionMap") || {
-    "ap-guangzhou": 1,
-    "ap-shanghai": 4,
-    "ap-hongkong": 5,
-    "ap-beijing": 8,
-    "ap-singapore": 9,
-    "na-siliconvalley": 15,
-    "ap-chengdu": 16,
-    "eu-frankfurt": 17,
-    "ap-seoul": 18,
-    "ap-chongqing": 19,
-    "ap-mumbai": 21,
-    "na-ashburn": 22,
+const tcrRegionMap = config.getObject<any>("tcrRegionMap") || {
     "ap-bangkok": 23,
-    "eu-moscow": 24,
-    "ap-tokyo": 25,
-    "ap-nanjing": 33,
-    "ap-taipei": 39,
+    "ap-beijing": 8,
+    "ap-chengdu": 16,
+    "ap-chongqing": 19,
+    "ap-guangzhou": 1,
+    "ap-hongkong": 5,
     "ap-jakarta": 72,
+    "ap-mumbai": 21,
+    "ap-nanjing": 33,
+    "ap-seoul": 18,
+    "ap-shanghai": 4,
+    "ap-singapore": 9,
+    "ap-taipei": 39,
+    "ap-tokyo": 25,
+    "eu-frankfurt": 17,
+    "eu-moscow": 24,
+    "na-ashburn": 22,
+    "na-siliconvalley": 15,
 };
 const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
     instanceType: "premium",
     replications: [
         {
-            regionId: tcrRegionMap["ap-guangzhou"],
+            regionId: Number(tcrRegionMap["ap-guangzhou"]),
         },
         {
-            regionId: tcrRegionMap["ap-singapore"],
+            regionId: Number(tcrRegionMap["ap-singapore"]),
         },
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -312,36 +451,101 @@ config = pulumi.Config()
 tcr_region_map = config.get_object("tcrRegionMap")
 if tcr_region_map is None:
     tcr_region_map = {
-        "ap-guangzhou": 1,
-        "ap-shanghai": 4,
-        "ap-hongkong": 5,
-        "ap-beijing": 8,
-        "ap-singapore": 9,
-        "na-siliconvalley": 15,
-        "ap-chengdu": 16,
-        "eu-frankfurt": 17,
-        "ap-seoul": 18,
-        "ap-chongqing": 19,
-        "ap-mumbai": 21,
-        "na-ashburn": 22,
         "ap-bangkok": 23,
-        "eu-moscow": 24,
-        "ap-tokyo": 25,
-        "ap-nanjing": 33,
-        "ap-taipei": 39,
+        "ap-beijing": 8,
+        "ap-chengdu": 16,
+        "ap-chongqing": 19,
+        "ap-guangzhou": 1,
+        "ap-hongkong": 5,
         "ap-jakarta": 72,
+        "ap-mumbai": 21,
+        "ap-nanjing": 33,
+        "ap-seoul": 18,
+        "ap-shanghai": 4,
+        "ap-singapore": 9,
+        "ap-taipei": 39,
+        "ap-tokyo": 25,
+        "eu-frankfurt": 17,
+        "eu-moscow": 24,
+        "na-ashburn": 22,
+        "na-siliconvalley": 15,
     }
 example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
     instance_type="premium",
     replications=[
-        tencentcloud.tcr.InstanceReplicationArgs(
-            region_id=tcr_region_map["ap-guangzhou"],
-        ),
-        tencentcloud.tcr.InstanceReplicationArgs(
-            region_id=tcr_region_map["ap-singapore"],
-        ),
+        {
+            "region_id": int(tcr_region_map["ap-guangzhou"]),
+        },
+        {
+            "region_id": int(tcr_region_map["ap-singapore"]),
+        },
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		tcrRegionMap := map[string]int{
+			"ap-bangkok":       23,
+			"ap-beijing":       8,
+			"ap-chengdu":       16,
+			"ap-chongqing":     19,
+			"ap-guangzhou":     1,
+			"ap-hongkong":      5,
+			"ap-jakarta":       72,
+			"ap-mumbai":        21,
+			"ap-nanjing":       33,
+			"ap-seoul":         18,
+			"ap-shanghai":      4,
+			"ap-singapore":     9,
+			"ap-taipei":        39,
+			"ap-tokyo":         25,
+			"eu-frankfurt":     17,
+			"eu-moscow":        24,
+			"na-ashburn":       22,
+			"na-siliconvalley": 15,
+		}
+		if param := cfg.GetObject("tcrRegionMap"); param != nil {
+			tcrRegionMap = param
+		}
+		_, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:         pulumi.String("tf-example-tcr"),
+			InstanceType: pulumi.String("premium"),
+			Replications: tcr.InstanceReplicationArray{
+				&tcr.InstanceReplicationArgs{
+					RegionId: pulumi.Any(tcrRegionMap.ApGuangzhou),
+				},
+				&tcr.InstanceReplicationArgs{
+					RegionId: pulumi.Any(tcrRegionMap.ApSingapore),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -351,29 +555,30 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 return await Deployment.RunAsync(() => 
 {
     var config = new Config();
-    var tcrRegionMap = config.GetObject<TcrRegionMap>("tcrRegionMap") ?? 
+    var tcrRegionMap = config.GetObject<dynamic>("tcrRegionMap") ?? 
     {
-        { "ap-guangzhou", 1 },
-        { "ap-shanghai", 4 },
-        { "ap-hongkong", 5 },
-        { "ap-beijing", 8 },
-        { "ap-singapore", 9 },
-        { "na-siliconvalley", 15 },
-        { "ap-chengdu", 16 },
-        { "eu-frankfurt", 17 },
-        { "ap-seoul", 18 },
-        { "ap-chongqing", 19 },
-        { "ap-mumbai", 21 },
-        { "na-ashburn", 22 },
         { "ap-bangkok", 23 },
-        { "eu-moscow", 24 },
-        { "ap-tokyo", 25 },
-        { "ap-nanjing", 33 },
-        { "ap-taipei", 39 },
+        { "ap-beijing", 8 },
+        { "ap-chengdu", 16 },
+        { "ap-chongqing", 19 },
+        { "ap-guangzhou", 1 },
+        { "ap-hongkong", 5 },
         { "ap-jakarta", 72 },
+        { "ap-mumbai", 21 },
+        { "ap-nanjing", 33 },
+        { "ap-seoul", 18 },
+        { "ap-shanghai", 4 },
+        { "ap-singapore", 9 },
+        { "ap-taipei", 39 },
+        { "ap-tokyo", 25 },
+        { "eu-frankfurt", 17 },
+        { "eu-moscow", 24 },
+        { "na-ashburn", 22 },
+        { "na-siliconvalley", 15 },
     };
     var example = new Tencentcloud.Tcr.Instance("example", new()
     {
+        Name = "tf-example-tcr",
         InstanceType = "premium",
         Replications = new[]
         {
@@ -389,82 +594,12 @@ return await Deployment.RunAsync(() =>
     });
 
 });
-
-public class TcrRegionMap
-{
-    public double ap-bangkok { get; set; }
-    public double ap-beijing { get; set; }
-    public double ap-chengdu { get; set; }
-    public double ap-chongqing { get; set; }
-    public double ap-guangzhou { get; set; }
-    public double ap-hongkong { get; set; }
-    public double ap-jakarta { get; set; }
-    public double ap-mumbai { get; set; }
-    public double ap-nanjing { get; set; }
-    public double ap-seoul { get; set; }
-    public double ap-shanghai { get; set; }
-    public double ap-singapore { get; set; }
-    public double ap-taipei { get; set; }
-    public double ap-tokyo { get; set; }
-    public double eu-frankfurt { get; set; }
-    public double eu-moscow { get; set; }
-    public double na-ashburn { get; set; }
-    public double na-siliconvalley { get; set; }
-}
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		tcrRegionMap := map[string]interface{}{
-			"ap-guangzhou":     1,
-			"ap-shanghai":      4,
-			"ap-hongkong":      5,
-			"ap-beijing":       8,
-			"ap-singapore":     9,
-			"na-siliconvalley": 15,
-			"ap-chengdu":       16,
-			"eu-frankfurt":     17,
-			"ap-seoul":         18,
-			"ap-chongqing":     19,
-			"ap-mumbai":        21,
-			"na-ashburn":       22,
-			"ap-bangkok":       23,
-			"eu-moscow":        24,
-			"ap-tokyo":         25,
-			"ap-nanjing":       33,
-			"ap-taipei":        39,
-			"ap-jakarta":       72,
-		}
-		if param := cfg.GetObject("tcrRegionMap"); param != nil {
-			tcrRegionMap = param
-		}
-		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-			InstanceType: pulumi.String("premium"),
-			Replications: tcr.InstanceReplicationArray{
-				&tcr.InstanceReplicationArgs{
-					RegionId: pulumi.Float64(tcrRegionMap.ApGuangzhou),
-				},
-				&tcr.InstanceReplicationArgs{
-					RegionId: pulumi.Float64(tcrRegionMap.ApSingapore),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -474,8 +609,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.Instance;
 import com.pulumi.tencentcloud.Tcr.InstanceArgs;
 import com.pulumi.tencentcloud.Tcr.inputs.InstanceReplicationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -488,8 +623,28 @@ public class App {
 
     public static void stack(Context ctx) {
         final var config = ctx.config();
-        final var tcrRegionMap = config.get("tcrRegionMap").orElse(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference));
-        var example = new Instance("example", InstanceArgs.builder()        
+        final var tcrRegionMap = config.get("tcrRegionMap").orElse(Map.ofEntries(
+            Map.entry("ap-bangkok", 23),
+            Map.entry("ap-beijing", 8),
+            Map.entry("ap-chengdu", 16),
+            Map.entry("ap-chongqing", 19),
+            Map.entry("ap-guangzhou", 1),
+            Map.entry("ap-hongkong", 5),
+            Map.entry("ap-jakarta", 72),
+            Map.entry("ap-mumbai", 21),
+            Map.entry("ap-nanjing", 33),
+            Map.entry("ap-seoul", 18),
+            Map.entry("ap-shanghai", 4),
+            Map.entry("ap-singapore", 9),
+            Map.entry("ap-taipei", 39),
+            Map.entry("ap-tokyo", 25),
+            Map.entry("eu-frankfurt", 17),
+            Map.entry("eu-moscow", 24),
+            Map.entry("na-ashburn", 22),
+            Map.entry("na-siliconvalley", 15)
+        ));
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
             .instanceType("premium")
             .replications(            
                 InstanceReplicationArgs.builder()
@@ -503,106 +658,391 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   tcrRegionMap:
-    type: object({ap-bangkok = union(none, number), ap-beijing = union(none, number), ap-chengdu = union(none, number), ap-chongqing = union(none, number), ap-guangzhou = union(none, number), ap-hongkong = union(none, number), ap-jakarta = union(none, number), ap-mumbai = union(none, number), ap-nanjing = union(none, number), ap-seoul = union(none, number), ap-shanghai = union(none, number), ap-singapore = union(none, number), ap-taipei = union(none, number), ap-tokyo = union(none, number), eu-frankfurt = union(none, number), eu-moscow = union(none, number), na-ashburn = union(none, number), na-siliconvalley = union(none, number)})
+    type: object
     default:
-      ap-guangzhou: 1
-      ap-shanghai: 4
-      ap-hongkong: 5
-      ap-beijing: 8
-      ap-singapore: 9
-      na-siliconvalley: 15
-      ap-chengdu: 16
-      eu-frankfurt: 17
-      ap-seoul: 18
-      ap-chongqing: 19
-      ap-mumbai: 21
-      na-ashburn: 22
       ap-bangkok: 23
-      eu-moscow: 24
-      ap-tokyo: 25
-      ap-nanjing: 33
-      ap-taipei: 39
+      ap-beijing: 8
+      ap-chengdu: 16
+      ap-chongqing: 19
+      ap-guangzhou: 1
+      ap-hongkong: 5
       ap-jakarta: 72
+      ap-mumbai: 21
+      ap-nanjing: 33
+      ap-seoul: 18
+      ap-shanghai: 4
+      ap-singapore: 9
+      ap-taipei: 39
+      ap-tokyo: 25
+      eu-frankfurt: 17
+      eu-moscow: 24
+      na-ashburn: 22
+      na-siliconvalley: 15
 resources:
   example:
     type: tencentcloud:Tcr:Instance
     properties:
+      name: tf-example-tcr
       instanceType: premium
       replications:
-        - regionId: ${tcrRegionMap"ap-guangzhou"[%!s(MISSING)]}
-        - regionId: ${tcrRegionMap"ap-singapore"[%!s(MISSING)]}
+        - regionId: ${tcrRegionMap["ap-guangzhou"]}
+        - regionId: ${tcrRegionMap["ap-singapore"]}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name          = "tf-example-tcr"
+  instance_type = "premium"
+  replications {
+    region_id = var.tcrRegionMap["ap-guangzhou"]
+  }
+  replications {
+    region_id = var.tcrRegionMap["ap-singapore"]
+  }
+}
+variable "tcrRegionMap" {
+  default = {
+    "ap-bangkok"       = 23
+    "ap-beijing"       = 8
+    "ap-chengdu"       = 16
+    "ap-chongqing"     = 19
+    "ap-guangzhou"     = 1
+    "ap-hongkong"      = 5
+    "ap-jakarta"       = 72
+    "ap-mumbai"        = 21
+    "ap-nanjing"       = 33
+    "ap-seoul"         = 18
+    "ap-shanghai"      = 4
+    "ap-singapore"     = 9
+    "ap-taipei"        = 39
+    "ap-tokyo"         = 25
+    "eu-frankfurt"     = 17
+    "eu-moscow"        = 24
+    "na-ashburn"       = 22
+    "na-siliconvalley" = 15
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create instance with COS bucket configuration.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
+    instanceType: "standard",
+    enableCosMaz: true,
+    enableCosVersioning: true,
+    tags: {
+        createdBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
+    instance_type="standard",
+    enable_cos_maz=True,
+    enable_cos_versioning=True,
+    tags={
+        "createdBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:                pulumi.String("tf-example-tcr"),
+			InstanceType:        pulumi.String("standard"),
+			EnableCosMaz:        pulumi.Bool(true),
+			EnableCosVersioning: pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Tcr.Instance("example", new()
+    {
+        Name = "tf-example-tcr",
+        InstanceType = "standard",
+        EnableCosMaz = true,
+        EnableCosVersioning = true,
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Tcr.Instance;
+import com.pulumi.tencentcloud.Tcr.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
+            .instanceType("standard")
+            .enableCosMaz(true)
+            .enableCosVersioning(true)
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Tcr:Instance
+    properties:
+      name: tf-example-tcr
+      instanceType: standard
+      enableCosMaz: true
+      enableCosVersioning: true
+      tags:
+        createdBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name                  = "tf-example-tcr"
+  instance_type         = "standard"
+  enable_cos_maz        = true
+  enable_cos_versioning = true
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateInstance](https://www.tencentcloud.com/document/api/1051/50715)
+  - [CreateMultipleSecurityPolicy](https://www.tencentcloud.com/document/api/1051/41108)
+  - [DescribeExternalEndpointStatus](https://www.tencentcloud.com/document/api/1051/50736)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [ManageExternalEndpoint](https://www.tencentcloud.com/document/api/1051/50733)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeExternalEndpointStatus](https://www.tencentcloud.com/document/api/1051/50736)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [DescribeReplicationInstances](https://www.tencentcloud.com/document/api/1051/42670)
+  - [DescribeSecurityPolicies](https://www.tencentcloud.com/document/api/1051/50734)
+* Update:
+  - [CreateMultipleSecurityPolicy](https://www.tencentcloud.com/document/api/1051/41108)
+  - [DeleteMultipleSecurityPolicy](https://www.tencentcloud.com/document/api/1051/41107)
+  - [DescribeExternalEndpointStatus](https://www.tencentcloud.com/document/api/1051/50736)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [ManageExternalEndpoint](https://www.tencentcloud.com/document/api/1051/50733)
+  - [ModifyInstance](https://www.tencentcloud.com/document/api/1051/42536)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [RenewInstance](https://www.tencentcloud.com/document/api/1051/50700)
+* Delete:
+  - [DeleteInstance](https://www.tencentcloud.com/document/api/1051/50711)
+  - [DeleteNamespace](https://www.tencentcloud.com/document/api/1051/50696)
+  - [DeleteReplicationInstance](https://www.tencentcloud.com/document/api/1051/50699)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
+  - [DescribeReplicationInstances](https://www.tencentcloud.com/document/api/1051/42670)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">enable_cos_versioning</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">enable_cos_maz</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">delete_bucket</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">instance_charge_type_prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">instance_charge_type_prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">deletion_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">open_public_operation</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">registry_charge_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">replications</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcr.InstanceReplicationArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">security_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcr.InstanceSecurityPolicyArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">replications</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceReplicationArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">security_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceSecurityPolicyArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcr_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -623,7 +1063,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -740,11 +1180,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -760,8 +1208,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletebucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletebucket_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Bucket</a>
@@ -769,8 +1216,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletionprotection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_csharp" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosmaz_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosmaz_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosversioning_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosversioning_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -778,8 +1248,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -787,8 +1256,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -796,8 +1264,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="openpublicoperation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openpublicoperation_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Public<wbr>Operation</a>
@@ -805,8 +1272,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="registrychargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registrychargetype_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Charge<wbr>Type</a>
@@ -814,35 +1280,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="replications_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_csharp" style="color: inherit; text-decoration: inherit;">Replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Replication<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancereplication">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Replication&gt;</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitypolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Security<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Security<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -856,8 +1318,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletebucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletebucket_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Bucket</a>
@@ -865,8 +1326,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletionprotection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_go" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosmaz_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosmaz_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosversioning_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosversioning_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -874,8 +1358,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -883,8 +1366,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -892,8 +1374,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="openpublicoperation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openpublicoperation_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Public<wbr>Operation</a>
@@ -901,8 +1382,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="registrychargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registrychargetype_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Charge<wbr>Type</a>
@@ -910,8 +1390,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="replications_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_go" style="color: inherit; text-decoration: inherit;">Replications</a>
@@ -919,8 +1398,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancereplication">[]Instance<wbr>Replication<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitypolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Policies</a>
@@ -928,17 +1406,125 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesecuritypolicy">[]Instance<wbr>Security<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_bucket_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletion_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_protection_hcl" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enable_cos_maz_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cos_maz_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enable_cos_versioning_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cos_versioning_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_public_operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_public_operation_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>public_<wbr>operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Control public network access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="registry_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_charge_type_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_hcl" style="color: inherit; text-decoration: inherit;">replications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancereplication">list(object)</a></span>
+    </dt>
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_policies_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">list(object)</a></span>
+    </dt>
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,8 +1538,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletebucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletebucket_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Bucket</a>
@@ -961,8 +1546,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletionprotection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_java" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosmaz_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosmaz_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosversioning_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosversioning_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -970,8 +1578,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -979,8 +1586,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -988,8 +1594,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="openpublicoperation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openpublicoperation_java" style="color: inherit; text-decoration: inherit;">open<wbr>Public<wbr>Operation</a>
@@ -997,8 +1602,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="registrychargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registrychargetype_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Charge<wbr>Type</a>
@@ -1006,35 +1610,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="replications_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_java" style="color: inherit; text-decoration: inherit;">replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">List&lt;Instance<wbr>Replication<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancereplication">List&lt;Instance<wbr>Replication&gt;</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitypolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_java" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Instance<wbr>Security<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Instance<wbr>Security<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1048,8 +1648,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletebucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletebucket_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Bucket</a>
@@ -1057,8 +1656,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletionprotection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_nodejs" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosmaz_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosmaz_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosversioning_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosversioning_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -1066,8 +1688,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1075,8 +1696,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1084,8 +1704,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="openpublicoperation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openpublicoperation_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Public<wbr>Operation</a>
@@ -1093,8 +1712,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="registrychargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registrychargetype_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Charge<wbr>Type</a>
@@ -1102,35 +1720,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="replications_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_nodejs" style="color: inherit; text-decoration: inherit;">replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">Instance<wbr>Replication<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancereplication">Instance<wbr>Replication[]</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitypolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">Instance<wbr>Security<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">Instance<wbr>Security<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1144,8 +1758,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_bucket_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>bucket</a>
@@ -1153,8 +1766,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletion_protection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_protection_python" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enable_cos_maz_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cos_maz_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enable_cos_versioning_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cos_versioning_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_period_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
@@ -1162,8 +1798,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
@@ -1171,8 +1806,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1180,8 +1814,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="open_public_operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_public_operation_python" style="color: inherit; text-decoration: inherit;">open_<wbr>public_<wbr>operation</a>
@@ -1189,8 +1822,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="registry_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_charge_type_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>charge_<wbr>type</a>
@@ -1198,35 +1830,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="replications_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_python" style="color: inherit; text-decoration: inherit;">replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">Instance<wbr>Replication<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancereplication">Sequence[Instance<wbr>Replication<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_policies_python" style="color: inherit; text-decoration: inherit;">security_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">Instance<wbr>Security<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">Sequence[Instance<wbr>Security<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1240,8 +1868,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletebucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletebucket_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Bucket</a>
@@ -1249,8 +1876,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletionprotection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_yaml" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosmaz_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosmaz_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enablecosversioning_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecosversioning_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -1258,8 +1908,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1267,8 +1916,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1276,8 +1924,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="openpublicoperation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openpublicoperation_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Public<wbr>Operation</a>
@@ -1285,8 +1932,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="registrychargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registrychargetype_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Charge<wbr>Type</a>
@@ -1294,8 +1940,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="replications_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replications_yaml" style="color: inherit; text-decoration: inherit;">replications</a>
@@ -1303,8 +1948,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancereplication">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitypolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
@@ -1312,17 +1956,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1343,8 +1985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1352,8 +1993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="internalendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalendpoint_csharp" style="color: inherit; text-decoration: inherit;">Internal<wbr>End<wbr>Point</a>
@@ -1361,8 +2001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicdomain_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Domain</a>
@@ -1370,8 +2009,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicstatus_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Status</a>
@@ -1379,8 +2017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1388,8 +2025,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd></dl>
+    <dd>Status of the TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +2039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1412,8 +2047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="internalendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalendpoint_go" style="color: inherit; text-decoration: inherit;">Internal<wbr>End<wbr>Point</a>
@@ -1421,8 +2055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicdomain_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Domain</a>
@@ -1430,8 +2063,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicstatus_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Status</a>
@@ -1439,8 +2071,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1448,8 +2079,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd></dl>
+    <dd>Status of the TCR instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="expired_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_at_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="internal_end_point_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_end_point_hcl" style="color: inherit; text-decoration: inherit;">internal_<wbr>end_<wbr>point</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
+            title="">
+        <span id="public_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_domain_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
+            title="">
+        <span id="public_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_status_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1463,8 +2147,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1472,8 +2155,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="internalendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalendpoint_java" style="color: inherit; text-decoration: inherit;">internal<wbr>End<wbr>Point</a>
@@ -1481,8 +2163,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicdomain_java" style="color: inherit; text-decoration: inherit;">public<wbr>Domain</a>
@@ -1490,8 +2171,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicstatus_java" style="color: inherit; text-decoration: inherit;">public<wbr>Status</a>
@@ -1499,8 +2179,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1508,8 +2187,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd></dl>
+    <dd>Status of the TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1523,8 +2201,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1532,8 +2209,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="internalendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalendpoint_nodejs" style="color: inherit; text-decoration: inherit;">internal<wbr>End<wbr>Point</a>
@@ -1541,8 +2217,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicdomain_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Domain</a>
@@ -1550,8 +2225,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicstatus_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Status</a>
@@ -1559,8 +2233,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1568,8 +2241,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd></dl>
+    <dd>Status of the TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1583,8 +2255,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1592,8 +2263,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="internal_end_point_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_end_point_python" style="color: inherit; text-decoration: inherit;">internal_<wbr>end_<wbr>point</a>
@@ -1601,8 +2271,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="public_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_domain_python" style="color: inherit; text-decoration: inherit;">public_<wbr>domain</a>
@@ -1610,8 +2279,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="public_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_status_python" style="color: inherit; text-decoration: inherit;">public_<wbr>status</a>
@@ -1619,8 +2287,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1628,8 +2295,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd></dl>
+    <dd>Status of the TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1643,8 +2309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1652,8 +2317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="internalendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalendpoint_yaml" style="color: inherit; text-decoration: inherit;">internal<wbr>End<wbr>Point</a>
@@ -1661,8 +2325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicdomain_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Domain</a>
@@ -1670,8 +2333,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-"
             title="">
         <span id="publicstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicstatus_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Status</a>
@@ -1679,8 +2341,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1688,8 +2349,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd></dl>
+    <dd>Status of the TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1699,22 +2359,25 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">delete_bucket</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">deletion_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">enable_cos_maz</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">enable_cos_versioning</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">expired_at</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_charge_type_prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_charge_type_prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -1725,108 +2388,147 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">public_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">public_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">registry_charge_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">replications</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcr.InstanceReplicationArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">security_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcr.InstanceSecurityPolicyArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">replications</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceReplicationArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">security_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceSecurityPolicyArgs]]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcr:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcr_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1834,28 +2536,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1863,28 +2568,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1904,8 +2612,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletionprotection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_csharp" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosmaz_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosmaz_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosversioning_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosversioning_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredat_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>At</a>
@@ -1913,8 +2644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-optional"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -1922,8 +2652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1931,8 +2660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1940,8 +2668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalendpoint_csharp" style="color: inherit; text-decoration: inherit;">Internal<wbr>End<wbr>Point</a>
@@ -1949,8 +2676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1958,8 +2684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_openpublicoperation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_openpublicoperation_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Public<wbr>Operation</a>
@@ -1967,8 +2692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicdomain_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Domain</a>
@@ -1976,8 +2700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicstatus_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Status</a>
@@ -1985,8 +2708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_registrychargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registrychargetype_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Charge<wbr>Type</a>
@@ -1994,26 +2716,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replications_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_csharp" style="color: inherit; text-decoration: inherit;">Replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Replication<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancereplication">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Replication&gt;</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitypolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitypolicies_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Security<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Instance<wbr>Security<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2021,17 +2740,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2045,8 +2762,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletionprotection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_go" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosmaz_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosmaz_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosversioning_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosversioning_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredat_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>At</a>
@@ -2054,8 +2794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-optional"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2063,8 +2802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2072,8 +2810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -2081,8 +2818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalendpoint_go" style="color: inherit; text-decoration: inherit;">Internal<wbr>End<wbr>Point</a>
@@ -2090,8 +2826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2099,8 +2834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_openpublicoperation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_openpublicoperation_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Public<wbr>Operation</a>
@@ -2108,8 +2842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicdomain_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Domain</a>
@@ -2117,8 +2850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicstatus_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Status</a>
@@ -2126,8 +2858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_registrychargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registrychargetype_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Charge<wbr>Type</a>
@@ -2135,8 +2866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replications_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_go" style="color: inherit; text-decoration: inherit;">Replications</a>
@@ -2144,8 +2874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancereplication">[]Instance<wbr>Replication<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitypolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitypolicies_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Policies</a>
@@ -2153,8 +2882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesecuritypolicy">[]Instance<wbr>Security<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2162,17 +2890,165 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_bucket_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletion_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletion_protection_hcl" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enable_cos_maz_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_cos_maz_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enable_cos_versioning_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_cos_versioning_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_expired_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expired_at_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_charge_type_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_charge_type_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internal_end_point_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internal_end_point_hcl" style="color: inherit; text-decoration: inherit;">internal_<wbr>end_<wbr>point</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_open_public_operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_open_public_operation_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>public_<wbr>operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Control public network access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_domain_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_status_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_registry_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registry_charge_type_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_hcl" style="color: inherit; text-decoration: inherit;">replications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancereplication">list(object)</a></span>
+    </dt>
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_policies_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">list(object)</a></span>
+    </dt>
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2186,8 +3062,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletionprotection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_java" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosmaz_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosmaz_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosversioning_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosversioning_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredat_java" style="color: inherit; text-decoration: inherit;">expired<wbr>At</a>
@@ -2195,8 +3094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-optional"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2204,8 +3102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2213,8 +3110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2222,8 +3118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalendpoint_java" style="color: inherit; text-decoration: inherit;">internal<wbr>End<wbr>Point</a>
@@ -2231,8 +3126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2240,8 +3134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_openpublicoperation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_openpublicoperation_java" style="color: inherit; text-decoration: inherit;">open<wbr>Public<wbr>Operation</a>
@@ -2249,8 +3142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicdomain_java" style="color: inherit; text-decoration: inherit;">public<wbr>Domain</a>
@@ -2258,8 +3150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicstatus_java" style="color: inherit; text-decoration: inherit;">public<wbr>Status</a>
@@ -2267,8 +3158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_registrychargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registrychargetype_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Charge<wbr>Type</a>
@@ -2276,26 +3166,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replications_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_java" style="color: inherit; text-decoration: inherit;">replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">List&lt;Instance<wbr>Replication<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancereplication">List&lt;Instance<wbr>Replication&gt;</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitypolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitypolicies_java" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Instance<wbr>Security<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Instance<wbr>Security<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2303,17 +3190,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2327,8 +3212,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletionprotection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_nodejs" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosmaz_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosmaz_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosversioning_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosversioning_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredat_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>At</a>
@@ -2336,8 +3244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-optional"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2345,8 +3252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2354,8 +3260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2363,8 +3268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalendpoint_nodejs" style="color: inherit; text-decoration: inherit;">internal<wbr>End<wbr>Point</a>
@@ -2372,8 +3276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2381,8 +3284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_openpublicoperation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_openpublicoperation_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Public<wbr>Operation</a>
@@ -2390,8 +3292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicdomain_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Domain</a>
@@ -2399,8 +3300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicstatus_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Status</a>
@@ -2408,8 +3308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_registrychargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registrychargetype_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Charge<wbr>Type</a>
@@ -2417,26 +3316,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replications_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_nodejs" style="color: inherit; text-decoration: inherit;">replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">Instance<wbr>Replication<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancereplication">Instance<wbr>Replication[]</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitypolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitypolicies_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">Instance<wbr>Security<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">Instance<wbr>Security<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2444,17 +3340,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2468,8 +3362,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletion_protection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletion_protection_python" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enable_cos_maz_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_cos_maz_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enable_cos_versioning_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_cos_versioning_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cos_<wbr>versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expired_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expired_at_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>at</a>
@@ -2477,8 +3394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-optional"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_charge_type_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_period_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
@@ -2486,8 +3402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_charge_type_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
@@ -2495,8 +3410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -2504,8 +3418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internal_end_point_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internal_end_point_python" style="color: inherit; text-decoration: inherit;">internal_<wbr>end_<wbr>point</a>
@@ -2513,8 +3426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2522,8 +3434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_open_public_operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_open_public_operation_python" style="color: inherit; text-decoration: inherit;">open_<wbr>public_<wbr>operation</a>
@@ -2531,8 +3442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_domain_python" style="color: inherit; text-decoration: inherit;">public_<wbr>domain</a>
@@ -2540,8 +3450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_status_python" style="color: inherit; text-decoration: inherit;">public_<wbr>status</a>
@@ -2549,8 +3458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_registry_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registry_charge_type_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>charge_<wbr>type</a>
@@ -2558,26 +3466,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replications_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_python" style="color: inherit; text-decoration: inherit;">replications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancereplication">Instance<wbr>Replication<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancereplication">Sequence[Instance<wbr>Replication<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_policies_python" style="color: inherit; text-decoration: inherit;">security_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesecuritypolicy">Instance<wbr>Security<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancesecuritypolicy">Sequence[Instance<wbr>Security<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2585,17 +3490,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2609,8 +3512,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to delete the COS bucket which is auto-created with the instance or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to delete the COS bucket which is auto-created with the instance or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletionprotection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_yaml" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Instance Deletion Protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosmaz_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosmaz_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Maz</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket multi-AZ feature. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_enablecosversioning_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecosversioning_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cos<wbr>Versioning</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable COS bucket versioning. Advanced Edition Instances: Default is <code>true</code> (versioning enabled); Standard / Basic Edition Instances: Default is <code>false</code> (disabled).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredat_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>At</a>
@@ -2618,8 +3544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance expiration time (prepaid).</p>
-</dd><dt class="property-optional"
+    <dd>Instance expiration time (prepaid).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2627,8 +3552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2636,8 +3560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2645,8 +3568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TCR types. Valid values are: <code>standard</code>, <code>basic</code>, <code>premium</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalendpoint_yaml" style="color: inherit; text-decoration: inherit;">internal<wbr>End<wbr>Point</a>
@@ -2654,8 +3576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internal address for access of the TCR instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Internal address for access of the TCR instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2663,8 +3584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_openpublicoperation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_openpublicoperation_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Public<wbr>Operation</a>
@@ -2672,8 +3592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Control public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Control public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicdomain_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Domain</a>
@@ -2681,8 +3600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public address for access of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public address for access of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicstatus_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Status</a>
@@ -2690,8 +3608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance public network access.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance public network access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_registrychargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registrychargetype_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Charge<wbr>Type</a>
@@ -2699,8 +3616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replications_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replications_yaml" style="color: inherit; text-decoration: inherit;">replications</a>
@@ -2708,8 +3624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancereplication">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</p>
-</dd><dt class="property-optional"
+    <dd>Specify List of instance Replications, premium only. The available <a href="https://www.tencentcloud.com/document/api/1051/41101">source region list</a> is here.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitypolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitypolicies_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
@@ -2717,8 +3632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesecuritypolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Public network access allowlist policies of the TCR instance. Only available when <code>open_public_operation</code> is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access allowlist policies of the TCR instance. Only available when <code>openPublicOperation</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2726,17 +3640,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this TCR instance.</p>
-</dd></dl>
+    <dd>The available tags within this TCR instance.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2751,7 +3663,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancereplication">Instance<wbr>Replication</h4>
+<h4 id="instancereplication">
+Instance<wbr>Replication<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Replication<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2763,8 +3677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
             title="Optional">
         <span id="regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -2772,8 +3685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Replication region ID, check the example at the top of page to find out id of region.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -2781,8 +3693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Replication region name.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region name.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntag_csharp" style="color: inherit; text-decoration: inherit;">Syn<wbr>Tag</a>
@@ -2790,8 +3701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</p>
-</dd></dl>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2805,8 +3715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
             title="Optional">
         <span id="regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -2814,8 +3723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Replication region ID, check the example at the top of page to find out id of region.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -2823,8 +3731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Replication region name.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region name.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntag_go" style="color: inherit; text-decoration: inherit;">Syn<wbr>Tag</a>
@@ -2832,8 +3739,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</p>
-</dd></dl>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replication region name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syn_tag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_tag_hcl" style="color: inherit; text-decoration: inherit;">syn_<wbr>tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2847,8 +3791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
             title="Optional">
         <span id="regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -2856,8 +3799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Replication region ID, check the example at the top of page to find out id of region.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -2865,8 +3807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Replication region name.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region name.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntag_java" style="color: inherit; text-decoration: inherit;">syn<wbr>Tag</a>
@@ -2874,8 +3815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</p>
-</dd></dl>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2889,8 +3829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
             title="Optional">
         <span id="regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -2898,8 +3837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Replication region ID, check the example at the top of page to find out id of region.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -2907,8 +3845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Replication region name.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region name.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntag_nodejs" style="color: inherit; text-decoration: inherit;">syn<wbr>Tag</a>
@@ -2916,8 +3853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</p>
-</dd></dl>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2931,8 +3867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
             title="Optional">
         <span id="region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -2940,8 +3875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Replication region ID, check the example at the top of page to find out id of region.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
@@ -2949,8 +3883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Replication region name.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region name.</dd><dt class="property-optional"
             title="Optional">
         <span id="syn_tag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_tag_python" style="color: inherit; text-decoration: inherit;">syn_<wbr>tag</a>
@@ -2958,8 +3891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</p>
-</dd></dl>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2973,8 +3905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Replication registry ID (readonly).</dd><dt class="property-optional"
             title="Optional">
         <span id="regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -2982,8 +3913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Replication region ID, check the example at the top of page to find out id of region.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region ID, check the example at the top of page to find out id of region.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -2991,8 +3921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Replication region name.</p>
-</dd><dt class="property-optional"
+    <dd>Replication region name.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntag_yaml" style="color: inherit; text-decoration: inherit;">syn<wbr>Tag</a>
@@ -3000,12 +3929,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</p>
-</dd></dl>
+    <dd>Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancesecuritypolicy">Instance<wbr>Security<wbr>Policy</h4>
+<h4 id="instancesecuritypolicy">
+Instance<wbr>Security<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Security<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3017,8 +3947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The public network IP address of the access source.</p>
-</dd><dt class="property-optional"
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -3026,8 +3955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Remarks of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_csharp" style="color: inherit; text-decoration: inherit;">Index</a>
@@ -3035,8 +3963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Index of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -3044,8 +3971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of policy.</p>
-</dd></dl>
+    <dd>Version of policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3059,8 +3985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The public network IP address of the access source.</p>
-</dd><dt class="property-optional"
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -3068,8 +3993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Remarks of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_go" style="color: inherit; text-decoration: inherit;">Index</a>
@@ -3077,8 +4001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Index of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -3086,8 +4009,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of policy.</p>
-</dd></dl>
+    <dd>Version of policy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remarks of policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="index_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_hcl" style="color: inherit; text-decoration: inherit;">index</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Index of policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3101,8 +4061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The public network IP address of the access source.</p>
-</dd><dt class="property-optional"
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -3110,8 +4069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Remarks of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_java" style="color: inherit; text-decoration: inherit;">index</a>
@@ -3119,8 +4077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Index of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Index of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3128,8 +4085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of policy.</p>
-</dd></dl>
+    <dd>Version of policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3143,8 +4099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The public network IP address of the access source.</p>
-</dd><dt class="property-optional"
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -3152,8 +4107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Remarks of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_nodejs" style="color: inherit; text-decoration: inherit;">index</a>
@@ -3161,8 +4115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Index of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Index of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3170,8 +4123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of policy.</p>
-</dd></dl>
+    <dd>Version of policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3185,8 +4137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The public network IP address of the access source.</p>
-</dd><dt class="property-optional"
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -3194,8 +4145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remarks of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Remarks of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_python" style="color: inherit; text-decoration: inherit;">index</a>
@@ -3203,8 +4153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Index of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3212,8 +4161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of policy.</p>
-</dd></dl>
+    <dd>Version of policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3227,8 +4175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The public network IP address of the access source.</p>
-</dd><dt class="property-optional"
+    <dd>The public network IP address of the access source.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -3236,8 +4183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Remarks of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_yaml" style="color: inherit; text-decoration: inherit;">index</a>
@@ -3245,8 +4191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Index of policy.</p>
-</dd><dt class="property-optional"
+    <dd>Index of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3254,8 +4199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of policy.</p>
-</dd></dl>
+    <dd>Version of policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3266,9 +4210,12 @@ The following state arguments are supported:
 tcr instance can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+$ pulumi import tencentcloud:Tcr/instance:Instance example tcr-4detlt3v
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -3280,7 +4227,6 @@ $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

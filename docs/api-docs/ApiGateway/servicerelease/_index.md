@@ -2,9 +2,11 @@
 ---
 title: "ServiceRelease"
 title_tag: "tencentcloud.ApiGateway.ServiceRelease"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.ServiceRelease resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create API gateway service release."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,66 +16,559 @@ no_edit_this_page: true
 
 Use this resource to create API gateway service release.
 
+## Example Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const service = new tencentcloud.apigateway.Service("service", {
+    serviceName: "myservice",
+    protocol: "http",
+    serviceDesc: "my nice service",
+    netTypes: ["INNER"],
+    ipVersion: "IPv4",
+});
+const api = new tencentcloud.apigateway.Api("api", {
+    serviceId: service.id,
+    apiName: "tf_example",
+    apiDesc: "my hello api update",
+    authType: "SECRET",
+    protocol: "HTTP",
+    enableCors: true,
+    requestConfigPath: "/user/info",
+    requestConfigMethod: "POST",
+    requestParameters: [{
+        name: "email",
+        position: "QUERY",
+        type: "string",
+        desc: "your email please?",
+        defaultValue: "tom@qq.com",
+        required: true,
+    }],
+    serviceConfigType: "HTTP",
+    serviceConfigTimeout: 10,
+    serviceConfigUrl: "http://www.tencent.com",
+    serviceConfigPath: "/user",
+    serviceConfigMethod: "POST",
+    responseType: "XML",
+    responseSuccessExample: "<note>success</note>",
+    responseFailExample: "<note>fail</note>",
+    responseErrorCodes: [{
+        code: 10,
+        msg: "system error",
+        desc: "system error code",
+        convertedCode: -10,
+        needConvert: true,
+    }],
+});
+const serviceServiceRelease = new tencentcloud.apigateway.ServiceRelease("service", {
+    serviceId: api.service.id,
+    environmentName: "release",
+    releaseDesc: "test service release",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+service = tencentcloud.apigateway.Service("service",
+    service_name="myservice",
+    protocol="http",
+    service_desc="my nice service",
+    net_types=["INNER"],
+    ip_version="IPv4")
+api = tencentcloud.apigateway.Api("api",
+    service_id=service.id,
+    api_name="tf_example",
+    api_desc="my hello api update",
+    auth_type="SECRET",
+    protocol="HTTP",
+    enable_cors=True,
+    request_config_path="/user/info",
+    request_config_method="POST",
+    request_parameters=[{
+        "name": "email",
+        "position": "QUERY",
+        "type": "string",
+        "desc": "your email please?",
+        "default_value": "tom@qq.com",
+        "required": True,
+    }],
+    service_config_type="HTTP",
+    service_config_timeout=10,
+    service_config_url="http://www.tencent.com",
+    service_config_path="/user",
+    service_config_method="POST",
+    response_type="XML",
+    response_success_example="<note>success</note>",
+    response_fail_example="<note>fail</note>",
+    response_error_codes=[{
+        "code": 10,
+        "msg": "system error",
+        "desc": "system error code",
+        "converted_code": -10,
+        "need_convert": True,
+    }])
+service_service_release = tencentcloud.apigateway.ServiceRelease("service",
+    service_id=api.service["id"],
+    environment_name="release",
+    release_desc="test service release")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		service, err := apigateway.NewService(ctx, "service", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("myservice"),
+			Protocol:    pulumi.String("http"),
+			ServiceDesc: pulumi.String("my nice service"),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		api, err := apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
+			ServiceId:           service.ID().ToIDOutput().ToStringOutput(),
+			ApiName:             pulumi.String("tf_example"),
+			ApiDesc:             pulumi.String("my hello api update"),
+			AuthType:            pulumi.String("SECRET"),
+			Protocol:            pulumi.String("HTTP"),
+			EnableCors:          pulumi.Bool(true),
+			RequestConfigPath:   pulumi.String("/user/info"),
+			RequestConfigMethod: pulumi.String("POST"),
+			RequestParameters: apigateway.ApiRequestParameterArray{
+				&apigateway.ApiRequestParameterArgs{
+					Name:         pulumi.String("email"),
+					Position:     pulumi.String("QUERY"),
+					Type:         pulumi.String("string"),
+					Desc:         pulumi.String("your email please?"),
+					DefaultValue: pulumi.String("tom@qq.com"),
+					Required:     pulumi.Bool(true),
+				},
+			},
+			ServiceConfigType:      pulumi.String("HTTP"),
+			ServiceConfigTimeout:   pulumi.Int(10),
+			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+			ServiceConfigPath:      pulumi.String("/user"),
+			ServiceConfigMethod:    pulumi.String("POST"),
+			ResponseType:           pulumi.String("XML"),
+			ResponseSuccessExample: pulumi.String("<note>success</note>"),
+			ResponseFailExample:    pulumi.String("<note>fail</note>"),
+			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+				&apigateway.ApiResponseErrorCodeArgs{
+					Code:          pulumi.Int(10),
+					Msg:           pulumi.String("system error"),
+					Desc:          pulumi.String("system error code"),
+					ConvertedCode: pulumi.Int(-10),
+					NeedConvert:   pulumi.Bool(true),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewServiceRelease(ctx, "service", &apigateway.ServiceReleaseArgs{
+			ServiceId:       api.Service.ID(),
+			EnvironmentName: pulumi.String("release"),
+			ReleaseDesc:     pulumi.String("test service release"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var service = new Tencentcloud.ApiGateway.Service("service", new()
+    {
+        ServiceName = "myservice",
+        Protocol = "http",
+        ServiceDesc = "my nice service",
+        NetTypes = new[]
+        {
+            "INNER",
+        },
+        IpVersion = "IPv4",
+    });
+
+    var api = new Tencentcloud.ApiGateway.Api("api", new()
+    {
+        ServiceId = service.Id,
+        ApiName = "tf_example",
+        ApiDesc = "my hello api update",
+        AuthType = "SECRET",
+        Protocol = "HTTP",
+        EnableCors = true,
+        RequestConfigPath = "/user/info",
+        RequestConfigMethod = "POST",
+        RequestParameters = new[]
+        {
+            new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+            {
+                Name = "email",
+                Position = "QUERY",
+                Type = "string",
+                Desc = "your email please?",
+                DefaultValue = "tom@qq.com",
+                Required = true,
+            },
+        },
+        ServiceConfigType = "HTTP",
+        ServiceConfigTimeout = 10,
+        ServiceConfigUrl = "http://www.tencent.com",
+        ServiceConfigPath = "/user",
+        ServiceConfigMethod = "POST",
+        ResponseType = "XML",
+        ResponseSuccessExample = "<note>success</note>",
+        ResponseFailExample = "<note>fail</note>",
+        ResponseErrorCodes = new[]
+        {
+            new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+            {
+                Code = 10,
+                Msg = "system error",
+                Desc = "system error code",
+                ConvertedCode = -10,
+                NeedConvert = true,
+            },
+        },
+    });
+
+    var serviceServiceRelease = new Tencentcloud.ApiGateway.ServiceRelease("service", new()
+    {
+        ServiceId = api.Service.Id,
+        EnvironmentName = "release",
+        ReleaseDesc = "test service release",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.ApiGateway.Service;
+import com.pulumi.tencentcloud.ApiGateway.ServiceArgs;
+import com.pulumi.tencentcloud.ApiGateway.Api;
+import com.pulumi.tencentcloud.ApiGateway.ApiArgs;
+import com.pulumi.tencentcloud.ApiGateway.inputs.ApiRequestParameterArgs;
+import com.pulumi.tencentcloud.ApiGateway.inputs.ApiResponseErrorCodeArgs;
+import com.pulumi.tencentcloud.ApiGateway.ServiceRelease;
+import com.pulumi.tencentcloud.ApiGateway.ServiceReleaseArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var service = new Service("service", ServiceArgs.builder()
+            .serviceName("myservice")
+            .protocol("http")
+            .serviceDesc("my nice service")
+            .netTypes("INNER")
+            .ipVersion("IPv4")
+            .build());
+
+        var api = new Api("api", ApiArgs.builder()
+            .serviceId(service.id())
+            .apiName("tf_example")
+            .apiDesc("my hello api update")
+            .authType("SECRET")
+            .protocol("HTTP")
+            .enableCors(true)
+            .requestConfigPath("/user/info")
+            .requestConfigMethod("POST")
+            .requestParameters(ApiRequestParameterArgs.builder()
+                .name("email")
+                .position("QUERY")
+                .type("string")
+                .desc("your email please?")
+                .defaultValue("tom@qq.com")
+                .required(true)
+                .build())
+            .serviceConfigType("HTTP")
+            .serviceConfigTimeout(10)
+            .serviceConfigUrl("http://www.tencent.com")
+            .serviceConfigPath("/user")
+            .serviceConfigMethod("POST")
+            .responseType("XML")
+            .responseSuccessExample("<note>success</note>")
+            .responseFailExample("<note>fail</note>")
+            .responseErrorCodes(ApiResponseErrorCodeArgs.builder()
+                .code(10)
+                .msg("system error")
+                .desc("system error code")
+                .convertedCode(-10)
+                .needConvert(true)
+                .build())
+            .build());
+
+        var serviceServiceRelease = new ServiceRelease("serviceServiceRelease", ServiceReleaseArgs.builder()
+            .serviceId(api.service().id())
+            .environmentName("release")
+            .releaseDesc("test service release")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  service:
+    type: tencentcloud:ApiGateway:Service
+    properties:
+      serviceName: myservice
+      protocol: http
+      serviceDesc: my nice service
+      netTypes:
+        - INNER
+      ipVersion: IPv4
+  api:
+    type: tencentcloud:ApiGateway:Api
+    properties:
+      serviceId: ${service.id}
+      apiName: tf_example
+      apiDesc: my hello api update
+      authType: SECRET
+      protocol: HTTP
+      enableCors: true
+      requestConfigPath: /user/info
+      requestConfigMethod: POST
+      requestParameters:
+        - name: email
+          position: QUERY
+          type: string
+          desc: your email please?
+          defaultValue: tom@qq.com
+          required: true
+      serviceConfigType: HTTP
+      serviceConfigTimeout: 10
+      serviceConfigUrl: http://www.tencent.com
+      serviceConfigPath: /user
+      serviceConfigMethod: POST
+      responseType: XML
+      responseSuccessExample: <note>success</note>
+      responseFailExample: <note>fail</note>
+      responseErrorCodes:
+        - code: 10
+          msg: system error
+          desc: system error code
+          convertedCode: -10
+          needConvert: true
+  serviceServiceRelease:
+    type: tencentcloud:ApiGateway:ServiceRelease
+    name: service
+    properties:
+      serviceId: ${api.service.id}
+      environmentName: release
+      releaseDesc: test service release
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_service" "service" {
+  service_name = "myservice"
+  protocol     = "http"
+  service_desc = "my nice service"
+  net_types    = ["INNER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_api" "api" {
+  service_id            = tencentcloud_apigateway_service.service.id
+  api_name              = "tf_example"
+  api_desc              = "my hello api update"
+  auth_type             = "SECRET"
+  protocol              = "HTTP"
+  enable_cors           = true
+  request_config_path   = "/user/info"
+  request_config_method = "POST"
+  request_parameters {
+    name          = "email"
+    position      = "QUERY"
+    type          = "string"
+    desc          = "your email please?"
+    default_value = "tom@qq.com"
+    required      = true
+  }
+  service_config_type      = "HTTP"
+  service_config_timeout   = 10
+  service_config_url       = "http://www.tencent.com"
+  service_config_path      = "/user"
+  service_config_method    = "POST"
+  response_type            = "XML"
+  response_success_example = "<note>success</note>"
+  response_fail_example    = "<note>fail</note>"
+  response_error_codes {
+    code           = 10
+    msg            = "system error"
+    desc           = "system error code"
+    converted_code = -10
+    need_convert   = true
+  }
+}
+resource "tencentcloud_apigateway_servicerelease" "service" {
+  service_id       = tencentcloud_apigateway_api.api.service.id
+  environment_name = "release"
+  release_desc     = "test service release"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+  - [ReleaseService](https://www.tencentcloud.com/search/?wd=ReleaseService&type=document&lang=en)
+* Read: [DescribeServiceEnvironmentReleaseHistory](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentReleaseHistory&type=document&lang=en)
+* Delete: [UnReleaseService](https://www.tencentcloud.com/search/?wd=UnReleaseService&type=document&lang=en)
 
 
 ## Create ServiceRelease Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                    <span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">release_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">release_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">release_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewServiceRelease</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServiceRelease</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewServiceRelease</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServiceRelease</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ServiceRelease</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceReleaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:ServiceRelease</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:ServiceRelease</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_service_release&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -94,7 +589,7 @@ Use this resource to create API gateway service release.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -211,11 +706,19 @@ Use this resource to create API gateway service release.
 </pulumi-choosable>
 </div>
 
+
+
 ## ServiceRelease Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ServiceRelease resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -231,8 +734,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="releasedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasedesc_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Desc</a>
@@ -240,8 +742,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -249,8 +750,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaseversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseversion_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Version</a>
@@ -258,8 +758,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd></dl>
+    <dd>The release version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -273,8 +772,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="releasedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasedesc_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Desc</a>
@@ -282,8 +780,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -291,8 +788,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaseversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseversion_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Version</a>
@@ -300,8 +796,45 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd></dl>
+    <dd>The release version.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="release_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_desc_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="release_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_version_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The release version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -315,8 +848,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="releasedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasedesc_java" style="color: inherit; text-decoration: inherit;">release<wbr>Desc</a>
@@ -324,8 +856,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -333,8 +864,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaseversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseversion_java" style="color: inherit; text-decoration: inherit;">release<wbr>Version</a>
@@ -342,8 +872,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd></dl>
+    <dd>The release version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +886,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="releasedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasedesc_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Desc</a>
@@ -366,8 +894,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -375,8 +902,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaseversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseversion_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Version</a>
@@ -384,8 +910,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd></dl>
+    <dd>The release version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -399,8 +924,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="release_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_desc_python" style="color: inherit; text-decoration: inherit;">release_<wbr>desc</a>
@@ -408,8 +932,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -417,8 +940,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="release_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_version_python" style="color: inherit; text-decoration: inherit;">release_<wbr>version</a>
@@ -426,8 +948,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd></dl>
+    <dd>The release version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -441,8 +962,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="releasedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasedesc_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Desc</a>
@@ -450,8 +970,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>This release description of the API gateway service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -459,8 +978,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>ID of API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaseversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseversion_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Version</a>
@@ -468,8 +986,7 @@ The ServiceRelease resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd></dl>
+    <dd>The release version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -490,8 +1007,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -505,8 +1021,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -520,8 +1049,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,8 +1063,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,8 +1077,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -565,8 +1091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -576,18 +1101,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ServiceRelease resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ServiceReleaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ServiceRelease</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ServiceReleaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ServiceRelease</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -595,104 +1120,143 @@ Get an existing ServiceRelease resource's state with the given name, ID, and opt
         <span class="nx">release_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">release_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ServiceRelease</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetServiceRelease<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ServiceReleaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServiceRelease</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetServiceRelease<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ServiceReleaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServiceRelease</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ServiceRelease</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceReleaseState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ServiceRelease</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceReleaseState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ServiceRelease</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceReleaseState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ServiceRelease</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceReleaseState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingServiceRelease</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:ServiceRelease</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_service_release</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceReleaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceReleaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -700,28 +1264,31 @@ Get an existing ServiceRelease resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceReleaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -729,28 +1296,31 @@ Get an existing ServiceRelease resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceReleaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -770,8 +1340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_releasedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasedesc_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Desc</a>
@@ -779,8 +1348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaseversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaseversion_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Version</a>
@@ -788,8 +1356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -797,8 +1364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd></dl>
+    <dd>ID of API gateway service.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -812,8 +1378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_releasedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasedesc_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Desc</a>
@@ -821,8 +1386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaseversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaseversion_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Version</a>
@@ -830,8 +1394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -839,8 +1402,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd></dl>
+    <dd>ID of API gateway service.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_release_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_desc_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_release_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_version_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of API gateway service.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -854,8 +1454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_releasedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasedesc_java" style="color: inherit; text-decoration: inherit;">release<wbr>Desc</a>
@@ -863,8 +1462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaseversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaseversion_java" style="color: inherit; text-decoration: inherit;">release<wbr>Version</a>
@@ -872,8 +1470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -881,8 +1478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd></dl>
+    <dd>ID of API gateway service.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_releasedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasedesc_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Desc</a>
@@ -905,8 +1500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaseversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaseversion_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Version</a>
@@ -914,8 +1508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -923,8 +1516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd></dl>
+    <dd>ID of API gateway service.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -938,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_release_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_desc_python" style="color: inherit; text-decoration: inherit;">release_<wbr>desc</a>
@@ -947,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_release_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_version_python" style="color: inherit; text-decoration: inherit;">release_<wbr>version</a>
@@ -956,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -965,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd></dl>
+    <dd>ID of API gateway service.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -980,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>API gateway service environment name to be released. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_releasedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasedesc_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Desc</a>
@@ -989,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This release description of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>This release description of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaseversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaseversion_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Version</a>
@@ -998,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The release version.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The release version.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1007,8 +1592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of API gateway service.</p>
-</dd></dl>
+    <dd>ID of API gateway service.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1031,6 +1615,9 @@ $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service se
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1040,7 +1627,6 @@ $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service se
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

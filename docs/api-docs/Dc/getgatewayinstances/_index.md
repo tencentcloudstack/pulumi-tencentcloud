@@ -2,9 +2,11 @@
 ---
 title: "getGatewayInstances"
 title_tag: "tencentcloud.Dc.getGatewayInstances"
-meta_desc: "Documentation for the tencentcloud.Dc.getGatewayInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of direct connect gateway instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,65 +18,131 @@ Use this data source to query detailed information of direct connect gateway ins
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const main = new tencentcloud.ccn.Instance("main", {
+    name: "ci-temp-test-ccn",
     description: "ci-temp-test-ccn-des",
     qos: "AG",
 });
-const ccnMain = new tencentcloud.dc.Gateway("ccnMain", {
+const ccnMain = new tencentcloud.dc.Gateway("ccn_main", {
+    name: "ci-cdg-ccn-test",
     networkInstanceId: main.id,
     networkType: "CCN",
     gatewayType: "NORMAL",
 });
-const nameSelect = tencentcloud.Dc.getGatewayInstancesOutput({
+//You need to sleep for a few seconds because there is a cache on the server
+const nameSelect = tencentcloud.dc.getGatewayInstancesOutput({
     name: ccnMain.name,
 });
-const idSelect = tencentcloud.Dc.getGatewayInstancesOutput({
+const idSelect = tencentcloud.dc.getGatewayInstancesOutput({
     dcgId: ccnMain.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
 main = tencentcloud.ccn.Instance("main",
+    name="ci-temp-test-ccn",
     description="ci-temp-test-ccn-des",
     qos="AG")
-ccn_main = tencentcloud.dc.Gateway("ccnMain",
+ccn_main = tencentcloud.dc.Gateway("ccn_main",
+    name="ci-cdg-ccn-test",
     network_instance_id=main.id,
     network_type="CCN",
     gateway_type="NORMAL")
-name_select = tencentcloud.Dc.get_gateway_instances_output(name=ccn_main.name)
-id_select = tencentcloud.Dc.get_gateway_instances_output(dcg_id=ccn_main.id)
+#You need to sleep for a few seconds because there is a cache on the server
+name_select = tencentcloud.dc.get_gateway_instances_output(name=ccn_main.name)
+id_select = tencentcloud.dc.get_gateway_instances_output(dcg_id=ccn_main.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		main, err := ccn.NewInstance(ctx, "main", &ccn.InstanceArgs{
+			Name:        pulumi.String("ci-temp-test-ccn"),
+			Description: pulumi.String("ci-temp-test-ccn-des"),
+			Qos:         pulumi.String("AG"),
+		})
+		if err != nil {
+			return err
+		}
+		ccnMain, err := dc.NewGateway(ctx, "ccn_main", &dc.GatewayArgs{
+			Name:              pulumi.String("ci-cdg-ccn-test"),
+			NetworkInstanceId: main.ID().ToIDOutput().ToStringOutput(),
+			NetworkType:       pulumi.String("CCN"),
+			GatewayType:       pulumi.String("NORMAL"),
+		})
+		if err != nil {
+			return err
+		}
+		// You need to sleep for a few seconds because there is a cache on the server
+		_ = dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
+			Name: ccnMain.Name,
+		}, nil)
+		_ = dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
+			DcgId: ccnMain.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var main = new Tencentcloud.Ccn.Instance("main", new()
     {
+        Name = "ci-temp-test-ccn",
         Description = "ci-temp-test-ccn-des",
         Qos = "AG",
     });
 
-    var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new()
+    var ccnMain = new Tencentcloud.Dc.Gateway("ccn_main", new()
     {
+        Name = "ci-cdg-ccn-test",
         NetworkInstanceId = main.Id,
         NetworkType = "CCN",
         GatewayType = "NORMAL",
     });
 
+    //You need to sleep for a few seconds because there is a cache on the server
     var nameSelect = Tencentcloud.Dc.GetGatewayInstances.Invoke(new()
     {
         Name = ccnMain.Name,
@@ -87,42 +155,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-			Description: pulumi.String("ci-temp-test-ccn-des"),
-			Qos:         pulumi.String("AG"),
-		})
-		if err != nil {
-			return err
-		}
-		ccnMain, err := Dc.NewGateway(ctx, "ccnMain", &Dc.GatewayArgs{
-			NetworkInstanceId: main.ID(),
-			NetworkType:       pulumi.String("CCN"),
-			GatewayType:       pulumi.String("NORMAL"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
-			Name: ccnMain.Name,
-		}, nil)
-		_ = Dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
-			DcgId: ccnMain.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -135,8 +172,8 @@ import com.pulumi.tencentcloud.Dc.Gateway;
 import com.pulumi.tencentcloud.Dc.GatewayArgs;
 import com.pulumi.tencentcloud.Dc.DcFunctions;
 import com.pulumi.tencentcloud.Dc.inputs.GetGatewayInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -148,17 +185,20 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var main = new Instance("main", InstanceArgs.builder()        
+        var main = new Instance("main", InstanceArgs.builder()
+            .name("ci-temp-test-ccn")
             .description("ci-temp-test-ccn-des")
             .qos("AG")
             .build());
 
-        var ccnMain = new Gateway("ccnMain", GatewayArgs.builder()        
+        var ccnMain = new Gateway("ccnMain", GatewayArgs.builder()
+            .name("ci-cdg-ccn-test")
             .networkInstanceId(main.id())
             .networkType("CCN")
             .gatewayType("NORMAL")
             .build());
 
+        //You need to sleep for a few seconds because there is a cache on the server
         final var nameSelect = DcFunctions.getGatewayInstances(GetGatewayInstancesArgs.builder()
             .name(ccnMain.name())
             .build());
@@ -170,33 +210,83 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   main:
     type: tencentcloud:Ccn:Instance
     properties:
+      name: ci-temp-test-ccn
       description: ci-temp-test-ccn-des
       qos: AG
   ccnMain:
     type: tencentcloud:Dc:Gateway
+    name: ccn_main
     properties:
+      name: ci-cdg-ccn-test
       networkInstanceId: ${main.id}
       networkType: CCN
       gatewayType: NORMAL
 variables:
+  #You need to sleep for a few seconds because there is a cache on the server
   nameSelect:
     fn::invoke:
-      Function: tencentcloud:Dc:getGatewayInstances
-      Arguments:
+      function: tencentcloud:Dc:getGatewayInstances
+      arguments:
         name: ${ccnMain.name}
   idSelect:
     fn::invoke:
-      Function: tencentcloud:Dc:getGatewayInstances
-      Arguments:
+      function: tencentcloud:Dc:getGatewayInstances
+      arguments:
         dcgId: ${ccnMain.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dc_getgatewayinstances" "nameSelect" {
+  name = tencentcloud_dc_gateway.ccn_main.name
+}
+data "tencentcloud_dc_getgatewayinstances" "idSelect" {
+  dcg_id = tencentcloud_dc_gateway.ccn_main.id
+}
+
+resource "tencentcloud_ccn_instance" "main" {
+  name        = "ci-temp-test-ccn"
+  description = "ci-temp-test-ccn-des"
+  qos         = "AG"
+}
+resource "tencentcloud_dc_gateway" "ccn_main" {
+  name                = "ci-cdg-ccn-test"
+  network_instance_id = tencentcloud_ccn_instance.main.id
+  network_type        = "CCN"
+  gateway_type        = "NORMAL"
+}
+#You need to sleep for a few seconds because there is a cache on the server
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
 
 
 
@@ -208,7 +298,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -216,9 +306,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGatewayInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewayInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>></span
+><span class="k">function </span>getGatewayInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewayInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>></span
 ><span class="k">
-function </span>getGatewayInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewayInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>></span
+function </span>getGatewayInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewayInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,10 +322,10 @@ function </span>getGatewayInstancesOutput<span class="p">(</span><span class="nx
                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGatewayInstancesResult</span
 ><span class="k">
-def </span>get_gateway_instances_output<span class="p">(</span><span class="nx">dcg_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewayInstancesResult]</span
+def </span>get_gateway_instances_output<span class="p">(</span><span class="nx">dcg_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewayInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -260,7 +350,8 @@ func </span>GetGatewayInstancesOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGatewayInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGatewayInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewayInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewayInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewayInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -269,7 +360,8 @@ func </span>GetGatewayInstancesOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> </span>getGatewayInstances<span class="p">(</span><span class="nx">GetGatewayInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> </span>getGatewayInstances<span class="p">(</span><span class="nx">GetGatewayInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewayInstancesResult</a></span>> </span>getGatewayInstances<span class="p">(</span><span class="nx">GetGatewayInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -281,6 +373,15 @@ func </span>GetGatewayInstancesOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dc/getGatewayInstances:getGatewayInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dc_get_gateway_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -299,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -308,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -317,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -332,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -341,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -350,8 +446,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dcg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -365,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -374,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -383,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -407,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -416,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -440,8 +558,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -449,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -473,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -482,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -506,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -515,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewayinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dc.<wbr>Outputs.<wbr>Get<wbr>Gateway<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DCG.</dd><dt class="property-"
             title="">
         <span id="dcgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_csharp" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -524,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG.</p>
-</dd><dt class="property-"
+    <dd>ID of the DCG.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -533,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Name of the DCG.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -556,8 +665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -565,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewayinstancesinstancelist">[]Get<wbr>Gateway<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DCG.</dd><dt class="property-"
             title="">
         <span id="dcgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_go" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -574,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG.</p>
-</dd><dt class="property-"
+    <dd>ID of the DCG.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -583,11 +689,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Name of the DCG.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewayinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the DCG.</dd><dt class="property-"
+            title="">
+        <span id="dcg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DCG.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DCG.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -606,8 +757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -615,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewayinstancesinstancelist">List&lt;Get<wbr>Gateway<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DCG.</dd><dt class="property-"
             title="">
         <span id="dcgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_java" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -624,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DCG.</p>
-</dd><dt class="property-"
+    <dd>ID of the DCG.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -633,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Name of the DCG.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -656,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -665,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewayinstancesinstancelist">Get<wbr>Gateway<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DCG.</dd><dt class="property-"
             title="">
         <span id="dcgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_nodejs" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -674,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG.</p>
-</dd><dt class="property-"
+    <dd>ID of the DCG.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -683,8 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Name of the DCG.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -706,17 +849,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewayinstancesinstancelist">Get<wbr>Gateway<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getgatewayinstancesinstancelist">Sequence[Get<wbr>Gateway<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DCG.</dd><dt class="property-"
             title="">
         <span id="dcg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_python" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
@@ -724,8 +865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DCG.</p>
-</dd><dt class="property-"
+    <dd>ID of the DCG.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -733,8 +873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Name of the DCG.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -756,8 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -765,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewayinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DCG.</dd><dt class="property-"
             title="">
         <span id="dcgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_yaml" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -774,8 +911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DCG.</p>
-</dd><dt class="property-"
+    <dd>ID of the DCG.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -783,8 +919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-"
+    <dd>Name of the DCG.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -816,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -825,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_csharp" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -834,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dcgip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgip_csharp" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Ip</a>
@@ -843,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd><dt class="property-required"
+    <dd>IP of the DCG.</dd><dt class="property-required"
             title="Required">
         <span id="enablebgp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Bgp</a>
@@ -852,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="gatewaytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Type</a>
@@ -861,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -870,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Instance<wbr>Id</a>
@@ -879,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -888,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd></dl>
+    <dd>IP of the DCG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -903,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -912,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_go" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -921,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dcgip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgip_go" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Ip</a>
@@ -930,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd><dt class="property-required"
+    <dd>IP of the DCG.</dd><dt class="property-required"
             title="Required">
         <span id="enablebgp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Bgp</a>
@@ -939,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="gatewaytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Type</a>
@@ -948,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -957,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinstanceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Instance<wbr>Id</a>
@@ -966,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -975,8 +1093,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd></dl>
+    <dd>IP of the DCG.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cnn_route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnn_route_type_hcl" style="color: inherit; text-decoration: inherit;">cnn_<wbr>route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="dcg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="dcg_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_ip_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the DCG.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_bgp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_bgp_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="gateway_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_type_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_instance_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the DCG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -990,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -999,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_java" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1008,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dcgip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgip_java" style="color: inherit; text-decoration: inherit;">dcg<wbr>Ip</a>
@@ -1017,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd><dt class="property-required"
+    <dd>IP of the DCG.</dd><dt class="property-required"
             title="Required">
         <span id="enablebgp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -1026,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="gatewaytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -1035,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1044,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinstanceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Instance<wbr>Id</a>
@@ -1053,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1062,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd></dl>
+    <dd>IP of the DCG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1077,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1086,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_nodejs" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1095,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dcgip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgip_nodejs" style="color: inherit; text-decoration: inherit;">dcg<wbr>Ip</a>
@@ -1104,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd><dt class="property-required"
+    <dd>IP of the DCG.</dd><dt class="property-required"
             title="Required">
         <span id="enablebgp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -1113,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="gatewaytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -1122,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1131,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Instance<wbr>Id</a>
@@ -1140,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1149,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd></dl>
+    <dd>IP of the DCG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1173,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="dcg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_python" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
@@ -1182,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dcg_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_ip_python" style="color: inherit; text-decoration: inherit;">dcg_<wbr>ip</a>
@@ -1191,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd><dt class="property-required"
+    <dd>IP of the DCG.</dd><dt class="property-required"
             title="Required">
         <span id="enable_bgp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_bgp_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>bgp</a>
@@ -1200,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="gateway_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_type_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>type</a>
@@ -1209,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1218,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="network_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_instance_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>instance_<wbr>id</a>
@@ -1227,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -1236,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd></dl>
+    <dd>IP of the DCG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1251,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CCN route. Valid values: <code>BGP</code> and <code>STATIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1260,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_yaml" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1269,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dcgip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgip_yaml" style="color: inherit; text-decoration: inherit;">dcg<wbr>Ip</a>
@@ -1278,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd><dt class="property-required"
+    <dd>IP of the DCG.</dd><dt class="property-required"
             title="Required">
         <span id="enablebgp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -1287,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="gatewaytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -1296,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the gateway. Valid values: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1305,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DCG to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinstanceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Instance<wbr>Id</a>
@@ -1314,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of associated network. Valid values: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1323,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the DCG.</p>
-</dd></dl>
+    <dd>IP of the DCG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1339,7 +1498,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

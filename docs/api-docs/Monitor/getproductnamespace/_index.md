@@ -2,9 +2,11 @@
 ---
 title: "getProductNamespace"
 title_tag: "tencentcloud.Monitor.getProductNamespace"
-meta_desc: "Documentation for the tencentcloud.Monitor.getProductNamespace function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query product namespace in monitor)"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query product namespace in monitor)
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const instances = tencentcloud.Monitor.getProductNamespace({
+const instances = tencentcloud.monitor.getProductNamespace({
     name: "Redis",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-instances = tencentcloud.Monitor.get_product_namespace(name="Redis")
+instances = tencentcloud.monitor.get_product_namespace(name="Redis")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := monitor.GetProductNamespace(ctx, &monitor.GetProductNamespaceArgs{
+			Name: pulumi.StringRef("Redis"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Monitor.GetProductNamespace(ctx, &monitor.GetProductNamespaceArgs{
-			Name: pulumi.StringRef("Redis"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.MonitorFunctions;
 import com.pulumi.tencentcloud.Monitor.inputs.GetProductNamespaceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   instances:
     fn::invoke:
-      Function: tencentcloud:Monitor:getProductNamespace
-      Arguments:
+      function: tencentcloud:Monitor:getProductNamespace
+      arguments:
         name: Redis
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_monitor_getproductnamespace" "instances" {
+  name = "Redis"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProductNamespace<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductNamespaceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>></span
+><span class="k">function </span>getProductNamespace<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductNamespaceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>></span
 ><span class="k">
-function </span>getProductNamespaceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductNamespaceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>></span
+function </span>getProductNamespaceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductNamespaceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getProductNamespaceOutput<span class="p">(</span><span class="nx
                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProductNamespaceResult</span
 ><span class="k">
-def </span>get_product_namespace_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProductNamespaceResult]</span
+def </span>get_product_namespace_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProductNamespaceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetProductNamespaceOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProductNamespace </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProductNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProductNamespaceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProductNamespaceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProductNamespaceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetProductNamespaceOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> </span>getProductNamespace<span class="p">(</span><span class="nx">GetProductNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> </span>getProductNamespace<span class="p">(</span><span class="nx">GetProductNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProductNamespaceResult</a></span>> </span>getProductNamespace<span class="p">(</span><span class="nx">GetProductNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetProductNamespaceOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Monitor/getProductNamespace:getProductNamespace
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_monitor_get_product_namespace&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name for filter, eg:<code>Load Banlancer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name for filter, eg:<code>Load Banlancer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name for filter, eg:<code>Load Banlancer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name for filter, eg:<code>Load Banlancer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name for filter, eg:<code>Load Banlancer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name for filter, eg:<code>Load Banlancer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name for filter, eg:<code>Load Banlancer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproductnamespacelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Outputs.<wbr>Get<wbr>Product<wbr>Namespace<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list product namespaces. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -406,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproductnamespacelist">[]Get<wbr>Product<wbr>Namespace<wbr>List</a></span>
     </dt>
-    <dd><p>A list product namespaces. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -428,6 +502,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproductnamespacelist">list(object)</a></span>
+    </dt>
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -446,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproductnamespacelist">List&lt;Get<wbr>Product<wbr>Namespace<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list product namespaces. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -486,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproductnamespacelist">Get<wbr>Product<wbr>Namespace<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list product namespaces. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -517,17 +625,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproductnamespacelist">Get<wbr>Product<wbr>Namespace<wbr>List]</a></span>
+        <span class="property-type"><a href="#getproductnamespacelist">Sequence[Get<wbr>Product<wbr>Namespace<wbr>List]</a></span>
     </dt>
-    <dd><p>A list product namespaces. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -566,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproductnamespacelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list product namespaces. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list product namespaces. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of each cloud product in monitor system.</p>
-</dd><dt class="property-required"
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
             title="Required">
         <span id="productchinesename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productchinesename_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Chinese<wbr>Name</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese name of this product.</p>
-</dd><dt class="property-required"
+    <dd>Chinese name of this product.</dd><dt class="property-required"
             title="Required">
         <span id="productname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>English name of this product.</p>
-</dd></dl>
+    <dd>English name of this product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -640,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of each cloud product in monitor system.</p>
-</dd><dt class="property-required"
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
             title="Required">
         <span id="productchinesename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productchinesename_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Chinese<wbr>Name</a>
@@ -649,8 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese name of this product.</p>
-</dd><dt class="property-required"
+    <dd>Chinese name of this product.</dd><dt class="property-required"
             title="Required">
         <span id="productname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -658,8 +757,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>English name of this product.</p>
-</dd></dl>
+    <dd>English name of this product.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
+            title="Required">
+        <span id="product_chinese_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_chinese_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>chinese_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Chinese name of this product.</dd><dt class="property-required"
+            title="Required">
+        <span id="product_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>English name of this product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of each cloud product in monitor system.</p>
-</dd><dt class="property-required"
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
             title="Required">
         <span id="productchinesename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productchinesename_java" style="color: inherit; text-decoration: inherit;">product<wbr>Chinese<wbr>Name</a>
@@ -682,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Chinese name of this product.</p>
-</dd><dt class="property-required"
+    <dd>Chinese name of this product.</dd><dt class="property-required"
             title="Required">
         <span id="productname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -691,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>English name of this product.</p>
-</dd></dl>
+    <dd>English name of this product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of each cloud product in monitor system.</p>
-</dd><dt class="property-required"
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
             title="Required">
         <span id="productchinesename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productchinesename_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Chinese<wbr>Name</a>
@@ -715,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese name of this product.</p>
-</dd><dt class="property-required"
+    <dd>Chinese name of this product.</dd><dt class="property-required"
             title="Required">
         <span id="productname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -724,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>English name of this product.</p>
-</dd></dl>
+    <dd>English name of this product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace of each cloud product in monitor system.</p>
-</dd><dt class="property-required"
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
             title="Required">
         <span id="product_chinese_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_chinese_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>chinese_<wbr>name</a>
@@ -748,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Chinese name of this product.</p>
-</dd><dt class="property-required"
+    <dd>Chinese name of this product.</dd><dt class="property-required"
             title="Required">
         <span id="product_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
@@ -757,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>English name of this product.</p>
-</dd></dl>
+    <dd>English name of this product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -772,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of each cloud product in monitor system.</p>
-</dd><dt class="property-required"
+    <dd>Namespace of each cloud product in monitor system.</dd><dt class="property-required"
             title="Required">
         <span id="productchinesename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productchinesename_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Chinese<wbr>Name</a>
@@ -781,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Chinese name of this product.</p>
-</dd><dt class="property-required"
+    <dd>Chinese name of this product.</dd><dt class="property-required"
             title="Required">
         <span id="productname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -790,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>English name of this product.</p>
-</dd></dl>
+    <dd>English name of this product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -806,7 +922,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

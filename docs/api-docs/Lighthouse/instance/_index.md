@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Lighthouse.Instance"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a lighthouse instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,12 +18,17 @@ Provides a resource to create a lighthouse instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const firewallTemplate = new tencentcloud.lighthouse.FirewallTemplate("firewallTemplate", {templateName: "empty-template"});
+const firewallTemplate = new tencentcloud.lighthouse.FirewallTemplate("firewall_template", {templateName: "empty-template"});
 const lighthouse = new tencentcloud.lighthouse.Instance("lighthouse", {
     bundleId: "bundle2022_gen_01",
     blueprintId: "lhbp-f1lkcd41",
@@ -92,11 +99,16 @@ const lighthouse = new tencentcloud.lighthouse.Instance("lighthouse", {
     firewallTemplateId: firewallTemplate.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-firewall_template = tencentcloud.lighthouse.FirewallTemplate("firewallTemplate", template_name="empty-template")
+firewall_template = tencentcloud.lighthouse.FirewallTemplate("firewall_template", template_name="empty-template")
 lighthouse = tencentcloud.lighthouse.Instance("lighthouse",
     bundle_id="bundle2022_gen_01",
     blueprint_id="lhbp-f1lkcd41",
@@ -105,67 +117,175 @@ lighthouse = tencentcloud.lighthouse.Instance("lighthouse",
     instance_name="hello world",
     zone="ap-guangzhou-3",
     containers=[
-        tencentcloud.lighthouse.InstanceContainerArgs(
-            container_image="ccr.ccs.tencentyun.com/qcloud/nginx",
-            container_name="nginx",
-            envs=[
-                tencentcloud.lighthouse.InstanceContainerEnvArgs(
-                    key="key",
-                    value="value",
-                ),
-                tencentcloud.lighthouse.InstanceContainerEnvArgs(
-                    key="key2",
-                    value="value2",
-                ),
+        {
+            "container_image": "ccr.ccs.tencentyun.com/qcloud/nginx",
+            "container_name": "nginx",
+            "envs": [
+                {
+                    "key": "key",
+                    "value": "value",
+                },
+                {
+                    "key": "key2",
+                    "value": "value2",
+                },
             ],
-            publish_ports=[
-                tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                    host_port=80,
-                    container_port=80,
-                    ip="127.0.0.1",
-                    protocol="tcp",
-                ),
-                tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                    host_port=36000,
-                    container_port=36000,
-                    ip="127.0.0.1",
-                    protocol="tcp",
-                ),
+            "publish_ports": [
+                {
+                    "host_port": 80,
+                    "container_port": 80,
+                    "ip": "127.0.0.1",
+                    "protocol": "tcp",
+                },
+                {
+                    "host_port": 36000,
+                    "container_port": 36000,
+                    "ip": "127.0.0.1",
+                    "protocol": "tcp",
+                },
             ],
-            volumes=[
-                tencentcloud.lighthouse.InstanceContainerVolumeArgs(
-                    container_path="/data",
-                    host_path="/tmp",
-                ),
-                tencentcloud.lighthouse.InstanceContainerVolumeArgs(
-                    container_path="/var",
-                    host_path="/tmp",
-                ),
+            "volumes": [
+                {
+                    "container_path": "/data",
+                    "host_path": "/tmp",
+                },
+                {
+                    "container_path": "/var",
+                    "host_path": "/tmp",
+                },
             ],
-            command="ls -l",
-        ),
-        tencentcloud.lighthouse.InstanceContainerArgs(
-            container_image="ccr.ccs.tencentyun.com/qcloud/resty",
-            container_name="resty",
-            envs=[tencentcloud.lighthouse.InstanceContainerEnvArgs(
-                key="key2",
-                value="value2",
-            )],
-            publish_ports=[tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                host_port=80,
-                container_port=80,
-                ip="127.0.0.1",
-                protocol="udp",
-            )],
-            volumes=[tencentcloud.lighthouse.InstanceContainerVolumeArgs(
-                container_path="/var",
-                host_path="/tmp",
-            )],
-            command="echo \"hello\"",
-        ),
+            "command": "ls -l",
+        },
+        {
+            "container_image": "ccr.ccs.tencentyun.com/qcloud/resty",
+            "container_name": "resty",
+            "envs": [{
+                "key": "key2",
+                "value": "value2",
+            }],
+            "publish_ports": [{
+                "host_port": 80,
+                "container_port": 80,
+                "ip": "127.0.0.1",
+                "protocol": "udp",
+            }],
+            "volumes": [{
+                "container_path": "/var",
+                "host_path": "/tmp",
+            }],
+            "command": "echo \"hello\"",
+        },
     ],
     firewall_template_id=firewall_template.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		firewallTemplate, err := lighthouse.NewFirewallTemplate(ctx, "firewall_template", &lighthouse.FirewallTemplateArgs{
+			TemplateName: pulumi.String("empty-template"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = lighthouse.NewInstance(ctx, "lighthouse", &lighthouse.InstanceArgs{
+			BundleId:     pulumi.String("bundle2022_gen_01"),
+			BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
+			Period:       pulumi.Int(1),
+			RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+			InstanceName: pulumi.String("hello world"),
+			Zone:         pulumi.String("ap-guangzhou-3"),
+			Containers: lighthouse.InstanceContainerArray{
+				&lighthouse.InstanceContainerArgs{
+					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
+					ContainerName:  pulumi.String("nginx"),
+					Envs: lighthouse.InstanceContainerEnvArray{
+						&lighthouse.InstanceContainerEnvArgs{
+							Key:   pulumi.String("key"),
+							Value: pulumi.String("value"),
+						},
+						&lighthouse.InstanceContainerEnvArgs{
+							Key:   pulumi.String("key2"),
+							Value: pulumi.String("value2"),
+						},
+					},
+					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+						&lighthouse.InstanceContainerPublishPortArgs{
+							HostPort:      pulumi.Int(80),
+							ContainerPort: pulumi.Int(80),
+							Ip:            pulumi.String("127.0.0.1"),
+							Protocol:      pulumi.String("tcp"),
+						},
+						&lighthouse.InstanceContainerPublishPortArgs{
+							HostPort:      pulumi.Int(36000),
+							ContainerPort: pulumi.Int(36000),
+							Ip:            pulumi.String("127.0.0.1"),
+							Protocol:      pulumi.String("tcp"),
+						},
+					},
+					Volumes: lighthouse.InstanceContainerVolumeArray{
+						&lighthouse.InstanceContainerVolumeArgs{
+							ContainerPath: pulumi.String("/data"),
+							HostPath:      pulumi.String("/tmp"),
+						},
+						&lighthouse.InstanceContainerVolumeArgs{
+							ContainerPath: pulumi.String("/var"),
+							HostPath:      pulumi.String("/tmp"),
+						},
+					},
+					Command: pulumi.String("ls -l"),
+				},
+				&lighthouse.InstanceContainerArgs{
+					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
+					ContainerName:  pulumi.String("resty"),
+					Envs: lighthouse.InstanceContainerEnvArray{
+						&lighthouse.InstanceContainerEnvArgs{
+							Key:   pulumi.String("key2"),
+							Value: pulumi.String("value2"),
+						},
+					},
+					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+						&lighthouse.InstanceContainerPublishPortArgs{
+							HostPort:      pulumi.Int(80),
+							ContainerPort: pulumi.Int(80),
+							Ip:            pulumi.String("127.0.0.1"),
+							Protocol:      pulumi.String("udp"),
+						},
+					},
+					Volumes: lighthouse.InstanceContainerVolumeArray{
+						&lighthouse.InstanceContainerVolumeArgs{
+							ContainerPath: pulumi.String("/var"),
+							HostPath:      pulumi.String("/tmp"),
+						},
+					},
+					Command: pulumi.String("echo \"hello\""),
+				},
+			},
+			FirewallTemplateId: firewallTemplate.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -174,7 +294,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new()
+    var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewall_template", new()
     {
         TemplateName = "empty-template",
     });
@@ -276,104 +396,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		firewallTemplate, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
-			TemplateName: pulumi.String("empty-template"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
-			BundleId:     pulumi.String("bundle2022_gen_01"),
-			BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
-			Period:       pulumi.Int(1),
-			RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-			InstanceName: pulumi.String("hello world"),
-			Zone:         pulumi.String("ap-guangzhou-3"),
-			Containers: lighthouse.InstanceContainerArray{
-				&lighthouse.InstanceContainerArgs{
-					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
-					ContainerName:  pulumi.String("nginx"),
-					Envs: lighthouse.InstanceContainerEnvArray{
-						&lighthouse.InstanceContainerEnvArgs{
-							Key:   pulumi.String("key"),
-							Value: pulumi.String("value"),
-						},
-						&lighthouse.InstanceContainerEnvArgs{
-							Key:   pulumi.String("key2"),
-							Value: pulumi.String("value2"),
-						},
-					},
-					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-						&lighthouse.InstanceContainerPublishPortArgs{
-							HostPort:      pulumi.Int(80),
-							ContainerPort: pulumi.Int(80),
-							Ip:            pulumi.String("127.0.0.1"),
-							Protocol:      pulumi.String("tcp"),
-						},
-						&lighthouse.InstanceContainerPublishPortArgs{
-							HostPort:      pulumi.Int(36000),
-							ContainerPort: pulumi.Int(36000),
-							Ip:            pulumi.String("127.0.0.1"),
-							Protocol:      pulumi.String("tcp"),
-						},
-					},
-					Volumes: lighthouse.InstanceContainerVolumeArray{
-						&lighthouse.InstanceContainerVolumeArgs{
-							ContainerPath: pulumi.String("/data"),
-							HostPath:      pulumi.String("/tmp"),
-						},
-						&lighthouse.InstanceContainerVolumeArgs{
-							ContainerPath: pulumi.String("/var"),
-							HostPath:      pulumi.String("/tmp"),
-						},
-					},
-					Command: pulumi.String("ls -l"),
-				},
-				&lighthouse.InstanceContainerArgs{
-					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
-					ContainerName:  pulumi.String("resty"),
-					Envs: lighthouse.InstanceContainerEnvArray{
-						&lighthouse.InstanceContainerEnvArgs{
-							Key:   pulumi.String("key2"),
-							Value: pulumi.String("value2"),
-						},
-					},
-					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-						&lighthouse.InstanceContainerPublishPortArgs{
-							HostPort:      pulumi.Int(80),
-							ContainerPort: pulumi.Int(80),
-							Ip:            pulumi.String("127.0.0.1"),
-							Protocol:      pulumi.String("udp"),
-						},
-					},
-					Volumes: lighthouse.InstanceContainerVolumeArray{
-						&lighthouse.InstanceContainerVolumeArgs{
-							ContainerPath: pulumi.String("/var"),
-							HostPath:      pulumi.String("/tmp"),
-						},
-					},
-					Command: pulumi.String("echo \"hello\""),
-				},
-			},
-			FirewallTemplateId: firewallTemplate.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -385,8 +412,11 @@ import com.pulumi.tencentcloud.Lighthouse.FirewallTemplateArgs;
 import com.pulumi.tencentcloud.Lighthouse.Instance;
 import com.pulumi.tencentcloud.Lighthouse.InstanceArgs;
 import com.pulumi.tencentcloud.Lighthouse.inputs.InstanceContainerArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Lighthouse.inputs.InstanceContainerEnvArgs;
+import com.pulumi.tencentcloud.Lighthouse.inputs.InstanceContainerPublishPortArgs;
+import com.pulumi.tencentcloud.Lighthouse.inputs.InstanceContainerVolumeArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -398,11 +428,11 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var firewallTemplate = new FirewallTemplate("firewallTemplate", FirewallTemplateArgs.builder()        
+        var firewallTemplate = new FirewallTemplate("firewallTemplate", FirewallTemplateArgs.builder()
             .templateName("empty-template")
             .build());
 
-        var lighthouse = new Instance("lighthouse", InstanceArgs.builder()        
+        var lighthouse = new Instance("lighthouse", InstanceArgs.builder()
             .bundleId("bundle2022_gen_01")
             .blueprintId("lhbp-f1lkcd41")
             .period(1)
@@ -471,10 +501,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   firewallTemplate:
     type: tencentcloud:Lighthouse:FirewallTemplate
+    name: firewall_template
     properties:
       templateName: empty-template
   lighthouse:
@@ -525,78 +561,193 @@ resources:
           command: echo "hello"
       firewallTemplateId: ${firewallTemplate.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_lighthouse_firewalltemplate" "firewall_template" {
+  template_name = "empty-template"
+}
+resource "tencentcloud_lighthouse_instance" "lighthouse" {
+  bundle_id     = "bundle2022_gen_01"
+  blueprint_id  = "lhbp-f1lkcd41"
+  period        = 1
+  renew_flag    = "NOTIFY_AND_AUTO_RENEW"
+  instance_name = "hello world"
+  zone          = "ap-guangzhou-3"
+  containers {
+    container_image = "ccr.ccs.tencentyun.com/qcloud/nginx"
+    container_name  = "nginx"
+    envs {
+      key   = "key"
+      value = "value"
+    }
+    envs {
+      key   = "key2"
+      value = "value2"
+    }
+    publish_ports {
+      host_port      = 80
+      container_port = 80
+      ip             = "127.0.0.1"
+      protocol       = "tcp"
+    }
+    publish_ports {
+      host_port      = 36000
+      container_port = 36000
+      ip             = "127.0.0.1"
+      protocol       = "tcp"
+    }
+    volumes {
+      container_path = "/data"
+      host_path      = "/tmp"
+    }
+    volumes {
+      container_path = "/var"
+      host_path      = "/tmp"
+    }
+    command = "ls -l"
+  }
+  containers {
+    container_image = "ccr.ccs.tencentyun.com/qcloud/resty"
+    container_name  = "resty"
+    envs {
+      key   = "key2"
+      value = "value2"
+    }
+    publish_ports {
+      host_port      = 80
+      container_port = 80
+      ip             = "127.0.0.1"
+      protocol       = "udp"
+    }
+    volumes {
+      container_path = "/var"
+      host_path      = "/tmp"
+    }
+    command = "echo \"hello\""
+  }
+  firewall_template_id = tencentcloud_lighthouse_firewalltemplate.firewall_template.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateInstances](https://www.tencentcloud.com/document/api/1103/45859)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+* Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+* Update:
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+  - [ModifyInstancesAttribute](https://www.tencentcloud.com/document/api/1103/42492)
+  - [ModifyInstancesBundle](https://www.tencentcloud.com/document/api/1103/55090)
+  - [ModifyInstancesRenewFlag](https://www.tencentcloud.com/document/api/1103/44053)
+  - [ResetInstance](https://www.tencentcloud.com/document/api/1103/42490)
+  - [ResetInstancesPassword](https://www.tencentcloud.com/document/api/1103/42489)
+* Delete:
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+  - [IsolateInstances](https://www.tencentcloud.com/document/api/1103/55091)
+  - [TerminateInstances](https://www.tencentcloud.com/document/api/1103/42486)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">blueprint_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">bundle_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">client_token</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">containers</span><span class="p">:</span> <span class="nx">Optional[Sequence[_lighthouse.InstanceContainerArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">dry_run</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">firewall_template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">is_update_bundle_id_auto_voucher</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">isolate_data_disk</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">login_configuration</span><span class="p">:</span> <span class="nx">Optional[_lighthouse.InstanceLoginConfigurationArgs]</span> = None<span class="p">,</span>
-             <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">permit_default_key_pair_login</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">bundle_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">blueprint_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">containers</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceContainerArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">firewall_template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">dry_run</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">is_update_bundle_id_auto_voucher</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">isolate_data_disk</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">login_configuration</span><span class="p">:</span> <span class="nx">Optional[InstanceLoginConfigurationArgs]</span> = None<span class="p">,</span>
+             <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">permit_default_key_pair_login</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">client_token</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Lighthouse:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Lighthouse:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_lighthouse_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -617,7 +768,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -734,11 +885,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -754,8 +913,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_csharp" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Id</a>
@@ -763,8 +921,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -772,8 +929,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-required"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -781,8 +937,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="clienttoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clienttoken_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Token</a>
@@ -790,17 +945,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="containers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_csharp" style="color: inherit; text-decoration: inherit;">Containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancecontainer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="dryrun_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dryrun_csharp" style="color: inherit; text-decoration: inherit;">Dry<wbr>Run</a>
@@ -808,8 +961,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewalltemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewalltemplateid_csharp" style="color: inherit; text-decoration: inherit;">Firewall<wbr>Template<wbr>Id</a>
@@ -817,8 +969,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="isupdatebundleidautovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isupdatebundleidautovoucher_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -826,8 +977,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isolatedatadisk_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedatadisk_csharp" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Data<wbr>Disk</a>
@@ -835,17 +985,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loginconfiguration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginconfiguration_csharp" style="color: inherit; text-decoration: inherit;">Login<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceloginconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Login<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -853,8 +1001,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="permitdefaultkeypairlogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permitdefaultkeypairlogin_csharp" style="color: inherit; text-decoration: inherit;">Permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -862,9 +1009,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -872,8 +1017,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1031,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_go" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Id</a>
@@ -896,8 +1039,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -905,8 +1047,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-required"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -914,8 +1055,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="clienttoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clienttoken_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Token</a>
@@ -923,8 +1063,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="containers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_go" style="color: inherit; text-decoration: inherit;">Containers</a>
@@ -932,8 +1071,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainer">[]Instance<wbr>Container<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="dryrun_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dryrun_go" style="color: inherit; text-decoration: inherit;">Dry<wbr>Run</a>
@@ -941,8 +1079,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewalltemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewalltemplateid_go" style="color: inherit; text-decoration: inherit;">Firewall<wbr>Template<wbr>Id</a>
@@ -950,8 +1087,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="isupdatebundleidautovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isupdatebundleidautovoucher_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -959,8 +1095,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isolatedatadisk_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedatadisk_go" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Data<wbr>Disk</a>
@@ -968,8 +1103,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loginconfiguration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginconfiguration_go" style="color: inherit; text-decoration: inherit;">Login<wbr>Configuration</a>
@@ -977,8 +1111,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -986,8 +1119,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="permitdefaultkeypairlogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permitdefaultkeypairlogin_go" style="color: inherit; text-decoration: inherit;">Permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -995,9 +1127,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1005,8 +1135,125 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="blueprint_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blueprint_id_hcl" style="color: inherit; text-decoration: inherit;">blueprint_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
+            title="Required">
+        <span id="bundle_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_id_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="client_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_token_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_hcl" style="color: inherit; text-decoration: inherit;">containers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecontainer">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dry_run_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dry_run_hcl" style="color: inherit; text-decoration: inherit;">dry_<wbr>run</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="firewall_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewall_template_id_hcl" style="color: inherit; text-decoration: inherit;">firewall_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_update_bundle_id_auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_update_bundle_id_auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>update_<wbr>bundle_<wbr>id_<wbr>auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="isolate_data_disk_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_data_disk_hcl" style="color: inherit; text-decoration: inherit;">isolate_<wbr>data_<wbr>disk</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="login_configuration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#login_configuration_hcl" style="color: inherit; text-decoration: inherit;">login_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">object</a></span>
+    </dt>
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="permit_default_key_pair_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permit_default_key_pair_login_hcl" style="color: inherit; text-decoration: inherit;">permit_<wbr>default_<wbr>key_<wbr>pair_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1020,8 +1267,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_java" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -1029,8 +1275,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1038,8 +1283,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-required"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1047,8 +1291,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="clienttoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clienttoken_java" style="color: inherit; text-decoration: inherit;">client<wbr>Token</a>
@@ -1056,17 +1299,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="containers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_java" style="color: inherit; text-decoration: inherit;">containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">List&lt;Instance<wbr>Container<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancecontainer">List&lt;Instance<wbr>Container&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="dryrun_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dryrun_java" style="color: inherit; text-decoration: inherit;">dry<wbr>Run</a>
@@ -1074,8 +1315,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewalltemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewalltemplateid_java" style="color: inherit; text-decoration: inherit;">firewall<wbr>Template<wbr>Id</a>
@@ -1083,8 +1323,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="isupdatebundleidautovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isupdatebundleidautovoucher_java" style="color: inherit; text-decoration: inherit;">is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -1092,8 +1331,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isolatedatadisk_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedatadisk_java" style="color: inherit; text-decoration: inherit;">isolate<wbr>Data<wbr>Disk</a>
@@ -1101,17 +1339,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loginconfiguration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginconfiguration_java" style="color: inherit; text-decoration: inherit;">login<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1119,8 +1355,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="permitdefaultkeypairlogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permitdefaultkeypairlogin_java" style="color: inherit; text-decoration: inherit;">permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -1128,9 +1363,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1138,8 +1371,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1153,8 +1385,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_nodejs" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -1162,8 +1393,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1171,8 +1401,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-required"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1180,8 +1409,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="clienttoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clienttoken_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Token</a>
@@ -1189,17 +1417,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="containers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_nodejs" style="color: inherit; text-decoration: inherit;">containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">Instance<wbr>Container<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancecontainer">Instance<wbr>Container[]</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="dryrun_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dryrun_nodejs" style="color: inherit; text-decoration: inherit;">dry<wbr>Run</a>
@@ -1207,8 +1433,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewalltemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewalltemplateid_nodejs" style="color: inherit; text-decoration: inherit;">firewall<wbr>Template<wbr>Id</a>
@@ -1216,8 +1441,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="isupdatebundleidautovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isupdatebundleidautovoucher_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -1225,8 +1449,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isolatedatadisk_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedatadisk_nodejs" style="color: inherit; text-decoration: inherit;">isolate<wbr>Data<wbr>Disk</a>
@@ -1234,17 +1457,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loginconfiguration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginconfiguration_nodejs" style="color: inherit; text-decoration: inherit;">login<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1252,8 +1473,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="permitdefaultkeypairlogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permitdefaultkeypairlogin_nodejs" style="color: inherit; text-decoration: inherit;">permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -1261,9 +1481,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1271,8 +1489,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1286,8 +1503,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
             title="Required">
         <span id="bundle_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_id_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>id</a>
@@ -1295,8 +1511,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1304,8 +1519,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-required"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
             title="Required">
         <span id="renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -1313,8 +1527,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="client_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_token_python" style="color: inherit; text-decoration: inherit;">client_<wbr>token</a>
@@ -1322,17 +1535,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="containers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_python" style="color: inherit; text-decoration: inherit;">containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">Instance<wbr>Container<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancecontainer">Sequence[Instance<wbr>Container<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="dry_run_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dry_run_python" style="color: inherit; text-decoration: inherit;">dry_<wbr>run</a>
@@ -1340,8 +1551,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewall_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewall_template_id_python" style="color: inherit; text-decoration: inherit;">firewall_<wbr>template_<wbr>id</a>
@@ -1349,8 +1559,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_update_bundle_id_auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_update_bundle_id_auto_voucher_python" style="color: inherit; text-decoration: inherit;">is_<wbr>update_<wbr>bundle_<wbr>id_<wbr>auto_<wbr>voucher</a>
@@ -1358,8 +1567,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isolate_data_disk_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_data_disk_python" style="color: inherit; text-decoration: inherit;">isolate_<wbr>data_<wbr>disk</a>
@@ -1367,8 +1575,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="login_configuration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#login_configuration_python" style="color: inherit; text-decoration: inherit;">login_<wbr>configuration</a>
@@ -1376,8 +1583,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1385,8 +1591,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="permit_default_key_pair_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permit_default_key_pair_login_python" style="color: inherit; text-decoration: inherit;">permit_<wbr>default_<wbr>key_<wbr>pair_<wbr>login</a>
@@ -1394,9 +1599,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1404,8 +1607,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1419,8 +1621,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_yaml" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -1428,8 +1629,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-required"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1437,8 +1637,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-required"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1446,8 +1645,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="clienttoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clienttoken_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Token</a>
@@ -1455,8 +1653,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="containers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containers_yaml" style="color: inherit; text-decoration: inherit;">containers</a>
@@ -1464,8 +1661,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainer">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="dryrun_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dryrun_yaml" style="color: inherit; text-decoration: inherit;">dry<wbr>Run</a>
@@ -1473,8 +1669,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewalltemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewalltemplateid_yaml" style="color: inherit; text-decoration: inherit;">firewall<wbr>Template<wbr>Id</a>
@@ -1482,8 +1677,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="isupdatebundleidautovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isupdatebundleidautovoucher_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -1491,8 +1685,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isolatedatadisk_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedatadisk_yaml" style="color: inherit; text-decoration: inherit;">isolate<wbr>Data<wbr>Disk</a>
@@ -1500,8 +1693,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loginconfiguration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginconfiguration_yaml" style="color: inherit; text-decoration: inherit;">login<wbr>Configuration</a>
@@ -1509,8 +1701,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceloginconfiguration">Property Map</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1518,8 +1709,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="permitdefaultkeypairlogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permitdefaultkeypairlogin_yaml" style="color: inherit; text-decoration: inherit;">permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -1527,9 +1717,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1537,8 +1725,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1559,8 +1746,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaddresses_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Addresses</a>
@@ -1568,8 +1754,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-"
+    <dd>Private addresses.</dd><dt class="property-"
             title="">
         <span id="publicaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaddresses_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Addresses</a>
@@ -1577,8 +1762,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd></dl>
+    <dd>Public addresses.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1592,8 +1776,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaddresses_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Addresses</a>
@@ -1601,8 +1784,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-"
+    <dd>Private addresses.</dd><dt class="property-"
             title="">
         <span id="publicaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaddresses_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Addresses</a>
@@ -1610,8 +1792,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd></dl>
+    <dd>Public addresses.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="private_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_addresses_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Private addresses.</dd><dt class="property-"
+            title="">
+        <span id="public_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_addresses_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Public addresses.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1625,8 +1836,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaddresses_java" style="color: inherit; text-decoration: inherit;">private<wbr>Addresses</a>
@@ -1634,8 +1844,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-"
+    <dd>Private addresses.</dd><dt class="property-"
             title="">
         <span id="publicaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaddresses_java" style="color: inherit; text-decoration: inherit;">public<wbr>Addresses</a>
@@ -1643,8 +1852,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd></dl>
+    <dd>Public addresses.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1658,8 +1866,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaddresses_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Addresses</a>
@@ -1667,8 +1874,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-"
+    <dd>Private addresses.</dd><dt class="property-"
             title="">
         <span id="publicaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaddresses_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Addresses</a>
@@ -1676,8 +1882,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd></dl>
+    <dd>Public addresses.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1691,8 +1896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="private_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_addresses_python" style="color: inherit; text-decoration: inherit;">private_<wbr>addresses</a>
@@ -1700,8 +1904,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-"
+    <dd>Private addresses.</dd><dt class="property-"
             title="">
         <span id="public_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_addresses_python" style="color: inherit; text-decoration: inherit;">public_<wbr>addresses</a>
@@ -1709,8 +1912,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd></dl>
+    <dd>Public addresses.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1724,8 +1926,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaddresses_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Addresses</a>
@@ -1733,8 +1934,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-"
+    <dd>Private addresses.</dd><dt class="property-"
             title="">
         <span id="publicaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaddresses_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Addresses</a>
@@ -1742,8 +1942,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd></dl>
+    <dd>Public addresses.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1753,135 +1952,174 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">blueprint_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">bundle_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">client_token</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">containers</span><span class="p">:</span> <span class="nx">Optional[Sequence[_lighthouse.InstanceContainerArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">containers</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceContainerArgs]]</span> = None<span class="p">,</span>
         <span class="nx">dry_run</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">firewall_template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">is_update_bundle_id_auto_voucher</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">isolate_data_disk</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">login_configuration</span><span class="p">:</span> <span class="nx">Optional[_lighthouse.InstanceLoginConfigurationArgs]</span> = None<span class="p">,</span>
+        <span class="nx">login_configuration</span><span class="p">:</span> <span class="nx">Optional[InstanceLoginConfigurationArgs]</span> = None<span class="p">,</span>
         <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">permit_default_key_pair_login</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">private_addresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">public_addresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Lighthouse:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_lighthouse_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1889,28 +2127,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1918,28 +2159,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1959,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bundleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundleid_csharp" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Id</a>
@@ -1968,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clienttoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clienttoken_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Token</a>
@@ -1977,17 +2219,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_csharp" style="color: inherit; text-decoration: inherit;">Containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancecontainer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dryrun_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dryrun_csharp" style="color: inherit; text-decoration: inherit;">Dry<wbr>Run</a>
@@ -1995,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firewalltemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewalltemplateid_csharp" style="color: inherit; text-decoration: inherit;">Firewall<wbr>Template<wbr>Id</a>
@@ -2004,8 +2243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2013,8 +2251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-optional"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isupdatebundleidautovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isupdatebundleidautovoucher_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -2022,8 +2259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isolatedatadisk_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolatedatadisk_csharp" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Data<wbr>Disk</a>
@@ -2031,17 +2267,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loginconfiguration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loginconfiguration_csharp" style="color: inherit; text-decoration: inherit;">Login<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceloginconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Login<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -2049,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_permitdefaultkeypairlogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permitdefaultkeypairlogin_csharp" style="color: inherit; text-decoration: inherit;">Permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -2058,9 +2291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaddresses_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Addresses</a>
@@ -2068,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Private addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaddresses_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Addresses</a>
@@ -2077,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Public addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -2086,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2095,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2110,8 +2337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bundleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundleid_go" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Id</a>
@@ -2119,8 +2345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clienttoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clienttoken_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Token</a>
@@ -2128,8 +2353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_go" style="color: inherit; text-decoration: inherit;">Containers</a>
@@ -2137,8 +2361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainer">[]Instance<wbr>Container<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dryrun_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dryrun_go" style="color: inherit; text-decoration: inherit;">Dry<wbr>Run</a>
@@ -2146,8 +2369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firewalltemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewalltemplateid_go" style="color: inherit; text-decoration: inherit;">Firewall<wbr>Template<wbr>Id</a>
@@ -2155,8 +2377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2164,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-optional"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isupdatebundleidautovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isupdatebundleidautovoucher_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -2173,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isolatedatadisk_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolatedatadisk_go" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Data<wbr>Disk</a>
@@ -2182,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loginconfiguration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loginconfiguration_go" style="color: inherit; text-decoration: inherit;">Login<wbr>Configuration</a>
@@ -2191,8 +2409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -2200,8 +2417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_permitdefaultkeypairlogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permitdefaultkeypairlogin_go" style="color: inherit; text-decoration: inherit;">Permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -2209,9 +2425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaddresses_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Addresses</a>
@@ -2219,8 +2433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Private addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaddresses_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Addresses</a>
@@ -2228,8 +2441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Public addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -2237,8 +2449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2246,8 +2457,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_blueprint_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blueprint_id_hcl" style="color: inherit; text-decoration: inherit;">blueprint_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bundle_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundle_id_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_client_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_token_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_containers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_hcl" style="color: inherit; text-decoration: inherit;">containers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecontainer">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dry_run_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dry_run_hcl" style="color: inherit; text-decoration: inherit;">dry_<wbr>run</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_firewall_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewall_template_id_hcl" style="color: inherit; text-decoration: inherit;">firewall_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_update_bundle_id_auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_update_bundle_id_auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>update_<wbr>bundle_<wbr>id_<wbr>auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_isolate_data_disk_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolate_data_disk_hcl" style="color: inherit; text-decoration: inherit;">isolate_<wbr>data_<wbr>disk</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_login_configuration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_login_configuration_hcl" style="color: inherit; text-decoration: inherit;">login_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">object</a></span>
+    </dt>
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_permit_default_key_pair_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permit_default_key_pair_login_hcl" style="color: inherit; text-decoration: inherit;">permit_<wbr>default_<wbr>key_<wbr>pair_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_private_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_addresses_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Private addresses.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_addresses_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Public addresses.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2261,8 +2605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bundleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundleid_java" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -2270,8 +2613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clienttoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clienttoken_java" style="color: inherit; text-decoration: inherit;">client<wbr>Token</a>
@@ -2279,17 +2621,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_java" style="color: inherit; text-decoration: inherit;">containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">List&lt;Instance<wbr>Container<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancecontainer">List&lt;Instance<wbr>Container&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dryrun_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dryrun_java" style="color: inherit; text-decoration: inherit;">dry<wbr>Run</a>
@@ -2297,8 +2637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firewalltemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewalltemplateid_java" style="color: inherit; text-decoration: inherit;">firewall<wbr>Template<wbr>Id</a>
@@ -2306,8 +2645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2315,8 +2653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-optional"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isupdatebundleidautovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isupdatebundleidautovoucher_java" style="color: inherit; text-decoration: inherit;">is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -2324,8 +2661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isolatedatadisk_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolatedatadisk_java" style="color: inherit; text-decoration: inherit;">isolate<wbr>Data<wbr>Disk</a>
@@ -2333,17 +2669,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loginconfiguration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loginconfiguration_java" style="color: inherit; text-decoration: inherit;">login<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2351,8 +2685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_permitdefaultkeypairlogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permitdefaultkeypairlogin_java" style="color: inherit; text-decoration: inherit;">permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -2360,9 +2693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaddresses_java" style="color: inherit; text-decoration: inherit;">private<wbr>Addresses</a>
@@ -2370,8 +2701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Private addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaddresses_java" style="color: inherit; text-decoration: inherit;">public<wbr>Addresses</a>
@@ -2379,8 +2709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Public addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2388,8 +2717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2397,8 +2725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2412,8 +2739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bundleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundleid_nodejs" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -2421,8 +2747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clienttoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clienttoken_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Token</a>
@@ -2430,17 +2755,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_nodejs" style="color: inherit; text-decoration: inherit;">containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">Instance<wbr>Container<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancecontainer">Instance<wbr>Container[]</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dryrun_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dryrun_nodejs" style="color: inherit; text-decoration: inherit;">dry<wbr>Run</a>
@@ -2448,8 +2771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firewalltemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewalltemplateid_nodejs" style="color: inherit; text-decoration: inherit;">firewall<wbr>Template<wbr>Id</a>
@@ -2457,8 +2779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2466,8 +2787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-optional"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isupdatebundleidautovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isupdatebundleidautovoucher_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -2475,8 +2795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isolatedatadisk_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolatedatadisk_nodejs" style="color: inherit; text-decoration: inherit;">isolate<wbr>Data<wbr>Disk</a>
@@ -2484,17 +2803,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loginconfiguration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loginconfiguration_nodejs" style="color: inherit; text-decoration: inherit;">login<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2502,8 +2819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_permitdefaultkeypairlogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permitdefaultkeypairlogin_nodejs" style="color: inherit; text-decoration: inherit;">permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -2511,9 +2827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaddresses_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Addresses</a>
@@ -2521,8 +2835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Private addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaddresses_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Addresses</a>
@@ -2530,8 +2843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Public addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2539,8 +2851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2548,8 +2859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2563,8 +2873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bundle_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundle_id_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>id</a>
@@ -2572,8 +2881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_client_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_token_python" style="color: inherit; text-decoration: inherit;">client_<wbr>token</a>
@@ -2581,17 +2889,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_python" style="color: inherit; text-decoration: inherit;">containers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainer">Instance<wbr>Container<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancecontainer">Sequence[Instance<wbr>Container<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dry_run_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dry_run_python" style="color: inherit; text-decoration: inherit;">dry_<wbr>run</a>
@@ -2599,8 +2905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firewall_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewall_template_id_python" style="color: inherit; text-decoration: inherit;">firewall_<wbr>template_<wbr>id</a>
@@ -2608,8 +2913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2617,8 +2921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-optional"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_update_bundle_id_auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_update_bundle_id_auto_voucher_python" style="color: inherit; text-decoration: inherit;">is_<wbr>update_<wbr>bundle_<wbr>id_<wbr>auto_<wbr>voucher</a>
@@ -2626,8 +2929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isolate_data_disk_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolate_data_disk_python" style="color: inherit; text-decoration: inherit;">isolate_<wbr>data_<wbr>disk</a>
@@ -2635,8 +2937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_login_configuration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_login_configuration_python" style="color: inherit; text-decoration: inherit;">login_<wbr>configuration</a>
@@ -2644,8 +2945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2653,8 +2953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_permit_default_key_pair_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permit_default_key_pair_login_python" style="color: inherit; text-decoration: inherit;">permit_<wbr>default_<wbr>key_<wbr>pair_<wbr>login</a>
@@ -2662,9 +2961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_private_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_addresses_python" style="color: inherit; text-decoration: inherit;">private_<wbr>addresses</a>
@@ -2672,8 +2969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Private addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_addresses_python" style="color: inherit; text-decoration: inherit;">public_<wbr>addresses</a>
@@ -2681,8 +2977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Public addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -2690,8 +2985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2699,8 +2993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2714,8 +3007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse image.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bundleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bundleid_yaml" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -2723,8 +3015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Lighthouse package.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Lighthouse package.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clienttoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clienttoken_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Token</a>
@@ -2732,8 +3023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</p>
-</dd><dt class="property-optional"
+    <dd>A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containers_yaml" style="color: inherit; text-decoration: inherit;">containers</a>
@@ -2741,8 +3031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainer">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the containers to create.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the containers to create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dryrun_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dryrun_yaml" style="color: inherit; text-decoration: inherit;">dry<wbr>Run</a>
@@ -2750,8 +3039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firewalltemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firewalltemplateid_yaml" style="color: inherit; text-decoration: inherit;">firewall<wbr>Template<wbr>Id</a>
@@ -2759,8 +3047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall template ID. If this parameter is not specified, the default firewall policy is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2768,8 +3055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The display name of the Lighthouse instance.</p>
-</dd><dt class="property-optional"
+    <dd>The display name of the Lighthouse instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isupdatebundleidautovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isupdatebundleidautovoucher_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Update<wbr>Bundle<wbr>Id<wbr>Auto<wbr>Voucher</a>
@@ -2777,8 +3063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the voucher is deducted automatically when update bundle id. Value range: <code>true</code>: indicates automatic deduction of vouchers, <code>false</code>: does not automatically deduct vouchers. Default value: <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isolatedatadisk_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isolatedatadisk_yaml" style="color: inherit; text-decoration: inherit;">isolate<wbr>Data<wbr>Disk</a>
@@ -2786,8 +3071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to return the mounted data disk. <code>true</code>: returns both the instance and the mounted data disk; <code>false</code>: returns the instance and no longer returns its mounted data disk. Default: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loginconfiguration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loginconfiguration_yaml" style="color: inherit; text-decoration: inherit;">login<wbr>Configuration</a>
@@ -2795,8 +3079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceloginconfiguration">Property Map</a></span>
     </dt>
-    <dd><p>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</p>
-</dd><dt class="property-optional"
+    <dd>Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2804,8 +3087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_permitdefaultkeypairlogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permitdefaultkeypairlogin_yaml" style="color: inherit; text-decoration: inherit;">permit<wbr>Default<wbr>Key<wbr>Pair<wbr>Login</a>
@@ -2813,9 +3095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair. Whether to allow login using the default key pair. <code>YES</code>: allow login; <code>NO</code>: disable login. Default: <code>YES</code>.<p class="property-message">Deprecated: It has been deprecated from version v1.81.8. Use <code>tencentcloud.Lighthouse.KeyPairAttachment</code> manage key pair.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaddresses_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Addresses</a>
@@ -2823,8 +3103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Private addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Private addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaddresses_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Addresses</a>
@@ -2832,8 +3111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Public addresses.</p>
-</dd><dt class="property-optional"
+    <dd>Public addresses.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2841,8 +3119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</p>
-</dd><dt class="property-optional"
+    <dd>Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2850,8 +3127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of availability zones. A random AZ is selected by default.</p>
-</dd></dl>
+    <dd>List of availability zones. A random AZ is selected by default.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2866,7 +3142,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancecontainer">Instance<wbr>Container</h4>
+<h4 id="instancecontainer">
+Instance<wbr>Container<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Container<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2878,8 +3156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The command to run.</p>
-</dd><dt class="property-optional"
+    <dd>The command to run.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimage_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Image</a>
@@ -2887,8 +3164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container image address.</p>
-</dd><dt class="property-optional"
+    <dd>Container image address.</dd><dt class="property-optional"
             title="Optional">
         <span id="containername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containername_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Name</a>
@@ -2896,8 +3172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-optional"
+    <dd>Container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="envs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_csharp" style="color: inherit; text-decoration: inherit;">Envs</a>
@@ -2905,8 +3180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerenv">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container<wbr>Env&gt;</a></span>
     </dt>
-    <dd><p>List of environment variables.</p>
-</dd><dt class="property-optional"
+    <dd>List of environment variables.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishports_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishports_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Ports</a>
@@ -2914,8 +3188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerpublishport">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container<wbr>Publish<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>List of mappings of container ports and host ports.</p>
-</dd><dt class="property-optional"
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
             title="Optional">
         <span id="volumes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_csharp" style="color: inherit; text-decoration: inherit;">Volumes</a>
@@ -2923,8 +3196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainervolume">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Instance<wbr>Container<wbr>Volume&gt;</a></span>
     </dt>
-    <dd><p>List of container mount volumes.</p>
-</dd></dl>
+    <dd>List of container mount volumes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2938,8 +3210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The command to run.</p>
-</dd><dt class="property-optional"
+    <dd>The command to run.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimage_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Image</a>
@@ -2947,8 +3218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container image address.</p>
-</dd><dt class="property-optional"
+    <dd>Container image address.</dd><dt class="property-optional"
             title="Optional">
         <span id="containername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containername_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Name</a>
@@ -2956,8 +3226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-optional"
+    <dd>Container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="envs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_go" style="color: inherit; text-decoration: inherit;">Envs</a>
@@ -2965,8 +3234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerenv">[]Instance<wbr>Container<wbr>Env</a></span>
     </dt>
-    <dd><p>List of environment variables.</p>
-</dd><dt class="property-optional"
+    <dd>List of environment variables.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishports_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishports_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Ports</a>
@@ -2974,8 +3242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerpublishport">[]Instance<wbr>Container<wbr>Publish<wbr>Port</a></span>
     </dt>
-    <dd><p>List of mappings of container ports and host ports.</p>
-</dd><dt class="property-optional"
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
             title="Optional">
         <span id="volumes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_go" style="color: inherit; text-decoration: inherit;">Volumes</a>
@@ -2983,8 +3250,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainervolume">[]Instance<wbr>Container<wbr>Volume</a></span>
     </dt>
-    <dd><p>List of container mount volumes.</p>
-</dd></dl>
+    <dd>List of container mount volumes.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="command_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_hcl" style="color: inherit; text-decoration: inherit;">command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The command to run.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_image_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_image_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>image</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Container image address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_name_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Container name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="envs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_hcl" style="color: inherit; text-decoration: inherit;">envs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecontainerenv">list(object)</a></span>
+    </dt>
+    <dd>List of environment variables.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publish_ports_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_ports_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>ports</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecontainerpublishport">list(object)</a></span>
+    </dt>
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="volumes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_hcl" style="color: inherit; text-decoration: inherit;">volumes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecontainervolume">list(object)</a></span>
+    </dt>
+    <dd>List of container mount volumes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2998,8 +3318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The command to run.</p>
-</dd><dt class="property-optional"
+    <dd>The command to run.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimage_java" style="color: inherit; text-decoration: inherit;">container<wbr>Image</a>
@@ -3007,8 +3326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container image address.</p>
-</dd><dt class="property-optional"
+    <dd>Container image address.</dd><dt class="property-optional"
             title="Optional">
         <span id="containername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containername_java" style="color: inherit; text-decoration: inherit;">container<wbr>Name</a>
@@ -3016,8 +3334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-optional"
+    <dd>Container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="envs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_java" style="color: inherit; text-decoration: inherit;">envs</a>
@@ -3025,8 +3342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerenv">List&lt;Instance<wbr>Container<wbr>Env&gt;</a></span>
     </dt>
-    <dd><p>List of environment variables.</p>
-</dd><dt class="property-optional"
+    <dd>List of environment variables.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishports_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishports_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Ports</a>
@@ -3034,8 +3350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerpublishport">List&lt;Instance<wbr>Container<wbr>Publish<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>List of mappings of container ports and host ports.</p>
-</dd><dt class="property-optional"
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
             title="Optional">
         <span id="volumes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_java" style="color: inherit; text-decoration: inherit;">volumes</a>
@@ -3043,8 +3358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainervolume">List&lt;Instance<wbr>Container<wbr>Volume&gt;</a></span>
     </dt>
-    <dd><p>List of container mount volumes.</p>
-</dd></dl>
+    <dd>List of container mount volumes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3058,8 +3372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The command to run.</p>
-</dd><dt class="property-optional"
+    <dd>The command to run.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimage_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Image</a>
@@ -3067,8 +3380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container image address.</p>
-</dd><dt class="property-optional"
+    <dd>Container image address.</dd><dt class="property-optional"
             title="Optional">
         <span id="containername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containername_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Name</a>
@@ -3076,8 +3388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-optional"
+    <dd>Container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="envs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_nodejs" style="color: inherit; text-decoration: inherit;">envs</a>
@@ -3085,8 +3396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerenv">Instance<wbr>Container<wbr>Env[]</a></span>
     </dt>
-    <dd><p>List of environment variables.</p>
-</dd><dt class="property-optional"
+    <dd>List of environment variables.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishports_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishports_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Ports</a>
@@ -3094,8 +3404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerpublishport">Instance<wbr>Container<wbr>Publish<wbr>Port[]</a></span>
     </dt>
-    <dd><p>List of mappings of container ports and host ports.</p>
-</dd><dt class="property-optional"
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
             title="Optional">
         <span id="volumes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_nodejs" style="color: inherit; text-decoration: inherit;">volumes</a>
@@ -3103,8 +3412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainervolume">Instance<wbr>Container<wbr>Volume[]</a></span>
     </dt>
-    <dd><p>List of container mount volumes.</p>
-</dd></dl>
+    <dd>List of container mount volumes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3118,8 +3426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The command to run.</p>
-</dd><dt class="property-optional"
+    <dd>The command to run.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_image_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_image_python" style="color: inherit; text-decoration: inherit;">container_<wbr>image</a>
@@ -3127,8 +3434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Container image address.</p>
-</dd><dt class="property-optional"
+    <dd>Container image address.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_name_python" style="color: inherit; text-decoration: inherit;">container_<wbr>name</a>
@@ -3136,35 +3442,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-optional"
+    <dd>Container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="envs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_python" style="color: inherit; text-decoration: inherit;">envs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainerenv">Instance<wbr>Container<wbr>Env]</a></span>
+        <span class="property-type"><a href="#instancecontainerenv">Sequence[Instance<wbr>Container<wbr>Env]</a></span>
     </dt>
-    <dd><p>List of environment variables.</p>
-</dd><dt class="property-optional"
+    <dd>List of environment variables.</dd><dt class="property-optional"
             title="Optional">
         <span id="publish_ports_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_ports_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>ports</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainerpublishport">Instance<wbr>Container<wbr>Publish<wbr>Port]</a></span>
+        <span class="property-type"><a href="#instancecontainerpublishport">Sequence[Instance<wbr>Container<wbr>Publish<wbr>Port]</a></span>
     </dt>
-    <dd><p>List of mappings of container ports and host ports.</p>
-</dd><dt class="property-optional"
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
             title="Optional">
         <span id="volumes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_python" style="color: inherit; text-decoration: inherit;">volumes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancecontainervolume">Instance<wbr>Container<wbr>Volume]</a></span>
+        <span class="property-type"><a href="#instancecontainervolume">Sequence[Instance<wbr>Container<wbr>Volume]</a></span>
     </dt>
-    <dd><p>List of container mount volumes.</p>
-</dd></dl>
+    <dd>List of container mount volumes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3178,8 +3480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The command to run.</p>
-</dd><dt class="property-optional"
+    <dd>The command to run.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimage_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Image</a>
@@ -3187,8 +3488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container image address.</p>
-</dd><dt class="property-optional"
+    <dd>Container image address.</dd><dt class="property-optional"
             title="Optional">
         <span id="containername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containername_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Name</a>
@@ -3196,8 +3496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-optional"
+    <dd>Container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="envs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envs_yaml" style="color: inherit; text-decoration: inherit;">envs</a>
@@ -3205,8 +3504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerenv">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of environment variables.</p>
-</dd><dt class="property-optional"
+    <dd>List of environment variables.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishports_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishports_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Ports</a>
@@ -3214,8 +3512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainerpublishport">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of mappings of container ports and host ports.</p>
-</dd><dt class="property-optional"
+    <dd>List of mappings of container ports and host ports.</dd><dt class="property-optional"
             title="Optional">
         <span id="volumes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumes_yaml" style="color: inherit; text-decoration: inherit;">volumes</a>
@@ -3223,12 +3520,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancecontainervolume">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of container mount volumes.</p>
-</dd></dl>
+    <dd>List of container mount volumes.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancecontainerenv">Instance<wbr>Container<wbr>Env</h4>
+<h4 id="instancecontainerenv">
+Instance<wbr>Container<wbr>Env<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Container<wbr>Env<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3240,8 +3538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment variable key.</p>
-</dd><dt class="property-required"
+    <dd>Environment variable key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3249,8 +3546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment variable value.</p>
-</dd></dl>
+    <dd>Environment variable value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3264,8 +3560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment variable key.</p>
-</dd><dt class="property-required"
+    <dd>Environment variable key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3273,8 +3568,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment variable value.</p>
-</dd></dl>
+    <dd>Environment variable value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Environment variable key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Environment variable value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3288,8 +3604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment variable key.</p>
-</dd><dt class="property-required"
+    <dd>Environment variable key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3297,8 +3612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment variable value.</p>
-</dd></dl>
+    <dd>Environment variable value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3312,8 +3626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment variable key.</p>
-</dd><dt class="property-required"
+    <dd>Environment variable key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3321,8 +3634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment variable value.</p>
-</dd></dl>
+    <dd>Environment variable value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3336,8 +3648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Environment variable key.</p>
-</dd><dt class="property-required"
+    <dd>Environment variable key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3345,8 +3656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Environment variable value.</p>
-</dd></dl>
+    <dd>Environment variable value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3360,8 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment variable key.</p>
-</dd><dt class="property-required"
+    <dd>Environment variable key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3369,12 +3678,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment variable value.</p>
-</dd></dl>
+    <dd>Environment variable value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancecontainerpublishport">Instance<wbr>Container<wbr>Publish<wbr>Port</h4>
+<h4 id="instancecontainerpublishport">
+Instance<wbr>Container<wbr>Publish<wbr>Port<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Container<wbr>Publish<wbr>Port<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3386,8 +3696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Container port.</p>
-</dd><dt class="property-required"
+    <dd>Container port.</dd><dt class="property-required"
             title="Required">
         <span id="hostport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostport_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Port</a>
@@ -3395,8 +3704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Host port.</p>
-</dd><dt class="property-optional"
+    <dd>Host port.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -3404,8 +3712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>External IP. It defaults to 0.0.0.0.</p>
-</dd><dt class="property-optional"
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3413,8 +3720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</p>
-</dd></dl>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3428,8 +3734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Container port.</p>
-</dd><dt class="property-required"
+    <dd>Container port.</dd><dt class="property-required"
             title="Required">
         <span id="hostport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostport_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Port</a>
@@ -3437,8 +3742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Host port.</p>
-</dd><dt class="property-optional"
+    <dd>Host port.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -3446,8 +3750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>External IP. It defaults to 0.0.0.0.</p>
-</dd><dt class="property-optional"
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3455,8 +3758,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</p>
-</dd></dl>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="container_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_port_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Container port.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_port_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Host port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3470,8 +3810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Container port.</p>
-</dd><dt class="property-required"
+    <dd>Container port.</dd><dt class="property-required"
             title="Required">
         <span id="hostport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostport_java" style="color: inherit; text-decoration: inherit;">host<wbr>Port</a>
@@ -3479,8 +3818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Host port.</p>
-</dd><dt class="property-optional"
+    <dd>Host port.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3488,8 +3826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>External IP. It defaults to 0.0.0.0.</p>
-</dd><dt class="property-optional"
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3497,8 +3834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</p>
-</dd></dl>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3512,8 +3848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Container port.</p>
-</dd><dt class="property-required"
+    <dd>Container port.</dd><dt class="property-required"
             title="Required">
         <span id="hostport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostport_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Port</a>
@@ -3521,8 +3856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Host port.</p>
-</dd><dt class="property-optional"
+    <dd>Host port.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3530,8 +3864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>External IP. It defaults to 0.0.0.0.</p>
-</dd><dt class="property-optional"
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3539,8 +3872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</p>
-</dd></dl>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3554,8 +3886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Container port.</p>
-</dd><dt class="property-required"
+    <dd>Container port.</dd><dt class="property-required"
             title="Required">
         <span id="host_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_port_python" style="color: inherit; text-decoration: inherit;">host_<wbr>port</a>
@@ -3563,8 +3894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Host port.</p>
-</dd><dt class="property-optional"
+    <dd>Host port.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3572,8 +3902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>External IP. It defaults to 0.0.0.0.</p>
-</dd><dt class="property-optional"
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3581,8 +3910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</p>
-</dd></dl>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3596,8 +3924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Container port.</p>
-</dd><dt class="property-required"
+    <dd>Container port.</dd><dt class="property-required"
             title="Required">
         <span id="hostport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostport_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Port</a>
@@ -3605,8 +3932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Host port.</p>
-</dd><dt class="property-optional"
+    <dd>Host port.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3614,8 +3940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>External IP. It defaults to 0.0.0.0.</p>
-</dd><dt class="property-optional"
+    <dd>External IP. It defaults to 0.0.0.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3623,12 +3948,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</p>
-</dd></dl>
+    <dd>The protocol defaults to tcp. Valid values: tcp, udp and sctp.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancecontainervolume">Instance<wbr>Container<wbr>Volume</h4>
+<h4 id="instancecontainervolume">
+Instance<wbr>Container<wbr>Volume<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Container<wbr>Volume<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3640,8 +3966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container path.</p>
-</dd><dt class="property-required"
+    <dd>Container path.</dd><dt class="property-required"
             title="Required">
         <span id="hostpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostpath_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Path</a>
@@ -3649,8 +3974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host path.</p>
-</dd></dl>
+    <dd>Host path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3664,8 +3988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container path.</p>
-</dd><dt class="property-required"
+    <dd>Container path.</dd><dt class="property-required"
             title="Required">
         <span id="hostpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostpath_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Path</a>
@@ -3673,8 +3996,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host path.</p>
-</dd></dl>
+    <dd>Host path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="container_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_path_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Container path.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_path_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3688,8 +4032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container path.</p>
-</dd><dt class="property-required"
+    <dd>Container path.</dd><dt class="property-required"
             title="Required">
         <span id="hostpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostpath_java" style="color: inherit; text-decoration: inherit;">host<wbr>Path</a>
@@ -3697,8 +4040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host path.</p>
-</dd></dl>
+    <dd>Host path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3712,8 +4054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container path.</p>
-</dd><dt class="property-required"
+    <dd>Container path.</dd><dt class="property-required"
             title="Required">
         <span id="hostpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostpath_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Path</a>
@@ -3721,8 +4062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host path.</p>
-</dd></dl>
+    <dd>Host path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3736,8 +4076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Container path.</p>
-</dd><dt class="property-required"
+    <dd>Container path.</dd><dt class="property-required"
             title="Required">
         <span id="host_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_path_python" style="color: inherit; text-decoration: inherit;">host_<wbr>path</a>
@@ -3745,8 +4084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host path.</p>
-</dd></dl>
+    <dd>Host path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3760,8 +4098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container path.</p>
-</dd><dt class="property-required"
+    <dd>Container path.</dd><dt class="property-required"
             title="Required">
         <span id="hostpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostpath_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Path</a>
@@ -3769,12 +4106,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host path.</p>
-</dd></dl>
+    <dd>Host path.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instanceloginconfiguration">Instance<wbr>Login<wbr>Configuration</h4>
+<h4 id="instanceloginconfiguration">
+Instance<wbr>Login<wbr>Configuration<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Login<wbr>Configuration<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3786,8 +4124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether auto generate password. if false, need set password.</p>
-</dd><dt class="property-optional"
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3795,8 +4132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Login password.</p>
-</dd></dl>
+    <dd>Login password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3810,8 +4146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether auto generate password. if false, need set password.</p>
-</dd><dt class="property-optional"
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3819,8 +4154,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Login password.</p>
-</dd></dl>
+    <dd>Login password.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_generate_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_generate_password_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>generate_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Login password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3834,8 +4190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>whether auto generate password. if false, need set password.</p>
-</dd><dt class="property-optional"
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3843,8 +4198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Login password.</p>
-</dd></dl>
+    <dd>Login password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3858,8 +4212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether auto generate password. if false, need set password.</p>
-</dd><dt class="property-optional"
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3867,8 +4220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Login password.</p>
-</dd></dl>
+    <dd>Login password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3882,8 +4234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>whether auto generate password. if false, need set password.</p>
-</dd><dt class="property-optional"
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3891,8 +4242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Login password.</p>
-</dd></dl>
+    <dd>Login password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3906,8 +4256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>whether auto generate password. if false, need set password.</p>
-</dd><dt class="property-optional"
+    <dd><code>YES</code> represents selecting to automatically generate a password, without specifying the Password field. <code>NO</code> represents selecting a custom password, in which case the Password field needs to be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3915,8 +4264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Login password.</p>
-</dd></dl>
+    <dd>Login password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3932,6 +4280,9 @@ $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxx
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3941,7 +4292,6 @@ $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxx
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

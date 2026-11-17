@@ -2,9 +2,11 @@
 ---
 title: "getRuleEngineSettings"
 title_tag: "tencentcloud.Teo.getRuleEngineSettings"
-meta_desc: "Documentation for the tencentcloud.Teo.getRuleEngineSettings function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of teo ruleEngineSettings"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of teo ruleEngineSettings
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ruleEngineSettings = tencentcloud.Teo.getRuleEngineSettings({});
+const ruleEngineSettings = tencentcloud.teo.getRuleEngineSettings({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-rule_engine_settings = tencentcloud.Teo.get_rule_engine_settings()
+rule_engine_settings = tencentcloud.teo.get_rule_engine_settings()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var ruleEngineSettings = Tencentcloud.Teo.GetRuleEngineSettings.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Teo.GetRuleEngineSettings(ctx, nil, nil)
+		_, err := teo.GetRuleEngineSettings(ctx, &teo.GetRuleEngineSettingsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var ruleEngineSettings = Tencentcloud.Teo.GetRuleEngineSettings.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Teo.TeoFunctions;
 import com.pulumi.tencentcloud.Teo.inputs.GetRuleEngineSettingsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var ruleEngineSettings = TeoFunctions.getRuleEngineSettings();
+        final var ruleEngineSettings = TeoFunctions.getRuleEngineSettings(GetRuleEngineSettingsArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   ruleEngineSettings:
     fn::invoke:
-      Function: tencentcloud:Teo:getRuleEngineSettings
-      Arguments: {}
+      function: tencentcloud:Teo:getRuleEngineSettings
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_teo_getruleenginesettings" "ruleEngineSettings" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRulesSetting](https://www.tencentcloud.com/document/api/1145/50467)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRuleEngineSettings<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleEngineSettingsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>></span
+><span class="k">function </span>getRuleEngineSettings<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleEngineSettingsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>></span
 ><span class="k">
-function </span>getRuleEngineSettingsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleEngineSettingsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>></span
+function </span>getRuleEngineSettingsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleEngineSettingsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getRuleEngineSettingsOutput<span class="p">(</span><span class="
 ><span class="k">def </span>get_rule_engine_settings<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRuleEngineSettingsResult</span
 ><span class="k">
-def </span>get_rule_engine_settings_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRuleEngineSettingsResult]</span
+def </span>get_rule_engine_settings_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRuleEngineSettingsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetRuleEngineSettingsOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRuleEngineSettings </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRuleEngineSettingsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleEngineSettingsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleEngineSettingsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleEngineSettingsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetRuleEngineSettingsOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> </span>getRuleEngineSettings<span class="p">(</span><span class="nx">GetRuleEngineSettingsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> </span>getRuleEngineSettings<span class="p">(</span><span class="nx">GetRuleEngineSettingsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRuleEngineSettingsResult</a></span>> </span>getRuleEngineSettings<span class="p">(</span><span class="nx">GetRuleEngineSettingsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetRuleEngineSettingsOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_teo_get_rule_engine_settings&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsaction">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Outputs.<wbr>Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action&gt;</a></span>
     </dt>
-    <dd><p>Detail info of actions which can be used in rule engine.</p>
-</dd><dt class="property-"
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsaction">[]Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action</a></span>
     </dt>
-    <dd><p>Detail info of actions which can be used in rule engine.</p>
-</dd><dt class="property-"
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="actions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actions_hcl" style="color: inherit; text-decoration: inherit;">actions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getruleenginesettingsaction">list(object)</a></span>
+    </dt>
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsaction">List&lt;Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action&gt;</a></span>
     </dt>
-    <dd><p>Detail info of actions which can be used in rule engine.</p>
-</dd><dt class="property-"
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsaction">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action[]</a></span>
     </dt>
-    <dd><p>Detail info of actions which can be used in rule engine.</p>
-</dd><dt class="property-"
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -417,10 +515,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actions_python" style="color: inherit; text-decoration: inherit;">actions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getruleenginesettingsaction">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action]</a></span>
+        <span class="property-type"><a href="#getruleenginesettingsaction">Sequence[Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action]</a></span>
     </dt>
-    <dd><p>Detail info of actions which can be used in rule engine.</p>
-</dd><dt class="property-"
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -428,8 +525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsaction">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Detail info of actions which can be used in rule engine.</p>
-</dd><dt class="property-"
+    <dd>Detail info of actions which can be used in rule engine.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action name.</p>
-</dd><dt class="property-required"
+    <dd>Action name.</dd><dt class="property-required"
             title="Required">
         <span id="properties_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_csharp" style="color: inherit; text-decoration: inherit;">Properties</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionproperty">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property&gt;</a></span>
     </dt>
-    <dd><p>Action properties.</p>
-</dd></dl>
+    <dd>Action properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -517,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action name.</p>
-</dd><dt class="property-required"
+    <dd>Action name.</dd><dt class="property-required"
             title="Required">
         <span id="properties_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_go" style="color: inherit; text-decoration: inherit;">Properties</a>
@@ -526,8 +617,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionproperty">[]Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property</a></span>
     </dt>
-    <dd><p>Action properties.</p>
-</dd></dl>
+    <dd>Action properties.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action name.</dd><dt class="property-required"
+            title="Required">
+        <span id="properties_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_hcl" style="color: inherit; text-decoration: inherit;">properties</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionproperty">list(object)</a></span>
+    </dt>
+    <dd>Action properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -541,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action name.</p>
-</dd><dt class="property-required"
+    <dd>Action name.</dd><dt class="property-required"
             title="Required">
         <span id="properties_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_java" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -550,8 +661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionproperty">List&lt;Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property&gt;</a></span>
     </dt>
-    <dd><p>Action properties.</p>
-</dd></dl>
+    <dd>Action properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -565,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action name.</p>
-</dd><dt class="property-required"
+    <dd>Action name.</dd><dt class="property-required"
             title="Required">
         <span id="properties_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_nodejs" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -574,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionproperty">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property[]</a></span>
     </dt>
-    <dd><p>Action properties.</p>
-</dd></dl>
+    <dd>Action properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -589,17 +697,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action name.</p>
-</dd><dt class="property-required"
+    <dd>Action name.</dd><dt class="property-required"
             title="Required">
         <span id="properties_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_python" style="color: inherit; text-decoration: inherit;">properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getruleenginesettingsactionproperty">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property]</a></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionproperty">Sequence[Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property]</a></span>
     </dt>
-    <dd><p>Action properties.</p>
-</dd></dl>
+    <dd>Action properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -613,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action name.</p>
-</dd><dt class="property-required"
+    <dd>Action name.</dd><dt class="property-required"
             title="Required">
         <span id="properties_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_yaml" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -622,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionproperty">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Action properties.</p>
-</dd></dl>
+    <dd>Action properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -641,8 +745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property&gt;</a></span>
     </dt>
-    <dd><p>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="choicesvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choicesvalues_csharp" style="color: inherit; text-decoration: inherit;">Choices<wbr>Values</a>
@@ -650,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Parameters</a>
@@ -659,8 +761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Extra<wbr>Parameter&gt;</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Empty</a>
@@ -668,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Multiple</a>
@@ -677,8 +777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_csharp" style="color: inherit; text-decoration: inherit;">Max</a>
@@ -686,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_csharp" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -695,8 +793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -704,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -713,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">[]Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property</a></span>
     </dt>
-    <dd><p>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="choicesvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choicesvalues_go" style="color: inherit; text-decoration: inherit;">Choices<wbr>Values</a>
@@ -737,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Parameters</a>
@@ -746,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">[]Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Extra<wbr>Parameter</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Empty</a>
@@ -755,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Multiple</a>
@@ -764,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_go" style="color: inherit; text-decoration: inherit;">Max</a>
@@ -773,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_go" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -782,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -791,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -800,8 +887,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="choice_properties_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choice_properties_hcl" style="color: inherit; text-decoration: inherit;">choice_<wbr>properties</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">list(object)</a></span>
+    </dt>
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="choices_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choices_values_hcl" style="color: inherit; text-decoration: inherit;">choices_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
+            title="Required">
+        <span id="extra_parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_parameters_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">list(object)</a></span>
+    </dt>
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_allow_empty_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_empty_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>empty</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_multiple_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multiple_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>multiple</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_hcl" style="color: inherit; text-decoration: inherit;">max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_hcl" style="color: inherit; text-decoration: inherit;">min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Property name.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -815,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">List&lt;Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property&gt;</a></span>
     </dt>
-    <dd><p>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="choicesvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choicesvalues_java" style="color: inherit; text-decoration: inherit;">choices<wbr>Values</a>
@@ -824,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Parameters</a>
@@ -833,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">List&lt;Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Extra<wbr>Parameter&gt;</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_java" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Empty</a>
@@ -842,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_java" style="color: inherit; text-decoration: inherit;">is<wbr>Multiple</a>
@@ -851,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_java" style="color: inherit; text-decoration: inherit;">max</a>
@@ -860,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_java" style="color: inherit; text-decoration: inherit;">min</a>
@@ -869,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -878,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -887,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -902,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property[]</a></span>
     </dt>
-    <dd><p>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="choicesvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choicesvalues_nodejs" style="color: inherit; text-decoration: inherit;">choices<wbr>Values</a>
@@ -911,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Parameters</a>
@@ -920,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Extra<wbr>Parameter[]</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Empty</a>
@@ -929,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Multiple</a>
@@ -938,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_nodejs" style="color: inherit; text-decoration: inherit;">max</a>
@@ -947,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_nodejs" style="color: inherit; text-decoration: inherit;">min</a>
@@ -956,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -965,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -974,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -987,10 +1133,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choice_properties_python" style="color: inherit; text-decoration: inherit;">choice_<wbr>properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property]</a></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">Sequence[Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property]</a></span>
     </dt>
-    <dd><p>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="choices_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choices_values_python" style="color: inherit; text-decoration: inherit;">choices_<wbr>values</a>
@@ -998,17 +1143,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extra_parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_parameters_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>parameters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Extra<wbr>Parameter]</a></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">Sequence[Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Extra<wbr>Parameter]</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_allow_empty_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_empty_python" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>empty</a>
@@ -1016,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="is_multiple_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multiple_python" style="color: inherit; text-decoration: inherit;">is_<wbr>multiple</a>
@@ -1025,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_python" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1034,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_python" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1043,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1052,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1061,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1076,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoiceproperty">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associative properties of this property, they are all required. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="choicesvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choicesvalues_yaml" style="color: inherit; text-decoration: inherit;">choices<wbr>Values</a>
@@ -1085,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Parameters</a>
@@ -1094,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertyextraparameter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Empty</a>
@@ -1103,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Multiple</a>
@@ -1112,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_yaml" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1121,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_yaml" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1130,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1139,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1148,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Parameters</a>
@@ -1176,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property<wbr>Extra<wbr>Parameter&gt;</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Empty</a>
@@ -1185,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Multiple</a>
@@ -1194,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_csharp" style="color: inherit; text-decoration: inherit;">Max</a>
@@ -1203,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_csharp" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -1212,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1221,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1230,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1245,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Parameters</a>
@@ -1254,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">[]Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property<wbr>Extra<wbr>Parameter</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Empty</a>
@@ -1263,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Multiple</a>
@@ -1272,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_go" style="color: inherit; text-decoration: inherit;">Max</a>
@@ -1281,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_go" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -1290,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1299,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1308,8 +1421,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="choices_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choices_values_hcl" style="color: inherit; text-decoration: inherit;">choices_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
+            title="Required">
+        <span id="extra_parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_parameters_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">list(object)</a></span>
+    </dt>
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_allow_empty_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_empty_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>empty</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_multiple_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multiple_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>multiple</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_hcl" style="color: inherit; text-decoration: inherit;">max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_hcl" style="color: inherit; text-decoration: inherit;">min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Property name.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1323,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Parameters</a>
@@ -1332,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">List&lt;Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property<wbr>Extra<wbr>Parameter&gt;</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_java" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Empty</a>
@@ -1341,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_java" style="color: inherit; text-decoration: inherit;">is<wbr>Multiple</a>
@@ -1350,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_java" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1359,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_java" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1368,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1377,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1386,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1401,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Parameters</a>
@@ -1410,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property<wbr>Extra<wbr>Parameter[]</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Empty</a>
@@ -1419,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Multiple</a>
@@ -1428,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_nodejs" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1437,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_nodejs" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1446,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1455,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1464,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1479,17 +1645,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extra_parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_parameters_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>parameters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property<wbr>Extra<wbr>Parameter]</a></span>
+        <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">Sequence[Get<wbr>Rule<wbr>Engine<wbr>Settings<wbr>Action<wbr>Property<wbr>Choice<wbr>Property<wbr>Extra<wbr>Parameter]</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_allow_empty_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_empty_python" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>empty</a>
@@ -1497,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="is_multiple_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multiple_python" style="color: inherit; text-decoration: inherit;">is_<wbr>multiple</a>
@@ -1506,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_python" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1515,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_python" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1524,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1533,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1542,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1557,8 +1715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The choices which can be used. This list may be empty.</p>
-</dd><dt class="property-required"
+    <dd>The choices which can be used. This list may be empty.</dd><dt class="property-required"
             title="Required">
         <span id="extraparameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraparameters_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Parameters</a>
@@ -1566,8 +1723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruleenginesettingsactionpropertychoicepropertyextraparameter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Special parameter. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isallowempty_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowempty_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Empty</a>
@@ -1575,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set empty.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set empty.</dd><dt class="property-required"
             title="Required">
         <span id="ismultiple_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismultiple_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Multiple</a>
@@ -1584,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this property is allowed to set multiple values.</p>
-</dd><dt class="property-required"
+    <dd>Whether this property is allowed to set multiple values.</dd><dt class="property-required"
             title="Required">
         <span id="max_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_yaml" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1593,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Max integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="min_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_yaml" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1602,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</p>
-</dd><dt class="property-required"
+    <dd>Min integer value can bse used when property type is <code>CUSTOM_NUM</code>. When <code>Min</code> and <code>Max</code> both are 0, this field is meaningless.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1611,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property name.</p>
-</dd><dt class="property-required"
+    <dd>Property name.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1620,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1639,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1648,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1657,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1672,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1681,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1690,8 +1835,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="choices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choices_hcl" style="color: inherit; text-decoration: inherit;">choices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1705,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1714,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1723,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1738,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1747,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1756,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1771,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1780,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1789,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1804,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1813,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1822,8 +1985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1841,8 +2003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1850,8 +2011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1859,8 +2019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1874,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1883,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1892,8 +2049,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="choices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#choices_hcl" style="color: inherit; text-decoration: inherit;">choices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1907,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1916,8 +2101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1925,8 +2109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1940,8 +2123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1949,8 +2131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1958,8 +2139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1973,8 +2153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1982,8 +2161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1991,8 +2169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2006,8 +2183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of choices which can be used when <code>Type</code> is <code>CHOICE</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2015,8 +2191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</p>
-</dd><dt class="property-required"
+    <dd>Parameter name. Valid values:- <code>Action</code>: this extra parameter is required when modify HTTP header, this action should be a <code>RewriteAction</code>.- <code>StatusCode</code>: this extra parameter is required when modify HTTP status code, this action should be a <code>CodeAction</code>.- <code>NULL</code>: this action should be a <code>NormalAction</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2024,8 +2199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</p>
-</dd></dl>
+    <dd>Property value type. Valid values:- <code>CHOICE</code>: enum type, must select one of the value in <code>ChoicesValue</code>.- <code>TOGGLE</code>: switch type, must select one of the value in <code>ChoicesValue</code>.- <code>OBJECT</code>: object type, the <code>ChoiceProperties</code> list all properties of the object.- <code>CUSTOM_NUM</code>: integer type.- <code>CUSTOM_STRING</code>: string type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2040,7 +2214,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

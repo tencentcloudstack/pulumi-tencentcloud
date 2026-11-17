@@ -2,9 +2,11 @@
 ---
 title: "PacketFilterConfig"
 title_tag: "tencentcloud.Antiddos.PacketFilterConfig"
-meta_desc: "Documentation for the tencentcloud.Antiddos.PacketFilterConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a antiddos packet filter config"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,251 +16,79 @@ no_edit_this_page: true
 
 Provides a resource to create a antiddos packet filter config
 
-## Example Usage
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const packetFilterConfig = new tencentcloud.antiddos.PacketFilterConfig("packetFilterConfig", {
-    instanceId: "bgp-00000ry7",
-    packetFilterConfig: {
-        action: "drop",
-        depth: 1,
-        dportEnd: 80,
-        dportStart: 80,
-        isNot: 0,
-        matchBegin: "begin_l5",
-        matchType: "pcre",
-        offset: 1,
-        pktlenMax: 1400,
-        pktlenMin: 1400,
-        protocol: "all",
-        sportEnd: 8080,
-        sportStart: 8080,
-        str: "a",
-    },
-});
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-packet_filter_config = tencentcloud.antiddos.PacketFilterConfig("packetFilterConfig",
-    instance_id="bgp-00000ry7",
-    packet_filter_config=tencentcloud.antiddos.PacketFilterConfigPacketFilterConfigArgs(
-        action="drop",
-        depth=1,
-        dport_end=80,
-        dport_start=80,
-        is_not=0,
-        match_begin="begin_l5",
-        match_type="pcre",
-        offset=1,
-        pktlen_max=1400,
-        pktlen_min=1400,
-        protocol="all",
-        sport_end=8080,
-        sport_start=8080,
-        str="a",
-    ))
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var packetFilterConfig = new Tencentcloud.Antiddos.PacketFilterConfig("packetFilterConfig", new()
-    {
-        InstanceId = "bgp-00000ry7",
-        AntiddosPacketFilterConfig = new Tencentcloud.Antiddos.Inputs.PacketFilterConfigPacketFilterConfigArgs
-        {
-            Action = "drop",
-            Depth = 1,
-            DportEnd = 80,
-            DportStart = 80,
-            IsNot = 0,
-            MatchBegin = "begin_l5",
-            MatchType = "pcre",
-            Offset = 1,
-            PktlenMax = 1400,
-            PktlenMin = 1400,
-            Protocol = "all",
-            SportEnd = 8080,
-            SportStart = 8080,
-            Str = "a",
-        },
-    });
-
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.NewPacketFilterConfig(ctx, "packetFilterConfig", &Antiddos.PacketFilterConfigArgs{
-			InstanceId: pulumi.String("bgp-00000ry7"),
-			PacketFilterConfig: &antiddos.PacketFilterConfigPacketFilterConfigArgs{
-				Action:     pulumi.String("drop"),
-				Depth:      pulumi.Int(1),
-				DportEnd:   pulumi.Int(80),
-				DportStart: pulumi.Int(80),
-				IsNot:      pulumi.Int(0),
-				MatchBegin: pulumi.String("begin_l5"),
-				MatchType:  pulumi.String("pcre"),
-				Offset:     pulumi.Int(1),
-				PktlenMax:  pulumi.Int(1400),
-				PktlenMin:  pulumi.Int(1400),
-				Protocol:   pulumi.String("all"),
-				SportEnd:   pulumi.Int(8080),
-				SportStart: pulumi.Int(8080),
-				Str:        pulumi.String("a"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Antiddos.PacketFilterConfig;
-import com.pulumi.tencentcloud.Antiddos.PacketFilterConfigArgs;
-import com.pulumi.tencentcloud.Antiddos.inputs.PacketFilterConfigPacketFilterConfigArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var packetFilterConfig = new PacketFilterConfig("packetFilterConfig", PacketFilterConfigArgs.builder()        
-            .instanceId("bgp-00000ry7")
-            .packetFilterConfig(PacketFilterConfigPacketFilterConfigArgs.builder()
-                .action("drop")
-                .depth(1)
-                .dportEnd(80)
-                .dportStart(80)
-                .isNot(0)
-                .matchBegin("begin_l5")
-                .matchType("pcre")
-                .offset(1)
-                .pktlenMax(1400)
-                .pktlenMin(1400)
-                .protocol("all")
-                .sportEnd(8080)
-                .sportStart(8080)
-                .str("a")
-                .build())
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  packetFilterConfig:
-    type: tencentcloud:Antiddos:PacketFilterConfig
-    properties:
-      instanceId: bgp-00000ry7
-      packetFilterConfig:
-        action: drop
-        depth: 1
-        dportEnd: 80
-        dportStart: 80
-        isNot: 0
-        matchBegin: begin_l5
-        matchType: pcre
-        offset: 1
-        pktlenMax: 1400
-        pktlenMin: 1400
-        protocol: all
-        sportEnd: 8080
-        sportStart: 8080
-        str: a
-```
-<!--End PulumiCodeChooser -->
-
 
 
 ## Create PacketFilterConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                        <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                       <span class="nx">packet_filter_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.PacketFilterConfigPacketFilterConfigArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                       <span class="nx">packet_filter_config</span><span class="p">:</span> <span class="nx">Optional[PacketFilterConfigPacketFilterConfigArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPacketFilterConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PacketFilterConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPacketFilterConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PacketFilterConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">PacketFilterConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PacketFilterConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:PacketFilterConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:PacketFilterConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_antiddos_packet_filter_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -279,7 +109,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -396,11 +226,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## PacketFilterConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The PacketFilterConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -414,10 +252,9 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddospacketfilterconfig_csharp" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Packet<wbr>Filter<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Feature filtering configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -425,8 +262,7 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd></dl>
+    <dd>resource id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -440,8 +276,7 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>resource id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="packetfilterconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilterconfig_go" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filter<wbr>Config</a>
@@ -449,8 +284,29 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>resource id.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="packet_filter_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_filter_config_hcl" style="color: inherit; text-decoration: inherit;">packet_<wbr>filter_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">object</a></span>
+    </dt>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,17 +320,15 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>resource id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="packetfilterconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilterconfig_java" style="color: inherit; text-decoration: inherit;">packet<wbr>Filter<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -488,17 +342,15 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>resource id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="packetfilterconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilterconfig_nodejs" style="color: inherit; text-decoration: inherit;">packet<wbr>Filter<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -512,8 +364,7 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>resource id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="packet_filter_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_filter_config_python" style="color: inherit; text-decoration: inherit;">packet_<wbr>filter_<wbr>config</a>
@@ -521,8 +372,7 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +386,7 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>resource id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="packetfilterconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilterconfig_yaml" style="color: inherit; text-decoration: inherit;">packet<wbr>Filter<wbr>Config</a>
@@ -545,8 +394,7 @@ The PacketFilterConfig resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Property Map</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -567,8 +415,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -582,8 +429,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -597,8 +457,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +471,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -627,8 +485,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -642,8 +499,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -653,121 +509,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing PacketFilterConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PacketFilterConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PacketFilterConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PacketFilterConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PacketFilterConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">packet_filter_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.PacketFilterConfigPacketFilterConfigArgs]</span> = None<span class="p">) -&gt;</span> PacketFilterConfig</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">packet_filter_config</span><span class="p">:</span> <span class="nx">Optional[PacketFilterConfigPacketFilterConfigArgs]</span> = None<span class="p">) -&gt;</span> PacketFilterConfig</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPacketFilterConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PacketFilterConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PacketFilterConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPacketFilterConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PacketFilterConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PacketFilterConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PacketFilterConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PacketFilterConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PacketFilterConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PacketFilterConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PacketFilterConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PacketFilterConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PacketFilterConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PacketFilterConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPacketFilterConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Antiddos:PacketFilterConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_antiddos_packet_filter_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PacketFilterConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PacketFilterConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -775,28 +670,31 @@ Get an existing PacketFilterConfig resource's state with the given name, ID, and
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PacketFilterConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -804,28 +702,31 @@ Get an existing PacketFilterConfig resource's state with the given name, ID, and
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PacketFilterConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -843,10 +744,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddospacketfilterconfig_csharp" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Packet<wbr>Filter<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Feature filtering configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -854,8 +754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd></dl>
+    <dd>resource id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,8 +768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>resource id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_packetfilterconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilterconfig_go" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filter<wbr>Config</a>
@@ -878,8 +776,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>resource id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_packet_filter_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packet_filter_config_hcl" style="color: inherit; text-decoration: inherit;">packet_<wbr>filter_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">object</a></span>
+    </dt>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -893,17 +812,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>resource id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_packetfilterconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilterconfig_java" style="color: inherit; text-decoration: inherit;">packet<wbr>Filter<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -917,17 +834,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>resource id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_packetfilterconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilterconfig_nodejs" style="color: inherit; text-decoration: inherit;">packet<wbr>Filter<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -941,8 +856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>resource id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_packet_filter_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packet_filter_config_python" style="color: inherit; text-decoration: inherit;">packet_<wbr>filter_<wbr>config</a>
@@ -950,8 +864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -965,8 +878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>resource id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_packetfilterconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilterconfig_yaml" style="color: inherit; text-decoration: inherit;">packet<wbr>Filter<wbr>Config</a>
@@ -974,8 +886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#packetfilterconfigpacketfilterconfig">Property Map</a></span>
     </dt>
-    <dd><p>Feature filtering configuration.</p>
-</dd></dl>
+    <dd>Feature filtering configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -990,7 +901,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="packetfilterconfigpacketfilterconfig">Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config</h4>
+<h4 id="packetfilterconfigpacketfilterconfig">
+Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Packet<wbr>Filter<wbr>Config<wbr>Packet<wbr>Filter<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1002,8 +915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].</p>
-</dd><dt class="property-required"
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_csharp" style="color: inherit; text-decoration: inherit;">Dport<wbr>End</a>
@@ -1011,8 +923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_csharp" style="color: inherit; text-decoration: inherit;">Dport<wbr>Start</a>
@@ -1020,8 +931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_csharp" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Max</a>
@@ -1029,8 +939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_csharp" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Min</a>
@@ -1038,8 +947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum message length, ranging from 1 to 1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1047,8 +955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value [TCP udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_csharp" style="color: inherit; text-decoration: inherit;">Sport<wbr>End</a>
@@ -1056,8 +963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_csharp" style="color: inherit; text-decoration: inherit;">Sport<wbr>Start</a>
@@ -1065,8 +971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting source port, ranging from 0 to 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="depth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_csharp" style="color: inherit; text-decoration: inherit;">Depth</a>
@@ -1074,8 +979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The detection depth starting from the detection position, with a value of [0-1500].</p>
-</dd><dt class="property-optional"
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
             title="Optional">
         <span id="depth2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_csharp" style="color: inherit; text-decoration: inherit;">Depth2</a>
@@ -1083,8 +987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The second detection depth starting from the second detection position, with a value of [01500].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Not</a>
@@ -1092,8 +995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Not2</a>
@@ -1101,8 +1003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin</a>
@@ -1110,8 +1011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection position, value [begin_l3 (IP header) begin_l4 (TCP/UDP header) begin_l5 (T payload) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin2</a>
@@ -1119,8 +1019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Second detection position, value [begin_l5 (load) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchlogic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Logic</a>
@@ -1128,8 +1027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-optional"
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Type</a>
@@ -1137,8 +1035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection type, value [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Type2</a>
@@ -1146,8 +1043,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -1155,8 +1051,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset from the detection position, with a value range of [0, Depth].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_csharp" style="color: inherit; text-decoration: inherit;">Offset2</a>
@@ -1164,8 +1059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset from the second detection position, with a value range of [0, Depth2].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
             title="Optional">
         <span id="pktlengt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengt_csharp" style="color: inherit; text-decoration: inherit;">Pkt<wbr>Len<wbr>Gt</a>
@@ -1173,8 +1067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Greater than message length, value 1+.</p>
-</dd><dt class="property-optional"
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
             title="Optional">
         <span id="str_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_csharp" style="color: inherit; text-decoration: inherit;">Str</a>
@@ -1182,8 +1075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd><dt class="property-optional"
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
             title="Optional">
         <span id="str2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_csharp" style="color: inherit; text-decoration: inherit;">Str2</a>
@@ -1191,8 +1083,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd></dl>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1206,8 +1097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].</p>
-</dd><dt class="property-required"
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_go" style="color: inherit; text-decoration: inherit;">Dport<wbr>End</a>
@@ -1215,8 +1105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_go" style="color: inherit; text-decoration: inherit;">Dport<wbr>Start</a>
@@ -1224,8 +1113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_go" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Max</a>
@@ -1233,8 +1121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_go" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Min</a>
@@ -1242,8 +1129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum message length, ranging from 1 to 1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1251,8 +1137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value [TCP udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_go" style="color: inherit; text-decoration: inherit;">Sport<wbr>End</a>
@@ -1260,8 +1145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_go" style="color: inherit; text-decoration: inherit;">Sport<wbr>Start</a>
@@ -1269,8 +1153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting source port, ranging from 0 to 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="depth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_go" style="color: inherit; text-decoration: inherit;">Depth</a>
@@ -1278,8 +1161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The detection depth starting from the detection position, with a value of [0-1500].</p>
-</dd><dt class="property-optional"
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
             title="Optional">
         <span id="depth2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_go" style="color: inherit; text-decoration: inherit;">Depth2</a>
@@ -1287,8 +1169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The second detection depth starting from the second detection position, with a value of [01500].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Not</a>
@@ -1296,8 +1177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Not2</a>
@@ -1305,8 +1185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin</a>
@@ -1314,8 +1193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection position, value [begin_l3 (IP header) begin_l4 (TCP/UDP header) begin_l5 (T payload) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin2</a>
@@ -1323,8 +1201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Second detection position, value [begin_l5 (load) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchlogic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Logic</a>
@@ -1332,8 +1209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-optional"
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Type</a>
@@ -1341,8 +1217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection type, value [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Type2</a>
@@ -1350,8 +1225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -1359,8 +1233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset from the detection position, with a value range of [0, Depth].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_go" style="color: inherit; text-decoration: inherit;">Offset2</a>
@@ -1368,8 +1241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset from the second detection position, with a value range of [0, Depth2].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
             title="Optional">
         <span id="pktlengt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengt_go" style="color: inherit; text-decoration: inherit;">Pkt<wbr>Len<wbr>Gt</a>
@@ -1377,8 +1249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Greater than message length, value 1+.</p>
-</dd><dt class="property-optional"
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
             title="Optional">
         <span id="str_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_go" style="color: inherit; text-decoration: inherit;">Str</a>
@@ -1386,8 +1257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd><dt class="property-optional"
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
             title="Optional">
         <span id="str2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_go" style="color: inherit; text-decoration: inherit;">Str2</a>
@@ -1395,8 +1265,189 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd></dl>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
+            title="Required">
+        <span id="dport_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dport_end_hcl" style="color: inherit; text-decoration: inherit;">dport_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="dport_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dport_start_hcl" style="color: inherit; text-decoration: inherit;">dport_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="pktlen_max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_max_hcl" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
+            title="Required">
+        <span id="pktlen_min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_min_hcl" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
+            title="Required">
+        <span id="sport_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_end_hcl" style="color: inherit; text-decoration: inherit;">sport_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
+            title="Required">
+        <span id="sport_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_start_hcl" style="color: inherit; text-decoration: inherit;">sport_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="depth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_hcl" style="color: inherit; text-decoration: inherit;">depth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="depth2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_hcl" style="color: inherit; text-decoration: inherit;">depth2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_not_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>not</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_not2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not2_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>not2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="match_begin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>begin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="match_begin2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin2_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>begin2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="match_logic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_logic_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>logic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="match_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="match_type2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type2_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>type2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_hcl" style="color: inherit; text-decoration: inherit;">offset2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pkt_len_gt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pkt_len_gt_hcl" style="color: inherit; text-decoration: inherit;">pkt_<wbr>len_<wbr>gt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="str_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_hcl" style="color: inherit; text-decoration: inherit;">str</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="str2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_hcl" style="color: inherit; text-decoration: inherit;">str2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1410,8 +1461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].</p>
-</dd><dt class="property-required"
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_java" style="color: inherit; text-decoration: inherit;">dport<wbr>End</a>
@@ -1419,8 +1469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>end destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_java" style="color: inherit; text-decoration: inherit;">dport<wbr>Start</a>
@@ -1428,8 +1477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_java" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Max</a>
@@ -1437,8 +1485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_java" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Min</a>
@@ -1446,8 +1493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum message length, ranging from 1 to 1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1455,8 +1501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value [TCP udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_java" style="color: inherit; text-decoration: inherit;">sport<wbr>End</a>
@@ -1464,8 +1509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_java" style="color: inherit; text-decoration: inherit;">sport<wbr>Start</a>
@@ -1473,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting source port, ranging from 0 to 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="depth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_java" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -1482,8 +1525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The detection depth starting from the detection position, with a value of [0-1500].</p>
-</dd><dt class="property-optional"
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
             title="Optional">
         <span id="depth2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_java" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -1491,8 +1533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The second detection depth starting from the second detection position, with a value of [01500].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_java" style="color: inherit; text-decoration: inherit;">is<wbr>Not</a>
@@ -1500,8 +1541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_java" style="color: inherit; text-decoration: inherit;">is<wbr>Not2</a>
@@ -1509,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_java" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -1518,8 +1557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection position, value [begin_l3 (IP header) begin_l4 (TCP/UDP header) begin_l5 (T payload) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_java" style="color: inherit; text-decoration: inherit;">match<wbr>Begin2</a>
@@ -1527,8 +1565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Second detection position, value [begin_l5 (load) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchlogic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_java" style="color: inherit; text-decoration: inherit;">match<wbr>Logic</a>
@@ -1536,8 +1573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-optional"
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_java" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -1545,8 +1581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection type, value [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_java" style="color: inherit; text-decoration: inherit;">match<wbr>Type2</a>
@@ -1554,8 +1589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1563,8 +1597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The offset from the detection position, with a value range of [0, Depth].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_java" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -1572,8 +1605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The offset from the second detection position, with a value range of [0, Depth2].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
             title="Optional">
         <span id="pktlengt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengt_java" style="color: inherit; text-decoration: inherit;">pkt<wbr>Len<wbr>Gt</a>
@@ -1581,8 +1613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Greater than message length, value 1+.</p>
-</dd><dt class="property-optional"
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
             title="Optional">
         <span id="str_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_java" style="color: inherit; text-decoration: inherit;">str</a>
@@ -1590,8 +1621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd><dt class="property-optional"
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
             title="Optional">
         <span id="str2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_java" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -1599,8 +1629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd></dl>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1614,8 +1643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].</p>
-</dd><dt class="property-required"
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_nodejs" style="color: inherit; text-decoration: inherit;">dport<wbr>End</a>
@@ -1623,8 +1651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>end destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_nodejs" style="color: inherit; text-decoration: inherit;">dport<wbr>Start</a>
@@ -1632,8 +1659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_nodejs" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Max</a>
@@ -1641,8 +1667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_nodejs" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Min</a>
@@ -1650,8 +1675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum message length, ranging from 1 to 1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1659,8 +1683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value [TCP udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_nodejs" style="color: inherit; text-decoration: inherit;">sport<wbr>End</a>
@@ -1668,8 +1691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_nodejs" style="color: inherit; text-decoration: inherit;">sport<wbr>Start</a>
@@ -1677,8 +1699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting source port, ranging from 0 to 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="depth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_nodejs" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -1686,8 +1707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The detection depth starting from the detection position, with a value of [0-1500].</p>
-</dd><dt class="property-optional"
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
             title="Optional">
         <span id="depth2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_nodejs" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -1695,8 +1715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The second detection depth starting from the second detection position, with a value of [01500].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Not</a>
@@ -1704,8 +1723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Not2</a>
@@ -1713,8 +1731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -1722,8 +1739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection position, value [begin_l3 (IP header) begin_l4 (TCP/UDP header) begin_l5 (T payload) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Begin2</a>
@@ -1731,8 +1747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Second detection position, value [begin_l5 (load) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchlogic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Logic</a>
@@ -1740,8 +1755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-optional"
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -1749,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection type, value [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Type2</a>
@@ -1758,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1767,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The offset from the detection position, with a value range of [0, Depth].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_nodejs" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -1776,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The offset from the second detection position, with a value range of [0, Depth2].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
             title="Optional">
         <span id="pktlengt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengt_nodejs" style="color: inherit; text-decoration: inherit;">pkt<wbr>Len<wbr>Gt</a>
@@ -1785,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Greater than message length, value 1+.</p>
-</dd><dt class="property-optional"
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
             title="Optional">
         <span id="str_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_nodejs" style="color: inherit; text-decoration: inherit;">str</a>
@@ -1794,8 +1803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd><dt class="property-optional"
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
             title="Optional">
         <span id="str2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_nodejs" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -1803,8 +1811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd></dl>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1818,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].</p>
-</dd><dt class="property-required"
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
             title="Required">
         <span id="dport_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dport_end_python" style="color: inherit; text-decoration: inherit;">dport_<wbr>end</a>
@@ -1827,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="dport_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dport_start_python" style="color: inherit; text-decoration: inherit;">dport_<wbr>start</a>
@@ -1836,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="pktlen_max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_max_python" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>max</a>
@@ -1845,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlen_min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_min_python" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>min</a>
@@ -1854,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum message length, ranging from 1 to 1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1863,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol, value [TCP udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sport_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_end_python" style="color: inherit; text-decoration: inherit;">sport_<wbr>end</a>
@@ -1872,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
             title="Required">
         <span id="sport_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_start_python" style="color: inherit; text-decoration: inherit;">sport_<wbr>start</a>
@@ -1881,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting source port, ranging from 0 to 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="depth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_python" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -1890,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The detection depth starting from the detection position, with a value of [0-1500].</p>
-</dd><dt class="property-optional"
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
             title="Optional">
         <span id="depth2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_python" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -1899,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The second detection depth starting from the second detection position, with a value of [01500].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
             title="Optional">
         <span id="is_not_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not_python" style="color: inherit; text-decoration: inherit;">is_<wbr>not</a>
@@ -1908,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="is_not2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not2_python" style="color: inherit; text-decoration: inherit;">is_<wbr>not2</a>
@@ -1917,8 +1913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="match_begin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin_python" style="color: inherit; text-decoration: inherit;">match_<wbr>begin</a>
@@ -1926,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detection position, value [begin_l3 (IP header) begin_l4 (TCP/UDP header) begin_l5 (T payload) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="match_begin2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin2_python" style="color: inherit; text-decoration: inherit;">match_<wbr>begin2</a>
@@ -1935,8 +1929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Second detection position, value [begin_l5 (load) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="match_logic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_logic_python" style="color: inherit; text-decoration: inherit;">match_<wbr>logic</a>
@@ -1944,8 +1937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-optional"
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
             title="Optional">
         <span id="match_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type_python" style="color: inherit; text-decoration: inherit;">match_<wbr>type</a>
@@ -1953,8 +1945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detection type, value [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="match_type2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type2_python" style="color: inherit; text-decoration: inherit;">match_<wbr>type2</a>
@@ -1962,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1971,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset from the detection position, with a value range of [0, Depth].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_python" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -1980,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset from the second detection position, with a value range of [0, Depth2].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
             title="Optional">
         <span id="pkt_len_gt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pkt_len_gt_python" style="color: inherit; text-decoration: inherit;">pkt_<wbr>len_<wbr>gt</a>
@@ -1989,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Greater than message length, value 1+.</p>
-</dd><dt class="property-optional"
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
             title="Optional">
         <span id="str_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_python" style="color: inherit; text-decoration: inherit;">str</a>
@@ -1998,8 +1985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd><dt class="property-optional"
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
             title="Optional">
         <span id="str2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_python" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -2007,8 +1993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd></dl>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2022,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].</p>
-</dd><dt class="property-required"
+    <dd>Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_yaml" style="color: inherit; text-decoration: inherit;">dport<wbr>End</a>
@@ -2031,8 +2015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>end destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>end destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_yaml" style="color: inherit; text-decoration: inherit;">dport<wbr>Start</a>
@@ -2040,8 +2023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting destination port, ranging from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting destination port, ranging from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_yaml" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Max</a>
@@ -2049,8 +2031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_yaml" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Min</a>
@@ -2058,8 +2039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum message length, ranging from 1 to 1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, ranging from 1 to 1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2067,8 +2047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value [TCP udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [TCP udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_yaml" style="color: inherit; text-decoration: inherit;">sport<wbr>End</a>
@@ -2076,8 +2055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, values range from 1 to 65535, must be greater than or equal to the start source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_yaml" style="color: inherit; text-decoration: inherit;">sport<wbr>Start</a>
@@ -2085,8 +2063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting source port, ranging from 0 to 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Starting source port, ranging from 0 to 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="depth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_yaml" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -2094,8 +2071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The detection depth starting from the detection position, with a value of [0-1500].</p>
-</dd><dt class="property-optional"
+    <dd>The detection depth starting from the detection position, with a value of [0-1500].</dd><dt class="property-optional"
             title="Optional">
         <span id="depth2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_yaml" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -2103,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The second detection depth starting from the second detection position, with a value of [01500].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection depth starting from the second detection position, with a value of [01500].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Not</a>
@@ -2112,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="isnot2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Not2</a>
@@ -2121,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</p>
-</dd><dt class="property-optional"
+    <dd>Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -2130,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection position, value [begin_l3 (IP header) begin_l4 (TCP/UDP header) begin_l5 (T payload) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchbegin2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Begin2</a>
@@ -2139,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Second detection position, value [begin_l5 (load) no_match (mismatch)].</p>
-</dd><dt class="property-optional"
+    <dd>Second detection position, value [beginL5 (load) noMatch (mismatch)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchlogic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Logic</a>
@@ -2148,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-optional"
+    <dd>When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -2157,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection type, value [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>Detection type, value [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="matchtype2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Type2</a>
@@ -2166,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</p>
-</dd><dt class="property-optional"
+    <dd>The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -2175,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The offset from the detection position, with a value range of [0, Depth].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the detection position, with a value range of [0, Depth].</dd><dt class="property-optional"
             title="Optional">
         <span id="offset2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_yaml" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -2184,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The offset from the second detection position, with a value range of [0, Depth2].</p>
-</dd><dt class="property-optional"
+    <dd>The offset from the second detection position, with a value range of [0, Depth2].</dd><dt class="property-optional"
             title="Optional">
         <span id="pktlengt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengt_yaml" style="color: inherit; text-decoration: inherit;">pkt<wbr>Len<wbr>Gt</a>
@@ -2193,8 +2159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Greater than message length, value 1+.</p>
-</dd><dt class="property-optional"
+    <dd>Greater than message length, value 1+.</dd><dt class="property-optional"
             title="Optional">
         <span id="str_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_yaml" style="color: inherit; text-decoration: inherit;">str</a>
@@ -2202,8 +2167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd><dt class="property-optional"
+    <dd>Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd><dt class="property-optional"
             title="Optional">
         <span id="str2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_yaml" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -2211,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</p>
-</dd></dl>
+    <dd>key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string '123'; when the detection type is pcre, please fill in the regular expression character string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2220,12 +2183,14 @@ The following state arguments are supported:
 
 
 
-antiddos packet_filter_config can be imported using the id, e.g.
+antiddos packetFilterConfig can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id
 ```
 
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2237,7 +2202,6 @@ $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig pack
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

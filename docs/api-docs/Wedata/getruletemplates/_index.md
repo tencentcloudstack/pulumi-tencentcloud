@@ -2,9 +2,11 @@
 ---
 title: "getRuleTemplates"
 title_tag: "tencentcloud.Wedata.getRuleTemplates"
-meta_desc: "Documentation for the tencentcloud.Wedata.getRuleTemplates function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of wedata rule templates"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,45 +18,94 @@ Use this data source to query detailed information of wedata rule templates
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ruleTemplates = tencentcloud.Wedata.getRuleTemplates({
+const ruleTemplates = tencentcloud.wedata.getRuleTemplates({
+    type: 2,
+    sourceObjectType: 2,
     projectId: "1840731346428280832",
     sourceEngineTypes: [
         2,
         4,
         16,
     ],
-    sourceObjectType: 2,
-    type: 2,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-rule_templates = tencentcloud.Wedata.get_rule_templates(project_id="1840731346428280832",
+rule_templates = tencentcloud.wedata.get_rule_templates(type=2,
+    source_object_type=2,
+    project_id="1840731346428280832",
     source_engine_types=[
         2,
         4,
         16,
-    ],
-    source_object_type=2,
-    type=2)
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/wedata"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := wedata.GetRuleTemplates(ctx, &wedata.GetRuleTemplatesArgs{
+			Type:             pulumi.IntRef(2),
+			SourceObjectType: pulumi.IntRef(2),
+			ProjectId:        pulumi.StringRef("1840731346428280832"),
+			SourceEngineTypes: []int{
+				2,
+				4,
+				16,
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var ruleTemplates = Tencentcloud.Wedata.GetRuleTemplates.Invoke(new()
     {
+        Type = 2,
+        SourceObjectType = 2,
         ProjectId = "1840731346428280832",
         SourceEngineTypes = new[]
         {
@@ -62,38 +113,15 @@ return await Deployment.RunAsync(() =>
             4,
             16,
         },
-        SourceObjectType = 2,
-        Type = 2,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-)
-func main() {
-pulumi.Run(func(ctx *pulumi.Context) error {
-_, err := Wedata.GetRuleTemplates(ctx, &wedata.GetRuleTemplatesArgs{
-ProjectId: pulumi.StringRef("1840731346428280832"),
-SourceEngineTypes: interface{}{
-2,
-4,
-16,
-},
-SourceObjectType: pulumi.IntRef(2),
-Type: pulumi.IntRef(2),
-}, nil);
-if err != nil {
-return err
-}
-return nil
-})
-}
-```
 ```java
 package generated_program;
 
@@ -102,8 +130,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Wedata.WedataFunctions;
 import com.pulumi.tencentcloud.Wedata.inputs.GetRuleTemplatesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -116,34 +144,67 @@ public class App {
 
     public static void stack(Context ctx) {
         final var ruleTemplates = WedataFunctions.getRuleTemplates(GetRuleTemplatesArgs.builder()
+            .type(2)
+            .sourceObjectType(2)
             .projectId("1840731346428280832")
             .sourceEngineTypes(            
                 2,
                 4,
                 16)
-            .sourceObjectType(2)
-            .type(2)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   ruleTemplates:
     fn::invoke:
-      Function: tencentcloud:Wedata:getRuleTemplates
-      Arguments:
+      function: tencentcloud:Wedata:getRuleTemplates
+      arguments:
+        type: 2
+        sourceObjectType: 2
         projectId: '1840731346428280832'
         sourceEngineTypes:
           - 2
           - 4
           - 16
-        sourceObjectType: 2
-        type: 2
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_wedata_getruletemplates" "ruleTemplates" {
+  type                = 2
+  source_object_type  = 2
+  project_id          = "1840731346428280832"
+  source_engine_types = [2, 4, 16]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
 
 
 
@@ -155,7 +216,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -163,9 +224,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRuleTemplates<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleTemplatesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>></span
+><span class="k">function </span>getRuleTemplates<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleTemplatesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>></span
 ><span class="k">
-function </span>getRuleTemplatesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleTemplatesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>></span
+function </span>getRuleTemplatesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleTemplatesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,12 +242,12 @@ function </span>getRuleTemplatesOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRuleTemplatesResult</span
 ><span class="k">
-def </span>get_rule_templates_output<span class="p">(</span><span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">source_engine_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
-                       <span class="nx">source_object_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                       <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRuleTemplatesResult]</span
+def </span>get_rule_templates_output<span class="p">(</span><span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">source_engine_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
+                       <span class="nx">source_object_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                       <span class="nx">type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRuleTemplatesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -211,7 +272,8 @@ func </span>GetRuleTemplatesOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRuleTemplates </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRuleTemplatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleTemplatesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleTemplatesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleTemplatesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -220,7 +282,8 @@ func </span>GetRuleTemplatesOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> </span>getRuleTemplates<span class="p">(</span><span class="nx">GetRuleTemplatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> </span>getRuleTemplates<span class="p">(</span><span class="nx">GetRuleTemplatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRuleTemplatesResult</a></span>> </span>getRuleTemplates<span class="p">(</span><span class="nx">GetRuleTemplatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,6 +295,15 @@ func </span>GetRuleTemplatesOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Wedata/getRuleTemplates:getRuleTemplates
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_wedata_get_rule_templates&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -250,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -259,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceenginetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Engine<wbr>Types</a>
@@ -268,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-optional"
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceobjecttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Type</a>
@@ -277,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-optional"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -286,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -301,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -310,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceenginetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Engine<wbr>Types</a>
@@ -319,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-optional"
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceobjecttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Type</a>
@@ -328,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-optional"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -337,8 +400,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_engine_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_engine_types_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>engine_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_object_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -352,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -361,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceenginetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_java" style="color: inherit; text-decoration: inherit;">source<wbr>Engine<wbr>Types</a>
@@ -370,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-optional"
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceobjecttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -379,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-optional"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -388,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -403,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -412,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceenginetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Engine<wbr>Types</a>
@@ -421,8 +522,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-optional"
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceobjecttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -430,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-optional"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -439,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -454,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -463,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_engine_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_engine_types_python" style="color: inherit; text-decoration: inherit;">source_<wbr>engine_<wbr>types</a>
@@ -472,8 +568,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-optional"
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_object_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>type</a>
@@ -481,8 +576,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-optional"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -490,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -505,8 +598,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -514,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceenginetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Engine<wbr>Types</a>
@@ -523,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-optional"
+    <dd>Applicable type of source data.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceobjecttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -532,8 +622,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-optional"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -541,8 +630,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -565,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruletemplatesdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Wedata.<wbr>Outputs.<wbr>Get<wbr>Rule<wbr>Templates<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>rule template list.</p>
-</dd><dt class="property-"
+    <dd>rule template list.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -574,8 +661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -599,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-"
+    <dd>Applicable type of source data.</dd><dt class="property-"
             title="">
         <span id="sourceobjecttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Type</a>
@@ -608,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-"
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
             title="">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -617,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -632,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruletemplatesdata">[]Get<wbr>Rule<wbr>Templates<wbr>Data</a></span>
     </dt>
-    <dd><p>rule template list.</p>
-</dd><dt class="property-"
+    <dd>rule template list.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -641,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -666,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-"
+    <dd>Applicable type of source data.</dd><dt class="property-"
             title="">
         <span id="sourceobjecttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Type</a>
@@ -675,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-"
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
             title="">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -684,8 +763,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_hcl" style="color: inherit; text-decoration: inherit;">datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getruletemplatesdata">list(object)</a></span>
+    </dt>
+    <dd>rule template list.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="source_engine_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_engine_types_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>engine_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Applicable type of source data.</dd><dt class="property-"
+            title="">
+        <span id="source_object_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -699,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruletemplatesdata">List&lt;Get<wbr>Rule<wbr>Templates<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>rule template list.</p>
-</dd><dt class="property-"
+    <dd>rule template list.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -708,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -733,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-"
+    <dd>Applicable type of source data.</dd><dt class="property-"
             title="">
         <span id="sourceobjecttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -742,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-"
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
             title="">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -751,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -766,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruletemplatesdata">Get<wbr>Rule<wbr>Templates<wbr>Data[]</a></span>
     </dt>
-    <dd><p>rule template list.</p>
-</dd><dt class="property-"
+    <dd>rule template list.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -775,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -800,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-"
+    <dd>Applicable type of source data.</dd><dt class="property-"
             title="">
         <span id="sourceobjecttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -809,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-"
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
             title="">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -818,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -831,10 +961,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_python" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getruletemplatesdata">Get<wbr>Rule<wbr>Templates<wbr>Data]</a></span>
+        <span class="property-type"><a href="#getruletemplatesdata">Sequence[Get<wbr>Rule<wbr>Templates<wbr>Data]</a></span>
     </dt>
-    <dd><p>rule template list.</p>
-</dd><dt class="property-"
+    <dd>rule template list.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -842,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -867,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-"
+    <dd>Applicable type of source data.</dd><dt class="property-"
             title="">
         <span id="source_object_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>type</a>
@@ -876,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-"
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
             title="">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -885,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getruletemplatesdata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>rule template list.</p>
-</dd><dt class="property-"
+    <dd>rule template list.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -909,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -934,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-"
+    <dd>Applicable type of source data.</dd><dt class="property-"
             title="">
         <span id="sourceobjecttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -943,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-"
+    <dd>Source object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-"
             title="">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -952,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd></dl>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -977,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Citations.</p>
-</dd><dt class="property-required"
+    <dd>Citations.</dd><dt class="property-required"
             title="Required">
         <span id="comparetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetype_csharp" style="color: inherit; text-decoration: inherit;">Compare<wbr>Type</a>
@@ -986,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</p>
-</dd><dt class="property-required"
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -995,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Description of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="multisourceflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multisourceflag_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Source<wbr>Flag</a>
@@ -1004,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to associate other library tables.</p>
-</dd><dt class="property-required"
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1013,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Name of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="qualitydim_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualitydim_csharp" style="color: inherit; text-decoration: inherit;">Quality<wbr>Dim</a>
@@ -1022,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="ruletemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletemplateid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Template<wbr>Id</a>
@@ -1031,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of rule template.</p>
-</dd><dt class="property-required"
+    <dd>ID of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourcecontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecontent_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Content</a>
@@ -1040,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Content of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourceenginetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Engine<wbr>Types</a>
@@ -1049,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-required"
+    <dd>Applicable type of source data.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjectdatatype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjectdatatype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Data<wbr>Type</a>
@@ -1058,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: value, <code>2</code>: string.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjecttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Type</a>
@@ -1067,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
             title="Required">
         <span id="sqlexpression_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlexpression_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Expression</a>
@@ -1076,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sql Expression.</p>
-</dd><dt class="property-required"
+    <dd>Sql Expression.</dd><dt class="property-required"
             title="Required">
         <span id="subqualitydim_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subqualitydim_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Quality<wbr>Dim</a>
@@ -1085,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1094,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd><dt class="property-required"
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1103,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time, like: yyyy-MM-dd HH:mm:ss.</p>
-</dd><dt class="property-required"
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
             title="Required">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1112,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>user id.</p>
-</dd><dt class="property-required"
+    <dd>user id.</dd><dt class="property-required"
             title="Required">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1121,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user name.</p>
-</dd><dt class="property-required"
+    <dd>user name.</dd><dt class="property-required"
             title="Required">
         <span id="whereflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whereflag_csharp" style="color: inherit; text-decoration: inherit;">Where<wbr>Flag</a>
@@ -1130,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If add where.</p>
-</dd></dl>
+    <dd>If add where.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1145,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Citations.</p>
-</dd><dt class="property-required"
+    <dd>Citations.</dd><dt class="property-required"
             title="Required">
         <span id="comparetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetype_go" style="color: inherit; text-decoration: inherit;">Compare<wbr>Type</a>
@@ -1154,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</p>
-</dd><dt class="property-required"
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1163,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Description of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="multisourceflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multisourceflag_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Source<wbr>Flag</a>
@@ -1172,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to associate other library tables.</p>
-</dd><dt class="property-required"
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1181,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Name of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="qualitydim_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualitydim_go" style="color: inherit; text-decoration: inherit;">Quality<wbr>Dim</a>
@@ -1190,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="ruletemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletemplateid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Template<wbr>Id</a>
@@ -1199,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of rule template.</p>
-</dd><dt class="property-required"
+    <dd>ID of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourcecontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecontent_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Content</a>
@@ -1208,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Content of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourceenginetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Engine<wbr>Types</a>
@@ -1217,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-required"
+    <dd>Applicable type of source data.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjectdatatype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjectdatatype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Data<wbr>Type</a>
@@ -1226,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: value, <code>2</code>: string.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjecttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Object<wbr>Type</a>
@@ -1235,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
             title="Required">
         <span id="sqlexpression_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlexpression_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Expression</a>
@@ -1244,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sql Expression.</p>
-</dd><dt class="property-required"
+    <dd>Sql Expression.</dd><dt class="property-required"
             title="Required">
         <span id="subqualitydim_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subqualitydim_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Quality<wbr>Dim</a>
@@ -1253,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1262,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd><dt class="property-required"
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1271,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time, like: yyyy-MM-dd HH:mm:ss.</p>
-</dd><dt class="property-required"
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
             title="Required">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1280,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>user id.</p>
-</dd><dt class="property-required"
+    <dd>user id.</dd><dt class="property-required"
             title="Required">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1289,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user name.</p>
-</dd><dt class="property-required"
+    <dd>user name.</dd><dt class="property-required"
             title="Required">
         <span id="whereflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whereflag_go" style="color: inherit; text-decoration: inherit;">Where<wbr>Flag</a>
@@ -1298,8 +1383,157 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If add where.</p>
-</dd></dl>
+    <dd>If add where.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="citation_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#citation_count_hcl" style="color: inherit; text-decoration: inherit;">citation_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Citations.</dd><dt class="property-required"
+            title="Required">
+        <span id="compare_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_type_hcl" style="color: inherit; text-decoration: inherit;">compare_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of rule template.</dd><dt class="property-required"
+            title="Required">
+        <span id="multi_source_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_source_flag_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>source_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of rule template.</dd><dt class="property-required"
+            title="Required">
+        <span id="quality_dim_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quality_dim_hcl" style="color: inherit; text-decoration: inherit;">quality_<wbr>dim</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_template_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of rule template.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_content_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of rule template.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_engine_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_engine_types_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>engine_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Applicable type of source data.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_object_data_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_data_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>data_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_object_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
+            title="Required">
+        <span id="sql_expression_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_expression_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>expression</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sql Expression.</dd><dt class="property-required"
+            title="Required">
+        <span id="sub_quality_dim_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_quality_dim_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>quality_<wbr>dim</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>user id.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>user name.</dd><dt class="property-required"
+            title="Required">
+        <span id="where_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#where_flag_hcl" style="color: inherit; text-decoration: inherit;">where_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If add where.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1313,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Citations.</p>
-</dd><dt class="property-required"
+    <dd>Citations.</dd><dt class="property-required"
             title="Required">
         <span id="comparetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetype_java" style="color: inherit; text-decoration: inherit;">compare<wbr>Type</a>
@@ -1322,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</p>
-</dd><dt class="property-required"
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1331,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Description of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="multisourceflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multisourceflag_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Source<wbr>Flag</a>
@@ -1340,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to associate other library tables.</p>
-</dd><dt class="property-required"
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1349,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Name of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="qualitydim_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualitydim_java" style="color: inherit; text-decoration: inherit;">quality<wbr>Dim</a>
@@ -1358,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="ruletemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletemplateid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Template<wbr>Id</a>
@@ -1367,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of rule template.</p>
-</dd><dt class="property-required"
+    <dd>ID of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourcecontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecontent_java" style="color: inherit; text-decoration: inherit;">source<wbr>Content</a>
@@ -1376,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Content of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourceenginetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_java" style="color: inherit; text-decoration: inherit;">source<wbr>Engine<wbr>Types</a>
@@ -1385,8 +1611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-required"
+    <dd>Applicable type of source data.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjectdatatype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjectdatatype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Data<wbr>Type</a>
@@ -1394,8 +1619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: value, <code>2</code>: string.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjecttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -1403,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
             title="Required">
         <span id="sqlexpression_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlexpression_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Expression</a>
@@ -1412,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sql Expression.</p>
-</dd><dt class="property-required"
+    <dd>Sql Expression.</dd><dt class="property-required"
             title="Required">
         <span id="subqualitydim_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subqualitydim_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Quality<wbr>Dim</a>
@@ -1421,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1430,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd><dt class="property-required"
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1439,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time, like: yyyy-MM-dd HH:mm:ss.</p>
-</dd><dt class="property-required"
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
             title="Required">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1448,8 +1667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>user id.</p>
-</dd><dt class="property-required"
+    <dd>user id.</dd><dt class="property-required"
             title="Required">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1457,8 +1675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user name.</p>
-</dd><dt class="property-required"
+    <dd>user name.</dd><dt class="property-required"
             title="Required">
         <span id="whereflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whereflag_java" style="color: inherit; text-decoration: inherit;">where<wbr>Flag</a>
@@ -1466,8 +1683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If add where.</p>
-</dd></dl>
+    <dd>If add where.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1481,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Citations.</p>
-</dd><dt class="property-required"
+    <dd>Citations.</dd><dt class="property-required"
             title="Required">
         <span id="comparetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetype_nodejs" style="color: inherit; text-decoration: inherit;">compare<wbr>Type</a>
@@ -1490,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</p>
-</dd><dt class="property-required"
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1499,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Description of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="multisourceflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multisourceflag_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Source<wbr>Flag</a>
@@ -1508,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to associate other library tables.</p>
-</dd><dt class="property-required"
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1517,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Name of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="qualitydim_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualitydim_nodejs" style="color: inherit; text-decoration: inherit;">quality<wbr>Dim</a>
@@ -1526,8 +1737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="ruletemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletemplateid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Template<wbr>Id</a>
@@ -1535,8 +1745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of rule template.</p>
-</dd><dt class="property-required"
+    <dd>ID of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourcecontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecontent_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Content</a>
@@ -1544,8 +1753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Content of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourceenginetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Engine<wbr>Types</a>
@@ -1553,8 +1761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-required"
+    <dd>Applicable type of source data.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjectdatatype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjectdatatype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Data<wbr>Type</a>
@@ -1562,8 +1769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: value, <code>2</code>: string.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjecttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -1571,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
             title="Required">
         <span id="sqlexpression_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlexpression_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Expression</a>
@@ -1580,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sql Expression.</p>
-</dd><dt class="property-required"
+    <dd>Sql Expression.</dd><dt class="property-required"
             title="Required">
         <span id="subqualitydim_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subqualitydim_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Quality<wbr>Dim</a>
@@ -1589,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1598,8 +1801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd><dt class="property-required"
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1607,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time, like: yyyy-MM-dd HH:mm:ss.</p>
-</dd><dt class="property-required"
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
             title="Required">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1616,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>user id.</p>
-</dd><dt class="property-required"
+    <dd>user id.</dd><dt class="property-required"
             title="Required">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1625,8 +1825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user name.</p>
-</dd><dt class="property-required"
+    <dd>user name.</dd><dt class="property-required"
             title="Required">
         <span id="whereflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whereflag_nodejs" style="color: inherit; text-decoration: inherit;">where<wbr>Flag</a>
@@ -1634,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If add where.</p>
-</dd></dl>
+    <dd>If add where.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1649,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Citations.</p>
-</dd><dt class="property-required"
+    <dd>Citations.</dd><dt class="property-required"
             title="Required">
         <span id="compare_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_type_python" style="color: inherit; text-decoration: inherit;">compare_<wbr>type</a>
@@ -1658,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</p>
-</dd><dt class="property-required"
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1667,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Description of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="multi_source_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_source_flag_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>source_<wbr>flag</a>
@@ -1676,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to associate other library tables.</p>
-</dd><dt class="property-required"
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1685,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Name of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="quality_dim_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quality_dim_python" style="color: inherit; text-decoration: inherit;">quality_<wbr>dim</a>
@@ -1694,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="rule_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_template_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>template_<wbr>id</a>
@@ -1703,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of rule template.</p>
-</dd><dt class="property-required"
+    <dd>ID of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="source_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_content_python" style="color: inherit; text-decoration: inherit;">source_<wbr>content</a>
@@ -1712,8 +1903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Content of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="source_engine_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_engine_types_python" style="color: inherit; text-decoration: inherit;">source_<wbr>engine_<wbr>types</a>
@@ -1721,8 +1911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-required"
+    <dd>Applicable type of source data.</dd><dt class="property-required"
             title="Required">
         <span id="source_object_data_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_data_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>data_<wbr>type</a>
@@ -1730,8 +1919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: value, <code>2</code>: string.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
             title="Required">
         <span id="source_object_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_object_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>object_<wbr>type</a>
@@ -1739,8 +1927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
             title="Required">
         <span id="sql_expression_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_expression_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>expression</a>
@@ -1748,8 +1935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sql Expression.</p>
-</dd><dt class="property-required"
+    <dd>Sql Expression.</dd><dt class="property-required"
             title="Required">
         <span id="sub_quality_dim_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_quality_dim_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>quality_<wbr>dim</a>
@@ -1757,8 +1943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1766,8 +1951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd><dt class="property-required"
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1775,8 +1959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time, like: yyyy-MM-dd HH:mm:ss.</p>
-</dd><dt class="property-required"
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
             title="Required">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -1784,8 +1967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>user id.</p>
-</dd><dt class="property-required"
+    <dd>user id.</dd><dt class="property-required"
             title="Required">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -1793,8 +1975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>user name.</p>
-</dd><dt class="property-required"
+    <dd>user name.</dd><dt class="property-required"
             title="Required">
         <span id="where_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#where_flag_python" style="color: inherit; text-decoration: inherit;">where_<wbr>flag</a>
@@ -1802,8 +1983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If add where.</p>
-</dd></dl>
+    <dd>If add where.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1817,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Citations.</p>
-</dd><dt class="property-required"
+    <dd>Citations.</dd><dt class="property-required"
             title="Required">
         <span id="comparetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetype_yaml" style="color: inherit; text-decoration: inherit;">compare<wbr>Type</a>
@@ -1826,8 +2005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</p>
-</dd><dt class="property-required"
+    <dd>The type of comparison method supported by the rule (1: fixed value comparison, greater than, less than, greater than or equal to, etc. 2: fluctuating value comparison, absolute value, rise, fall).</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1835,8 +2013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Description of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="multisourceflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multisourceflag_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Source<wbr>Flag</a>
@@ -1844,8 +2021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to associate other library tables.</p>
-</dd><dt class="property-required"
+    <dd>Whether to associate other library tables.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1853,8 +2029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Name of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="qualitydim_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualitydim_yaml" style="color: inherit; text-decoration: inherit;">quality<wbr>Dim</a>
@@ -1862,8 +2037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="ruletemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletemplateid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Template<wbr>Id</a>
@@ -1871,8 +2045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of rule template.</p>
-</dd><dt class="property-required"
+    <dd>ID of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourcecontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecontent_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Content</a>
@@ -1880,8 +2053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of rule template.</p>
-</dd><dt class="property-required"
+    <dd>Content of rule template.</dd><dt class="property-required"
             title="Required">
         <span id="sourceenginetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceenginetypes_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Engine<wbr>Types</a>
@@ -1889,8 +2061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Applicable type of source data.</p>
-</dd><dt class="property-required"
+    <dd>Applicable type of source data.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjectdatatype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjectdatatype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Data<wbr>Type</a>
@@ -1898,8 +2069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: value, <code>2</code>: string.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: value, <code>2</code>: string.</dd><dt class="property-required"
             title="Required">
         <span id="sourceobjecttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceobjecttype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Object<wbr>Type</a>
@@ -1907,8 +2077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</p>
-</dd><dt class="property-required"
+    <dd>Source data object type. <code>1</code>: Constant, <code>2</code>: Offline table level, <code>3</code>: Offline field level.</dd><dt class="property-required"
             title="Required">
         <span id="sqlexpression_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlexpression_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Expression</a>
@@ -1916,8 +2085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sql Expression.</p>
-</dd><dt class="property-required"
+    <dd>Sql Expression.</dd><dt class="property-required"
             title="Required">
         <span id="subqualitydim_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subqualitydim_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Quality<wbr>Dim</a>
@@ -1925,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</p>
-</dd><dt class="property-required"
+    <dd>Sub Quality inspection dimensions. <code>1</code>: Accuracy, <code>2</code>: Uniqueness, <code>3</code>: Completeness, <code>4</code>: Consistency, <code>5</code>: Timeliness, <code>6</code>: Effectiveness.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1934,8 +2101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</p>
-</dd><dt class="property-required"
+    <dd>Template type. <code>1</code> means System template, <code>2</code> means Custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1943,8 +2109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time, like: yyyy-MM-dd HH:mm:ss.</p>
-</dd><dt class="property-required"
+    <dd>update time, like: yyyy-MM-dd HH:mm:ss.</dd><dt class="property-required"
             title="Required">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1952,8 +2117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>user id.</p>
-</dd><dt class="property-required"
+    <dd>user id.</dd><dt class="property-required"
             title="Required">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1961,8 +2125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user name.</p>
-</dd><dt class="property-required"
+    <dd>user name.</dd><dt class="property-required"
             title="Required">
         <span id="whereflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whereflag_yaml" style="color: inherit; text-decoration: inherit;">where<wbr>Flag</a>
@@ -1970,8 +2133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If add where.</p>
-</dd></dl>
+    <dd>If add where.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1986,7 +2148,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

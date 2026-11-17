@@ -2,9 +2,11 @@
 ---
 title: "Account"
 title_tag: "tencentcloud.Redis.Account"
-meta_desc: "Documentation for the tencentcloud.Redis.Account resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a redis account"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,174 +20,146 @@ Provides a resource to create a redis account
 
 ### Create an account with read and write permissions
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zone = tencentcloud.Redis.getZoneConfig({
+const zone = tencentcloud.redis.getZoneConfig({
     typeId: 7,
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+    name: "tf_redis_subnet",
     cidrBlock: "10.0.1.0/24",
 });
 const foo = new tencentcloud.redis.Instance("foo", {
     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
     typeId: zone.then(zone => zone.lists?.[1]?.typeId),
-    password: "test12345789",
+    password: "Password@123",
     memSize: 8192,
     redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
     redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
+    name: "tf_example",
     port: 6379,
     vpcId: vpc.id,
     subnetId: subnet.id,
 });
 const account = new tencentcloud.redis.Account("account", {
     instanceId: foo.id,
-    accountName: "account_test",
-    accountPassword: "test1234",
+    accountName: "tf_example",
+    accountPassword: "Password@123",
     remark: "master",
     readonlyPolicies: ["master"],
     privilege: "rw",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zone = tencentcloud.Redis.get_zone_config(type_id=7)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zone = tencentcloud.redis.get_zone_config(type_id=7)
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=zone.lists[1].zone,
+    name="tf_redis_subnet",
     cidr_block="10.0.1.0/24")
 foo = tencentcloud.redis.Instance("foo",
     availability_zone=zone.lists[1].zone,
     type_id=zone.lists[1].type_id,
-    password="test12345789",
+    password="Password@123",
     mem_size=8192,
     redis_shard_num=zone.lists[1].redis_shard_nums[0],
     redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+    name="tf_example",
     port=6379,
     vpc_id=vpc.id,
     subnet_id=subnet.id)
 account = tencentcloud.redis.Account("account",
     instance_id=foo.id,
-    account_name="account_test",
-    account_password="test1234",
+    account_name="tf_example",
+    account_password="Password@123",
     remark="master",
     readonly_policies=["master"],
     privilege="rw")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
-    {
-        TypeId = 7,
-    });
-
-    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        VpcId = vpc.Id,
-        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
-        CidrBlock = "10.0.1.0/24",
-    });
-
-    var foo = new Tencentcloud.Redis.Instance("foo", new()
-    {
-        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
-        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.TypeId),
-        Password = "test12345789",
-        MemSize = 8192,
-        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
-        RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
-        Port = 6379,
-        VpcId = vpc.Id,
-        SubnetId = subnet.Id,
-    });
-
-    var account = new Tencentcloud.Redis.Account("account", new()
-    {
-        InstanceId = foo.Id,
-        AccountName = "account_test",
-        AccountPassword = "test1234",
-        Remark = "master",
-        ReadonlyPolicies = new[]
-        {
-            "master",
-        },
-        Privilege = "rw",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
 			TypeId: pulumi.IntRef(7),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
 		})
 		if err != nil {
 			return err
 		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
 			CidrBlock:        pulumi.String("10.0.1.0/24"),
 		})
 		if err != nil {
 			return err
 		}
-		foo, err := Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
+		foo, err := redis.NewInstance(ctx, "foo", &redis.InstanceArgs{
 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
 			TypeId:           pulumi.Int(zone.Lists[1].TypeId),
-			Password:         pulumi.String("test12345789"),
+			Password:         pulumi.String("Password@123"),
 			MemSize:          pulumi.Int(8192),
 			RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
 			RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf_example"),
 			Port:             pulumi.Int(6379),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Redis.NewAccount(ctx, "account", &Redis.AccountArgs{
-			InstanceId:      foo.ID(),
-			AccountName:     pulumi.String("account_test"),
-			AccountPassword: pulumi.String("test1234"),
+		_, err = redis.NewAccount(ctx, "account", &redis.AccountArgs{
+			InstanceId:      foo.ID().ToIDOutput().ToStringOutput(),
+			AccountName:     pulumi.String("tf_example"),
+			AccountPassword: pulumi.String("Password@123"),
 			Remark:          pulumi.String("master"),
 			ReadonlyPolicies: pulumi.StringArray{
 				pulumi.String("master"),
@@ -199,187 +173,15 @@ func main() {
 	})
 }
 ```
-```java
-package generated_program;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
 
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Redis.RedisFunctions;
-import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Redis.Instance;
-import com.pulumi.tencentcloud.Redis.InstanceArgs;
-import com.pulumi.tencentcloud.Redis.Account;
-import com.pulumi.tencentcloud.Redis.AccountArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        final var zone = RedisFunctions.getZoneConfig(GetZoneConfigArgs.builder()
-            .typeId(7)
-            .build());
-
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
-            .cidrBlock("10.0.0.0/16")
-            .build());
-
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .vpcId(vpc.id())
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].zone()))
-            .cidrBlock("10.0.1.0/24")
-            .build());
-
-        var foo = new Instance("foo", InstanceArgs.builder()        
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].zone()))
-            .typeId(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].typeId()))
-            .password("test12345789")
-            .memSize(8192)
-            .redisShardNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].redisShardNums()[0]))
-            .redisReplicasNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].redisReplicasNums()[0]))
-            .port(6379)
-            .vpcId(vpc.id())
-            .subnetId(subnet.id())
-            .build());
-
-        var account = new Account("account", AccountArgs.builder()        
-            .instanceId(foo.id())
-            .accountName("account_test")
-            .accountPassword("test1234")
-            .remark("master")
-            .readonlyPolicies("master")
-            .privilege("rw")
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  vpc:
-    type: tencentcloud:Vpc:Instance
-    properties:
-      cidrBlock: 10.0.0.0/16
-  subnet:
-    type: tencentcloud:Subnet:Instance
-    properties:
-      vpcId: ${vpc.id}
-      availabilityZone: ${zone.lists[1].zone}
-      cidrBlock: 10.0.1.0/24
-  foo:
-    type: tencentcloud:Redis:Instance
-    properties:
-      availabilityZone: ${zone.lists[1].zone}
-      typeId: ${zone.lists[1].typeId}
-      password: test12345789
-      memSize: 8192
-      redisShardNum: ${zone.lists[1].redisShardNums[0]}
-      redisReplicasNum: ${zone.lists[1].redisReplicasNums[0]}
-      port: 6379
-      vpcId: ${vpc.id}
-      subnetId: ${subnet.id}
-  account:
-    type: tencentcloud:Redis:Account
-    properties:
-      instanceId: ${foo.id}
-      accountName: account_test
-      accountPassword: test1234
-      remark: master
-      readonlyPolicies:
-        - master
-      privilege: rw
-variables:
-  zone:
-    fn::invoke:
-      Function: tencentcloud:Redis:getZoneConfig
-      Arguments:
-        typeId: 7
-```
-<!--End PulumiCodeChooser -->
-
-### Create an account with read-only permissions
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const zone = tencentcloud.Redis.getZoneConfig({
-    typeId: 7,
-});
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
-const subnet = new tencentcloud.subnet.Instance("subnet", {
-    vpcId: vpc.id,
-    availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
-    cidrBlock: "10.0.1.0/24",
-});
-const foo = new tencentcloud.redis.Instance("foo", {
-    availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
-    typeId: zone.then(zone => zone.lists?.[1]?.typeId),
-    password: "test12345789",
-    memSize: 8192,
-    redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
-    redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
-    port: 6379,
-    vpcId: vpc.id,
-    subnetId: subnet.id,
-});
-const account = new tencentcloud.redis.Account("account", {
-    instanceId: foo.id,
-    accountName: "account_test",
-    accountPassword: "test1234",
-    remark: "master",
-    readonlyPolicies: ["master"],
-    privilege: "r",
-});
-```
-```python
-import pulumi
-import pulumi_tencentcloud as tencentcloud
-import tencentcloud_iac_pulumi as tencentcloud
-
-zone = tencentcloud.Redis.get_zone_config(type_id=7)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-subnet = tencentcloud.subnet.Instance("subnet",
-    vpc_id=vpc.id,
-    availability_zone=zone.lists[1].zone,
-    cidr_block="10.0.1.0/24")
-foo = tencentcloud.redis.Instance("foo",
-    availability_zone=zone.lists[1].zone,
-    type_id=zone.lists[1].type_id,
-    password="test12345789",
-    mem_size=8192,
-    redis_shard_num=zone.lists[1].redis_shard_nums[0],
-    redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
-    port=6379,
-    vpc_id=vpc.id,
-    subnet_id=subnet.id)
-account = tencentcloud.redis.Account("account",
-    instance_id=foo.id,
-    account_name="account_test",
-    account_password="test1234",
-    remark="master",
-    readonly_policies=["master"],
-    privilege="r")
-```
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -392,12 +194,14 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
+        Name = "tf_redis_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
@@ -405,10 +209,11 @@ return await Deployment.RunAsync(() =>
     {
         AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
         TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.TypeId),
-        Password = "test12345789",
+        Password = "Password@123",
         MemSize = 8192,
         RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
         RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+        Name = "tf_example",
         Port = 6379,
         VpcId = vpc.Id,
         SubnetId = subnet.Id,
@@ -417,81 +222,23 @@ return await Deployment.RunAsync(() =>
     var account = new Tencentcloud.Redis.Account("account", new()
     {
         InstanceId = foo.Id,
-        AccountName = "account_test",
-        AccountPassword = "test1234",
+        AccountName = "tf_example",
+        AccountPassword = "Password@123",
         Remark = "master",
         ReadonlyPolicies = new[]
         {
             "master",
         },
-        Privilege = "r",
+        Privilege = "rw",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-			TypeId: pulumi.IntRef(7),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		foo, err := Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
-			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-			TypeId:           pulumi.Int(zone.Lists[1].TypeId),
-			Password:         pulumi.String("test12345789"),
-			MemSize:          pulumi.Int(8192),
-			RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
-			RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
-			Port:             pulumi.Int(6379),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Redis.NewAccount(ctx, "account", &Redis.AccountArgs{
-			InstanceId:      foo.ID(),
-			AccountName:     pulumi.String("account_test"),
-			AccountPassword: pulumi.String("test1234"),
-			Remark:          pulumi.String("master"),
-			ReadonlyPolicies: pulumi.StringArray{
-				pulumi.String("master"),
-			},
-			Privilege: pulumi.String("r"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -500,16 +247,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.RedisFunctions;
 import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Redis.Instance;
-import com.pulumi.tencentcloud.Redis.InstanceArgs;
 import com.pulumi.tencentcloud.Redis.Account;
 import com.pulumi.tencentcloud.Redis.AccountArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -525,61 +266,72 @@ public class App {
             .typeId(7)
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].zone()))
+            .availabilityZone(zone.lists()[1].zone())
+            .name("tf_redis_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var foo = new Instance("foo", InstanceArgs.builder()        
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].zone()))
-            .typeId(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].typeId()))
-            .password("test12345789")
+        var foo = new com.pulumi.tencentcloud.Redis.Instance("foo", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[1].zone())
+            .typeId(zone.lists()[1].typeId())
+            .password("Password@123")
             .memSize(8192)
-            .redisShardNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].redisShardNums()[0]))
-            .redisReplicasNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].redisReplicasNums()[0]))
+            .redisShardNum(zone.lists()[1].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[1].redisReplicasNums()[0])
+            .name("tf_example")
             .port(6379)
             .vpcId(vpc.id())
             .subnetId(subnet.id())
             .build());
 
-        var account = new Account("account", AccountArgs.builder()        
+        var account = new Account("account", AccountArgs.builder()
             .instanceId(foo.id())
-            .accountName("account_test")
-            .accountPassword("test1234")
+            .accountName("tf_example")
+            .accountPassword("Password@123")
             .remark("master")
             .readonlyPolicies("master")
-            .privilege("r")
+            .privilege("rw")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${zone.lists[1].zone}
+      name: tf_redis_subnet
       cidrBlock: 10.0.1.0/24
   foo:
     type: tencentcloud:Redis:Instance
     properties:
       availabilityZone: ${zone.lists[1].zone}
       typeId: ${zone.lists[1].typeId}
-      password: test12345789
+      password: Password@123
       memSize: 8192
       redisShardNum: ${zone.lists[1].redisShardNums[0]}
       redisReplicasNum: ${zone.lists[1].redisReplicasNums[0]}
+      name: tf_example
       port: 6379
       vpcId: ${vpc.id}
       subnetId: ${subnet.id}
@@ -587,38 +339,502 @@ resources:
     type: tencentcloud:Redis:Account
     properties:
       instanceId: ${foo.id}
-      accountName: account_test
-      accountPassword: test1234
+      accountName: tf_example
+      accountPassword: Password@123
       remark: master
       readonlyPolicies:
         - master
-      privilege: r
+      privilege: rw
 variables:
   zone:
     fn::invoke:
-      Function: tencentcloud:Redis:getZoneConfig
-      Arguments:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
         typeId: 7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_redis_instance" "foo" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[1].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[1].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[1].redis_replicas_nums[0]
+  name               = "tf_example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+}
+resource "tencentcloud_redis_account" "account" {
+  instance_id       = tencentcloud_redis_instance.foo.id
+  account_name      = "tf_example"
+  account_password  = "Password@123"
+  remark            = "master"
+  readonly_policies = ["master"]
+  privilege         = "rw"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create an account with read-only permissions
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const zone = tencentcloud.redis.getZoneConfig({
+    typeId: 7,
+});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+    name: "tf_redis_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const example = new tencentcloud.redis.Instance("example", {
+    availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+    typeId: zone.then(zone => zone.lists?.[1]?.typeId),
+    password: "Password@123",
+    memSize: 8192,
+    redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
+    redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
+    name: "tf_example",
+    port: 6379,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+});
+const exampleAccount = new tencentcloud.redis.Account("example", {
+    instanceId: example.id,
+    accountName: "tf_example",
+    accountPassword: "Password@123",
+    remark: "master",
+    readonlyPolicies: ["master"],
+    privilege: "rw",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+zone = tencentcloud.redis.get_zone_config(type_id=7)
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=zone.lists[1].zone,
+    name="tf_redis_subnet",
+    cidr_block="10.0.1.0/24")
+example = tencentcloud.redis.Instance("example",
+    availability_zone=zone.lists[1].zone,
+    type_id=zone.lists[1].type_id,
+    password="Password@123",
+    mem_size=8192,
+    redis_shard_num=zone.lists[1].redis_shard_nums[0],
+    redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+    name="tf_example",
+    port=6379,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id)
+example_account = tencentcloud.redis.Account("example",
+    instance_id=example.id,
+    account_name="tf_example",
+    account_password="Password@123",
+    remark="master",
+    readonly_policies=["master"],
+    privilege="rw")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(7),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+			TypeId:           pulumi.Int(zone.Lists[1].TypeId),
+			Password:         pulumi.String("Password@123"),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf_example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewAccount(ctx, "example", &redis.AccountArgs{
+			InstanceId:      example.ID().ToIDOutput().ToStringOutput(),
+			AccountName:     pulumi.String("tf_example"),
+			AccountPassword: pulumi.String("Password@123"),
+			Remark:          pulumi.String("master"),
+			ReadonlyPolicies: pulumi.StringArray{
+				pulumi.String("master"),
+			},
+			Privilege: pulumi.String("rw"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    {
+        TypeId = 7,
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
+        Name = "tf_redis_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var example = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
+        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.TypeId),
+        Password = "Password@123",
+        MemSize = 8192,
+        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
+        RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+        Name = "tf_example",
+        Port = 6379,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+    });
+
+    var exampleAccount = new Tencentcloud.Redis.Account("example", new()
+    {
+        InstanceId = example.Id,
+        AccountName = "tf_example",
+        AccountPassword = "Password@123",
+        Remark = "master",
+        ReadonlyPolicies = new[]
+        {
+            "master",
+        },
+        Privilege = "rw",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Redis.RedisFunctions;
+import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
+import com.pulumi.tencentcloud.Redis.Account;
+import com.pulumi.tencentcloud.Redis.AccountArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var zone = RedisFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .typeId(7)
+            .build());
+
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(zone.lists()[1].zone())
+            .name("tf_redis_subnet")
+            .cidrBlock("10.0.1.0/24")
+            .build());
+
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[1].zone())
+            .typeId(zone.lists()[1].typeId())
+            .password("Password@123")
+            .memSize(8192)
+            .redisShardNum(zone.lists()[1].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[1].redisReplicasNums()[0])
+            .name("tf_example")
+            .port(6379)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .build());
+
+        var exampleAccount = new Account("exampleAccount", AccountArgs.builder()
+            .instanceId(example.id())
+            .accountName("tf_example")
+            .accountPassword("Password@123")
+            .remark("master")
+            .readonlyPolicies("master")
+            .privilege("rw")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${zone.lists[1].zone}
+      name: tf_redis_subnet
+      cidrBlock: 10.0.1.0/24
+  example:
+    type: tencentcloud:Redis:Instance
+    properties:
+      availabilityZone: ${zone.lists[1].zone}
+      typeId: ${zone.lists[1].typeId}
+      password: Password@123
+      memSize: 8192
+      redisShardNum: ${zone.lists[1].redisShardNums[0]}
+      redisReplicasNum: ${zone.lists[1].redisReplicasNums[0]}
+      name: tf_example
+      port: 6379
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+  exampleAccount:
+    type: tencentcloud:Redis:Account
+    name: example
+    properties:
+      instanceId: ${example.id}
+      accountName: tf_example
+      accountPassword: Password@123
+      remark: master
+      readonlyPolicies:
+        - master
+      privilege: rw
+variables:
+  zone:
+    fn::invoke:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
+        typeId: 7
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[1].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[1].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[1].redis_replicas_nums[0]
+  name               = "tf_example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+}
+resource "tencentcloud_redis_account" "example" {
+  instance_id       = tencentcloud_redis_instance.example.id
+  account_name      = "tf_example"
+  account_password  = "Password@123"
+  remark            = "master"
+  readonly_policies = ["master"]
+  privilege         = "rw"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateInstanceAccount](https://www.tencentcloud.com/document/api/239/33297)
+  - [DescribeInstanceAccount](https://www.tencentcloud.com/document/api/239/33295)
+  - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+* Read: [DescribeInstanceAccount](https://www.tencentcloud.com/document/api/239/33295)
+* Update:
+  - [DescribeInstanceAccount](https://www.tencentcloud.com/document/api/239/33295)
+  - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+  - [ModifyInstanceAccount](https://www.tencentcloud.com/document/api/239/33292)
+* Delete:
+  - [DeleteInstanceAccount](https://www.tencentcloud.com/document/api/239/33296)
+  - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
 
 
 ## Create Account Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Account</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Account</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Account</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Account</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
             <span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -626,44 +842,50 @@ variables:
             <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">privilege</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">readonly_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-            <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Account</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAccount</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAccount</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:Account</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:Account</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_redis_account&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -684,7 +906,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -801,11 +1023,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Account Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Account resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -821,8 +1051,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-required"
+    <dd>The account name.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -830,8 +1059,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-required"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -839,8 +1067,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-required"
+    <dd>The ID of instance.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_csharp" style="color: inherit; text-decoration: inherit;">Privilege</a>
@@ -848,8 +1075,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-required"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
             title="Required">
         <span id="readonlypolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlypolicies_csharp" style="color: inherit; text-decoration: inherit;">Readonly<wbr>Policies</a>
@@ -857,8 +1083,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -866,8 +1091,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -881,8 +1105,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-required"
+    <dd>The account name.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -890,8 +1113,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-required"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -899,8 +1121,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-required"
+    <dd>The ID of instance.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_go" style="color: inherit; text-decoration: inherit;">Privilege</a>
@@ -908,8 +1129,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-required"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
             title="Required">
         <span id="readonlypolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlypolicies_go" style="color: inherit; text-decoration: inherit;">Readonly<wbr>Policies</a>
@@ -917,8 +1137,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -926,8 +1145,61 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The account name.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="account_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_password_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="privilege_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_hcl" style="color: inherit; text-decoration: inherit;">privilege</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
+            title="Required">
+        <span id="readonly_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_policies_hcl" style="color: inherit; text-decoration: inherit;">readonly_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -941,8 +1213,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-required"
+    <dd>The account name.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_java" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -950,8 +1221,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-required"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -959,8 +1229,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-required"
+    <dd>The ID of instance.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_java" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -968,8 +1237,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-required"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
             title="Required">
         <span id="readonlypolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlypolicies_java" style="color: inherit; text-decoration: inherit;">readonly<wbr>Policies</a>
@@ -977,8 +1245,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -986,8 +1253,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1001,8 +1267,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-required"
+    <dd>The account name.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1010,8 +1275,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-required"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1019,8 +1283,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-required"
+    <dd>The ID of instance.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_nodejs" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1028,8 +1291,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-required"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
             title="Required">
         <span id="readonlypolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlypolicies_nodejs" style="color: inherit; text-decoration: inherit;">readonly<wbr>Policies</a>
@@ -1037,8 +1299,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1046,8 +1307,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1061,8 +1321,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-required"
+    <dd>The account name.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="account_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_password_python" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
@@ -1070,8 +1329,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-required"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1079,8 +1337,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-required"
+    <dd>The ID of instance.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_python" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1088,8 +1345,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-required"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
             title="Required">
         <span id="readonly_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_policies_python" style="color: inherit; text-decoration: inherit;">readonly_<wbr>policies</a>
@@ -1097,8 +1353,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1106,8 +1361,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1121,8 +1375,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-required"
+    <dd>The account name.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1130,8 +1383,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-required"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1139,8 +1391,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-required"
+    <dd>The ID of instance.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_yaml" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1148,8 +1399,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-required"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-required"
             title="Required">
         <span id="readonlypolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlypolicies_yaml" style="color: inherit; text-decoration: inherit;">readonly<wbr>Policies</a>
@@ -1157,8 +1407,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1166,8 +1415,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1188,8 +1436,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1203,8 +1450,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1218,8 +1478,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1233,8 +1492,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1248,8 +1506,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1263,8 +1520,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1274,18 +1530,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Account resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Account</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Account</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1295,104 +1551,143 @@ Get an existing Account resource's state with the given name, ID, and optional e
         <span class="nx">privilege</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">readonly_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Account</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAccount<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAccount<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAccount</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Redis:Account</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_redis_account</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1400,28 +1695,31 @@ Get an existing Account resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1429,28 +1727,31 @@ Get an existing Account resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1470,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-optional"
+    <dd>The account name.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -1479,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-optional"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1488,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privilege_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_csharp" style="color: inherit; text-decoration: inherit;">Privilege</a>
@@ -1497,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readonlypolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonlypolicies_csharp" style="color: inherit; text-decoration: inherit;">Readonly<wbr>Policies</a>
@@ -1506,8 +1803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1515,8 +1811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-optional"
+    <dd>The account name.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -1539,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-optional"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1548,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privilege_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_go" style="color: inherit; text-decoration: inherit;">Privilege</a>
@@ -1557,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readonlypolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonlypolicies_go" style="color: inherit; text-decoration: inherit;">Readonly<wbr>Policies</a>
@@ -1566,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1575,8 +1865,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The account name.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_account_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_password_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_privilege_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_hcl" style="color: inherit; text-decoration: inherit;">privilege</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_readonly_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonly_policies_hcl" style="color: inherit; text-decoration: inherit;">readonly_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1590,8 +1933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-optional"
+    <dd>The account name.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_java" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1599,8 +1941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-optional"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1608,8 +1949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privilege_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_java" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1617,8 +1957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readonlypolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonlypolicies_java" style="color: inherit; text-decoration: inherit;">readonly<wbr>Policies</a>
@@ -1626,8 +1965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1635,8 +1973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1650,8 +1987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-optional"
+    <dd>The account name.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1659,8 +1995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-optional"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1668,8 +2003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privilege_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_nodejs" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1677,8 +2011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readonlypolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonlypolicies_nodejs" style="color: inherit; text-decoration: inherit;">readonly<wbr>Policies</a>
@@ -1686,8 +2019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1695,8 +2027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1710,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-optional"
+    <dd>The account name.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_account_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_password_python" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
@@ -1719,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-optional"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1728,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privilege_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_python" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1737,8 +2065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readonly_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonly_policies_python" style="color: inherit; text-decoration: inherit;">readonly_<wbr>policies</a>
@@ -1746,8 +2073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1755,8 +2081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1770,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The account name.</p>
-</dd><dt class="property-optional"
+    <dd>The account name.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1779,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</p>
-</dd><dt class="property-optional"
+    <dd>1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with <code>/</code>; 3: Include at least two items: a.Lowercase letters <code>a-z</code>; b.Uppercase letters <code>A-Z</code> c.Numbers <code>0-9</code>;  d.<code>()</code>~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1788,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privilege_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privilege_yaml" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -1797,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readonlypolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readonlypolicies_yaml" style="color: inherit; text-decoration: inherit;">readonly<wbr>Policies</a>
@@ -1806,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</p>
-</dd><dt class="property-optional"
+    <dd>Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1815,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark.</p>
-</dd></dl>
+    <dd>Remark.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1834,9 +2153,12 @@ The following state arguments are supported:
 redis account can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Redis/account:Account account crs-xxxxxx#account_test
+$ pulumi import tencentcloud:Redis/account:Account example crs-cqdfdzvt#tf_example
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1848,7 +2170,6 @@ $ pulumi import tencentcloud:Redis/account:Account account crs-xxxxxx#account_te
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

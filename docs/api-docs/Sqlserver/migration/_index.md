@@ -2,9 +2,11 @@
 ---
 title: "Migration"
 title_tag: "tencentcloud.Sqlserver.Migration"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.Migration resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a sqlserver migration"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,36 @@ Provides a resource to create a sqlserver migration
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "sqlserver",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
-const srcExample = new tencentcloud.sqlserver.BasicInstance("srcExample", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-example",
+    description: "desc.",
+});
+const srcExample = new tencentcloud.sqlserver.BasicInstance("src_example", {
+    name: "tf-example",
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: vpc.id,
@@ -55,7 +69,8 @@ const srcExample = new tencentcloud.sqlserver.BasicInstance("srcExample", {
         test: "test",
     },
 });
-const dstExample = new tencentcloud.sqlserver.BasicInstance("dstExample", {
+const dstExample = new tencentcloud.sqlserver.BasicInstance("dst_example", {
+    name: "tf-example",
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: vpc.id,
@@ -77,36 +92,40 @@ const dstExample = new tencentcloud.sqlserver.BasicInstance("dstExample", {
         test: "test",
     },
 });
-const srcDb = new tencentcloud.sqlserver.Db("srcDb", {
+const src = new tencentcloud.sqlserver.Db("src", {
     instanceId: srcExample.id,
+    name: "tf_example_db_src",
     charset: "Chinese_PRC_BIN",
     remark: "testACC-remark",
 });
-const dstDb = new tencentcloud.sqlserver.Db("dstDb", {
+const dst = new tencentcloud.sqlserver.Db("dst", {
     instanceId: dstExample.id,
+    name: "tf_example_db_dst",
     charset: "Chinese_PRC_BIN",
     remark: "testACC-remark",
 });
-const srcAccount = new tencentcloud.sqlserver.Account("srcAccount", {
+const srcAccount = new tencentcloud.sqlserver.Account("src", {
     instanceId: srcExample.id,
+    name: "tf_example_src_account",
     password: "Qwer@234",
     isAdmin: true,
 });
-const dstAccount = new tencentcloud.sqlserver.Account("dstAccount", {
+const dstAccount = new tencentcloud.sqlserver.Account("dst", {
     instanceId: dstExample.id,
+    name: "tf_example_dst_account",
     password: "Qwer@234",
     isAdmin: true,
 });
-const srcAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment", {
+const srcAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("src", {
     instanceId: srcExample.id,
     accountName: srcAccount.name,
-    dbName: srcDb.name,
+    dbName: src.name,
     privilege: "ReadWrite",
 });
-const dstAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("dstAccountDbAttachment", {
+const dstAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("dst", {
     instanceId: dstExample.id,
     accountName: dstAccount.name,
-    dbName: dstDb.name,
+    dbName: dst.name,
     privilege: "ReadWrite",
 });
 const migration = new tencentcloud.sqlserver.Migration("migration", {
@@ -124,24 +143,35 @@ const migration = new tencentcloud.sqlserver.Migration("migration", {
         password: dstAccount.password,
     },
     migrateDbSets: [{
-        dbName: srcDb.name,
+        dbName: src.name,
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="sqlserver")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[4].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="desc.")
-src_example = tencentcloud.sqlserver.BasicInstance("srcExample",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-example",
+    description="desc.")
+src_example = tencentcloud.sqlserver.BasicInstance("src_example",
+    name="tf-example",
     availability_zone=zones.zones[4].name,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id=vpc.id,
@@ -162,7 +192,8 @@ src_example = tencentcloud.sqlserver.BasicInstance("srcExample",
     tags={
         "test": "test",
     })
-dst_example = tencentcloud.sqlserver.BasicInstance("dstExample",
+dst_example = tencentcloud.sqlserver.BasicInstance("dst_example",
+    name="tf-example",
     availability_zone=zones.zones[4].name,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id=vpc.id,
@@ -183,55 +214,249 @@ dst_example = tencentcloud.sqlserver.BasicInstance("dstExample",
     tags={
         "test": "test",
     })
-src_db = tencentcloud.sqlserver.Db("srcDb",
+src = tencentcloud.sqlserver.Db("src",
     instance_id=src_example.id,
+    name="tf_example_db_src",
     charset="Chinese_PRC_BIN",
     remark="testACC-remark")
-dst_db = tencentcloud.sqlserver.Db("dstDb",
+dst = tencentcloud.sqlserver.Db("dst",
     instance_id=dst_example.id,
+    name="tf_example_db_dst",
     charset="Chinese_PRC_BIN",
     remark="testACC-remark")
-src_account = tencentcloud.sqlserver.Account("srcAccount",
+src_account = tencentcloud.sqlserver.Account("src",
     instance_id=src_example.id,
+    name="tf_example_src_account",
     password="Qwer@234",
     is_admin=True)
-dst_account = tencentcloud.sqlserver.Account("dstAccount",
+dst_account = tencentcloud.sqlserver.Account("dst",
     instance_id=dst_example.id,
+    name="tf_example_dst_account",
     password="Qwer@234",
     is_admin=True)
-src_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment",
+src_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("src",
     instance_id=src_example.id,
     account_name=src_account.name,
-    db_name=src_db.name,
+    db_name=src.name,
     privilege="ReadWrite")
-dst_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("dstAccountDbAttachment",
+dst_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("dst",
     instance_id=dst_example.id,
     account_name=dst_account.name,
-    db_name=dst_db.name,
+    db_name=dst.name,
     privilege="ReadWrite")
 migration = tencentcloud.sqlserver.Migration("migration",
     migrate_name="tf_test_migration",
     migrate_type=1,
     source_type=1,
-    source=tencentcloud.sqlserver.MigrationSourceArgs(
-        instance_id=src_example.id,
-        user_name=src_account.name,
-        password=src_account.password,
-    ),
-    target=tencentcloud.sqlserver.MigrationTargetArgs(
-        instance_id=dst_example.id,
-        user_name=dst_account.name,
-        password=dst_account.password,
-    ),
-    migrate_db_sets=[tencentcloud.sqlserver.MigrationMigrateDbSetArgs(
-        db_name=src_db.name,
-    )])
+    source={
+        "instance_id": src_example.id,
+        "user_name": src_account.name,
+        "password": src_account.password,
+    },
+    target={
+        "instance_id": dst_example.id,
+        "user_name": dst_account.name,
+        "password": dst_account.password,
+    },
+    migrate_db_sets=[{
+        "db_name": src.name,
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "sqlserver",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-example"),
+			Description: pulumi.String("desc."),
+		})
+		if err != nil {
+			return err
+		}
+		srcExample, err := sqlserver.NewBasicInstance(ctx, "src_example", &sqlserver.BasicInstanceArgs{
+			Name:             pulumi.String("tf-example"),
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			Cpu:              pulumi.Int(2),
+			MachineType:      pulumi.String("CLOUD_PREMIUM"),
+			MaintenanceWeekSets: pulumi.IntArray{
+				pulumi.Int(1),
+				pulumi.Int(2),
+				pulumi.Int(3),
+			},
+			MaintenanceStartTime: pulumi.String("09:00"),
+			MaintenanceTimeSpan:  pulumi.Int(3),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		dstExample, err := sqlserver.NewBasicInstance(ctx, "dst_example", &sqlserver.BasicInstanceArgs{
+			Name:             pulumi.String("tf-example"),
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			Cpu:              pulumi.Int(2),
+			MachineType:      pulumi.String("CLOUD_PREMIUM"),
+			MaintenanceWeekSets: pulumi.IntArray{
+				pulumi.Int(1),
+				pulumi.Int(2),
+				pulumi.Int(3),
+			},
+			MaintenanceStartTime: pulumi.String("09:00"),
+			MaintenanceTimeSpan:  pulumi.Int(3),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		src, err := sqlserver.NewDb(ctx, "src", &sqlserver.DbArgs{
+			InstanceId: srcExample.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db_src"),
+			Charset:    pulumi.String("Chinese_PRC_BIN"),
+			Remark:     pulumi.String("testACC-remark"),
+		})
+		if err != nil {
+			return err
+		}
+		dst, err := sqlserver.NewDb(ctx, "dst", &sqlserver.DbArgs{
+			InstanceId: dstExample.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db_dst"),
+			Charset:    pulumi.String("Chinese_PRC_BIN"),
+			Remark:     pulumi.String("testACC-remark"),
+		})
+		if err != nil {
+			return err
+		}
+		srcAccount, err := sqlserver.NewAccount(ctx, "src", &sqlserver.AccountArgs{
+			InstanceId: srcExample.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_src_account"),
+			Password:   pulumi.String("Qwer@234"),
+			IsAdmin:    pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		dstAccount, err := sqlserver.NewAccount(ctx, "dst", &sqlserver.AccountArgs{
+			InstanceId: dstExample.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_dst_account"),
+			Password:   pulumi.String("Qwer@234"),
+			IsAdmin:    pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = sqlserver.NewAccountDbAttachment(ctx, "src", &sqlserver.AccountDbAttachmentArgs{
+			InstanceId:  srcExample.ID().ToIDOutput().ToStringOutput(),
+			AccountName: srcAccount.Name,
+			DbName:      src.Name,
+			Privilege:   pulumi.String("ReadWrite"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = sqlserver.NewAccountDbAttachment(ctx, "dst", &sqlserver.AccountDbAttachmentArgs{
+			InstanceId:  dstExample.ID().ToIDOutput().ToStringOutput(),
+			AccountName: dstAccount.Name,
+			DbName:      dst.Name,
+			Privilege:   pulumi.String("ReadWrite"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = sqlserver.NewMigration(ctx, "migration", &sqlserver.MigrationArgs{
+			MigrateName: pulumi.String("tf_test_migration"),
+			MigrateType: pulumi.Int(1),
+			SourceType:  pulumi.Int(1),
+			Source: &sqlserver.MigrationSourceArgs{
+				InstanceId: srcExample.ID().ToIDOutput().ToStringOutput(),
+				UserName:   srcAccount.Name,
+				Password:   srcAccount.Password,
+			},
+			Target: &sqlserver.MigrationTargetArgs{
+				InstanceId: dstExample.ID().ToIDOutput().ToStringOutput(),
+				UserName:   dstAccount.Name,
+				Password:   dstAccount.Password,
+			},
+			MigrateDbSets: sqlserver.MigrationMigrateDbSetArray{
+				&sqlserver.MigrationMigrateDbSetArgs{
+					DbName: src.Name,
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -243,24 +468,28 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Name = "subnet-example",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-example",
         Description = "desc.",
     });
 
-    var srcExample = new Tencentcloud.Sqlserver.BasicInstance("srcExample", new()
+    var srcExample = new Tencentcloud.Sqlserver.BasicInstance("src_example", new()
     {
+        Name = "tf-example",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = vpc.Id,
@@ -288,8 +517,9 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var dstExample = new Tencentcloud.Sqlserver.BasicInstance("dstExample", new()
+    var dstExample = new Tencentcloud.Sqlserver.BasicInstance("dst_example", new()
     {
+        Name = "tf-example",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = vpc.Id,
@@ -317,47 +547,51 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var srcDb = new Tencentcloud.Sqlserver.Db("srcDb", new()
+    var src = new Tencentcloud.Sqlserver.Db("src", new()
     {
         InstanceId = srcExample.Id,
+        Name = "tf_example_db_src",
         Charset = "Chinese_PRC_BIN",
         Remark = "testACC-remark",
     });
 
-    var dstDb = new Tencentcloud.Sqlserver.Db("dstDb", new()
+    var dst = new Tencentcloud.Sqlserver.Db("dst", new()
     {
         InstanceId = dstExample.Id,
+        Name = "tf_example_db_dst",
         Charset = "Chinese_PRC_BIN",
         Remark = "testACC-remark",
     });
 
-    var srcAccount = new Tencentcloud.Sqlserver.Account("srcAccount", new()
+    var srcAccount = new Tencentcloud.Sqlserver.Account("src", new()
     {
         InstanceId = srcExample.Id,
+        Name = "tf_example_src_account",
         Password = "Qwer@234",
         IsAdmin = true,
     });
 
-    var dstAccount = new Tencentcloud.Sqlserver.Account("dstAccount", new()
+    var dstAccount = new Tencentcloud.Sqlserver.Account("dst", new()
     {
         InstanceId = dstExample.Id,
+        Name = "tf_example_dst_account",
         Password = "Qwer@234",
         IsAdmin = true,
     });
 
-    var srcAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("srcAccountDbAttachment", new()
+    var srcAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("src", new()
     {
         InstanceId = srcExample.Id,
         AccountName = srcAccount.Name,
-        DbName = srcDb.Name,
+        DbName = src.Name,
         Privilege = "ReadWrite",
     });
 
-    var dstAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("dstAccountDbAttachment", new()
+    var dstAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("dst", new()
     {
         InstanceId = dstExample.Id,
         AccountName = dstAccount.Name,
-        DbName = dstDb.Name,
+        DbName = dst.Name,
         Privilege = "ReadWrite",
     });
 
@@ -382,185 +616,18 @@ return await Deployment.RunAsync(() =>
         {
             new Tencentcloud.Sqlserver.Inputs.MigrationMigrateDbSetArgs
             {
-                DbName = srcDb.Name,
+                DbName = src.Name,
             },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "sqlserver",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("desc."),
-		})
-		if err != nil {
-			return err
-		}
-		srcExample, err := Sqlserver.NewBasicInstance(ctx, "srcExample", &Sqlserver.BasicInstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			ProjectId:        pulumi.Int(0),
-			Memory:           pulumi.Int(4),
-			Storage:          pulumi.Int(100),
-			Cpu:              pulumi.Int(2),
-			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-			MaintenanceWeekSets: pulumi.IntArray{
-				pulumi.Int(1),
-				pulumi.Int(2),
-				pulumi.Int(3),
-			},
-			MaintenanceStartTime: pulumi.String("09:00"),
-			MaintenanceTimeSpan:  pulumi.Int(3),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		dstExample, err := Sqlserver.NewBasicInstance(ctx, "dstExample", &Sqlserver.BasicInstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			ProjectId:        pulumi.Int(0),
-			Memory:           pulumi.Int(4),
-			Storage:          pulumi.Int(100),
-			Cpu:              pulumi.Int(2),
-			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-			MaintenanceWeekSets: pulumi.IntArray{
-				pulumi.Int(1),
-				pulumi.Int(2),
-				pulumi.Int(3),
-			},
-			MaintenanceStartTime: pulumi.String("09:00"),
-			MaintenanceTimeSpan:  pulumi.Int(3),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		srcDb, err := Sqlserver.NewDb(ctx, "srcDb", &Sqlserver.DbArgs{
-			InstanceId: srcExample.ID(),
-			Charset:    pulumi.String("Chinese_PRC_BIN"),
-			Remark:     pulumi.String("testACC-remark"),
-		})
-		if err != nil {
-			return err
-		}
-		dstDb, err := Sqlserver.NewDb(ctx, "dstDb", &Sqlserver.DbArgs{
-			InstanceId: dstExample.ID(),
-			Charset:    pulumi.String("Chinese_PRC_BIN"),
-			Remark:     pulumi.String("testACC-remark"),
-		})
-		if err != nil {
-			return err
-		}
-		srcAccount, err := Sqlserver.NewAccount(ctx, "srcAccount", &Sqlserver.AccountArgs{
-			InstanceId: srcExample.ID(),
-			Password:   pulumi.String("Qwer@234"),
-			IsAdmin:    pulumi.Bool(true),
-		})
-		if err != nil {
-			return err
-		}
-		dstAccount, err := Sqlserver.NewAccount(ctx, "dstAccount", &Sqlserver.AccountArgs{
-			InstanceId: dstExample.ID(),
-			Password:   pulumi.String("Qwer@234"),
-			IsAdmin:    pulumi.Bool(true),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Sqlserver.NewAccountDbAttachment(ctx, "srcAccountDbAttachment", &Sqlserver.AccountDbAttachmentArgs{
-			InstanceId:  srcExample.ID(),
-			AccountName: srcAccount.Name,
-			DbName:      srcDb.Name,
-			Privilege:   pulumi.String("ReadWrite"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Sqlserver.NewAccountDbAttachment(ctx, "dstAccountDbAttachment", &Sqlserver.AccountDbAttachmentArgs{
-			InstanceId:  dstExample.ID(),
-			AccountName: dstAccount.Name,
-			DbName:      dstDb.Name,
-			Privilege:   pulumi.String("ReadWrite"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Sqlserver.NewMigration(ctx, "migration", &Sqlserver.MigrationArgs{
-			MigrateName: pulumi.String("tf_test_migration"),
-			MigrateType: pulumi.Int(1),
-			SourceType:  pulumi.Int(1),
-			Source: &sqlserver.MigrationSourceArgs{
-				InstanceId: srcExample.ID(),
-				UserName:   srcAccount.Name,
-				Password:   srcAccount.Password,
-			},
-			Target: &sqlserver.MigrationTargetArgs{
-				InstanceId: dstExample.ID(),
-				UserName:   dstAccount.Name,
-				Password:   dstAccount.Password,
-			},
-			MigrateDbSets: sqlserver.MigrationMigrateDbSetArray{
-				&sqlserver.MigrationMigrateDbSetArgs{
-					DbName: srcDb.Name,
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -569,10 +636,6 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Sqlserver.BasicInstance;
@@ -588,8 +651,8 @@ import com.pulumi.tencentcloud.Sqlserver.MigrationArgs;
 import com.pulumi.tencentcloud.Sqlserver.inputs.MigrationSourceArgs;
 import com.pulumi.tencentcloud.Sqlserver.inputs.MigrationTargetArgs;
 import com.pulumi.tencentcloud.Sqlserver.inputs.MigrationMigrateDbSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -605,23 +668,27 @@ public class App {
             .product("sqlserver")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[4].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-example")
             .description("desc.")
             .build());
 
-        var srcExample = new BasicInstance("srcExample", BasicInstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var srcExample = new BasicInstance("srcExample", BasicInstanceArgs.builder()
+            .name("tf-example")
+            .availabilityZone(zones.zones()[4].name())
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -640,8 +707,9 @@ public class App {
             .tags(Map.of("test", "test"))
             .build());
 
-        var dstExample = new BasicInstance("dstExample", BasicInstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var dstExample = new BasicInstance("dstExample", BasicInstanceArgs.builder()
+            .name("tf-example")
+            .availabilityZone(zones.zones()[4].name())
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -660,45 +728,49 @@ public class App {
             .tags(Map.of("test", "test"))
             .build());
 
-        var srcDb = new Db("srcDb", DbArgs.builder()        
+        var src = new Db("src", DbArgs.builder()
             .instanceId(srcExample.id())
+            .name("tf_example_db_src")
             .charset("Chinese_PRC_BIN")
             .remark("testACC-remark")
             .build());
 
-        var dstDb = new Db("dstDb", DbArgs.builder()        
+        var dst = new Db("dst", DbArgs.builder()
             .instanceId(dstExample.id())
+            .name("tf_example_db_dst")
             .charset("Chinese_PRC_BIN")
             .remark("testACC-remark")
             .build());
 
-        var srcAccount = new Account("srcAccount", AccountArgs.builder()        
+        var srcAccount = new Account("srcAccount", AccountArgs.builder()
             .instanceId(srcExample.id())
+            .name("tf_example_src_account")
             .password("Qwer@234")
             .isAdmin(true)
             .build());
 
-        var dstAccount = new Account("dstAccount", AccountArgs.builder()        
+        var dstAccount = new Account("dstAccount", AccountArgs.builder()
             .instanceId(dstExample.id())
+            .name("tf_example_dst_account")
             .password("Qwer@234")
             .isAdmin(true)
             .build());
 
-        var srcAccountDbAttachment = new AccountDbAttachment("srcAccountDbAttachment", AccountDbAttachmentArgs.builder()        
+        var srcAccountDbAttachment = new AccountDbAttachment("srcAccountDbAttachment", AccountDbAttachmentArgs.builder()
             .instanceId(srcExample.id())
             .accountName(srcAccount.name())
-            .dbName(srcDb.name())
+            .dbName(src.name())
             .privilege("ReadWrite")
             .build());
 
-        var dstAccountDbAttachment = new AccountDbAttachment("dstAccountDbAttachment", AccountDbAttachmentArgs.builder()        
+        var dstAccountDbAttachment = new AccountDbAttachment("dstAccountDbAttachment", AccountDbAttachmentArgs.builder()
             .instanceId(dstExample.id())
             .accountName(dstAccount.name())
-            .dbName(dstDb.name())
+            .dbName(dst.name())
             .privilege("ReadWrite")
             .build());
 
-        var migration = new Migration("migration", MigrationArgs.builder()        
+        var migration = new Migration("migration", MigrationArgs.builder()
             .migrateName("tf_test_migration")
             .migrateType(1)
             .sourceType(1)
@@ -713,33 +785,44 @@ public class App {
                 .password(dstAccount.password())
                 .build())
             .migrateDbSets(MigrationMigrateDbSetArgs.builder()
-                .dbName(srcDb.name())
+                .dbName(src.name())
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[4].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-example
       description: desc.
   srcExample:
     type: tencentcloud:Sqlserver:BasicInstance
+    name: src_example
     properties:
+      name: tf-example
       availabilityZone: ${zones.zones[4].name}
       chargeType: POSTPAID_BY_HOUR
       vpcId: ${vpc.id}
@@ -761,7 +844,9 @@ resources:
         test: test
   dstExample:
     type: tencentcloud:Sqlserver:BasicInstance
+    name: dst_example
     properties:
+      name: tf-example
       availabilityZone: ${zones.zones[4].name}
       chargeType: POSTPAID_BY_HOUR
       vpcId: ${vpc.id}
@@ -781,43 +866,51 @@ resources:
         - ${securityGroup.id}
       tags:
         test: test
-  srcDb:
+  src:
     type: tencentcloud:Sqlserver:Db
     properties:
       instanceId: ${srcExample.id}
+      name: tf_example_db_src
       charset: Chinese_PRC_BIN
       remark: testACC-remark
-  dstDb:
+  dst:
     type: tencentcloud:Sqlserver:Db
     properties:
       instanceId: ${dstExample.id}
+      name: tf_example_db_dst
       charset: Chinese_PRC_BIN
       remark: testACC-remark
   srcAccount:
     type: tencentcloud:Sqlserver:Account
+    name: src
     properties:
       instanceId: ${srcExample.id}
+      name: tf_example_src_account
       password: Qwer@234
       isAdmin: true
   dstAccount:
     type: tencentcloud:Sqlserver:Account
+    name: dst
     properties:
       instanceId: ${dstExample.id}
+      name: tf_example_dst_account
       password: Qwer@234
       isAdmin: true
   srcAccountDbAttachment:
     type: tencentcloud:Sqlserver:AccountDbAttachment
+    name: src
     properties:
       instanceId: ${srcExample.id}
       accountName: ${srcAccount.name}
-      dbName: ${srcDb.name}
+      dbName: ${src.name}
       privilege: ReadWrite
   dstAccountDbAttachment:
     type: tencentcloud:Sqlserver:AccountDbAttachment
+    name: dst
     properties:
       instanceId: ${dstExample.id}
       accountName: ${dstAccount.name}
-      dbName: ${dstDb.name}
+      dbName: ${dst.name}
       privilege: ReadWrite
   migration:
     type: tencentcloud:Sqlserver:Migration
@@ -834,79 +927,230 @@ resources:
         userName: ${dstAccount.name}
         password: ${dstAccount.password}
       migrateDbSets:
-        - dbName: ${srcDb.name}
+        - dbName: ${src.name}
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: sqlserver
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "sqlserver"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-example"
+  description = "desc."
+}
+resource "tencentcloud_sqlserver_basicinstance" "src_example" {
+  name                   = "tf-example"
+  availability_zone      = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  charge_type            = "POSTPAID_BY_HOUR"
+  vpc_id                 = tencentcloud_vpc_instance.vpc.id
+  subnet_id              = tencentcloud_subnet_instance.subnet.id
+  project_id             = 0
+  memory                 = 4
+  storage                = 100
+  cpu                    = 2
+  machine_type           = "CLOUD_PREMIUM"
+  maintenance_week_sets  = [1, 2, 3]
+  maintenance_start_time = "09:00"
+  maintenance_time_span  = 3
+  security_groups        = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "test" = "test"
+  }
+}
+resource "tencentcloud_sqlserver_basicinstance" "dst_example" {
+  name                   = "tf-example"
+  availability_zone      = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  charge_type            = "POSTPAID_BY_HOUR"
+  vpc_id                 = tencentcloud_vpc_instance.vpc.id
+  subnet_id              = tencentcloud_subnet_instance.subnet.id
+  project_id             = 0
+  memory                 = 4
+  storage                = 100
+  cpu                    = 2
+  machine_type           = "CLOUD_PREMIUM"
+  maintenance_week_sets  = [1, 2, 3]
+  maintenance_start_time = "09:00"
+  maintenance_time_span  = 3
+  security_groups        = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "test" = "test"
+  }
+}
+resource "tencentcloud_sqlserver_db" "src" {
+  instance_id = tencentcloud_sqlserver_basicinstance.src_example.id
+  name        = "tf_example_db_src"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "testACC-remark"
+}
+resource "tencentcloud_sqlserver_db" "dst" {
+  instance_id = tencentcloud_sqlserver_basicinstance.dst_example.id
+  name        = "tf_example_db_dst"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "testACC-remark"
+}
+resource "tencentcloud_sqlserver_account" "src" {
+  instance_id = tencentcloud_sqlserver_basicinstance.src_example.id
+  name        = "tf_example_src_account"
+  password    = "Qwer@234"
+  is_admin    = true
+}
+resource "tencentcloud_sqlserver_account" "dst" {
+  instance_id = tencentcloud_sqlserver_basicinstance.dst_example.id
+  name        = "tf_example_dst_account"
+  password    = "Qwer@234"
+  is_admin    = true
+}
+resource "tencentcloud_sqlserver_accountdbattachment" "src" {
+  instance_id  = tencentcloud_sqlserver_basicinstance.src_example.id
+  account_name = tencentcloud_sqlserver_account.src.name
+  db_name      = tencentcloud_sqlserver_db.src.name
+  privilege    = "ReadWrite"
+}
+resource "tencentcloud_sqlserver_accountdbattachment" "dst" {
+  instance_id  = tencentcloud_sqlserver_basicinstance.dst_example.id
+  account_name = tencentcloud_sqlserver_account.dst.name
+  db_name      = tencentcloud_sqlserver_db.dst.name
+  privilege    = "ReadWrite"
+}
+resource "tencentcloud_sqlserver_migration" "migration" {
+  migrate_name = "tf_test_migration"
+  migrate_type = 1
+  source_type  = 1
+  source = {
+    instance_id = tencentcloud_sqlserver_basicinstance.src_example.id
+    user_name   = tencentcloud_sqlserver_account.src.name
+    password    = tencentcloud_sqlserver_account.src.password
+  }
+  target = {
+    instance_id = tencentcloud_sqlserver_basicinstance.dst_example.id
+    user_name   = tencentcloud_sqlserver_account.dst.name
+    password    = tencentcloud_sqlserver_account.dst.password
+  }
+  migrate_db_sets {
+    db_name = tencentcloud_sqlserver_db.src.name
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateMigration](https://www.tencentcloud.com/document/api/238/32129)
+* Read: [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/238/32126)
+* Update: [ModifyMigration](https://www.tencentcloud.com/document/api/238/32124)
+* Delete: [DeleteMigration](https://www.tencentcloud.com/document/api/238/32128)
 
 
 ## Create Migration Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-              <span class="nx">migrate_db_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_sqlserver.MigrationMigrateDbSetArgs]]</span> = None<span class="p">,</span>
-              <span class="nx">migrate_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">migrate_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-              <span class="nx">rename_restores</span><span class="p">:</span> <span class="nx">Optional[Sequence[_sqlserver.MigrationRenameRestoreArgs]]</span> = None<span class="p">,</span>
-              <span class="nx">source</span><span class="p">:</span> <span class="nx">Optional[_sqlserver.MigrationSourceArgs]</span> = None<span class="p">,</span>
-              <span class="nx">source_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-              <span class="nx">target</span><span class="p">:</span> <span class="nx">Optional[_sqlserver.MigrationTargetArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+              <span class="nx">migrate_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">migrate_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+              <span class="nx">source</span><span class="p">:</span> <span class="nx">Optional[MigrationSourceArgs]</span> = None<span class="p">,</span>
+              <span class="nx">source_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+              <span class="nx">target</span><span class="p">:</span> <span class="nx">Optional[MigrationTargetArgs]</span> = None<span class="p">,</span>
+              <span class="nx">migrate_db_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[MigrationMigrateDbSetArgs]]</span> = None<span class="p">,</span>
+              <span class="nx">rename_restores</span><span class="p">:</span> <span class="nx">Optional[Sequence[MigrationRenameRestoreArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewMigration</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Migration</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewMigration</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Migration</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Migration</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MigrationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:Migration</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:Migration</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_sqlserver_migration&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -927,7 +1171,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1044,11 +1288,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Migration Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Migration resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1064,8 +1316,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-required"
+    <dd>Name of the migration task.</dd><dt class="property-required"
             title="Required">
         <span id="migratetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratetype_csharp" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Type</a>
@@ -1073,17 +1324,15 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-required"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
             title="Required">
         <span id="source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationsource">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Source<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationsource">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Source</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-required"
+    <dd>Migration source.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -1091,35 +1340,31 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-required"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
             title="Required">
         <span id="target_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_csharp" style="color: inherit; text-decoration: inherit;">Target</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationtarget">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Target<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationtarget">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Target</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd><dt class="property-optional"
+    <dd>Migration target.</dd><dt class="property-optional"
             title="Optional">
         <span id="migratedbsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratedbsets_csharp" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Db<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Migrate<wbr>Db<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="renamerestores_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renamerestores_csharp" style="color: inherit; text-decoration: inherit;">Rename<wbr>Restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Rename<wbr>Restore<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Rename<wbr>Restore&gt;</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd></dl>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,8 +1378,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-required"
+    <dd>Name of the migration task.</dd><dt class="property-required"
             title="Required">
         <span id="migratetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratetype_go" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Type</a>
@@ -1142,8 +1386,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-required"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
             title="Required">
         <span id="source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1151,8 +1394,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-required"
+    <dd>Migration source.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -1160,8 +1402,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-required"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
             title="Required">
         <span id="target_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_go" style="color: inherit; text-decoration: inherit;">Target</a>
@@ -1169,8 +1410,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd><dt class="property-optional"
+    <dd>Migration target.</dd><dt class="property-optional"
             title="Optional">
         <span id="migratedbsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratedbsets_go" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Db<wbr>Sets</a>
@@ -1178,8 +1418,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationmigratedbset">[]Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="renamerestores_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renamerestores_go" style="color: inherit; text-decoration: inherit;">Rename<wbr>Restores</a>
@@ -1187,8 +1426,69 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationrenamerestore">[]Migration<wbr>Rename<wbr>Restore<wbr>Args</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd></dl>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="migrate_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migrate_name_hcl" style="color: inherit; text-decoration: inherit;">migrate_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the migration task.</dd><dt class="property-required"
+            title="Required">
+        <span id="migrate_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migrate_type_hcl" style="color: inherit; text-decoration: inherit;">migrate_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
+            title="Required">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationsource">object</a></span>
+    </dt>
+    <dd>Migration source.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
+            title="Required">
+        <span id="target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_hcl" style="color: inherit; text-decoration: inherit;">target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationtarget">object</a></span>
+    </dt>
+    <dd>Migration target.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="migrate_db_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migrate_db_sets_hcl" style="color: inherit; text-decoration: inherit;">migrate_<wbr>db_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationmigratedbset">list(object)</a></span>
+    </dt>
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rename_restores_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rename_restores_hcl" style="color: inherit; text-decoration: inherit;">rename_<wbr>restores</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationrenamerestore">list(object)</a></span>
+    </dt>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1502,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-required"
+    <dd>Name of the migration task.</dd><dt class="property-required"
             title="Required">
         <span id="migratetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratetype_java" style="color: inherit; text-decoration: inherit;">migrate<wbr>Type</a>
@@ -1211,17 +1510,15 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-required"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
             title="Required">
         <span id="source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_java" style="color: inherit; text-decoration: inherit;">source</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-required"
+    <dd>Migration source.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1229,35 +1526,31 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-required"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
             title="Required">
         <span id="target_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_java" style="color: inherit; text-decoration: inherit;">target</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd><dt class="property-optional"
+    <dd>Migration target.</dd><dt class="property-optional"
             title="Optional">
         <span id="migratedbsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratedbsets_java" style="color: inherit; text-decoration: inherit;">migrate<wbr>Db<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Migration<wbr>Migrate<wbr>Db<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="renamerestores_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renamerestores_java" style="color: inherit; text-decoration: inherit;">rename<wbr>Restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Migration<wbr>Rename<wbr>Restore<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Migration<wbr>Rename<wbr>Restore&gt;</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd></dl>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1271,8 +1564,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-required"
+    <dd>Name of the migration task.</dd><dt class="property-required"
             title="Required">
         <span id="migratetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratetype_nodejs" style="color: inherit; text-decoration: inherit;">migrate<wbr>Type</a>
@@ -1280,17 +1572,15 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-required"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
             title="Required">
         <span id="source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-required"
+    <dd>Migration source.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1298,35 +1588,31 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-required"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
             title="Required">
         <span id="target_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_nodejs" style="color: inherit; text-decoration: inherit;">target</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd><dt class="property-optional"
+    <dd>Migration target.</dd><dt class="property-optional"
             title="Optional">
         <span id="migratedbsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratedbsets_nodejs" style="color: inherit; text-decoration: inherit;">migrate<wbr>Db<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="renamerestores_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renamerestores_nodejs" style="color: inherit; text-decoration: inherit;">rename<wbr>Restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">Migration<wbr>Rename<wbr>Restore<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">Migration<wbr>Rename<wbr>Restore[]</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd></dl>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1340,8 +1626,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-required"
+    <dd>Name of the migration task.</dd><dt class="property-required"
             title="Required">
         <span id="migrate_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migrate_type_python" style="color: inherit; text-decoration: inherit;">migrate_<wbr>type</a>
@@ -1349,8 +1634,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-required"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
             title="Required">
         <span id="source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1358,8 +1642,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-required"
+    <dd>Migration source.</dd><dt class="property-required"
             title="Required">
         <span id="source_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
@@ -1367,8 +1650,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-required"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
             title="Required">
         <span id="target_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_python" style="color: inherit; text-decoration: inherit;">target</a>
@@ -1376,26 +1658,23 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd><dt class="property-optional"
+    <dd>Migration target.</dd><dt class="property-optional"
             title="Optional">
         <span id="migrate_db_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migrate_db_sets_python" style="color: inherit; text-decoration: inherit;">migrate_<wbr>db_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">Sequence[Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="rename_restores_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rename_restores_python" style="color: inherit; text-decoration: inherit;">rename_<wbr>restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">Migration<wbr>Rename<wbr>Restore<wbr>Args]</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">Sequence[Migration<wbr>Rename<wbr>Restore<wbr>Args]</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd></dl>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1409,8 +1688,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-required"
+    <dd>Name of the migration task.</dd><dt class="property-required"
             title="Required">
         <span id="migratetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratetype_yaml" style="color: inherit; text-decoration: inherit;">migrate<wbr>Type</a>
@@ -1418,8 +1696,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-required"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-required"
             title="Required">
         <span id="source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1427,8 +1704,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationsource">Property Map</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-required"
+    <dd>Migration source.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1436,8 +1712,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-required"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-required"
             title="Required">
         <span id="target_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_yaml" style="color: inherit; text-decoration: inherit;">target</a>
@@ -1445,8 +1720,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationtarget">Property Map</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd><dt class="property-optional"
+    <dd>Migration target.</dd><dt class="property-optional"
             title="Optional">
         <span id="migratedbsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migratedbsets_yaml" style="color: inherit; text-decoration: inherit;">migrate<wbr>Db<wbr>Sets</a>
@@ -1454,8 +1728,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationmigratedbset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="renamerestores_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renamerestores_yaml" style="color: inherit; text-decoration: inherit;">rename<wbr>Restores</a>
@@ -1463,8 +1736,7 @@ The Migration resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationrenamerestore">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd></dl>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1485,8 +1757,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1500,8 +1771,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1515,8 +1799,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,8 +1813,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1545,8 +1827,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1560,8 +1841,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1571,126 +1851,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Migration resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">MigrationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Migration</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">MigrationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Migration</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">migrate_db_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_sqlserver.MigrationMigrateDbSetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">migrate_db_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[MigrationMigrateDbSetArgs]]</span> = None<span class="p">,</span>
         <span class="nx">migrate_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">migrate_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">rename_restores</span><span class="p">:</span> <span class="nx">Optional[Sequence[_sqlserver.MigrationRenameRestoreArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">source</span><span class="p">:</span> <span class="nx">Optional[_sqlserver.MigrationSourceArgs]</span> = None<span class="p">,</span>
+        <span class="nx">rename_restores</span><span class="p">:</span> <span class="nx">Optional[Sequence[MigrationRenameRestoreArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">source</span><span class="p">:</span> <span class="nx">Optional[MigrationSourceArgs]</span> = None<span class="p">,</span>
         <span class="nx">source_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">target</span><span class="p">:</span> <span class="nx">Optional[_sqlserver.MigrationTargetArgs]</span> = None<span class="p">) -&gt;</span> Migration</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">target</span><span class="p">:</span> <span class="nx">Optional[MigrationTargetArgs]</span> = None<span class="p">) -&gt;</span> Migration</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetMigration<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">MigrationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Migration</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetMigration<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">MigrationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Migration</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Migration</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MigrationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Migration</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MigrationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Migration</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MigrationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Migration</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MigrationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingMigration</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Sqlserver:Migration</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_sqlserver_migration</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MigrationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MigrationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1698,28 +2017,31 @@ Get an existing Migration resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MigrationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1727,28 +2049,31 @@ Get an existing Migration resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MigrationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1766,10 +2091,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratedbsets_csharp" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Db<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Migrate<wbr>Db<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratename_csharp" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Name</a>
@@ -1777,8 +2101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the migration task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratetype_csharp" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Type</a>
@@ -1786,26 +2109,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-optional"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renamerestores_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renamerestores_csharp" style="color: inherit; text-decoration: inherit;">Rename<wbr>Restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Rename<wbr>Restore<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Rename<wbr>Restore&gt;</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd><dt class="property-optional"
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationsource">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Source<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationsource">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Source</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-optional"
+    <dd>Migration source.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -1813,17 +2133,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-optional"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_csharp" style="color: inherit; text-decoration: inherit;">Target</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationtarget">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Target<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationtarget">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Migration<wbr>Target</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd></dl>
+    <dd>Migration target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1837,8 +2155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationmigratedbset">[]Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratename_go" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Name</a>
@@ -1846,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the migration task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratetype_go" style="color: inherit; text-decoration: inherit;">Migrate<wbr>Type</a>
@@ -1855,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-optional"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renamerestores_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renamerestores_go" style="color: inherit; text-decoration: inherit;">Rename<wbr>Restores</a>
@@ -1864,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationrenamerestore">[]Migration<wbr>Rename<wbr>Restore<wbr>Args</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd><dt class="property-optional"
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1873,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-optional"
+    <dd>Migration source.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -1882,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-optional"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_go" style="color: inherit; text-decoration: inherit;">Target</a>
@@ -1891,8 +2203,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd></dl>
+    <dd>Migration target.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_migrate_db_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migrate_db_sets_hcl" style="color: inherit; text-decoration: inherit;">migrate_<wbr>db_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationmigratedbset">list(object)</a></span>
+    </dt>
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_migrate_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migrate_name_hcl" style="color: inherit; text-decoration: inherit;">migrate_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the migration task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_migrate_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migrate_type_hcl" style="color: inherit; text-decoration: inherit;">migrate_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rename_restores_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rename_restores_hcl" style="color: inherit; text-decoration: inherit;">rename_<wbr>restores</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationrenamerestore">list(object)</a></span>
+    </dt>
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationsource">object</a></span>
+    </dt>
+    <dd>Migration source.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_source_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_hcl" style="color: inherit; text-decoration: inherit;">target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#migrationtarget">object</a></span>
+    </dt>
+    <dd>Migration target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1904,10 +2277,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratedbsets_java" style="color: inherit; text-decoration: inherit;">migrate<wbr>Db<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">List&lt;Migration<wbr>Migrate<wbr>Db<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratename_java" style="color: inherit; text-decoration: inherit;">migrate<wbr>Name</a>
@@ -1915,8 +2287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the migration task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratetype_java" style="color: inherit; text-decoration: inherit;">migrate<wbr>Type</a>
@@ -1924,26 +2295,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-optional"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renamerestores_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renamerestores_java" style="color: inherit; text-decoration: inherit;">rename<wbr>Restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Migration<wbr>Rename<wbr>Restore<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">List&lt;Migration<wbr>Rename<wbr>Restore&gt;</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd><dt class="property-optional"
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_java" style="color: inherit; text-decoration: inherit;">source</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-optional"
+    <dd>Migration source.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1951,17 +2319,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-optional"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_java" style="color: inherit; text-decoration: inherit;">target</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd></dl>
+    <dd>Migration target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1973,10 +2339,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratedbsets_nodejs" style="color: inherit; text-decoration: inherit;">migrate<wbr>Db<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratename_nodejs" style="color: inherit; text-decoration: inherit;">migrate<wbr>Name</a>
@@ -1984,8 +2349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the migration task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratetype_nodejs" style="color: inherit; text-decoration: inherit;">migrate<wbr>Type</a>
@@ -1993,26 +2357,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-optional"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renamerestores_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renamerestores_nodejs" style="color: inherit; text-decoration: inherit;">rename<wbr>Restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">Migration<wbr>Rename<wbr>Restore<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">Migration<wbr>Rename<wbr>Restore[]</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd><dt class="property-optional"
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationsource">Migration<wbr>Source</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-optional"
+    <dd>Migration source.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -2020,17 +2381,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-optional"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_nodejs" style="color: inherit; text-decoration: inherit;">target</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
+        <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd></dl>
+    <dd>Migration target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2042,10 +2401,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migrate_db_sets_python" style="color: inherit; text-decoration: inherit;">migrate_<wbr>db_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#migrationmigratedbset">Sequence[Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migrate_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migrate_name_python" style="color: inherit; text-decoration: inherit;">migrate_<wbr>name</a>
@@ -2053,8 +2411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the migration task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migrate_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migrate_type_python" style="color: inherit; text-decoration: inherit;">migrate_<wbr>type</a>
@@ -2062,17 +2419,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-optional"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rename_restores_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rename_restores_python" style="color: inherit; text-decoration: inherit;">rename_<wbr>restores</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#migrationrenamerestore">Migration<wbr>Rename<wbr>Restore<wbr>Args]</a></span>
+        <span class="property-type"><a href="#migrationrenamerestore">Sequence[Migration<wbr>Rename<wbr>Restore<wbr>Args]</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd><dt class="property-optional"
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2080,8 +2435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationsource">Migration<wbr>Source<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-optional"
+    <dd>Migration source.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
@@ -2089,8 +2443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-optional"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_python" style="color: inherit; text-decoration: inherit;">target</a>
@@ -2098,8 +2451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationtarget">Migration<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd></dl>
+    <dd>Migration target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2113,8 +2465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationmigratedbset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratename_yaml" style="color: inherit; text-decoration: inherit;">migrate<wbr>Name</a>
@@ -2122,8 +2473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the migration task.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the migration task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_migratetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_migratetype_yaml" style="color: inherit; text-decoration: inherit;">migrate<wbr>Type</a>
@@ -2131,8 +2481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</p>
-</dd><dt class="property-optional"
+    <dd>Migration type (1 structure migration 2 data migration 3 incremental synchronization).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renamerestores_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renamerestores_yaml" style="color: inherit; text-decoration: inherit;">rename<wbr>Restores</a>
@@ -2140,8 +2489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationrenamerestore">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</p>
-</dd><dt class="property-optional"
+    <dd>Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2149,8 +2497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationsource">Property Map</a></span>
     </dt>
-    <dd><p>Migration source.</p>
-</dd><dt class="property-optional"
+    <dd>Migration source.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -2158,8 +2505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</p>
-</dd><dt class="property-optional"
+    <dd>Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_yaml" style="color: inherit; text-decoration: inherit;">target</a>
@@ -2167,8 +2513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#migrationtarget">Property Map</a></span>
     </dt>
-    <dd><p>Migration target.</p>
-</dd></dl>
+    <dd>Migration target.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2183,7 +2528,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="migrationmigratedbset">Migration<wbr>Migrate<wbr>Db<wbr>Set</h4>
+<h4 id="migrationmigratedbset">
+Migration<wbr>Migrate<wbr>Db<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Migration<wbr>Migrate<wbr>Db<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2195,8 +2542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration database.</p>
-</dd></dl>
+    <dd>Name of the migration database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2210,8 +2556,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration database.</p>
-</dd></dl>
+    <dd>Name of the migration database.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the migration database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2225,8 +2584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the migration database.</p>
-</dd></dl>
+    <dd>Name of the migration database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2240,8 +2598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the migration database.</p>
-</dd></dl>
+    <dd>Name of the migration database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2255,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the migration database.</p>
-</dd></dl>
+    <dd>Name of the migration database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2270,12 +2626,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the migration database.</p>
-</dd></dl>
+    <dd>Name of the migration database.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="migrationrenamerestore">Migration<wbr>Rename<wbr>Restore</h4>
+<h4 id="migrationrenamerestore">
+Migration<wbr>Rename<wbr>Restore<pulumi-choosable type="language" values="python,go" class="inline">, Migration<wbr>Rename<wbr>Restore<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2287,8 +2644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</p>
-</dd><dt class="property-optional"
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldname_csharp" style="color: inherit; text-decoration: inherit;">Old<wbr>Name</a>
@@ -2296,8 +2652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</p>
-</dd></dl>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2311,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</p>
-</dd><dt class="property-optional"
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldname_go" style="color: inherit; text-decoration: inherit;">Old<wbr>Name</a>
@@ -2320,8 +2674,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</p>
-</dd></dl>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="new_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_name_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="old_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_name_hcl" style="color: inherit; text-decoration: inherit;">old_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2335,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</p>
-</dd><dt class="property-optional"
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldname_java" style="color: inherit; text-decoration: inherit;">old<wbr>Name</a>
@@ -2344,8 +2718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</p>
-</dd></dl>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2359,8 +2732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</p>
-</dd><dt class="property-optional"
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldname_nodejs" style="color: inherit; text-decoration: inherit;">old<wbr>Name</a>
@@ -2368,8 +2740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</p>
-</dd></dl>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2383,8 +2754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</p>
-</dd><dt class="property-optional"
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
             title="Optional">
         <span id="old_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_name_python" style="color: inherit; text-decoration: inherit;">old_<wbr>name</a>
@@ -2392,8 +2762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</p>
-</dd></dl>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2407,8 +2776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</p>
-</dd><dt class="property-optional"
+    <dd>When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldname_yaml" style="color: inherit; text-decoration: inherit;">old<wbr>Name</a>
@@ -2416,12 +2784,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</p>
-</dd></dl>
+    <dd>The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="migrationsource">Migration<wbr>Source</h4>
+<h4 id="migrationsource">
+Migration<wbr>Source<pulumi-choosable type="language" values="python,go" class="inline">, Migration<wbr>Source<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2433,8 +2802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</p>
-</dd><dt class="property-optional"
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2442,8 +2810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2451,8 +2818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2460,8 +2826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2469,8 +2834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2478,8 +2842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</p>
-</dd><dt class="property-optional"
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlpassword_csharp" style="color: inherit; text-decoration: inherit;">Url<wbr>Password</a>
@@ -2487,8 +2850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="urls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_csharp" style="color: inherit; text-decoration: inherit;">Urls</a>
@@ -2496,8 +2858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -2505,8 +2866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2514,8 +2874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</p>
-</dd></dl>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2529,8 +2888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</p>
-</dd><dt class="property-optional"
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2538,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2547,8 +2904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2556,8 +2912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2565,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2574,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</p>
-</dd><dt class="property-optional"
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlpassword_go" style="color: inherit; text-decoration: inherit;">Url<wbr>Password</a>
@@ -2583,8 +2936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="urls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_go" style="color: inherit; text-decoration: inherit;">Urls</a>
@@ -2592,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -2601,8 +2952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2610,8 +2960,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</p>
-</dd></dl>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cvm_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_id_hcl" style="color: inherit; text-decoration: inherit;">cvm_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="url_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_password_hcl" style="color: inherit; text-decoration: inherit;">url_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_hcl" style="color: inherit; text-decoration: inherit;">urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2625,8 +3060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</p>
-</dd><dt class="property-optional"
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2634,8 +3068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2643,8 +3076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2652,8 +3084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2661,8 +3092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2670,8 +3100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</p>
-</dd><dt class="property-optional"
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlpassword_java" style="color: inherit; text-decoration: inherit;">url<wbr>Password</a>
@@ -2679,8 +3108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="urls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_java" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -2688,8 +3116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -2697,8 +3124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2706,8 +3132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</p>
-</dd></dl>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2721,8 +3146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</p>
-</dd><dt class="property-optional"
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2730,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2739,8 +3162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2748,8 +3170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2757,8 +3178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2766,8 +3186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</p>
-</dd><dt class="property-optional"
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlpassword_nodejs" style="color: inherit; text-decoration: inherit;">url<wbr>Password</a>
@@ -2775,8 +3194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="urls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_nodejs" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -2784,8 +3202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -2793,8 +3210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2802,8 +3218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</p>
-</dd></dl>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2817,8 +3232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</p>
-</dd><dt class="property-optional"
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2826,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2835,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2844,8 +3256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2853,8 +3264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2862,8 +3272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</p>
-</dd><dt class="property-optional"
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_password_python" style="color: inherit; text-decoration: inherit;">url_<wbr>password</a>
@@ -2871,8 +3280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="urls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_python" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -2880,8 +3288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -2889,8 +3296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User name, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2898,8 +3304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</p>
-</dd></dl>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2913,8 +3318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</p>
-</dd><dt class="property-optional"
+    <dd>ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2922,8 +3326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2931,8 +3334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2940,8 +3342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>Password, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2949,8 +3350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</p>
-</dd><dt class="property-optional"
+    <dd>The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2958,8 +3358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</p>
-</dd><dt class="property-optional"
+    <dd>The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlpassword_yaml" style="color: inherit; text-decoration: inherit;">url<wbr>Password</a>
@@ -2967,8 +3366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup password for offline migration, MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="urls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_yaml" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -2976,8 +3374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</p>
-</dd><dt class="property-optional"
+    <dd>The source backup address for offline migration. MigrateType=4 or MigrateType=5.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -2985,8 +3382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name, MigrateType=1 or MigrateType=2.</p>
-</dd><dt class="property-optional"
+    <dd>User name, MigrateType=1 or MigrateType=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2994,12 +3390,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</p>
-</dd></dl>
+    <dd>The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="migrationtarget">Migration<wbr>Target</h4>
+<h4 id="migrationtarget">
+Migration<wbr>Target<pulumi-choosable type="language" values="python,go" class="inline">, Migration<wbr>Target<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3011,8 +3408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the migration target instance, in the format mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3020,8 +3416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of the migration target instance.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -3029,8 +3424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name of the migration target instance.</p>
-</dd></dl>
+    <dd>User name of the migration target instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3044,8 +3438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the migration target instance, in the format mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3053,8 +3446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of the migration target instance.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -3062,8 +3454,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name of the migration target instance.</p>
-</dd></dl>
+    <dd>User name of the migration target instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User name of the migration target instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3077,8 +3498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the migration target instance, in the format mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3086,8 +3506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of the migration target instance.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -3095,8 +3514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name of the migration target instance.</p>
-</dd></dl>
+    <dd>User name of the migration target instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3110,8 +3528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the migration target instance, in the format mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3119,8 +3536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of the migration target instance.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -3128,8 +3544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name of the migration target instance.</p>
-</dd></dl>
+    <dd>User name of the migration target instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3143,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the migration target instance, in the format mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3152,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of the migration target instance.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -3161,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User name of the migration target instance.</p>
-</dd></dl>
+    <dd>User name of the migration target instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3176,8 +3588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the migration target instance, in the format mssql-si2823jyl.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the migration target instance, in the format mssql-si2823jyl.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3185,8 +3596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of the migration target instance.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the migration target instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -3194,8 +3604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name of the migration target instance.</p>
-</dd></dl>
+    <dd>User name of the migration target instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3211,6 +3620,9 @@ $ pulumi import tencentcloud:Sqlserver/migration:Migration migration migration_i
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3220,7 +3632,6 @@ $ pulumi import tencentcloud:Sqlserver/migration:Migration migration migration_i
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

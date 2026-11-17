@@ -2,9 +2,11 @@
 ---
 title: "getMesh"
 title_tag: "tencentcloud.Tcm.getMesh"
-meta_desc: "Documentation for the tencentcloud.Tcm.getMesh function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tcm mesh"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,41 +18,88 @@ Use this data source to query detailed information of tcm mesh
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const mesh = tencentcloud.Tcm.getMesh({
-    meshClusters: ["cls-xxxx"],
+const mesh = tencentcloud.tcm.getMesh({
     meshIds: ["mesh-xxxxxx"],
     meshNames: ["KEEP_MASH"],
     tags: ["key"],
+    meshClusters: ["cls-xxxx"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-mesh = tencentcloud.Tcm.get_mesh(mesh_clusters=["cls-xxxx"],
-    mesh_ids=["mesh-xxxxxx"],
+mesh = tencentcloud.tcm.get_mesh(mesh_ids=["mesh-xxxxxx"],
     mesh_names=["KEEP_MASH"],
-    tags=["key"])
+    tags=["key"],
+    mesh_clusters=["cls-xxxx"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcm.GetMesh(ctx, &tcm.GetMeshArgs{
+			MeshIds: []string{
+				"mesh-xxxxxx",
+			},
+			MeshNames: []string{
+				"KEEP_MASH",
+			},
+			Tags: []string{
+				"key",
+			},
+			MeshClusters: []string{
+				"cls-xxxx",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var mesh = Tencentcloud.Tcm.GetMesh.Invoke(new()
     {
-        MeshClusters = new[]
-        {
-            "cls-xxxx",
-        },
         MeshIds = new[]
         {
             "mesh-xxxxxx",
@@ -63,41 +112,19 @@ return await Deployment.RunAsync(() =>
         {
             "key",
         },
+        MeshClusters = new[]
+        {
+            "cls-xxxx",
+        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcm.GetMesh(ctx, &tcm.GetMeshArgs{
-			MeshClusters: []string{
-				"cls-xxxx",
-			},
-			MeshIds: []string{
-				"mesh-xxxxxx",
-			},
-			MeshNames: []string{
-				"KEEP_MASH",
-			},
-			Tags: []string{
-				"key",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -106,8 +133,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcm.TcmFunctions;
 import com.pulumi.tencentcloud.Tcm.inputs.GetMeshArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -120,32 +147,65 @@ public class App {
 
     public static void stack(Context ctx) {
         final var mesh = TcmFunctions.getMesh(GetMeshArgs.builder()
-            .meshClusters("cls-xxxx")
             .meshIds("mesh-xxxxxx")
             .meshNames("KEEP_MASH")
             .tags("key")
+            .meshClusters("cls-xxxx")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   mesh:
     fn::invoke:
-      Function: tencentcloud:Tcm:getMesh
-      Arguments:
-        meshClusters:
-          - cls-xxxx
+      function: tencentcloud:Tcm:getMesh
+      arguments:
         meshIds:
           - mesh-xxxxxx
         meshNames:
           - KEEP_MASH
         tags:
           - key
+        meshClusters:
+          - cls-xxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcm_getmesh" "mesh" {
+  mesh_ids      = ["mesh-xxxxxx"]
+  mesh_names    = ["KEEP_MASH"]
+  tags          = ["key"]
+  mesh_clusters = ["cls-xxxx"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&type=document&lang=en)
 
 
 
@@ -157,7 +217,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -165,9 +225,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getMesh<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMeshArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>></span
+><span class="k">function </span>getMesh<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMeshArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>></span
 ><span class="k">
-function </span>getMeshOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMeshOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>></span
+function </span>getMeshOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMeshOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -183,12 +243,12 @@ function </span>getMeshOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetMeshResult</span
 ><span class="k">
-def </span>get_mesh_output<span class="p">(</span><span class="nx">mesh_clusters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-             <span class="nx">mesh_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-             <span class="nx">mesh_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMeshResult]</span
+def </span>get_mesh_output<span class="p">(</span><span class="nx">mesh_clusters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+             <span class="nx">mesh_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+             <span class="nx">mesh_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMeshResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,12 +257,12 @@ def </span>get_mesh_output<span class="p">(</span><span class="nx">mesh_clusters
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetMesh<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetMeshArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetMeshResult</a></span>, error)</span
+><span class="k">func </span>LookupMesh<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupMeshArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupMeshResult</a></span>, error)</span
 ><span class="k">
-func </span>GetMeshOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetMeshOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetMeshResultOutput</span
+func </span>LookupMeshOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupMeshOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupMeshResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetMesh` in the Go SDK.
+&gt; Note: This function is named `LookupMesh` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -213,7 +273,8 @@ func </span>GetMeshOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetMesh </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetMeshArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMeshInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMeshInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMeshInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -222,7 +283,8 @@ func </span>GetMeshOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> </span>getMesh<span class="p">(</span><span class="nx">GetMeshArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> </span>getMesh<span class="p">(</span><span class="nx">GetMeshArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMeshResult</a></span>> </span>getMesh<span class="p">(</span><span class="nx">GetMeshArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -234,6 +296,15 @@ func </span>GetMeshOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcm/getMesh:getMesh
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcm_get_mesh&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +323,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshids_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Ids</a>
@@ -261,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Names</a>
@@ -270,8 +339,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-optional"
+    <dd>Display name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -279,8 +347,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -288,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd></dl>
+    <dd>tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -303,8 +369,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshids_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Ids</a>
@@ -312,8 +377,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Names</a>
@@ -321,8 +385,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-optional"
+    <dd>Display name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -330,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -339,8 +401,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd></dl>
+    <dd>tag key.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="mesh_clusters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_clusters_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Mesh name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mesh_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_ids_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mesh_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_names_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Display name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -354,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshids_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Ids</a>
@@ -363,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Names</a>
@@ -372,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-optional"
+    <dd>Display name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -381,8 +485,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -390,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd></dl>
+    <dd>tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -405,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshids_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Ids</a>
@@ -414,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Names</a>
@@ -423,8 +523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-optional"
+    <dd>Display name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -432,8 +531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -441,8 +539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd></dl>
+    <dd>tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -456,8 +553,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="mesh_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_ids_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>ids</a>
@@ -465,8 +561,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="mesh_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_names_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>names</a>
@@ -474,8 +569,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-optional"
+    <dd>Display name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -483,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -492,8 +585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd></dl>
+    <dd>tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -507,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshids_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Ids</a>
@@ -516,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh instance Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Names</a>
@@ -525,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-optional"
+    <dd>Display name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -534,8 +623,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -543,8 +631,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd></dl>
+    <dd>tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -567,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="meshlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshlists_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Lists</a>
@@ -576,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Outputs.<wbr>Get<wbr>Mesh<wbr>Mesh<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-"
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
             title="">
         <span id="meshclusters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshclusters_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Clusters</a>
@@ -593,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-"
+    <dd>Mesh instance Id.</dd><dt class="property-"
             title="">
         <span id="meshnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Names</a>
@@ -632,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="meshlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshlists_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Lists</a>
@@ -641,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlist">[]Get<wbr>Mesh<wbr>Mesh<wbr>List</a></span>
     </dt>
-    <dd><p>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-"
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
             title="">
         <span id="meshclusters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshclusters_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Clusters</a>
@@ -658,8 +740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-"
+    <dd>Mesh instance Id.</dd><dt class="property-"
             title="">
         <span id="meshnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Names</a>
@@ -688,6 +769,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="mesh_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_lists_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmeshmeshlist">list(object)</a></span>
+    </dt>
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
+            title="">
+        <span id="mesh_clusters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_clusters_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="mesh_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_ids_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Mesh instance Id.</dd><dt class="property-"
+            title="">
+        <span id="mesh_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_names_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -697,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="meshlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshlists_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Lists</a>
@@ -706,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlist">List&lt;Get<wbr>Mesh<wbr>Mesh<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-"
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
             title="">
         <span id="meshclusters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshclusters_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Clusters</a>
@@ -723,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-"
+    <dd>Mesh instance Id.</dd><dt class="property-"
             title="">
         <span id="meshnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Names</a>
@@ -762,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="meshlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshlists_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Lists</a>
@@ -771,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlist">Get<wbr>Mesh<wbr>Mesh<wbr>List[]</a></span>
     </dt>
-    <dd><p>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-"
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
             title="">
         <span id="meshclusters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshclusters_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Clusters</a>
@@ -788,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-"
+    <dd>Mesh instance Id.</dd><dt class="property-"
             title="">
         <span id="meshnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Names</a>
@@ -827,17 +964,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="mesh_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_lists_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmeshmeshlist">Get<wbr>Mesh<wbr>Mesh<wbr>List]</a></span>
+        <span class="property-type"><a href="#getmeshmeshlist">Sequence[Get<wbr>Mesh<wbr>Mesh<wbr>List]</a></span>
     </dt>
-    <dd><p>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-"
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
             title="">
         <span id="mesh_clusters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_clusters_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>clusters</a>
@@ -853,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-"
+    <dd>Mesh instance Id.</dd><dt class="property-"
             title="">
         <span id="mesh_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_names_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>names</a>
@@ -892,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="meshlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshlists_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Lists</a>
@@ -901,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-"
+    <dd>The mesh information is queriedNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-"
             title="">
         <span id="meshclusters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshclusters_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Clusters</a>
@@ -918,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-"
+    <dd>Mesh instance Id.</dd><dt class="property-"
             title="">
         <span id="meshnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshnames_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Names</a>
@@ -967,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -976,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Id</a>
@@ -985,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-required"
+    <dd>Mesh instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="taglists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Lists</a>
@@ -994,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlisttaglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Tag<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-required"
+    <dd>A list of associated tags.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1003,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</p>
-</dd><dt class="property-required"
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1012,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd></dl>
+    <dd>Mesh version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1027,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfig">[]Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -1036,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Id</a>
@@ -1045,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-required"
+    <dd>Mesh instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="taglists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Lists</a>
@@ -1054,8 +1176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlisttaglist">[]Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Tag<wbr>List</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-required"
+    <dd>A list of associated tags.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1063,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</p>
-</dd><dt class="property-required"
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1072,8 +1192,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd></dl>
+    <dd>Mesh version.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_hcl" style="color: inherit; text-decoration: inherit;">configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmeshmeshlistconfig">list(object)</a></span>
+    </dt>
+    <dd>Mesh configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh name.</dd><dt class="property-required"
+            title="Required">
+        <span id="mesh_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_id_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh instance Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_lists_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmeshmeshlisttaglist">list(object)</a></span>
+    </dt>
+    <dd>A list of associated tags.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1087,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfig">List&lt;Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1096,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1105,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-required"
+    <dd>Mesh instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="taglists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
@@ -1114,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlisttaglist">List&lt;Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Tag<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-required"
+    <dd>A list of associated tags.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1123,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</p>
-</dd><dt class="property-required"
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1132,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd></dl>
+    <dd>Mesh version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1147,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfig">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1156,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1165,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-required"
+    <dd>Mesh instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="taglists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
@@ -1174,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlisttaglist">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Tag<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-required"
+    <dd>A list of associated tags.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1183,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</p>
-</dd><dt class="property-required"
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1192,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd></dl>
+    <dd>Mesh version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,10 +1366,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_python" style="color: inherit; text-decoration: inherit;">configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmeshmeshlistconfig">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getmeshmeshlistconfig">Sequence[Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config]</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -1216,8 +1376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="mesh_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_id_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>id</a>
@@ -1225,17 +1384,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-required"
+    <dd>Mesh instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="tag_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_lists_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmeshmeshlisttaglist">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Tag<wbr>List]</a></span>
+        <span class="property-type"><a href="#getmeshmeshlisttaglist">Sequence[Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Tag<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-required"
+    <dd>A list of associated tags.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1243,8 +1400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</p>
-</dd><dt class="property-required"
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1252,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd></dl>
+    <dd>Mesh version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1276,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1285,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh instance Id.</p>
-</dd><dt class="property-required"
+    <dd>Mesh instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="taglists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
@@ -1294,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlisttaglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-required"
+    <dd>A list of associated tags.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1303,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</p>
-</dd><dt class="property-required"
+    <dd>Mesh type.  Value range:- <code>STANDALONE</code>: Standalone mesh- <code>HOSTED</code>: hosted the mesh.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1312,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd></dl>
+    <dd>Mesh version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1331,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistio">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio&gt;</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd></dl>
+    <dd>Istio configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1346,8 +1494,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistio">[]Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd></dl>
+    <dd>Istio configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="istios_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istios_hcl" style="color: inherit; text-decoration: inherit;">istios</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmeshmeshlistconfigistio">list(object)</a></span>
+    </dt>
+    <dd>Istio configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1361,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistio">List&lt;Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio&gt;</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd></dl>
+    <dd>Istio configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1376,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistio">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio[]</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd></dl>
+    <dd>Istio configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1389,10 +1548,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istios_python" style="color: inherit; text-decoration: inherit;">istios</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmeshmeshlistconfigistio">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio]</a></span>
+        <span class="property-type"><a href="#getmeshmeshlistconfigistio">Sequence[Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio]</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd></dl>
+    <dd>Istio configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1406,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistio">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd></dl>
+    <dd>Istio configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1425,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-required"
+    <dd>Disable http retry.</dd><dt class="property-required"
             title="Required">
         <span id="disablepolicychecks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Policy<wbr>Checks</a>
@@ -1434,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-required"
+    <dd>Disable policy checks.</dd><dt class="property-required"
             title="Required">
         <span id="enablepilothttp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Pilot<wbr>Http</a>
@@ -1443,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-required"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
             title="Required">
         <span id="outboundtrafficpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outboundtrafficpolicy_csharp" style="color: inherit; text-decoration: inherit;">Outbound<wbr>Traffic<wbr>Policy</a>
@@ -1452,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Outbound traffic policy.</p>
-</dd><dt class="property-required"
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
             title="Required">
         <span id="smartdns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_csharp" style="color: inherit; text-decoration: inherit;">Smart<wbr>Dns</a>
@@ -1461,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dn&gt;</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd></dl>
+    <dd>SmartDNS configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1476,8 +1628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-required"
+    <dd>Disable http retry.</dd><dt class="property-required"
             title="Required">
         <span id="disablepolicychecks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Policy<wbr>Checks</a>
@@ -1485,8 +1636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-required"
+    <dd>Disable policy checks.</dd><dt class="property-required"
             title="Required">
         <span id="enablepilothttp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Pilot<wbr>Http</a>
@@ -1494,8 +1644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-required"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
             title="Required">
         <span id="outboundtrafficpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outboundtrafficpolicy_go" style="color: inherit; text-decoration: inherit;">Outbound<wbr>Traffic<wbr>Policy</a>
@@ -1503,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Outbound traffic policy.</p>
-</dd><dt class="property-required"
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
             title="Required">
         <span id="smartdns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_go" style="color: inherit; text-decoration: inherit;">Smart<wbr>Dns</a>
@@ -1512,8 +1660,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">[]Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dn</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd></dl>
+    <dd>SmartDNS configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disable_http_retry_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_http_retry_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>http_<wbr>retry</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable http retry.</dd><dt class="property-required"
+            title="Required">
+        <span id="disable_policy_checks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_policy_checks_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>policy_<wbr>checks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable policy checks.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_pilot_http_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_pilot_http_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>pilot_<wbr>http</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
+            title="Required">
+        <span id="outbound_traffic_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbound_traffic_policy_hcl" style="color: inherit; text-decoration: inherit;">outbound_<wbr>traffic_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="smart_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smart_dns_hcl" style="color: inherit; text-decoration: inherit;">smart_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">list(object)</a></span>
+    </dt>
+    <dd>SmartDNS configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1527,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-required"
+    <dd>Disable http retry.</dd><dt class="property-required"
             title="Required">
         <span id="disablepolicychecks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Policy<wbr>Checks</a>
@@ -1536,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-required"
+    <dd>Disable policy checks.</dd><dt class="property-required"
             title="Required">
         <span id="enablepilothttp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Pilot<wbr>Http</a>
@@ -1545,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-required"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
             title="Required">
         <span id="outboundtrafficpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outboundtrafficpolicy_java" style="color: inherit; text-decoration: inherit;">outbound<wbr>Traffic<wbr>Policy</a>
@@ -1554,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Outbound traffic policy.</p>
-</dd><dt class="property-required"
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
             title="Required">
         <span id="smartdns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_java" style="color: inherit; text-decoration: inherit;">smart<wbr>Dns</a>
@@ -1563,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">List&lt;Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dn&gt;</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd></dl>
+    <dd>SmartDNS configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-required"
+    <dd>Disable http retry.</dd><dt class="property-required"
             title="Required">
         <span id="disablepolicychecks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Policy<wbr>Checks</a>
@@ -1587,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-required"
+    <dd>Disable policy checks.</dd><dt class="property-required"
             title="Required">
         <span id="enablepilothttp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Pilot<wbr>Http</a>
@@ -1596,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-required"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
             title="Required">
         <span id="outboundtrafficpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outboundtrafficpolicy_nodejs" style="color: inherit; text-decoration: inherit;">outbound<wbr>Traffic<wbr>Policy</a>
@@ -1605,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Outbound traffic policy.</p>
-</dd><dt class="property-required"
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
             title="Required">
         <span id="smartdns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_nodejs" style="color: inherit; text-decoration: inherit;">smart<wbr>Dns</a>
@@ -1614,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dn[]</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd></dl>
+    <dd>SmartDNS configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1629,8 +1812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-required"
+    <dd>Disable http retry.</dd><dt class="property-required"
             title="Required">
         <span id="disable_policy_checks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_policy_checks_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>policy_<wbr>checks</a>
@@ -1638,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-required"
+    <dd>Disable policy checks.</dd><dt class="property-required"
             title="Required">
         <span id="enable_pilot_http_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_pilot_http_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>pilot_<wbr>http</a>
@@ -1647,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-required"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
             title="Required">
         <span id="outbound_traffic_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbound_traffic_policy_python" style="color: inherit; text-decoration: inherit;">outbound_<wbr>traffic_<wbr>policy</a>
@@ -1656,17 +1836,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Outbound traffic policy.</p>
-</dd><dt class="property-required"
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
             title="Required">
         <span id="smart_dns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smart_dns_python" style="color: inherit; text-decoration: inherit;">smart_<wbr>dns</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dn]</a></span>
+        <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">Sequence[Get<wbr>Mesh<wbr>Mesh<wbr>List<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dn]</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd></dl>
+    <dd>SmartDNS configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1680,8 +1858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-required"
+    <dd>Disable http retry.</dd><dt class="property-required"
             title="Required">
         <span id="disablepolicychecks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Policy<wbr>Checks</a>
@@ -1689,8 +1866,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-required"
+    <dd>Disable policy checks.</dd><dt class="property-required"
             title="Required">
         <span id="enablepilothttp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Pilot<wbr>Http</a>
@@ -1698,8 +1874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-required"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-required"
             title="Required">
         <span id="outboundtrafficpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outboundtrafficpolicy_yaml" style="color: inherit; text-decoration: inherit;">outbound<wbr>Traffic<wbr>Policy</a>
@@ -1707,8 +1882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Outbound traffic policy.</p>
-</dd><dt class="property-required"
+    <dd>Outbound traffic policy.</dd><dt class="property-required"
             title="Required">
         <span id="smartdns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_yaml" style="color: inherit; text-decoration: inherit;">smart<wbr>Dns</a>
@@ -1716,8 +1890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmeshmeshlistconfigistiosmartdn">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd></dl>
+    <dd>SmartDNS configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1735,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-required"
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
             title="Required">
         <span id="istiometadnscapture_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_csharp" style="color: inherit; text-decoration: inherit;">Istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -1744,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1759,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-required"
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
             title="Required">
         <span id="istiometadnscapture_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_go" style="color: inherit; text-decoration: inherit;">Istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -1768,8 +1938,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="istio_meta_dns_auto_allocate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_meta_dns_auto_allocate_hcl" style="color: inherit; text-decoration: inherit;">istio_<wbr>meta_<wbr>dns_<wbr>auto_<wbr>allocate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
+            title="Required">
+        <span id="istio_meta_dns_capture_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_meta_dns_capture_hcl" style="color: inherit; text-decoration: inherit;">istio_<wbr>meta_<wbr>dns_<wbr>capture</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1783,8 +1974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-required"
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
             title="Required">
         <span id="istiometadnscapture_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_java" style="color: inherit; text-decoration: inherit;">istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -1792,8 +1982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1807,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-required"
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
             title="Required">
         <span id="istiometadnscapture_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_nodejs" style="color: inherit; text-decoration: inherit;">istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -1816,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1831,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-required"
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
             title="Required">
         <span id="istio_meta_dns_capture_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_meta_dns_capture_python" style="color: inherit; text-decoration: inherit;">istio_<wbr>meta_<wbr>dns_<wbr>capture</a>
@@ -1840,8 +2026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1855,8 +2040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-required"
+    <dd>Enable auto allocate address.</dd><dt class="property-required"
             title="Required">
         <span id="istiometadnscapture_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_yaml" style="color: inherit; text-decoration: inherit;">istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -1864,8 +2048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1883,8 +2066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="passthrough_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_csharp" style="color: inherit; text-decoration: inherit;">Passthrough</a>
@@ -1892,8 +2074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd><dt class="property-required"
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1901,8 +2082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1916,8 +2096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="passthrough_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_go" style="color: inherit; text-decoration: inherit;">Passthrough</a>
@@ -1925,8 +2104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd><dt class="property-required"
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1934,8 +2112,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="passthrough_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_hcl" style="color: inherit; text-decoration: inherit;">passthrough</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1949,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="passthrough_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_java" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -1958,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd><dt class="property-required"
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1967,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1982,8 +2186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="passthrough_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_nodejs" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -1991,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd><dt class="property-required"
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2000,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2015,8 +2216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="passthrough_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_python" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -2024,8 +2224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd><dt class="property-required"
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2033,8 +2232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2048,8 +2246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="passthrough_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_yaml" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -2057,8 +2254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd><dt class="property-required"
+    <dd>Passthrough to other related product.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2066,8 +2262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2082,7 +2277,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "TmpTkeConfig"
 title_tag: "tencentcloud.Monitor.TmpTkeConfig"
-meta_desc: "Documentation for the tencentcloud.Monitor.TmpTkeConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tke tmpPrometheusConfig"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,69 +16,1391 @@ no_edit_this_page: true
 
 Provides a resource to create a tke tmpPrometheusConfig
 
+## Example Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const defaultInstanceType = config.get("defaultInstanceType") || "SA1.MEDIUM2";
+const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+const vpcOne = tencentcloud.vpc.getSubnets({
+    isDefault: true,
+    availabilityZone: availabilityZoneFirst,
+});
+const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
+const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
+const vpcTwo = tencentcloud.vpc.getSubnets({
+    isDefault: true,
+    availabilityZone: availabilityZoneSecond,
+});
+const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.vpcId);
+const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
+const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
+const sgId = sg.id;
+const _default = tencentcloud.images.getInstance({
+    imageTypes: ["PUBLIC_IMAGE"],
+    imageNameRegex: "Final",
+});
+const imageId = _default.then(_default => _default.imageId);
+const sgRule = new tencentcloud.index.SecurityGroupLiteRule("sg_rule", {
+    securityGroupId: sg.id,
+    ingresses: [
+        "ACCEPT#10.0.0.0/16#ALL#ALL",
+        "ACCEPT#172.16.0.0/22#ALL#ALL",
+        "DROP#0.0.0.0/0#ALL#ALL",
+    ],
+    egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+});
+const example = new tencentcloud.kubernetes.Cluster("example", {
+    vpcId: firstVpcId,
+    clusterCidr: exampleClusterCidr,
+    clusterMaxPodNum: 32,
+    clusterName: "tf_example_cluster",
+    clusterDesc: "example for tke cluster",
+    clusterMaxServiceNum: 32,
+    clusterInternet: false,
+    clusterInternetSecurityGroup: sgId,
+    clusterVersion: "1.22.5",
+    clusterDeployType: "MANAGED_CLUSTER",
+    workerConfigs: [
+        {
+            count: 1,
+            availabilityZone: availabilityZoneFirst,
+            instanceType: defaultInstanceType,
+            systemDiskType: "CLOUD_SSD",
+            systemDiskSize: 60,
+            internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+            internetMaxBandwidthOut: 100,
+            publicIpAssigned: true,
+            subnetId: firstSubnetId,
+            imgId: imageId,
+            dataDisks: [{
+                diskType: "CLOUD_PREMIUM",
+                diskSize: 50,
+            }],
+            enhancedSecurityService: false,
+            enhancedMonitorService: false,
+            userData: "dGVzdA==",
+            password: "ZZXXccvv1212",
+        },
+        {
+            count: 1,
+            availabilityZone: availabilityZoneSecond,
+            instanceType: defaultInstanceType,
+            systemDiskType: "CLOUD_SSD",
+            systemDiskSize: 60,
+            internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+            internetMaxBandwidthOut: 100,
+            publicIpAssigned: true,
+            subnetId: secondSubnetId,
+            dataDisks: [{
+                diskType: "CLOUD_PREMIUM",
+                diskSize: 50,
+            }],
+            enhancedSecurityService: false,
+            enhancedMonitorService: false,
+            userData: "dGVzdA==",
+            camRoleName: "CVM_QcsRole",
+            password: "ZZXXccvv1212",
+        },
+    ],
+    labels: {
+        test1: "test1",
+        test2: "test2",
+    },
+});
+const zone = config.get("zone") || "ap-guangzhou";
+const clusterType = config.get("clusterType") || "tke";
+const foo = new tencentcloud.monitor.TmpInstance("foo", {
+    instanceName: "tf-tmp-instance",
+    vpcId: firstVpcId,
+    subnetId: firstSubnetId,
+    dataRetentionTime: 30,
+    zone: availabilityZoneSecond,
+    tags: {
+        createdBy: "terraform",
+    },
+});
+// tmp tke bind
+const fooTmpTkeClusterAgent = new tencentcloud.monitor.TmpTkeClusterAgent("foo", {
+    instanceId: foo.id,
+    agents: {
+        region: zone,
+        clusterType: clusterType,
+        clusterId: example.id,
+        enableExternal: false,
+    },
+});
+const fooTmpTkeConfig = new tencentcloud.monitor.TmpTkeConfig("foo", {
+    instanceId: foo.id,
+    clusterType: clusterType,
+    clusterId: example.id,
+    rawJobs: [{
+        name: "raw_jobs_001",
+        config: "your config for raw_jobs_001\n",
+    }],
+    serviceMonitors: [{
+        name: "kube-system/service-monitor-001",
+        config: `apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor-001
+  namespace: kube-system
+`,
+    }],
+    podMonitors: [{
+        name: "mynamespace/pod-monitor-001",
+        config: `apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pod-monitor-001
+  namespace: mynamespace
+`,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+default_instance_type = config.get("defaultInstanceType")
+if default_instance_type is None:
+    default_instance_type = "SA1.MEDIUM2"
+availability_zone_first = config.get("availabilityZoneFirst")
+if availability_zone_first is None:
+    availability_zone_first = "ap-guangzhou-3"
+availability_zone_second = config.get("availabilityZoneSecond")
+if availability_zone_second is None:
+    availability_zone_second = "ap-guangzhou-4"
+example_cluster_cidr = config.get("exampleClusterCidr")
+if example_cluster_cidr is None:
+    example_cluster_cidr = "10.31.0.0/16"
+vpc_one = tencentcloud.vpc.get_subnets(is_default=True,
+    availability_zone=availability_zone_first)
+first_vpc_id = vpc_one.instance_lists[0].vpc_id
+first_subnet_id = vpc_one.instance_lists[0].subnet_id
+vpc_two = tencentcloud.vpc.get_subnets(is_default=True,
+    availability_zone=availability_zone_second)
+second_vpc_id = vpc_two.instance_lists[0].vpc_id
+second_subnet_id = vpc_two.instance_lists[0].subnet_id
+sg = tencentcloud.security.Group("sg", name="tf-example-sg")
+sg_id = sg.id
+default = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    image_name_regex="Final")
+image_id = default.image_id
+sg_rule = tencentcloud.SecurityGroupLiteRule("sg_rule",
+    security_group_id=sg.id,
+    ingresses=[
+        ACCEPT#10.0.0.0/16#ALL#ALL,
+        ACCEPT#172.16.0.0/22#ALL#ALL,
+        DROP#0.0.0.0/0#ALL#ALL,
+    ],
+    egresses=[ACCEPT#172.16.0.0/22#ALL#ALL])
+example = tencentcloud.kubernetes.Cluster("example",
+    vpc_id=first_vpc_id,
+    cluster_cidr=example_cluster_cidr,
+    cluster_max_pod_num=32,
+    cluster_name="tf_example_cluster",
+    cluster_desc="example for tke cluster",
+    cluster_max_service_num=32,
+    cluster_internet=False,
+    cluster_internet_security_group=sg_id,
+    cluster_version="1.22.5",
+    cluster_deploy_type="MANAGED_CLUSTER",
+    worker_configs=[
+        {
+            "count": 1,
+            "availability_zone": availability_zone_first,
+            "instance_type": default_instance_type,
+            "system_disk_type": "CLOUD_SSD",
+            "system_disk_size": 60,
+            "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+            "internet_max_bandwidth_out": 100,
+            "public_ip_assigned": True,
+            "subnet_id": first_subnet_id,
+            "img_id": image_id,
+            "data_disks": [{
+                "disk_type": "CLOUD_PREMIUM",
+                "disk_size": 50,
+            }],
+            "enhanced_security_service": False,
+            "enhanced_monitor_service": False,
+            "user_data": "dGVzdA==",
+            "password": "ZZXXccvv1212",
+        },
+        {
+            "count": 1,
+            "availability_zone": availability_zone_second,
+            "instance_type": default_instance_type,
+            "system_disk_type": "CLOUD_SSD",
+            "system_disk_size": 60,
+            "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+            "internet_max_bandwidth_out": 100,
+            "public_ip_assigned": True,
+            "subnet_id": second_subnet_id,
+            "data_disks": [{
+                "disk_type": "CLOUD_PREMIUM",
+                "disk_size": 50,
+            }],
+            "enhanced_security_service": False,
+            "enhanced_monitor_service": False,
+            "user_data": "dGVzdA==",
+            "cam_role_name": "CVM_QcsRole",
+            "password": "ZZXXccvv1212",
+        },
+    ],
+    labels={
+        "test1": "test1",
+        "test2": "test2",
+    })
+zone = config.get("zone")
+if zone is None:
+    zone = "ap-guangzhou"
+cluster_type = config.get("clusterType")
+if cluster_type is None:
+    cluster_type = "tke"
+foo = tencentcloud.monitor.TmpInstance("foo",
+    instance_name="tf-tmp-instance",
+    vpc_id=first_vpc_id,
+    subnet_id=first_subnet_id,
+    data_retention_time=30,
+    zone=availability_zone_second,
+    tags={
+        "createdBy": "terraform",
+    })
+# tmp tke bind
+foo_tmp_tke_cluster_agent = tencentcloud.monitor.TmpTkeClusterAgent("foo",
+    instance_id=foo.id,
+    agents={
+        "region": zone,
+        "cluster_type": cluster_type,
+        "cluster_id": example.id,
+        "enable_external": False,
+    })
+foo_tmp_tke_config = tencentcloud.monitor.TmpTkeConfig("foo",
+    instance_id=foo.id,
+    cluster_type=cluster_type,
+    cluster_id=example.id,
+    raw_jobs=[{
+        "name": "raw_jobs_001",
+        "config": "your config for raw_jobs_001\n",
+    }],
+    service_monitors=[{
+        "name": "kube-system/service-monitor-001",
+        "config": """apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor-001
+  namespace: kube-system
+""",
+    }],
+    pod_monitors=[{
+        "name": "mynamespace/pod-monitor-001",
+        "config": """apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pod-monitor-001
+  namespace: mynamespace
+""",
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		defaultInstanceType := "SA1.MEDIUM2"
+		if param := cfg.Get("defaultInstanceType"); param != "" {
+			defaultInstanceType = param
+		}
+		availabilityZoneFirst := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZoneFirst"); param != "" {
+			availabilityZoneFirst = param
+		}
+		availabilityZoneSecond := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZoneSecond"); param != "" {
+			availabilityZoneSecond = param
+		}
+		exampleClusterCidr := "10.31.0.0/16"
+		if param := cfg.Get("exampleClusterCidr"); param != "" {
+			exampleClusterCidr = param
+		}
+		vpcOne, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		firstVpcId := vpcOne.InstanceLists[0].VpcId
+		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
+		vpcTwo, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_ := vpcTwo.InstanceLists[0].VpcId
+		secondSubnetId := vpcTwo.InstanceLists[0].SubnetId
+		sg, err := security.NewGroup(ctx, "sg", &security.GroupArgs{
+			Name: pulumi.String("tf-example-sg"),
+		})
+		if err != nil {
+			return err
+		}
+		sgId := sg.ID()
+		_default, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			ImageNameRegex: pulumi.StringRef("Final"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		imageId := _default.ImageId
+		_, err = tencentcloud.NewSecurityGroupLiteRule(ctx, "sg_rule", &tencentcloud.SecurityGroupLiteRuleArgs{
+			SecurityGroupId: sg.ID(),
+			Ingresses: []string{
+				"ACCEPT#10.0.0.0/16#ALL#ALL",
+				"ACCEPT#172.16.0.0/22#ALL#ALL",
+				"DROP#0.0.0.0/0#ALL#ALL",
+			},
+			Egresses: []string{
+				"ACCEPT#172.16.0.0/22#ALL#ALL",
+			},
+		})
+		if err != nil {
+			return err
+		}
+		example, err := kubernetes.NewCluster(ctx, "example", &kubernetes.ClusterArgs{
+			VpcId:                        pulumi.String(firstVpcId),
+			ClusterCidr:                  pulumi.String(exampleClusterCidr),
+			ClusterMaxPodNum:             pulumi.Int(32),
+			ClusterName:                  pulumi.String("tf_example_cluster"),
+			ClusterDesc:                  pulumi.String("example for tke cluster"),
+			ClusterMaxServiceNum:         pulumi.Int(32),
+			ClusterInternet:              pulumi.Bool(false),
+			ClusterInternetSecurityGroup: sgId.ToIDOutput().ToStringOutput(),
+			ClusterVersion:               pulumi.String("1.22.5"),
+			ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
+			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+				&kubernetes.ClusterWorkerConfigArgs{
+					Count:                   pulumi.Int(1),
+					AvailabilityZone:        pulumi.String(availabilityZoneFirst),
+					InstanceType:            pulumi.String(defaultInstanceType),
+					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+					SystemDiskSize:          pulumi.Int(60),
+					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+					InternetMaxBandwidthOut: pulumi.Int(100),
+					PublicIpAssigned:        pulumi.Bool(true),
+					SubnetId:                pulumi.String(firstSubnetId),
+					ImgId:                   pulumi.String(imageId),
+					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+						&kubernetes.ClusterWorkerConfigDataDiskArgs{
+							DiskType: pulumi.String("CLOUD_PREMIUM"),
+							DiskSize: pulumi.Int(50),
+						},
+					},
+					EnhancedSecurityService: pulumi.Bool(false),
+					EnhancedMonitorService:  pulumi.Bool(false),
+					UserData:                pulumi.String("dGVzdA=="),
+					Password:                pulumi.String("ZZXXccvv1212"),
+				},
+				&kubernetes.ClusterWorkerConfigArgs{
+					Count:                   pulumi.Int(1),
+					AvailabilityZone:        pulumi.String(availabilityZoneSecond),
+					InstanceType:            pulumi.String(defaultInstanceType),
+					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+					SystemDiskSize:          pulumi.Int(60),
+					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+					InternetMaxBandwidthOut: pulumi.Int(100),
+					PublicIpAssigned:        pulumi.Bool(true),
+					SubnetId:                pulumi.String(secondSubnetId),
+					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+						&kubernetes.ClusterWorkerConfigDataDiskArgs{
+							DiskType: pulumi.String("CLOUD_PREMIUM"),
+							DiskSize: pulumi.Int(50),
+						},
+					},
+					EnhancedSecurityService: pulumi.Bool(false),
+					EnhancedMonitorService:  pulumi.Bool(false),
+					UserData:                pulumi.String("dGVzdA=="),
+					CamRoleName:             pulumi.String("CVM_QcsRole"),
+					Password:                pulumi.String("ZZXXccvv1212"),
+				},
+			},
+			Labels: pulumi.StringMap{
+				"test1": pulumi.String("test1"),
+				"test2": pulumi.String("test2"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		zone := "ap-guangzhou"
+		if param := cfg.Get("zone"); param != "" {
+			zone = param
+		}
+		clusterType := "tke"
+		if param := cfg.Get("clusterType"); param != "" {
+			clusterType = param
+		}
+		foo, err := monitor.NewTmpInstance(ctx, "foo", &monitor.TmpInstanceArgs{
+			InstanceName:      pulumi.String("tf-tmp-instance"),
+			VpcId:             pulumi.String(firstVpcId),
+			SubnetId:          pulumi.String(firstSubnetId),
+			DataRetentionTime: pulumi.Int(30),
+			Zone:              pulumi.String(availabilityZoneSecond),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// tmp tke bind
+		_, err = monitor.NewTmpTkeClusterAgent(ctx, "foo", &monitor.TmpTkeClusterAgentArgs{
+			InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
+			Agents: &monitor.TmpTkeClusterAgentAgentsArgs{
+				Region:         pulumi.String(zone),
+				ClusterType:    pulumi.String(clusterType),
+				ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
+				EnableExternal: pulumi.Bool(false),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = monitor.NewTmpTkeConfig(ctx, "foo", &monitor.TmpTkeConfigArgs{
+			InstanceId:  foo.ID().ToIDOutput().ToStringOutput(),
+			ClusterType: pulumi.String(clusterType),
+			ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
+			RawJobs: monitor.TmpTkeConfigRawJobArray{
+				&monitor.TmpTkeConfigRawJobArgs{
+					Name:   pulumi.String("raw_jobs_001"),
+					Config: pulumi.String("your config for raw_jobs_001\n"),
+				},
+			},
+			ServiceMonitors: monitor.TmpTkeConfigServiceMonitorArray{
+				&monitor.TmpTkeConfigServiceMonitorArgs{
+					Name: pulumi.String("kube-system/service-monitor-001"),
+					Config: pulumi.String(`apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor-001
+  namespace: kube-system
+`),
+				},
+			},
+			PodMonitors: monitor.TmpTkeConfigPodMonitorArray{
+				&monitor.TmpTkeConfigPodMonitorArgs{
+					Name: pulumi.String("mynamespace/pod-monitor-001"),
+					Config: pulumi.String(`apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pod-monitor-001
+  namespace: mynamespace
+`),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA1.MEDIUM2";
+    var availabilityZoneFirst = config.Get("availabilityZoneFirst") ?? "ap-guangzhou-3";
+    var availabilityZoneSecond = config.Get("availabilityZoneSecond") ?? "ap-guangzhou-4";
+    var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    var vpcOne = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZoneFirst,
+    });
+
+    var firstVpcId = vpcOne.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
+
+    var firstSubnetId = vpcOne.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
+
+    var vpcTwo = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZoneSecond,
+    });
+
+    var secondVpcId = vpcTwo.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
+
+    var secondSubnetId = vpcTwo.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
+
+    var sg = new Tencentcloud.Security.Group("sg", new()
+    {
+        Name = "tf-example-sg",
+    });
+
+    var sgId = sg.Id;
+
+    var @default = Tencentcloud.Images.GetInstance.Invoke(new()
+    {
+        ImageTypes = new[]
+        {
+            "PUBLIC_IMAGE",
+        },
+        ImageNameRegex = "Final",
+    });
+
+    var imageId = @default.Apply(@default => @default.Apply(getInstanceResult => getInstanceResult.ImageId));
+
+    var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
+    {
+        SecurityGroupId = sg.Id,
+        Ingresses = new[]
+        {
+            "ACCEPT#10.0.0.0/16#ALL#ALL",
+            "ACCEPT#172.16.0.0/22#ALL#ALL",
+            "DROP#0.0.0.0/0#ALL#ALL",
+        },
+        Egresses = new[]
+        {
+            "ACCEPT#172.16.0.0/22#ALL#ALL",
+        },
+    });
+
+    var example = new Tencentcloud.Kubernetes.Cluster("example", new()
+    {
+        VpcId = firstVpcId,
+        ClusterCidr = exampleClusterCidr,
+        ClusterMaxPodNum = 32,
+        ClusterName = "tf_example_cluster",
+        ClusterDesc = "example for tke cluster",
+        ClusterMaxServiceNum = 32,
+        ClusterInternet = false,
+        ClusterInternetSecurityGroup = sgId,
+        ClusterVersion = "1.22.5",
+        ClusterDeployType = "MANAGED_CLUSTER",
+        WorkerConfigs = new[]
+        {
+            new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
+            {
+                Count = 1,
+                AvailabilityZone = availabilityZoneFirst,
+                InstanceType = defaultInstanceType,
+                SystemDiskType = "CLOUD_SSD",
+                SystemDiskSize = 60,
+                InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+                InternetMaxBandwidthOut = 100,
+                PublicIpAssigned = true,
+                SubnetId = firstSubnetId,
+                ImgId = imageId,
+                DataDisks = new[]
+                {
+                    new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
+                    {
+                        DiskType = "CLOUD_PREMIUM",
+                        DiskSize = 50,
+                    },
+                },
+                EnhancedSecurityService = false,
+                EnhancedMonitorService = false,
+                UserData = "dGVzdA==",
+                Password = "ZZXXccvv1212",
+            },
+            new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
+            {
+                Count = 1,
+                AvailabilityZone = availabilityZoneSecond,
+                InstanceType = defaultInstanceType,
+                SystemDiskType = "CLOUD_SSD",
+                SystemDiskSize = 60,
+                InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+                InternetMaxBandwidthOut = 100,
+                PublicIpAssigned = true,
+                SubnetId = secondSubnetId,
+                DataDisks = new[]
+                {
+                    new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
+                    {
+                        DiskType = "CLOUD_PREMIUM",
+                        DiskSize = 50,
+                    },
+                },
+                EnhancedSecurityService = false,
+                EnhancedMonitorService = false,
+                UserData = "dGVzdA==",
+                CamRoleName = "CVM_QcsRole",
+                Password = "ZZXXccvv1212",
+            },
+        },
+        Labels = 
+        {
+            { "test1", "test1" },
+            { "test2", "test2" },
+        },
+    });
+
+    var zone = config.Get("zone") ?? "ap-guangzhou";
+    var clusterType = config.Get("clusterType") ?? "tke";
+    var foo = new Tencentcloud.Monitor.TmpInstance("foo", new()
+    {
+        InstanceName = "tf-tmp-instance",
+        VpcId = firstVpcId,
+        SubnetId = firstSubnetId,
+        DataRetentionTime = 30,
+        Zone = availabilityZoneSecond,
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+    // tmp tke bind
+    var fooTmpTkeClusterAgent = new Tencentcloud.Monitor.TmpTkeClusterAgent("foo", new()
+    {
+        InstanceId = foo.Id,
+        Agents = new Tencentcloud.Monitor.Inputs.TmpTkeClusterAgentAgentsArgs
+        {
+            Region = zone,
+            ClusterType = clusterType,
+            ClusterId = example.Id,
+            EnableExternal = false,
+        },
+    });
+
+    var fooTmpTkeConfig = new Tencentcloud.Monitor.TmpTkeConfig("foo", new()
+    {
+        InstanceId = foo.Id,
+        ClusterType = clusterType,
+        ClusterId = example.Id,
+        RawJobs = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.TmpTkeConfigRawJobArgs
+            {
+                Name = "raw_jobs_001",
+                Config = @"your config for raw_jobs_001
+",
+            },
+        },
+        ServiceMonitors = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.TmpTkeConfigServiceMonitorArgs
+            {
+                Name = "kube-system/service-monitor-001",
+                Config = @"apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor-001
+  namespace: kube-system
+",
+            },
+        },
+        PodMonitors = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.TmpTkeConfigPodMonitorArgs
+            {
+                Name = "mynamespace/pod-monitor-001",
+                Config = @"apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pod-monitor-001
+  namespace: mynamespace
+",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpc.VpcFunctions;
+import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import com.pulumi.tencentcloud.Images.ImagesFunctions;
+import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
+import com.pulumi.tencentcloud.SecurityGroupLiteRule;
+import com.pulumi.tencentcloud.SecurityGroupLiteRuleArgs;
+import com.pulumi.tencentcloud.Kubernetes.Cluster;
+import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.ClusterWorkerConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.ClusterWorkerConfigDataDiskArgs;
+import com.pulumi.tencentcloud.Monitor.TmpInstance;
+import com.pulumi.tencentcloud.Monitor.TmpInstanceArgs;
+import com.pulumi.tencentcloud.Monitor.TmpTkeClusterAgent;
+import com.pulumi.tencentcloud.Monitor.TmpTkeClusterAgentArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeClusterAgentAgentsArgs;
+import com.pulumi.tencentcloud.Monitor.TmpTkeConfig;
+import com.pulumi.tencentcloud.Monitor.TmpTkeConfigArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeConfigRawJobArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeConfigServiceMonitorArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeConfigPodMonitorArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var defaultInstanceType = config.get("defaultInstanceType").orElse("SA1.MEDIUM2");
+        final var availabilityZoneFirst = config.get("availabilityZoneFirst").orElse("ap-guangzhou-3");
+        final var availabilityZoneSecond = config.get("availabilityZoneSecond").orElse("ap-guangzhou-4");
+        final var exampleClusterCidr = config.get("exampleClusterCidr").orElse("10.31.0.0/16");
+        final var vpcOne = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .isDefault(true)
+            .availabilityZone(availabilityZoneFirst)
+            .build());
+
+        final var firstVpcId = vpcOne.instanceLists()[0].vpcId();
+
+        final var firstSubnetId = vpcOne.instanceLists()[0].subnetId();
+
+        final var vpcTwo = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .isDefault(true)
+            .availabilityZone(availabilityZoneSecond)
+            .build());
+
+        final var secondVpcId = vpcTwo.instanceLists()[0].vpcId();
+
+        final var secondSubnetId = vpcTwo.instanceLists()[0].subnetId();
+
+        var sg = new Group("sg", GroupArgs.builder()
+            .name("tf-example-sg")
+            .build());
+
+        final var sgId = sg.id();
+
+        final var default = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+            .imageTypes("PUBLIC_IMAGE")
+            .imageNameRegex("Final")
+            .build());
+
+        final var imageId = default_.imageId();
+
+        var sgRule = new SecurityGroupLiteRule("sgRule", SecurityGroupLiteRuleArgs.builder()
+            .securityGroupId(sg.id())
+            .ingresses(Arrays.asList(            
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL"))
+            .egresses(Arrays.asList("ACCEPT#172.16.0.0/22#ALL#ALL"))
+            .build());
+
+        var example = new Cluster("example", ClusterArgs.builder()
+            .vpcId(firstVpcId)
+            .clusterCidr(exampleClusterCidr)
+            .clusterMaxPodNum(32)
+            .clusterName("tf_example_cluster")
+            .clusterDesc("example for tke cluster")
+            .clusterMaxServiceNum(32)
+            .clusterInternet(false)
+            .clusterInternetSecurityGroup(sgId)
+            .clusterVersion("1.22.5")
+            .clusterDeployType("MANAGED_CLUSTER")
+            .workerConfigs(            
+                ClusterWorkerConfigArgs.builder()
+                    .count(1)
+                    .availabilityZone(availabilityZoneFirst)
+                    .instanceType(defaultInstanceType)
+                    .systemDiskType("CLOUD_SSD")
+                    .systemDiskSize(60)
+                    .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                    .internetMaxBandwidthOut(100)
+                    .publicIpAssigned(true)
+                    .subnetId(firstSubnetId)
+                    .imgId(imageId)
+                    .dataDisks(ClusterWorkerConfigDataDiskArgs.builder()
+                        .diskType("CLOUD_PREMIUM")
+                        .diskSize(50)
+                        .build())
+                    .enhancedSecurityService(false)
+                    .enhancedMonitorService(false)
+                    .userData("dGVzdA==")
+                    .password("ZZXXccvv1212")
+                    .build(),
+                ClusterWorkerConfigArgs.builder()
+                    .count(1)
+                    .availabilityZone(availabilityZoneSecond)
+                    .instanceType(defaultInstanceType)
+                    .systemDiskType("CLOUD_SSD")
+                    .systemDiskSize(60)
+                    .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                    .internetMaxBandwidthOut(100)
+                    .publicIpAssigned(true)
+                    .subnetId(secondSubnetId)
+                    .dataDisks(ClusterWorkerConfigDataDiskArgs.builder()
+                        .diskType("CLOUD_PREMIUM")
+                        .diskSize(50)
+                        .build())
+                    .enhancedSecurityService(false)
+                    .enhancedMonitorService(false)
+                    .userData("dGVzdA==")
+                    .camRoleName("CVM_QcsRole")
+                    .password("ZZXXccvv1212")
+                    .build())
+            .labels(Map.ofEntries(
+                Map.entry("test1", "test1"),
+                Map.entry("test2", "test2")
+            ))
+            .build());
+
+        final var zone = config.get("zone").orElse("ap-guangzhou");
+        final var clusterType = config.get("clusterType").orElse("tke");
+        var foo = new TmpInstance("foo", TmpInstanceArgs.builder()
+            .instanceName("tf-tmp-instance")
+            .vpcId(firstVpcId)
+            .subnetId(firstSubnetId)
+            .dataRetentionTime(30)
+            .zone(availabilityZoneSecond)
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+        // tmp tke bind
+        var fooTmpTkeClusterAgent = new TmpTkeClusterAgent("fooTmpTkeClusterAgent", TmpTkeClusterAgentArgs.builder()
+            .instanceId(foo.id())
+            .agents(TmpTkeClusterAgentAgentsArgs.builder()
+                .region(zone)
+                .clusterType(clusterType)
+                .clusterId(example.id())
+                .enableExternal(false)
+                .build())
+            .build());
+
+        var fooTmpTkeConfig = new TmpTkeConfig("fooTmpTkeConfig", TmpTkeConfigArgs.builder()
+            .instanceId(foo.id())
+            .clusterType(clusterType)
+            .clusterId(example.id())
+            .rawJobs(TmpTkeConfigRawJobArgs.builder()
+                .name("raw_jobs_001")
+                .config("""
+your config for raw_jobs_001
+                """)
+                .build())
+            .serviceMonitors(TmpTkeConfigServiceMonitorArgs.builder()
+                .name("kube-system/service-monitor-001")
+                .config("""
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor-001
+  namespace: kube-system
+                """)
+                .build())
+            .podMonitors(TmpTkeConfigPodMonitorArgs.builder()
+                .name("mynamespace/pod-monitor-001")
+                .config("""
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pod-monitor-001
+  namespace: mynamespace
+                """)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  defaultInstanceType:
+    type: string
+    default: SA1.MEDIUM2
+  availabilityZoneFirst:
+    type: string
+    default: ap-guangzhou-3
+  availabilityZoneSecond:
+    type: string
+    default: ap-guangzhou-4
+  exampleClusterCidr:
+    type: string
+    default: 10.31.0.0/16
+  # create monitor
+  zone:
+    type: string
+    default: ap-guangzhou
+  clusterType:
+    type: string
+    default: tke
+resources:
+  sg:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example-sg
+  sgRule:
+    type: tencentcloud:SecurityGroupLiteRule
+    name: sg_rule
+    properties:
+      securityGroupId: ${sg.id}
+      ingresses:
+        - ACCEPT#10.0.0.0/16#ALL#ALL
+        - ACCEPT#172.16.0.0/22#ALL#ALL
+        - DROP#0.0.0.0/0#ALL#ALL
+      egresses:
+        - ACCEPT#172.16.0.0/22#ALL#ALL
+  example:
+    type: tencentcloud:Kubernetes:Cluster
+    properties:
+      vpcId: ${firstVpcId}
+      clusterCidr: ${exampleClusterCidr}
+      clusterMaxPodNum: 32
+      clusterName: tf_example_cluster
+      clusterDesc: example for tke cluster
+      clusterMaxServiceNum: 32
+      clusterInternet: false
+      clusterInternetSecurityGroup: ${sgId}
+      clusterVersion: 1.22.5
+      clusterDeployType: MANAGED_CLUSTER
+      workerConfigs:
+        - count: 1
+          availabilityZone: ${availabilityZoneFirst}
+          instanceType: ${defaultInstanceType}
+          systemDiskType: CLOUD_SSD
+          systemDiskSize: 60
+          internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+          internetMaxBandwidthOut: 100
+          publicIpAssigned: true
+          subnetId: ${firstSubnetId}
+          imgId: ${imageId}
+          dataDisks:
+            - diskType: CLOUD_PREMIUM
+              diskSize: 50
+          enhancedSecurityService: false
+          enhancedMonitorService: false
+          userData: dGVzdA==
+          password: ZZXXccvv1212
+        - count: 1
+          availabilityZone: ${availabilityZoneSecond}
+          instanceType: ${defaultInstanceType}
+          systemDiskType: CLOUD_SSD
+          systemDiskSize: 60
+          internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+          internetMaxBandwidthOut: 100
+          publicIpAssigned: true
+          subnetId: ${secondSubnetId}
+          dataDisks:
+            - diskType: CLOUD_PREMIUM
+              diskSize: 50
+          enhancedSecurityService: false
+          enhancedMonitorService: false
+          userData: dGVzdA==
+          camRoleName: CVM_QcsRole
+          password: ZZXXccvv1212
+      labels:
+        test1: test1
+        test2: test2
+  foo:
+    type: tencentcloud:Monitor:TmpInstance
+    properties:
+      instanceName: tf-tmp-instance
+      vpcId: ${firstVpcId}
+      subnetId: ${firstSubnetId}
+      dataRetentionTime: 30
+      zone: ${availabilityZoneSecond}
+      tags:
+        createdBy: terraform
+  # tmp tke bind
+  fooTmpTkeClusterAgent:
+    type: tencentcloud:Monitor:TmpTkeClusterAgent
+    name: foo
+    properties:
+      instanceId: ${foo.id}
+      agents:
+        region: ${zone}
+        clusterType: ${clusterType}
+        clusterId: ${example.id}
+        enableExternal: false
+  fooTmpTkeConfig:
+    type: tencentcloud:Monitor:TmpTkeConfig
+    name: foo
+    properties:
+      instanceId: ${foo.id}
+      clusterType: ${clusterType}
+      clusterId: ${example.id}
+      rawJobs:
+        - name: raw_jobs_001
+          config: |
+            your config for raw_jobs_001
+      serviceMonitors:
+        - name: kube-system/service-monitor-001
+          config: |
+            apiVersion: monitoring.coreos.com/v1
+            kind: ServiceMonitor
+            metadata:
+              name: service-monitor-001
+              namespace: kube-system
+      podMonitors:
+        - name: mynamespace/pod-monitor-001
+          config: |
+            apiVersion: monitoring.coreos.com/v1
+            kind: PodMonitor
+            metadata:
+              name: pod-monitor-001
+              namespace: mynamespace
+variables:
+  firstVpcId: ${vpcOne.instanceLists[0].vpcId}
+  firstSubnetId: ${vpcOne.instanceLists[0].subnetId}
+  secondVpcId: ${vpcTwo.instanceLists[0].vpcId}
+  secondSubnetId: ${vpcTwo.instanceLists[0].subnetId}
+  sgId: ${sg.id}
+  imageId: ${default.imageId}
+  vpcOne:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
+        isDefault: true
+        availabilityZone: ${availabilityZoneFirst}
+  vpcTwo:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
+        isDefault: true
+        availabilityZone: ${availabilityZoneSecond}
+  default:
+    fn::invoke:
+      function: tencentcloud:Images:getInstance
+      arguments:
+        imageTypes:
+          - PUBLIC_IMAGE
+        imageNameRegex: Final
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpcOne" {
+  is_default        = true
+  availability_zone = var.availabilityZoneFirst
+}
+data "tencentcloud_vpc_getsubnets" "vpcTwo" {
+  is_default        = true
+  availability_zone = var.availabilityZoneSecond
+}
+data "tencentcloud_images_getinstance" "default" {
+  image_types      = ["PUBLIC_IMAGE"]
+  image_name_regex = "Final"
+}
+
+resource "tencentcloud_security_group" "sg" {
+  name = "tf-example-sg"
+}
+resource "tencentcloud_securitygroupliterule" "sg_rule" {
+  security_group_id = tencentcloud_security_group.sg.id
+  ingresses         = ["ACCEPT#10.0.0.0/16#ALL#ALL", "ACCEPT#172.16.0.0/22#ALL#ALL", "DROP#0.0.0.0/0#ALL#ALL"]
+  egresses          = ["ACCEPT#172.16.0.0/22#ALL#ALL"]
+}
+resource "tencentcloud_kubernetes_cluster" "example" {
+  vpc_id                          = local.firstVpcId
+  cluster_cidr                    = var.exampleClusterCidr
+  cluster_max_pod_num             = 32
+  cluster_name                    = "tf_example_cluster"
+  cluster_desc                    = "example for tke cluster"
+  cluster_max_service_num         = 32
+  cluster_internet                = false
+  cluster_internet_security_group = local.sgId
+  cluster_version                 = "1.22.5"
+  cluster_deploy_type             = "MANAGED_CLUSTER"
+  worker_configs {
+    count                      = 1
+    availability_zone          = var.availabilityZoneFirst
+    instance_type              = var.defaultInstanceType
+    system_disk_type           = "CLOUD_SSD"
+    system_disk_size           = 60
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 100
+    public_ip_assigned         = true
+    subnet_id                  = local.firstSubnetId
+    img_id                     = local.imageId
+    data_disks {
+      disk_type = "CLOUD_PREMIUM"
+      disk_size = 50
+    }
+    enhanced_security_service = false
+    enhanced_monitor_service  = false
+    user_data                 = "dGVzdA=="
+    password                  = "ZZXXccvv1212"
+  }
+  worker_configs {
+    count                      = 1
+    availability_zone          = var.availabilityZoneSecond
+    instance_type              = var.defaultInstanceType
+    system_disk_type           = "CLOUD_SSD"
+    system_disk_size           = 60
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 100
+    public_ip_assigned         = true
+    subnet_id                  = local.secondSubnetId
+    data_disks {
+      disk_type = "CLOUD_PREMIUM"
+      disk_size = 50
+    }
+    enhanced_security_service = false
+    enhanced_monitor_service  = false
+    user_data                 = "dGVzdA=="
+    cam_role_name             = "CVM_QcsRole"
+    password                  = "ZZXXccvv1212"
+  }
+  # key_ids                   = ["skey-11112222"]
+  # key_ids                   = ["skey-11112222"]
+  labels = {
+    "test1" = "test1"
+    "test2" = "test2"
+  }
+}
+resource "tencentcloud_monitor_tmpinstance" "foo" {
+  instance_name       = "tf-tmp-instance"
+  vpc_id              = local.firstVpcId
+  subnet_id           = local.firstSubnetId
+  data_retention_time = 30
+  zone                = var.availabilityZoneSecond
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+# tmp tke bind
+resource "tencentcloud_monitor_tmptkeclusteragent" "foo" {
+  instance_id = tencentcloud_monitor_tmpinstance.foo.id
+  agents = {
+    region          = var.zone
+    cluster_type    = var.clusterType
+    cluster_id      = tencentcloud_kubernetes_cluster.example.id
+    enable_external = false
+  }
+}
+resource "tencentcloud_monitor_tmptkeconfig" "foo" {
+  instance_id  = tencentcloud_monitor_tmpinstance.foo.id
+  cluster_type = var.clusterType
+  cluster_id   = tencentcloud_kubernetes_cluster.example.id
+  raw_jobs {
+    name   = "raw_jobs_001"
+    config = "your config for raw_jobs_001\n"
+  }
+  service_monitors {
+    name   = "kube-system/service-monitor-001"
+    config = "apiVersion: monitoring.coreos.com/v1\nkind: ServiceMonitor\nmetadata:\n  name: service-monitor-001\n  namespace: kube-system\n"
+  }
+  # name with default namespace kube-system
+  pod_monitors {
+    name   = "mynamespace/pod-monitor-001"
+    config = "apiVersion: monitoring.coreos.com/v1\nkind: PodMonitor\nmetadata:\n  name: pod-monitor-001\n  namespace: mynamespace\n"
+  }
+}
+variable "defaultInstanceType" {
+  type    = string
+  default = "SA1.MEDIUM2"
+}
+variable "availabilityZoneFirst" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+variable "availabilityZoneSecond" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+variable "exampleClusterCidr" {
+  type    = string
+  default = "10.31.0.0/16"
+}
+locals {
+  firstVpcId = data.tencentcloud_vpc_getsubnets.vpcOne.instance_lists[0].vpc_id
+}
+locals {
+  firstSubnetId = data.tencentcloud_vpc_getsubnets.vpcOne.instance_lists[0].subnet_id
+}
+locals {
+  secondVpcId = data.tencentcloud_vpc_getsubnets.vpcTwo.instance_lists[0].vpc_id
+}
+locals {
+  secondSubnetId = data.tencentcloud_vpc_getsubnets.vpcTwo.instance_lists[0].subnet_id
+}
+locals {
+  sgId = tencentcloud_security_group.sg.id
+}
+locals {
+  imageId = data.tencentcloud_images_getinstance.default.image_id
+}
+# create monitor
+variable "zone" {
+  type    = string
+  default = "ap-guangzhou"
+}
+variable "clusterType" {
+  type    = string
+  default = "tke"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreatePrometheusConfig](https://www.tencentcloud.com/document/api/248/53763)
+* Read: [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+* Update: [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
+* Delete: [DeletePrometheusConfig](https://www.tencentcloud.com/document/api/248/53762)
 
 
 
 ## Create TmpTkeConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                  <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">cluster_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">pod_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpTkeConfigPodMonitorArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">raw_jobs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpTkeConfigRawJobArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">service_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpTkeConfigServiceMonitorArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">pod_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpTkeConfigPodMonitorArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">raw_jobs</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpTkeConfigRawJobArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">service_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpTkeConfigServiceMonitorArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTmpTkeConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTmpTkeConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TmpTkeConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:TmpTkeConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:TmpTkeConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_tmp_tke_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -97,7 +1421,7 @@ Provides a resource to create a tke tmpPrometheusConfig
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -214,11 +1538,19 @@ Provides a resource to create a tke tmpPrometheusConfig
 </pulumi-choosable>
 </div>
 
+
+
 ## TmpTkeConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -234,8 +1566,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -243,8 +1574,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -252,35 +1582,31 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="podmonitors_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podmonitors_csharp" style="color: inherit; text-decoration: inherit;">Pod<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawjobs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawjobs_csharp" style="color: inherit; text-decoration: inherit;">Raw<wbr>Jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicemonitors_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicemonitors_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -294,8 +1620,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -303,8 +1628,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -312,8 +1636,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="podmonitors_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podmonitors_go" style="color: inherit; text-decoration: inherit;">Pod<wbr>Monitors</a>
@@ -321,8 +1644,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigpodmonitor">[]Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawjobs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawjobs_go" style="color: inherit; text-decoration: inherit;">Raw<wbr>Jobs</a>
@@ -330,8 +1652,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigrawjob">[]Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicemonitors_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicemonitors_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Monitors</a>
@@ -339,8 +1660,61 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigservicemonitor">[]Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pod_monitors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pod_monitors_hcl" style="color: inherit; text-decoration: inherit;">pod_<wbr>monitors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="raw_jobs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#raw_jobs_hcl" style="color: inherit; text-decoration: inherit;">raw_<wbr>jobs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_monitors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_monitors_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>monitors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -354,8 +1728,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -363,8 +1736,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -372,35 +1744,31 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="podmonitors_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podmonitors_java" style="color: inherit; text-decoration: inherit;">pod<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Pod&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawjobs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawjobs_java" style="color: inherit; text-decoration: inherit;">raw<wbr>Jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicemonitors_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicemonitors_java" style="color: inherit; text-decoration: inherit;">service<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Service&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -414,8 +1782,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -423,8 +1790,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -432,35 +1798,31 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="podmonitors_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podmonitors_nodejs" style="color: inherit; text-decoration: inherit;">pod<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor[]</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawjobs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawjobs_nodejs" style="color: inherit; text-decoration: inherit;">raw<wbr>Jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job[]</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicemonitors_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicemonitors_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor[]</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -474,8 +1836,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -483,8 +1844,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -492,35 +1852,31 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="pod_monitors_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pod_monitors_python" style="color: inherit; text-decoration: inherit;">pod_<wbr>monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Sequence[Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="raw_jobs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#raw_jobs_python" style="color: inherit; text-decoration: inherit;">raw_<wbr>jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">Sequence[Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_monitors_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_monitors_python" style="color: inherit; text-decoration: inherit;">service_<wbr>monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Sequence[Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -534,8 +1890,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -543,8 +1898,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -552,8 +1906,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="podmonitors_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podmonitors_yaml" style="color: inherit; text-decoration: inherit;">pod<wbr>Monitors</a>
@@ -561,8 +1914,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawjobs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawjobs_yaml" style="color: inherit; text-decoration: inherit;">raw<wbr>Jobs</a>
@@ -570,8 +1922,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicemonitors_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicemonitors_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Monitors</a>
@@ -579,8 +1930,7 @@ The TmpTkeConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -601,8 +1951,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-"
+    <dd>Global configuration.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -610,8 +1959,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -625,8 +1973,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-"
+    <dd>Global configuration.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -634,8 +1981,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Global configuration.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,8 +2017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-"
+    <dd>Global configuration.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -658,8 +2025,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +2039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-"
+    <dd>Global configuration.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -682,8 +2047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -697,8 +2061,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-"
+    <dd>Global configuration.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -706,8 +2069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -721,8 +2083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-"
+    <dd>Global configuration.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -730,8 +2091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -741,18 +2101,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TmpTkeConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TmpTkeConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TmpTkeConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TmpTkeConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TmpTkeConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -760,107 +2120,146 @@ Get an existing TmpTkeConfig resource's state with the given name, ID, and optio
         <span class="nx">cluster_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">config</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">pod_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpTkeConfigPodMonitorArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">raw_jobs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpTkeConfigRawJobArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">service_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpTkeConfigServiceMonitorArgs]]</span> = None<span class="p">) -&gt;</span> TmpTkeConfig</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">pod_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpTkeConfigPodMonitorArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">raw_jobs</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpTkeConfigRawJobArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">service_monitors</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpTkeConfigServiceMonitorArgs]]</span> = None<span class="p">) -&gt;</span> TmpTkeConfig</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTmpTkeConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TmpTkeConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTmpTkeConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TmpTkeConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TmpTkeConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TmpTkeConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TmpTkeConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TmpTkeConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTmpTkeConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:TmpTkeConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_tmp_tke_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -868,28 +2267,31 @@ Get an existing TmpTkeConfig resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -897,28 +2299,31 @@ Get an existing TmpTkeConfig resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -938,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -947,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Type of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_config_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_csharp" style="color: inherit; text-decoration: inherit;">Config</a>
@@ -956,8 +2359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -965,35 +2367,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_podmonitors_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_podmonitors_csharp" style="color: inherit; text-decoration: inherit;">Pod<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawjobs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawjobs_csharp" style="color: inherit; text-decoration: inherit;">Raw<wbr>Jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicemonitors_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicemonitors_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1016,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Type of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_config_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_go" style="color: inherit; text-decoration: inherit;">Config</a>
@@ -1025,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1034,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_podmonitors_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_podmonitors_go" style="color: inherit; text-decoration: inherit;">Pod<wbr>Monitors</a>
@@ -1043,8 +2437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigpodmonitor">[]Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawjobs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawjobs_go" style="color: inherit; text-decoration: inherit;">Raw<wbr>Jobs</a>
@@ -1052,8 +2445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigrawjob">[]Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicemonitors_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicemonitors_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Monitors</a>
@@ -1061,8 +2453,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigservicemonitor">[]Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pod_monitors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pod_monitors_hcl" style="color: inherit; text-decoration: inherit;">pod_<wbr>monitors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_raw_jobs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_raw_jobs_hcl" style="color: inherit; text-decoration: inherit;">raw_<wbr>jobs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_monitors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_monitors_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>monitors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">list(object)</a></span>
+    </dt>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1076,8 +2529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1085,8 +2537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Type of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_config_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_java" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1094,8 +2545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1103,35 +2553,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_podmonitors_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_podmonitors_java" style="color: inherit; text-decoration: inherit;">pod<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Pod&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawjobs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawjobs_java" style="color: inherit; text-decoration: inherit;">raw<wbr>Jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicemonitors_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicemonitors_java" style="color: inherit; text-decoration: inherit;">service<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Tmp<wbr>Tke<wbr>Config<wbr>Service&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1145,8 +2591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1154,8 +2599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Type of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_config_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_nodejs" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1163,8 +2607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1172,35 +2615,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_podmonitors_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_podmonitors_nodejs" style="color: inherit; text-decoration: inherit;">pod<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor[]</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawjobs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawjobs_nodejs" style="color: inherit; text-decoration: inherit;">raw<wbr>Jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job[]</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicemonitors_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicemonitors_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor[]</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1214,8 +2653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -1223,8 +2661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Type of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_python" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1232,8 +2669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1241,35 +2677,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pod_monitors_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pod_monitors_python" style="color: inherit; text-decoration: inherit;">pod_<wbr>monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigpodmonitor">Sequence[Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_raw_jobs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_raw_jobs_python" style="color: inherit; text-decoration: inherit;">raw_<wbr>jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigrawjob">Sequence[Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_monitors_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_monitors_python" style="color: inherit; text-decoration: inherit;">service_<wbr>monitors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmptkeconfigservicemonitor">Sequence[Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1283,8 +2715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1292,8 +2723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Type of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_config_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_yaml" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1301,8 +2731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Global configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1310,8 +2739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_podmonitors_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_podmonitors_yaml" style="color: inherit; text-decoration: inherit;">pod<wbr>Monitors</a>
@@ -1319,8 +2747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigpodmonitor">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the pod monitors.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the pod monitors.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawjobs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawjobs_yaml" style="color: inherit; text-decoration: inherit;">raw<wbr>Jobs</a>
@@ -1328,8 +2755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigrawjob">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the native prometheus job.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of the native prometheus job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicemonitors_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicemonitors_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Monitors</a>
@@ -1337,8 +2763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkeconfigservicemonitor">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of the service monitors.</p>
-</dd></dl>
+    <dd>Configuration of the service monitors.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1353,7 +2778,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="tmptkeconfigpodmonitor">Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor</h4>
+<h4 id="tmptkeconfigpodmonitor">
+Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Config<wbr>Pod<wbr>Monitor<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1365,8 +2792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1374,8 +2800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1383,8 +2808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1398,8 +2822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1407,8 +2830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1416,8 +2838,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Config.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1431,8 +2882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1440,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1449,8 +2898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1464,8 +2912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1473,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1482,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1497,8 +2942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1506,8 +2950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1515,8 +2958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,8 +2972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1539,8 +2980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1548,12 +2988,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkeconfigrawjob">Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job</h4>
+<h4 id="tmptkeconfigrawjob">
+Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Config<wbr>Raw<wbr>Job<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1565,8 +3006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1574,8 +3014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name.</p>
-</dd><dt class="property-optional"
+    <dd>Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1583,8 +3022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1598,8 +3036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1607,8 +3044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name.</p>
-</dd><dt class="property-optional"
+    <dd>Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1616,8 +3052,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Config.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1631,8 +3096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1640,8 +3104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name.</p>
-</dd><dt class="property-optional"
+    <dd>Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1649,8 +3112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1664,8 +3126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1673,8 +3134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name.</p>
-</dd><dt class="property-optional"
+    <dd>Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1682,8 +3142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1697,8 +3156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1706,8 +3164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name.</p>
-</dd><dt class="property-optional"
+    <dd>Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1715,8 +3172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1730,8 +3186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1739,8 +3194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name.</p>
-</dd><dt class="property-optional"
+    <dd>Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1748,12 +3202,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkeconfigservicemonitor">Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor</h4>
+<h4 id="tmptkeconfigservicemonitor">
+Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Config<wbr>Service<wbr>Monitor<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1765,8 +3220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1774,8 +3228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1783,8 +3236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1798,8 +3250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1807,8 +3258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1816,8 +3266,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Config.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1831,8 +3310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1840,8 +3318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1849,8 +3326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1864,8 +3340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1873,8 +3348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1882,8 +3356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1897,8 +3370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1906,8 +3378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1915,8 +3386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1930,8 +3400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config.</p>
-</dd><dt class="property-required"
+    <dd>Config.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1939,8 +3408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</p>
-</dd><dt class="property-optional"
+    <dd>Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1948,8 +3416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for output parameters, if the configuration comes from a template, it is the template id.</p>
-</dd></dl>
+    <dd>Used for output parameters, if the configuration comes from a template, it is the template id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1961,7 +3428,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

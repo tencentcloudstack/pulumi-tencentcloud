@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Dc.getInstances"
-meta_desc: "Documentation for the tencentcloud.Dc.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of DC instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,54 +18,95 @@ Use this data source to query detailed information of DC instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
-```java
-package generated_program;
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
 
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Dc.DcFunctions;
-import com.pulumi.tencentcloud.Dc.inputs.GetInstancesArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        final var nameSelect = DcFunctions.getInstances(GetInstancesArgs.builder()
-            .name("t")
-            .build());
-
-        final var id = DcFunctions.getInstances(GetInstancesArgs.builder()
-            .dcxId("dc-kax48sg7")
-            .build());
-
-    }
-}
 ```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   nameSelect:
     fn::invoke:
-      Function: tencentcloud:Dc:getInstances
-      Arguments:
+      function: tencentcloud:Dc:getInstances
+      arguments:
         name: t
   id:
     fn::invoke:
-      Function: tencentcloud:Dc:getInstances
-      Arguments:
+      function: tencentcloud:Dc:getInstances
+      arguments:
         dcxId: dc-kax48sg7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dc_getinstances" "nameSelect" {
+  name = "t"
+}
+data "tencentcloud_dc_getinstances" "id" {
+  dcx_id = "dc-kax48sg7"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
 
 
 
@@ -75,7 +118,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -83,9 +126,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -99,10 +142,10 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">dc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">dc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,7 +170,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -136,7 +180,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -148,6 +193,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dc/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dc_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -166,8 +220,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -175,8 +228,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -184,8 +236,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -199,8 +250,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -208,8 +258,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -217,8 +266,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -232,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -241,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -250,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -265,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -274,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -283,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -307,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -316,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -331,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -340,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -349,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -373,8 +439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -382,8 +447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dc.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DC.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DC.</dd><dt class="property-"
             title="">
         <span id="dcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_csharp" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -391,8 +455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-"
+    <dd>ID of the DC.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -400,8 +463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC.</p>
-</dd><dt class="property-"
+    <dd>Name of the DC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -423,8 +485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -432,8 +493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the DC.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DC.</dd><dt class="property-"
             title="">
         <span id="dcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_go" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -441,8 +501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-"
+    <dd>ID of the DC.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -450,11 +509,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC.</p>
-</dd><dt class="property-"
+    <dd>Name of the DC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the DC.</dd><dt class="property-"
+            title="">
+        <span id="dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DC.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -473,8 +577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -482,8 +585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DC.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DC.</dd><dt class="property-"
             title="">
         <span id="dcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_java" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -491,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-"
+    <dd>ID of the DC.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -500,8 +601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DC.</p>
-</dd><dt class="property-"
+    <dd>Name of the DC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -523,8 +623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -532,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the DC.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DC.</dd><dt class="property-"
             title="">
         <span id="dcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_nodejs" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -541,8 +639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-"
+    <dd>ID of the DC.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -550,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC.</p>
-</dd><dt class="property-"
+    <dd>Name of the DC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -573,17 +669,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the DC.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DC.</dd><dt class="property-"
             title="">
         <span id="dc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_python" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
@@ -591,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-"
+    <dd>ID of the DC.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -600,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DC.</p>
-</dd><dt class="property-"
+    <dd>Name of the DC.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -623,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -632,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DC.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DC.</dd><dt class="property-"
             title="">
         <span id="dcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_yaml" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -641,8 +731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-"
+    <dd>ID of the DC.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -650,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DC.</p>
-</dd><dt class="property-"
+    <dd>Name of the DC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -683,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access point ID of tne DC.</p>
-</dd><dt class="property-required"
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -692,8 +779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="circuitcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuitcode_csharp" style="color: inherit; text-decoration: inherit;">Circuit<wbr>Code</a>
@@ -701,8 +787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The circuit code provided by the operator for the DC.</p>
-</dd><dt class="property-required"
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -710,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -719,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customeremail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeremail_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Email</a>
@@ -728,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customername_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Name</a>
@@ -737,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customerphone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customerphone_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Phone</a>
@@ -746,8 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_csharp" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -755,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="enabledtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledtime_csharp" style="color: inherit; text-decoration: inherit;">Enabled<wbr>Time</a>
@@ -764,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Enable time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -773,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire date of resource.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of resource.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactperson_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactperson_csharp" style="color: inherit; text-decoration: inherit;">Fault<wbr>Report<wbr>Contact<wbr>Person</a>
@@ -782,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactphone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactphone_csharp" style="color: inherit; text-decoration: inherit;">Fault<wbr>Report<wbr>Contact<wbr>Phone</a>
@@ -791,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="lineoperator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineoperator_csharp" style="color: inherit; text-decoration: inherit;">Line<wbr>Operator</a>
@@ -800,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
             title="Required">
         <span id="location_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_csharp" style="color: inherit; text-decoration: inherit;">Location</a>
@@ -809,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The DC location where the connection is located.</p>
-</dd><dt class="property-required"
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -818,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="porttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#porttype_csharp" style="color: inherit; text-decoration: inherit;">Port<wbr>Type</a>
@@ -827,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</p>
-</dd><dt class="property-required"
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
             title="Required">
         <span id="redundantdcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundantdcid_csharp" style="color: inherit; text-decoration: inherit;">Redundant<wbr>Dc<wbr>Id</a>
@@ -836,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the redundant DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -845,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_csharp" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -854,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd></dl>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access point ID of tne DC.</p>
-</dd><dt class="property-required"
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -878,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="circuitcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuitcode_go" style="color: inherit; text-decoration: inherit;">Circuit<wbr>Code</a>
@@ -887,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The circuit code provided by the operator for the DC.</p>
-</dd><dt class="property-required"
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -896,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -905,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customeremail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeremail_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Email</a>
@@ -914,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customername_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Name</a>
@@ -923,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customerphone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customerphone_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Phone</a>
@@ -932,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_go" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -941,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="enabledtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledtime_go" style="color: inherit; text-decoration: inherit;">Enabled<wbr>Time</a>
@@ -950,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Enable time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -959,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire date of resource.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of resource.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactperson_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactperson_go" style="color: inherit; text-decoration: inherit;">Fault<wbr>Report<wbr>Contact<wbr>Person</a>
@@ -968,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactphone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactphone_go" style="color: inherit; text-decoration: inherit;">Fault<wbr>Report<wbr>Contact<wbr>Phone</a>
@@ -977,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="lineoperator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineoperator_go" style="color: inherit; text-decoration: inherit;">Line<wbr>Operator</a>
@@ -986,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
             title="Required">
         <span id="location_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_go" style="color: inherit; text-decoration: inherit;">Location</a>
@@ -995,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The DC location where the connection is located.</p>
-</dd><dt class="property-required"
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1004,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="porttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#porttype_go" style="color: inherit; text-decoration: inherit;">Port<wbr>Type</a>
@@ -1013,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</p>
-</dd><dt class="property-required"
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
             title="Required">
         <span id="redundantdcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundantdcid_go" style="color: inherit; text-decoration: inherit;">Redundant<wbr>Dc<wbr>Id</a>
@@ -1022,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the redundant DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1031,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_go" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -1040,8 +1089,173 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd></dl>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_point_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_point_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>point_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
+            title="Required">
+        <span id="circuit_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuit_code_hcl" style="color: inherit; text-decoration: inherit;">circuit_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="customer_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_address_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
+            title="Required">
+        <span id="customer_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_email_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
+            title="Required">
+        <span id="customer_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_name_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
+            title="Required">
+        <span id="customer_phone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_phone_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>phone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
+            title="Required">
+        <span id="dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="enabled_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_time_hcl" style="color: inherit; text-decoration: inherit;">enabled_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Enable time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expire date of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="fault_report_contact_person_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fault_report_contact_person_hcl" style="color: inherit; text-decoration: inherit;">fault_<wbr>report_<wbr>contact_<wbr>person</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
+            title="Required">
+        <span id="fault_report_contact_phone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fault_report_contact_phone_hcl" style="color: inherit; text-decoration: inherit;">fault_<wbr>report_<wbr>contact_<wbr>phone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
+            title="Required">
+        <span id="line_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_operator_hcl" style="color: inherit; text-decoration: inherit;">line_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_hcl" style="color: inherit; text-decoration: inherit;">location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_type_hcl" style="color: inherit; text-decoration: inherit;">port_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="redundant_dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundant_dc_id_hcl" style="color: inherit; text-decoration: inherit;">redundant_<wbr>dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tencent_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencent_address_hcl" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1055,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access point ID of tne DC.</p>
-</dd><dt class="property-required"
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1064,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="circuitcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuitcode_java" style="color: inherit; text-decoration: inherit;">circuit<wbr>Code</a>
@@ -1073,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The circuit code provided by the operator for the DC.</p>
-</dd><dt class="property-required"
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1082,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1091,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customeremail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeremail_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Email</a>
@@ -1100,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customername_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Name</a>
@@ -1109,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customerphone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customerphone_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Phone</a>
@@ -1118,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_java" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -1127,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="enabledtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledtime_java" style="color: inherit; text-decoration: inherit;">enabled<wbr>Time</a>
@@ -1136,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Enable time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Enable time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1145,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire date of resource.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of resource.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactperson_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactperson_java" style="color: inherit; text-decoration: inherit;">fault<wbr>Report<wbr>Contact<wbr>Person</a>
@@ -1154,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactphone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactphone_java" style="color: inherit; text-decoration: inherit;">fault<wbr>Report<wbr>Contact<wbr>Phone</a>
@@ -1163,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="lineoperator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineoperator_java" style="color: inherit; text-decoration: inherit;">line<wbr>Operator</a>
@@ -1172,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
             title="Required">
         <span id="location_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_java" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1181,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The DC location where the connection is located.</p>
-</dd><dt class="property-required"
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1190,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="porttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#porttype_java" style="color: inherit; text-decoration: inherit;">port<wbr>Type</a>
@@ -1199,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</p>
-</dd><dt class="property-required"
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
             title="Required">
         <span id="redundantdcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundantdcid_java" style="color: inherit; text-decoration: inherit;">redundant<wbr>Dc<wbr>Id</a>
@@ -1208,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the redundant DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1217,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_java" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1226,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd></dl>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1241,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access point ID of tne DC.</p>
-</dd><dt class="property-required"
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1250,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="circuitcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuitcode_nodejs" style="color: inherit; text-decoration: inherit;">circuit<wbr>Code</a>
@@ -1259,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The circuit code provided by the operator for the DC.</p>
-</dd><dt class="property-required"
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1268,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1277,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customeremail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeremail_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Email</a>
@@ -1286,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customername_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Name</a>
@@ -1295,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customerphone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customerphone_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Phone</a>
@@ -1304,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_nodejs" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -1313,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="enabledtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledtime_nodejs" style="color: inherit; text-decoration: inherit;">enabled<wbr>Time</a>
@@ -1322,8 +1507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Enable time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1331,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire date of resource.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of resource.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactperson_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactperson_nodejs" style="color: inherit; text-decoration: inherit;">fault<wbr>Report<wbr>Contact<wbr>Person</a>
@@ -1340,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactphone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactphone_nodejs" style="color: inherit; text-decoration: inherit;">fault<wbr>Report<wbr>Contact<wbr>Phone</a>
@@ -1349,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="lineoperator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineoperator_nodejs" style="color: inherit; text-decoration: inherit;">line<wbr>Operator</a>
@@ -1358,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
             title="Required">
         <span id="location_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_nodejs" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1367,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The DC location where the connection is located.</p>
-</dd><dt class="property-required"
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1376,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="porttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#porttype_nodejs" style="color: inherit; text-decoration: inherit;">port<wbr>Type</a>
@@ -1385,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</p>
-</dd><dt class="property-required"
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
             title="Required">
         <span id="redundantdcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundantdcid_nodejs" style="color: inherit; text-decoration: inherit;">redundant<wbr>Dc<wbr>Id</a>
@@ -1394,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the redundant DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1403,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_nodejs" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1412,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd></dl>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1427,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access point ID of tne DC.</p>
-</dd><dt class="property-required"
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1436,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="circuit_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuit_code_python" style="color: inherit; text-decoration: inherit;">circuit_<wbr>code</a>
@@ -1445,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The circuit code provided by the operator for the DC.</p>
-</dd><dt class="property-required"
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1454,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customer_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_address_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
@@ -1463,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customer_email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_email_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>email</a>
@@ -1472,8 +1641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customer_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_name_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>name</a>
@@ -1481,8 +1649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customer_phone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_phone_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>phone</a>
@@ -1490,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="dc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_python" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
@@ -1499,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_time_python" style="color: inherit; text-decoration: inherit;">enabled_<wbr>time</a>
@@ -1508,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Enable time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Enable time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -1517,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expire date of resource.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of resource.</dd><dt class="property-required"
             title="Required">
         <span id="fault_report_contact_person_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fault_report_contact_person_python" style="color: inherit; text-decoration: inherit;">fault_<wbr>report_<wbr>contact_<wbr>person</a>
@@ -1526,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="fault_report_contact_phone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fault_report_contact_phone_python" style="color: inherit; text-decoration: inherit;">fault_<wbr>report_<wbr>contact_<wbr>phone</a>
@@ -1535,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="line_operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_operator_python" style="color: inherit; text-decoration: inherit;">line_<wbr>operator</a>
@@ -1544,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
             title="Required">
         <span id="location_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_python" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1553,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The DC location where the connection is located.</p>
-</dd><dt class="property-required"
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1562,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="port_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_type_python" style="color: inherit; text-decoration: inherit;">port_<wbr>type</a>
@@ -1571,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</p>
-</dd><dt class="property-required"
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
             title="Required">
         <span id="redundant_dc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundant_dc_id_python" style="color: inherit; text-decoration: inherit;">redundant_<wbr>dc_<wbr>id</a>
@@ -1580,8 +1737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the redundant DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1589,8 +1745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencent_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencent_address_python" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
@@ -1598,8 +1753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd></dl>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1613,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access point ID of tne DC.</p>
-</dd><dt class="property-required"
+    <dd>Access point ID of tne DC.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1622,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="circuitcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#circuitcode_yaml" style="color: inherit; text-decoration: inherit;">circuit<wbr>Code</a>
@@ -1631,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The circuit code provided by the operator for the DC.</p>
-</dd><dt class="property-required"
+    <dd>The circuit code provided by the operator for the DC.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1640,8 +1791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1649,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customeremail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeremail_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Email</a>
@@ -1658,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customername_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Name</a>
@@ -1667,8 +1815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="customerphone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customerphone_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Phone</a>
@@ -1676,8 +1823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_yaml" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -1685,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="enabledtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledtime_yaml" style="color: inherit; text-decoration: inherit;">enabled<wbr>Time</a>
@@ -1694,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Enable time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Enable time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1703,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire date of resource.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of resource.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactperson_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactperson_yaml" style="color: inherit; text-decoration: inherit;">fault<wbr>Report<wbr>Contact<wbr>Person</a>
@@ -1712,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="faultreportcontactphone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#faultreportcontactphone_yaml" style="color: inherit; text-decoration: inherit;">fault<wbr>Report<wbr>Contact<wbr>Phone</a>
@@ -1721,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd><dt class="property-required"
+    <dd>Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.</dd><dt class="property-required"
             title="Required">
         <span id="lineoperator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineoperator_yaml" style="color: inherit; text-decoration: inherit;">line<wbr>Operator</a>
@@ -1730,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the DC, and available values include <code>ChinaTelecom</code>, <code>ChinaMobile</code>, <code>ChinaUnicom</code>, <code>In-houseWiring</code>, <code>ChinaOther</code> and <code>InternationalOperator</code>.</dd><dt class="property-required"
             title="Required">
         <span id="location_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_yaml" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1739,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The DC location where the connection is located.</p>
-</dd><dt class="property-required"
+    <dd>The DC location where the connection is located.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1748,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="porttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#porttype_yaml" style="color: inherit; text-decoration: inherit;">port<wbr>Type</a>
@@ -1757,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</p>
-</dd><dt class="property-required"
+    <dd>Port type of the DC in client, and available values include <code>100Base-T</code>, <code>1000Base-T</code>, <code>1000Base-LX</code>, <code>10GBase-T</code> and <code>10GBase-LR</code>. The default value is <code>1000Base-LX</code>.</dd><dt class="property-required"
             title="Required">
         <span id="redundantdcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redundantdcid_yaml" style="color: inherit; text-decoration: inherit;">redundant<wbr>Dc<wbr>Id</a>
@@ -1766,8 +1903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the redundant DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the redundant DC.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1775,8 +1911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the DC, and available values include <code>REJECTED</code>, <code>TOPAY</code>, <code>PAID</code>, <code>ALLOCATED</code>, <code>AVAILABLE</code>, <code>DELETING</code> and <code>DELETED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_yaml" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1784,8 +1919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</p>
-</dd></dl>
+    <dd>Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1800,7 +1934,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

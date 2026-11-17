@@ -2,9 +2,11 @@
 ---
 title: "getUsagePlanEnvironments"
 title_tag: "tencentcloud.ApiGateway.getUsagePlanEnvironments"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getUsagePlanEnvironments function with examples, input properties, output properties, and supporting types."
+meta_desc: "Used to query the environment list bound by the plan."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Used to query the environment list bound by the plan.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const plan = new tencentcloud.apigateway.UsagePlan("plan", {
@@ -38,28 +44,33 @@ const service = new tencentcloud.apigateway.Service("service", {
     ],
     ipVersion: "IPv4",
 });
-const attachService = new tencentcloud.apigateway.UsagePlanAttachment("attachService", {
+const attachService = new tencentcloud.apigateway.UsagePlanAttachment("attach_service", {
     usagePlanId: plan.id,
     serviceId: service.id,
     environment: "test",
     bindType: "SERVICE",
 });
-const environmentTest = tencentcloud.ApiGateway.getUsagePlanEnvironmentsOutput({
+const environmentTest = tencentcloud.apigateway.getUsagePlanEnvironmentsOutput({
     usagePlanId: attachService.usagePlanId,
     bindType: "SERVICE",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-plan = tencentcloud.api_gateway.UsagePlan("plan",
+plan = tencentcloud.apigateway.UsagePlan("plan",
     usage_plan_name="my_plan",
     usage_plan_desc="nice plan",
     max_request_num=100,
     max_request_num_pre_sec=10)
-service = tencentcloud.api_gateway.Service("service",
+service = tencentcloud.apigateway.Service("service",
     service_name="niceservice",
     protocol="http&https",
     service_desc="your nice service",
@@ -68,19 +79,77 @@ service = tencentcloud.api_gateway.Service("service",
         "OUTER",
     ],
     ip_version="IPv4")
-attach_service = tencentcloud.api_gateway.UsagePlanAttachment("attachService",
+attach_service = tencentcloud.apigateway.UsagePlanAttachment("attach_service",
     usage_plan_id=plan.id,
     service_id=service.id,
     environment="test",
     bind_type="SERVICE")
-environment_test = tencentcloud.ApiGateway.get_usage_plan_environments_output(usage_plan_id=attach_service.usage_plan_id,
+environment_test = tencentcloud.apigateway.get_usage_plan_environments_output(usage_plan_id=attach_service.usage_plan_id,
     bind_type="SERVICE")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		plan, err := apigateway.NewUsagePlan(ctx, "plan", &apigateway.UsagePlanArgs{
+			UsagePlanName:       pulumi.String("my_plan"),
+			UsagePlanDesc:       pulumi.String("nice plan"),
+			MaxRequestNum:       pulumi.Int(100),
+			MaxRequestNumPreSec: pulumi.Int(10),
+		})
+		if err != nil {
+			return err
+		}
+		service, err := apigateway.NewService(ctx, "service", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("niceservice"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("your nice service"),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		attachService, err := apigateway.NewUsagePlanAttachment(ctx, "attach_service", &apigateway.UsagePlanAttachmentArgs{
+			UsagePlanId: plan.ID().ToIDOutput().ToStringOutput(),
+			ServiceId:   service.ID().ToIDOutput().ToStringOutput(),
+			Environment: pulumi.String("test"),
+			BindType:    pulumi.String("SERVICE"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = apigateway.GetUsagePlanEnvironmentsOutput(ctx, apigateway.GetUsagePlanEnvironmentsOutputArgs{
+			UsagePlanId: attachService.UsagePlanId,
+			BindType:    pulumi.String("SERVICE"),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -106,7 +175,7 @@ return await Deployment.RunAsync(() =>
         IpVersion = "IPv4",
     });
 
-    var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attachService", new()
+    var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attach_service", new()
     {
         UsagePlanId = plan.Id,
         ServiceId = service.Id,
@@ -122,55 +191,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-			UsagePlanName:       pulumi.String("my_plan"),
-			UsagePlanDesc:       pulumi.String("nice plan"),
-			MaxRequestNum:       pulumi.Int(100),
-			MaxRequestNumPreSec: pulumi.Int(10),
-		})
-		if err != nil {
-			return err
-		}
-		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("niceservice"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("your nice service"),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-		})
-		if err != nil {
-			return err
-		}
-		attachService, err := ApiGateway.NewUsagePlanAttachment(ctx, "attachService", &ApiGateway.UsagePlanAttachmentArgs{
-			UsagePlanId: plan.ID(),
-			ServiceId:   service.ID(),
-			Environment: pulumi.String("test"),
-			BindType:    pulumi.String("SERVICE"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = ApiGateway.GetUsagePlanEnvironmentsOutput(ctx, apigateway.GetUsagePlanEnvironmentsOutputArgs{
-			UsagePlanId: attachService.UsagePlanId,
-			BindType:    pulumi.String("SERVICE"),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -185,8 +210,8 @@ import com.pulumi.tencentcloud.ApiGateway.UsagePlanAttachment;
 import com.pulumi.tencentcloud.ApiGateway.UsagePlanAttachmentArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetUsagePlanEnvironmentsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -198,14 +223,14 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var plan = new UsagePlan("plan", UsagePlanArgs.builder()        
+        var plan = new UsagePlan("plan", UsagePlanArgs.builder()
             .usagePlanName("my_plan")
             .usagePlanDesc("nice plan")
             .maxRequestNum(100)
             .maxRequestNumPreSec(10)
             .build());
 
-        var service = new Service("service", ServiceArgs.builder()        
+        var service = new Service("service", ServiceArgs.builder()
             .serviceName("niceservice")
             .protocol("http&https")
             .serviceDesc("your nice service")
@@ -215,7 +240,7 @@ public class App {
             .ipVersion("IPv4")
             .build());
 
-        var attachService = new UsagePlanAttachment("attachService", UsagePlanAttachmentArgs.builder()        
+        var attachService = new UsagePlanAttachment("attachService", UsagePlanAttachmentArgs.builder()
             .usagePlanId(plan.id())
             .serviceId(service.id())
             .environment("test")
@@ -230,6 +255,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   plan:
@@ -251,6 +281,7 @@ resources:
       ipVersion: IPv4
   attachService:
     type: tencentcloud:ApiGateway:UsagePlanAttachment
+    name: attach_service
     properties:
       usagePlanId: ${plan.id}
       serviceId: ${service.id}
@@ -259,13 +290,59 @@ resources:
 variables:
   environmentTest:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getUsagePlanEnvironments
-      Arguments:
+      function: tencentcloud:ApiGateway:getUsagePlanEnvironments
+      arguments:
         usagePlanId: ${attachService.usagePlanId}
         bindType: SERVICE
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getusageplanenvironments" "environmentTest" {
+  usage_plan_id = tencentcloud_apigateway_usageplanattachment.attach_service.usage_plan_id
+  bind_type     = "SERVICE"
+}
+
+resource "tencentcloud_apigateway_usageplan" "plan" {
+  usage_plan_name         = "my_plan"
+  usage_plan_desc         = "nice plan"
+  max_request_num         = 100
+  max_request_num_pre_sec = 10
+}
+resource "tencentcloud_apigateway_service" "service" {
+  service_name = "niceservice"
+  protocol     = "http&https"
+  service_desc = "your nice service"
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_usageplanattachment" "attach_service" {
+  usage_plan_id = tencentcloud_apigateway_usageplan.plan.id
+  service_id    = tencentcloud_apigateway_service.service.id
+  environment   = "test"
+  bind_type     = "SERVICE"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&type=document&lang=en)
 
 
 
@@ -277,7 +354,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -285,9 +362,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getUsagePlanEnvironments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlanEnvironmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>></span
+><span class="k">function </span>getUsagePlanEnvironments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlanEnvironmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>></span
 ><span class="k">
-function </span>getUsagePlanEnvironmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlanEnvironmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>></span
+function </span>getUsagePlanEnvironmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlanEnvironmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -301,10 +378,10 @@ function </span>getUsagePlanEnvironmentsOutput<span class="p">(</span><span clas
                                 <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetUsagePlanEnvironmentsResult</span
 ><span class="k">
-def </span>get_usage_plan_environments_output<span class="p">(</span><span class="nx">bind_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsagePlanEnvironmentsResult]</span
+def </span>get_usage_plan_environments_output<span class="p">(</span><span class="nx">bind_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsagePlanEnvironmentsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -329,7 +406,8 @@ func </span>GetUsagePlanEnvironmentsOutput<span class="p">(</span><span class="n
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetUsagePlanEnvironments </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetUsagePlanEnvironmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsagePlanEnvironmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsagePlanEnvironmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsagePlanEnvironmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -338,7 +416,8 @@ func </span>GetUsagePlanEnvironmentsOutput<span class="p">(</span><span class="n
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> </span>getUsagePlanEnvironments<span class="p">(</span><span class="nx">GetUsagePlanEnvironmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> </span>getUsagePlanEnvironments<span class="p">(</span><span class="nx">GetUsagePlanEnvironmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsagePlanEnvironmentsResult</a></span>> </span>getUsagePlanEnvironments<span class="p">(</span><span class="nx">GetUsagePlanEnvironmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -350,6 +429,15 @@ func </span>GetUsagePlanEnvironmentsOutput<span class="p">(</span><span class="n
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_usage_plan_environments&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -368,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_csharp" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -377,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -386,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -401,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_go" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -410,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -419,8 +502,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bind_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -434,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_java" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -443,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -452,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +576,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_nodejs" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -476,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -485,8 +592,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -500,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="bind_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
@@ -509,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -518,8 +622,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -533,8 +636,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_yaml" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -542,8 +644,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value: <code>SERVICE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -551,8 +652,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -575,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -584,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanenvironmentslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Usage<wbr>Plan<wbr>Environments<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of usage plan binding details.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
             title="">
         <span id="usageplanid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -623,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -632,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanenvironmentslist">[]Get<wbr>Usage<wbr>Plan<wbr>Environments<wbr>List</a></span>
     </dt>
-    <dd><p>A list of usage plan binding details.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
             title="">
         <span id="usageplanid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -662,6 +758,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getusageplanenvironmentslist">list(object)</a></span>
+    </dt>
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
+            title="">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="bind_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -671,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -680,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanenvironmentslist">List&lt;Get<wbr>Usage<wbr>Plan<wbr>Environments<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of usage plan binding details.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
             title="">
         <span id="usageplanid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -719,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -728,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanenvironmentslist">Get<wbr>Usage<wbr>Plan<wbr>Environments<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of usage plan binding details.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
             title="">
         <span id="usageplanid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -767,17 +905,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getusageplanenvironmentslist">Get<wbr>Usage<wbr>Plan<wbr>Environments<wbr>List]</a></span>
+        <span class="property-type"><a href="#getusageplanenvironmentslist">Sequence[Get<wbr>Usage<wbr>Plan<wbr>Environments<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of usage plan binding details.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
             title="">
         <span id="usage_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
@@ -815,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -824,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanenvironmentslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of usage plan binding details.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plan binding details.</dd><dt class="property-"
             title="">
         <span id="usageplanid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -873,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API ID, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -882,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API name, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -891,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="environment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_csharp" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -900,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment name.</p>
-</dd><dt class="property-required"
+    <dd>The environment name.</dd><dt class="property-required"
             title="Required">
         <span id="method_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_csharp" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -909,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API method, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -918,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -927,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API path, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -936,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-required"
+    <dd>The service ID.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -945,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service name.</p>
-</dd></dl>
+    <dd>The service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API ID, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -969,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API name, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -978,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="environment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_go" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -987,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment name.</p>
-</dd><dt class="property-required"
+    <dd>The environment name.</dd><dt class="property-required"
             title="Required">
         <span id="method_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_go" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -996,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API method, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1005,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1014,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API path, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1023,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-required"
+    <dd>The service ID.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -1032,8 +1149,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service name.</p>
-</dd></dl>
+    <dd>The service name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The environment name.</dd><dt class="property-required"
+            title="Required">
+        <span id="method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_hcl" style="color: inherit; text-decoration: inherit;">method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The service ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1047,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API ID, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1056,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API name, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1065,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="environment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_java" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1074,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment name.</p>
-</dd><dt class="property-required"
+    <dd>The environment name.</dd><dt class="property-required"
             title="Required">
         <span id="method_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_java" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1083,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API method, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1092,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1101,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API path, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1110,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-required"
+    <dd>The service ID.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1119,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service name.</p>
-</dd></dl>
+    <dd>The service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1134,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API ID, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1143,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API name, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1152,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="environment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_nodejs" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1161,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment name.</p>
-</dd><dt class="property-required"
+    <dd>The environment name.</dd><dt class="property-required"
             title="Required">
         <span id="method_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_nodejs" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1170,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API method, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1179,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1188,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The API path, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1197,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-required"
+    <dd>The service ID.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1206,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service name.</p>
-</dd></dl>
+    <dd>The service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1221,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The API ID, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="api_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
@@ -1230,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The API name, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1239,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="environment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_python" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1248,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The environment name.</p>
-</dd><dt class="property-required"
+    <dd>The environment name.</dd><dt class="property-required"
             title="Required">
         <span id="method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_python" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1257,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The API method, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1266,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1275,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The API path, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1284,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-required"
+    <dd>The service ID.</dd><dt class="property-required"
             title="Required">
         <span id="service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -1293,8 +1461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The service name.</p>
-</dd></dl>
+    <dd>The service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1308,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API ID, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API ID, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1317,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API name, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API name, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1326,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="environment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_yaml" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1335,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment name.</p>
-</dd><dt class="property-required"
+    <dd>The environment name.</dd><dt class="property-required"
             title="Required">
         <span id="method_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_yaml" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1344,8 +1507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API method, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API method, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1353,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1362,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The API path, this value is empty if attach service.</p>
-</dd><dt class="property-required"
+    <dd>The API path, this value is empty if attach service.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1371,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-required"
+    <dd>The service ID.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1380,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service name.</p>
-</dd></dl>
+    <dd>The service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1396,7 +1554,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getHttpDomains"
 title_tag: "tencentcloud.Gaap.getHttpDomains"
-meta_desc: "Documentation for the tencentcloud.Gaap.getHttpDomains function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query forward domain of layer7 listeners."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,101 +18,82 @@ Use this data source to query forward domain of layer7 listeners.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const fooProxy = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("foo", {
     protocol: "HTTP",
+    name: "ci-test-gaap-l7-listener",
     port: 80,
     proxyId: fooProxy.id,
 });
-const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+const fooHttpDomain = new tencentcloud.gaap.HttpDomain("foo", {
     listenerId: fooLayer7Listener.id,
     domain: "www.qq.com",
 });
-const fooHttpDomains = tencentcloud.Gaap.getHttpDomainsOutput({
+const foo = tencentcloud.gaap.getHttpDomainsOutput({
     listenerId: fooLayer7Listener.id,
     domain: fooHttpDomain.domain,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo_proxy = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+foo_layer7_listener = tencentcloud.gaap.Layer7Listener("foo",
     protocol="HTTP",
+    name="ci-test-gaap-l7-listener",
     port=80,
     proxy_id=foo_proxy.id)
-foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+foo_http_domain = tencentcloud.gaap.HttpDomain("foo",
     listener_id=foo_layer7_listener.id,
     domain="www.qq.com")
-foo_http_domains = tencentcloud.Gaap.get_http_domains_output(listener_id=foo_layer7_listener.id,
+foo = tencentcloud.gaap.get_http_domains_output(listener_id=foo_layer7_listener.id,
     domain=foo_http_domain.domain)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
-    {
-        Bandwidth = 10,
-        Concurrent = 2,
-        AccessRegion = "SouthChina",
-        RealserverRegion = "NorthChina",
-    });
-
-    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
-    {
-        Protocol = "HTTP",
-        Port = 80,
-        ProxyId = fooProxy.Id,
-    });
-
-    var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
-    {
-        ListenerId = fooLayer7Listener.Id,
-        Domain = "www.qq.com",
-    });
-
-    var fooHttpDomains = Tencentcloud.Gaap.GetHttpDomains.Invoke(new()
-    {
-        ListenerId = fooLayer7Listener.Id,
-        Domain = fooHttpDomain.Domain,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+		fooProxy, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
 			Bandwidth:        pulumi.Int(10),
 			Concurrent:       pulumi.Int(2),
 			AccessRegion:     pulumi.String("SouthChina"),
@@ -119,29 +102,79 @@ func main() {
 		if err != nil {
 			return err
 		}
-		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+		fooLayer7Listener, err := gaap.NewLayer7Listener(ctx, "foo", &gaap.Layer7ListenerArgs{
 			Protocol: pulumi.String("HTTP"),
+			Name:     pulumi.String("ci-test-gaap-l7-listener"),
 			Port:     pulumi.Int(80),
-			ProxyId:  fooProxy.ID(),
+			ProxyId:  fooProxy.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
 		}
-		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-			ListenerId: fooLayer7Listener.ID(),
+		fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 			Domain:     pulumi.String("www.qq.com"),
 		})
 		if err != nil {
 			return err
 		}
-		_ = Gaap.GetHttpDomainsOutput(ctx, gaap.GetHttpDomainsOutputArgs{
-			ListenerId: fooLayer7Listener.ID(),
+		_ = gaap.GetHttpDomainsOutput(ctx, gaap.GetHttpDomainsOutputArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 			Domain:     fooHttpDomain.Domain,
 		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var fooProxy = new Tencentcloud.Gaap.Proxy("foo", new()
+    {
+        Name = "ci-test-gaap-proxy",
+        Bandwidth = 10,
+        Concurrent = 2,
+        AccessRegion = "SouthChina",
+        RealserverRegion = "NorthChina",
+    });
+
+    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("foo", new()
+    {
+        Protocol = "HTTP",
+        Name = "ci-test-gaap-l7-listener",
+        Port = 80,
+        ProxyId = fooProxy.Id,
+    });
+
+    var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("foo", new()
+    {
+        ListenerId = fooLayer7Listener.Id,
+        Domain = "www.qq.com",
+    });
+
+    var foo = Tencentcloud.Gaap.GetHttpDomains.Invoke(new()
+    {
+        ListenerId = fooLayer7Listener.Id,
+        Domain = fooHttpDomain.Domain,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -156,8 +189,8 @@ import com.pulumi.tencentcloud.Gaap.HttpDomain;
 import com.pulumi.tencentcloud.Gaap.HttpDomainArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetHttpDomainsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -169,25 +202,27 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()        
+        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()
             .protocol("HTTP")
+            .name("ci-test-gaap-l7-listener")
             .port(80)
             .proxyId(fooProxy.id())
             .build());
 
-        var fooHttpDomain = new HttpDomain("fooHttpDomain", HttpDomainArgs.builder()        
+        var fooHttpDomain = new HttpDomain("fooHttpDomain", HttpDomainArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain("www.qq.com")
             .build());
 
-        final var fooHttpDomains = GaapFunctions.getHttpDomains(GetHttpDomainsArgs.builder()
+        final var foo = GaapFunctions.getHttpDomains(GetHttpDomainsArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain(fooHttpDomain.domain())
             .build());
@@ -195,36 +230,90 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooProxy:
     type: tencentcloud:Gaap:Proxy
+    name: foo
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooLayer7Listener:
     type: tencentcloud:Gaap:Layer7Listener
+    name: foo
     properties:
       protocol: HTTP
+      name: ci-test-gaap-l7-listener
       port: 80
       proxyId: ${fooProxy.id}
   fooHttpDomain:
     type: tencentcloud:Gaap:HttpDomain
+    name: foo
     properties:
       listenerId: ${fooLayer7Listener.id}
       domain: www.qq.com
 variables:
-  fooHttpDomains:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getHttpDomains
-      Arguments:
+      function: tencentcloud:Gaap:getHttpDomains
+      arguments:
         listenerId: ${fooLayer7Listener.id}
         domain: ${fooHttpDomain.domain}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_gethttpdomains" "foo" {
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+  domain      = tencentcloud_gaap_httpdomain.foo.domain
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_layer7listener" "foo" {
+  protocol = "HTTP"
+  name     = "ci-test-gaap-l7-listener"
+  port     = 80
+  proxy_id = tencentcloud_gaap_proxy.foo.id
+}
+resource "tencentcloud_gaap_httpdomain" "foo" {
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+  domain      = "www.qq.com"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
 
 
 
@@ -236,7 +325,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -244,9 +333,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getHttpDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>></span
+><span class="k">function </span>getHttpDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>></span
 ><span class="k">
-function </span>getHttpDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>></span
+function </span>getHttpDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -260,10 +349,10 @@ function </span>getHttpDomainsOutput<span class="p">(</span><span class="nx">arg
                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetHttpDomainsResult</span
 ><span class="k">
-def </span>get_http_domains_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetHttpDomainsResult]</span
+def </span>get_http_domains_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetHttpDomainsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -288,7 +377,8 @@ func </span>GetHttpDomainsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetHttpDomains </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetHttpDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetHttpDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetHttpDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetHttpDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -297,7 +387,8 @@ func </span>GetHttpDomainsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> </span>getHttpDomains<span class="p">(</span><span class="nx">GetHttpDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> </span>getHttpDomains<span class="p">(</span><span class="nx">GetHttpDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetHttpDomainsResult</a></span>> </span>getHttpDomains<span class="p">(</span><span class="nx">GetHttpDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -309,6 +400,15 @@ func </span>GetHttpDomainsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getHttpDomains:getHttpDomains
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_http_domains&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -327,8 +427,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -336,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -345,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -360,8 +457,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -369,8 +465,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -378,8 +473,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -393,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -402,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -411,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -426,8 +547,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -435,8 +555,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -444,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -459,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -468,8 +585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -477,8 +593,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -492,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -501,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -510,8 +623,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -534,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="domains_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_csharp" style="color: inherit; text-decoration: inherit;">Domains</a>
@@ -543,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttpdomainsdomain">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Http<wbr>Domains<wbr>Domain&gt;</a></span>
     </dt>
-    <dd><p>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -552,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -583,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="domains_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_go" style="color: inherit; text-decoration: inherit;">Domains</a>
@@ -592,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttpdomainsdomain">[]Get<wbr>Http<wbr>Domains<wbr>Domain</a></span>
     </dt>
-    <dd><p>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -601,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -623,6 +729,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="domains_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_hcl" style="color: inherit; text-decoration: inherit;">domains</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gethttpdomainsdomain">list(object)</a></span>
+    </dt>
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -632,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="domains_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_java" style="color: inherit; text-decoration: inherit;">domains</a>
@@ -641,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttpdomainsdomain">List&lt;Get<wbr>Http<wbr>Domains<wbr>Domain&gt;</a></span>
     </dt>
-    <dd><p>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -650,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -681,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="domains_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_nodejs" style="color: inherit; text-decoration: inherit;">domains</a>
@@ -690,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttpdomainsdomain">Get<wbr>Http<wbr>Domains<wbr>Domain[]</a></span>
     </dt>
-    <dd><p>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -699,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -730,17 +876,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="domains_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_python" style="color: inherit; text-decoration: inherit;">domains</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gethttpdomainsdomain">Get<wbr>Http<wbr>Domains<wbr>Domain]</a></span>
+        <span class="property-type"><a href="#gethttpdomainsdomain">Sequence[Get<wbr>Http<wbr>Domains<wbr>Domain]</a></span>
     </dt>
-    <dd><p>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -748,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -779,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Forward domain of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="domains_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_yaml" style="color: inherit; text-decoration: inherit;">domains</a>
@@ -788,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttpdomainsdomain">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward domain of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -797,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -838,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether basic authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="basicauthid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicauthid_csharp" style="color: inherit; text-decoration: inherit;">Basic<wbr>Auth<wbr>Id</a>
@@ -847,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the basic authentication.</p>
-</dd><dt class="property-required"
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -856,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -865,9 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -875,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -884,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauth_csharp" style="color: inherit; text-decoration: inherit;">Gaap<wbr>Auth</a>
@@ -893,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SSL certificate authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauthid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauthid_csharp" style="color: inherit; text-decoration: inherit;">Gaap<wbr>Auth<wbr>Id</a>
@@ -902,8 +1034,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SSL certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="isdefaultserver_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultserver_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="realserverauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverauth_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Auth</a>
@@ -911,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether realserver authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="realservercertificatedomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificatedomain_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Certificate<wbr>Domain</a>
@@ -920,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CA certificate domain of the realserver.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="realservercertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateid_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Certificate<wbr>Id</a>
@@ -929,9 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead. CA certificate ID of the realserver.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="realservercertificateids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateids_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Certificate<wbr>Ids</a>
@@ -939,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>CA certificate ID list of the realserver.</p>
-</dd></dl>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether basic authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="basicauthid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicauthid_go" style="color: inherit; text-decoration: inherit;">Basic<wbr>Auth<wbr>Id</a>
@@ -963,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the basic authentication.</p>
-</dd><dt class="property-required"
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -972,8 +1104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -981,9 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -991,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1000,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauth_go" style="color: inherit; text-decoration: inherit;">Gaap<wbr>Auth</a>
@@ -1009,8 +1136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SSL certificate authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauthid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauthid_go" style="color: inherit; text-decoration: inherit;">Gaap<wbr>Auth<wbr>Id</a>
@@ -1018,8 +1144,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SSL certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="isdefaultserver_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultserver_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="realserverauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverauth_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Auth</a>
@@ -1027,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether realserver authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="realservercertificatedomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificatedomain_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Certificate<wbr>Domain</a>
@@ -1036,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CA certificate domain of the realserver.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="realservercertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateid_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Certificate<wbr>Id</a>
@@ -1045,9 +1176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead. CA certificate ID of the realserver.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="realservercertificateids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateids_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Certificate<wbr>Ids</a>
@@ -1055,8 +1184,117 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>CA certificate ID list of the realserver.</p>
-</dd></dl>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="basic_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basic_auth_hcl" style="color: inherit; text-decoration: inherit;">basic_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
+            title="Required">
+        <span id="basic_auth_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basic_auth_id_hcl" style="color: inherit; text-decoration: inherit;">basic_<wbr>auth_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
+            title="Required">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="client_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="client_certificate_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_ids_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="gaap_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaap_auth_hcl" style="color: inherit; text-decoration: inherit;">gaap_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
+            title="Required">
+        <span id="gaap_auth_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaap_auth_id_hcl" style="color: inherit; text-decoration: inherit;">gaap_<wbr>auth_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_server_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_server_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="realserver_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_auth_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
+            title="Required">
+        <span id="realserver_certificate_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_certificate_domain_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>certificate_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="realserver_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="realserver_certificate_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_certificate_ids_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>certificate_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1070,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether basic authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="basicauthid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicauthid_java" style="color: inherit; text-decoration: inherit;">basic<wbr>Auth<wbr>Id</a>
@@ -1079,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the basic authentication.</p>
-</dd><dt class="property-required"
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1088,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1097,9 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1107,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1116,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauth_java" style="color: inherit; text-decoration: inherit;">gaap<wbr>Auth</a>
@@ -1125,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether SSL certificate authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauthid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauthid_java" style="color: inherit; text-decoration: inherit;">gaap<wbr>Auth<wbr>Id</a>
@@ -1134,8 +1364,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SSL certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="isdefaultserver_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultserver_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="realserverauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverauth_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Auth</a>
@@ -1143,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether realserver authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="realservercertificatedomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificatedomain_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Domain</a>
@@ -1152,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CA certificate domain of the realserver.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="realservercertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateid_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Id</a>
@@ -1161,9 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead. CA certificate ID of the realserver.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="realservercertificateids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateids_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Ids</a>
@@ -1171,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>CA certificate ID list of the realserver.</p>
-</dd></dl>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1186,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether basic authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="basicauthid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicauthid_nodejs" style="color: inherit; text-decoration: inherit;">basic<wbr>Auth<wbr>Id</a>
@@ -1195,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the basic authentication.</p>
-</dd><dt class="property-required"
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1204,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1213,9 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1223,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1232,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauth_nodejs" style="color: inherit; text-decoration: inherit;">gaap<wbr>Auth</a>
@@ -1241,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether SSL certificate authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauthid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauthid_nodejs" style="color: inherit; text-decoration: inherit;">gaap<wbr>Auth<wbr>Id</a>
@@ -1250,8 +1474,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SSL certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="isdefaultserver_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultserver_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="realserverauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverauth_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Auth</a>
@@ -1259,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether realserver authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="realservercertificatedomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificatedomain_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Domain</a>
@@ -1268,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CA certificate domain of the realserver.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="realservercertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateid_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Id</a>
@@ -1277,9 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead. CA certificate ID of the realserver.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="realservercertificateids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateids_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Ids</a>
@@ -1287,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>CA certificate ID list of the realserver.</p>
-</dd></dl>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1302,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether basic authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="basic_auth_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basic_auth_id_python" style="color: inherit; text-decoration: inherit;">basic_<wbr>auth_<wbr>id</a>
@@ -1311,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the basic authentication.</p>
-</dd><dt class="property-required"
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -1320,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the server certificate.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="client_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_id_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
@@ -1329,9 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="client_certificate_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_ids_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
@@ -1339,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1348,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="gaap_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaap_auth_python" style="color: inherit; text-decoration: inherit;">gaap_<wbr>auth</a>
@@ -1357,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SSL certificate authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="gaap_auth_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaap_auth_id_python" style="color: inherit; text-decoration: inherit;">gaap_<wbr>auth_<wbr>id</a>
@@ -1366,8 +1584,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SSL certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_server_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_server_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="realserver_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_auth_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>auth</a>
@@ -1375,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether realserver authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="realserver_certificate_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_certificate_domain_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>certificate_<wbr>domain</a>
@@ -1384,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CA certificate domain of the realserver.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="realserver_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_certificate_id_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>certificate_<wbr>id</a>
@@ -1393,9 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead. CA certificate ID of the realserver.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="realserver_certificate_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_certificate_ids_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>certificate_<wbr>ids</a>
@@ -1403,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>CA certificate ID list of the realserver.</p>
-</dd></dl>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1418,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether basic authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether basic authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="basicauthid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicauthid_yaml" style="color: inherit; text-decoration: inherit;">basic<wbr>Auth<wbr>Id</a>
@@ -1427,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the basic authentication.</p>
-</dd><dt class="property-required"
+    <dd>ID of the basic authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1436,8 +1654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of the server certificate.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1445,9 +1662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1455,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1464,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauth_yaml" style="color: inherit; text-decoration: inherit;">gaap<wbr>Auth</a>
@@ -1473,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether SSL certificate authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether SSL certificate authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="gaapauthid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaapauthid_yaml" style="color: inherit; text-decoration: inherit;">gaap<wbr>Auth<wbr>Id</a>
@@ -1482,8 +1694,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SSL certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SSL certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="isdefaultserver_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultserver_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to use as the default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="realserverauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverauth_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Auth</a>
@@ -1491,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether realserver authentication is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether realserver authentication is enable.</dd><dt class="property-required"
             title="Required">
         <span id="realservercertificatedomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificatedomain_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Domain</a>
@@ -1500,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CA certificate domain of the realserver.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>CA certificate domain of the realserver.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="realservercertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateid_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Id</a>
@@ -1509,9 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead. CA certificate ID of the realserver.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.28.0. Use <code>realserver_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead. CA certificate ID of the realserver.<p class="property-message">Deprecated: It has been deprecated from version 1.28.0. Use <code>realserverCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="realservercertificateids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservercertificateids_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Certificate<wbr>Ids</a>
@@ -1519,8 +1734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>CA certificate ID list of the realserver.</p>
-</dd></dl>
+    <dd>CA certificate ID list of the realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1535,7 +1749,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

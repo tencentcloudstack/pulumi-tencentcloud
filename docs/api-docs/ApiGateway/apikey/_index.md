@@ -2,9 +2,11 @@
 ---
 title: "ApiKey"
 title_tag: "tencentcloud.ApiGateway.ApiKey"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.ApiKey resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create API gateway access key."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,51 +20,50 @@ Use this resource to create API gateway access key.
 
 ### Automatically generate key for API gateway access key.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleAuto = new tencentcloud.apigateway.ApiKey("exampleAuto", {
+const exampleAuto = new tencentcloud.apigateway.ApiKey("example_auto", {
     secretName: "tf_example_auto",
     status: "on",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_auto = tencentcloud.api_gateway.ApiKey("exampleAuto",
+example_auto = tencentcloud.apigateway.ApiKey("example_auto",
     secret_name="tf_example_auto",
     status="on")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleAuto = new Tencentcloud.ApiGateway.ApiKey("exampleAuto", new()
-    {
-        SecretName = "tf_example_auto",
-        Status = "on",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := ApiGateway.NewApiKey(ctx, "exampleAuto", &ApiGateway.ApiKeyArgs{
+		_, err := apigateway.NewApiKey(ctx, "example_auto", &apigateway.ApiKeyArgs{
 			SecretName: pulumi.String("tf_example_auto"),
 			Status:     pulumi.String("on"),
 		})
@@ -73,71 +74,11 @@ func main() {
 	})
 }
 ```
-```java
-package generated_program;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
 
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.ApiGateway.ApiKey;
-import com.pulumi.tencentcloud.ApiGateway.ApiKeyArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var exampleAuto = new ApiKey("exampleAuto", ApiKeyArgs.builder()        
-            .secretName("tf_example_auto")
-            .status("on")
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  exampleAuto:
-    type: tencentcloud:ApiGateway:ApiKey
-    properties:
-      secretName: tf_example_auto
-      status: on
-```
-<!--End PulumiCodeChooser -->
-
-### Manually generate a secret key for API gateway access key.
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const exampleManual = new tencentcloud.apigateway.ApiKey("exampleManual", {
-    accessKeyId: "28e287e340507fa147b2c8284dab542f",
-    accessKeySecret: "0198a4b8c3105080f4acd9e507599eff",
-    accessKeyType: "manual",
-    secretName: "tf_example_manual",
-    status: "on",
-});
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-example_manual = tencentcloud.api_gateway.ApiKey("exampleManual",
-    access_key_id="28e287e340507fa147b2c8284dab542f",
-    access_key_secret="0198a4b8c3105080f4acd9e507599eff",
-    access_key_type="manual",
-    secret_name="tf_example_manual",
-    status="on")
-```
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -146,41 +87,19 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleManual = new Tencentcloud.ApiGateway.ApiKey("exampleManual", new()
+    var exampleAuto = new Tencentcloud.ApiGateway.ApiKey("example_auto", new()
     {
-        AccessKeyId = "28e287e340507fa147b2c8284dab542f",
-        AccessKeySecret = "0198a4b8c3105080f4acd9e507599eff",
-        AccessKeyType = "manual",
-        SecretName = "tf_example_manual",
+        SecretName = "tf_example_auto",
         Status = "on",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := ApiGateway.NewApiKey(ctx, "exampleManual", &ApiGateway.ApiKeyArgs{
-			AccessKeyId:     pulumi.String("28e287e340507fa147b2c8284dab542f"),
-			AccessKeySecret: pulumi.String("0198a4b8c3105080f4acd9e507599eff"),
-			AccessKeyType:   pulumi.String("manual"),
-			SecretName:      pulumi.String("tf_example_manual"),
-			Status:          pulumi.String("on"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -189,8 +108,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.ApiGateway.ApiKey;
 import com.pulumi.tencentcloud.ApiGateway.ApiKeyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -202,91 +121,311 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleManual = new ApiKey("exampleManual", ApiKeyArgs.builder()        
-            .accessKeyId("28e287e340507fa147b2c8284dab542f")
-            .accessKeySecret("0198a4b8c3105080f4acd9e507599eff")
-            .accessKeyType("manual")
-            .secretName("tf_example_manual")
+        var exampleAuto = new ApiKey("exampleAuto", ApiKeyArgs.builder()
+            .secretName("tf_example_auto")
             .status("on")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  exampleAuto:
+    type: tencentcloud:ApiGateway:ApiKey
+    name: example_auto
+    properties:
+      secretName: tf_example_auto
+      status: on
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_apikey" "example_auto" {
+  secret_name = "tf_example_auto"
+  status      = "on"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Manually generate a secret key for API gateway access key.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const exampleManual = new tencentcloud.apigateway.ApiKey("example_manual", {
+    secretName: "tf_example_manual",
+    status: "on",
+    accessKeyType: "manual",
+    accessKeyId: "28e287e340507fa147b2c8284dab542f",
+    accessKeySecret: "0198a4b8c3105080f4acd9e507599eff",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example_manual = tencentcloud.apigateway.ApiKey("example_manual",
+    secret_name="tf_example_manual",
+    status="on",
+    access_key_type="manual",
+    access_key_id="28e287e340507fa147b2c8284dab542f",
+    access_key_secret="0198a4b8c3105080f4acd9e507599eff")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := apigateway.NewApiKey(ctx, "example_manual", &apigateway.ApiKeyArgs{
+			SecretName:      pulumi.String("tf_example_manual"),
+			Status:          pulumi.String("on"),
+			AccessKeyType:   pulumi.String("manual"),
+			AccessKeyId:     pulumi.String("28e287e340507fa147b2c8284dab542f"),
+			AccessKeySecret: pulumi.String("0198a4b8c3105080f4acd9e507599eff"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var exampleManual = new Tencentcloud.ApiGateway.ApiKey("example_manual", new()
+    {
+        SecretName = "tf_example_manual",
+        Status = "on",
+        AccessKeyType = "manual",
+        AccessKeyId = "28e287e340507fa147b2c8284dab542f",
+        AccessKeySecret = "0198a4b8c3105080f4acd9e507599eff",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.ApiGateway.ApiKey;
+import com.pulumi.tencentcloud.ApiGateway.ApiKeyArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var exampleManual = new ApiKey("exampleManual", ApiKeyArgs.builder()
+            .secretName("tf_example_manual")
+            .status("on")
+            .accessKeyType("manual")
+            .accessKeyId("28e287e340507fa147b2c8284dab542f")
+            .accessKeySecret("0198a4b8c3105080f4acd9e507599eff")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   exampleManual:
     type: tencentcloud:ApiGateway:ApiKey
+    name: example_manual
     properties:
-      accessKeyId: 28e287e340507fa147b2c8284dab542f
-      accessKeySecret: 0198a4b8c3105080f4acd9e507599eff
-      accessKeyType: manual
       secretName: tf_example_manual
       status: on
+      accessKeyType: manual
+      accessKeyId: 28e287e340507fa147b2c8284dab542f
+      accessKeySecret: 0198a4b8c3105080f4acd9e507599eff
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_apikey" "example_manual" {
+  secret_name       = "tf_example_manual"
+  status            = "on"
+  access_key_type   = "manual"
+  access_key_id     = "28e287e340507fa147b2c8284dab542f"
+  access_key_secret = "0198a4b8c3105080f4acd9e507599eff"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateApiKey](https://www.tencentcloud.com/search/?wd=CreateApiKey&type=document&lang=en)
+  - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+* Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
+* Update:
+  - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+  - [EnableApiKey](https://www.tencentcloud.com/search/?wd=EnableApiKey&type=document&lang=en)
+  - [UpdateApiKey](https://www.tencentcloud.com/search/?wd=UpdateApiKey&type=document&lang=en)
+* Delete:
+  - [DeleteApiKey](https://www.tencentcloud.com/search/?wd=DeleteApiKey&type=document&lang=en)
+  - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
 
 
 ## Create ApiKey Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+           <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">access_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">access_key_secret</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">access_key_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApiKey</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiKey</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApiKey</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiKey</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ApiKey</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiKeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:ApiKey</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:ApiKey</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_api_key&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -307,7 +446,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -424,11 +563,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ApiKey Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -444,8 +591,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyid_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Id</a>
@@ -453,8 +599,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeysecret_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeysecret_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Secret</a>
@@ -462,8 +607,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeytype_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Type</a>
@@ -471,8 +615,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -480,8 +623,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -495,8 +637,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyid_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Id</a>
@@ -504,8 +645,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeysecret_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeysecret_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Secret</a>
@@ -513,8 +653,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeytype_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Type</a>
@@ -522,8 +661,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -531,8 +669,53 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom key name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_key_secret_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_secret_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>secret</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_key_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_type_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -546,8 +729,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyid_java" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Id</a>
@@ -555,8 +737,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeysecret_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeysecret_java" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Secret</a>
@@ -564,8 +745,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeytype_java" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Type</a>
@@ -573,8 +753,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -582,8 +761,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -597,8 +775,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyid_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Id</a>
@@ -606,8 +783,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeysecret_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeysecret_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Secret</a>
@@ -615,8 +791,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeytype_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Type</a>
@@ -624,8 +799,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -633,8 +807,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -648,8 +821,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="access_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_id_python" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>id</a>
@@ -657,8 +829,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="access_key_secret_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_secret_python" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>secret</a>
@@ -666,8 +837,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="access_key_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_type_python" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>type</a>
@@ -675,8 +845,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -684,8 +853,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -699,8 +867,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyid_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Id</a>
@@ -708,8 +875,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeysecret_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeysecret_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Secret</a>
@@ -717,8 +883,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesskeytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeytype_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Type</a>
@@ -726,8 +891,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -735,8 +899,7 @@ The ApiKey resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -757,8 +920,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -766,8 +928,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -775,8 +936,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd></dl>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -790,8 +950,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -799,8 +958,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -808,8 +966,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd></dl>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -823,8 +1010,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -832,8 +1018,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -841,8 +1026,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd></dl>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -856,8 +1040,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -865,8 +1048,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -874,8 +1056,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd></dl>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -889,8 +1070,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -898,8 +1078,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -907,8 +1086,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd></dl>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -922,8 +1100,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -931,8 +1108,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -940,8 +1116,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd></dl>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -951,18 +1126,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ApiKey resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApiKeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ApiKey</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApiKeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ApiKey</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -973,104 +1148,143 @@ Get an existing ApiKey resource's state with the given name, ID, and optional ex
         <span class="nx">modify_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ApiKey</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApiKey<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApiKeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiKey</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApiKey<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApiKeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiKey</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ApiKey</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiKeyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ApiKey</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiKeyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ApiKey</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiKeyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ApiKey</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiKeyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingApiKey</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:ApiKey</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_api_key</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiKeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiKeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1078,28 +1292,31 @@ Get an existing ApiKey resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiKeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1107,28 +1324,31 @@ Get an existing ApiKey resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiKeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1148,8 +1368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeysecret_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeysecret_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Secret</a>
@@ -1157,8 +1376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeytype_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Type</a>
@@ -1166,8 +1384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1175,8 +1392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1184,8 +1400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1193,8 +1408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1202,8 +1416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1217,8 +1430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeysecret_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeysecret_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Secret</a>
@@ -1226,8 +1438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeytype_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Type</a>
@@ -1235,8 +1446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1244,8 +1454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1253,8 +1462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1262,8 +1470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1271,8 +1478,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_access_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_key_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_access_key_secret_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_key_secret_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>secret</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_access_key_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_key_type_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom key name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1286,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeysecret_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeysecret_java" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Secret</a>
@@ -1295,8 +1562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeytype_java" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Type</a>
@@ -1304,8 +1570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1313,8 +1578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1322,8 +1586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1331,8 +1594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1340,8 +1602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeysecret_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeysecret_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Secret</a>
@@ -1364,8 +1624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeytype_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Type</a>
@@ -1373,8 +1632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1382,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1391,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1400,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1409,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1424,8 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_access_key_secret_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_key_secret_python" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>secret</a>
@@ -1433,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_access_key_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_key_type_python" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>type</a>
@@ -1442,8 +1694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1451,8 +1702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1460,8 +1710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -1469,8 +1718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1478,8 +1726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1493,8 +1740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeysecret_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeysecret_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Secret</a>
@@ -1502,8 +1748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</p>
-</dd><dt class="property-optional"
+    <dd>The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accesskeytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesskeytype_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Type</a>
@@ -1511,8 +1756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key type, supports both auto and manual (custom keys), defaults to auto.</p>
-</dd><dt class="property-optional"
+    <dd>Key type, supports both auto and manual (custom keys), defaults to auto.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1520,8 +1764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1529,8 +1772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1538,8 +1780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1547,8 +1788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status. Valid values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Valid values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1571,6 +1811,9 @@ $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jk
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1580,7 +1823,6 @@ $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jk
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

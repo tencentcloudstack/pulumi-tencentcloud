@@ -2,9 +2,11 @@
 ---
 title: "ApiDoc"
 title_tag: "tencentcloud.ApiGateway.ApiDoc"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.ApiDoc resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a APIGateway ApiDoc"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,74 +18,67 @@ Provides a resource to create a APIGateway ApiDoc
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const myApiDoc = new tencentcloud.apigateway.ApiDoc("myApiDoc", {
+const myApiDoc = new tencentcloud.apigateway.ApiDoc("my_api_doc", {
     apiDocName: "doc_test1",
+    serviceId: "service_test1",
+    environment: "release",
     apiIds: [
         "api-test1",
         "api-test2",
     ],
-    environment: "release",
-    serviceId: "service_test1",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-my_api_doc = tencentcloud.api_gateway.ApiDoc("myApiDoc",
+my_api_doc = tencentcloud.apigateway.ApiDoc("my_api_doc",
     api_doc_name="doc_test1",
+    service_id="service_test1",
+    environment="release",
     api_ids=[
         "api-test1",
         "api-test2",
-    ],
-    environment="release",
-    service_id="service_test1")
+    ])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var myApiDoc = new Tencentcloud.ApiGateway.ApiDoc("myApiDoc", new()
-    {
-        ApiDocName = "doc_test1",
-        ApiIds = new[]
-        {
-            "api-test1",
-            "api-test2",
-        },
-        Environment = "release",
-        ServiceId = "service_test1",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := ApiGateway.NewApiDoc(ctx, "myApiDoc", &ApiGateway.ApiDocArgs{
-			ApiDocName: pulumi.String("doc_test1"),
+		_, err := apigateway.NewApiDoc(ctx, "my_api_doc", &apigateway.ApiDocArgs{
+			ApiDocName:  pulumi.String("doc_test1"),
+			ServiceId:   pulumi.String("service_test1"),
+			Environment: pulumi.String("release"),
 			ApiIds: pulumi.StringArray{
 				pulumi.String("api-test1"),
 				pulumi.String("api-test2"),
 			},
-			Environment: pulumi.String("release"),
-			ServiceId:   pulumi.String("service_test1"),
 		})
 		if err != nil {
 			return err
@@ -92,6 +87,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var myApiDoc = new Tencentcloud.ApiGateway.ApiDoc("my_api_doc", new()
+    {
+        ApiDocName = "doc_test1",
+        ServiceId = "service_test1",
+        Environment = "release",
+        ApiIds = new[]
+        {
+            "api-test1",
+            "api-test2",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -100,8 +127,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.ApiGateway.ApiDoc;
 import com.pulumi.tencentcloud.ApiGateway.ApiDocArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -113,93 +140,149 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var myApiDoc = new ApiDoc("myApiDoc", ApiDocArgs.builder()        
+        var myApiDoc = new ApiDoc("myApiDoc", ApiDocArgs.builder()
             .apiDocName("doc_test1")
+            .serviceId("service_test1")
+            .environment("release")
             .apiIds(            
                 "api-test1",
                 "api-test2")
-            .environment("release")
-            .serviceId("service_test1")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   myApiDoc:
     type: tencentcloud:ApiGateway:ApiDoc
+    name: my_api_doc
     properties:
       apiDocName: doc_test1
+      serviceId: service_test1
+      environment: release
       apiIds:
         - api-test1
         - api-test2
-      environment: release
-      serviceId: service_test1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_apidoc" "my_api_doc" {
+  api_doc_name = "doc_test1"
+  service_id   = "service_test1"
+  environment  = "release"
+  api_ids      = ["api-test1", "api-test2"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateAPIDoc](https://www.tencentcloud.com/search/?wd=CreateAPIDoc&type=document&lang=en)
+  - [DescribeAPIDocDetail](https://www.tencentcloud.com/search/?wd=DescribeAPIDocDetail&type=document&lang=en)
+* Read: [DescribeAPIDocDetail](https://www.tencentcloud.com/search/?wd=DescribeAPIDocDetail&type=document&lang=en)
+* Update:
+  - [DescribeAPIDocDetail](https://www.tencentcloud.com/search/?wd=DescribeAPIDocDetail&type=document&lang=en)
+  - [ModifyAPIDoc](https://www.tencentcloud.com/search/?wd=ModifyAPIDoc&type=document&lang=en)
+* Delete: [DeleteAPIDoc](https://www.tencentcloud.com/search/?wd=DeleteAPIDoc&type=document&lang=en)
 
 
 
 ## Create ApiDoc Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
            <span class="nx">api_doc_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">api_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
            <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApiDoc</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiDoc</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApiDoc</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiDoc</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ApiDoc</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApiDocArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:ApiDoc</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:ApiDoc</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_api_doc&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -220,7 +303,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -337,11 +420,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ApiDoc Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -357,8 +448,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-required"
+    <dd>Api Document name.</dd><dt class="property-required"
             title="Required">
         <span id="apiids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiids_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Ids</a>
@@ -366,8 +456,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-required"
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
             title="Required">
         <span id="environment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_csharp" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -375,8 +464,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-required"
+    <dd>Env name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -384,8 +472,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd></dl>
+    <dd>Service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -399,8 +486,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-required"
+    <dd>Api Document name.</dd><dt class="property-required"
             title="Required">
         <span id="apiids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiids_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Ids</a>
@@ -408,8 +494,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-required"
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
             title="Required">
         <span id="environment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_go" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -417,8 +502,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-required"
+    <dd>Env name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -426,8 +510,45 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd></dl>
+    <dd>Service name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="api_doc_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Api Document name.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_ids_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
+            title="Required">
+        <span id="environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Env name.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -441,8 +562,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-required"
+    <dd>Api Document name.</dd><dt class="property-required"
             title="Required">
         <span id="apiids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiids_java" style="color: inherit; text-decoration: inherit;">api<wbr>Ids</a>
@@ -450,8 +570,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-required"
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
             title="Required">
         <span id="environment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_java" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -459,8 +578,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-required"
+    <dd>Env name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -468,8 +586,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd></dl>
+    <dd>Service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +600,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-required"
+    <dd>Api Document name.</dd><dt class="property-required"
             title="Required">
         <span id="apiids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiids_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Ids</a>
@@ -492,8 +608,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-required"
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
             title="Required">
         <span id="environment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_nodejs" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -501,8 +616,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-required"
+    <dd>Env name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -510,8 +624,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd></dl>
+    <dd>Service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +638,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-required"
+    <dd>Api Document name.</dd><dt class="property-required"
             title="Required">
         <span id="api_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_ids_python" style="color: inherit; text-decoration: inherit;">api_<wbr>ids</a>
@@ -534,8 +646,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-required"
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
             title="Required">
         <span id="environment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_python" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -543,8 +654,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-required"
+    <dd>Env name.</dd><dt class="property-required"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -552,8 +662,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd></dl>
+    <dd>Service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -567,8 +676,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-required"
+    <dd>Api Document name.</dd><dt class="property-required"
             title="Required">
         <span id="apiids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiids_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Ids</a>
@@ -576,8 +684,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-required"
+    <dd>List of APIs for generating documents.</dd><dt class="property-required"
             title="Required">
         <span id="environment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_yaml" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -585,8 +692,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-required"
+    <dd>Env name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -594,8 +700,7 @@ The ApiDoc resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd></dl>
+    <dd>Service name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -616,8 +721,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-"
+    <dd>Api Document count.</dd><dt class="property-"
             title="">
         <span id="apidocid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Id</a>
@@ -625,8 +729,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-"
+    <dd>Api Document ID.</dd><dt class="property-"
             title="">
         <span id="apidocstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocstatus_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Status</a>
@@ -634,8 +737,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-"
+    <dd>API Document Build Status.</dd><dt class="property-"
             title="">
         <span id="apidocuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocuri_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Uri</a>
@@ -643,8 +745,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-"
+    <dd>API Document Access URI.</dd><dt class="property-"
             title="">
         <span id="apinames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apinames_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Names</a>
@@ -652,8 +753,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-"
+    <dd>List of names for generating documents.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -661,8 +761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="releasecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasecount_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Count</a>
@@ -670,8 +769,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-"
+    <dd>Number of API document releases.</dd><dt class="property-"
             title="">
         <span id="servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -679,8 +777,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-"
+    <dd>API Document service name.</dd><dt class="property-"
             title="">
         <span id="sharepassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharepassword_csharp" style="color: inherit; text-decoration: inherit;">Share<wbr>Password</a>
@@ -688,8 +785,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-"
+    <dd>API Document Sharing Password.</dd><dt class="property-"
             title="">
         <span id="updatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -697,8 +793,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-"
+    <dd>API Document update time.</dd><dt class="property-"
             title="">
         <span id="viewcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewcount_csharp" style="color: inherit; text-decoration: inherit;">View<wbr>Count</a>
@@ -706,8 +801,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -721,8 +815,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-"
+    <dd>Api Document count.</dd><dt class="property-"
             title="">
         <span id="apidocid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Id</a>
@@ -730,8 +823,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-"
+    <dd>Api Document ID.</dd><dt class="property-"
             title="">
         <span id="apidocstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocstatus_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Status</a>
@@ -739,8 +831,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-"
+    <dd>API Document Build Status.</dd><dt class="property-"
             title="">
         <span id="apidocuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocuri_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Uri</a>
@@ -748,8 +839,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-"
+    <dd>API Document Access URI.</dd><dt class="property-"
             title="">
         <span id="apinames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apinames_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Names</a>
@@ -757,8 +847,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-"
+    <dd>List of names for generating documents.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -766,8 +855,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="releasecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasecount_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Count</a>
@@ -775,8 +863,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-"
+    <dd>Number of API document releases.</dd><dt class="property-"
             title="">
         <span id="servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -784,8 +871,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-"
+    <dd>API Document service name.</dd><dt class="property-"
             title="">
         <span id="sharepassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharepassword_go" style="color: inherit; text-decoration: inherit;">Share<wbr>Password</a>
@@ -793,8 +879,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-"
+    <dd>API Document Sharing Password.</dd><dt class="property-"
             title="">
         <span id="updatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -802,8 +887,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-"
+    <dd>API Document update time.</dd><dt class="property-"
             title="">
         <span id="viewcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewcount_go" style="color: inherit; text-decoration: inherit;">View<wbr>Count</a>
@@ -811,8 +895,101 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="api_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_count_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Api Document count.</dd><dt class="property-"
+            title="">
+        <span id="api_doc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Api Document ID.</dd><dt class="property-"
+            title="">
+        <span id="api_doc_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_status_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document Build Status.</dd><dt class="property-"
+            title="">
+        <span id="api_doc_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_uri_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document Access URI.</dd><dt class="property-"
+            title="">
+        <span id="api_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_names_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of names for generating documents.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="release_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_count_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of API document releases.</dd><dt class="property-"
+            title="">
+        <span id="service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document service name.</dd><dt class="property-"
+            title="">
+        <span id="share_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#share_password_hcl" style="color: inherit; text-decoration: inherit;">share_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document Sharing Password.</dd><dt class="property-"
+            title="">
+        <span id="updated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document update time.</dd><dt class="property-"
+            title="">
+        <span id="view_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_count_hcl" style="color: inherit; text-decoration: inherit;">view_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -826,8 +1003,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-"
+    <dd>Api Document count.</dd><dt class="property-"
             title="">
         <span id="apidocid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Id</a>
@@ -835,8 +1011,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-"
+    <dd>Api Document ID.</dd><dt class="property-"
             title="">
         <span id="apidocstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocstatus_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Status</a>
@@ -844,8 +1019,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-"
+    <dd>API Document Build Status.</dd><dt class="property-"
             title="">
         <span id="apidocuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocuri_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Uri</a>
@@ -853,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-"
+    <dd>API Document Access URI.</dd><dt class="property-"
             title="">
         <span id="apinames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apinames_java" style="color: inherit; text-decoration: inherit;">api<wbr>Names</a>
@@ -862,8 +1035,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-"
+    <dd>List of names for generating documents.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -871,8 +1043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="releasecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasecount_java" style="color: inherit; text-decoration: inherit;">release<wbr>Count</a>
@@ -880,8 +1051,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-"
+    <dd>Number of API document releases.</dd><dt class="property-"
             title="">
         <span id="servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -889,8 +1059,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-"
+    <dd>API Document service name.</dd><dt class="property-"
             title="">
         <span id="sharepassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharepassword_java" style="color: inherit; text-decoration: inherit;">share<wbr>Password</a>
@@ -898,8 +1067,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-"
+    <dd>API Document Sharing Password.</dd><dt class="property-"
             title="">
         <span id="updatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_java" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -907,8 +1075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-"
+    <dd>API Document update time.</dd><dt class="property-"
             title="">
         <span id="viewcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewcount_java" style="color: inherit; text-decoration: inherit;">view<wbr>Count</a>
@@ -916,8 +1083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -931,8 +1097,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-"
+    <dd>Api Document count.</dd><dt class="property-"
             title="">
         <span id="apidocid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Id</a>
@@ -940,8 +1105,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-"
+    <dd>Api Document ID.</dd><dt class="property-"
             title="">
         <span id="apidocstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocstatus_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Status</a>
@@ -949,8 +1113,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-"
+    <dd>API Document Build Status.</dd><dt class="property-"
             title="">
         <span id="apidocuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocuri_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Uri</a>
@@ -958,8 +1121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-"
+    <dd>API Document Access URI.</dd><dt class="property-"
             title="">
         <span id="apinames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apinames_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Names</a>
@@ -967,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-"
+    <dd>List of names for generating documents.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -976,8 +1137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="releasecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasecount_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Count</a>
@@ -985,8 +1145,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-"
+    <dd>Number of API document releases.</dd><dt class="property-"
             title="">
         <span id="servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -994,8 +1153,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-"
+    <dd>API Document service name.</dd><dt class="property-"
             title="">
         <span id="sharepassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharepassword_nodejs" style="color: inherit; text-decoration: inherit;">share<wbr>Password</a>
@@ -1003,8 +1161,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-"
+    <dd>API Document Sharing Password.</dd><dt class="property-"
             title="">
         <span id="updatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1012,8 +1169,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-"
+    <dd>API Document update time.</dd><dt class="property-"
             title="">
         <span id="viewcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewcount_nodejs" style="color: inherit; text-decoration: inherit;">view<wbr>Count</a>
@@ -1021,8 +1177,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1036,8 +1191,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-"
+    <dd>Api Document count.</dd><dt class="property-"
             title="">
         <span id="api_doc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>id</a>
@@ -1045,8 +1199,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-"
+    <dd>Api Document ID.</dd><dt class="property-"
             title="">
         <span id="api_doc_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_status_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>status</a>
@@ -1054,8 +1207,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-"
+    <dd>API Document Build Status.</dd><dt class="property-"
             title="">
         <span id="api_doc_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_doc_uri_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>uri</a>
@@ -1063,8 +1215,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-"
+    <dd>API Document Access URI.</dd><dt class="property-"
             title="">
         <span id="api_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_names_python" style="color: inherit; text-decoration: inherit;">api_<wbr>names</a>
@@ -1072,8 +1223,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-"
+    <dd>List of names for generating documents.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1081,8 +1231,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="release_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_count_python" style="color: inherit; text-decoration: inherit;">release_<wbr>count</a>
@@ -1090,8 +1239,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-"
+    <dd>Number of API document releases.</dd><dt class="property-"
             title="">
         <span id="service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -1099,8 +1247,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-"
+    <dd>API Document service name.</dd><dt class="property-"
             title="">
         <span id="share_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#share_password_python" style="color: inherit; text-decoration: inherit;">share_<wbr>password</a>
@@ -1108,8 +1255,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-"
+    <dd>API Document Sharing Password.</dd><dt class="property-"
             title="">
         <span id="updated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
@@ -1117,8 +1263,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-"
+    <dd>API Document update time.</dd><dt class="property-"
             title="">
         <span id="view_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_count_python" style="color: inherit; text-decoration: inherit;">view_<wbr>count</a>
@@ -1126,8 +1271,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1141,8 +1285,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-"
+    <dd>Api Document count.</dd><dt class="property-"
             title="">
         <span id="apidocid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Id</a>
@@ -1150,8 +1293,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-"
+    <dd>Api Document ID.</dd><dt class="property-"
             title="">
         <span id="apidocstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocstatus_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Status</a>
@@ -1159,8 +1301,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-"
+    <dd>API Document Build Status.</dd><dt class="property-"
             title="">
         <span id="apidocuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apidocuri_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Uri</a>
@@ -1168,8 +1309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-"
+    <dd>API Document Access URI.</dd><dt class="property-"
             title="">
         <span id="apinames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apinames_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Names</a>
@@ -1177,8 +1317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-"
+    <dd>List of names for generating documents.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1186,8 +1325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="releasecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releasecount_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Count</a>
@@ -1195,8 +1333,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-"
+    <dd>Number of API document releases.</dd><dt class="property-"
             title="">
         <span id="servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1204,8 +1341,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-"
+    <dd>API Document service name.</dd><dt class="property-"
             title="">
         <span id="sharepassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharepassword_yaml" style="color: inherit; text-decoration: inherit;">share<wbr>Password</a>
@@ -1213,8 +1349,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-"
+    <dd>API Document Sharing Password.</dd><dt class="property-"
             title="">
         <span id="updatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1222,8 +1357,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-"
+    <dd>API Document update time.</dd><dt class="property-"
             title="">
         <span id="viewcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewcount_yaml" style="color: inherit; text-decoration: inherit;">view<wbr>Count</a>
@@ -1231,8 +1365,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1242,18 +1375,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ApiDoc resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApiDocState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ApiDoc</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApiDocState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ApiDoc</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1271,104 +1404,143 @@ Get an existing ApiDoc resource's state with the given name, ID, and optional ex
         <span class="nx">share_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">updated_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">view_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> ApiDoc</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApiDoc<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApiDocState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiDoc</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApiDoc<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApiDocState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApiDoc</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ApiDoc</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiDocState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ApiDoc</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiDocState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ApiDoc</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiDocState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ApiDoc</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApiDocState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingApiDoc</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:ApiDoc</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_api_doc</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiDocState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiDocState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1376,28 +1548,31 @@ Get an existing ApiDoc resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiDocState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1405,28 +1580,31 @@ Get an existing ApiDoc resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApiDocState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1446,8 +1624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Id</a>
@@ -1455,8 +1632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Name</a>
@@ -1464,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocstatus_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Status</a>
@@ -1473,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Build Status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocuri_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Uri</a>
@@ -1482,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Access URI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apiids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiids_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Ids</a>
@@ -1491,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apinames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apinames_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Names</a>
@@ -1500,8 +1672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_csharp" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -1509,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-optional"
+    <dd>Env name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releasecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasecount_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Count</a>
@@ -1518,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-optional"
+    <dd>Number of API document releases.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1527,8 +1696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-optional"
+    <dd>Service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -1536,8 +1704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-optional"
+    <dd>API Document service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sharepassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sharepassword_csharp" style="color: inherit; text-decoration: inherit;">Share<wbr>Password</a>
@@ -1545,8 +1712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1554,8 +1720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-optional"
+    <dd>API Document update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viewcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viewcount_csharp" style="color: inherit; text-decoration: inherit;">View<wbr>Count</a>
@@ -1563,8 +1728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Id</a>
@@ -1587,8 +1750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Name</a>
@@ -1596,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocstatus_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Status</a>
@@ -1605,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Build Status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocuri_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Doc<wbr>Uri</a>
@@ -1614,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Access URI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apiids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiids_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Ids</a>
@@ -1623,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apinames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apinames_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Names</a>
@@ -1632,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_go" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -1641,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-optional"
+    <dd>Env name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releasecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasecount_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Count</a>
@@ -1650,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-optional"
+    <dd>Number of API document releases.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1659,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-optional"
+    <dd>Service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -1668,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-optional"
+    <dd>API Document service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sharepassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sharepassword_go" style="color: inherit; text-decoration: inherit;">Share<wbr>Password</a>
@@ -1677,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1686,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-optional"
+    <dd>API Document update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viewcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viewcount_go" style="color: inherit; text-decoration: inherit;">View<wbr>Count</a>
@@ -1695,8 +1846,125 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_count_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Api Document count.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_doc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Api Document ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_doc_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Api Document name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_doc_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_status_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document Build Status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_doc_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_uri_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document Access URI.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_ids_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_names_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Env name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_release_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_count_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of API document releases.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document service name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_share_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_share_password_hcl" style="color: inherit; text-decoration: inherit;">share_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_updated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updated_time_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API Document update time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_view_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_view_count_hcl" style="color: inherit; text-decoration: inherit;">view_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1710,8 +1978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Id</a>
@@ -1719,8 +1986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Name</a>
@@ -1728,8 +1994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocstatus_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Status</a>
@@ -1737,8 +2002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Build Status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocuri_java" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Uri</a>
@@ -1746,8 +2010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Access URI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apiids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiids_java" style="color: inherit; text-decoration: inherit;">api<wbr>Ids</a>
@@ -1755,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apinames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apinames_java" style="color: inherit; text-decoration: inherit;">api<wbr>Names</a>
@@ -1764,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_java" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1773,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-optional"
+    <dd>Env name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releasecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasecount_java" style="color: inherit; text-decoration: inherit;">release<wbr>Count</a>
@@ -1782,8 +2042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-optional"
+    <dd>Number of API document releases.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1791,8 +2050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-optional"
+    <dd>Service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1800,8 +2058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-optional"
+    <dd>API Document service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sharepassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sharepassword_java" style="color: inherit; text-decoration: inherit;">share<wbr>Password</a>
@@ -1809,8 +2066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_java" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1818,8 +2074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-optional"
+    <dd>API Document update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viewcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viewcount_java" style="color: inherit; text-decoration: inherit;">view<wbr>Count</a>
@@ -1827,8 +2082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1842,8 +2096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Id</a>
@@ -1851,8 +2104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Name</a>
@@ -1860,8 +2112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocstatus_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Status</a>
@@ -1869,8 +2120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Build Status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocuri_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Uri</a>
@@ -1878,8 +2128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Access URI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apiids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiids_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Ids</a>
@@ -1887,8 +2136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apinames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apinames_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Names</a>
@@ -1896,8 +2144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_nodejs" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1905,8 +2152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-optional"
+    <dd>Env name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releasecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasecount_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Count</a>
@@ -1914,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-optional"
+    <dd>Number of API document releases.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1923,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-optional"
+    <dd>Service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1932,8 +2176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-optional"
+    <dd>API Document service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sharepassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sharepassword_nodejs" style="color: inherit; text-decoration: inherit;">share<wbr>Password</a>
@@ -1941,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1950,8 +2192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-optional"
+    <dd>API Document update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viewcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viewcount_nodejs" style="color: inherit; text-decoration: inherit;">view<wbr>Count</a>
@@ -1959,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1974,8 +2214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_api_doc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>id</a>
@@ -1983,8 +2222,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_api_doc_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>name</a>
@@ -1992,8 +2230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_api_doc_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_status_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>status</a>
@@ -2001,8 +2238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Build Status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_api_doc_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_doc_uri_python" style="color: inherit; text-decoration: inherit;">api_<wbr>doc_<wbr>uri</a>
@@ -2010,8 +2246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Access URI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_api_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_ids_python" style="color: inherit; text-decoration: inherit;">api_<wbr>ids</a>
@@ -2019,8 +2254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_api_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_names_python" style="color: inherit; text-decoration: inherit;">api_<wbr>names</a>
@@ -2028,8 +2262,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_python" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -2037,8 +2270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-optional"
+    <dd>Env name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_release_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_count_python" style="color: inherit; text-decoration: inherit;">release_<wbr>count</a>
@@ -2046,8 +2278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-optional"
+    <dd>Number of API document releases.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -2055,8 +2286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-optional"
+    <dd>Service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -2064,8 +2294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-optional"
+    <dd>API Document service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_share_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_share_password_python" style="color: inherit; text-decoration: inherit;">share_<wbr>password</a>
@@ -2073,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updated_time_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
@@ -2082,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-optional"
+    <dd>API Document update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_view_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_view_count_python" style="color: inherit; text-decoration: inherit;">view_<wbr>count</a>
@@ -2091,8 +2318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2106,8 +2332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Api Document count.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Id</a>
@@ -2115,8 +2340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document ID.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Name</a>
@@ -2124,8 +2348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Api Document name.</p>
-</dd><dt class="property-optional"
+    <dd>Api Document name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocstatus_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Status</a>
@@ -2133,8 +2356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Build Status.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Build Status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apidocuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apidocuri_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Doc<wbr>Uri</a>
@@ -2142,8 +2364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Access URI.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Access URI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apiids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiids_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Ids</a>
@@ -2151,8 +2372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of APIs for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of APIs for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apinames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apinames_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Names</a>
@@ -2160,8 +2380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of names for generating documents.</p>
-</dd><dt class="property-optional"
+    <dd>List of names for generating documents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_yaml" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -2169,8 +2388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Env name.</p>
-</dd><dt class="property-optional"
+    <dd>Env name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releasecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releasecount_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Count</a>
@@ -2178,8 +2396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of API document releases.</p>
-</dd><dt class="property-optional"
+    <dd>Number of API document releases.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -2187,8 +2404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-optional"
+    <dd>Service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -2196,8 +2412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document service name.</p>
-</dd><dt class="property-optional"
+    <dd>API Document service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sharepassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sharepassword_yaml" style="color: inherit; text-decoration: inherit;">share<wbr>Password</a>
@@ -2205,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document Sharing Password.</p>
-</dd><dt class="property-optional"
+    <dd>API Document Sharing Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -2214,8 +2428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API Document update time.</p>
-</dd><dt class="property-optional"
+    <dd>API Document update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viewcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viewcount_yaml" style="color: inherit; text-decoration: inherit;">view<wbr>Count</a>
@@ -2223,8 +2436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API Document Viewing Times.</p>
-</dd></dl>
+    <dd>API Document Viewing Times.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2243,7 +2455,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

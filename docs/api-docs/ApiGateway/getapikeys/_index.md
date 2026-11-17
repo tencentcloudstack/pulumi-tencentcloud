@@ -2,9 +2,11 @@
 ---
 title: "getApiKeys"
 title_tag: "tencentcloud.ApiGateway.getApiKeys"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getApiKeys function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query API gateway access keys."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,39 +18,84 @@ Use this data source to query API gateway access keys.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const test = new tencentcloud.apigateway.ApiKey("test", {
     secretName: "my_api_key",
     status: "on",
 });
-const name = tencentcloud.ApiGateway.getApiKeysOutput({
+const name = tencentcloud.apigateway.getApiKeysOutput({
     secretName: test.secretName,
 });
-const id = tencentcloud.ApiGateway.getApiKeysOutput({
+const id = tencentcloud.apigateway.getApiKeysOutput({
     apiKeyId: test.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-test = tencentcloud.api_gateway.ApiKey("test",
+test = tencentcloud.apigateway.ApiKey("test",
     secret_name="my_api_key",
     status="on")
-name = tencentcloud.ApiGateway.get_api_keys_output(secret_name=test.secret_name)
-id = tencentcloud.ApiGateway.get_api_keys_output(api_key_id=test.id)
+name = tencentcloud.apigateway.get_api_keys_output(secret_name=test.secret_name)
+id = tencentcloud.apigateway.get_api_keys_output(api_key_id=test.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		test, err := apigateway.NewApiKey(ctx, "test", &apigateway.ApiKeyArgs{
+			SecretName: pulumi.String("my_api_key"),
+			Status:     pulumi.String("on"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = apigateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
+			SecretName: test.SecretName,
+		}, nil)
+		_ = apigateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
+			ApiKeyId: test.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -71,33 +118,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		test, err := ApiGateway.NewApiKey(ctx, "test", &ApiGateway.ApiKeyArgs{
-			SecretName: pulumi.String("my_api_key"),
-			Status:     pulumi.String("on"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = ApiGateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
-			SecretName: test.SecretName,
-		}, nil)
-		_ = ApiGateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
-			ApiKeyId: test.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -108,8 +133,8 @@ import com.pulumi.tencentcloud.ApiGateway.ApiKey;
 import com.pulumi.tencentcloud.ApiGateway.ApiKeyArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetApiKeysArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -121,7 +146,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var test = new ApiKey("test", ApiKeyArgs.builder()        
+        var test = new ApiKey("test", ApiKeyArgs.builder()
             .secretName("my_api_key")
             .status("on")
             .build());
@@ -137,6 +162,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   test:
@@ -147,17 +177,50 @@ resources:
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getApiKeys
-      Arguments:
+      function: tencentcloud:ApiGateway:getApiKeys
+      arguments:
         secretName: ${test.secretName}
   id:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getApiKeys
-      Arguments:
+      function: tencentcloud:ApiGateway:getApiKeys
+      arguments:
         apiKeyId: ${test.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getapikeys" "name" {
+  secret_name = tencentcloud_apigateway_apikey.test.secret_name
+}
+data "tencentcloud_apigateway_getapikeys" "id" {
+  api_key_id = tencentcloud_apigateway_apikey.test.id
+}
+
+resource "tencentcloud_apigateway_apikey" "test" {
+  secret_name = "my_api_key"
+  status      = "on"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
 
 
 
@@ -169,7 +232,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -177,9 +240,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getApiKeys<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApiKeysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>></span
+><span class="k">function </span>getApiKeys<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApiKeysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>></span
 ><span class="k">
-function </span>getApiKeysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApiKeysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>></span
+function </span>getApiKeysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApiKeysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -193,10 +256,10 @@ function </span>getApiKeysOutput<span class="p">(</span><span class="nx">args</s
                  <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetApiKeysResult</span
 ><span class="k">
-def </span>get_api_keys_output<span class="p">(</span><span class="nx">api_key_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetApiKeysResult]</span
+def </span>get_api_keys_output<span class="p">(</span><span class="nx">api_key_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetApiKeysResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -221,7 +284,8 @@ func </span>GetApiKeysOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetApiKeys </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetApiKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApiKeysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApiKeysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApiKeysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -230,7 +294,8 @@ func </span>GetApiKeysOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> </span>getApiKeys<span class="p">(</span><span class="nx">GetApiKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> </span>getApiKeys<span class="p">(</span><span class="nx">GetApiKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetApiKeysResult</a></span>> </span>getApiKeys<span class="p">(</span><span class="nx">GetApiKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -242,6 +307,15 @@ func </span>GetApiKeysOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getApiKeys:getApiKeys
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_api_keys&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -260,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -269,8 +342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -278,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd></dl>
+    <dd>Custom key name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -293,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -302,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -311,8 +380,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd></dl>
+    <dd>Custom key name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="api_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_key_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom key name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -326,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -335,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -344,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd></dl>
+    <dd>Custom key name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -359,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -368,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -377,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd></dl>
+    <dd>Custom key name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -392,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -401,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -410,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd></dl>
+    <dd>Custom key name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -425,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-optional"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -434,8 +522,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -443,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom key name.</p>
-</dd></dl>
+    <dd>Custom key name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -476,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapikeyslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Api<wbr>Keys<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of API keys.</p>
-</dd><dt class="property-"
+    <dd>A list of API keys.</dd><dt class="property-"
             title="">
         <span id="apikeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Key<wbr>Id</a>
@@ -485,8 +569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API key ID.</p>
-</dd><dt class="property-"
+    <dd>API key ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -516,8 +599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -525,8 +607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapikeyslist">[]Get<wbr>Api<wbr>Keys<wbr>List</a></span>
     </dt>
-    <dd><p>A list of API keys.</p>
-</dd><dt class="property-"
+    <dd>A list of API keys.</dd><dt class="property-"
             title="">
         <span id="apikeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Key<wbr>Id</a>
@@ -534,8 +615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API key ID.</p>
-</dd><dt class="property-"
+    <dd>API key ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -556,6 +636,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapikeyslist">list(object)</a></span>
+    </dt>
+    <dd>A list of API keys.</dd><dt class="property-"
+            title="">
+        <span id="api_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_key_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API key ID.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -565,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -574,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapikeyslist">List&lt;Get<wbr>Api<wbr>Keys<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of API keys.</p>
-</dd><dt class="property-"
+    <dd>A list of API keys.</dd><dt class="property-"
             title="">
         <span id="apikeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Key<wbr>Id</a>
@@ -583,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API key ID.</p>
-</dd><dt class="property-"
+    <dd>API key ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -614,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -623,8 +745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapikeyslist">Get<wbr>Api<wbr>Keys<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of API keys.</p>
-</dd><dt class="property-"
+    <dd>A list of API keys.</dd><dt class="property-"
             title="">
         <span id="apikeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Key<wbr>Id</a>
@@ -632,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API key ID.</p>
-</dd><dt class="property-"
+    <dd>API key ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -663,17 +783,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapikeyslist">Get<wbr>Api<wbr>Keys<wbr>List]</a></span>
+        <span class="property-type"><a href="#getapikeyslist">Sequence[Get<wbr>Api<wbr>Keys<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of API keys.</p>
-</dd><dt class="property-"
+    <dd>A list of API keys.</dd><dt class="property-"
             title="">
         <span id="api_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_key_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>key_<wbr>id</a>
@@ -681,8 +799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API key ID.</p>
-</dd><dt class="property-"
+    <dd>API key ID.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -712,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -721,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapikeyslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of API keys.</p>
-</dd><dt class="property-"
+    <dd>A list of API keys.</dd><dt class="property-"
             title="">
         <span id="apikeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Key<wbr>Id</a>
@@ -730,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API key ID.</p>
-</dd><dt class="property-"
+    <dd>API key ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -771,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key.</p>
-</dd><dt class="property-required"
+    <dd>Created API key.</dd><dt class="property-required"
             title="Required">
         <span id="apikeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Key<wbr>Id</a>
@@ -780,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-required"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -789,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -798,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -807,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -822,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key.</p>
-</dd><dt class="property-required"
+    <dd>Created API key.</dd><dt class="property-required"
             title="Required">
         <span id="apikeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Key<wbr>Id</a>
@@ -831,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-required"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -840,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -849,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -858,8 +963,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_key_secret_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_secret_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>secret</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Created API key.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_key_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -873,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API key.</p>
-</dd><dt class="property-required"
+    <dd>Created API key.</dd><dt class="property-required"
             title="Required">
         <span id="apikeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Key<wbr>Id</a>
@@ -882,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-required"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -891,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -900,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -909,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status. Values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -924,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key.</p>
-</dd><dt class="property-required"
+    <dd>Created API key.</dd><dt class="property-required"
             title="Required">
         <span id="apikeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Key<wbr>Id</a>
@@ -933,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-required"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -942,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -951,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -960,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status. Values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -975,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Created API key.</p>
-</dd><dt class="property-required"
+    <dd>Created API key.</dd><dt class="property-required"
             title="Required">
         <span id="api_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_key_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>key_<wbr>id</a>
@@ -984,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-required"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -993,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1002,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1011,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key status. Values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1026,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API key.</p>
-</dd><dt class="property-required"
+    <dd>Created API key.</dd><dt class="property-required"
             title="Required">
         <span id="apikeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apikeyid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Key<wbr>Id</a>
@@ -1035,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created API key ID, this field is exactly the same as ID.</p>
-</dd><dt class="property-required"
+    <dd>Created API key ID, this field is exactly the same as ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1044,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1053,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1062,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status. Values: <code>on</code>, <code>off</code>.</p>
-</dd></dl>
+    <dd>Key status. Values: <code>on</code>, <code>off</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,7 +1208,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

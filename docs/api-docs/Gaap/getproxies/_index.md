@@ -2,9 +2,11 @@
 ---
 title: "getProxies"
 title_tag: "tencentcloud.Gaap.getProxies"
-meta_desc: "Documentation for the tencentcloud.Gaap.getProxies function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query gaap proxies."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,102 @@ Use this data source to query gaap proxies.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const fooProxy = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooProxies = tencentcloud.Gaap.getProxiesOutput({
+const foo = tencentcloud.gaap.getProxiesOutput({
     ids: [fooProxy.id],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo_proxy = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_proxies = tencentcloud.Gaap.get_proxies_output(ids=[foo_proxy.id])
+foo = tencentcloud.gaap.get_proxies_output(ids=[foo_proxy.id])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooProxy, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetProxiesOutput(ctx, gaap.GetProxiesOutputArgs{
+			Ids: pulumi.StringArray{
+				fooProxy.ID().ToIDOutput().ToStringOutput(),
+			},
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
+    var fooProxy = new Tencentcloud.Gaap.Proxy("foo", new()
     {
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
         AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
     });
 
-    var fooProxies = Tencentcloud.Gaap.GetProxies.Invoke(new()
+    var foo = Tencentcloud.Gaap.GetProxies.Invoke(new()
     {
         Ids = new[]
         {
@@ -71,34 +123,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			AccessRegion:     pulumi.String("SouthChina"),
-			RealserverRegion: pulumi.String("NorthChina"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Gaap.GetProxiesOutput(ctx, gaap.GetProxiesOutputArgs{
-			Ids: pulumi.StringArray{
-				fooProxy.ID(),
-			},
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -109,8 +138,8 @@ import com.pulumi.tencentcloud.Gaap.Proxy;
 import com.pulumi.tencentcloud.Gaap.ProxyArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetProxiesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -122,39 +151,80 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        final var fooProxies = GaapFunctions.getProxies(GetProxiesArgs.builder()
+        final var foo = GaapFunctions.getProxies(GetProxiesArgs.builder()
             .ids(fooProxy.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooProxy:
     type: tencentcloud:Gaap:Proxy
+    name: foo
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
 variables:
-  fooProxies:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getProxies
-      Arguments:
+      function: tencentcloud:Gaap:getProxies
+      arguments:
         ids:
           - ${fooProxy.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getproxies" "foo" {
+  ids = [tencentcloud_gaap_proxy.foo.id]
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
 
 
 
@@ -166,7 +236,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -174,9 +244,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProxies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>></span
+><span class="k">function </span>getProxies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>></span
 ><span class="k">
-function </span>getProxiesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>></span
+function </span>getProxiesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,16 +260,16 @@ function </span>getProxiesOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">realserver_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProxiesResult</span
 ><span class="k">
-def </span>get_proxies_output<span class="p">(</span><span class="nx">access_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">realserver_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxiesResult]</span
+def </span>get_proxies_output<span class="p">(</span><span class="nx">access_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">realserver_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxiesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,7 +294,8 @@ func </span>GetProxiesOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProxies </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProxiesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxiesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxiesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxiesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -233,7 +304,8 @@ func </span>GetProxiesOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> </span>getProxies<span class="p">(</span><span class="nx">GetProxiesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> </span>getProxies<span class="p">(</span><span class="nx">GetProxiesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxiesResult</a></span>> </span>getProxies<span class="p">(</span><span class="nx">GetProxiesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -245,6 +317,15 @@ func </span>GetProxiesOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getProxies:getProxies
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_proxies&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -263,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_csharp" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -272,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried. Conflict with <code>project_id</code>, <code>access_region</code> and <code>realserver_region</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -281,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -290,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -299,17 +376,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -323,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_go" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -332,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried. Conflict with <code>project_id</code>, <code>access_region</code> and <code>realserver_region</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -341,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -350,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -359,17 +430,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_hcl" style="color: inherit; text-decoration: inherit;">ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="realserver_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -383,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_java" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -392,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried. Conflict with <code>project_id</code>, <code>access_region</code> and <code>realserver_region</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -401,8 +522,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -410,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +538,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_nodejs" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -452,8 +568,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried. Conflict with <code>project_id</code>, <code>access_region</code> and <code>realserver_region</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -461,8 +576,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -470,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -479,17 +592,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -503,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_python" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -512,8 +622,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried. Conflict with <code>project_id</code>, <code>access_region</code> and <code>realserver_region</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -521,8 +630,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserver_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
@@ -530,8 +638,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -539,17 +646,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -563,8 +668,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_yaml" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -572,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried. Conflict with <code>project_id</code>, <code>access_region</code> and <code>realserver_region</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried. Conflict with <code>projectId</code>, <code>accessRegion</code> and <code>realserverRegion</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -581,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -590,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -599,17 +700,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -632,8 +731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesproxy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Proxies<wbr>Proxy&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP proxy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -641,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accessregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessregion_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Region</a>
@@ -650,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="ids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_csharp" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -667,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, '0' means is default project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
             title="">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -676,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -691,10 +785,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -708,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxies_go" style="color: inherit; text-decoration: inherit;">Proxies</a>
@@ -717,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesproxy">[]Get<wbr>Proxies<wbr>Proxy</a></span>
     </dt>
-    <dd><p>An information list of GAAP proxy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accessregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessregion_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Region</a>
@@ -726,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="ids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_go" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -743,8 +833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, '0' means is default project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
             title="">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -752,8 +841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -767,10 +855,79 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="proxies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxies_hcl" style="color: inherit; text-decoration: inherit;">proxies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxiesproxy">list(object)</a></span>
+    </dt>
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_hcl" style="color: inherit; text-decoration: inherit;">ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
+            title="">
+        <span id="realserver_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -784,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxies_java" style="color: inherit; text-decoration: inherit;">proxies</a>
@@ -793,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesproxy">List&lt;Get<wbr>Proxies<wbr>Proxy&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP proxy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accessregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessregion_java" style="color: inherit; text-decoration: inherit;">access<wbr>Region</a>
@@ -802,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="ids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_java" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -819,8 +973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, '0' means is default project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
             title="">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -828,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -843,10 +995,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -860,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxies_nodejs" style="color: inherit; text-decoration: inherit;">proxies</a>
@@ -869,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesproxy">Get<wbr>Proxies<wbr>Proxy[]</a></span>
     </dt>
-    <dd><p>An information list of GAAP proxy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accessregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessregion_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Region</a>
@@ -878,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="ids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_nodejs" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -895,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, '0' means is default project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
             title="">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -904,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -919,10 +1065,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -936,17 +1081,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxies_python" style="color: inherit; text-decoration: inherit;">proxies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxiesproxy">Get<wbr>Proxies<wbr>Proxy]</a></span>
+        <span class="property-type"><a href="#getproxiesproxy">Sequence[Get<wbr>Proxies<wbr>Proxy]</a></span>
     </dt>
-    <dd><p>An information list of GAAP proxy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="access_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_python" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
@@ -954,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_python" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -971,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, '0' means is default project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
             title="">
         <span id="realserver_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
@@ -980,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -995,10 +1135,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1012,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxies_yaml" style="color: inherit; text-decoration: inherit;">proxies</a>
@@ -1021,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesproxy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP proxy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP proxy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accessregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessregion_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Region</a>
@@ -1030,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access region of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="ids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_yaml" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -1047,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, '0' means is default project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP proxy, '0' means is default project.</dd><dt class="property-"
             title="">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -1056,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Region of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1071,10 +1205,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1098,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1107,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_csharp" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -1116,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k.</p>
-</dd><dt class="property-required"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1125,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1134,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="forwardip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Ip</a>
@@ -1143,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1152,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1161,8 +1287,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautoscaleproxy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscaleproxy_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Scale<wbr>Proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1170,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1179,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policy ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1188,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -1197,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scalable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_csharp" style="color: inherit; text-decoration: inherit;">Scalable</a>
@@ -1206,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1215,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="supportprotocols_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Protocols</a>
@@ -1224,17 +1351,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1242,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Version of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1257,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1266,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_go" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -1275,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k.</p>
-</dd><dt class="property-required"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1284,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1293,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="forwardip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Ip</a>
@@ -1302,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1311,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1320,8 +1437,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautoscaleproxy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscaleproxy_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Scale<wbr>Proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1329,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1338,8 +1461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policy ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1347,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -1356,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scalable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_go" style="color: inherit; text-decoration: inherit;">Scalable</a>
@@ -1365,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1374,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="supportprotocols_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Protocols</a>
@@ -1383,17 +1501,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1401,8 +1517,157 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Version of the GAAP proxy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
+            title="Required">
+        <span id="concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_hcl" style="color: inherit; text-decoration: inherit;">concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_ip_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_auto_scale_proxy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_scale_proxy_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>scale_<wbr>proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="realserver_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="scalable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_hcl" style="color: inherit; text-decoration: inherit;">scalable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_protocols_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1416,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1425,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_java" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1434,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k.</p>
-</dd><dt class="property-required"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1443,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1452,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="forwardip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1461,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1470,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1479,8 +1737,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautoscaleproxy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscaleproxy_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scale<wbr>Proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1488,8 +1753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1497,8 +1761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security policy ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1506,8 +1769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -1515,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scalable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_java" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1524,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1533,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="supportprotocols_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_java" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -1542,17 +1801,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1560,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Version of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1575,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1584,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_nodejs" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1593,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k.</p>
-</dd><dt class="property-required"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1602,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1611,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="forwardip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1620,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1629,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1638,8 +1887,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautoscaleproxy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscaleproxy_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scale<wbr>Proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1647,8 +1903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1656,8 +1911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policy ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1665,8 +1919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -1674,8 +1927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scalable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_nodejs" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1683,8 +1935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1692,8 +1943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="supportprotocols_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -1701,17 +1951,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1719,8 +1967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Version of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1734,8 +1981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1743,8 +1989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_python" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1752,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k.</p>
-</dd><dt class="property-required"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1761,8 +2005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1770,8 +2013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="forward_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_ip_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>ip</a>
@@ -1779,8 +2021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1788,8 +2029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1797,8 +2037,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_auto_scale_proxy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_scale_proxy_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>scale_<wbr>proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1806,8 +2053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1815,8 +2061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Security policy ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1824,8 +2069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="realserver_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
@@ -1833,8 +2077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scalable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_python" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1842,8 +2085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1851,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="support_protocols_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_protocols_python" style="color: inherit; text-decoration: inherit;">support_<wbr>protocols</a>
@@ -1860,17 +2101,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1878,8 +2117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Version of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1893,8 +2131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1902,8 +2139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_yaml" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1911,8 +2147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k.</p>
-</dd><dt class="property-required"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1920,8 +2155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1929,8 +2163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="forwardip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1938,8 +2171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1947,8 +2179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1956,8 +2187,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautoscaleproxy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscaleproxy_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scale<wbr>Proxy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Indicates whether the auto scale channel is enabled, with 0 for no and 1 for yes.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1965,8 +2203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1974,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security policy ID of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Security policy ID of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1983,8 +2219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the GAAP proxy to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -1992,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Region of the GAAP realserver to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scalable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_yaml" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -2001,8 +2235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2010,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="supportprotocols_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -2019,17 +2251,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-required"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2037,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Version of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2053,7 +2282,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getDomains"
 title_tag: "tencentcloud.Cdn.getDomains"
-meta_desc: "Documentation for the tencentcloud.Cdn.getDomains function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the detail information of CDN domain."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,64 +18,60 @@ Use this data source to query the detail information of CDN domain.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cdn.getDomains({
+const foo = tencentcloud.cdn.getDomains({
     domain: "xxxx.com",
-    fullUrlCache: false,
-    httpsSwitch: "on",
-    originPullProtocol: "follow",
     serviceType: "web",
+    fullUrlCache: false,
+    originPullProtocol: "follow",
+    httpsSwitch: "on",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cdn.get_domains(domain="xxxx.com",
+foo = tencentcloud.cdn.get_domains(domain="xxxx.com",
+    service_type="web",
     full_url_cache=False,
-    https_switch="on",
     origin_pull_protocol="follow",
-    service_type="web")
+    https_switch="on")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cdn.GetDomains.Invoke(new()
-    {
-        Domain = "xxxx.com",
-        FullUrlCache = false,
-        HttpsSwitch = "on",
-        OriginPullProtocol = "follow",
-        ServiceType = "web",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdn.GetDomains(ctx, &cdn.GetDomainsArgs{
+		_, err := cdn.GetDomains(ctx, &cdn.GetDomainsArgs{
 			Domain:             pulumi.StringRef("xxxx.com"),
-			FullUrlCache:       pulumi.BoolRef(false),
-			HttpsSwitch:        pulumi.StringRef("on"),
-			OriginPullProtocol: pulumi.StringRef("follow"),
 			ServiceType:        pulumi.StringRef("web"),
+			FullUrlCache:       pulumi.BoolRef(false),
+			OriginPullProtocol: pulumi.StringRef("follow"),
+			HttpsSwitch:        pulumi.StringRef("on"),
 		}, nil)
 		if err != nil {
 			return err
@@ -82,6 +80,35 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Cdn.GetDomains.Invoke(new()
+    {
+        Domain = "xxxx.com",
+        ServiceType = "web",
+        FullUrlCache = false,
+        OriginPullProtocol = "follow",
+        HttpsSwitch = "on",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -90,8 +117,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdn.CdnFunctions;
 import com.pulumi.tencentcloud.Cdn.inputs.GetDomainsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -105,29 +132,65 @@ public class App {
     public static void stack(Context ctx) {
         final var foo = CdnFunctions.getDomains(GetDomainsArgs.builder()
             .domain("xxxx.com")
-            .fullUrlCache(false)
-            .httpsSwitch("on")
-            .originPullProtocol("follow")
             .serviceType("web")
+            .fullUrlCache(false)
+            .originPullProtocol("follow")
+            .httpsSwitch("on")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Cdn:getDomains
-      Arguments:
+      function: tencentcloud:Cdn:getDomains
+      arguments:
         domain: xxxx.com
-        fullUrlCache: false
-        httpsSwitch: on
-        originPullProtocol: follow
         serviceType: web
+        fullUrlCache: false
+        originPullProtocol: follow
+        httpsSwitch: on
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cdn_getdomains" "foo" {
+  domain               = "xxxx.com"
+  service_type         = "web"
+  full_url_cache       = false
+  origin_pull_protocol = "follow"
+  https_switch         = "on"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
 
@@ -139,7 +202,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +210,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
+><span class="k">function </span>getDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
 ><span class="k">
-function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
+function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,13 +229,13 @@ function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">service_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDomainsResult</span
 ><span class="k">
-def </span>get_domains_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">full_url_cache</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                <span class="nx">https_switch</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">origin_pull_protocol</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">service_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainsResult]</span
+def </span>get_domains_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">full_url_cache</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                <span class="nx">https_switch</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">origin_pull_protocol</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">service_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,7 +260,8 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDomains </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,7 +270,8 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,6 +283,15 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cdn/getDomains:getDomains
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cdn_get_domains&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -236,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fullurlcache_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_csharp" style="color: inherit; text-decoration: inherit;">Full<wbr>Url<wbr>Cache</a>
@@ -245,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpsswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_csharp" style="color: inherit; text-decoration: inherit;">Https<wbr>Switch</a>
@@ -254,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Protocol</a>
@@ -263,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -272,8 +342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -281,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fullurlcache_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_go" style="color: inherit; text-decoration: inherit;">Full<wbr>Url<wbr>Cache</a>
@@ -305,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpsswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_go" style="color: inherit; text-decoration: inherit;">Https<wbr>Switch</a>
@@ -314,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Protocol</a>
@@ -323,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -332,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -341,8 +404,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="full_url_cache_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_url_cache_hcl" style="color: inherit; text-decoration: inherit;">full_<wbr>url_<wbr>cache</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="https_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_switch_hcl" style="color: inherit; text-decoration: inherit;">https_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="origin_pull_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_protocol_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fullurlcache_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_java" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -365,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpsswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_java" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -374,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -383,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -392,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_java" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -401,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fullurlcache_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_nodejs" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -425,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpsswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_nodejs" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -434,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -443,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -452,8 +558,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -461,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="full_url_cache_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_url_cache_python" style="color: inherit; text-decoration: inherit;">full_<wbr>url_<wbr>cache</a>
@@ -485,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
             title="Optional">
         <span id="https_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_switch_python" style="color: inherit; text-decoration: inherit;">https_<wbr>switch</a>
@@ -494,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_pull_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_protocol_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>protocol</a>
@@ -503,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -512,8 +612,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_python" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
@@ -521,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +634,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fullurlcache_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_yaml" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -545,8 +642,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpsswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_yaml" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -554,8 +650,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="originpullprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -563,8 +658,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -572,8 +666,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -581,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Outputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cdn domain. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -614,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -623,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-"
+    <dd>Acceleration domain name.</dd><dt class="property-"
             title="">
         <span id="fullurlcache_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_csharp" style="color: inherit; text-decoration: inherit;">Full<wbr>Url<wbr>Cache</a>
@@ -632,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
             title="">
         <span id="httpsswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_csharp" style="color: inherit; text-decoration: inherit;">Https<wbr>Switch</a>
@@ -641,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration switch.</p>
-</dd><dt class="property-"
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
             title="">
         <span id="originpullprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Protocol</a>
@@ -650,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration.</p>
-</dd><dt class="property-"
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -667,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -682,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">[]Get<wbr>Domains<wbr>Domain<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of cdn domain. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -691,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -700,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-"
+    <dd>Acceleration domain name.</dd><dt class="property-"
             title="">
         <span id="fullurlcache_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_go" style="color: inherit; text-decoration: inherit;">Full<wbr>Url<wbr>Cache</a>
@@ -709,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
             title="">
         <span id="httpsswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_go" style="color: inherit; text-decoration: inherit;">Https<wbr>Switch</a>
@@ -718,8 +799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration switch.</p>
-</dd><dt class="property-"
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
             title="">
         <span id="originpullprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Protocol</a>
@@ -727,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration.</p>
-</dd><dt class="property-"
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -744,8 +823,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="domain_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_lists_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlist">list(object)</a></span>
+    </dt>
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration domain name.</dd><dt class="property-"
+            title="">
+        <span id="full_url_cache_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_url_cache_hcl" style="color: inherit; text-decoration: inherit;">full_<wbr>url_<wbr>cache</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
+            title="">
+        <span id="https_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_switch_hcl" style="color: inherit; text-decoration: inherit;">https_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
+            title="">
+        <span id="origin_pull_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_protocol_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="service_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service type of acceleration domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -759,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cdn domain. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -768,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -777,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-"
+    <dd>Acceleration domain name.</dd><dt class="property-"
             title="">
         <span id="fullurlcache_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_java" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -786,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
             title="">
         <span id="httpsswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_java" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -795,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTPS configuration switch.</p>
-</dd><dt class="property-"
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
             title="">
         <span id="originpullprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -804,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration.</p>
-</dd><dt class="property-"
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -821,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service type of acceleration domain name.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -836,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">Get<wbr>Domains<wbr>Domain<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of cdn domain. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -845,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -854,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-"
+    <dd>Acceleration domain name.</dd><dt class="property-"
             title="">
         <span id="fullurlcache_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_nodejs" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -863,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
             title="">
         <span id="httpsswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_nodejs" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -872,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration switch.</p>
-</dd><dt class="property-"
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
             title="">
         <span id="originpullprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -881,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration.</p>
-</dd><dt class="property-"
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -898,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,10 +1045,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_lists_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlist">Get<wbr>Domains<wbr>Domain<wbr>List]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlist">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of cdn domain. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -922,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -931,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-"
+    <dd>Acceleration domain name.</dd><dt class="property-"
             title="">
         <span id="full_url_cache_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_url_cache_python" style="color: inherit; text-decoration: inherit;">full_<wbr>url_<wbr>cache</a>
@@ -940,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
             title="">
         <span id="https_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_switch_python" style="color: inherit; text-decoration: inherit;">https_<wbr>switch</a>
@@ -949,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTPS configuration switch.</p>
-</dd><dt class="property-"
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
             title="">
         <span id="origin_pull_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_protocol_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>protocol</a>
@@ -958,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration.</p>
-</dd><dt class="property-"
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -975,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service type of acceleration domain name.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -990,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of cdn domain. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cdn domain. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -999,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1008,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-"
+    <dd>Acceleration domain name.</dd><dt class="property-"
             title="">
         <span id="fullurlcache_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_yaml" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -1017,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-"
             title="">
         <span id="httpsswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_yaml" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -1026,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTPS configuration switch.</p>
-</dd><dt class="property-"
+    <dd>HTTPS configuration switch.</dd><dt class="property-"
             title="">
         <span id="originpullprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -1035,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration.</p>
-</dd><dt class="property-"
+    <dd>Origin-pull protocol configuration.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1052,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service type of acceleration domain name.</p>
-</dd></dl>
+    <dd>Service type of acceleration domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1077,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration region.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration region.</dd><dt class="property-required"
             title="Required">
         <span id="cname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_csharp" style="color: inherit; text-decoration: inherit;">Cname</a>
@@ -1086,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME address of domain name.</p>
-</dd><dt class="property-required"
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1095,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name creation time.</p>
-</dd><dt class="property-required"
+    <dd>Domain name creation time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1104,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration domain name.</dd><dt class="property-required"
             title="Required">
         <span id="fullurlcache_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_csharp" style="color: inherit; text-decoration: inherit;">Full<wbr>Url<wbr>Cache</a>
@@ -1113,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
             title="Required">
         <span id="httpsconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsconfigs_csharp" style="color: inherit; text-decoration: inherit;">Https<wbr>Configs</a>
@@ -1122,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Https<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>HTTPS acceleration configuration. It's a list and consist of at most one item.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1131,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain name ID.</dd><dt class="property-required"
             title="Required">
         <span id="origins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_csharp" style="color: inherit; text-decoration: inherit;">Origins</a>
@@ -1140,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistorigin">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Origin&gt;</a></span>
     </dt>
-    <dd><p>Origin server configuration.</p>
-</dd><dt class="property-required"
+    <dd>Origin server configuration.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1149,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDN belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="rangeoriginswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rangeoriginswitch_csharp" style="color: inherit; text-decoration: inherit;">Range<wbr>Origin<wbr>Switch</a>
@@ -1158,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sharding back to source configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="requestheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestheaders_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Headers</a>
@@ -1167,17 +1277,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheader">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header&gt;</a></span>
     </dt>
-    <dd><p>Request header configuration.</p>
-</dd><dt class="property-required"
+    <dd>Request header configuration.</dd><dt class="property-required"
             title="Required">
         <span id="rulecaches_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulecaches_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Caches</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrulecach">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cach&gt;</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cache&gt;</a></span>
     </dt>
-    <dd><p>Advanced path cache configuration.</p>
-</dd><dt class="property-required"
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -1185,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1194,17 +1301,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration service status.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration service status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of cdn domain.</p>
-</dd><dt class="property-required"
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1212,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of domain name.</p>
-</dd></dl>
+    <dd>Last modified time of domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration region.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration region.</dd><dt class="property-required"
             title="Required">
         <span id="cname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_go" style="color: inherit; text-decoration: inherit;">Cname</a>
@@ -1236,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME address of domain name.</p>
-</dd><dt class="property-required"
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1245,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name creation time.</p>
-</dd><dt class="property-required"
+    <dd>Domain name creation time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1254,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration domain name.</dd><dt class="property-required"
             title="Required">
         <span id="fullurlcache_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_go" style="color: inherit; text-decoration: inherit;">Full<wbr>Url<wbr>Cache</a>
@@ -1263,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
             title="Required">
         <span id="httpsconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsconfigs_go" style="color: inherit; text-decoration: inherit;">Https<wbr>Configs</a>
@@ -1272,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">[]Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Https<wbr>Config</a></span>
     </dt>
-    <dd><p>HTTPS acceleration configuration. It's a list and consist of at most one item.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1281,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain name ID.</dd><dt class="property-required"
             title="Required">
         <span id="origins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_go" style="color: inherit; text-decoration: inherit;">Origins</a>
@@ -1290,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistorigin">[]Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Origin</a></span>
     </dt>
-    <dd><p>Origin server configuration.</p>
-</dd><dt class="property-required"
+    <dd>Origin server configuration.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1299,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDN belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="rangeoriginswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rangeoriginswitch_go" style="color: inherit; text-decoration: inherit;">Range<wbr>Origin<wbr>Switch</a>
@@ -1308,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sharding back to source configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="requestheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestheaders_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Headers</a>
@@ -1317,17 +1411,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheader">[]Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header</a></span>
     </dt>
-    <dd><p>Request header configuration.</p>
-</dd><dt class="property-required"
+    <dd>Request header configuration.</dd><dt class="property-required"
             title="Required">
         <span id="rulecaches_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulecaches_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Caches</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrulecach">[]Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cach</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">[]Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cache</a></span>
     </dt>
-    <dd><p>Advanced path cache configuration.</p>
-</dd><dt class="property-required"
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -1335,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1344,17 +1435,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration service status.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration service status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of cdn domain.</p>
-</dd><dt class="property-required"
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1362,8 +1451,141 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of domain name.</p>
-</dd></dl>
+    <dd>Last modified time of domain name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration region.</dd><dt class="property-required"
+            title="Required">
+        <span id="cname_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_hcl" style="color: inherit; text-decoration: inherit;">cname</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="full_url_cache_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_url_cache_hcl" style="color: inherit; text-decoration: inherit;">full_<wbr>url_<wbr>cache</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
+            title="Required">
+        <span id="https_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_configs_hcl" style="color: inherit; text-decoration: inherit;">https_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">list(object)</a></span>
+    </dt>
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="origins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_hcl" style="color: inherit; text-decoration: inherit;">origins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlistorigin">list(object)</a></span>
+    </dt>
+    <dd>Origin server configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
+            title="Required">
+        <span id="range_origin_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_origin_switch_hcl" style="color: inherit; text-decoration: inherit;">range_<wbr>origin_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_headers_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrequestheader">list(object)</a></span>
+    </dt>
+    <dd>Request header configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_caches_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_caches_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>caches</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">list(object)</a></span>
+    </dt>
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration service status.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time of domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1377,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration region.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration region.</dd><dt class="property-required"
             title="Required">
         <span id="cname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_java" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1386,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CNAME address of domain name.</p>
-</dd><dt class="property-required"
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1395,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name creation time.</p>
-</dd><dt class="property-required"
+    <dd>Domain name creation time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1404,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration domain name.</dd><dt class="property-required"
             title="Required">
         <span id="fullurlcache_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_java" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -1413,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
             title="Required">
         <span id="httpsconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsconfigs_java" style="color: inherit; text-decoration: inherit;">https<wbr>Configs</a>
@@ -1422,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Https<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>HTTPS acceleration configuration. It's a list and consist of at most one item.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1431,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain name ID.</dd><dt class="property-required"
             title="Required">
         <span id="origins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_java" style="color: inherit; text-decoration: inherit;">origins</a>
@@ -1440,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistorigin">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Origin&gt;</a></span>
     </dt>
-    <dd><p>Origin server configuration.</p>
-</dd><dt class="property-required"
+    <dd>Origin server configuration.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1449,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CDN belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="rangeoriginswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rangeoriginswitch_java" style="color: inherit; text-decoration: inherit;">range<wbr>Origin<wbr>Switch</a>
@@ -1458,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sharding back to source configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="requestheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestheaders_java" style="color: inherit; text-decoration: inherit;">request<wbr>Headers</a>
@@ -1467,17 +1679,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheader">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header&gt;</a></span>
     </dt>
-    <dd><p>Request header configuration.</p>
-</dd><dt class="property-required"
+    <dd>Request header configuration.</dd><dt class="property-required"
             title="Required">
         <span id="rulecaches_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulecaches_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Caches</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrulecach">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cach&gt;</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cache&gt;</a></span>
     </dt>
-    <dd><p>Advanced path cache configuration.</p>
-</dd><dt class="property-required"
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_java" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1485,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1494,17 +1703,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration service status.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration service status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of cdn domain.</p>
-</dd><dt class="property-required"
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1512,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of domain name.</p>
-</dd></dl>
+    <dd>Last modified time of domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1527,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration region.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration region.</dd><dt class="property-required"
             title="Required">
         <span id="cname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_nodejs" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1536,8 +1741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME address of domain name.</p>
-</dd><dt class="property-required"
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1545,8 +1749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name creation time.</p>
-</dd><dt class="property-required"
+    <dd>Domain name creation time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1554,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration domain name.</dd><dt class="property-required"
             title="Required">
         <span id="fullurlcache_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_nodejs" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -1563,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
             title="Required">
         <span id="httpsconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsconfigs_nodejs" style="color: inherit; text-decoration: inherit;">https<wbr>Configs</a>
@@ -1572,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Https<wbr>Config[]</a></span>
     </dt>
-    <dd><p>HTTPS acceleration configuration. It's a list and consist of at most one item.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1581,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain name ID.</dd><dt class="property-required"
             title="Required">
         <span id="origins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_nodejs" style="color: inherit; text-decoration: inherit;">origins</a>
@@ -1590,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistorigin">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Origin[]</a></span>
     </dt>
-    <dd><p>Origin server configuration.</p>
-</dd><dt class="property-required"
+    <dd>Origin server configuration.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1599,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CDN belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="rangeoriginswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rangeoriginswitch_nodejs" style="color: inherit; text-decoration: inherit;">range<wbr>Origin<wbr>Switch</a>
@@ -1608,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sharding back to source configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="requestheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestheaders_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Headers</a>
@@ -1617,17 +1813,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheader">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header[]</a></span>
     </dt>
-    <dd><p>Request header configuration.</p>
-</dd><dt class="property-required"
+    <dd>Request header configuration.</dd><dt class="property-required"
             title="Required">
         <span id="rulecaches_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulecaches_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Caches</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrulecach">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cach[]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cache[]</a></span>
     </dt>
-    <dd><p>Advanced path cache configuration.</p>
-</dd><dt class="property-required"
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1635,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1644,17 +1837,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration service status.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration service status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of cdn domain.</p>
-</dd><dt class="property-required"
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1662,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of domain name.</p>
-</dd></dl>
+    <dd>Last modified time of domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1677,8 +1867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration region.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration region.</dd><dt class="property-required"
             title="Required">
         <span id="cname_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_python" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1686,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CNAME address of domain name.</p>
-</dd><dt class="property-required"
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1695,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name creation time.</p>
-</dd><dt class="property-required"
+    <dd>Domain name creation time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1704,8 +1891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration domain name.</dd><dt class="property-required"
             title="Required">
         <span id="full_url_cache_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_url_cache_python" style="color: inherit; text-decoration: inherit;">full_<wbr>url_<wbr>cache</a>
@@ -1713,17 +1899,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
             title="Required">
         <span id="https_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_configs_python" style="color: inherit; text-decoration: inherit;">https_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Https<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Https<wbr>Config]</a></span>
     </dt>
-    <dd><p>HTTPS acceleration configuration. It's a list and consist of at most one item.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1731,17 +1915,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain name ID.</dd><dt class="property-required"
             title="Required">
         <span id="origins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_python" style="color: inherit; text-decoration: inherit;">origins</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistorigin">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Origin]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistorigin">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Origin]</a></span>
     </dt>
-    <dd><p>Origin server configuration.</p>
-</dd><dt class="property-required"
+    <dd>Origin server configuration.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1749,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CDN belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="range_origin_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_origin_switch_python" style="color: inherit; text-decoration: inherit;">range_<wbr>origin_<wbr>switch</a>
@@ -1758,26 +1939,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sharding back to source configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="request_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_headers_python" style="color: inherit; text-decoration: inherit;">request_<wbr>headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrequestheader">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrequestheader">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header]</a></span>
     </dt>
-    <dd><p>Request header configuration.</p>
-</dd><dt class="property-required"
+    <dd>Request header configuration.</dd><dt class="property-required"
             title="Required">
         <span id="rule_caches_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_caches_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>caches</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrulecach">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cach]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cache]</a></span>
     </dt>
-    <dd><p>Advanced path cache configuration.</p>
-</dd><dt class="property-required"
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
             title="Required">
         <span id="service_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_python" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
@@ -1785,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1794,17 +1971,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration service status.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration service status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of cdn domain.</p>
-</dd><dt class="property-required"
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1812,8 +1987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time of domain name.</p>
-</dd></dl>
+    <dd>Last modified time of domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1827,8 +2001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration region.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration region.</dd><dt class="property-required"
             title="Required">
         <span id="cname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_yaml" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1836,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CNAME address of domain name.</p>
-</dd><dt class="property-required"
+    <dd>CNAME address of domain name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1845,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name creation time.</p>
-</dd><dt class="property-required"
+    <dd>Domain name creation time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1854,8 +2025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration domain name.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration domain name.</dd><dt class="property-required"
             title="Required">
         <span id="fullurlcache_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fullurlcache_yaml" style="color: inherit; text-decoration: inherit;">full<wbr>Url<wbr>Cache</a>
@@ -1863,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable full-path cache.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable full-path cache.</dd><dt class="property-required"
             title="Required">
         <span id="httpsconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsconfigs_yaml" style="color: inherit; text-decoration: inherit;">https<wbr>Configs</a>
@@ -1872,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlisthttpsconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>HTTPS acceleration configuration. It's a list and consist of at most one item.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS acceleration configuration. It's a list and consist of at most one item.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1881,8 +2049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain name ID.</dd><dt class="property-required"
             title="Required">
         <span id="origins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origins_yaml" style="color: inherit; text-decoration: inherit;">origins</a>
@@ -1890,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistorigin">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Origin server configuration.</p>
-</dd><dt class="property-required"
+    <dd>Origin server configuration.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1899,8 +2065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CDN belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CDN belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="rangeoriginswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rangeoriginswitch_yaml" style="color: inherit; text-decoration: inherit;">range<wbr>Origin<wbr>Switch</a>
@@ -1908,8 +2073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sharding back to source configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Sharding back to source configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="requestheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestheaders_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Headers</a>
@@ -1917,17 +2081,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheader">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Request header configuration.</p>
-</dd><dt class="property-required"
+    <dd>Request header configuration.</dd><dt class="property-required"
             title="Required">
         <span id="rulecaches_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulecaches_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Caches</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrulecach">List&lt;Property Map&gt;</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrulecache">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Advanced path cache configuration.</p>
-</dd><dt class="property-required"
+    <dd>Advanced path cache configuration.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1935,8 +2097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service type of acceleration domain name. The available value include <code>web</code>, <code>download</code> and <code>media</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1944,17 +2105,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration service status.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration service status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of cdn domain.</p>
-</dd><dt class="property-required"
+    <dd>Tags of cdn domain.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1962,8 +2121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of domain name.</p>
-</dd></dl>
+    <dd>Last modified time of domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1981,8 +2139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP2 configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="httpsswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_csharp" style="color: inherit; text-decoration: inherit;">Https<wbr>Switch</a>
@@ -1990,8 +2147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ocspstaplingswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocspstaplingswitch_csharp" style="color: inherit; text-decoration: inherit;">Ocsp<wbr>Stapling<wbr>Switch</a>
@@ -1999,8 +2155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>OCSP configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="spdyswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdyswitch_csharp" style="color: inherit; text-decoration: inherit;">Spdy<wbr>Switch</a>
@@ -2008,8 +2163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Spdy configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="verifyclient_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyclient_csharp" style="color: inherit; text-decoration: inherit;">Verify<wbr>Client</a>
@@ -2017,8 +2171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client certificate authentication feature.</p>
-</dd></dl>
+    <dd>Client certificate authentication feature.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2032,8 +2185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP2 configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="httpsswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_go" style="color: inherit; text-decoration: inherit;">Https<wbr>Switch</a>
@@ -2041,8 +2193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ocspstaplingswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocspstaplingswitch_go" style="color: inherit; text-decoration: inherit;">Ocsp<wbr>Stapling<wbr>Switch</a>
@@ -2050,8 +2201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>OCSP configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="spdyswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdyswitch_go" style="color: inherit; text-decoration: inherit;">Spdy<wbr>Switch</a>
@@ -2059,8 +2209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Spdy configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="verifyclient_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyclient_go" style="color: inherit; text-decoration: inherit;">Verify<wbr>Client</a>
@@ -2068,8 +2217,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client certificate authentication feature.</p>
-</dd></dl>
+    <dd>Client certificate authentication feature.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="http2_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2_switch_hcl" style="color: inherit; text-decoration: inherit;">http2_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="https_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_switch_hcl" style="color: inherit; text-decoration: inherit;">https_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ocsp_stapling_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocsp_stapling_switch_hcl" style="color: inherit; text-decoration: inherit;">ocsp_<wbr>stapling_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="spdy_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdy_switch_hcl" style="color: inherit; text-decoration: inherit;">spdy_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="verify_client_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_client_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>client</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Client certificate authentication feature.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2083,8 +2277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP2 configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="httpsswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_java" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -2092,8 +2285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ocspstaplingswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocspstaplingswitch_java" style="color: inherit; text-decoration: inherit;">ocsp<wbr>Stapling<wbr>Switch</a>
@@ -2101,8 +2293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>OCSP configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="spdyswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdyswitch_java" style="color: inherit; text-decoration: inherit;">spdy<wbr>Switch</a>
@@ -2110,8 +2301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Spdy configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="verifyclient_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyclient_java" style="color: inherit; text-decoration: inherit;">verify<wbr>Client</a>
@@ -2119,8 +2309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Client certificate authentication feature.</p>
-</dd></dl>
+    <dd>Client certificate authentication feature.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2134,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP2 configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="httpsswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_nodejs" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -2143,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ocspstaplingswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocspstaplingswitch_nodejs" style="color: inherit; text-decoration: inherit;">ocsp<wbr>Stapling<wbr>Switch</a>
@@ -2152,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>OCSP configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="spdyswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdyswitch_nodejs" style="color: inherit; text-decoration: inherit;">spdy<wbr>Switch</a>
@@ -2161,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Spdy configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="verifyclient_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyclient_nodejs" style="color: inherit; text-decoration: inherit;">verify<wbr>Client</a>
@@ -2170,8 +2355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client certificate authentication feature.</p>
-</dd></dl>
+    <dd>Client certificate authentication feature.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2185,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP2 configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="https_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_switch_python" style="color: inherit; text-decoration: inherit;">https_<wbr>switch</a>
@@ -2194,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ocsp_stapling_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocsp_stapling_switch_python" style="color: inherit; text-decoration: inherit;">ocsp_<wbr>stapling_<wbr>switch</a>
@@ -2203,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>OCSP configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="spdy_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdy_switch_python" style="color: inherit; text-decoration: inherit;">spdy_<wbr>switch</a>
@@ -2212,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Spdy configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="verify_client_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_client_python" style="color: inherit; text-decoration: inherit;">verify_<wbr>client</a>
@@ -2221,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Client certificate authentication feature.</p>
-</dd></dl>
+    <dd>Client certificate authentication feature.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2236,8 +2415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP2 configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>HTTP2 configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="httpsswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsswitch_yaml" style="color: inherit; text-decoration: inherit;">https<wbr>Switch</a>
@@ -2245,8 +2423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</p>
-</dd><dt class="property-required"
+    <dd>HTTPS configuration. Valid values: <code>on</code>, <code>off</code> and <code>processing</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ocspstaplingswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ocspstaplingswitch_yaml" style="color: inherit; text-decoration: inherit;">ocsp<wbr>Stapling<wbr>Switch</a>
@@ -2254,8 +2431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>OCSP configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>OCSP configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="spdyswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spdyswitch_yaml" style="color: inherit; text-decoration: inherit;">spdy<wbr>Switch</a>
@@ -2263,8 +2439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Spdy configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Spdy configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="verifyclient_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyclient_yaml" style="color: inherit; text-decoration: inherit;">verify<wbr>Client</a>
@@ -2272,8 +2447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Client certificate authentication feature.</p>
-</dd></dl>
+    <dd>Client certificate authentication feature.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2291,8 +2465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Backup origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="backuporigintype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuporigintype_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Origin<wbr>Type</a>
@@ -2300,8 +2473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backup origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="backupservername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupservername_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Server<wbr>Name</a>
@@ -2309,8 +2481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</p>
-</dd><dt class="property-required"
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
             title="Required">
         <span id="cosprivateaccess_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosprivateaccess_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Private<wbr>Access</a>
@@ -2318,8 +2489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When OriginType is COS, you can specify if access to private buckets is allowed.</p>
-</dd><dt class="property-required"
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
             title="Required">
         <span id="originlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originlists_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Lists</a>
@@ -2327,8 +2497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Master origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="originpullprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Protocol</a>
@@ -2336,8 +2505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="origintype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origintype_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Type</a>
@@ -2345,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="servername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servername_csharp" style="color: inherit; text-decoration: inherit;">Server<wbr>Name</a>
@@ -2354,8 +2521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</p>
-</dd></dl>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2369,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Backup origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="backuporigintype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuporigintype_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Origin<wbr>Type</a>
@@ -2378,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backup origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="backupservername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupservername_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Server<wbr>Name</a>
@@ -2387,8 +2551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</p>
-</dd><dt class="property-required"
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
             title="Required">
         <span id="cosprivateaccess_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosprivateaccess_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Private<wbr>Access</a>
@@ -2396,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When OriginType is COS, you can specify if access to private buckets is allowed.</p>
-</dd><dt class="property-required"
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
             title="Required">
         <span id="originlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originlists_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Lists</a>
@@ -2405,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Master origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="originpullprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Pull<wbr>Protocol</a>
@@ -2414,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="origintype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origintype_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Type</a>
@@ -2423,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="servername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servername_go" style="color: inherit; text-decoration: inherit;">Server<wbr>Name</a>
@@ -2432,8 +2591,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</p>
-</dd></dl>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backup_origin_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_origin_lists_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>origin_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Backup origin server list.</dd><dt class="property-required"
+            title="Required">
+        <span id="backup_origin_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_origin_type_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>origin_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backup origin server type.</dd><dt class="property-required"
+            title="Required">
+        <span id="backup_server_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_server_name_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>server_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
+            title="Required">
+        <span id="cos_private_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_private_access_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_lists_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Master origin server list.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_pull_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_protocol_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_type_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Master origin server type.</dd><dt class="property-required"
+            title="Required">
+        <span id="server_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#server_name_hcl" style="color: inherit; text-decoration: inherit;">server_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2447,8 +2675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Backup origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="backuporigintype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuporigintype_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Origin<wbr>Type</a>
@@ -2456,8 +2683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backup origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="backupservername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupservername_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Server<wbr>Name</a>
@@ -2465,8 +2691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</p>
-</dd><dt class="property-required"
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
             title="Required">
         <span id="cosprivateaccess_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosprivateaccess_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Private<wbr>Access</a>
@@ -2474,8 +2699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When OriginType is COS, you can specify if access to private buckets is allowed.</p>
-</dd><dt class="property-required"
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
             title="Required">
         <span id="originlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originlists_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Lists</a>
@@ -2483,8 +2707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Master origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="originpullprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -2492,8 +2715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="origintype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origintype_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Type</a>
@@ -2501,8 +2723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="servername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servername_java" style="color: inherit; text-decoration: inherit;">server<wbr>Name</a>
@@ -2510,8 +2731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</p>
-</dd></dl>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2525,8 +2745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Backup origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="backuporigintype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuporigintype_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Origin<wbr>Type</a>
@@ -2534,8 +2753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backup origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="backupservername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupservername_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Server<wbr>Name</a>
@@ -2543,8 +2761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</p>
-</dd><dt class="property-required"
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
             title="Required">
         <span id="cosprivateaccess_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosprivateaccess_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Private<wbr>Access</a>
@@ -2552,8 +2769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When OriginType is COS, you can specify if access to private buckets is allowed.</p>
-</dd><dt class="property-required"
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
             title="Required">
         <span id="originlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originlists_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Lists</a>
@@ -2561,8 +2777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Master origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="originpullprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -2570,8 +2785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="origintype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origintype_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Type</a>
@@ -2579,8 +2793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="servername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servername_nodejs" style="color: inherit; text-decoration: inherit;">server<wbr>Name</a>
@@ -2588,8 +2801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</p>
-</dd></dl>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2603,8 +2815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Backup origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="backup_origin_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_origin_type_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>origin_<wbr>type</a>
@@ -2612,8 +2823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backup origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="backup_server_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_server_name_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>server_<wbr>name</a>
@@ -2621,8 +2831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</p>
-</dd><dt class="property-required"
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
             title="Required">
         <span id="cos_private_access_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_private_access_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>private_<wbr>access</a>
@@ -2630,8 +2839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When OriginType is COS, you can specify if access to private buckets is allowed.</p>
-</dd><dt class="property-required"
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
             title="Required">
         <span id="origin_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_lists_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>lists</a>
@@ -2639,8 +2847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Master origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="origin_pull_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_pull_protocol_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>pull_<wbr>protocol</a>
@@ -2648,8 +2855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="origin_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_type_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>type</a>
@@ -2657,8 +2863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="server_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#server_name_python" style="color: inherit; text-decoration: inherit;">server_<wbr>name</a>
@@ -2666,8 +2871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</p>
-</dd></dl>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2681,8 +2885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Backup origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="backuporigintype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuporigintype_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Origin<wbr>Type</a>
@@ -2690,8 +2893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backup origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Backup origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="backupservername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupservername_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Server<wbr>Name</a>
@@ -2699,8 +2901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</p>
-</dd><dt class="property-required"
+    <dd>Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.</dd><dt class="property-required"
             title="Required">
         <span id="cosprivateaccess_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosprivateaccess_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Private<wbr>Access</a>
@@ -2708,8 +2909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When OriginType is COS, you can specify if access to private buckets is allowed.</p>
-</dd><dt class="property-required"
+    <dd>When OriginType is COS, you can specify if access to private buckets is allowed.</dd><dt class="property-required"
             title="Required">
         <span id="originlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originlists_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Lists</a>
@@ -2717,8 +2917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Master origin server list.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server list.</dd><dt class="property-required"
             title="Required">
         <span id="originpullprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originpullprotocol_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Pull<wbr>Protocol</a>
@@ -2726,8 +2925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Origin-pull protocol configuration. Valid values: <code>http</code>, <code>https</code> and <code>follow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="origintype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origintype_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Type</a>
@@ -2735,8 +2933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master origin server type.</p>
-</dd><dt class="property-required"
+    <dd>Master origin server type.</dd><dt class="property-required"
             title="Required">
         <span id="servername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servername_yaml" style="color: inherit; text-decoration: inherit;">server<wbr>Name</a>
@@ -2744,8 +2941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</p>
-</dd></dl>
+    <dd>Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2763,8 +2959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header<wbr>Header<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Custom request header configuration rules.</p>
-</dd><dt class="property-required"
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
             title="Required">
         <span id="switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -2772,8 +2967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd></dl>
+    <dd>Cache configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2787,8 +2981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">[]Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header<wbr>Header<wbr>Rule</a></span>
     </dt>
-    <dd><p>Custom request header configuration rules.</p>
-</dd><dt class="property-required"
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
             title="Required">
         <span id="switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -2796,8 +2989,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd></dl>
+    <dd>Cache configuration switch.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="header_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_rules_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">list(object)</a></span>
+    </dt>
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cache configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2811,8 +3025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header<wbr>Header<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Custom request header configuration rules.</p>
-</dd><dt class="property-required"
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
             title="Required">
         <span id="switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -2820,8 +3033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd></dl>
+    <dd>Cache configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2835,8 +3047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header<wbr>Header<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Custom request header configuration rules.</p>
-</dd><dt class="property-required"
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
             title="Required">
         <span id="switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -2844,8 +3055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd></dl>
+    <dd>Cache configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2857,10 +3067,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_rules_python" style="color: inherit; text-decoration: inherit;">header_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header<wbr>Header<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Request<wbr>Header<wbr>Header<wbr>Rule]</a></span>
     </dt>
-    <dd><p>Custom request header configuration rules.</p>
-</dd><dt class="property-required"
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
             title="Required">
         <span id="switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -2868,8 +3077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd></dl>
+    <dd>Cache configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2883,8 +3091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlistrequestheaderheaderrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Custom request header configuration rules.</p>
-</dd><dt class="property-required"
+    <dd>Custom request header configuration rules.</dd><dt class="property-required"
             title="Required">
         <span id="switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -2892,8 +3099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd></dl>
+    <dd>Cache configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2911,8 +3117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header setting method.</p>
-</dd><dt class="property-required"
+    <dd>Http header setting method.</dd><dt class="property-required"
             title="Required">
         <span id="headername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headername_csharp" style="color: inherit; text-decoration: inherit;">Header<wbr>Name</a>
@@ -2920,8 +3125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header name.</p>
-</dd><dt class="property-required"
+    <dd>Http header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_csharp" style="color: inherit; text-decoration: inherit;">Header<wbr>Value</a>
@@ -2929,8 +3133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header value.</p>
-</dd><dt class="property-required"
+    <dd>Http header value.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Paths</a>
@@ -2938,8 +3141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -2947,8 +3149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd></dl>
+    <dd>Rule type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2962,8 +3163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header setting method.</p>
-</dd><dt class="property-required"
+    <dd>Http header setting method.</dd><dt class="property-required"
             title="Required">
         <span id="headername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headername_go" style="color: inherit; text-decoration: inherit;">Header<wbr>Name</a>
@@ -2971,8 +3171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header name.</p>
-</dd><dt class="property-required"
+    <dd>Http header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_go" style="color: inherit; text-decoration: inherit;">Header<wbr>Value</a>
@@ -2980,8 +3179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header value.</p>
-</dd><dt class="property-required"
+    <dd>Http header value.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Paths</a>
@@ -2989,8 +3187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -2998,8 +3195,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd></dl>
+    <dd>Rule type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="header_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_mode_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Http header setting method.</dd><dt class="property-required"
+            title="Required">
+        <span id="header_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_name_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Http header name.</dd><dt class="property-required"
+            title="Required">
+        <span id="header_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_value_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Http header value.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_paths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_paths_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>paths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Rule paths.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3013,8 +3255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Http header setting method.</p>
-</dd><dt class="property-required"
+    <dd>Http header setting method.</dd><dt class="property-required"
             title="Required">
         <span id="headername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headername_java" style="color: inherit; text-decoration: inherit;">header<wbr>Name</a>
@@ -3022,8 +3263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Http header name.</p>
-</dd><dt class="property-required"
+    <dd>Http header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_java" style="color: inherit; text-decoration: inherit;">header<wbr>Value</a>
@@ -3031,8 +3271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Http header value.</p>
-</dd><dt class="property-required"
+    <dd>Http header value.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Paths</a>
@@ -3040,8 +3279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -3049,8 +3287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd></dl>
+    <dd>Rule type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3064,8 +3301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header setting method.</p>
-</dd><dt class="property-required"
+    <dd>Http header setting method.</dd><dt class="property-required"
             title="Required">
         <span id="headername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headername_nodejs" style="color: inherit; text-decoration: inherit;">header<wbr>Name</a>
@@ -3073,8 +3309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header name.</p>
-</dd><dt class="property-required"
+    <dd>Http header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_nodejs" style="color: inherit; text-decoration: inherit;">header<wbr>Value</a>
@@ -3082,8 +3317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Http header value.</p>
-</dd><dt class="property-required"
+    <dd>Http header value.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Paths</a>
@@ -3091,8 +3325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -3100,8 +3333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd></dl>
+    <dd>Rule type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3115,8 +3347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Http header setting method.</p>
-</dd><dt class="property-required"
+    <dd>Http header setting method.</dd><dt class="property-required"
             title="Required">
         <span id="header_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_name_python" style="color: inherit; text-decoration: inherit;">header_<wbr>name</a>
@@ -3124,8 +3355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Http header name.</p>
-</dd><dt class="property-required"
+    <dd>Http header name.</dd><dt class="property-required"
             title="Required">
         <span id="header_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_value_python" style="color: inherit; text-decoration: inherit;">header_<wbr>value</a>
@@ -3133,8 +3363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Http header value.</p>
-</dd><dt class="property-required"
+    <dd>Http header value.</dd><dt class="property-required"
             title="Required">
         <span id="rule_paths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_paths_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>paths</a>
@@ -3142,8 +3371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="rule_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
@@ -3151,8 +3379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd></dl>
+    <dd>Rule type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3166,8 +3393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Http header setting method.</p>
-</dd><dt class="property-required"
+    <dd>Http header setting method.</dd><dt class="property-required"
             title="Required">
         <span id="headername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headername_yaml" style="color: inherit; text-decoration: inherit;">header<wbr>Name</a>
@@ -3175,8 +3401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Http header name.</p>
-</dd><dt class="property-required"
+    <dd>Http header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_yaml" style="color: inherit; text-decoration: inherit;">header<wbr>Value</a>
@@ -3184,8 +3409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Http header value.</p>
-</dd><dt class="property-required"
+    <dd>Http header value.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Paths</a>
@@ -3193,8 +3417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -3202,12 +3425,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd></dl>
+    <dd>Rule type.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="getdomainsdomainlistrulecach">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cach</h4>
+<h4 id="getdomainsdomainlistrulecache">Get<wbr>Domains<wbr>Domain<wbr>List<wbr>Rule<wbr>Cache</h4>
 
 
 
@@ -3221,8 +3443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cache expiration time setting, the unit is second.</p>
-</dd><dt class="property-required"
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
             title="Required">
         <span id="followoriginswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followoriginswitch_csharp" style="color: inherit; text-decoration: inherit;">Follow<wbr>Origin<wbr>Switch</a>
@@ -3230,8 +3451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Follow the source station configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="ignoresetcookie_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoresetcookie_csharp" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Set<wbr>Cookie</a>
@@ -3239,8 +3459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ignore the Set-Cookie header of the origin site.</p>
-</dd><dt class="property-required"
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
             title="Required">
         <span id="nocacheswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nocacheswitch_csharp" style="color: inherit; text-decoration: inherit;">No<wbr>Cache<wbr>Switch</a>
@@ -3248,8 +3467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Cache configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="revalidate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#revalidate_csharp" style="color: inherit; text-decoration: inherit;">Re<wbr>Validate</a>
@@ -3257,8 +3475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Always check back to origin.</p>
-</dd><dt class="property-required"
+    <dd>Always check back to origin.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Paths</a>
@@ -3266,8 +3483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -3275,8 +3491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd><dt class="property-required"
+    <dd>Rule type.</dd><dt class="property-required"
             title="Required">
         <span id="switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -3284,8 +3499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-optional"
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="comparemaxage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparemaxage_csharp" style="color: inherit; text-decoration: inherit;">Compare<wbr>Max<wbr>Age</a>
@@ -3293,8 +3507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Advanced cache expiration configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecachecontrol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecachecontrol_csharp" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Cache<wbr>Control</a>
@@ -3302,8 +3515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</p>
-</dd></dl>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3317,8 +3529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cache expiration time setting, the unit is second.</p>
-</dd><dt class="property-required"
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
             title="Required">
         <span id="followoriginswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followoriginswitch_go" style="color: inherit; text-decoration: inherit;">Follow<wbr>Origin<wbr>Switch</a>
@@ -3326,8 +3537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Follow the source station configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="ignoresetcookie_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoresetcookie_go" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Set<wbr>Cookie</a>
@@ -3335,8 +3545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ignore the Set-Cookie header of the origin site.</p>
-</dd><dt class="property-required"
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
             title="Required">
         <span id="nocacheswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nocacheswitch_go" style="color: inherit; text-decoration: inherit;">No<wbr>Cache<wbr>Switch</a>
@@ -3344,8 +3553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Cache configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="revalidate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#revalidate_go" style="color: inherit; text-decoration: inherit;">Re<wbr>Validate</a>
@@ -3353,8 +3561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Always check back to origin.</p>
-</dd><dt class="property-required"
+    <dd>Always check back to origin.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Paths</a>
@@ -3362,8 +3569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -3371,8 +3577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd><dt class="property-required"
+    <dd>Rule type.</dd><dt class="property-required"
             title="Required">
         <span id="switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -3380,8 +3585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-optional"
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="comparemaxage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparemaxage_go" style="color: inherit; text-decoration: inherit;">Compare<wbr>Max<wbr>Age</a>
@@ -3389,8 +3593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Advanced cache expiration configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecachecontrol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecachecontrol_go" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Cache<wbr>Control</a>
@@ -3398,8 +3601,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</p>
-</dd></dl>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cache_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cache_time_hcl" style="color: inherit; text-decoration: inherit;">cache_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
+            title="Required">
+        <span id="follow_origin_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_origin_switch_hcl" style="color: inherit; text-decoration: inherit;">follow_<wbr>origin_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="ignore_set_cookie_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_set_cookie_hcl" style="color: inherit; text-decoration: inherit;">ignore_<wbr>set_<wbr>cookie</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
+            title="Required">
+        <span id="no_cache_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#no_cache_switch_hcl" style="color: inherit; text-decoration: inherit;">no_<wbr>cache_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cache configuration switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="re_validate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#re_validate_hcl" style="color: inherit; text-decoration: inherit;">re_<wbr>validate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Always check back to origin.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_paths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_paths_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>paths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Rule paths.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule type.</dd><dt class="property-required"
+            title="Required">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compare_max_age_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_max_age_hcl" style="color: inherit; text-decoration: inherit;">compare_<wbr>max_<wbr>age</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ignore_cache_control_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_cache_control_hcl" style="color: inherit; text-decoration: inherit;">ignore_<wbr>cache_<wbr>control</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3413,8 +3701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cache expiration time setting, the unit is second.</p>
-</dd><dt class="property-required"
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
             title="Required">
         <span id="followoriginswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followoriginswitch_java" style="color: inherit; text-decoration: inherit;">follow<wbr>Origin<wbr>Switch</a>
@@ -3422,8 +3709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Follow the source station configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="ignoresetcookie_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoresetcookie_java" style="color: inherit; text-decoration: inherit;">ignore<wbr>Set<wbr>Cookie</a>
@@ -3431,8 +3717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ignore the Set-Cookie header of the origin site.</p>
-</dd><dt class="property-required"
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
             title="Required">
         <span id="nocacheswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nocacheswitch_java" style="color: inherit; text-decoration: inherit;">no<wbr>Cache<wbr>Switch</a>
@@ -3440,8 +3725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Cache configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="revalidate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#revalidate_java" style="color: inherit; text-decoration: inherit;">re<wbr>Validate</a>
@@ -3449,8 +3733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Always check back to origin.</p>
-</dd><dt class="property-required"
+    <dd>Always check back to origin.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Paths</a>
@@ -3458,8 +3741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -3467,8 +3749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd><dt class="property-required"
+    <dd>Rule type.</dd><dt class="property-required"
             title="Required">
         <span id="switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -3476,8 +3757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-optional"
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="comparemaxage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparemaxage_java" style="color: inherit; text-decoration: inherit;">compare<wbr>Max<wbr>Age</a>
@@ -3485,8 +3765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Advanced cache expiration configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecachecontrol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecachecontrol_java" style="color: inherit; text-decoration: inherit;">ignore<wbr>Cache<wbr>Control</a>
@@ -3494,8 +3773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</p>
-</dd></dl>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3509,8 +3787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cache expiration time setting, the unit is second.</p>
-</dd><dt class="property-required"
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
             title="Required">
         <span id="followoriginswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followoriginswitch_nodejs" style="color: inherit; text-decoration: inherit;">follow<wbr>Origin<wbr>Switch</a>
@@ -3518,8 +3795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Follow the source station configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="ignoresetcookie_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoresetcookie_nodejs" style="color: inherit; text-decoration: inherit;">ignore<wbr>Set<wbr>Cookie</a>
@@ -3527,8 +3803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ignore the Set-Cookie header of the origin site.</p>
-</dd><dt class="property-required"
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
             title="Required">
         <span id="nocacheswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nocacheswitch_nodejs" style="color: inherit; text-decoration: inherit;">no<wbr>Cache<wbr>Switch</a>
@@ -3536,8 +3811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Cache configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="revalidate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#revalidate_nodejs" style="color: inherit; text-decoration: inherit;">re<wbr>Validate</a>
@@ -3545,8 +3819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Always check back to origin.</p>
-</dd><dt class="property-required"
+    <dd>Always check back to origin.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Paths</a>
@@ -3554,8 +3827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -3563,8 +3835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd><dt class="property-required"
+    <dd>Rule type.</dd><dt class="property-required"
             title="Required">
         <span id="switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -3572,8 +3843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-optional"
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="comparemaxage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparemaxage_nodejs" style="color: inherit; text-decoration: inherit;">compare<wbr>Max<wbr>Age</a>
@@ -3581,8 +3851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Advanced cache expiration configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecachecontrol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecachecontrol_nodejs" style="color: inherit; text-decoration: inherit;">ignore<wbr>Cache<wbr>Control</a>
@@ -3590,8 +3859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</p>
-</dd></dl>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3605,8 +3873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cache expiration time setting, the unit is second.</p>
-</dd><dt class="property-required"
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
             title="Required">
         <span id="follow_origin_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#follow_origin_switch_python" style="color: inherit; text-decoration: inherit;">follow_<wbr>origin_<wbr>switch</a>
@@ -3614,8 +3881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Follow the source station configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="ignore_set_cookie_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_set_cookie_python" style="color: inherit; text-decoration: inherit;">ignore_<wbr>set_<wbr>cookie</a>
@@ -3623,8 +3889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ignore the Set-Cookie header of the origin site.</p>
-</dd><dt class="property-required"
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
             title="Required">
         <span id="no_cache_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#no_cache_switch_python" style="color: inherit; text-decoration: inherit;">no_<wbr>cache_<wbr>switch</a>
@@ -3632,8 +3897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Cache configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="re_validate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#re_validate_python" style="color: inherit; text-decoration: inherit;">re_<wbr>validate</a>
@@ -3641,8 +3905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Always check back to origin.</p>
-</dd><dt class="property-required"
+    <dd>Always check back to origin.</dd><dt class="property-required"
             title="Required">
         <span id="rule_paths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_paths_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>paths</a>
@@ -3650,8 +3913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="rule_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
@@ -3659,8 +3921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd><dt class="property-required"
+    <dd>Rule type.</dd><dt class="property-required"
             title="Required">
         <span id="switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -3668,8 +3929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-optional"
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="compare_max_age_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_max_age_python" style="color: inherit; text-decoration: inherit;">compare_<wbr>max_<wbr>age</a>
@@ -3677,8 +3937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Advanced cache expiration configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignore_cache_control_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_cache_control_python" style="color: inherit; text-decoration: inherit;">ignore_<wbr>cache_<wbr>control</a>
@@ -3686,8 +3945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</p>
-</dd></dl>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3701,8 +3959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cache expiration time setting, the unit is second.</p>
-</dd><dt class="property-required"
+    <dd>Cache expiration time setting, the unit is second.</dd><dt class="property-required"
             title="Required">
         <span id="followoriginswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#followoriginswitch_yaml" style="color: inherit; text-decoration: inherit;">follow<wbr>Origin<wbr>Switch</a>
@@ -3710,8 +3967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Follow the source station configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Follow the source station configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="ignoresetcookie_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoresetcookie_yaml" style="color: inherit; text-decoration: inherit;">ignore<wbr>Set<wbr>Cookie</a>
@@ -3719,8 +3975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ignore the Set-Cookie header of the origin site.</p>
-</dd><dt class="property-required"
+    <dd>Ignore the Set-Cookie header of the origin site.</dd><dt class="property-required"
             title="Required">
         <span id="nocacheswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nocacheswitch_yaml" style="color: inherit; text-decoration: inherit;">no<wbr>Cache<wbr>Switch</a>
@@ -3728,8 +3983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-required"
+    <dd>Cache configuration switch.</dd><dt class="property-required"
             title="Required">
         <span id="revalidate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#revalidate_yaml" style="color: inherit; text-decoration: inherit;">re<wbr>Validate</a>
@@ -3737,8 +3991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Always check back to origin.</p>
-</dd><dt class="property-required"
+    <dd>Always check back to origin.</dd><dt class="property-required"
             title="Required">
         <span id="rulepaths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulepaths_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Paths</a>
@@ -3746,8 +3999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Rule paths.</p>
-</dd><dt class="property-required"
+    <dd>Rule paths.</dd><dt class="property-required"
             title="Required">
         <span id="ruletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -3755,8 +4007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule type.</p>
-</dd><dt class="property-required"
+    <dd>Rule type.</dd><dt class="property-required"
             title="Required">
         <span id="switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -3764,8 +4015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cache configuration switch.</p>
-</dd><dt class="property-optional"
+    <dd>Cache configuration switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="comparemaxage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparemaxage_yaml" style="color: inherit; text-decoration: inherit;">compare<wbr>Max<wbr>Age</a>
@@ -3773,8 +4023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Advanced cache expiration configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Advanced cache expiration configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecachecontrol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecachecontrol_yaml" style="color: inherit; text-decoration: inherit;">ignore<wbr>Cache<wbr>Control</a>
@@ -3782,8 +4031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</p>
-</dd></dl>
+    <dd>Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3798,7 +4046,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

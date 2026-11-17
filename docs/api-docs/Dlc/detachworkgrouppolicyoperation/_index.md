@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Dlc.DetachWorkGroupPolicyOperation"
 meta_desc: "Documentation for the tencentcloud.Dlc.DetachWorkGroupPolicyOperation resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,61 +18,76 @@ no_edit_this_page: true
 
 
 ## Create DetachWorkGroupPolicyOperation Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                                   <span class="nx">policy_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dlc.DetachWorkGroupPolicyOperationPolicySetArgs]]</span> = None<span class="p">,</span>
-                                   <span class="nx">work_group_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p">,</span>
-                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                                   <span class="nx">work_group_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                                   <span class="nx">policy_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[DetachWorkGroupPolicyOperationPolicySetArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DetachWorkGroupPolicyOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DetachWorkGroupPolicyOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DetachWorkGroupPolicyOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dlc:DetachWorkGroupPolicyOperation</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dlc:DetachWorkGroupPolicyOperation</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dlc_detach_work_group_policy_operation&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -91,7 +108,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -208,11 +225,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## DetachWorkGroupPolicyOperation Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -228,17 +253,15 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policysets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policysets_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dlc.<wbr>Inputs.<wbr>Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dlc.<wbr>Inputs.<wbr>Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd></dl>
+    <dd>Collection of policies to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +275,7 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policysets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policysets_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Sets</a>
@@ -261,8 +283,29 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">[]Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd></dl>
+    <dd>Collection of policies to be bound.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="work_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_group_id_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policy_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_sets_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">list(object)</a></span>
+    </dt>
+    <dd>Collection of policies to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,17 +319,15 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policysets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policysets_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd></dl>
+    <dd>Collection of policies to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,17 +341,15 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policysets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policysets_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set[]</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd></dl>
+    <dd>Collection of policies to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,17 +363,15 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policy_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_sets_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Sequence[Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd></dl>
+    <dd>Collection of policies to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -348,8 +385,7 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Work group ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policysets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policysets_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Sets</a>
@@ -357,8 +393,7 @@ The DetachWorkGroupPolicyOperation resource accepts the following [input](/docs/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd></dl>
+    <dd>Collection of policies to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -379,8 +414,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -394,8 +428,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -409,8 +456,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +470,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -439,8 +484,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -454,8 +498,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,121 +508,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DetachWorkGroupPolicyOperation resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DetachWorkGroupPolicyOperation</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DetachWorkGroupPolicyOperation</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">policy_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dlc.DetachWorkGroupPolicyOperationPolicySetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">policy_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[DetachWorkGroupPolicyOperationPolicySetArgs]]</span> = None<span class="p">,</span>
         <span class="nx">work_group_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> DetachWorkGroupPolicyOperation</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDetachWorkGroupPolicyOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DetachWorkGroupPolicyOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDetachWorkGroupPolicyOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DetachWorkGroupPolicyOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DetachWorkGroupPolicyOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DetachWorkGroupPolicyOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDetachWorkGroupPolicyOperation</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dlc:DetachWorkGroupPolicyOperation</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dlc_detach_work_group_policy_operation</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DetachWorkGroupPolicyOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DetachWorkGroupPolicyOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -587,28 +669,31 @@ Get an existing DetachWorkGroupPolicyOperation resource's state with the given n
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DetachWorkGroupPolicyOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -616,28 +701,31 @@ Get an existing DetachWorkGroupPolicyOperation resource's state with the given n
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DetachWorkGroupPolicyOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -655,10 +743,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policysets_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dlc.<wbr>Inputs.<wbr>Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dlc.<wbr>Inputs.<wbr>Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workgroupid_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Group<wbr>Id</a>
@@ -666,8 +753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd></dl>
+    <dd>Work group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">[]Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workgroupid_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Group<wbr>Id</a>
@@ -690,8 +775,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd></dl>
+    <dd>Work group ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policy_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_sets_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">list(object)</a></span>
+    </dt>
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_work_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_group_id_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Work group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -703,10 +809,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policysets_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workgroupid_java" style="color: inherit; text-decoration: inherit;">work<wbr>Group<wbr>Id</a>
@@ -714,8 +819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd></dl>
+    <dd>Work group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -727,10 +831,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policysets_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set[]</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workgroupid_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Group<wbr>Id</a>
@@ -738,8 +841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd></dl>
+    <dd>Work group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -751,10 +853,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_sets_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">Sequence[Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_work_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_group_id_python" style="color: inherit; text-decoration: inherit;">work_<wbr>group_<wbr>id</a>
@@ -762,8 +863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd></dl>
+    <dd>Work group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -777,8 +877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#detachworkgrouppolicyoperationpolicyset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The set of policies to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Collection of policies to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workgroupid_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Group<wbr>Id</a>
@@ -786,8 +885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Work group id.</p>
-</dd></dl>
+    <dd>Work group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -802,7 +900,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="detachworkgrouppolicyoperationpolicyset">Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set</h4>
+<h4 id="detachworkgrouppolicyoperationpolicyset">
+Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Detach<wbr>Work<wbr>Group<wbr>Policy<wbr>Operation<wbr>Policy<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -814,8 +914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
             title="Required">
         <span id="database_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_csharp" style="color: inherit; text-decoration: inherit;">Database</a>
@@ -823,8 +922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
             title="Required">
         <span id="operation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_csharp" style="color: inherit; text-decoration: inherit;">Operation</a>
@@ -832,8 +930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.</p>
-</dd><dt class="property-required"
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
             title="Required">
         <span id="table_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_csharp" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -841,8 +938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
             title="Optional">
         <span id="column_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_csharp" style="color: inherit; text-decoration: inherit;">Column</a>
@@ -850,8 +946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -859,8 +954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the permission was created. Leave the input parameter blank.</p>
-</dd><dt class="property-optional"
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataengine_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataengine_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Engine</a>
@@ -868,8 +962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="function_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_csharp" style="color: inherit; text-decoration: inherit;">Function</a>
@@ -877,8 +970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -886,8 +978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy id.</p>
-</dd><dt class="property-optional"
+    <dd>The policy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -895,8 +986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.</p>
-</dd><dt class="property-optional"
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_csharp" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -904,8 +994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator, do not fill in the input parameters.</p>
-</dd><dt class="property-optional"
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -913,8 +1002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.</p>
-</dd><dt class="property-optional"
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="reauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reauth_csharp" style="color: inherit; text-decoration: inherit;">Re<wbr>Auth</a>
@@ -922,8 +1010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -931,8 +1018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.</p>
-</dd><dt class="property-optional"
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Id</a>
@@ -940,8 +1026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Name</a>
@@ -949,8 +1034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_csharp" style="color: inherit; text-decoration: inherit;">View</a>
@@ -958,8 +1042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.</p>
-</dd></dl>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,8 +1056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
             title="Required">
         <span id="database_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_go" style="color: inherit; text-decoration: inherit;">Database</a>
@@ -982,8 +1064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
             title="Required">
         <span id="operation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_go" style="color: inherit; text-decoration: inherit;">Operation</a>
@@ -991,8 +1072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.</p>
-</dd><dt class="property-required"
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
             title="Required">
         <span id="table_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_go" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -1000,8 +1080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
             title="Optional">
         <span id="column_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_go" style="color: inherit; text-decoration: inherit;">Column</a>
@@ -1009,8 +1088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1018,8 +1096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the permission was created. Leave the input parameter blank.</p>
-</dd><dt class="property-optional"
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataengine_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataengine_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Engine</a>
@@ -1027,8 +1104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="function_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_go" style="color: inherit; text-decoration: inherit;">Function</a>
@@ -1036,8 +1112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1045,8 +1120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy id.</p>
-</dd><dt class="property-optional"
+    <dd>The policy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -1054,8 +1128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.</p>
-</dd><dt class="property-optional"
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_go" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1063,8 +1136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator, do not fill in the input parameters.</p>
-</dd><dt class="property-optional"
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -1072,8 +1144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.</p>
-</dd><dt class="property-optional"
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="reauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reauth_go" style="color: inherit; text-decoration: inherit;">Re<wbr>Auth</a>
@@ -1081,8 +1152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1090,8 +1160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.</p>
-</dd><dt class="property-optional"
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Id</a>
@@ -1099,8 +1168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Name</a>
@@ -1108,8 +1176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_go" style="color: inherit; text-decoration: inherit;">View</a>
@@ -1117,8 +1184,149 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.</p>
-</dd></dl>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="catalog_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_hcl" style="color: inherit; text-decoration: inherit;">catalog</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
+            title="Required">
+        <span id="database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_hcl" style="color: inherit; text-decoration: inherit;">database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
+            title="Required">
+        <span id="operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_hcl" style="color: inherit; text-decoration: inherit;">operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_hcl" style="color: inherit; text-decoration: inherit;">table</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="column_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_hcl" style="color: inherit; text-decoration: inherit;">column</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_engine_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_engine_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>engine</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="function_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_hcl" style="color: inherit; text-decoration: inherit;">function</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The policy ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="re_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#re_auth_hcl" style="color: inherit; text-decoration: inherit;">re_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_name_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="view_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_hcl" style="color: inherit; text-decoration: inherit;">view</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1132,8 +1340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
             title="Required">
         <span id="database_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_java" style="color: inherit; text-decoration: inherit;">database</a>
@@ -1141,8 +1348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
             title="Required">
         <span id="operation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_java" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1150,8 +1356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.</p>
-</dd><dt class="property-required"
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
             title="Required">
         <span id="table_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_java" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1159,8 +1364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
             title="Optional">
         <span id="column_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_java" style="color: inherit; text-decoration: inherit;">column</a>
@@ -1168,8 +1372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1177,8 +1380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the permission was created. Leave the input parameter blank.</p>
-</dd><dt class="property-optional"
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataengine_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataengine_java" style="color: inherit; text-decoration: inherit;">data<wbr>Engine</a>
@@ -1186,8 +1388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="function_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_java" style="color: inherit; text-decoration: inherit;">function</a>
@@ -1195,8 +1396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1204,8 +1404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Policy id.</p>
-</dd><dt class="property-optional"
+    <dd>The policy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1213,8 +1412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.</p>
-</dd><dt class="property-optional"
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_java" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1222,8 +1420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator, do not fill in the input parameters.</p>
-</dd><dt class="property-optional"
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1231,8 +1428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.</p>
-</dd><dt class="property-optional"
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="reauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reauth_java" style="color: inherit; text-decoration: inherit;">re<wbr>Auth</a>
@@ -1240,8 +1436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_java" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1249,8 +1444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.</p>
-</dd><dt class="property-optional"
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Id</a>
@@ -1258,8 +1452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_java" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -1267,8 +1460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_java" style="color: inherit; text-decoration: inherit;">view</a>
@@ -1276,8 +1468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.</p>
-</dd></dl>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,8 +1482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
             title="Required">
         <span id="database_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_nodejs" style="color: inherit; text-decoration: inherit;">database</a>
@@ -1300,8 +1490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
             title="Required">
         <span id="operation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_nodejs" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1309,8 +1498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.</p>
-</dd><dt class="property-required"
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
             title="Required">
         <span id="table_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_nodejs" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1318,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
             title="Optional">
         <span id="column_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_nodejs" style="color: inherit; text-decoration: inherit;">column</a>
@@ -1327,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1336,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the permission was created. Leave the input parameter blank.</p>
-</dd><dt class="property-optional"
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataengine_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataengine_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Engine</a>
@@ -1345,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="function_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_nodejs" style="color: inherit; text-decoration: inherit;">function</a>
@@ -1354,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1363,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Policy id.</p>
-</dd><dt class="property-optional"
+    <dd>The policy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1372,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.</p>
-</dd><dt class="property-optional"
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_nodejs" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1381,8 +1562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator, do not fill in the input parameters.</p>
-</dd><dt class="property-optional"
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1390,8 +1570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.</p>
-</dd><dt class="property-optional"
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="reauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reauth_nodejs" style="color: inherit; text-decoration: inherit;">re<wbr>Auth</a>
@@ -1399,8 +1578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1408,8 +1586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.</p>
-</dd><dt class="property-optional"
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Id</a>
@@ -1417,8 +1594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -1426,8 +1602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_nodejs" style="color: inherit; text-decoration: inherit;">view</a>
@@ -1435,8 +1610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.</p>
-</dd></dl>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1450,8 +1624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
             title="Required">
         <span id="database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_python" style="color: inherit; text-decoration: inherit;">database</a>
@@ -1459,8 +1632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
             title="Required">
         <span id="operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_python" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1468,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.</p>
-</dd><dt class="property-required"
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
             title="Required">
         <span id="table_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_python" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1477,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
             title="Optional">
         <span id="column_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_python" style="color: inherit; text-decoration: inherit;">column</a>
@@ -1486,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1495,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the permission was created. Leave the input parameter blank.</p>
-</dd><dt class="property-optional"
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="data_engine_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_engine_python" style="color: inherit; text-decoration: inherit;">data_<wbr>engine</a>
@@ -1504,8 +1672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="function_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_python" style="color: inherit; text-decoration: inherit;">function</a>
@@ -1513,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1522,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy id.</p>
-</dd><dt class="property-optional"
+    <dd>The policy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1531,8 +1696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.</p>
-</dd><dt class="property-optional"
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_python" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1540,8 +1704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator, do not fill in the input parameters.</p>
-</dd><dt class="property-optional"
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
@@ -1549,8 +1712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.</p>
-</dd><dt class="property-optional"
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="re_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#re_auth_python" style="color: inherit; text-decoration: inherit;">re_<wbr>auth</a>
@@ -1558,8 +1720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1567,8 +1728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.</p>
-</dd><dt class="property-optional"
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>id</a>
@@ -1576,8 +1736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_name_python" style="color: inherit; text-decoration: inherit;">source_<wbr>name</a>
@@ -1585,8 +1744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_python" style="color: inherit; text-decoration: inherit;">view</a>
@@ -1594,8 +1752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.</p>
-</dd></dl>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1609,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target data source. To grant admin permission, it must be <code>*</code> (all resources at this level); to grant data source and database permissions, it must be <code>COSDataCatalog</code> or <code>*</code>; to grant table permissions, it can be a custom data source; if it is left empty, <code>DataLakeCatalog</code> is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.</dd><dt class="property-required"
             title="Required">
         <span id="database_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_yaml" style="color: inherit; text-decoration: inherit;">database</a>
@@ -1618,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.</p>
-</dd><dt class="property-required"
+    <dd>The name of the target database. <code>*</code> represents all databases in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.</dd><dt class="property-required"
             title="Required">
         <span id="operation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_yaml" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1627,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.</p>
-</dd><dt class="property-required"
+    <dd>The target permissions, which vary by permission level. Admin: <code>ALL</code> (default); data connection: <code>CREATE</code>; database: <code>ALL</code>, <code>CREATE</code>, <code>ALTER</code>, and <code>DROP</code>; table: <code>ALL</code>, <code>SELECT</code>, <code>INSERT</code>, <code>ALTER</code>, <code>DELETE</code>, <code>DROP</code>, and <code>UPDATE</code>. Note: For table permissions, if a data source other than <code>COSDataCatalog</code> is specified, only the <code>SELECT</code> permission can be granted here.</dd><dt class="property-required"
             title="Required">
         <span id="table_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_yaml" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1636,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target table. <code>*</code> represents all tables in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.</dd><dt class="property-optional"
             title="Optional">
         <span id="column_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_yaml" style="color: inherit; text-decoration: inherit;">column</a>
@@ -1645,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target column. <code>*</code> represents all columns. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1654,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the permission was created. Leave the input parameter blank.</p>
-</dd><dt class="property-optional"
+    <dd>The permission policy creation time, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataengine_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataengine_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Engine</a>
@@ -1663,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target data engine. <code>*</code> represents all engines. To grant admin permissions, it must be <code>*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="function_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_yaml" style="color: inherit; text-decoration: inherit;">function</a>
@@ -1672,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the target function. <code>*</code> represents all functions in the current catalog. To grant admin permissions, it must be <code>*</code>; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1681,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Policy id.</p>
-</dd><dt class="property-optional"
+    <dd>The policy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1690,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.</p>
-</dd><dt class="property-optional"
+    <dd>The grant mode, which is not required as an input parameter. Valid values: <code>COMMON</code> and <code>SENIOR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_yaml" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1699,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator, do not fill in the input parameters.</p>
-</dd><dt class="property-optional"
+    <dd>The operator, which is not required as an input parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1708,8 +1854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.</p>
-</dd><dt class="property-optional"
+    <dd>The permission type. Valid values: <code>ADMIN</code>, <code>DATASOURCE</code>, <code>DATABASE</code>, <code>TABLE</code>, <code>VIEW</code>, <code>FUNCTION</code>, <code>COLUMN</code>, and <code>ENGINE</code>. Note: If it is left empty, <code>ADMIN</code> is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="reauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reauth_yaml" style="color: inherit; text-decoration: inherit;">re<wbr>Auth</a>
@@ -1717,8 +1862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the grantee is allowed to further grant the permissions. Valid values: <code>false</code> (default) and <code>true</code> (the grantee can grant permissions gained here to other sub-users).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1726,8 +1870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.</p>
-</dd><dt class="property-optional"
+    <dd>The permission source, which is not required when input parameters are passed in. Valid values: <code>USER</code> (from the user) and <code>WORKGROUP</code> (from one or more associated work groups).</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Id</a>
@@ -1735,8 +1878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -1744,8 +1886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the work group, which applies only when the value of the <code>Source</code> field is <code>WORKGROUP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_yaml" style="color: inherit; text-decoration: inherit;">view</a>
@@ -1753,8 +1894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.</p>
-</dd></dl>
+    <dd>The name of the target view. <code>*</code> represents all views in the current database. To grant admin permissions, it must be <code>*</code>; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1766,7 +1906,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

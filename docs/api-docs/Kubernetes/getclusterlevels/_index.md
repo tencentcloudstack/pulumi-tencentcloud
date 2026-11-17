@@ -2,9 +2,11 @@
 ---
 title: "getClusterLevels"
 title_tag: "tencentcloud.Kubernetes.getClusterLevels"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.getClusterLevels function with examples, input properties, output properties, and supporting types."
+meta_desc: "Provide a datasource to query TKE cluster levels."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,65 @@ Provide a datasource to query TKE cluster levels.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Kubernetes.getClusterLevels({});
+const foo = tencentcloud.kubernetes.getClusterLevels({});
 export const level5 = foo.then(foo => foo.lists?.[0]?.alias);
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Kubernetes.get_cluster_levels()
+foo = tencentcloud.kubernetes.get_cluster_levels()
 pulumi.export("level5", foo.lists[0].alias)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := kubernetes.GetClusterLevels(ctx, &kubernetes.GetClusterLevelsArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		ctx.Export("level5", foo.Lists[0].Alias)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -47,25 +88,11 @@ return await Deployment.RunAsync(() =>
     };
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		foo, err := Kubernetes.GetClusterLevels(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		ctx.Export("level5", foo.Lists[0].Alias)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kubernetes.KubernetesFunctions;
 import com.pulumi.tencentcloud.Kubernetes.inputs.GetClusterLevelsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -87,23 +114,57 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = KubernetesFunctions.getClusterLevels();
+        final var foo = KubernetesFunctions.getClusterLevels(GetClusterLevelsArgs.builder()
+            .build());
 
-        ctx.export("level5", foo.applyValue(getClusterLevelsResult -> getClusterLevelsResult.lists()[0].alias()));
+        ctx.export("level5", foo.lists()[0].alias());
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Kubernetes:getClusterLevels
-      Arguments: {}
+      function: tencentcloud:Kubernetes:getClusterLevels
+      arguments: {}
 outputs:
   level5: ${foo.lists[0].alias}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_kubernetes_getclusterlevels" "foo" {
+}
+
+output "level5" {
+  value = data.tencentcloud_kubernetes_getclusterlevels.foo.lists[0].alias
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
 
 
 
@@ -115,7 +176,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +184,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getClusterLevels<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterLevelsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>></span
+><span class="k">function </span>getClusterLevels<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterLevelsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>></span
 ><span class="k">
-function </span>getClusterLevelsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterLevelsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>></span
+function </span>getClusterLevelsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterLevelsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +199,9 @@ function </span>getClusterLevelsOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetClusterLevelsResult</span
 ><span class="k">
-def </span>get_cluster_levels_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterLevelsResult]</span
+def </span>get_cluster_levels_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterLevelsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +226,8 @@ func </span>GetClusterLevelsOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetClusterLevels </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetClusterLevelsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterLevelsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterLevelsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterLevelsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +236,8 @@ func </span>GetClusterLevelsOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> </span>getClusterLevels<span class="p">(</span><span class="nx">GetClusterLevelsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> </span>getClusterLevels<span class="p">(</span><span class="nx">GetClusterLevelsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterLevelsResult</a></span>> </span>getClusterLevels<span class="p">(</span><span class="nx">GetClusterLevelsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +249,15 @@ func </span>GetClusterLevelsOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Kubernetes/getClusterLevels:getClusterLevels
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_kubernetes_get_cluster_levels&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +276,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify cluster Id, if set will only query current cluster's available levels.</p>
-</dd><dt class="property-optional"
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +284,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify cluster Id, if set will only query current cluster's available levels.</p>
-</dd><dt class="property-optional"
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +306,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify cluster Id, if set will only query current cluster's available levels.</p>
-</dd><dt class="property-optional"
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify cluster Id, if set will only query current cluster's available levels.</p>
-</dd><dt class="property-optional"
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify cluster Id, if set will only query current cluster's available levels.</p>
-</dd><dt class="property-optional"
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify cluster Id, if set will only query current cluster's available levels.</p>
-</dd><dt class="property-optional"
+    <dd>Specify cluster Id, if set will only query current cluster's available levels.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -366,8 +447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterlevelslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Outputs.<wbr>Get<wbr>Cluster<wbr>Levels<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of level information.</p>
-</dd><dt class="property-"
+    <dd>List of level information.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -397,8 +477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -406,8 +485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterlevelslist">[]Get<wbr>Cluster<wbr>Levels<wbr>List</a></span>
     </dt>
-    <dd><p>List of level information.</p>
-</dd><dt class="property-"
+    <dd>List of level information.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -428,6 +506,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterlevelslist">list(object)</a></span>
+    </dt>
+    <dd>List of level information.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -437,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -446,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterlevelslist">List&lt;Get<wbr>Cluster<wbr>Levels<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of level information.</p>
-</dd><dt class="property-"
+    <dd>List of level information.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -477,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -486,8 +599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterlevelslist">Get<wbr>Cluster<wbr>Levels<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of level information.</p>
-</dd><dt class="property-"
+    <dd>List of level information.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -517,17 +629,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterlevelslist">Get<wbr>Cluster<wbr>Levels<wbr>List]</a></span>
+        <span class="property-type"><a href="#getclusterlevelslist">Sequence[Get<wbr>Cluster<wbr>Levels<wbr>List]</a></span>
     </dt>
-    <dd><p>List of level information.</p>
-</dd><dt class="property-"
+    <dd>List of level information.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -557,8 +667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -566,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterlevelslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of level information.</p>
-</dd><dt class="property-"
+    <dd>List of level information.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -607,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias used for pass to cluster level arguments.</p>
-</dd><dt class="property-required"
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
             title="Required">
         <span id="configmapcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configmapcount_csharp" style="color: inherit; text-decoration: inherit;">Config<wbr>Map<wbr>Count</a>
@@ -616,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of ConfigMaps.</p>
-</dd><dt class="property-required"
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
             title="Required">
         <span id="crdcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crdcount_csharp" style="color: inherit; text-decoration: inherit;">Crd<wbr>Count</a>
@@ -625,8 +731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CRDs.</p>
-</dd><dt class="property-required"
+    <dd>Number of CRDs.</dd><dt class="property-required"
             title="Required">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -634,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the current level enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -643,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Level name.</p>
-</dd><dt class="property-required"
+    <dd>Level name.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -652,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="othercount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othercount_csharp" style="color: inherit; text-decoration: inherit;">Other<wbr>Count</a>
@@ -661,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of others.</p>
-</dd><dt class="property-required"
+    <dd>Number of others.</dd><dt class="property-required"
             title="Required">
         <span id="podcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podcount_csharp" style="color: inherit; text-decoration: inherit;">Pod<wbr>Count</a>
@@ -670,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of pods.</p>
-</dd></dl>
+    <dd>Number of pods.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -685,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias used for pass to cluster level arguments.</p>
-</dd><dt class="property-required"
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
             title="Required">
         <span id="configmapcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configmapcount_go" style="color: inherit; text-decoration: inherit;">Config<wbr>Map<wbr>Count</a>
@@ -694,8 +793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of ConfigMaps.</p>
-</dd><dt class="property-required"
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
             title="Required">
         <span id="crdcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crdcount_go" style="color: inherit; text-decoration: inherit;">Crd<wbr>Count</a>
@@ -703,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CRDs.</p>
-</dd><dt class="property-required"
+    <dd>Number of CRDs.</dd><dt class="property-required"
             title="Required">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -712,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the current level enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -721,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Level name.</p>
-</dd><dt class="property-required"
+    <dd>Level name.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -730,8 +825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="othercount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othercount_go" style="color: inherit; text-decoration: inherit;">Other<wbr>Count</a>
@@ -739,8 +833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of others.</p>
-</dd><dt class="property-required"
+    <dd>Number of others.</dd><dt class="property-required"
             title="Required">
         <span id="podcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podcount_go" style="color: inherit; text-decoration: inherit;">Pod<wbr>Count</a>
@@ -748,8 +841,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of pods.</p>
-</dd></dl>
+    <dd>Number of pods.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
+            title="Required">
+        <span id="config_map_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_map_count_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>map_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
+            title="Required">
+        <span id="crd_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crd_count_hcl" style="color: inherit; text-decoration: inherit;">crd_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of CRDs.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Level name.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="other_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#other_count_hcl" style="color: inherit; text-decoration: inherit;">other_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of others.</dd><dt class="property-required"
+            title="Required">
+        <span id="pod_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pod_count_hcl" style="color: inherit; text-decoration: inherit;">pod_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of pods.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -763,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alias used for pass to cluster level arguments.</p>
-</dd><dt class="property-required"
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
             title="Required">
         <span id="configmapcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configmapcount_java" style="color: inherit; text-decoration: inherit;">config<wbr>Map<wbr>Count</a>
@@ -772,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of ConfigMaps.</p>
-</dd><dt class="property-required"
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
             title="Required">
         <span id="crdcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crdcount_java" style="color: inherit; text-decoration: inherit;">crd<wbr>Count</a>
@@ -781,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of CRDs.</p>
-</dd><dt class="property-required"
+    <dd>Number of CRDs.</dd><dt class="property-required"
             title="Required">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -790,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the current level enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -799,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Level name.</p>
-</dd><dt class="property-required"
+    <dd>Level name.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -808,8 +965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="othercount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othercount_java" style="color: inherit; text-decoration: inherit;">other<wbr>Count</a>
@@ -817,8 +973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of others.</p>
-</dd><dt class="property-required"
+    <dd>Number of others.</dd><dt class="property-required"
             title="Required">
         <span id="podcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podcount_java" style="color: inherit; text-decoration: inherit;">pod<wbr>Count</a>
@@ -826,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of pods.</p>
-</dd></dl>
+    <dd>Number of pods.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -841,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias used for pass to cluster level arguments.</p>
-</dd><dt class="property-required"
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
             title="Required">
         <span id="configmapcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configmapcount_nodejs" style="color: inherit; text-decoration: inherit;">config<wbr>Map<wbr>Count</a>
@@ -850,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of ConfigMaps.</p>
-</dd><dt class="property-required"
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
             title="Required">
         <span id="crdcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crdcount_nodejs" style="color: inherit; text-decoration: inherit;">crd<wbr>Count</a>
@@ -859,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of CRDs.</p>
-</dd><dt class="property-required"
+    <dd>Number of CRDs.</dd><dt class="property-required"
             title="Required">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -868,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the current level enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -877,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Level name.</p>
-</dd><dt class="property-required"
+    <dd>Level name.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -886,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="othercount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othercount_nodejs" style="color: inherit; text-decoration: inherit;">other<wbr>Count</a>
@@ -895,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of others.</p>
-</dd><dt class="property-required"
+    <dd>Number of others.</dd><dt class="property-required"
             title="Required">
         <span id="podcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podcount_nodejs" style="color: inherit; text-decoration: inherit;">pod<wbr>Count</a>
@@ -904,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of pods.</p>
-</dd></dl>
+    <dd>Number of pods.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alias used for pass to cluster level arguments.</p>
-</dd><dt class="property-required"
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
             title="Required">
         <span id="config_map_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_map_count_python" style="color: inherit; text-decoration: inherit;">config_<wbr>map_<wbr>count</a>
@@ -928,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of ConfigMaps.</p>
-</dd><dt class="property-required"
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
             title="Required">
         <span id="crd_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crd_count_python" style="color: inherit; text-decoration: inherit;">crd_<wbr>count</a>
@@ -937,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CRDs.</p>
-</dd><dt class="property-required"
+    <dd>Number of CRDs.</dd><dt class="property-required"
             title="Required">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -946,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the current level enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -955,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Level name.</p>
-</dd><dt class="property-required"
+    <dd>Level name.</dd><dt class="property-required"
             title="Required">
         <span id="node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -964,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="other_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#other_count_python" style="color: inherit; text-decoration: inherit;">other_<wbr>count</a>
@@ -973,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of others.</p>
-</dd><dt class="property-required"
+    <dd>Number of others.</dd><dt class="property-required"
             title="Required">
         <span id="pod_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pod_count_python" style="color: inherit; text-decoration: inherit;">pod_<wbr>count</a>
@@ -982,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of pods.</p>
-</dd></dl>
+    <dd>Number of pods.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -997,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alias used for pass to cluster level arguments.</p>
-</dd><dt class="property-required"
+    <dd>Alias used for pass to cluster level arguments.</dd><dt class="property-required"
             title="Required">
         <span id="configmapcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configmapcount_yaml" style="color: inherit; text-decoration: inherit;">config<wbr>Map<wbr>Count</a>
@@ -1006,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of ConfigMaps.</p>
-</dd><dt class="property-required"
+    <dd>Number of ConfigMaps.</dd><dt class="property-required"
             title="Required">
         <span id="crdcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#crdcount_yaml" style="color: inherit; text-decoration: inherit;">crd<wbr>Count</a>
@@ -1015,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of CRDs.</p>
-</dd><dt class="property-required"
+    <dd>Number of CRDs.</dd><dt class="property-required"
             title="Required">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1024,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the current level enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the current level enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1033,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Level name.</p>
-</dd><dt class="property-required"
+    <dd>Level name.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -1042,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="othercount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othercount_yaml" style="color: inherit; text-decoration: inherit;">other<wbr>Count</a>
@@ -1051,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of others.</p>
-</dd><dt class="property-required"
+    <dd>Number of others.</dd><dt class="property-required"
             title="Required">
         <span id="podcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#podcount_yaml" style="color: inherit; text-decoration: inherit;">pod<wbr>Count</a>
@@ -1060,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of pods.</p>
-</dd></dl>
+    <dd>Number of pods.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1076,7 +1206,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

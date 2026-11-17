@@ -2,9 +2,11 @@
 ---
 title: "FirewallTemplate"
 title_tag: "tencentcloud.Lighthouse.FirewallTemplate"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.FirewallTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a lighthouse firewall template"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,114 +18,95 @@ Provides a resource to create a lighthouse firewall template
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const firewallTemplate = new tencentcloud.lighthouse.FirewallTemplate("firewallTemplate", {
+const firewallTemplate = new tencentcloud.lighthouse.FirewallTemplate("firewall_template", {
     templateName: "firewall-template-test",
     templateRules: [
         {
-            action: "ACCEPT",
-            cidrBlock: "127.0.0.1",
-            firewallRuleDescription: "test description",
-            port: "8080",
             protocol: "TCP",
+            port: "8080",
+            cidrBlock: "127.0.0.1",
+            action: "ACCEPT",
+            firewallRuleDescription: "test description",
         },
         {
-            action: "DROP",
-            cidrBlock: "127.0.0.0/24",
-            firewallRuleDescription: "test description",
-            port: "8090",
             protocol: "TCP",
+            port: "8090",
+            cidrBlock: "127.0.0.0/24",
+            action: "DROP",
+            firewallRuleDescription: "test description",
         },
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-firewall_template = tencentcloud.lighthouse.FirewallTemplate("firewallTemplate",
+firewall_template = tencentcloud.lighthouse.FirewallTemplate("firewall_template",
     template_name="firewall-template-test",
     template_rules=[
-        tencentcloud.lighthouse.FirewallTemplateTemplateRuleArgs(
-            action="ACCEPT",
-            cidr_block="127.0.0.1",
-            firewall_rule_description="test description",
-            port="8080",
-            protocol="TCP",
-        ),
-        tencentcloud.lighthouse.FirewallTemplateTemplateRuleArgs(
-            action="DROP",
-            cidr_block="127.0.0.0/24",
-            firewall_rule_description="test description",
-            port="8090",
-            protocol="TCP",
-        ),
+        {
+            "protocol": "TCP",
+            "port": "8080",
+            "cidr_block": "127.0.0.1",
+            "action": "ACCEPT",
+            "firewall_rule_description": "test description",
+        },
+        {
+            "protocol": "TCP",
+            "port": "8090",
+            "cidr_block": "127.0.0.0/24",
+            "action": "DROP",
+            "firewall_rule_description": "test description",
+        },
     ])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new()
-    {
-        TemplateName = "firewall-template-test",
-        TemplateRules = new[]
-        {
-            new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
-            {
-                Action = "ACCEPT",
-                CidrBlock = "127.0.0.1",
-                FirewallRuleDescription = "test description",
-                Port = "8080",
-                Protocol = "TCP",
-            },
-            new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
-            {
-                Action = "DROP",
-                CidrBlock = "127.0.0.0/24",
-                FirewallRuleDescription = "test description",
-                Port = "8090",
-                Protocol = "TCP",
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
+		_, err := lighthouse.NewFirewallTemplate(ctx, "firewall_template", &lighthouse.FirewallTemplateArgs{
 			TemplateName: pulumi.String("firewall-template-test"),
 			TemplateRules: lighthouse.FirewallTemplateTemplateRuleArray{
 				&lighthouse.FirewallTemplateTemplateRuleArgs{
-					Action:                  pulumi.String("ACCEPT"),
-					CidrBlock:               pulumi.String("127.0.0.1"),
-					FirewallRuleDescription: pulumi.String("test description"),
-					Port:                    pulumi.String("8080"),
 					Protocol:                pulumi.String("TCP"),
+					Port:                    pulumi.String("8080"),
+					CidrBlock:               pulumi.String("127.0.0.1"),
+					Action:                  pulumi.String("ACCEPT"),
+					FirewallRuleDescription: pulumi.String("test description"),
 				},
 				&lighthouse.FirewallTemplateTemplateRuleArgs{
-					Action:                  pulumi.String("DROP"),
-					CidrBlock:               pulumi.String("127.0.0.0/24"),
-					FirewallRuleDescription: pulumi.String("test description"),
-					Port:                    pulumi.String("8090"),
 					Protocol:                pulumi.String("TCP"),
+					Port:                    pulumi.String("8090"),
+					CidrBlock:               pulumi.String("127.0.0.0/24"),
+					Action:                  pulumi.String("DROP"),
+					FirewallRuleDescription: pulumi.String("test description"),
 				},
 			},
 		})
@@ -134,6 +117,50 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewall_template", new()
+    {
+        TemplateName = "firewall-template-test",
+        TemplateRules = new[]
+        {
+            new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
+            {
+                Protocol = "TCP",
+                Port = "8080",
+                CidrBlock = "127.0.0.1",
+                Action = "ACCEPT",
+                FirewallRuleDescription = "test description",
+            },
+            new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
+            {
+                Protocol = "TCP",
+                Port = "8090",
+                CidrBlock = "127.0.0.0/24",
+                Action = "DROP",
+                FirewallRuleDescription = "test description",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -143,8 +170,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Lighthouse.FirewallTemplate;
 import com.pulumi.tencentcloud.Lighthouse.FirewallTemplateArgs;
 import com.pulumi.tencentcloud.Lighthouse.inputs.FirewallTemplateTemplateRuleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -156,106 +183,171 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var firewallTemplate = new FirewallTemplate("firewallTemplate", FirewallTemplateArgs.builder()        
+        var firewallTemplate = new FirewallTemplate("firewallTemplate", FirewallTemplateArgs.builder()
             .templateName("firewall-template-test")
             .templateRules(            
                 FirewallTemplateTemplateRuleArgs.builder()
-                    .action("ACCEPT")
-                    .cidrBlock("127.0.0.1")
-                    .firewallRuleDescription("test description")
-                    .port("8080")
                     .protocol("TCP")
+                    .port("8080")
+                    .cidrBlock("127.0.0.1")
+                    .action("ACCEPT")
+                    .firewallRuleDescription("test description")
                     .build(),
                 FirewallTemplateTemplateRuleArgs.builder()
-                    .action("DROP")
-                    .cidrBlock("127.0.0.0/24")
-                    .firewallRuleDescription("test description")
-                    .port("8090")
                     .protocol("TCP")
+                    .port("8090")
+                    .cidrBlock("127.0.0.0/24")
+                    .action("DROP")
+                    .firewallRuleDescription("test description")
                     .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   firewallTemplate:
     type: tencentcloud:Lighthouse:FirewallTemplate
+    name: firewall_template
     properties:
       templateName: firewall-template-test
       templateRules:
-        - action: ACCEPT
-          cidrBlock: 127.0.0.1
-          firewallRuleDescription: test description
+        - protocol: TCP
           port: '8080'
-          protocol: TCP
-        - action: DROP
-          cidrBlock: 127.0.0.0/24
+          cidrBlock: 127.0.0.1
+          action: ACCEPT
           firewallRuleDescription: test description
+        - protocol: TCP
           port: '8090'
-          protocol: TCP
+          cidrBlock: 127.0.0.0/24
+          action: DROP
+          firewallRuleDescription: test description
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_lighthouse_firewalltemplate" "firewall_template" {
+  template_name = "firewall-template-test"
+  template_rules {
+    protocol                  = "TCP"
+    port                      = "8080"
+    cidr_block                = "127.0.0.1"
+    action                    = "ACCEPT"
+    firewall_rule_description = "test description"
+  }
+  template_rules {
+    protocol                  = "TCP"
+    port                      = "8090"
+    cidr_block                = "127.0.0.0/24"
+    action                    = "DROP"
+    firewall_rule_description = "test description"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateFirewallTemplate](https://www.tencentcloud.com/search/?wd=CreateFirewallTemplate&type=document&lang=en)
+* Read:
+  - [DescribeFirewallTemplateRules](https://www.tencentcloud.com/search/?wd=DescribeFirewallTemplateRules&type=document&lang=en)
+  - [DescribeFirewallTemplates](https://www.tencentcloud.com/search/?wd=DescribeFirewallTemplates&type=document&lang=en)
+* Update: [ModifyFirewallTemplate](https://www.tencentcloud.com/search/?wd=ModifyFirewallTemplate&type=document&lang=en)
+* Delete: [DeleteFirewallTemplate](https://www.tencentcloud.com/search/?wd=DeleteFirewallTemplate&type=document&lang=en)
 
 
 ## Create FirewallTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                      <span class="nx">template_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">template_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_lighthouse.FirewallTemplateTemplateRuleArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">template_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[FirewallTemplateTemplateRuleArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFirewallTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FirewallTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFirewallTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FirewallTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">FirewallTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FirewallTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Lighthouse:FirewallTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Lighthouse:FirewallTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_lighthouse_firewall_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -276,7 +368,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -393,11 +485,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## FirewallTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The FirewallTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -413,17 +513,15 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templaterules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templaterules_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Firewall<wbr>Template<wbr>Template<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -437,8 +535,7 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templaterules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templaterules_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Rules</a>
@@ -446,8 +543,29 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#firewalltemplatetemplaterule">[]Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="template_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_name_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_rules_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">list(object)</a></span>
+    </dt>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -461,17 +579,15 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templaterules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templaterules_java" style="color: inherit; text-decoration: inherit;">template<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Firewall<wbr>Template<wbr>Template<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -485,17 +601,15 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templaterules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templaterules_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -509,17 +623,15 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_rules_python" style="color: inherit; text-decoration: inherit;">template_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">Sequence[Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -533,8 +645,7 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="templaterules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templaterules_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Rules</a>
@@ -542,8 +653,7 @@ The FirewallTemplate resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -564,8 +674,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -579,8 +688,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -594,8 +716,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +730,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -624,8 +744,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -639,8 +758,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -650,121 +768,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing FirewallTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FirewallTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">FirewallTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FirewallTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">FirewallTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">template_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">template_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_lighthouse.FirewallTemplateTemplateRuleArgs]]</span> = None<span class="p">) -&gt;</span> FirewallTemplate</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">template_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[FirewallTemplateTemplateRuleArgs]]</span> = None<span class="p">) -&gt;</span> FirewallTemplate</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFirewallTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FirewallTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FirewallTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFirewallTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FirewallTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FirewallTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">FirewallTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FirewallTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">FirewallTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FirewallTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">FirewallTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FirewallTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">FirewallTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FirewallTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingFirewallTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Lighthouse:FirewallTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_lighthouse_firewall_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FirewallTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FirewallTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -772,28 +929,31 @@ Get an existing FirewallTemplate resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FirewallTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -801,28 +961,31 @@ Get an existing FirewallTemplate resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FirewallTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -842,17 +1005,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templaterules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templaterules_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Firewall<wbr>Template<wbr>Template<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -866,8 +1027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templaterules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templaterules_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Rules</a>
@@ -875,8 +1035,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#firewalltemplatetemplaterule">[]Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_template_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_name_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_template_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_rules_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">list(object)</a></span>
+    </dt>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -890,17 +1071,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templaterules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templaterules_java" style="color: inherit; text-decoration: inherit;">template<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Firewall<wbr>Template<wbr>Template<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -914,17 +1093,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templaterules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templaterules_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -938,17 +1115,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_template_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_rules_python" style="color: inherit; text-decoration: inherit;">template_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#firewalltemplatetemplaterule">Sequence[Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,8 +1137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name.</p>
-</dd><dt class="property-optional"
+    <dd>Template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templaterules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templaterules_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Rules</a>
@@ -971,8 +1145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#firewalltemplatetemplaterule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of firewall rules.</p>
-</dd></dl>
+    <dd>List of firewall rules.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -987,7 +1160,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="firewalltemplatetemplaterule">Firewall<wbr>Template<wbr>Template<wbr>Rule</h4>
+<h4 id="firewalltemplatetemplaterule">
+Firewall<wbr>Template<wbr>Template<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Firewall<wbr>Template<wbr>Template<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -999,8 +1174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol. Values: TCP, UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_csharp" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -1008,8 +1182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1017,8 +1190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</p>
-</dd><dt class="property-optional"
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewallruledescription_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewallruledescription_csharp" style="color: inherit; text-decoration: inherit;">Firewall<wbr>Rule<wbr>Description</a>
@@ -1026,8 +1198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall rule description.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall rule description.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1035,8 +1206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</p>
-</dd></dl>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1050,8 +1220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol. Values: TCP, UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_go" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -1059,8 +1228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1068,8 +1236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</p>
-</dd><dt class="property-optional"
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewallruledescription_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewallruledescription_go" style="color: inherit; text-decoration: inherit;">Firewall<wbr>Rule<wbr>Description</a>
@@ -1077,8 +1244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall rule description.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall rule description.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1086,8 +1252,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</p>
-</dd></dl>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="firewall_rule_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewall_rule_description_hcl" style="color: inherit; text-decoration: inherit;">firewall_<wbr>rule_<wbr>description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Firewall rule description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1101,8 +1312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol. Values: TCP, UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_java" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1110,8 +1320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1119,8 +1328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</p>
-</dd><dt class="property-optional"
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewallruledescription_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewallruledescription_java" style="color: inherit; text-decoration: inherit;">firewall<wbr>Rule<wbr>Description</a>
@@ -1128,8 +1336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Firewall rule description.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall rule description.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1137,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</p>
-</dd></dl>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1152,8 +1358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol. Values: TCP, UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_nodejs" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1161,8 +1366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1170,8 +1374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</p>
-</dd><dt class="property-optional"
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewallruledescription_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewallruledescription_nodejs" style="color: inherit; text-decoration: inherit;">firewall<wbr>Rule<wbr>Description</a>
@@ -1179,8 +1382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Firewall rule description.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall rule description.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1188,8 +1390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</p>
-</dd></dl>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1203,8 +1404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol. Values: TCP, UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_python" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1212,8 +1412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -1221,8 +1420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</p>
-</dd><dt class="property-optional"
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewall_rule_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewall_rule_description_python" style="color: inherit; text-decoration: inherit;">firewall_<wbr>rule_<wbr>description</a>
@@ -1230,8 +1428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Firewall rule description.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall rule description.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1239,8 +1436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</p>
-</dd></dl>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1254,8 +1450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol. Values: TCP, UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol. Values: TCP, UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_yaml" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1263,8 +1458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action. Values: ACCEPT, DROP. The default is <code>ACCEPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1272,8 +1466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</p>
-</dd><dt class="property-optional"
+    <dd>Network segment or IP (mutually exclusive). The default is <code>0.0.0.0</code>, indicating all sources.</dd><dt class="property-optional"
             title="Optional">
         <span id="firewallruledescription_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firewallruledescription_yaml" style="color: inherit; text-decoration: inherit;">firewall<wbr>Rule<wbr>Description</a>
@@ -1281,8 +1474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Firewall rule description.</p>
-</dd><dt class="property-optional"
+    <dd>Firewall rule description.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1290,8 +1482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</p>
-</dd></dl>
+    <dd>Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1299,12 +1490,15 @@ The following state arguments are supported:
 
 
 
-lighthouse firewall_template can be imported using the id, e.g.
+lighthouse firewallTemplate can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1316,7 +1510,6 @@ $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewa
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

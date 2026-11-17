@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Organization.Instance"
-meta_desc: "Documentation for the tencentcloud.Organization.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a organization organization"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,19 +18,57 @@ Provides a resource to create a organization organization
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const organization = new tencentcloud.organization.Instance("organization", {});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 organization = tencentcloud.organization.Instance("organization")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/organization"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := organization.NewInstance(ctx, "organization", nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -41,24 +81,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Organization.NewInstance(ctx, "organization", nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -66,8 +93,8 @@ import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Organization.Instance;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -84,69 +111,124 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   organization:
     type: tencentcloud:Organization:Instance
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_organization_instance" "organization" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateOrganization](https://www.tencentcloud.com/document/api/1031/66415)
+  - [DescribeOrganization](https://www.tencentcloud.com/document/api/1031/52049)
+  - [UpdateOrganizationNode](https://www.tencentcloud.com/document/api/1031/52059)
+* Read:
+  - [DescribeOrganization](https://www.tencentcloud.com/document/api/1031/52049)
+  - [DescribeOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52061)
+* Update:
+  - [DescribeOrganization](https://www.tencentcloud.com/document/api/1031/52049)
+  - [UpdateOrganizationNode](https://www.tencentcloud.com/document/api/1031/52059)
+* Delete: [DeleteOrganization](https://www.tencentcloud.com/document/api/1031/66414)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[InstanceArgs]</a></span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">root_node_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Organization:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Organization:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_organization_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -167,7 +249,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -284,11 +366,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -296,37 +386,99 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"></dl>
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="rootnodename_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodename_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"></dl>
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="rootnodename_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodename_go" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="root_node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_node_name_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"></dl>
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="rootnodename_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodename_java" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"></dl>
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="rootnodename_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodename_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"></dl>
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="root_node_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_node_name_python" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"></dl>
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="rootnodename_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodename_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -347,8 +499,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="hostuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostuin_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Uin</a>
@@ -356,8 +507,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -365,8 +515,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isallowquit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Quit</a>
@@ -374,8 +523,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isassignmanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isassignmanager_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Assign<wbr>Manager</a>
@@ -383,8 +531,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isauthmanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isauthmanager_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auth<wbr>Manager</a>
@@ -392,8 +539,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="ismanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismanager_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Manager</a>
@@ -401,8 +547,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="jointime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jointime_csharp" style="color: inherit; text-decoration: inherit;">Join<wbr>Time</a>
@@ -410,8 +555,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="nickname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_csharp" style="color: inherit; text-decoration: inherit;">Nick<wbr>Name</a>
@@ -419,8 +563,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgid_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Id</a>
@@ -428,8 +571,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpermissions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Permissions</a>
@@ -437,8 +579,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Organization.<wbr>Outputs.<wbr>Instance<wbr>Org<wbr>Permission&gt;</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Name</a>
@@ -446,8 +587,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Type</a>
@@ -455,8 +595,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgtype_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Type</a>
@@ -464,8 +603,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Name</a>
@@ -473,8 +611,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Uin</a>
@@ -482,8 +619,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="rootnodeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodeid_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Id</a>
@@ -491,8 +627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -506,8 +641,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="hostuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostuin_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Uin</a>
@@ -515,8 +649,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -524,8 +657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isallowquit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Quit</a>
@@ -533,8 +665,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isassignmanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isassignmanager_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Assign<wbr>Manager</a>
@@ -542,8 +673,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isauthmanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isauthmanager_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auth<wbr>Manager</a>
@@ -551,8 +681,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="ismanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismanager_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Manager</a>
@@ -560,8 +689,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="jointime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jointime_go" style="color: inherit; text-decoration: inherit;">Join<wbr>Time</a>
@@ -569,8 +697,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="nickname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_go" style="color: inherit; text-decoration: inherit;">Nick<wbr>Name</a>
@@ -578,8 +705,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgid_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Id</a>
@@ -587,8 +713,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpermissions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Permissions</a>
@@ -596,8 +721,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">[]Instance<wbr>Org<wbr>Permission</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Name</a>
@@ -605,8 +729,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Type</a>
@@ -614,8 +737,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgtype_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Type</a>
@@ -623,8 +745,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Name</a>
@@ -632,8 +753,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Uin</a>
@@ -641,8 +761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="rootnodeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodeid_go" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Id</a>
@@ -650,8 +769,149 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="host_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_uin_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="is_allow_quit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_quit_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>quit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="is_assign_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_assign_manager_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>assign_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="is_auth_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auth_manager_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auth_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="is_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_manager_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="join_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#join_time_hcl" style="color: inherit; text-decoration: inherit;">join_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="nick_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nick_name_hcl" style="color: inherit; text-decoration: inherit;">nick_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="org_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_id_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="org_permissions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_permissions_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>permissions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceorgpermission">list(object)</a></span>
+    </dt>
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="org_policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_name_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="org_policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_type_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="org_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_type_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="pay_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_name_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="pay_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_uin_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="root_node_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_node_id_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -665,8 +925,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="hostuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostuin_java" style="color: inherit; text-decoration: inherit;">host<wbr>Uin</a>
@@ -674,8 +933,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -683,8 +941,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isallowquit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_java" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -692,8 +949,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isassignmanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isassignmanager_java" style="color: inherit; text-decoration: inherit;">is<wbr>Assign<wbr>Manager</a>
@@ -701,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isauthmanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isauthmanager_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auth<wbr>Manager</a>
@@ -710,8 +965,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="ismanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismanager_java" style="color: inherit; text-decoration: inherit;">is<wbr>Manager</a>
@@ -719,8 +973,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="jointime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jointime_java" style="color: inherit; text-decoration: inherit;">join<wbr>Time</a>
@@ -728,8 +981,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="nickname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_java" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
@@ -737,8 +989,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgid_java" style="color: inherit; text-decoration: inherit;">org<wbr>Id</a>
@@ -746,8 +997,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpermissions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_java" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -755,8 +1005,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">List&lt;Instance<wbr>Org<wbr>Permission&gt;</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_java" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -764,8 +1013,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_java" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -773,8 +1021,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgtype_java" style="color: inherit; text-decoration: inherit;">org<wbr>Type</a>
@@ -782,8 +1029,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -791,8 +1037,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -800,8 +1045,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="rootnodeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodeid_java" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Id</a>
@@ -809,8 +1053,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -824,8 +1067,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="hostuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostuin_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Uin</a>
@@ -833,8 +1075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -842,8 +1083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isallowquit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -851,8 +1091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isassignmanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isassignmanager_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Assign<wbr>Manager</a>
@@ -860,8 +1099,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isauthmanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isauthmanager_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auth<wbr>Manager</a>
@@ -869,8 +1107,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="ismanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismanager_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Manager</a>
@@ -878,8 +1115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="jointime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jointime_nodejs" style="color: inherit; text-decoration: inherit;">join<wbr>Time</a>
@@ -887,8 +1123,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="nickname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_nodejs" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
@@ -896,8 +1131,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgid_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Id</a>
@@ -905,8 +1139,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpermissions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -914,8 +1147,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">Instance<wbr>Org<wbr>Permission[]</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -923,8 +1155,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -932,8 +1163,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgtype_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Type</a>
@@ -941,8 +1171,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -950,8 +1179,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -959,8 +1187,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="rootnodeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodeid_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Id</a>
@@ -968,8 +1195,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,8 +1209,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="host_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_uin_python" style="color: inherit; text-decoration: inherit;">host_<wbr>uin</a>
@@ -992,8 +1217,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1001,8 +1225,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="is_allow_quit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_allow_quit_python" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>quit</a>
@@ -1010,8 +1233,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="is_assign_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_assign_manager_python" style="color: inherit; text-decoration: inherit;">is_<wbr>assign_<wbr>manager</a>
@@ -1019,8 +1241,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="is_auth_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auth_manager_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auth_<wbr>manager</a>
@@ -1028,8 +1249,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="is_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_manager_python" style="color: inherit; text-decoration: inherit;">is_<wbr>manager</a>
@@ -1037,8 +1257,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="join_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#join_time_python" style="color: inherit; text-decoration: inherit;">join_<wbr>time</a>
@@ -1046,8 +1265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="nick_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nick_name_python" style="color: inherit; text-decoration: inherit;">nick_<wbr>name</a>
@@ -1055,8 +1273,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="org_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_id_python" style="color: inherit; text-decoration: inherit;">org_<wbr>id</a>
@@ -1064,17 +1281,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="org_permissions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_permissions_python" style="color: inherit; text-decoration: inherit;">org_<wbr>permissions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceorgpermission">Instance<wbr>Org<wbr>Permission]</a></span>
+        <span class="property-type"><a href="#instanceorgpermission">Sequence[Instance<wbr>Org<wbr>Permission]</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="org_policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_name_python" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>name</a>
@@ -1082,8 +1297,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="org_policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_policy_type_python" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>type</a>
@@ -1091,8 +1305,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="org_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#org_type_python" style="color: inherit; text-decoration: inherit;">org_<wbr>type</a>
@@ -1100,8 +1313,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="pay_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_name_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>name</a>
@@ -1109,8 +1321,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="pay_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_uin_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>uin</a>
@@ -1118,8 +1329,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="root_node_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_node_id_python" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>id</a>
@@ -1127,8 +1337,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1142,8 +1351,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="hostuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostuin_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Uin</a>
@@ -1151,8 +1359,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1160,8 +1367,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isallowquit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isallowquit_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -1169,8 +1375,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isassignmanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isassignmanager_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Assign<wbr>Manager</a>
@@ -1178,8 +1383,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="isauthmanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isauthmanager_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auth<wbr>Manager</a>
@@ -1187,8 +1391,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="ismanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismanager_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Manager</a>
@@ -1196,8 +1399,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="jointime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jointime_yaml" style="color: inherit; text-decoration: inherit;">join<wbr>Time</a>
@@ -1205,8 +1407,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="nickname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nickname_yaml" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
@@ -1214,8 +1415,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgid_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Id</a>
@@ -1223,8 +1423,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpermissions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpermissions_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -1232,8 +1431,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicyname_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -1241,8 +1439,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgpolicytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgpolicytype_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -1250,8 +1447,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="orgtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orgtype_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Type</a>
@@ -1259,8 +1455,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payname_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -1268,8 +1463,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="payuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#payuin_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -1277,8 +1471,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="rootnodeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootnodeid_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Id</a>
@@ -1286,8 +1479,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1297,18 +1489,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1321,111 +1513,151 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">join_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">nick_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">org_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">org_permissions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_organization.InstanceOrgPermissionArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">org_permissions</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceOrgPermissionArgs]]</span> = None<span class="p">,</span>
         <span class="nx">org_policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">org_policy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">org_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">pay_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">pay_uin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">root_node_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">root_node_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">root_node_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Organization:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_organization_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1433,28 +1665,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1462,28 +1697,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1503,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostuin_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Uin</a>
@@ -1512,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isallowquit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isallowquit_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Quit</a>
@@ -1521,8 +1757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isassignmanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isassignmanager_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Assign<wbr>Manager</a>
@@ -1530,8 +1765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isauthmanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isauthmanager_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auth<wbr>Manager</a>
@@ -1539,8 +1773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismanager_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Manager</a>
@@ -1548,8 +1781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jointime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jointime_csharp" style="color: inherit; text-decoration: inherit;">Join<wbr>Time</a>
@@ -1557,8 +1789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nickname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nickname_csharp" style="color: inherit; text-decoration: inherit;">Nick<wbr>Name</a>
@@ -1566,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgid_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Id</a>
@@ -1575,17 +1805,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpermissions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpermissions_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Permissions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceorgpermission">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Organization.<wbr>Inputs.<wbr>Instance<wbr>Org<wbr>Permission<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceorgpermission">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Organization.<wbr>Inputs.<wbr>Instance<wbr>Org<wbr>Permission&gt;</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicyname_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Name</a>
@@ -1593,8 +1821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicytype_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Type</a>
@@ -1602,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgtype_csharp" style="color: inherit; text-decoration: inherit;">Org<wbr>Type</a>
@@ -1611,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payname_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Name</a>
@@ -1620,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payuin_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Uin</a>
@@ -1629,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootnodeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodeid_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Id</a>
@@ -1638,8 +1861,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rootnodename_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodename_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1653,8 +1883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostuin_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Uin</a>
@@ -1662,8 +1891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isallowquit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isallowquit_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Allow<wbr>Quit</a>
@@ -1671,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isassignmanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isassignmanager_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Assign<wbr>Manager</a>
@@ -1680,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isauthmanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isauthmanager_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auth<wbr>Manager</a>
@@ -1689,8 +1915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismanager_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Manager</a>
@@ -1698,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jointime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jointime_go" style="color: inherit; text-decoration: inherit;">Join<wbr>Time</a>
@@ -1707,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nickname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nickname_go" style="color: inherit; text-decoration: inherit;">Nick<wbr>Name</a>
@@ -1716,8 +1939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgid_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Id</a>
@@ -1725,8 +1947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpermissions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpermissions_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Permissions</a>
@@ -1734,8 +1955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">[]Instance<wbr>Org<wbr>Permission<wbr>Args</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicyname_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Name</a>
@@ -1743,8 +1963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicytype_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Policy<wbr>Type</a>
@@ -1752,8 +1971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgtype_go" style="color: inherit; text-decoration: inherit;">Org<wbr>Type</a>
@@ -1761,8 +1979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payname_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Name</a>
@@ -1770,8 +1987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payuin_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Uin</a>
@@ -1779,8 +1995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootnodeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodeid_go" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Id</a>
@@ -1788,8 +2003,157 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rootnodename_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodename_go" style="color: inherit; text-decoration: inherit;">Root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_uin_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_allow_quit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_allow_quit_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>quit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_assign_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_assign_manager_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>assign_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_auth_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_auth_manager_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auth_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_manager_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_join_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_join_time_hcl" style="color: inherit; text-decoration: inherit;">join_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_nick_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nick_name_hcl" style="color: inherit; text-decoration: inherit;">nick_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_org_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_id_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_org_permissions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_permissions_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>permissions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceorgpermission">list(object)</a></span>
+    </dt>
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_org_policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_policy_name_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_org_policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_policy_type_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_org_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_type_hcl" style="color: inherit; text-decoration: inherit;">org_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pay_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pay_name_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pay_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pay_uin_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_root_node_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_node_id_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_root_node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_node_name_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1803,8 +2167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostuin_java" style="color: inherit; text-decoration: inherit;">host<wbr>Uin</a>
@@ -1812,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isallowquit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isallowquit_java" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -1821,8 +2183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isassignmanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isassignmanager_java" style="color: inherit; text-decoration: inherit;">is<wbr>Assign<wbr>Manager</a>
@@ -1830,8 +2191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isauthmanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isauthmanager_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auth<wbr>Manager</a>
@@ -1839,8 +2199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismanager_java" style="color: inherit; text-decoration: inherit;">is<wbr>Manager</a>
@@ -1848,8 +2207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jointime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jointime_java" style="color: inherit; text-decoration: inherit;">join<wbr>Time</a>
@@ -1857,8 +2215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nickname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nickname_java" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
@@ -1866,8 +2223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgid_java" style="color: inherit; text-decoration: inherit;">org<wbr>Id</a>
@@ -1875,17 +2231,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpermissions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpermissions_java" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceorgpermission">List&lt;Instance<wbr>Org<wbr>Permission<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceorgpermission">List&lt;Instance<wbr>Org<wbr>Permission&gt;</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicyname_java" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -1893,8 +2247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicytype_java" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -1902,8 +2255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgtype_java" style="color: inherit; text-decoration: inherit;">org<wbr>Type</a>
@@ -1911,8 +2263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payname_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -1920,8 +2271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payuin_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -1929,8 +2279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootnodeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodeid_java" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Id</a>
@@ -1938,8 +2287,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rootnodename_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodename_java" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1953,8 +2309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostuin_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Uin</a>
@@ -1962,8 +2317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isallowquit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isallowquit_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -1971,8 +2325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isassignmanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isassignmanager_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Assign<wbr>Manager</a>
@@ -1980,8 +2333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isauthmanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isauthmanager_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auth<wbr>Manager</a>
@@ -1989,8 +2341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismanager_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Manager</a>
@@ -1998,8 +2349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jointime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jointime_nodejs" style="color: inherit; text-decoration: inherit;">join<wbr>Time</a>
@@ -2007,8 +2357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nickname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nickname_nodejs" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
@@ -2016,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgid_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Id</a>
@@ -2025,17 +2373,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpermissions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpermissions_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceorgpermission">Instance<wbr>Org<wbr>Permission<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instanceorgpermission">Instance<wbr>Org<wbr>Permission[]</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicyname_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -2043,8 +2389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicytype_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -2052,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgtype_nodejs" style="color: inherit; text-decoration: inherit;">org<wbr>Type</a>
@@ -2061,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payname_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -2070,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payuin_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -2079,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootnodeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodeid_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Id</a>
@@ -2088,8 +2429,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rootnodename_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodename_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2103,8 +2451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_uin_python" style="color: inherit; text-decoration: inherit;">host_<wbr>uin</a>
@@ -2112,8 +2459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_allow_quit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_allow_quit_python" style="color: inherit; text-decoration: inherit;">is_<wbr>allow_<wbr>quit</a>
@@ -2121,8 +2467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_assign_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_assign_manager_python" style="color: inherit; text-decoration: inherit;">is_<wbr>assign_<wbr>manager</a>
@@ -2130,8 +2475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_auth_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_auth_manager_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auth_<wbr>manager</a>
@@ -2139,8 +2483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_manager_python" style="color: inherit; text-decoration: inherit;">is_<wbr>manager</a>
@@ -2148,8 +2491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_join_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_join_time_python" style="color: inherit; text-decoration: inherit;">join_<wbr>time</a>
@@ -2157,8 +2499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nick_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nick_name_python" style="color: inherit; text-decoration: inherit;">nick_<wbr>name</a>
@@ -2166,8 +2507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_org_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_id_python" style="color: inherit; text-decoration: inherit;">org_<wbr>id</a>
@@ -2175,17 +2515,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_org_permissions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_permissions_python" style="color: inherit; text-decoration: inherit;">org_<wbr>permissions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceorgpermission">Instance<wbr>Org<wbr>Permission<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instanceorgpermission">Sequence[Instance<wbr>Org<wbr>Permission<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_org_policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_policy_name_python" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>name</a>
@@ -2193,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_org_policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_policy_type_python" style="color: inherit; text-decoration: inherit;">org_<wbr>policy_<wbr>type</a>
@@ -2202,8 +2539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_org_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_org_type_python" style="color: inherit; text-decoration: inherit;">org_<wbr>type</a>
@@ -2211,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pay_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pay_name_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>name</a>
@@ -2220,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pay_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pay_uin_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>uin</a>
@@ -2229,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_root_node_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_node_id_python" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>id</a>
@@ -2238,8 +2571,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_root_node_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_node_name_python" style="color: inherit; text-decoration: inherit;">root_<wbr>node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2253,8 +2593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostuin_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Uin</a>
@@ -2262,8 +2601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isallowquit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isallowquit_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Allow<wbr>Quit</a>
@@ -2271,8 +2609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isassignmanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isassignmanager_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Assign<wbr>Manager</a>
@@ -2280,8 +2617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isauthmanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isauthmanager_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auth<wbr>Manager</a>
@@ -2289,8 +2625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismanager_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Manager</a>
@@ -2298,8 +2633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jointime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jointime_yaml" style="color: inherit; text-decoration: inherit;">join<wbr>Time</a>
@@ -2307,8 +2641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nickname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nickname_yaml" style="color: inherit; text-decoration: inherit;">nick<wbr>Name</a>
@@ -2316,8 +2649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgid_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Id</a>
@@ -2325,8 +2657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpermissions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpermissions_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Permissions</a>
@@ -2334,8 +2665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceorgpermission">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicyname_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Name</a>
@@ -2343,8 +2673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgpolicytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgpolicytype_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Policy<wbr>Type</a>
@@ -2352,8 +2681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orgtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orgtype_yaml" style="color: inherit; text-decoration: inherit;">org<wbr>Type</a>
@@ -2361,8 +2689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payname_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Name</a>
@@ -2370,8 +2697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_payuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_payuin_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Uin</a>
@@ -2379,8 +2705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootnodeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodeid_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Id</a>
@@ -2388,8 +2713,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rootnodename_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootnodename_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>Node<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Root node name.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2404,7 +2736,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instanceorgpermission">Instance<wbr>Org<wbr>Permission</h4>
+<h4 id="instanceorgpermission">
+Instance<wbr>Org<wbr>Permission<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Org<wbr>Permission<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2416,8 +2750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Permissions ID.</p>
-</dd><dt class="property-optional"
+    <dd>Permissions ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2425,8 +2758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2440,8 +2772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Permissions ID.</p>
-</dd><dt class="property-optional"
+    <dd>Permissions ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2449,8 +2780,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Permissions ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2464,8 +2816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Permissions ID.</p>
-</dd><dt class="property-optional"
+    <dd>Permissions ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2473,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2488,8 +2838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Permissions ID.</p>
-</dd><dt class="property-optional"
+    <dd>Permissions ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2497,8 +2846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2512,8 +2860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Permissions ID.</p>
-</dd><dt class="property-optional"
+    <dd>Permissions ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2521,8 +2868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2536,8 +2882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Permissions ID.</p>
-</dd><dt class="property-optional"
+    <dd>Permissions ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2545,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Permission name.</p>
-</dd></dl>
+    <dd>Permission name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2562,6 +2906,9 @@ $ pulumi import tencentcloud:Organization/instance:Instance organization organiz
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2571,7 +2918,6 @@ $ pulumi import tencentcloud:Organization/instance:Instance organization organiz
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

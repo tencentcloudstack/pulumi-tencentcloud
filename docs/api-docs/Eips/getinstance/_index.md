@@ -2,9 +2,11 @@
 ---
 title: "getInstance"
 title_tag: "tencentcloud.Eips.getInstance"
-meta_desc: "Documentation for the tencentcloud.Eips.getInstance function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query eip instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,42 +20,45 @@ Use this data source to query eip instances.
 
 ### Query all eip instances
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Eips.getInstance({});
+const example = tencentcloud.eips.getInstance({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Eips.get_instance()
+example = tencentcloud.eips.get_instance()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Eips.GetInstance.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eips"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eips"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eips.GetInstance(ctx, nil, nil)
+		_, err := eips.GetInstance(ctx, &eips.GetInstanceArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -61,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Eips.GetInstance.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -69,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eips.EipsFunctions;
 import com.pulumi.tencentcloud.Eips.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -82,42 +109,107 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var example = EipsFunctions.getInstance();
+        final var example = EipsFunctions.getInstance(GetInstanceArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Eips:getInstance
-      Arguments: {}
+      function: tencentcloud:Eips:getInstance
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_eips_getinstance" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query eip instances by eip ID
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Eips.getInstance({
+const example = tencentcloud.eips.getInstance({
     eipId: "eip-ry9h95hg",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Eips.get_instance(eip_id="eip-ry9h95hg")
+example = tencentcloud.eips.get_instance(eip_id="eip-ry9h95hg")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eips"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := eips.GetInstance(ctx, &eips.GetInstanceArgs{
+			EipId: pulumi.StringRef("eip-ry9h95hg"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -128,26 +220,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eips"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eips.GetInstance(ctx, &eips.GetInstanceArgs{
-			EipId: pulumi.StringRef("eip-ry9h95hg"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -156,8 +233,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eips.EipsFunctions;
 import com.pulumi.tencentcloud.Eips.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -176,38 +253,103 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Eips:getInstance
-      Arguments:
+      function: tencentcloud:Eips:getInstance
+      arguments:
         eipId: eip-ry9h95hg
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_eips_getinstance" "example" {
+  eip_id = "eip-ry9h95hg"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query eip instances by eip name
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Eips.getInstance({
+const example = tencentcloud.eips.getInstance({
     eipName: "tf-example",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Eips.get_instance(eip_name="tf-example")
+example = tencentcloud.eips.get_instance(eip_name="tf-example")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eips"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := eips.GetInstance(ctx, &eips.GetInstanceArgs{
+			EipName: pulumi.StringRef("tf-example"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -218,26 +360,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eips"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eips.GetInstance(ctx, &eips.GetInstanceArgs{
-			EipName: pulumi.StringRef("tf-example"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -246,8 +373,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eips.EipsFunctions;
 import com.pulumi.tencentcloud.Eips.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -266,38 +393,103 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Eips:getInstance
-      Arguments:
+      function: tencentcloud:Eips:getInstance
+      arguments:
         eipName: tf-example
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_eips_getinstance" "example" {
+  eip_name = "tf-example"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query eip instances by public ip
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Eips.getInstance({
+const example = tencentcloud.eips.getInstance({
     publicIp: "1.12.62.3",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Eips.get_instance(public_ip="1.12.62.3")
+example = tencentcloud.eips.get_instance(public_ip="1.12.62.3")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eips"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := eips.GetInstance(ctx, &eips.GetInstanceArgs{
+			PublicIp: pulumi.StringRef("1.12.62.3"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -308,26 +500,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eips"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eips.GetInstance(ctx, &eips.GetInstanceArgs{
-			PublicIp: pulumi.StringRef("1.12.62.3"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -336,8 +513,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eips.EipsFunctions;
 import com.pulumi.tencentcloud.Eips.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -356,42 +533,109 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Eips:getInstance
-      Arguments:
+      function: tencentcloud:Eips:getInstance
+      arguments:
         publicIp: 1.12.62.3
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_eips_getinstance" "example" {
+  public_ip = "1.12.62.3"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query eip instances by tags
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Eips.getInstance({
+const example = tencentcloud.eips.getInstance({
     tags: {
         test: "test",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Eips.get_instance(tags={
+example = tencentcloud.eips.get_instance(tags={
     "test": "test",
 })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eips"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := eips.GetInstance(ctx, &eips.GetInstanceArgs{
+			Tags: map[string]string{
+				"test": "test",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -405,28 +649,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eips"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eips.GetInstance(ctx, &eips.GetInstanceArgs{
-			Tags: map[string]interface{}{
-				"test": "test",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -435,8 +662,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eips.EipsFunctions;
 import com.pulumi.tencentcloud.Eips.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -455,17 +682,51 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Eips:getInstance
-      Arguments:
+      function: tencentcloud:Eips:getInstance
+      arguments:
         tags:
           test: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_eips_getinstance" "example" {
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
 
@@ -477,7 +738,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -485,9 +746,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -500,15 +761,15 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">eip_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">public_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">eip_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">eip_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">public_ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">eip_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">eip_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">public_ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -533,7 +794,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -542,7 +804,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -554,6 +817,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Eips/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_eips_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -572,8 +844,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Name</a>
@@ -581,8 +852,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -590,8 +860,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic ip address.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -599,17 +868,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -623,8 +890,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Name</a>
@@ -632,8 +898,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -641,8 +906,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic ip address.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -650,17 +914,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="eip_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eip_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_name_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The elastic ip address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -674,8 +982,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -683,8 +990,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -692,8 +998,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic ip address.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -701,17 +1006,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -725,8 +1028,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -734,8 +1036,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -743,8 +1044,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic ip address.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -752,17 +1052,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -776,8 +1074,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="eip_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_name_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>name</a>
@@ -785,8 +1082,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -794,8 +1090,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic ip address.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -803,17 +1098,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +1120,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="eipname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -836,8 +1128,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -845,8 +1136,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic ip address.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -854,17 +1144,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeiplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eips.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>Eip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of EIP. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -896,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="eipid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Id</a>
@@ -905,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the EIP.</dd><dt class="property-"
             title="">
         <span id="eipname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Name</a>
@@ -914,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the EIP.</dd><dt class="property-"
             title="">
         <span id="publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -923,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-"
+    <dd>The elastic ip address.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -938,10 +1221,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the EIP.</p>
-</dd></dl>
+    <dd>Tags of the EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeiplist">[]Get<wbr>Instance<wbr>Eip<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of EIP. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -964,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="eipid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Id</a>
@@ -973,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the EIP.</dd><dt class="property-"
             title="">
         <span id="eipname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Name</a>
@@ -982,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the EIP.</dd><dt class="property-"
             title="">
         <span id="publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -991,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-"
+    <dd>The elastic ip address.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1006,10 +1283,71 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the EIP.</p>
-</dd></dl>
+    <dd>Tags of the EIP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="eip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_lists_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeiplist">list(object)</a></span>
+    </dt>
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="eip_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the EIP.</dd><dt class="property-"
+            title="">
+        <span id="eip_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_name_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the EIP.</dd><dt class="property-"
+            title="">
+        <span id="public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The elastic ip address.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeiplist">List&lt;Get<wbr>Instance<wbr>Eip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of EIP. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1032,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="eipid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -1041,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the EIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the EIP.</dd><dt class="property-"
             title="">
         <span id="eipname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -1050,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the EIP.</dd><dt class="property-"
             title="">
         <span id="publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1059,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-"
+    <dd>The elastic ip address.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1074,10 +1407,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the EIP.</p>
-</dd></dl>
+    <dd>Tags of the EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1091,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeiplist">Get<wbr>Instance<wbr>Eip<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of EIP. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1100,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="eipid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -1109,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the EIP.</dd><dt class="property-"
             title="">
         <span id="eipname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -1118,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the EIP.</dd><dt class="property-"
             title="">
         <span id="publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1127,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-"
+    <dd>The elastic ip address.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1142,10 +1469,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the EIP.</p>
-</dd></dl>
+    <dd>Tags of the EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,10 +1483,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_lists_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceeiplist">Get<wbr>Instance<wbr>Eip<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstanceeiplist">Sequence[Get<wbr>Instance<wbr>Eip<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of EIP. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1168,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="eip_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_id_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
@@ -1177,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the EIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the EIP.</dd><dt class="property-"
             title="">
         <span id="eip_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_name_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>name</a>
@@ -1186,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the EIP.</dd><dt class="property-"
             title="">
         <span id="public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -1195,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-"
+    <dd>The elastic ip address.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1210,10 +1531,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the EIP.</p>
-</dd></dl>
+    <dd>Tags of the EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeiplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of EIP. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of EIP. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1236,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="eipid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -1245,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the EIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the EIP.</dd><dt class="property-"
             title="">
         <span id="eipname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -1254,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the EIP.</dd><dt class="property-"
             title="">
         <span id="publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1263,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-"
+    <dd>The elastic ip address.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1278,10 +1593,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the EIP.</p>
-</dd></dl>
+    <dd>Tags of the EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1305,8 +1619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eipid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Id</a>
@@ -1314,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eipname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Name</a>
@@ -1323,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eiptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiptype_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Type</a>
@@ -1332,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Type of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eniid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniid_csharp" style="color: inherit; text-decoration: inherit;">Eni<wbr>Id</a>
@@ -1341,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The eni id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1350,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1359,8 +1667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-required"
+    <dd>The elastic ip address.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1368,17 +1675,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-required"
+    <dd>The EIP current status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1392,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eipid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Id</a>
@@ -1401,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eipname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Name</a>
@@ -1410,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eiptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiptype_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Type</a>
@@ -1419,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Type of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eniid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniid_go" style="color: inherit; text-decoration: inherit;">Eni<wbr>Id</a>
@@ -1428,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The eni id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1437,8 +1737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1446,8 +1745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-required"
+    <dd>The elastic ip address.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1455,17 +1753,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-required"
+    <dd>The EIP current status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_name_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="eip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_type_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the EIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="eni_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_id_hcl" style="color: inherit; text-decoration: inherit;">eni_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The elastic ip address.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The EIP current status.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1479,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eipid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -1488,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eipname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -1497,8 +1869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eiptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiptype_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Type</a>
@@ -1506,8 +1877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Type of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eniid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniid_java" style="color: inherit; text-decoration: inherit;">eni<wbr>Id</a>
@@ -1515,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The eni id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1524,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1533,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-required"
+    <dd>The elastic ip address.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1542,17 +1909,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-required"
+    <dd>The EIP current status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1566,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eipid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -1575,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eipname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -1584,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eiptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiptype_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Type</a>
@@ -1593,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Type of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eniid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniid_nodejs" style="color: inherit; text-decoration: inherit;">eni<wbr>Id</a>
@@ -1602,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The eni id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1611,8 +1971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1620,8 +1979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-required"
+    <dd>The elastic ip address.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1629,17 +1987,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-required"
+    <dd>The EIP current status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1653,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eip_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_id_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
@@ -1662,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eip_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_name_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>name</a>
@@ -1671,8 +2025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_type_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>type</a>
@@ -1680,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Type of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eni_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_id_python" style="color: inherit; text-decoration: inherit;">eni_<wbr>id</a>
@@ -1689,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The eni id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1698,8 +2049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -1707,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-required"
+    <dd>The elastic ip address.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1716,17 +2065,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-required"
+    <dd>The EIP current status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1740,8 +2087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eipid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipid_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -1749,8 +2095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eipname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipname_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Name</a>
@@ -1758,8 +2103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the EIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the EIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="eiptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eiptype_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Type</a>
@@ -1767,8 +2111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Type of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="eniid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniid_yaml" style="color: inherit; text-decoration: inherit;">eni<wbr>Id</a>
@@ -1776,8 +2119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The eni id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The eni id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1785,8 +2127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance id to bind with the EIP.</p>
-</dd><dt class="property-required"
+    <dd>The instance id to bind with the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1794,8 +2135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic ip address.</p>
-</dd><dt class="property-required"
+    <dd>The elastic ip address.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1803,17 +2143,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-required"
+    <dd>The EIP current status.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of EIP.</p>
-</dd></dl>
+    <dd>The tags of EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1828,7 +2166,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

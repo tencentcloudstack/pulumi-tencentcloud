@@ -2,9 +2,11 @@
 ---
 title: "getNamespaces"
 title_tag: "tencentcloud.Tcr.getNamespaces"
-meta_desc: "Documentation for the tencentcloud.Tcr.getNamespaces function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of TCR namespaces."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query detailed information of TCR namespaces.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const name = tencentcloud.Tcr.getNamespaces({
+const name = tencentcloud.tcr.getNamespaces({
     instanceId: "cls-satg5125",
     namespaceName: "test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-name = tencentcloud.Tcr.get_namespaces(instance_id="cls-satg5125",
+name = tencentcloud.tcr.get_namespaces(instance_id="cls-satg5125",
     namespace_name="test")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcr.GetNamespaces(ctx, &tcr.GetNamespacesArgs{
+			InstanceId:    "cls-satg5125",
+			NamespaceName: pulumi.StringRef("test"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcr.GetNamespaces(ctx, &tcr.GetNamespacesArgs{
-			InstanceId:    "cls-satg5125",
-			NamespaceName: pulumi.StringRef("test"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.TcrFunctions;
 import com.pulumi.tencentcloud.Tcr.inputs.GetNamespacesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:Tcr:getNamespaces
-      Arguments:
+      function: tencentcloud:Tcr:getNamespaces
+      arguments:
         instanceId: cls-satg5125
         namespaceName: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcr_getnamespaces" "name" {
+  instance_id    = "cls-satg5125"
+  namespace_name = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getNamespaces<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
+><span class="k">function </span>getNamespaces<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
 ><span class="k">
-function </span>getNamespacesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
+function </span>getNamespacesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getNamespacesOutput<span class="p">(</span><span class="nx">args
                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetNamespacesResult</span
 ><span class="k">
-def </span>get_namespaces_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetNamespacesResult]</span
+def </span>get_namespaces_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetNamespacesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetNamespacesOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetNamespaces </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNamespacesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNamespacesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNamespacesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetNamespacesOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> </span>getNamespaces<span class="p">(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> </span>getNamespaces<span class="p">(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> </span>getNamespaces<span class="p">(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetNamespacesOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcr/getNamespaces:getNamespaces
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcr_get_namespaces&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance that the namespace belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR namespace to query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance that the namespace belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR namespace to query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance that the namespace belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR namespace to query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance that the namespace belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR namespace to query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instance that the namespace belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR namespace to query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance that the namespace belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the namespace belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR namespace to query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR namespace to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -436,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespacelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Outputs.<wbr>Get<wbr>Namespaces<wbr>Namespace<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR namespaces.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
             title="">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -467,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -484,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespacelist">[]Get<wbr>Namespaces<wbr>Namespace<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR namespaces.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
             title="">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -506,6 +583,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="namespace_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_lists_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getnamespacesnamespacelist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
+            title="">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -515,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -532,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespacelist">List&lt;Get<wbr>Namespaces<wbr>Namespace<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR namespaces.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
             title="">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -563,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -580,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespacelist">Get<wbr>Namespaces<wbr>Namespace<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR namespaces.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
             title="">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -611,8 +730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -626,10 +744,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_lists_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getnamespacesnamespacelist">Get<wbr>Namespaces<wbr>Namespace<wbr>List]</a></span>
+        <span class="property-type"><a href="#getnamespacesnamespacelist">Sequence[Get<wbr>Namespaces<wbr>Namespace<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR namespaces.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
             title="">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -659,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -676,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespacelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR namespaces.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR namespaces.</dd><dt class="property-"
             title="">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -717,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of TCR namespace.</p>
-</dd><dt class="property-required"
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
             title="Required">
         <span id="ispublic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Public</a>
@@ -726,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -735,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of TCR namespace.</p>
-</dd></dl>
+    <dd>Name of TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -750,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of TCR namespace.</p>
-</dd><dt class="property-required"
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
             title="Required">
         <span id="ispublic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Public</a>
@@ -759,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -768,8 +878,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of TCR namespace.</p>
-</dd></dl>
+    <dd>Name of TCR namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_public_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_public_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>public</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -783,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of TCR namespace.</p>
-</dd><dt class="property-required"
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
             title="Required">
         <span id="ispublic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_java" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -792,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -801,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of TCR namespace.</p>
-</dd></dl>
+    <dd>Name of TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -816,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of TCR namespace.</p>
-</dd><dt class="property-required"
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
             title="Required">
         <span id="ispublic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -825,8 +960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -834,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of TCR namespace.</p>
-</dd></dl>
+    <dd>Name of TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -849,8 +982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of TCR namespace.</p>
-</dd><dt class="property-required"
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
             title="Required">
         <span id="is_public_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_public_python" style="color: inherit; text-decoration: inherit;">is_<wbr>public</a>
@@ -858,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -867,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of TCR namespace.</p>
-</dd></dl>
+    <dd>Name of TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -882,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of TCR namespace.</p>
-</dd><dt class="property-required"
+    <dd>ID of TCR namespace.</dd><dt class="property-required"
             title="Required">
         <span id="ispublic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -891,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the namespace is public or not.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -900,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of TCR namespace.</p>
-</dd></dl>
+    <dd>Name of TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -916,7 +1043,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

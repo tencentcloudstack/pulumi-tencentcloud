@@ -2,9 +2,11 @@
 ---
 title: "Parameters"
 title_tag: "tencentcloud.Mariadb.Parameters"
-meta_desc: "Documentation for the tencentcloud.Mariadb.Parameters resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a mariadb parameters"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,18 @@ Provides a resource to create a mariadb parameters
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const parameters = new tencentcloud.mariadb.Parameters("parameters", {
-    instanceId: "tdsql-4pzs5b67",
+const example = new tencentcloud.mariadb.Parameters("example", {
+    instanceId: "tdsql-5n00ev40zl",
     params: [
         {
             param: "auto_increment_increment",
@@ -35,6 +42,14 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
         {
             param: "autocommit",
             value: "ON",
+        },
+        {
+            param: "binlog_transaction_dependency_history_size",
+            value: "25000",
+        },
+        {
+            param: "binlog_write_threshold",
+            value: "1610612736",
         },
         {
             param: "character_set_server",
@@ -58,7 +73,7 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
         },
         {
             param: "default_collation_for_utf8mb4",
-            value: "utf8mb4_general_ci",
+            value: "utf8mb4_0900_ai_ci",
         },
         {
             param: "default_week_format",
@@ -89,12 +104,32 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
             value: "ON",
         },
         {
+            param: "explicit_defaults_for_timestamp",
+            value: "ON",
+        },
+        {
             param: "group_concat_max_len",
             value: "1024",
         },
         {
+            param: "innodb_autoinc_lock_mode",
+            value: "2",
+        },
+        {
+            param: "innodb_backquery_enable",
+            value: "OFF",
+        },
+        {
+            param: "innodb_backquery_window",
+            value: "86400",
+        },
+        {
             param: "innodb_concurrency_tickets",
             value: "5000",
+        },
+        {
+            param: "innodb_encryption_algorithm",
+            value: "AES",
         },
         {
             param: "innodb_flush_log_at_trx_commit",
@@ -107,6 +142,10 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
         {
             param: "innodb_max_dirty_pages_pct",
             value: "70.000000",
+        },
+        {
+            param: "innodb_max_undo_log_size",
+            value: "1073741824",
         },
         {
             param: "innodb_old_blocks_pct",
@@ -134,7 +173,7 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
         },
         {
             param: "innodb_strict_mode",
-            value: "OFF",
+            value: "ON",
         },
         {
             param: "innodb_table_locks",
@@ -147,6 +186,10 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
         {
             param: "interactive_timeout",
             value: "28800",
+        },
+        {
+            param: "join_buffer_size",
+            value: "2097152",
         },
         {
             param: "key_cache_age_threshold",
@@ -179,6 +222,10 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
         {
             param: "low_priority_updates",
             value: "OFF",
+        },
+        {
+            param: "lower_case_table_names",
+            value: "1",
         },
         {
             param: "max_allowed_packet",
@@ -225,12 +272,24 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
             value: "300",
         },
         {
+            param: "optimizer_switch",
+            value: "batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off",
+        },
+        {
+            param: "performance_schema",
+            value: "ON",
+        },
+        {
             param: "query_alloc_block_size",
             value: "16384",
         },
         {
             param: "query_prealloc_size",
             value: "24576",
+        },
+        {
+            param: "reject_table_no_pk",
+            value: "1",
         },
         {
             param: "slow_launch_time",
@@ -269,6 +328,14 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
             value: "20480",
         },
         {
+            param: "thread_pool_oversubscribe",
+            value: "30",
+        },
+        {
+            param: "thread_pool_size",
+            value: "24",
+        },
+        {
             param: "time_zone",
             value: "+08:00",
         },
@@ -287,275 +354,692 @@ const parameters = new tencentcloud.mariadb.Parameters("parameters", {
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-parameters = tencentcloud.mariadb.Parameters("parameters",
-    instance_id="tdsql-4pzs5b67",
+example = tencentcloud.mariadb.Parameters("example",
+    instance_id="tdsql-5n00ev40zl",
     params=[
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="auto_increment_increment",
-            value="1",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="auto_increment_offset",
-            value="1",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="autocommit",
-            value="ON",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="character_set_server",
-            value="utf8mb4",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="collation_connection",
-            value="utf8mb4_general_ci",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="collation_database",
-            value="utf8mb4_general_ci",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="collation_server",
-            value="utf8mb4_general_ci",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="connect_timeout",
-            value="10",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="default_collation_for_utf8mb4",
-            value="utf8mb4_general_ci",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="default_week_format",
-            value="0",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="delay_key_write",
-            value="ON",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="delayed_insert_limit",
-            value="100",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="delayed_insert_timeout",
-            value="300",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="delayed_queue_size",
-            value="1000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="div_precision_increment",
-            value="4",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="event_scheduler",
-            value="ON",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="group_concat_max_len",
-            value="1024",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_concurrency_tickets",
-            value="5000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_flush_log_at_trx_commit",
-            value="1",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_lock_wait_timeout",
-            value="20",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_max_dirty_pages_pct",
-            value="70.000000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_old_blocks_pct",
-            value="37",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_old_blocks_time",
-            value="1000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_purge_batch_size",
-            value="1000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_read_ahead_threshold",
-            value="56",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_stats_method",
-            value="nulls_equal",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_stats_on_metadata",
-            value="OFF",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_strict_mode",
-            value="OFF",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_table_locks",
-            value="ON",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="innodb_thread_concurrency",
-            value="0",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="interactive_timeout",
-            value="28800",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="key_cache_age_threshold",
-            value="300",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="key_cache_block_size",
-            value="1024",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="key_cache_division_limit",
-            value="100",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="local_infile",
-            value="OFF",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="lock_wait_timeout",
-            value="5",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="log_queries_not_using_indexes",
-            value="OFF",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="long_query_time",
-            value="1.000000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="low_priority_updates",
-            value="OFF",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="max_allowed_packet",
-            value="1073741824",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="max_binlog_size",
-            value="536870912",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="max_connect_errors",
-            value="2000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="max_connections",
-            value="10000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="max_execution_time",
-            value="0",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="max_prepared_stmt_count",
-            value="200000",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="myisam_sort_buffer_size",
-            value="4194304",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="net_buffer_length",
-            value="16384",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="net_read_timeout",
-            value="150",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="net_retry_count",
-            value="10",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="net_write_timeout",
-            value="300",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="query_alloc_block_size",
-            value="16384",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="query_prealloc_size",
-            value="24576",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="slow_launch_time",
-            value="2",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="sort_buffer_size",
-            value="2097152",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="sql_mode",
-            value="NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="sql_require_primary_key",
-            value="ON",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="sql_safe_updates",
-            value="OFF",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="sqlasyntimeout",
-            value="30",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="sync_binlog",
-            value="1",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="table_definition_cache",
-            value="10240",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="table_open_cache",
-            value="20480",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="time_zone",
-            value="+08:00",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="tmp_table_size",
-            value="33554432",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="tx_isolation",
-            value="READ-COMMITTED",
-        ),
-        tencentcloud.mariadb.ParametersParamArgs(
-            param="wait_timeout",
-            value="28800",
-        ),
+        {
+            "param": "auto_increment_increment",
+            "value": "1",
+        },
+        {
+            "param": "auto_increment_offset",
+            "value": "1",
+        },
+        {
+            "param": "autocommit",
+            "value": "ON",
+        },
+        {
+            "param": "binlog_transaction_dependency_history_size",
+            "value": "25000",
+        },
+        {
+            "param": "binlog_write_threshold",
+            "value": "1610612736",
+        },
+        {
+            "param": "character_set_server",
+            "value": "utf8mb4",
+        },
+        {
+            "param": "collation_connection",
+            "value": "utf8mb4_general_ci",
+        },
+        {
+            "param": "collation_database",
+            "value": "utf8mb4_general_ci",
+        },
+        {
+            "param": "collation_server",
+            "value": "utf8mb4_general_ci",
+        },
+        {
+            "param": "connect_timeout",
+            "value": "10",
+        },
+        {
+            "param": "default_collation_for_utf8mb4",
+            "value": "utf8mb4_0900_ai_ci",
+        },
+        {
+            "param": "default_week_format",
+            "value": "0",
+        },
+        {
+            "param": "delay_key_write",
+            "value": "ON",
+        },
+        {
+            "param": "delayed_insert_limit",
+            "value": "100",
+        },
+        {
+            "param": "delayed_insert_timeout",
+            "value": "300",
+        },
+        {
+            "param": "delayed_queue_size",
+            "value": "1000",
+        },
+        {
+            "param": "div_precision_increment",
+            "value": "4",
+        },
+        {
+            "param": "event_scheduler",
+            "value": "ON",
+        },
+        {
+            "param": "explicit_defaults_for_timestamp",
+            "value": "ON",
+        },
+        {
+            "param": "group_concat_max_len",
+            "value": "1024",
+        },
+        {
+            "param": "innodb_autoinc_lock_mode",
+            "value": "2",
+        },
+        {
+            "param": "innodb_backquery_enable",
+            "value": "OFF",
+        },
+        {
+            "param": "innodb_backquery_window",
+            "value": "86400",
+        },
+        {
+            "param": "innodb_concurrency_tickets",
+            "value": "5000",
+        },
+        {
+            "param": "innodb_encryption_algorithm",
+            "value": "AES",
+        },
+        {
+            "param": "innodb_flush_log_at_trx_commit",
+            "value": "1",
+        },
+        {
+            "param": "innodb_lock_wait_timeout",
+            "value": "20",
+        },
+        {
+            "param": "innodb_max_dirty_pages_pct",
+            "value": "70.000000",
+        },
+        {
+            "param": "innodb_max_undo_log_size",
+            "value": "1073741824",
+        },
+        {
+            "param": "innodb_old_blocks_pct",
+            "value": "37",
+        },
+        {
+            "param": "innodb_old_blocks_time",
+            "value": "1000",
+        },
+        {
+            "param": "innodb_purge_batch_size",
+            "value": "1000",
+        },
+        {
+            "param": "innodb_read_ahead_threshold",
+            "value": "56",
+        },
+        {
+            "param": "innodb_stats_method",
+            "value": "nulls_equal",
+        },
+        {
+            "param": "innodb_stats_on_metadata",
+            "value": "OFF",
+        },
+        {
+            "param": "innodb_strict_mode",
+            "value": "ON",
+        },
+        {
+            "param": "innodb_table_locks",
+            "value": "ON",
+        },
+        {
+            "param": "innodb_thread_concurrency",
+            "value": "0",
+        },
+        {
+            "param": "interactive_timeout",
+            "value": "28800",
+        },
+        {
+            "param": "join_buffer_size",
+            "value": "2097152",
+        },
+        {
+            "param": "key_cache_age_threshold",
+            "value": "300",
+        },
+        {
+            "param": "key_cache_block_size",
+            "value": "1024",
+        },
+        {
+            "param": "key_cache_division_limit",
+            "value": "100",
+        },
+        {
+            "param": "local_infile",
+            "value": "OFF",
+        },
+        {
+            "param": "lock_wait_timeout",
+            "value": "5",
+        },
+        {
+            "param": "log_queries_not_using_indexes",
+            "value": "OFF",
+        },
+        {
+            "param": "long_query_time",
+            "value": "1.000000",
+        },
+        {
+            "param": "low_priority_updates",
+            "value": "OFF",
+        },
+        {
+            "param": "lower_case_table_names",
+            "value": "1",
+        },
+        {
+            "param": "max_allowed_packet",
+            "value": "1073741824",
+        },
+        {
+            "param": "max_binlog_size",
+            "value": "536870912",
+        },
+        {
+            "param": "max_connect_errors",
+            "value": "2000",
+        },
+        {
+            "param": "max_connections",
+            "value": "10000",
+        },
+        {
+            "param": "max_execution_time",
+            "value": "0",
+        },
+        {
+            "param": "max_prepared_stmt_count",
+            "value": "200000",
+        },
+        {
+            "param": "myisam_sort_buffer_size",
+            "value": "4194304",
+        },
+        {
+            "param": "net_buffer_length",
+            "value": "16384",
+        },
+        {
+            "param": "net_read_timeout",
+            "value": "150",
+        },
+        {
+            "param": "net_retry_count",
+            "value": "10",
+        },
+        {
+            "param": "net_write_timeout",
+            "value": "300",
+        },
+        {
+            "param": "optimizer_switch",
+            "value": "batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off",
+        },
+        {
+            "param": "performance_schema",
+            "value": "ON",
+        },
+        {
+            "param": "query_alloc_block_size",
+            "value": "16384",
+        },
+        {
+            "param": "query_prealloc_size",
+            "value": "24576",
+        },
+        {
+            "param": "reject_table_no_pk",
+            "value": "1",
+        },
+        {
+            "param": "slow_launch_time",
+            "value": "2",
+        },
+        {
+            "param": "sort_buffer_size",
+            "value": "2097152",
+        },
+        {
+            "param": "sql_mode",
+            "value": "NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES",
+        },
+        {
+            "param": "sql_require_primary_key",
+            "value": "ON",
+        },
+        {
+            "param": "sql_safe_updates",
+            "value": "OFF",
+        },
+        {
+            "param": "sqlasyntimeout",
+            "value": "30",
+        },
+        {
+            "param": "sync_binlog",
+            "value": "1",
+        },
+        {
+            "param": "table_definition_cache",
+            "value": "10240",
+        },
+        {
+            "param": "table_open_cache",
+            "value": "20480",
+        },
+        {
+            "param": "thread_pool_oversubscribe",
+            "value": "30",
+        },
+        {
+            "param": "thread_pool_size",
+            "value": "24",
+        },
+        {
+            "param": "time_zone",
+            "value": "+08:00",
+        },
+        {
+            "param": "tmp_table_size",
+            "value": "33554432",
+        },
+        {
+            "param": "tx_isolation",
+            "value": "READ-COMMITTED",
+        },
+        {
+            "param": "wait_timeout",
+            "value": "28800",
+        },
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mariadb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := mariadb.NewParameters(ctx, "example", &mariadb.ParametersArgs{
+			InstanceId: pulumi.String("tdsql-5n00ev40zl"),
+			Params: mariadb.ParametersParamArray{
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("auto_increment_increment"),
+					Value: pulumi.String("1"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("auto_increment_offset"),
+					Value: pulumi.String("1"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("autocommit"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("binlog_transaction_dependency_history_size"),
+					Value: pulumi.String("25000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("binlog_write_threshold"),
+					Value: pulumi.String("1610612736"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("character_set_server"),
+					Value: pulumi.String("utf8mb4"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("collation_connection"),
+					Value: pulumi.String("utf8mb4_general_ci"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("collation_database"),
+					Value: pulumi.String("utf8mb4_general_ci"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("collation_server"),
+					Value: pulumi.String("utf8mb4_general_ci"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("connect_timeout"),
+					Value: pulumi.String("10"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("default_collation_for_utf8mb4"),
+					Value: pulumi.String("utf8mb4_0900_ai_ci"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("default_week_format"),
+					Value: pulumi.String("0"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("delay_key_write"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("delayed_insert_limit"),
+					Value: pulumi.String("100"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("delayed_insert_timeout"),
+					Value: pulumi.String("300"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("delayed_queue_size"),
+					Value: pulumi.String("1000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("div_precision_increment"),
+					Value: pulumi.String("4"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("event_scheduler"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("explicit_defaults_for_timestamp"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("group_concat_max_len"),
+					Value: pulumi.String("1024"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_autoinc_lock_mode"),
+					Value: pulumi.String("2"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_backquery_enable"),
+					Value: pulumi.String("OFF"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_backquery_window"),
+					Value: pulumi.String("86400"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_concurrency_tickets"),
+					Value: pulumi.String("5000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_encryption_algorithm"),
+					Value: pulumi.String("AES"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_flush_log_at_trx_commit"),
+					Value: pulumi.String("1"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_lock_wait_timeout"),
+					Value: pulumi.String("20"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_max_dirty_pages_pct"),
+					Value: pulumi.String("70.000000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_max_undo_log_size"),
+					Value: pulumi.String("1073741824"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_old_blocks_pct"),
+					Value: pulumi.String("37"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_old_blocks_time"),
+					Value: pulumi.String("1000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_purge_batch_size"),
+					Value: pulumi.String("1000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_read_ahead_threshold"),
+					Value: pulumi.String("56"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_stats_method"),
+					Value: pulumi.String("nulls_equal"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_stats_on_metadata"),
+					Value: pulumi.String("OFF"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_strict_mode"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_table_locks"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("innodb_thread_concurrency"),
+					Value: pulumi.String("0"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("interactive_timeout"),
+					Value: pulumi.String("28800"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("join_buffer_size"),
+					Value: pulumi.String("2097152"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("key_cache_age_threshold"),
+					Value: pulumi.String("300"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("key_cache_block_size"),
+					Value: pulumi.String("1024"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("key_cache_division_limit"),
+					Value: pulumi.String("100"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("local_infile"),
+					Value: pulumi.String("OFF"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("lock_wait_timeout"),
+					Value: pulumi.String("5"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("log_queries_not_using_indexes"),
+					Value: pulumi.String("OFF"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("long_query_time"),
+					Value: pulumi.String("1.000000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("low_priority_updates"),
+					Value: pulumi.String("OFF"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("lower_case_table_names"),
+					Value: pulumi.String("1"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("max_allowed_packet"),
+					Value: pulumi.String("1073741824"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("max_binlog_size"),
+					Value: pulumi.String("536870912"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("max_connect_errors"),
+					Value: pulumi.String("2000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("max_connections"),
+					Value: pulumi.String("10000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("max_execution_time"),
+					Value: pulumi.String("0"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("max_prepared_stmt_count"),
+					Value: pulumi.String("200000"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("myisam_sort_buffer_size"),
+					Value: pulumi.String("4194304"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("net_buffer_length"),
+					Value: pulumi.String("16384"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("net_read_timeout"),
+					Value: pulumi.String("150"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("net_retry_count"),
+					Value: pulumi.String("10"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("net_write_timeout"),
+					Value: pulumi.String("300"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("optimizer_switch"),
+					Value: pulumi.String("batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("performance_schema"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("query_alloc_block_size"),
+					Value: pulumi.String("16384"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("query_prealloc_size"),
+					Value: pulumi.String("24576"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("reject_table_no_pk"),
+					Value: pulumi.String("1"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("slow_launch_time"),
+					Value: pulumi.String("2"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("sort_buffer_size"),
+					Value: pulumi.String("2097152"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("sql_mode"),
+					Value: pulumi.String("NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("sql_require_primary_key"),
+					Value: pulumi.String("ON"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("sql_safe_updates"),
+					Value: pulumi.String("OFF"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("sqlasyntimeout"),
+					Value: pulumi.String("30"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("sync_binlog"),
+					Value: pulumi.String("1"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("table_definition_cache"),
+					Value: pulumi.String("10240"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("table_open_cache"),
+					Value: pulumi.String("20480"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("thread_pool_oversubscribe"),
+					Value: pulumi.String("30"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("thread_pool_size"),
+					Value: pulumi.String("24"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("time_zone"),
+					Value: pulumi.String("+08:00"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("tmp_table_size"),
+					Value: pulumi.String("33554432"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("tx_isolation"),
+					Value: pulumi.String("READ-COMMITTED"),
+				},
+				&mariadb.ParametersParamArgs{
+					Param: pulumi.String("wait_timeout"),
+					Value: pulumi.String("28800"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -564,9 +1048,9 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var parameters = new Tencentcloud.Mariadb.Parameters("parameters", new()
+    var example = new Tencentcloud.Mariadb.Parameters("example", new()
     {
-        InstanceId = "tdsql-4pzs5b67",
+        InstanceId = "tdsql-5n00ev40zl",
         Params = new[]
         {
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
@@ -583,6 +1067,16 @@ return await Deployment.RunAsync(() =>
             {
                 Param = "autocommit",
                 Value = "ON",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "binlog_transaction_dependency_history_size",
+                Value = "25000",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "binlog_write_threshold",
+                Value = "1610612736",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -612,7 +1106,7 @@ return await Deployment.RunAsync(() =>
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
                 Param = "default_collation_for_utf8mb4",
-                Value = "utf8mb4_general_ci",
+                Value = "utf8mb4_0900_ai_ci",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -651,13 +1145,38 @@ return await Deployment.RunAsync(() =>
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
+                Param = "explicit_defaults_for_timestamp",
+                Value = "ON",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
                 Param = "group_concat_max_len",
                 Value = "1024",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
+                Param = "innodb_autoinc_lock_mode",
+                Value = "2",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "innodb_backquery_enable",
+                Value = "OFF",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "innodb_backquery_window",
+                Value = "86400",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
                 Param = "innodb_concurrency_tickets",
                 Value = "5000",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "innodb_encryption_algorithm",
+                Value = "AES",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -673,6 +1192,11 @@ return await Deployment.RunAsync(() =>
             {
                 Param = "innodb_max_dirty_pages_pct",
                 Value = "70.000000",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "innodb_max_undo_log_size",
+                Value = "1073741824",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -707,7 +1231,7 @@ return await Deployment.RunAsync(() =>
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
                 Param = "innodb_strict_mode",
-                Value = "OFF",
+                Value = "ON",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -723,6 +1247,11 @@ return await Deployment.RunAsync(() =>
             {
                 Param = "interactive_timeout",
                 Value = "28800",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "join_buffer_size",
+                Value = "2097152",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -763,6 +1292,11 @@ return await Deployment.RunAsync(() =>
             {
                 Param = "low_priority_updates",
                 Value = "OFF",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "lower_case_table_names",
+                Value = "1",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -821,6 +1355,16 @@ return await Deployment.RunAsync(() =>
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
+                Param = "optimizer_switch",
+                Value = "batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "performance_schema",
+                Value = "ON",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
                 Param = "query_alloc_block_size",
                 Value = "16384",
             },
@@ -828,6 +1372,11 @@ return await Deployment.RunAsync(() =>
             {
                 Param = "query_prealloc_size",
                 Value = "24576",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "reject_table_no_pk",
+                Value = "1",
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
@@ -876,6 +1425,16 @@ return await Deployment.RunAsync(() =>
             },
             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
             {
+                Param = "thread_pool_oversubscribe",
+                Value = "30",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
+                Param = "thread_pool_size",
+                Value = "24",
+            },
+            new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+            {
                 Param = "time_zone",
                 Value = "+08:00",
             },
@@ -899,288 +1458,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mariadb.NewParameters(ctx, "parameters", &Mariadb.ParametersArgs{
-			InstanceId: pulumi.String("tdsql-4pzs5b67"),
-			Params: mariadb.ParametersParamArray{
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("auto_increment_increment"),
-					Value: pulumi.String("1"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("auto_increment_offset"),
-					Value: pulumi.String("1"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("autocommit"),
-					Value: pulumi.String("ON"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("character_set_server"),
-					Value: pulumi.String("utf8mb4"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("collation_connection"),
-					Value: pulumi.String("utf8mb4_general_ci"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("collation_database"),
-					Value: pulumi.String("utf8mb4_general_ci"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("collation_server"),
-					Value: pulumi.String("utf8mb4_general_ci"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("connect_timeout"),
-					Value: pulumi.String("10"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("default_collation_for_utf8mb4"),
-					Value: pulumi.String("utf8mb4_general_ci"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("default_week_format"),
-					Value: pulumi.String("0"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("delay_key_write"),
-					Value: pulumi.String("ON"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("delayed_insert_limit"),
-					Value: pulumi.String("100"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("delayed_insert_timeout"),
-					Value: pulumi.String("300"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("delayed_queue_size"),
-					Value: pulumi.String("1000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("div_precision_increment"),
-					Value: pulumi.String("4"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("event_scheduler"),
-					Value: pulumi.String("ON"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("group_concat_max_len"),
-					Value: pulumi.String("1024"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_concurrency_tickets"),
-					Value: pulumi.String("5000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_flush_log_at_trx_commit"),
-					Value: pulumi.String("1"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_lock_wait_timeout"),
-					Value: pulumi.String("20"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_max_dirty_pages_pct"),
-					Value: pulumi.String("70.000000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_old_blocks_pct"),
-					Value: pulumi.String("37"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_old_blocks_time"),
-					Value: pulumi.String("1000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_purge_batch_size"),
-					Value: pulumi.String("1000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_read_ahead_threshold"),
-					Value: pulumi.String("56"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_stats_method"),
-					Value: pulumi.String("nulls_equal"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_stats_on_metadata"),
-					Value: pulumi.String("OFF"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_strict_mode"),
-					Value: pulumi.String("OFF"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_table_locks"),
-					Value: pulumi.String("ON"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("innodb_thread_concurrency"),
-					Value: pulumi.String("0"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("interactive_timeout"),
-					Value: pulumi.String("28800"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("key_cache_age_threshold"),
-					Value: pulumi.String("300"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("key_cache_block_size"),
-					Value: pulumi.String("1024"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("key_cache_division_limit"),
-					Value: pulumi.String("100"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("local_infile"),
-					Value: pulumi.String("OFF"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("lock_wait_timeout"),
-					Value: pulumi.String("5"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("log_queries_not_using_indexes"),
-					Value: pulumi.String("OFF"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("long_query_time"),
-					Value: pulumi.String("1.000000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("low_priority_updates"),
-					Value: pulumi.String("OFF"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("max_allowed_packet"),
-					Value: pulumi.String("1073741824"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("max_binlog_size"),
-					Value: pulumi.String("536870912"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("max_connect_errors"),
-					Value: pulumi.String("2000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("max_connections"),
-					Value: pulumi.String("10000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("max_execution_time"),
-					Value: pulumi.String("0"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("max_prepared_stmt_count"),
-					Value: pulumi.String("200000"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("myisam_sort_buffer_size"),
-					Value: pulumi.String("4194304"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("net_buffer_length"),
-					Value: pulumi.String("16384"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("net_read_timeout"),
-					Value: pulumi.String("150"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("net_retry_count"),
-					Value: pulumi.String("10"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("net_write_timeout"),
-					Value: pulumi.String("300"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("query_alloc_block_size"),
-					Value: pulumi.String("16384"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("query_prealloc_size"),
-					Value: pulumi.String("24576"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("slow_launch_time"),
-					Value: pulumi.String("2"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("sort_buffer_size"),
-					Value: pulumi.String("2097152"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("sql_mode"),
-					Value: pulumi.String("NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("sql_require_primary_key"),
-					Value: pulumi.String("ON"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("sql_safe_updates"),
-					Value: pulumi.String("OFF"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("sqlasyntimeout"),
-					Value: pulumi.String("30"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("sync_binlog"),
-					Value: pulumi.String("1"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("table_definition_cache"),
-					Value: pulumi.String("10240"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("table_open_cache"),
-					Value: pulumi.String("20480"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("time_zone"),
-					Value: pulumi.String("+08:00"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("tmp_table_size"),
-					Value: pulumi.String("33554432"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("tx_isolation"),
-					Value: pulumi.String("READ-COMMITTED"),
-				},
-				&mariadb.ParametersParamArgs{
-					Param: pulumi.String("wait_timeout"),
-					Value: pulumi.String("28800"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -1190,8 +1472,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mariadb.Parameters;
 import com.pulumi.tencentcloud.Mariadb.ParametersArgs;
 import com.pulumi.tencentcloud.Mariadb.inputs.ParametersParamArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1203,8 +1485,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var parameters = new Parameters("parameters", ParametersArgs.builder()        
-            .instanceId("tdsql-4pzs5b67")
+        var example = new Parameters("example", ParametersArgs.builder()
+            .instanceId("tdsql-5n00ev40zl")
             .params(            
                 ParametersParamArgs.builder()
                     .param("auto_increment_increment")
@@ -1217,6 +1499,14 @@ public class App {
                 ParametersParamArgs.builder()
                     .param("autocommit")
                     .value("ON")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("binlog_transaction_dependency_history_size")
+                    .value("25000")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("binlog_write_threshold")
+                    .value("1610612736")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("character_set_server")
@@ -1240,7 +1530,7 @@ public class App {
                     .build(),
                 ParametersParamArgs.builder()
                     .param("default_collation_for_utf8mb4")
-                    .value("utf8mb4_general_ci")
+                    .value("utf8mb4_0900_ai_ci")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("default_week_format")
@@ -1271,12 +1561,32 @@ public class App {
                     .value("ON")
                     .build(),
                 ParametersParamArgs.builder()
+                    .param("explicit_defaults_for_timestamp")
+                    .value("ON")
+                    .build(),
+                ParametersParamArgs.builder()
                     .param("group_concat_max_len")
                     .value("1024")
                     .build(),
                 ParametersParamArgs.builder()
+                    .param("innodb_autoinc_lock_mode")
+                    .value("2")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("innodb_backquery_enable")
+                    .value("OFF")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("innodb_backquery_window")
+                    .value("86400")
+                    .build(),
+                ParametersParamArgs.builder()
                     .param("innodb_concurrency_tickets")
                     .value("5000")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("innodb_encryption_algorithm")
+                    .value("AES")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("innodb_flush_log_at_trx_commit")
@@ -1289,6 +1599,10 @@ public class App {
                 ParametersParamArgs.builder()
                     .param("innodb_max_dirty_pages_pct")
                     .value("70.000000")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("innodb_max_undo_log_size")
+                    .value("1073741824")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("innodb_old_blocks_pct")
@@ -1316,7 +1630,7 @@ public class App {
                     .build(),
                 ParametersParamArgs.builder()
                     .param("innodb_strict_mode")
-                    .value("OFF")
+                    .value("ON")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("innodb_table_locks")
@@ -1329,6 +1643,10 @@ public class App {
                 ParametersParamArgs.builder()
                     .param("interactive_timeout")
                     .value("28800")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("join_buffer_size")
+                    .value("2097152")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("key_cache_age_threshold")
@@ -1361,6 +1679,10 @@ public class App {
                 ParametersParamArgs.builder()
                     .param("low_priority_updates")
                     .value("OFF")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("lower_case_table_names")
+                    .value("1")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("max_allowed_packet")
@@ -1407,12 +1729,24 @@ public class App {
                     .value("300")
                     .build(),
                 ParametersParamArgs.builder()
+                    .param("optimizer_switch")
+                    .value("batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("performance_schema")
+                    .value("ON")
+                    .build(),
+                ParametersParamArgs.builder()
                     .param("query_alloc_block_size")
                     .value("16384")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("query_prealloc_size")
                     .value("24576")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("reject_table_no_pk")
+                    .value("1")
                     .build(),
                 ParametersParamArgs.builder()
                     .param("slow_launch_time")
@@ -1451,6 +1785,14 @@ public class App {
                     .value("20480")
                     .build(),
                 ParametersParamArgs.builder()
+                    .param("thread_pool_oversubscribe")
+                    .value("30")
+                    .build(),
+                ParametersParamArgs.builder()
+                    .param("thread_pool_size")
+                    .value("24")
+                    .build(),
+                ParametersParamArgs.builder()
                     .param("time_zone")
                     .value("+08:00")
                     .build(),
@@ -1471,12 +1813,17 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  parameters:
+  example:
     type: tencentcloud:Mariadb:Parameters
     properties:
-      instanceId: tdsql-4pzs5b67
+      instanceId: tdsql-5n00ev40zl
       params:
         - param: auto_increment_increment
           value: '1'
@@ -1484,6 +1831,10 @@ resources:
           value: '1'
         - param: autocommit
           value: ON
+        - param: binlog_transaction_dependency_history_size
+          value: '25000'
+        - param: binlog_write_threshold
+          value: '1610612736'
         - param: character_set_server
           value: utf8mb4
         - param: collation_connection
@@ -1495,7 +1846,7 @@ resources:
         - param: connect_timeout
           value: '10'
         - param: default_collation_for_utf8mb4
-          value: utf8mb4_general_ci
+          value: utf8mb4_0900_ai_ci
         - param: default_week_format
           value: '0'
         - param: delay_key_write
@@ -1510,16 +1861,28 @@ resources:
           value: '4'
         - param: event_scheduler
           value: ON
+        - param: explicit_defaults_for_timestamp
+          value: ON
         - param: group_concat_max_len
           value: '1024'
+        - param: innodb_autoinc_lock_mode
+          value: '2'
+        - param: innodb_backquery_enable
+          value: OFF
+        - param: innodb_backquery_window
+          value: '86400'
         - param: innodb_concurrency_tickets
           value: '5000'
+        - param: innodb_encryption_algorithm
+          value: AES
         - param: innodb_flush_log_at_trx_commit
           value: '1'
         - param: innodb_lock_wait_timeout
           value: '20'
         - param: innodb_max_dirty_pages_pct
           value: '70.000000'
+        - param: innodb_max_undo_log_size
+          value: '1073741824'
         - param: innodb_old_blocks_pct
           value: '37'
         - param: innodb_old_blocks_time
@@ -1533,13 +1896,15 @@ resources:
         - param: innodb_stats_on_metadata
           value: OFF
         - param: innodb_strict_mode
-          value: OFF
+          value: ON
         - param: innodb_table_locks
           value: ON
         - param: innodb_thread_concurrency
           value: '0'
         - param: interactive_timeout
           value: '28800'
+        - param: join_buffer_size
+          value: '2097152'
         - param: key_cache_age_threshold
           value: '300'
         - param: key_cache_block_size
@@ -1556,6 +1921,8 @@ resources:
           value: '1.000000'
         - param: low_priority_updates
           value: OFF
+        - param: lower_case_table_names
+          value: '1'
         - param: max_allowed_packet
           value: '1073741824'
         - param: max_binlog_size
@@ -1578,10 +1945,16 @@ resources:
           value: '10'
         - param: net_write_timeout
           value: '300'
+        - param: optimizer_switch
+          value: batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off
+        - param: performance_schema
+          value: ON
         - param: query_alloc_block_size
           value: '16384'
         - param: query_prealloc_size
           value: '24576'
+        - param: reject_table_no_pk
+          value: '1'
         - param: slow_launch_time
           value: '2'
         - param: sort_buffer_size
@@ -1600,6 +1973,10 @@ resources:
           value: '10240'
         - param: table_open_cache
           value: '20480'
+        - param: thread_pool_oversubscribe
+          value: '30'
+        - param: thread_pool_size
+          value: '24'
         - param: time_zone
           value: +08:00
         - param: tmp_table_size
@@ -1609,66 +1986,428 @@ resources:
         - param: wait_timeout
           value: '28800'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_mariadb_parameters" "example" {
+  instance_id = "tdsql-5n00ev40zl"
+  params {
+    param = "auto_increment_increment"
+    value = "1"
+  }
+  params {
+    param = "auto_increment_offset"
+    value = "1"
+  }
+  params {
+    param = "autocommit"
+    value = "ON"
+  }
+  params {
+    param = "binlog_transaction_dependency_history_size"
+    value = "25000"
+  }
+  params {
+    param = "binlog_write_threshold"
+    value = "1610612736"
+  }
+  params {
+    param = "character_set_server"
+    value = "utf8mb4"
+  }
+  params {
+    param = "collation_connection"
+    value = "utf8mb4_general_ci"
+  }
+  params {
+    param = "collation_database"
+    value = "utf8mb4_general_ci"
+  }
+  params {
+    param = "collation_server"
+    value = "utf8mb4_general_ci"
+  }
+  params {
+    param = "connect_timeout"
+    value = "10"
+  }
+  params {
+    param = "default_collation_for_utf8mb4"
+    value = "utf8mb4_0900_ai_ci"
+  }
+  params {
+    param = "default_week_format"
+    value = "0"
+  }
+  params {
+    param = "delay_key_write"
+    value = "ON"
+  }
+  params {
+    param = "delayed_insert_limit"
+    value = "100"
+  }
+  params {
+    param = "delayed_insert_timeout"
+    value = "300"
+  }
+  params {
+    param = "delayed_queue_size"
+    value = "1000"
+  }
+  params {
+    param = "div_precision_increment"
+    value = "4"
+  }
+  params {
+    param = "event_scheduler"
+    value = "ON"
+  }
+  params {
+    param = "explicit_defaults_for_timestamp"
+    value = "ON"
+  }
+  params {
+    param = "group_concat_max_len"
+    value = "1024"
+  }
+  params {
+    param = "innodb_autoinc_lock_mode"
+    value = "2"
+  }
+  params {
+    param = "innodb_backquery_enable"
+    value = "OFF"
+  }
+  params {
+    param = "innodb_backquery_window"
+    value = "86400"
+  }
+  params {
+    param = "innodb_concurrency_tickets"
+    value = "5000"
+  }
+  params {
+    param = "innodb_encryption_algorithm"
+    value = "AES"
+  }
+  params {
+    param = "innodb_flush_log_at_trx_commit"
+    value = "1"
+  }
+  params {
+    param = "innodb_lock_wait_timeout"
+    value = "20"
+  }
+  params {
+    param = "innodb_max_dirty_pages_pct"
+    value = "70.000000"
+  }
+  params {
+    param = "innodb_max_undo_log_size"
+    value = "1073741824"
+  }
+  params {
+    param = "innodb_old_blocks_pct"
+    value = "37"
+  }
+  params {
+    param = "innodb_old_blocks_time"
+    value = "1000"
+  }
+  params {
+    param = "innodb_purge_batch_size"
+    value = "1000"
+  }
+  params {
+    param = "innodb_read_ahead_threshold"
+    value = "56"
+  }
+  params {
+    param = "innodb_stats_method"
+    value = "nulls_equal"
+  }
+  params {
+    param = "innodb_stats_on_metadata"
+    value = "OFF"
+  }
+  params {
+    param = "innodb_strict_mode"
+    value = "ON"
+  }
+  params {
+    param = "innodb_table_locks"
+    value = "ON"
+  }
+  params {
+    param = "innodb_thread_concurrency"
+    value = "0"
+  }
+  params {
+    param = "interactive_timeout"
+    value = "28800"
+  }
+  params {
+    param = "join_buffer_size"
+    value = "2097152"
+  }
+  params {
+    param = "key_cache_age_threshold"
+    value = "300"
+  }
+  params {
+    param = "key_cache_block_size"
+    value = "1024"
+  }
+  params {
+    param = "key_cache_division_limit"
+    value = "100"
+  }
+  params {
+    param = "local_infile"
+    value = "OFF"
+  }
+  params {
+    param = "lock_wait_timeout"
+    value = "5"
+  }
+  params {
+    param = "log_queries_not_using_indexes"
+    value = "OFF"
+  }
+  params {
+    param = "long_query_time"
+    value = "1.000000"
+  }
+  params {
+    param = "low_priority_updates"
+    value = "OFF"
+  }
+  params {
+    param = "lower_case_table_names"
+    value = "1"
+  }
+  params {
+    param = "max_allowed_packet"
+    value = "1073741824"
+  }
+  params {
+    param = "max_binlog_size"
+    value = "536870912"
+  }
+  params {
+    param = "max_connect_errors"
+    value = "2000"
+  }
+  params {
+    param = "max_connections"
+    value = "10000"
+  }
+  params {
+    param = "max_execution_time"
+    value = "0"
+  }
+  params {
+    param = "max_prepared_stmt_count"
+    value = "200000"
+  }
+  params {
+    param = "myisam_sort_buffer_size"
+    value = "4194304"
+  }
+  params {
+    param = "net_buffer_length"
+    value = "16384"
+  }
+  params {
+    param = "net_read_timeout"
+    value = "150"
+  }
+  params {
+    param = "net_retry_count"
+    value = "10"
+  }
+  params {
+    param = "net_write_timeout"
+    value = "300"
+  }
+  params {
+    param = "optimizer_switch"
+    value = "batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off"
+  }
+  params {
+    param = "performance_schema"
+    value = "ON"
+  }
+  params {
+    param = "query_alloc_block_size"
+    value = "16384"
+  }
+  params {
+    param = "query_prealloc_size"
+    value = "24576"
+  }
+  params {
+    param = "reject_table_no_pk"
+    value = "1"
+  }
+  params {
+    param = "slow_launch_time"
+    value = "2"
+  }
+  params {
+    param = "sort_buffer_size"
+    value = "2097152"
+  }
+  params {
+    param = "sql_mode"
+    value = "NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES"
+  }
+  params {
+    param = "sql_require_primary_key"
+    value = "ON"
+  }
+  params {
+    param = "sql_safe_updates"
+    value = "OFF"
+  }
+  params {
+    param = "sqlasyntimeout"
+    value = "30"
+  }
+  params {
+    param = "sync_binlog"
+    value = "1"
+  }
+  params {
+    param = "table_definition_cache"
+    value = "10240"
+  }
+  params {
+    param = "table_open_cache"
+    value = "20480"
+  }
+  params {
+    param = "thread_pool_oversubscribe"
+    value = "30"
+  }
+  params {
+    param = "thread_pool_size"
+    value = "24"
+  }
+  params {
+    param = "time_zone"
+    value = "+08:00"
+  }
+  params {
+    param = "tmp_table_size"
+    value = "33554432"
+  }
+  params {
+    param = "tx_isolation"
+    value = "READ-COMMITTED"
+  }
+  params {
+    param = "wait_timeout"
+    value = "28800"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [ModifyDBParameters](https://www.tencentcloud.com/document/api/237/16153)
+* Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/237/16154)
+* Update: [ModifyDBParameters](https://www.tencentcloud.com/document/api/237/16153)
 
 
 ## Create Parameters Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">params</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mariadb.ParametersParamArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">params</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParametersParamArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewParameters</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Parameters</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewParameters</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Parameters</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Parameters</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParametersArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mariadb:Parameters</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mariadb:Parameters</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mariadb_parameters&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1689,7 +2428,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1806,11 +2545,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Parameters Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Parameters resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1826,17 +2573,15 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="params_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_csharp" style="color: inherit; text-decoration: inherit;">Params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mariadb.<wbr>Inputs.<wbr>Parameters<wbr>Param<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#parametersparam">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mariadb.<wbr>Inputs.<wbr>Parameters<wbr>Param&gt;</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1850,8 +2595,7 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="params_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_go" style="color: inherit; text-decoration: inherit;">Params</a>
@@ -1859,8 +2603,29 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#parametersparam">[]Parameters<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="params_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_hcl" style="color: inherit; text-decoration: inherit;">params</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#parametersparam">list(object)</a></span>
+    </dt>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1874,17 +2639,15 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="params_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_java" style="color: inherit; text-decoration: inherit;">params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">List&lt;Parameters<wbr>Param<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#parametersparam">List&lt;Parameters<wbr>Param&gt;</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1898,17 +2661,15 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="params_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_nodejs" style="color: inherit; text-decoration: inherit;">params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">Parameters<wbr>Param<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#parametersparam">Parameters<wbr>Param[]</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1922,17 +2683,15 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="params_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_python" style="color: inherit; text-decoration: inherit;">params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">Parameters<wbr>Param<wbr>Args]</a></span>
+        <span class="property-type"><a href="#parametersparam">Sequence[Parameters<wbr>Param<wbr>Args]</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1946,8 +2705,7 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="params_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_yaml" style="color: inherit; text-decoration: inherit;">params</a>
@@ -1955,8 +2713,7 @@ The Parameters resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#parametersparam">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1977,8 +2734,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1992,8 +2748,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2007,8 +2776,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2022,8 +2790,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2037,8 +2804,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2052,8 +2818,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2063,121 +2828,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Parameters resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ParametersState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Parameters</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ParametersState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Parameters</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">params</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mariadb.ParametersParamArgs]]</span> = None<span class="p">) -&gt;</span> Parameters</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">params</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParametersParamArgs]]</span> = None<span class="p">) -&gt;</span> Parameters</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetParameters<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ParametersState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Parameters</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetParameters<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ParametersState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Parameters</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Parameters</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParametersState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Parameters</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParametersState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Parameters</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParametersState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Parameters</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParametersState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingParameters</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mariadb:Parameters</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mariadb_parameters</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParametersState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParametersState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2185,28 +2989,31 @@ Get an existing Parameters resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParametersState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2214,28 +3021,31 @@ Get an existing Parameters resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParametersState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2255,17 +3065,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_csharp" style="color: inherit; text-decoration: inherit;">Params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mariadb.<wbr>Inputs.<wbr>Parameters<wbr>Param<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#parametersparam">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mariadb.<wbr>Inputs.<wbr>Parameters<wbr>Param&gt;</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2279,8 +3087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_go" style="color: inherit; text-decoration: inherit;">Params</a>
@@ -2288,8 +3095,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#parametersparam">[]Parameters<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_params_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_hcl" style="color: inherit; text-decoration: inherit;">params</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#parametersparam">list(object)</a></span>
+    </dt>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2303,17 +3131,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_java" style="color: inherit; text-decoration: inherit;">params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">List&lt;Parameters<wbr>Param<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#parametersparam">List&lt;Parameters<wbr>Param&gt;</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2327,17 +3153,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_nodejs" style="color: inherit; text-decoration: inherit;">params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">Parameters<wbr>Param<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#parametersparam">Parameters<wbr>Param[]</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2351,17 +3175,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_python" style="color: inherit; text-decoration: inherit;">params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#parametersparam">Parameters<wbr>Param<wbr>Args]</a></span>
+        <span class="property-type"><a href="#parametersparam">Sequence[Parameters<wbr>Param<wbr>Args]</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2375,8 +3197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_yaml" style="color: inherit; text-decoration: inherit;">params</a>
@@ -2384,8 +3205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#parametersparam">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Number of days to keep, no more than 30.</p>
-</dd></dl>
+    <dd>Number of days to keep, no more than 30.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2400,7 +3220,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="parametersparam">Parameters<wbr>Param</h4>
+<h4 id="parametersparam">
+Parameters<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Parameters<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2412,8 +3234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2421,8 +3242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2436,8 +3256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2445,8 +3264,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_hcl" style="color: inherit; text-decoration: inherit;">param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>parameter name.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2460,8 +3300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2469,8 +3308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2484,8 +3322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2493,8 +3330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2508,8 +3344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2517,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2532,8 +3366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2541,8 +3374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2551,11 +3383,13 @@ The following state arguments are supported:
 
 
 mariadb parameters can be imported using the id, e.g.
-
 ```sh
-$ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs5b67
+$ pulumi import tencentcloud:Mariadb/parameters:Parameters example tdsql-4pzs5b67
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2567,7 +3401,6 @@ $ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

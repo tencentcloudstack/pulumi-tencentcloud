@@ -2,9 +2,11 @@
 ---
 title: "StorageSet"
 title_tag: "tencentcloud.Cbs.StorageSet"
-meta_desc: "Documentation for the tencentcloud.Cbs.StorageSet resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create CBS set. NOTE: When creating encrypted disks, if kmsKeyId is not entered, the product side will generate a key by default."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,75 +16,75 @@ no_edit_this_page: true
 
 Provides a resource to create CBS set.
 
+> **NOTE:** When creating encrypted disks, if `kmsKeyId` is not entered, the product side will generate a key by default.
+
+> **NOTE:** When using CBS encrypted disk, it is necessary to add `CVM_QcsRole` role and `QcloudKMSAccessForCVMRole` strategy to the account.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create 3 standard CBS storages
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const storage = new tencentcloud.cbs.StorageSet("storage", {
-    availabilityZone: "ap-guangzhou-3",
-    diskCount: 10,
-    encrypt: false,
-    projectId: 0,
-    storageName: "mystorage",
-    storageSize: 100,
+const example = new tencentcloud.cbs.StorageSet("example", {
+    diskCount: 3,
+    storageName: "tf-example",
     storageType: "CLOUD_SSD",
+    storageSize: 100,
+    availabilityZone: "ap-guangzhou-3",
+    projectId: 0,
+    encrypt: false,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-storage = tencentcloud.cbs.StorageSet("storage",
-    availability_zone="ap-guangzhou-3",
-    disk_count=10,
-    encrypt=False,
-    project_id=0,
-    storage_name="mystorage",
+example = tencentcloud.cbs.StorageSet("example",
+    disk_count=3,
+    storage_name="tf-example",
+    storage_type="CLOUD_SSD",
     storage_size=100,
-    storage_type="CLOUD_SSD")
+    availability_zone="ap-guangzhou-3",
+    project_id=0,
+    encrypt=False)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var storage = new Tencentcloud.Cbs.StorageSet("storage", new()
-    {
-        AvailabilityZone = "ap-guangzhou-3",
-        DiskCount = 10,
-        Encrypt = false,
-        ProjectId = 0,
-        StorageName = "mystorage",
-        StorageSize = 100,
-        StorageType = "CLOUD_SSD",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cbs.NewStorageSet(ctx, "storage", &Cbs.StorageSetArgs{
-			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-			DiskCount:        pulumi.Int(10),
-			Encrypt:          pulumi.Bool(false),
-			ProjectId:        pulumi.Int(0),
-			StorageName:      pulumi.String("mystorage"),
-			StorageSize:      pulumi.Int(100),
+		_, err := cbs.NewStorageSet(ctx, "example", &cbs.StorageSetArgs{
+			DiskCount:        pulumi.Int(3),
+			StorageName:      pulumi.String("tf-example"),
 			StorageType:      pulumi.String("CLOUD_SSD"),
+			StorageSize:      pulumi.Int(100),
+			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+			ProjectId:        pulumi.Int(0),
+			Encrypt:          pulumi.Bool(false),
 		})
 		if err != nil {
 			return err
@@ -91,6 +93,37 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cbs.StorageSet("example", new()
+    {
+        DiskCount = 3,
+        StorageName = "tf-example",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 100,
+        AvailabilityZone = "ap-guangzhou-3",
+        ProjectId = 0,
+        Encrypt = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -99,8 +132,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cbs.StorageSet;
 import com.pulumi.tencentcloud.Cbs.StorageSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -112,101 +145,723 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var storage = new StorageSet("storage", StorageSetArgs.builder()        
-            .availabilityZone("ap-guangzhou-3")
-            .diskCount(10)
-            .encrypt(false)
-            .projectId(0)
-            .storageName("mystorage")
-            .storageSize(100)
+        var example = new StorageSet("example", StorageSetArgs.builder()
+            .diskCount(3)
+            .storageName("tf-example")
             .storageType("CLOUD_SSD")
+            .storageSize(100)
+            .availabilityZone("ap-guangzhou-3")
+            .projectId(0)
+            .encrypt(false)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  storage:
+  example:
     type: tencentcloud:Cbs:StorageSet
     properties:
-      availabilityZone: ap-guangzhou-3
-      diskCount: 10
-      encrypt: false
-      projectId: 0
-      storageName: mystorage
-      storageSize: 100
+      diskCount: 3
+      storageName: tf-example
       storageType: CLOUD_SSD
+      storageSize: 100
+      availabilityZone: ap-guangzhou-3
+      projectId: 0
+      encrypt: false
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cbs_storageset" "example" {
+  disk_count        = 3
+  storage_name      = "tf-example"
+  storage_type      = "CLOUD_SSD"
+  storage_size      = 100
+  availability_zone = "ap-guangzhou-3"
+  project_id        = 0
+  encrypt           = false
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create 3 standard CBS storages with customize kmsKeyId
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cbs.StorageSet("example", {
+    diskCount: 3,
+    storageName: "tf-example",
+    storageType: "CLOUD_SSD",
+    storageSize: 100,
+    availabilityZone: "ap-guangzhou-3",
+    projectId: 0,
+    kmsKeyId: "b60b328d-7ed5-11ef-8836-5254009ad364",
+    encrypt: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cbs.StorageSet("example",
+    disk_count=3,
+    storage_name="tf-example",
+    storage_type="CLOUD_SSD",
+    storage_size=100,
+    availability_zone="ap-guangzhou-3",
+    project_id=0,
+    kms_key_id="b60b328d-7ed5-11ef-8836-5254009ad364",
+    encrypt=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cbs.NewStorageSet(ctx, "example", &cbs.StorageSetArgs{
+			DiskCount:        pulumi.Int(3),
+			StorageName:      pulumi.String("tf-example"),
+			StorageType:      pulumi.String("CLOUD_SSD"),
+			StorageSize:      pulumi.Int(100),
+			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+			ProjectId:        pulumi.Int(0),
+			KmsKeyId:         pulumi.String("b60b328d-7ed5-11ef-8836-5254009ad364"),
+			Encrypt:          pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cbs.StorageSet("example", new()
+    {
+        DiskCount = 3,
+        StorageName = "tf-example",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 100,
+        AvailabilityZone = "ap-guangzhou-3",
+        ProjectId = 0,
+        KmsKeyId = "b60b328d-7ed5-11ef-8836-5254009ad364",
+        Encrypt = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.StorageSet;
+import com.pulumi.tencentcloud.Cbs.StorageSetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new StorageSet("example", StorageSetArgs.builder()
+            .diskCount(3)
+            .storageName("tf-example")
+            .storageType("CLOUD_SSD")
+            .storageSize(100)
+            .availabilityZone("ap-guangzhou-3")
+            .projectId(0)
+            .kmsKeyId("b60b328d-7ed5-11ef-8836-5254009ad364")
+            .encrypt(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cbs:StorageSet
+    properties:
+      diskCount: 3
+      storageName: tf-example
+      storageType: CLOUD_SSD
+      storageSize: 100
+      availabilityZone: ap-guangzhou-3
+      projectId: 0
+      kmsKeyId: b60b328d-7ed5-11ef-8836-5254009ad364
+      encrypt: true
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cbs_storageset" "example" {
+  disk_count        = 3
+  storage_name      = "tf-example"
+  storage_type      = "CLOUD_SSD"
+  storage_size      = 100
+  availability_zone = "ap-guangzhou-3"
+  project_id        = 0
+  kms_key_id        = "b60b328d-7ed5-11ef-8836-5254009ad364"
+  encrypt           = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create 3 encrypted CBS storage with default generated kmsKeyId
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cbs.StorageSet("example", {
+    diskCount: 3,
+    storageName: "tf-example",
+    storageType: "CLOUD_SSD",
+    storageSize: 100,
+    availabilityZone: "ap-guangzhou-3",
+    projectId: 0,
+    encrypt: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cbs.StorageSet("example",
+    disk_count=3,
+    storage_name="tf-example",
+    storage_type="CLOUD_SSD",
+    storage_size=100,
+    availability_zone="ap-guangzhou-3",
+    project_id=0,
+    encrypt=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cbs.NewStorageSet(ctx, "example", &cbs.StorageSetArgs{
+			DiskCount:        pulumi.Int(3),
+			StorageName:      pulumi.String("tf-example"),
+			StorageType:      pulumi.String("CLOUD_SSD"),
+			StorageSize:      pulumi.Int(100),
+			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+			ProjectId:        pulumi.Int(0),
+			Encrypt:          pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cbs.StorageSet("example", new()
+    {
+        DiskCount = 3,
+        StorageName = "tf-example",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 100,
+        AvailabilityZone = "ap-guangzhou-3",
+        ProjectId = 0,
+        Encrypt = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.StorageSet;
+import com.pulumi.tencentcloud.Cbs.StorageSetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new StorageSet("example", StorageSetArgs.builder()
+            .diskCount(3)
+            .storageName("tf-example")
+            .storageType("CLOUD_SSD")
+            .storageSize(100)
+            .availabilityZone("ap-guangzhou-3")
+            .projectId(0)
+            .encrypt(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cbs:StorageSet
+    properties:
+      diskCount: 3
+      storageName: tf-example
+      storageType: CLOUD_SSD
+      storageSize: 100
+      availabilityZone: ap-guangzhou-3
+      projectId: 0
+      encrypt: true
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cbs_storageset" "example" {
+  disk_count        = 3
+  storage_name      = "tf-example"
+  storage_type      = "CLOUD_SSD"
+  storage_size      = 100
+  availability_zone = "ap-guangzhou-3"
+  project_id        = 0
+  encrypt           = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create 3 dedicated cluster CBS storages
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cbs.StorageSet("example", {
+    diskCount: 3,
+    storageName: "tf-example",
+    storageType: "CLOUD_SSD",
+    storageSize: 100,
+    availabilityZone: "ap-guangzhou-4",
+    dedicatedClusterId: "cluster-262n63e8",
+    chargeType: "DEDICATED_CLUSTER_PAID",
+    projectId: 0,
+    encrypt: false,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cbs.StorageSet("example",
+    disk_count=3,
+    storage_name="tf-example",
+    storage_type="CLOUD_SSD",
+    storage_size=100,
+    availability_zone="ap-guangzhou-4",
+    dedicated_cluster_id="cluster-262n63e8",
+    charge_type="DEDICATED_CLUSTER_PAID",
+    project_id=0,
+    encrypt=False)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cbs.NewStorageSet(ctx, "example", &cbs.StorageSetArgs{
+			DiskCount:          pulumi.Int(3),
+			StorageName:        pulumi.String("tf-example"),
+			StorageType:        pulumi.String("CLOUD_SSD"),
+			StorageSize:        pulumi.Int(100),
+			AvailabilityZone:   pulumi.String("ap-guangzhou-4"),
+			DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+			ChargeType:         pulumi.String("DEDICATED_CLUSTER_PAID"),
+			ProjectId:          pulumi.Int(0),
+			Encrypt:            pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cbs.StorageSet("example", new()
+    {
+        DiskCount = 3,
+        StorageName = "tf-example",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 100,
+        AvailabilityZone = "ap-guangzhou-4",
+        DedicatedClusterId = "cluster-262n63e8",
+        ChargeType = "DEDICATED_CLUSTER_PAID",
+        ProjectId = 0,
+        Encrypt = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.StorageSet;
+import com.pulumi.tencentcloud.Cbs.StorageSetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new StorageSet("example", StorageSetArgs.builder()
+            .diskCount(3)
+            .storageName("tf-example")
+            .storageType("CLOUD_SSD")
+            .storageSize(100)
+            .availabilityZone("ap-guangzhou-4")
+            .dedicatedClusterId("cluster-262n63e8")
+            .chargeType("DEDICATED_CLUSTER_PAID")
+            .projectId(0)
+            .encrypt(false)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cbs:StorageSet
+    properties:
+      diskCount: 3
+      storageName: tf-example
+      storageType: CLOUD_SSD
+      storageSize: 100
+      availabilityZone: ap-guangzhou-4
+      dedicatedClusterId: cluster-262n63e8
+      chargeType: DEDICATED_CLUSTER_PAID
+      projectId: 0
+      encrypt: false
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cbs_storageset" "example" {
+  disk_count           = 3
+  storage_name         = "tf-example"
+  storage_type         = "CLOUD_SSD"
+  storage_size         = 100
+  availability_zone    = "ap-guangzhou-4"
+  dedicated_cluster_id = "cluster-262n63e8"
+  charge_type          = "DEDICATED_CLUSTER_PAID"
+  project_id           = 0
+  encrypt              = false
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+* Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+* Delete: [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
 
 
 
 ## Create StorageSet Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">disk_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-               <span class="nx">encrypt</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-               <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-               <span class="nx">snapshot_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">storage_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">storage_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">throughput_performance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">disk_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">encrypt</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+               <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">snapshot_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">throughput_performance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewStorageSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StorageSet</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewStorageSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StorageSet</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">StorageSet</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StorageSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cbs:StorageSet</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cbs:StorageSet</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cbs_storage_set&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -227,7 +882,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -344,11 +999,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## StorageSet Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The StorageSet resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -364,8 +1027,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -373,8 +1035,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -382,8 +1043,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -391,8 +1051,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -400,8 +1059,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -409,8 +1075,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -418,8 +1083,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kmskeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -427,8 +1099,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -436,8 +1107,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_csharp" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -445,8 +1115,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -460,8 +1129,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -469,8 +1137,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -478,8 +1145,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -487,8 +1153,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -496,8 +1161,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -505,8 +1177,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -514,8 +1185,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kmskeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -523,8 +1201,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -532,8 +1209,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_go" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -541,8 +1217,109 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_size_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_count_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="throughput_performance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_hcl" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -556,8 +1333,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -565,8 +1341,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -574,8 +1349,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -583,8 +1357,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -592,8 +1365,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -601,8 +1381,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -610,8 +1389,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kmskeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -619,8 +1405,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -628,8 +1413,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_java" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -637,8 +1421,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +1435,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -661,8 +1443,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -670,8 +1451,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -679,8 +1459,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -688,8 +1467,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -697,8 +1483,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -706,8 +1491,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kmskeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -715,8 +1507,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -724,8 +1515,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_nodejs" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -733,8 +1523,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -748,8 +1537,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="storage_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
@@ -757,8 +1545,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_size_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
@@ -766,8 +1553,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -775,8 +1561,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -784,8 +1569,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disk_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_count_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
@@ -793,8 +1585,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -802,8 +1593,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kms_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -811,8 +1609,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -820,8 +1617,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughput_performance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_python" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
@@ -829,8 +1625,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -844,8 +1639,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -853,8 +1647,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -862,8 +1655,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -871,8 +1663,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -880,8 +1671,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -889,8 +1687,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -898,8 +1695,15 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kmskeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -907,8 +1711,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -916,8 +1719,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_yaml" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -925,8 +1727,7 @@ The StorageSet resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1748,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
             title="">
         <span id="diskids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Ids</a>
@@ -956,8 +1756,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-"
+    <dd>disk id list.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -965,8 +1764,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestatus_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Status</a>
@@ -974,8 +1772,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd></dl>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -989,8 +1786,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
             title="">
         <span id="diskids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Ids</a>
@@ -998,8 +1794,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-"
+    <dd>disk id list.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1007,8 +1802,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestatus_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Status</a>
@@ -1016,8 +1810,45 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd></dl>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="attached_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attached_hcl" style="color: inherit; text-decoration: inherit;">attached</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
+            title="">
+        <span id="disk_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_ids_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>disk id list.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="storage_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_status_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,8 +1862,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
             title="">
         <span id="diskids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -1040,8 +1870,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-"
+    <dd>disk id list.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1049,8 +1878,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestatus_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Status</a>
@@ -1058,8 +1886,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd></dl>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1073,8 +1900,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
             title="">
         <span id="diskids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -1082,8 +1908,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-"
+    <dd>disk id list.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1091,8 +1916,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestatus_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Status</a>
@@ -1100,8 +1924,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd></dl>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1115,8 +1938,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
             title="">
         <span id="disk_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_ids_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
@@ -1124,8 +1946,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-"
+    <dd>disk id list.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1133,8 +1954,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storage_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_status_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>status</a>
@@ -1142,8 +1962,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd></dl>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1976,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-"
             title="">
         <span id="diskids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskids_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -1166,8 +1984,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-"
+    <dd>disk id list.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1175,8 +1992,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestatus_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Status</a>
@@ -1184,8 +2000,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd></dl>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1195,27 +2010,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing StorageSet resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">StorageSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">StorageSet</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">StorageSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">StorageSet</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">attached</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">disk_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">disk_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">encrypt</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">snapshot_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">storage_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -1223,104 +2040,143 @@ Get an existing StorageSet resource's state with the given name, ID, and optiona
         <span class="nx">storage_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">throughput_performance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> StorageSet</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetStorageSet<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">StorageSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StorageSet</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetStorageSet<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">StorageSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StorageSet</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">StorageSet</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StorageSetState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">StorageSet</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StorageSetState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">StorageSet</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StorageSetState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">StorageSet</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StorageSetState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingStorageSet</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cbs:StorageSet</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cbs_storage_set</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StorageSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StorageSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1328,28 +2184,31 @@ Get an existing StorageSet resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StorageSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1357,28 +2216,31 @@ Get an existing StorageSet resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StorageSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1398,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1407,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1416,8 +2276,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_diskcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -1425,8 +2292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskids_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Ids</a>
@@ -1434,8 +2300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -1443,8 +2308,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kmskeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1452,8 +2324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1461,8 +2332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagename_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -1470,8 +2340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagesize_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -1479,8 +2348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagestatus_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Status</a>
@@ -1488,8 +2356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1497,8 +2364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_throughputperformance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughputperformance_csharp" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -1506,8 +2372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1521,8 +2386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1530,8 +2394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1539,8 +2402,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_diskcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -1548,8 +2418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskids_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Ids</a>
@@ -1557,8 +2426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -1566,8 +2434,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kmskeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1575,8 +2450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1584,8 +2458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagename_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -1593,8 +2466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagesize_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -1602,8 +2474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagestatus_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Status</a>
@@ -1611,8 +2482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1620,8 +2490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_throughputperformance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughputperformance_go" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -1629,8 +2498,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_attached_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_attached_hcl" style="color: inherit; text-decoration: inherit;">attached</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_count_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_ids_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_size_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_status_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_throughput_performance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughput_performance_hcl" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1644,8 +2638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1653,8 +2646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1662,8 +2654,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_diskcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -1671,8 +2670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskids_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -1680,8 +2678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1689,8 +2686,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kmskeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1698,8 +2702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1707,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagename_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -1716,8 +2718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagesize_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -1725,8 +2726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagestatus_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Status</a>
@@ -1734,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1743,8 +2742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_throughputperformance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughputperformance_java" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -1752,8 +2750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1767,8 +2764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1776,8 +2772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1785,8 +2780,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_diskcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -1794,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskids_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -1803,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1812,8 +2812,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kmskeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1821,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1830,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagename_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -1839,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagesize_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -1848,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagestatus_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Status</a>
@@ -1857,8 +2860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1866,8 +2868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_throughputperformance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughputperformance_nodejs" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -1875,8 +2876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1890,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1899,8 +2898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1908,8 +2906,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_disk_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_count_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
@@ -1917,8 +2922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_ids_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>ids</a>
@@ -1926,8 +2930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1935,8 +2938,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kms_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1944,8 +2954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -1953,8 +2962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_name_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
@@ -1962,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_size_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
@@ -1971,8 +2978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_status_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>status</a>
@@ -1980,8 +2986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -1989,8 +2994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_throughput_performance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughput_performance_python" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
@@ -1998,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2013,8 +3016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2022,8 +3024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2031,8 +3032,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of CBS instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of CBS instance. Support <code>POSTPAID_BY_HOUR</code> and <code>DEDICATED_CLUSTER_PAID</code>. The default is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_diskcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -2040,8 +3048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of disks to be purchased. Default 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of disks to be purchased. Default 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskids_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Ids</a>
@@ -2049,8 +3056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>disk id list.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>disk id list.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -2058,8 +3064,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kmskeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the <code>encrypt</code> parameter need be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2067,8 +3080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -2076,8 +3088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot. If specified, created the CBS by this snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot. If specified, created the CBS by this snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagename_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -2085,8 +3096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CBS. The maximum length can not exceed 60 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CBS. The maximum length can not exceed 60 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagesize_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -2094,8 +3104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of CBS, and unit is GB.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of CBS, and unit is GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagestatus_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Status</a>
@@ -2103,8 +3112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -2112,8 +3120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_throughputperformance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_throughputperformance_yaml" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -2121,8 +3128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2141,7 +3147,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

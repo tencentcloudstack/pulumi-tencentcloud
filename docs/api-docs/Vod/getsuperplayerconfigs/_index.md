@@ -2,9 +2,11 @@
 ---
 title: "getSuperPlayerConfigs"
 title_tag: "tencentcloud.Vod.getSuperPlayerConfigs"
-meta_desc: "Documentation for the tencentcloud.Vod.getSuperPlayerConfigs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of VOD super player configs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,18 +18,23 @@ Use this data source to query detailed information of VOD super player configs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooSuperPlayerConfig = new tencentcloud.vod.SuperPlayerConfig("fooSuperPlayerConfig", {
+const fooSuperPlayerConfig = new tencentcloud.vod.SuperPlayerConfig("foo", {
+    name: "tf-super-player",
     drmSwitch: true,
     drmStreamingInfo: {
-        simpleAesDefinition: tencentcloud_vod_adaptive_dynamic_streaming_template.foo.id,
+        simpleAesDefinition: fooTencentcloudVodAdaptiveDynamicStreamingTemplate.id,
     },
-    imageSpriteDefinition: tencentcloud_vod_image_sprite_template.foo.id,
+    imageSpriteDefinition: fooTencentcloudVodImageSpriteTemplate.id,
     resolutionNames: [
         {
             minEdgeLength: 889,
@@ -42,55 +49,116 @@ const fooSuperPlayerConfig = new tencentcloud.vod.SuperPlayerConfig("fooSuperPla
     scheme: "Default",
     comment: "test",
 });
-const fooSuperPlayerConfigs = tencentcloud.Vod.getSuperPlayerConfigs({
+const foo = tencentcloud.vod.getSuperPlayerConfigs({
     type: "Custom",
     name: "tf-super-player",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_super_player_config = tencentcloud.vod.SuperPlayerConfig("fooSuperPlayerConfig",
+foo_super_player_config = tencentcloud.vod.SuperPlayerConfig("foo",
+    name="tf-super-player",
     drm_switch=True,
-    drm_streaming_info=tencentcloud.vod.SuperPlayerConfigDrmStreamingInfoArgs(
-        simple_aes_definition=tencentcloud_vod_adaptive_dynamic_streaming_template["foo"]["id"],
-    ),
-    image_sprite_definition=tencentcloud_vod_image_sprite_template["foo"]["id"],
+    drm_streaming_info={
+        "simple_aes_definition": foo_tencentcloud_vod_adaptive_dynamic_streaming_template["id"],
+    },
+    image_sprite_definition=foo_tencentcloud_vod_image_sprite_template["id"],
     resolution_names=[
-        tencentcloud.vod.SuperPlayerConfigResolutionNameArgs(
-            min_edge_length=889,
-            name="test1",
-        ),
-        tencentcloud.vod.SuperPlayerConfigResolutionNameArgs(
-            min_edge_length=890,
-            name="test2",
-        ),
+        {
+            "min_edge_length": 889,
+            "name": "test1",
+        },
+        {
+            "min_edge_length": 890,
+            "name": "test2",
+        },
     ],
     domain="Default",
     scheme="Default",
     comment="test")
-foo_super_player_configs = tencentcloud.Vod.get_super_player_configs(type="Custom",
+foo = tencentcloud.vod.get_super_player_configs(type="Custom",
     name="tf-super-player")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vod"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vod.NewSuperPlayerConfig(ctx, "foo", &vod.SuperPlayerConfigArgs{
+			Name:      pulumi.String("tf-super-player"),
+			DrmSwitch: pulumi.Bool(true),
+			DrmStreamingInfo: &vod.SuperPlayerConfigDrmStreamingInfoArgs{
+				SimpleAesDefinition: pulumi.Any(fooTencentcloudVodAdaptiveDynamicStreamingTemplate.Id),
+			},
+			ImageSpriteDefinition: pulumi.Any(fooTencentcloudVodImageSpriteTemplate.Id),
+			ResolutionNames: vod.SuperPlayerConfigResolutionNameArray{
+				&vod.SuperPlayerConfigResolutionNameArgs{
+					MinEdgeLength: pulumi.Int(889),
+					Name:          pulumi.String("test1"),
+				},
+				&vod.SuperPlayerConfigResolutionNameArgs{
+					MinEdgeLength: pulumi.Int(890),
+					Name:          pulumi.String("test2"),
+				},
+			},
+			Domain:  pulumi.String("Default"),
+			Scheme:  pulumi.String("Default"),
+			Comment: pulumi.String("test"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = vod.GetSuperPlayerConfigs(ctx, &vod.GetSuperPlayerConfigsArgs{
+			Type: pulumi.StringRef("Custom"),
+			Name: pulumi.StringRef("tf-super-player"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new()
+    var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("foo", new()
     {
+        Name = "tf-super-player",
         DrmSwitch = true,
         DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
         {
-            SimpleAesDefinition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
+            SimpleAesDefinition = fooTencentcloudVodAdaptiveDynamicStreamingTemplate.Id,
         },
-        ImageSpriteDefinition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ImageSpriteDefinition = fooTencentcloudVodImageSpriteTemplate.Id,
         ResolutionNames = new[]
         {
             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
@@ -109,7 +177,7 @@ return await Deployment.RunAsync(() =>
         Comment = "test",
     });
 
-    var fooSuperPlayerConfigs = Tencentcloud.Vod.GetSuperPlayerConfigs.Invoke(new()
+    var foo = Tencentcloud.Vod.GetSuperPlayerConfigs.Invoke(new()
     {
         Type = "Custom",
         Name = "tf-super-player",
@@ -117,50 +185,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vod.NewSuperPlayerConfig(ctx, "fooSuperPlayerConfig", &Vod.SuperPlayerConfigArgs{
-			DrmSwitch: pulumi.Bool(true),
-			DrmStreamingInfo: &vod.SuperPlayerConfigDrmStreamingInfoArgs{
-				SimpleAesDefinition: pulumi.Any(tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id),
-			},
-			ImageSpriteDefinition: pulumi.Any(tencentcloud_vod_image_sprite_template.Foo.Id),
-			ResolutionNames: vod.SuperPlayerConfigResolutionNameArray{
-				&vod.SuperPlayerConfigResolutionNameArgs{
-					MinEdgeLength: pulumi.Int(889),
-					Name:          pulumi.String("test1"),
-				},
-				&vod.SuperPlayerConfigResolutionNameArgs{
-					MinEdgeLength: pulumi.Int(890),
-					Name:          pulumi.String("test2"),
-				},
-			},
-			Domain:  pulumi.String("Default"),
-			Scheme:  pulumi.String("Default"),
-			Comment: pulumi.String("test"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Vod.GetSuperPlayerConfigs(ctx, &vod.GetSuperPlayerConfigsArgs{
-			Type: pulumi.StringRef("Custom"),
-			Name: pulumi.StringRef("tf-super-player"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -173,8 +202,8 @@ import com.pulumi.tencentcloud.Vod.inputs.SuperPlayerConfigDrmStreamingInfoArgs;
 import com.pulumi.tencentcloud.Vod.inputs.SuperPlayerConfigResolutionNameArgs;
 import com.pulumi.tencentcloud.Vod.VodFunctions;
 import com.pulumi.tencentcloud.Vod.inputs.GetSuperPlayerConfigsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -186,12 +215,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooSuperPlayerConfig = new SuperPlayerConfig("fooSuperPlayerConfig", SuperPlayerConfigArgs.builder()        
+        var fooSuperPlayerConfig = new SuperPlayerConfig("fooSuperPlayerConfig", SuperPlayerConfigArgs.builder()
+            .name("tf-super-player")
             .drmSwitch(true)
             .drmStreamingInfo(SuperPlayerConfigDrmStreamingInfoArgs.builder()
-                .simpleAesDefinition(tencentcloud_vod_adaptive_dynamic_streaming_template.foo().id())
+                .simpleAesDefinition(fooTencentcloudVodAdaptiveDynamicStreamingTemplate.id())
                 .build())
-            .imageSpriteDefinition(tencentcloud_vod_image_sprite_template.foo().id())
+            .imageSpriteDefinition(fooTencentcloudVodImageSpriteTemplate.id())
             .resolutionNames(            
                 SuperPlayerConfigResolutionNameArgs.builder()
                     .minEdgeLength(889)
@@ -206,7 +236,7 @@ public class App {
             .comment("test")
             .build());
 
-        final var fooSuperPlayerConfigs = VodFunctions.getSuperPlayerConfigs(GetSuperPlayerConfigsArgs.builder()
+        final var foo = VodFunctions.getSuperPlayerConfigs(GetSuperPlayerConfigsArgs.builder()
             .type("Custom")
             .name("tf-super-player")
             .build());
@@ -214,15 +244,22 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooSuperPlayerConfig:
     type: tencentcloud:Vod:SuperPlayerConfig
+    name: foo
     properties:
+      name: tf-super-player
       drmSwitch: true
       drmStreamingInfo:
-        simpleAesDefinition: ${tencentcloud_vod_adaptive_dynamic_streaming_template.foo.id}
-      imageSpriteDefinition: ${tencentcloud_vod_image_sprite_template.foo.id}
+        simpleAesDefinition: ${fooTencentcloudVodAdaptiveDynamicStreamingTemplate.id}
+      imageSpriteDefinition: ${fooTencentcloudVodImageSpriteTemplate.id}
       resolutionNames:
         - minEdgeLength: 889
           name: test1
@@ -232,15 +269,61 @@ resources:
       scheme: Default
       comment: test
 variables:
-  fooSuperPlayerConfigs:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Vod:getSuperPlayerConfigs
-      Arguments:
+      function: tencentcloud:Vod:getSuperPlayerConfigs
+      arguments:
         type: Custom
         name: tf-super-player
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vod_getsuperplayerconfigs" "foo" {
+  type = "Custom"
+  name = "tf-super-player"
+}
+
+resource "tencentcloud_vod_superplayerconfig" "foo" {
+  name       = "tf-super-player"
+  drm_switch = true
+  drm_streaming_info = {
+    simple_aes_definition = fooTencentcloudVodAdaptiveDynamicStreamingTemplate.id
+  }
+  image_sprite_definition = fooTencentcloudVodImageSpriteTemplate.id
+  resolution_names {
+    min_edge_length = 889
+    name            = "test1"
+  }
+  resolution_names {
+    min_edge_length = 890
+    name            = "test2"
+  }
+  domain  = "Default"
+  scheme  = "Default"
+  comment = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&type=document&lang=en)
 
 
 
@@ -252,7 +335,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -260,9 +343,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSuperPlayerConfigs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSuperPlayerConfigsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>></span
+><span class="k">function </span>getSuperPlayerConfigs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSuperPlayerConfigsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>></span
 ><span class="k">
-function </span>getSuperPlayerConfigsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSuperPlayerConfigsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>></span
+function </span>getSuperPlayerConfigsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSuperPlayerConfigsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -277,11 +360,11 @@ function </span>getSuperPlayerConfigsOutput<span class="p">(</span><span class="
                              <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSuperPlayerConfigsResult</span
 ><span class="k">
-def </span>get_super_player_configs_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                             <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSuperPlayerConfigsResult]</span
+def </span>get_super_player_configs_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                             <span class="nx">type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSuperPlayerConfigsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -306,7 +389,8 @@ func </span>GetSuperPlayerConfigsOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSuperPlayerConfigs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSuperPlayerConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSuperPlayerConfigsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSuperPlayerConfigsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSuperPlayerConfigsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -315,7 +399,8 @@ func </span>GetSuperPlayerConfigsOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> </span>getSuperPlayerConfigs<span class="p">(</span><span class="nx">GetSuperPlayerConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> </span>getSuperPlayerConfigs<span class="p">(</span><span class="nx">GetSuperPlayerConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSuperPlayerConfigsResult</a></span>> </span>getSuperPlayerConfigs<span class="p">(</span><span class="nx">GetSuperPlayerConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -327,6 +412,15 @@ func </span>GetSuperPlayerConfigsOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_vod_get_super_player_configs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -345,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-optional"
+    <dd>Name of super player config.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -354,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -363,8 +455,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</p>
-</dd><dt class="property-optional"
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -372,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -387,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-optional"
+    <dd>Name of super player config.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -396,8 +485,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -405,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</p>
-</dd><dt class="property-optional"
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -414,8 +501,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of super player config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -429,8 +553,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-optional"
+    <dd>Name of super player config.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -438,8 +561,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -447,8 +569,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</p>
-</dd><dt class="property-optional"
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -456,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -471,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-optional"
+    <dd>Name of super player config.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -480,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -489,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</p>
-</dd><dt class="property-optional"
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -498,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -513,8 +629,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-optional"
+    <dd>Name of super player config.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -522,8 +637,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -531,8 +645,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</p>
-</dd><dt class="property-optional"
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -540,8 +653,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -555,8 +667,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-optional"
+    <dd>Name of super player config.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -564,8 +675,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -573,8 +683,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</p>
-</dd><dt class="property-optional"
+    <dd>Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -582,8 +691,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -606,8 +714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Outputs.<wbr>Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of super player configs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -615,8 +722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -624,8 +730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-"
+    <dd>Display name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -649,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -664,8 +768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">[]Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List</a></span>
     </dt>
-    <dd><p>A list of super player configs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -673,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -682,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-"
+    <dd>Display name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -707,8 +808,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="config_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_lists_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">list(object)</a></span>
+    </dt>
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Display name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -722,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">List&lt;Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of super player configs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -731,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -740,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-"
+    <dd>Display name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -765,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -780,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of super player configs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -789,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -798,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-"
+    <dd>Display name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -823,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -836,10 +982,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_lists_python" style="color: inherit; text-decoration: inherit;">config_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">Sequence[Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of super player configs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -847,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -856,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-"
+    <dd>Display name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -881,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of super player configs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of super player configs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -905,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -914,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Display name.</p>
-</dd><dt class="property-"
+    <dd>Display name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -939,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd></dl>
+    <dd>Template type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -964,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>false</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
             title="Required">
         <span id="comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -973,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description.</p>
-</dd><dt class="property-required"
+    <dd>Template description.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -982,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -991,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</p>
-</dd><dt class="property-required"
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
             title="Required">
         <span id="drmstreaminginfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmstreaminginfos_csharp" style="color: inherit; text-decoration: inherit;">Drm<wbr>Streaming<wbr>Infos</a>
@@ -1000,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Drm<wbr>Streaming<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>true</code>.</p>
-</dd><dt class="property-required"
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
             title="Required">
         <span id="drmswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmswitch_csharp" style="color: inherit; text-decoration: inherit;">Drm<wbr>Switch</a>
@@ -1009,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</p>
-</dd><dt class="property-required"
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
             title="Required">
         <span id="imagespritedefinition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritedefinition_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Sprite<wbr>Definition</a>
@@ -1018,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image sprite template that allows output.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1027,8 +1158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-required"
+    <dd>Name of super player config.</dd><dt class="property-required"
             title="Required">
         <span id="resolutionnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionnames_csharp" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Names</a>
@@ -1036,8 +1166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Resolution<wbr>Name&gt;</a></span>
     </dt>
-    <dd><p>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</p>
-</dd><dt class="property-required"
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_csharp" style="color: inherit; text-decoration: inherit;">Scheme</a>
@@ -1045,8 +1174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1054,8 +1182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd><dt class="property-required"
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1063,8 +1190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>false</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
             title="Required">
         <span id="comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1087,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description.</p>
-</dd><dt class="property-required"
+    <dd>Template description.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1096,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1105,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</p>
-</dd><dt class="property-required"
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
             title="Required">
         <span id="drmstreaminginfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmstreaminginfos_go" style="color: inherit; text-decoration: inherit;">Drm<wbr>Streaming<wbr>Infos</a>
@@ -1114,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">[]Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Drm<wbr>Streaming<wbr>Info</a></span>
     </dt>
-    <dd><p>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>true</code>.</p>
-</dd><dt class="property-required"
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
             title="Required">
         <span id="drmswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmswitch_go" style="color: inherit; text-decoration: inherit;">Drm<wbr>Switch</a>
@@ -1123,8 +1244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</p>
-</dd><dt class="property-required"
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
             title="Required">
         <span id="imagespritedefinition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritedefinition_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Sprite<wbr>Definition</a>
@@ -1132,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image sprite template that allows output.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1141,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-required"
+    <dd>Name of super player config.</dd><dt class="property-required"
             title="Required">
         <span id="resolutionnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionnames_go" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Names</a>
@@ -1150,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">[]Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Resolution<wbr>Name</a></span>
     </dt>
-    <dd><p>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</p>
-</dd><dt class="property-required"
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_go" style="color: inherit; text-decoration: inherit;">Scheme</a>
@@ -1159,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1168,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd><dt class="property-required"
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1177,8 +1292,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="adaptive_dynamic_streaming_definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adaptive_dynamic_streaming_definition_hcl" style="color: inherit; text-decoration: inherit;">adaptive_<wbr>dynamic_<wbr>streaming_<wbr>definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
+            title="Required">
+        <span id="drm_streaming_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drm_streaming_infos_hcl" style="color: inherit; text-decoration: inherit;">drm_<wbr>streaming_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">list(object)</a></span>
+    </dt>
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="drm_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drm_switch_hcl" style="color: inherit; text-decoration: inherit;">drm_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_sprite_definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_sprite_definition_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>sprite_<wbr>definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of super player config.</dd><dt class="property-required"
+            title="Required">
+        <span id="resolution_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolution_names_hcl" style="color: inherit; text-decoration: inherit;">resolution_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">list(object)</a></span>
+    </dt>
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="scheme_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_hcl" style="color: inherit; text-decoration: inherit;">scheme</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1192,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>false</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
             title="Required">
         <span id="comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1201,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description.</p>
-</dd><dt class="property-required"
+    <dd>Template description.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1210,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1219,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</p>
-</dd><dt class="property-required"
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
             title="Required">
         <span id="drmstreaminginfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmstreaminginfos_java" style="color: inherit; text-decoration: inherit;">drm<wbr>Streaming<wbr>Infos</a>
@@ -1228,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">List&lt;Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Drm<wbr>Streaming<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>true</code>.</p>
-</dd><dt class="property-required"
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
             title="Required">
         <span id="drmswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmswitch_java" style="color: inherit; text-decoration: inherit;">drm<wbr>Switch</a>
@@ -1237,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</p>
-</dd><dt class="property-required"
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
             title="Required">
         <span id="imagespritedefinition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritedefinition_java" style="color: inherit; text-decoration: inherit;">image<wbr>Sprite<wbr>Definition</a>
@@ -1246,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image sprite template that allows output.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1255,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-required"
+    <dd>Name of super player config.</dd><dt class="property-required"
             title="Required">
         <span id="resolutionnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionnames_java" style="color: inherit; text-decoration: inherit;">resolution<wbr>Names</a>
@@ -1264,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">List&lt;Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Resolution<wbr>Name&gt;</a></span>
     </dt>
-    <dd><p>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</p>
-</dd><dt class="property-required"
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_java" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1273,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1282,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd><dt class="property-required"
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1291,8 +1496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1306,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>false</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
             title="Required">
         <span id="comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1315,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description.</p>
-</dd><dt class="property-required"
+    <dd>Template description.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1324,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1333,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</p>
-</dd><dt class="property-required"
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
             title="Required">
         <span id="drmstreaminginfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmstreaminginfos_nodejs" style="color: inherit; text-decoration: inherit;">drm<wbr>Streaming<wbr>Infos</a>
@@ -1342,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Drm<wbr>Streaming<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>true</code>.</p>
-</dd><dt class="property-required"
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
             title="Required">
         <span id="drmswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmswitch_nodejs" style="color: inherit; text-decoration: inherit;">drm<wbr>Switch</a>
@@ -1351,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</p>
-</dd><dt class="property-required"
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
             title="Required">
         <span id="imagespritedefinition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritedefinition_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Sprite<wbr>Definition</a>
@@ -1360,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image sprite template that allows output.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1369,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-required"
+    <dd>Name of super player config.</dd><dt class="property-required"
             title="Required">
         <span id="resolutionnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionnames_nodejs" style="color: inherit; text-decoration: inherit;">resolution<wbr>Names</a>
@@ -1378,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Resolution<wbr>Name[]</a></span>
     </dt>
-    <dd><p>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</p>
-</dd><dt class="property-required"
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_nodejs" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1387,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1396,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd><dt class="property-required"
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1405,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1420,8 +1612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>false</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
             title="Required">
         <span id="comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1429,8 +1620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description.</p>
-</dd><dt class="property-required"
+    <dd>Template description.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1438,8 +1628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1447,17 +1636,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</p>
-</dd><dt class="property-required"
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
             title="Required">
         <span id="drm_streaming_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drm_streaming_infos_python" style="color: inherit; text-decoration: inherit;">drm_<wbr>streaming_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Drm<wbr>Streaming<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">Sequence[Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Drm<wbr>Streaming<wbr>Info]</a></span>
     </dt>
-    <dd><p>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>true</code>.</p>
-</dd><dt class="property-required"
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
             title="Required">
         <span id="drm_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drm_switch_python" style="color: inherit; text-decoration: inherit;">drm_<wbr>switch</a>
@@ -1465,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</p>
-</dd><dt class="property-required"
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
             title="Required">
         <span id="image_sprite_definition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_sprite_definition_python" style="color: inherit; text-decoration: inherit;">image_<wbr>sprite_<wbr>definition</a>
@@ -1474,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the image sprite template that allows output.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1483,17 +1668,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-required"
+    <dd>Name of super player config.</dd><dt class="property-required"
             title="Required">
         <span id="resolution_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolution_names_python" style="color: inherit; text-decoration: inherit;">resolution_<wbr>names</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Resolution<wbr>Name]</a></span>
+        <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">Sequence[Get<wbr>Super<wbr>Player<wbr>Configs<wbr>Config<wbr>List<wbr>Resolution<wbr>Name]</a></span>
     </dt>
-    <dd><p>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</p>
-</dd><dt class="property-required"
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_python" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1501,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1510,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd><dt class="property-required"
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1519,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1534,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>false</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>false</code>.</dd><dt class="property-required"
             title="Required">
         <span id="comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1543,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description.</p>
-</dd><dt class="property-required"
+    <dd>Template description.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1552,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1561,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</p>
-</dd><dt class="property-required"
+    <dd>Domain name used for playback. If it is left empty or set to <code>Default</code>, the domain name configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used.</dd><dt class="property-required"
             title="Required">
         <span id="drmstreaminginfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmstreaminginfos_yaml" style="color: inherit; text-decoration: inherit;">drm<wbr>Streaming<wbr>Infos</a>
@@ -1570,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistdrmstreaminginfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drm_switch</code> is <code>true</code>.</p>
-</dd><dt class="property-required"
+    <dd>Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if <code>drmSwitch</code> is <code>true</code>.</dd><dt class="property-required"
             title="Required">
         <span id="drmswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drmswitch_yaml" style="color: inherit; text-decoration: inherit;">drm<wbr>Switch</a>
@@ -1579,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</p>
-</dd><dt class="property-required"
+    <dd>Switch of DRM-protected adaptive bitstream playback: <code>true</code>: enabled, indicating to play back only output adaptive bitstreams protected by DRM; <code>false</code>: disabled, indicating to play back unencrypted output adaptive bitstreams.</dd><dt class="property-required"
             title="Required">
         <span id="imagespritedefinition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritedefinition_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Sprite<wbr>Definition</a>
@@ -1588,8 +1762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image sprite template that allows output.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image sprite template that allows output.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1597,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd><dt class="property-required"
+    <dd>Name of super player config.</dd><dt class="property-required"
             title="Required">
         <span id="resolutionnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionnames_yaml" style="color: inherit; text-decoration: inherit;">resolution<wbr>Names</a>
@@ -1606,8 +1778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsuperplayerconfigsconfiglistresolutionname">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</p>
-</dd><dt class="property-required"
+    <dd>Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: <code>min_edge_length: 240, name: LD</code>; <code>min_edge_length: 480, name: SD</code>; <code>min_edge_length: 720, name: HD</code>; <code>min_edge_length: 1080, name: FHD</code>; <code>min_edge_length: 1440, name: 2K</code>; <code>min_edge_length: 2160, name: 4K</code>; <code>min_edge_length: 4320, name: 8K</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_yaml" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1615,8 +1786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheme used for playback. If it is left empty or set to <code>Default</code>, the scheme configured in <a href="https://cloud.tencent.com/document/product/266/33373">Default Distribution Configuration</a> will be used. Other valid values: <code>HTTP</code>; <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1624,8 +1794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</p>
-</dd><dt class="property-required"
+    <dd>Config type filter. Valid values: <code>Preset</code>, <code>Custom</code>. <code>Preset</code>: preset template; <code>Custom</code>: custom template.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1633,8 +1802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1652,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</p>
-</dd></dl>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1667,8 +1834,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</p>
-</dd></dl>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="simple_aes_definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#simple_aes_definition_hcl" style="color: inherit; text-decoration: inherit;">simple_<wbr>aes_<wbr>definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1682,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</p>
-</dd></dl>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1697,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</p>
-</dd></dl>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1712,8 +1890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</p>
-</dd></dl>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1727,8 +1904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</p>
-</dd></dl>
+    <dd>ID of the adaptive dynamic streaming template whose protection type is <code>SimpleAES</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1746,8 +1922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of video short side in px.</p>
-</dd><dt class="property-required"
+    <dd>Length of video short side in px.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1755,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd></dl>
+    <dd>Name of super player config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1770,8 +1944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of video short side in px.</p>
-</dd><dt class="property-required"
+    <dd>Length of video short side in px.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1779,8 +1952,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd></dl>
+    <dd>Name of super player config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="min_edge_length_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_edge_length_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>edge_<wbr>length</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Length of video short side in px.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of super player config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1794,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Length of video short side in px.</p>
-</dd><dt class="property-required"
+    <dd>Length of video short side in px.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1803,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd></dl>
+    <dd>Name of super player config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1818,8 +2010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Length of video short side in px.</p>
-</dd><dt class="property-required"
+    <dd>Length of video short side in px.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1827,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd></dl>
+    <dd>Name of super player config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1842,8 +2032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Length of video short side in px.</p>
-</dd><dt class="property-required"
+    <dd>Length of video short side in px.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1851,8 +2040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd></dl>
+    <dd>Name of super player config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1866,8 +2054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Length of video short side in px.</p>
-</dd><dt class="property-required"
+    <dd>Length of video short side in px.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1875,8 +2062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of super player config.</p>
-</dd></dl>
+    <dd>Name of super player config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1891,7 +2077,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

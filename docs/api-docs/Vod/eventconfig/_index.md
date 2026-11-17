@@ -2,9 +2,11 @@
 ---
 title: "EventConfig"
 title_tag: "tencentcloud.Vod.EventConfig"
-meta_desc: "Documentation for the tencentcloud.Vod.EventConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a vod event config."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -17,64 +19,79 @@ Provide a resource to create a vod event config.
 
 
 ## Create EventConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">delete_media_complete_event_switch</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">notification_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">upload_media_complete_event_switch</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">upload_media_complete_event_switch</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewEventConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">EventConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewEventConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">EventConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">EventConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EventConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:EventConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:EventConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vod_event_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -95,7 +112,7 @@ Provide a resource to create a vod event config.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -212,11 +229,19 @@ Provide a resource to create a vod event config.
 </pulumi-choosable>
 </div>
 
+
+
 ## EventConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The EventConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -232,8 +257,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemediacompleteeventswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemediacompleteeventswitch_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -241,8 +265,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -250,12 +273,11 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="notificationurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationurl_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Url</a>
@@ -263,8 +285,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="uploadmediacompleteeventswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadmediacompleteeventswitch_csharp" style="color: inherit; text-decoration: inherit;">Upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -272,8 +293,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -287,8 +307,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemediacompleteeventswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemediacompleteeventswitch_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -296,8 +315,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -305,12 +323,11 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="notificationurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationurl_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Url</a>
@@ -318,8 +335,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="uploadmediacompleteeventswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadmediacompleteeventswitch_go" style="color: inherit; text-decoration: inherit;">Upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -327,8 +343,57 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sub app id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_media_complete_event_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_media_complete_event_switch_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>How to receive event notifications. Valid values:</p>
+<ul>
+<li>Push: HTTP callback notification;</li>
+<li>PULL: Reliable notification based on message queuing.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_url_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="upload_media_complete_event_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upload_media_complete_event_switch_hcl" style="color: inherit; text-decoration: inherit;">upload_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -342,8 +407,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemediacompleteeventswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemediacompleteeventswitch_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -351,8 +415,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -360,12 +423,11 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="notificationurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationurl_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Url</a>
@@ -373,8 +435,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="uploadmediacompleteeventswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadmediacompleteeventswitch_java" style="color: inherit; text-decoration: inherit;">upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -382,8 +443,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +457,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemediacompleteeventswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemediacompleteeventswitch_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -406,8 +465,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -415,12 +473,11 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="notificationurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationurl_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Url</a>
@@ -428,8 +485,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="uploadmediacompleteeventswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadmediacompleteeventswitch_nodejs" style="color: inherit; text-decoration: inherit;">upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -437,8 +493,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -452,8 +507,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_media_complete_event_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_media_complete_event_switch_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
@@ -461,8 +515,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -470,12 +523,11 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="notification_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_url_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>url</a>
@@ -483,8 +535,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="upload_media_complete_event_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upload_media_complete_event_switch_python" style="color: inherit; text-decoration: inherit;">upload_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
@@ -492,8 +543,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -507,8 +557,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletemediacompleteeventswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletemediacompleteeventswitch_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -516,8 +565,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -525,12 +573,11 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="notificationurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationurl_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Url</a>
@@ -538,8 +585,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="uploadmediacompleteeventswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadmediacompleteeventswitch_yaml" style="color: inherit; text-decoration: inherit;">upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -547,8 +593,7 @@ The EventConfig resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -569,8 +614,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -584,8 +628,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +656,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -614,8 +670,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -629,8 +684,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -644,8 +698,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -655,18 +708,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing EventConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">EventConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">EventConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">EventConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">EventConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -675,104 +728,143 @@ Get an existing EventConfig resource's state with the given name, ID, and option
         <span class="nx">notification_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">upload_media_complete_event_switch</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> EventConfig</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetEventConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">EventConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">EventConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetEventConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">EventConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">EventConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">EventConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EventConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">EventConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EventConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">EventConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EventConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">EventConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EventConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingEventConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vod:EventConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vod_event_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EventConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EventConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -780,28 +872,31 @@ Get an existing EventConfig resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EventConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -809,28 +904,31 @@ Get an existing EventConfig resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EventConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -850,8 +948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -859,12 +956,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationurl_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Url</a>
@@ -872,8 +968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -881,8 +976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uploadmediacompleteeventswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uploadmediacompleteeventswitch_csharp" style="color: inherit; text-decoration: inherit;">Upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -890,8 +984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,8 +998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -914,12 +1006,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationurl_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Url</a>
@@ -927,8 +1018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -936,8 +1026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uploadmediacompleteeventswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uploadmediacompleteeventswitch_go" style="color: inherit; text-decoration: inherit;">Upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -945,8 +1034,57 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_media_complete_event_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_media_complete_event_switch_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>How to receive event notifications. Valid values:</p>
+<ul>
+<li>Push: HTTP callback notification;</li>
+<li>PULL: Reliable notification based on message queuing.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_url_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sub app id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_upload_media_complete_event_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upload_media_complete_event_switch_hcl" style="color: inherit; text-decoration: inherit;">upload_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,8 +1098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -969,12 +1106,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationurl_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Url</a>
@@ -982,8 +1118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -991,8 +1126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uploadmediacompleteeventswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uploadmediacompleteeventswitch_java" style="color: inherit; text-decoration: inherit;">upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -1000,8 +1134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1015,8 +1148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1024,12 +1156,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationurl_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Url</a>
@@ -1037,8 +1168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1046,8 +1176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uploadmediacompleteeventswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uploadmediacompleteeventswitch_nodejs" style="color: inherit; text-decoration: inherit;">upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -1055,8 +1184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1070,8 +1198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1079,12 +1206,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_url_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>url</a>
@@ -1092,8 +1218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -1101,8 +1226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upload_media_complete_event_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upload_media_complete_event_switch_python" style="color: inherit; text-decoration: inherit;">upload_<wbr>media_<wbr>complete_<wbr>event_<wbr>switch</a>
@@ -1110,8 +1234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1125,8 +1248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to receive video deletion completion event notification, default <code>OFF</code> is to ignore the event notification, <code>ON</code> is to receive event notification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1134,12 +1256,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>How to receive event notifications. Valid values:</p>
+    <dd>How to receive event notifications. Valid values:</p>
 <ul>
 <li>Push: HTTP callback notification;</li>
 <li>PULL: Reliable notification based on message queuing.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationurl_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Url</a>
@@ -1147,8 +1268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</p>
-</dd><dt class="property-optional"
+    <dd>The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1156,8 +1276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sub app id.</p>
-</dd><dt class="property-optional"
+    <dd>Sub app id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uploadmediacompleteeventswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uploadmediacompleteeventswitch_yaml" style="color: inherit; text-decoration: inherit;">upload<wbr>Media<wbr>Complete<wbr>Event<wbr>Switch</a>
@@ -1165,8 +1284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</p>
-</dd></dl>
+    <dd>Whether to receive video upload completion event notification, default <code>OFF</code> means to ignore the event notification, <code>ON</code> means to receive event notification.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1188,6 +1306,8 @@ $ pulumi import tencentcloud:Vod/eventConfig:EventConfig foo $subAppId
 ```
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
 
 
 
@@ -1198,7 +1318,6 @@ $ pulumi import tencentcloud:Vod/eventConfig:EventConfig foo $subAppId
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 
